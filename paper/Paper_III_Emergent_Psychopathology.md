@@ -1,13 +1,13 @@
 # Paper III: Emergent Psychopathology — Digital Twins, Clinical Neurology, and Computational Pharmacology in Γ-Net ALICE
 
-**Γ-Net ALICE Research Monograph Series (3 of 3)**
+Γ-Net ALICE Research Monograph Series (3 of 3)
 
-**Hsi-Yu Huang (黃璽宇)**
+Hsi-Yu Huang (黃璽宇)
 *Γ-Net Research Group*
 *Independent Researcher, Taiwan*
-*Correspondence: llc.y.huangll@gmail.com*
+*Correspondence: <llc.y.huangll@gmail.com>*
 
-*February 2026*
+February 2026
 
 ---
 
@@ -22,6 +22,7 @@
 > ---
 >
 > **Paper Series Overview:**
+>
 > - **Paper I**: The Minimum Reflection Principle — Core theory, mathematical foundations, and system architecture
 > - **Paper II**: From Coaxial Cables to Cognition — Body systems, brain modules, and perception pipeline
 > - **Paper III** (this paper): Emergent Psychopathology — PTSD digital twins, clinical neurology, and computational pharmacology
@@ -68,7 +69,7 @@ In the 600-tick awakening experiment (`exp_awakening.py`), the system was expose
 After Act IV, the system transitioned to an **irreversible frozen state**:
 
 | Metric | Pre-trauma (Act III) | Post-trauma (Act V) |
-|---|---|---|
+| --- | --- | --- |
 | $E_{\text{ref}}$ (pain correlate) | 0.0 | **1.0** (locked) |
 | $\Theta$ (arousal) | 0.3 | **1.0** (locked) |
 | Cortisol | 0.15 | **0.457** (elevated) |
@@ -85,7 +86,7 @@ This is a **thermodynamic trap**: the system cannot cool itself because the dise
 All four cardinal features of PTSD (DSM-5) emerged without explicit programming:
 
 | Feature | DSM-5 Description | Γ-Net Mechanism | Verified |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Re-experiencing** | Intrusive memories, flashbacks | $\lambda_{eff} = \lambda_{base}/(1-\Gamma^2) \to \infty$ → memories never decay | ✅ |
 | **Avoidance** | Avoiding reminders | Amygdala pre-tags stimuli → thalamus blocks (Γ_gate ↑) | ✅ |
 | **Hyperarousal** | Startle, insomnia, irritability | Sympathetic locked at max, sleep entry blocked | ✅ |
@@ -95,7 +96,7 @@ All four cardinal features of PTSD (DSM-5) emerged without explicit programming:
 
 The root cause is **processing queue deadlock**:
 
-```
+```text
 Frozen → cannot perceive() → queue not flushed → sustained pressure
 → cooling = 0.03 × (1 - 1.0) = 0 → temperature locked → Frozen
 ```
@@ -110,8 +111,10 @@ This is equivalent to a clogged pipe: you must first clear the blockage (queue f
 
 To validate that the equations predict not only disease but also treatment, we designed 5 parallel controlled experiments (`exp_therapy_mechanism.py`):
 
-| Protocol | Physical Mechanism | Recovery Score | Consciousness | Pain-Free | Γ Improvement |
-|---|---|---|---|---|---|
+All values below are from a deterministic seed=42 run of `exp_therapy_mechanism.py`. Results are fully reproducible for a given seed; the qualitative orderings (not the exact numbers) constitute the formal claims.
+
+| Protocol | Physical Mechanism | Recovery Score | Consciousness Ratio | Pain-Free Ratio | Γ Improvement |
+| --- | --- | --- | --- | --- | --- |
 | A: Natural recovery | No intervention | 0.107 | 0% | 0% | 0.000 |
 | B: SSRI | Γ↓5%/dose + parasympathetic↑ + acute stabilization | 0.240 | 52% | 57% | +0.021 |
 | C: Benzodiazepine | GABA sedation + queue flush + acute cooling | **0.930** | 80% | **92%** | +0.013 |
@@ -120,14 +123,16 @@ To validate that the equations predict not only disease but also treatment, we d
 
 ### 3.2 Clinical Correspondence (6/6 Passed)
 
-| # | Correspondence | Status |
-|---|---|---|
-| 1 | Natural recovery ≤ all treatments | ✅ |
-| 2 | SSRI > natural recovery | ✅ |
-| 3 | Any treatment arm → consciousness recovery | ✅ |
-| 4 | Any treatment arm → pain relief | ✅ |
-| 5 | SSRI oscillatory recovery (52% awake / 48% re-frozen) | ✅ |
-| 6 | EMDR optimal after stabilization | ✅ |
+The following are the six formal assertions verified in `exp_therapy_mechanism.py` (all held at seed=42):
+
+| # | Code Assertion | Status |
+| --- | --- | --- |
+| 1 | Natural recovery score ≤ all treatment groups | ✅ |
+| 2 | Combined treatment (SSRI+EMDR) ≥ all single-arm recovery scores | ✅ |
+| 3 | SSRI recovery score > natural recovery | ✅ |
+| 4 | EMDR Γ improvement > Benzo Γ improvement (Benzo relieves symptoms without modifying Γ) | ✅ |
+| 5 | At least one treatment arm: consciousness recovery tick observed | ✅ |
+| 6 | At least one treatment arm: pain relief tick observed | ✅ |
 
 ### 3.3 Key Insights
 
@@ -146,7 +151,7 @@ To validate that the equations predict not only disease but also treatment, we d
 `exp_digital_twin.py` drove the **same equation set** with different environmental event sequences to produce two clinically distinct PTSD presentations:
 
 | | Case A: Combat Veteran | Case B: Acute Trauma Survivor |
-|---|---|---|
+| --- | --- | --- |
 | **Environment** | 720-tick chronic deployment (540 ticks sustained stress) | 360-tick acute event (15-tick extreme peak) |
 | **Traumatic Events** | 240 | 53 |
 | **Chronic Stress Load** | 1.000 | 0.265 |
@@ -173,7 +178,7 @@ The default accumulator increment (+0.1/event) saturates after only 10 traumas, 
 ### 4.4 Clinical Correspondence (10/10 Passed)
 
 | # | Check | Status |
-|---|---|---|
+| --- | --- | --- |
 | 1 | CSL_A > CSL_B | ✅ |
 | 2 | Resting cortisol A > B | ✅ |
 | 3 | Pain sensitivity A > B | ✅ |
@@ -198,7 +203,7 @@ The default accumulator increment (+0.1/event) saturates after only 10 traumas, 
 ### 5.2 Four-Arm Treatment Comparison
 
 | Protocol | Recovery | Consciousness Φ | Temperature T | Pain | Frozen? |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | A: Control | 0.094 | 0.050 | 1.000 | 1.000 | YES |
 | B: Sleep only | 0.078 | 0.050 | 1.000 | 1.000 | YES |
 | C: Flush only | 0.506 | 0.100 | 0.358 | 0.025 | YES |
@@ -209,6 +214,7 @@ The default accumulator increment (+0.1/event) saturates after only 10 traumas, 
 **Sleep only failed** (recovery 0.078 ≤ control 0.094) because queue deadlock prevents cooling. Even though sleep's impedance repair, energy restoration, and memory consolidation all operate, temperature remains locked at 1.0.
 
 **Dream therapy succeeded** (recovery 0.967) because it:
+
 1. First flushes the queue (= clinical sedation, e.g., prazosin blocking flashbacks)
 2. Then allows natural sleep onset
 3. Sleep performs offline impedance restructuring ($\Gamma_{int} \to \min$)
@@ -221,7 +227,7 @@ The clinical equivalent: "You must suppress the traumatic flashbacks before rest
 A complete 1440-tick circadian cycle demonstrated overnight recovery from PTSD:
 
 | Metric | Pre-sleep (PTSD) | Post-sleep (Morning) |
-|---|---|---|
+| --- | --- | --- |
 | Consciousness Φ | 0.05 | **0.936** |
 | Cortisol | 0.457 | **0.063** |
 | Heart Rate | 119 bpm | **55 bpm** |
@@ -247,7 +253,7 @@ When a limb is amputated, the load impedance becomes infinite (open circuit), an
 ### 6.2 Three Clinical Phenomena
 
 | Phenomenon | Physical Mechanism | Clinical Literature |
-|---|---|---|
+| --- | --- | --- |
 | **Phantom sensation** | Motor efference continues ($e_{min} = 0.05$, never zero) | Ramachandran, 1996 |
 | **Mirror therapy** | Visual feedback tricks impedance re-matching (Γ ↓) | Ramachandran, 1996 |
 | **Cortical reorganization** | Adjacent areas invade ($r = 0.93$ with pain intensity) | Flor et al., 2006 |
@@ -258,7 +264,7 @@ When a limb is amputated, the load impedance becomes infinite (open circuit), an
 The PhantomLimbEngine simulated 4 weeks of mirror therapy:
 
 | Metric | Pre-therapy | Post-therapy | Clinical Reference |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | VAS Pain Score | 7.2 | **2.8** | 4.0 → 2.1 (Ramachandran) |
 | Phantom Γ | 1.0 | **0.35** | — |
 | Cortical reorganization | High | Moderate | Flor et al. correlation |
@@ -284,7 +290,7 @@ $$M_{phantom} = \int_0^{T_{amputation}} |\Gamma_{limb}(\tau)|^2 \cdot P_{in}(\ta
 After amputation, two memory layers conflict:
 
 | Layer | Signal | Timescale |
-|---|---|---|
+| --- | --- | --- |
 | **Electrical** ($Z_0$) | $Z_L = \infty$ → "no limb exists" | Modifiable (weeks–months) |
 | **Structural** ($M_{structural}$) | Decades of sintered tissue → "limb was here" | Near-permanent (physical modification) |
 
@@ -301,7 +307,7 @@ The persistent pain arises from the unresolvable conflict between electrical mem
 Phase 25 demonstrated that all neuropathology is essentially "different channel impedance mismatch patterns, but the same physical laws":
 
 | Disease | Physical Mapping | Γ Pattern | Clinical Scale |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Stroke** | Acute vascular occlusion → regional Γ → 1.0 | Sudden, focal | NIHSS 0–42 |
 | **ALS** | Progressive motor neuron death → Γ → 1.0 | Sequential, spreading | ALSFRS-R 0–48 |
 | **Dementia** | Diffuse cognitive drift → Γ ↑ everywhere | Gradual, distributed | MMSE 0–30 |
@@ -327,6 +333,7 @@ $$\text{health}_i(t) = e^{-k \cdot (t - t_{onset}^i)}$$
 where $k_{normal} = 0.003$ and $k_{Riluzole} = 0.003 \times 0.70$ (30% reduction, matching Bensimon et al., 1994).
 
 The El Escorial spreading pattern:
+
 - **Limb-onset**: hand → motor_gross → calibration → mouth → broca → respiratory
 - **Bulbar-onset**: mouth → broca first, then motor channels
 
@@ -339,7 +346,7 @@ $$\Gamma_{domain}(t) = \text{drift\_rate} \times (t - \text{onset} - \text{delay
 Seven cognitive domains deteriorate sequentially with domain-specific delays:
 
 | Domain | Delay (ticks) | Clinical Correspondence |
-|---|---|---|
+| --- | --- | --- |
 | Hippocampus (memory) | 0 | Short-term memory loss (first symptom) |
 | Prefrontal (executive) | 100 | Planning difficulties |
 | Attention | 200 | Concentration problems |
@@ -366,7 +373,7 @@ $$\Gamma_{spastic}(v) = \Gamma_{baseline} + 0.8 \times |v|$$
 Three subtypes mapped to impedance patterns:
 
 | Subtype | Impedance Pattern | GMFCS Mapping |
-|---|---|---|
+| --- | --- | --- |
 | Spastic | Velocity-dependent Γ gain (Lance, 1980) | Γ_base = 0.10–0.85 |
 | Dyskinetic | Random Γ noise (σ = 0.15) | Variable |
 | Ataxic | Precision-demand intentional tremor (gain 0.5) | Variable |
@@ -388,6 +395,7 @@ $$Z_{eff} = Z_0 \times (1 + \alpha_{drug})$$
 $$\Gamma_{drug} = \frac{\alpha}{2 + \alpha}$$
 
 where:
+
 - $\alpha < 0$: Decreases impedance → $\Gamma \downarrow$ → therapeutic effect
 - $\alpha > 0$: Increases impedance → $\Gamma \uparrow$ → side effects
 - Multi-drug stacking: $\alpha_{total} = \sum_i \alpha_i$
@@ -399,6 +407,7 @@ where:
 $$\Gamma_{lesion} = \text{severity} \times |\text{target\_channels}|$$
 
 Demyelination is coaxial cable insulation degradation. Three clinical subtypes:
+
 - **RRMS** (relapsing-remitting): Episodic relapses + partial remyelination
 - **PPMS** (primary progressive): Continuous worsening
 - **SPMS** (secondary progressive): RRMS conversion
@@ -412,8 +421,8 @@ $$\Gamma_{motor} = 1 - \text{dopamine\_level}$$
 Substantia nigra dopamine neuron loss → progressive motor Γ elevation:
 
 | Motor Symptom | Physical Mechanism |
-|---|---|
-| **Tremor** (4–6 Hz) | $A = 0.1 \times (1 - DA) \times |\sin(2\pi \times 5.0 \times t)|$ |
+| --- | --- |
+| **Tremor** (4–6 Hz) | $A = 0.1 \times (1 - DA) \times \|\sin(2\pi \times 5.0 \times t)\|$ |
 | **Rigidity** | Tonic Γ elevation |
 | **Bradykinesia** | Increased response delay |
 
@@ -436,6 +445,7 @@ $$\Gamma_{emotional} = \text{deficit} \times \text{channel\_weight}$$
 Serotonin + norepinephrine depletion → emotional channel Γ elevation ($\Gamma_{amygdala} \uparrow$, $\Gamma_{prefrontal} \uparrow$, $\Gamma_{basal\_ganglia} \uparrow$).
 
 **SSRI treatment** ($\alpha = -0.20$):
+
 - Blocks serotonin reuptake → effective 5-HT ↑
 - **300-tick delayed onset** (receptor down-regulation/up-regulation takes time)
 - HAM-D (Hamilton, 1960) 13→9 after treatment onset
@@ -444,18 +454,20 @@ Serotonin + norepinephrine depletion → emotional channel Γ elevation ($\Gamma
 
 ### 8.6 Pharmacology Results (10/10 Passed)
 
+Numerical values in the "Key Data" column are deterministic simulation outputs from `exp_pharmacology.py` (no stochastic elements; results are fully reproducible). Rows 1–2, 5–6, 9–10 report qualitative assertions; rows 3–4, 7–8 report representative trajectory endpoints.
+
 | # | Experiment | Result | Key Data |
-|---|---|---|---|
-| 1 | MS demyelination | ✅ | Lesions 1→25, EDSS rises |
-| 2 | RRMS relapsing-remitting | ✅ | Relapses ≥ 1, EDSS ≤ 10 |
-| 3 | PD dopamine depletion | ✅ | DA 0.80→0.00, UPDRS 22→103 |
-| 4 | L-DOPA + dyskinesia | ✅ | UPDRS 46→26, dyskinesia 0.02 |
-| 5 | Epileptic seizure + postictal | ✅ | Both phases observed |
-| 6 | Kindling effect | ✅ | Threshold 0.80→0.775, seizures ≥ 5 |
-| 7 | Depression monoamine | ✅ | 5-HT 0.55→0.19, HAM-D 11→21 |
-| 8 | SSRI delayed onset | ✅ | Baseline HAM-D 13, post-onset 9 |
-| 9 | Unified Z_eff formula | ✅ | Γ actual = theoretical |
-| 10 | Cross-disease + AliceBrain | ✅ | PD + MDD coexistence |
+| --- | --- | --- | --- |
+| 1 | MS demyelination | ✅ | Plaque count increases monotonically; EDSS rises with disease progression |
+| 2 | RRMS relapsing-remitting | ✅ | Relapse count ≥ 1; EDSS within valid range (0–10) |
+| 3 | PD dopamine depletion | ✅ | DA depletes from 0.80 → 0.00 over 2000 ticks; UPDRS increases accordingly |
+| 4 | L-DOPA + dyskinesia | ✅ | L-DOPA group UPDRS < control at 200 ticks post-treatment; dyskinesia index > 0 after 2000-tick threshold |
+| 5 | Epileptic seizure + postictal | ✅ | Both seizure and postictal phases observed following forced seizure |
+| 6 | Kindling effect | ✅ | Threshold 0.80→0.775 after 5 seizures; total seizure count ≥ 5 (KINDLING_INCREMENT = 0.005/event) |
+| 7 | Depression monoamine | ✅ | Serotonin depletes and HAM-D increases monotonically; amygdala Γ > 0.2 |
+| 8 | SSRI delayed onset | ✅ | HAM-D no significant improvement before onset; HAM-D decreases below baseline after 300-tick onset delay |
+| 9 | Unified Z_eff formula | ✅ | |Γ_actual − Γ_theoretical| < 0.01 |
+| 10 | Cross-disease + AliceBrain | ✅ | PD + MDD coexistence; merged Γ non-empty; AliceBrain introspect includes both conditions |
 
 60 new tests all passed. Cumulative: **1,876 tests**, **44 brain modules**.
 
@@ -478,7 +490,7 @@ $$P_{pinch} = \frac{\mu_0 I^2}{8\pi R^2}$$
 This provides a physical mechanism for distinguishing **reversible fatigue** from **irreversible aging**:
 
 | Type | Mechanical Analog | Neural Equivalent | Recoverable? |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Elastic strain** ($\varepsilon < \varepsilon_{yield}$) | Spring stretching | Sleep-repairable fatigue | **Yes** |
 | **Plastic strain** ($\varepsilon > \varepsilon_{yield}$) | Metal bending | Aging / permanent damage | **No** |
 
@@ -497,6 +509,7 @@ This provides a physical mechanism for distinguishing **reversible fatigue** fro
 ### 9.4 Physical Insight
 
 This explains the asymmetry of recovery:
+
 - Post-sleep performance restoration = elastic strain recovery ✅
 - Single sleep cycle cannot reverse accumulated plastic strain ✅
 
@@ -509,7 +522,7 @@ This explains the asymmetry of recovery:
 Across all clinical domains, Γ-Net achieved:
 
 | Domain | Experiments | Assertions | Passed | Rate |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | PTSD emergence | 1 | 6 | 6 | 100% |
 | Simulated therapy | 1 | 6 | 6 | 100% |
 | PTSD digital twins | 1 | 10 | 10 | 100% |
@@ -687,4 +700,4 @@ The most profound implication: **disease is not separate from health — it is h
 
 ---
 
-*This is Paper III of the Γ-Net ALICE Research Monograph Series.*
+This is Paper III of the Γ-Net ALICE Research Monograph Series.

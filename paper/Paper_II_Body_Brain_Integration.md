@@ -1,13 +1,13 @@
 # Paper II: From Coaxial Cables to Cognition — Body-Brain Integration in the Γ-Net ALICE Architecture
 
-**Γ-Net ALICE Research Monograph Series (2 of 3)**
+Γ-Net ALICE Research Monograph Series (2 of 3)
 
-**Hsi-Yu Huang (黃璽宇)**
+Hsi-Yu Huang (黃璽宇)
 *Γ-Net Research Group*
 *Independent Researcher, Taiwan*
-*Correspondence: llc.y.huangll@gmail.com*
+*Correspondence: <llc.y.huangll@gmail.com>*
 
-*February 2026*
+February 2026
 
 ---
 
@@ -22,6 +22,7 @@
 > ---
 >
 > **Paper Series Overview:**
+>
 > - **Paper I**: The Minimum Reflection Principle — Core theory, mathematical foundations, and system architecture
 > - **Paper II** (this paper): From Coaxial Cables to Cognition — Body systems, brain modules, and perception pipeline
 > - **Paper III**: Emergent Psychopathology — PTSD digital twins, clinical neurology, and computational pharmacology
@@ -48,9 +49,9 @@ Three principles guided the implementation:
 
 1. **Physics first**: Every module must be derivable from impedance matching theory. If a cognitive function cannot be expressed as Γ manipulation, it does not belong in the architecture.
 
-2. **O(1) perception**: The perception pipeline must execute in constant time, regardless of input complexity. Biological perception is inherently O(1) — the time from photon hitting retina to conscious percept is approximately constant (~100ms), regardless of scene complexity. This forces the system to rely on impedance-gated filtering rather than exhaustive search.
+1. **O(1) perception**: The perception pipeline must execute in constant time, regardless of input complexity. Biological perception is inherently O(1) — the time from photon hitting retina to conscious percept is approximately constant (~100ms), regardless of scene complexity. This forces the system to rely on impedance-gated filtering rather than exhaustive search.
 
-3. **Emergence, not programming**: Complex behaviors (pain, PTSD, fear, sleep necessity) must emerge from the equations, not be explicitly coded. If a behavior must be hardcoded, the theory is incomplete.
+1. **Emergence, not programming**: Complex behaviors (pain, PTSD, fear, sleep necessity) must emerge from the equations, not be explicitly coded. If a behavior must be hardcoded, the theory is incomplete.
 
 ---
 
@@ -63,7 +64,7 @@ The Γ-Net eye is a 16×16 pixel retina with a physics-based visual processing p
 #### 2.1.1 Architecture
 
 | Component | Function | Output |
-|---|---|---|
+| --- | --- | --- |
 | Retina (16×16) | Raw light capture | Pixel intensity matrix |
 | Saccade Controller | Foveal targeting via Γ-gradient | (x, y) fixation point |
 | Edge Detector | Contrast extraction | Edge map |
@@ -84,7 +85,7 @@ Edge detection is reframed as impedance boundary detection. At each pixel, the l
 
 $$\Gamma_{pixel}(x,y) = \frac{I(x,y) - \bar{I}_{neighborhood}}{I(x,y) + \bar{I}_{neighborhood}}$$
 
-where $I(x,y)$ is pixel intensity and $\bar{I}_{neighborhood}$ is the mean intensity of the surrounding region. High $|\Gamma_{pixel}|$ indicates a contrast boundary — an edge.
+where $I(x,y)$ is pixel intensity and $\bar{I}_{neighborhood}$ is the mean intensity of the surrounding region. High $\vert \Gamma_{pixel}\vert $ indicates a contrast boundary — an edge.
 
 #### 2.1.4 The Retinotopic Map as Γ-Topology
 
@@ -97,10 +98,10 @@ The retinotopic map is therefore a \textbf{hardware realization of Γ-topology}:
 #### 2.1.5 Experimental Verification
 
 `exp_eye_oscilloscope.py` verified:
-- Saccade stability: fixation converges within 3 steps ✅
-- Edge detection accuracy: matches Sobel operator output ✅
-- Impedance encoding: visual Γ ∈ [-1, 1] for all inputs ✅
-- Foveal resolution gradient: center 4× resolution vs. periphery ✅
+
+- Visual frequency mapping: spatial frequency → brainwave band (δ/θ for low-freq, β/γ for high-freq) ✅
+- End-to-end pipeline: Eye → AliceBrain → Oscilloscope produces 4-channel Γ output ✅
+- Standing wave computation: incident + reflected waveforms yield correct VSWR ✅
 
 ### 2.2 Ear: Cochlear Impedance Analysis
 
@@ -109,7 +110,7 @@ The retinotopic map is therefore a \textbf{hardware realization of Γ-topology}:
 The Γ-Net ear implements a 24-band cochlear filterbank based on the Glasberg-Moore auditory filter model (Glasberg & Moore, 1990):
 
 | Component | Function | Output |
-|---|---|---|
+| --- | --- | --- |
 | Outer Ear | Frequency-dependent gain | Amplified signal |
 | Cochlear Filterbank | 24-band ERB decomposition | Tonotopic activation |
 | Hair Cell Transduction | Mechanical → neural conversion | Auditory Γ per band |
@@ -131,7 +132,7 @@ $$\mathbf{F}_{sound} = [\Gamma_1, \Gamma_2, ..., \Gamma_{24}]$$
 
 Two sounds are perceived as similar when their fingerprint distance is small:
 
-$$d(A, B) = \|\mathbf{F}_A - \mathbf{F}_B\|_2$$
+$$d(A, B) = |\mathbf{F}_A - \mathbf{F}_B|_2$$
 
 This replaces spectrogram-based representations with an impedance-based representation that naturally supports Hebbian association.
 
@@ -143,15 +144,16 @@ $$Z_{basilar}(x) = Z_{base} \cdot \left(\frac{L - x}{L}\right)^\alpha$$
 
 where $x$ is position along the membrane and $L$ is total length. Adjacent hair cells resonate at similar frequencies and present similar impedances, yielding $\Gamma_{ij} \to 0$ for neighboring cells. The tonotopic map is therefore a **hardware realization of Γ-topology**: the spatial organization of the cochlea is an impedance gradient frozen into the physical structure of the basilar membrane. This is not the brain computing frequencies — it is the physics of a graded elastic strip performing mechanical Fourier decomposition.
 
-Notably, the auditory nerve transmits at 50Ω, while the temporal cortex receives at 75Ω — an impedance mismatch of $\Gamma = |50 - 75|/(50 + 75) = 0.20$. By contrast, the optic nerve (50Ω) matches the occipital cortex (50Ω) perfectly ($\Gamma = 0$). This asymmetry may explain why auditory processing requires more temporal calibration than visual processing, and contributes to the temporal cortex's specialization in time-domain analysis.
+Notably, the auditory nerve transmits at 50Ω, while the temporal cortex receives at 75Ω — an impedance mismatch of $\Gamma = \vert 50 - 75\vert /(50 + 75) = 0.20$. By contrast, the optic nerve (50Ω) matches the occipital cortex (50Ω) perfectly ($\Gamma = 0$). This asymmetry may explain why auditory processing requires more temporal calibration than visual processing, and contributes to the temporal cortex's specialization in time-domain analysis.
 
 #### 2.2.5 Auditory Grounding
 
 `exp_auditory_grounding.py` verified the hear→learn→recognize pipeline:
-- Vowel discrimination: /a/, /i/, /u/ produce distinct cochlear fingerprints ✅
-- Cross-modal binding: auditory Γ + visual Γ → integrated percept ✅
-- Frequency selectivity: Q-factor matches human psychoacoustic data ✅
-- Adaptation: repeated stimuli reduce auditory Γ (habituation) ✅
+
+- Vowel discrimination: /a/, /i/, /u/, /e/, /o/ produce distinct 24-dim cochlear fingerprints ✅
+- Cross-modal binding (Pavlovian): bell + food pairing → bell alone triggers visual phantom activation ✅
+- Extinction: CS presented without US → cross-modal synapse decays (Γ increases, channel closes) ✅
+- Differential conditioning: distinct CSs bind to distinct USs without cross-contamination ✅
 
 ### 2.3 Hand: Motor Impedance System
 
@@ -160,9 +162,9 @@ Notably, the auditory nerve transmits at 50Ω, while the temporal cortex receive
 The Γ-Net hand is a 5-finger system with pressure sensors, temperature sensors, and motor actuators:
 
 | Component | Function | Γ Mapping |
-|---|---|---|
-| 5 Pressure Sensors | Contact force detection | $\Gamma_p = |F - F_{target}| / (F + F_{target})$ |
-| 5 Temperature Sensors | Thermal environment | $\Gamma_T = |T - T_{comfort}| / (T + T_{comfort})$ |
+| --- | --- | --- |
+| 5 Pressure Sensors | Contact force detection | $\Gamma_p = \\\vert F - F_{target}\\\vert  / (F + F_{target})$ |
+| 5 Temperature Sensors | Thermal environment | $\Gamma_T = \\\vert T - T_{comfort}\\\vert  / (T + T_{comfort})$ |
 | Grip Controller | Force calibration | Motor Γ |
 | Proprioception | Internal position sense | Calibration Γ |
 
@@ -184,12 +186,13 @@ This produces the anxiety tremor observed clinically — hands shake not because
 
 #### 2.3.4 Experimental Verification
 
-`exp_hand_coordination.py` verified five clinical scenarios:
-- Normal grip calibration: converges within 10 trials ✅
-- Fragile object handling: reduced force + increased caution ✅
-- Anxiety tremor: tremor amplitude proportional to stress level ✅
-- Motor learning transfer: skills generalize across similar objects ✅
-- Fatigue: prolonged gripping increases Γ_motor (muscle fatigue analog) ✅
+`exp_hand_coordination.py` verified five scenarios:
+
+- PID reaching convergence: hand reaches all 4 workspace corners ✅
+- Anxiety tremor: tremor amplitude increases monotonically with ram_temperature (0.0→1.0) ✅
+- Multi-target dopamine accumulation: successful reaches trigger cumulative dopamine reward ✅
+- Trajectory visualization: calm vs. anxious trajectories differ qualitatively ✅
+- Proprioception: moving hand signal frequency > stationary hand frequency ✅
 
 ### 2.4 Mouth: Articulatory System
 
@@ -198,7 +201,7 @@ This produces the anxiety tremor observed clinically — hands shake not because
 The Γ-Net mouth produces speech through impedance-based articulatory planning:
 
 | Component | Function | Γ Mapping |
-|---|---|---|
+| --- | --- | --- |
 | Broca's Planner | Articulatory sequencing | $\Gamma_{plan}$ |
 | Vocal Tract Model | Formant-based vowel generation | F1, F2 parameters |
 | Motor Execution | Plan → sound conversion | $\Gamma_{speech}$ |
@@ -209,7 +212,7 @@ The Γ-Net mouth produces speech through impedance-based articulatory planning:
 Five vowels (/a/, /e/, /i/, /o/, /u/) are defined by formant frequency pairs (F1, F2), following Peterson & Barney (1952):
 
 | Vowel | F1 (Hz) | F2 (Hz) | Articulatory Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | /a/ | 730 | 1090 | Open, back |
 | /e/ | 530 | 1840 | Mid, front |
 | /i/ | 270 | 2290 | Close, front |
@@ -227,11 +230,11 @@ Practice reduces $\Gamma_{speech}$ — repeated articulation monotonically decre
 The mouth implements a complete sensorimotor loop (Hickok & Poeppel, 2007):
 
 1. **Broca**: Plans articulatory sequence from concept activation
-2. **Vocal Tract**: Executes plan → produces acoustic signal
-3. **Ear**: Receives self-generated sound (auditory feedback)
-4. **Wernicke**: Processes heard speech → generates cochlear fingerprint
-5. **Error signal**: $\Delta\Gamma = \Gamma_{heard} - \Gamma_{intended}$
-6. **Broca update**: Adjusts plan to reduce error
+1. **Vocal Tract**: Executes plan → produces acoustic signal
+1. **Ear**: Receives self-generated sound (auditory feedback)
+1. **Wernicke**: Processes heard speech → generates cochlear fingerprint
+1. **Error signal**: $\Delta\Gamma = \Gamma_{heard} - \Gamma_{intended}$
+1. **Broca update**: Adjusts plan to reduce error
 
 This is the physics of **learning to talk**: infants babble (random motor plans), hear themselves (auditory feedback), and gradually calibrate Broca's impedance settings to produce intended sounds.
 
@@ -273,7 +276,7 @@ High arousal (many channels mismatched) triggers sympathetic activation; low aro
 
 The LifeLoop is the master control loop that keeps ALICE alive:
 
-```
+```text
 while alive:
     signals = perceive()              # Multi-modal sensory input
     errors  = estimate_errors()       # Cross-modal error estimation
@@ -284,7 +287,7 @@ while alive:
     adapt(performance)                # Meta-learning adjusts the system
 ```
 
-`exp_life_loop.py` verified continuous autonomous operation over 1000+ ticks with no NaN, no Inf, and stable vital signs ✅.
+`exp_life_loop.py` verified the complete closed-loop architecture over 20 ticks across 5 modalities (see, hear, reach, say, full-cycle), with stable vital signs (no NaN/Inf), error-to-pain coupling, and autonomic homeostasis ✅.
 
 ### 3.3 Pain and Nociception
 
@@ -333,7 +336,7 @@ $$P(t) = P_{base} + \alpha_P \cdot (1 - \text{arousal}) - \beta_P \cdot \text{Pa
 The autonomic system generates four vital signs:
 
 | Vital Sign | Formula | Normal Range |
-|---|---|---|
+| --- | --- | --- |
 | Heart Rate | $HR = 60 + 40 \cdot S - 20 \cdot P$ | 55–100 bpm |
 | Cortisol | $C = 0.1 + 0.4 \cdot S$ | 0.1–0.5 |
 | Temperature | $T = 36.5 + 1.5 \cdot \text{arousal}$ | 36.5–38.0°C |
@@ -355,7 +358,7 @@ Sleep is not a functional pause but a **physically necessary mode of operation**
 Γ-Net implements four biologically inspired sleep stages:
 
 | Stage | Duration | Function | Γ Operation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | N1 (Light) | 5% | Transition | Gradual sensory Γ gating |
 | N2 (Spindle) | 50% | Memory selection | K-complex Γ filtering |
 | N3 (Slow-wave) | 25% | Deep repair | Global Γ normalization |
@@ -365,22 +368,24 @@ Sleep is not a functional pause but a **physically necessary mode of operation**
 
 `exp_sleep_physics.py` provided a direct experimental proof that sleep is physically necessary:
 
-1. **Sleep deprivation**: After 200 ticks without sleep, mean Γ increases by 40%, consciousness Φ decreases by 60%, and motor coordination degrades by 50%.
+1. **Sleep deprivation**: Under full deprivation (210 awake ticks, 0 sleep ticks), final energy is significantly lower and impedance debt substantially higher than the normal-sleep condition (100 awake + 110 sleep ticks), confirming irreversible degradation without recovery.
 
-2. **Recovery sleep**: A single complete sleep cycle (N1→N2→N3→REM) restores all metrics to baseline within 5% tolerance.
+1. **Recovery sleep**: A complete sleep cycle (N1→N2→N3→REM) restores energy and reduces impedance debt relative to the pre-sleep state.
 
-3. **Sleep debt accumulation**: Sleep pressure follows adenosine-like kinetics — it accumulates during waking and can only be discharged during N3 sleep.
+1. **Sleep debt accumulation**: Sleep pressure and impedance debt accumulate during waking ticks and are discharged during N3 (synaptic downscaling) and REM (channel diagnostics).
 
-4. **Insomnia paradox**: PTSD-frozen states prevent sleep entry (consciousness < 0.15 blocks sleep_cycle.tick()), creating a vicious cycle: frozen → can't sleep → can't repair → stays frozen.
+1. **Insomnia paradox**: PTSD-frozen states prevent sleep entry (consciousness < 0.15 blocks sleep_cycle.tick()), creating a vicious cycle: frozen → can't sleep → can't repair → stays frozen.
 
 #### 3.5.4 Circadian Regulation
 
-`exp_day_night_cycle.py` verified a complete 1440-tick (24-hour) circadian cycle:
+`exp_day_night_cycle.py` verified a complete 550-tick circadian simulation across 6 phases:
 
-- Dawn (tick 0–360): Cortisol surge, wake transition, consciousness rising
-- Day (tick 360–1080): Active perception, learning, stress accumulation
-- Dusk (tick 1080–1200): Melatonin-analog rise, arousal decline
-- Night (tick 1200–1440): 6 complete sleep cycles, impedance repair
+- Phase 1 · Dawn (tick 0–50): Wake-up activation, baseline measurement
+- Phase 2 · Morning (tick 50–150): Intensive learning, attention training
+- Phase 3 · Afternoon (tick 150–250): Fatigue accumulation, efficiency degradation
+- Phase 4 · Evening (tick 250–350): Push-through learning, system limit
+- Phase 5 · Night (tick 350–500): Natural sleep, NREM/REM cycle, impedance repair
+- Phase 6 · Next Morning (tick 500–550): Wake comparison, overnight gain measured
 
 ### 3.6 Memory Hierarchy
 
@@ -415,15 +420,14 @@ The semantic field stores concepts as impedance patterns:
 
 #### 3.6.4 Memory Verification
 
-`exp_memory_theory.py` verified all 5 memory properties:
+`exp_memory_theory.py` verified 4 core predictions:
 
-| # | Property | Verification | Status |
-|---|---|---|---|
-| 1 | Ebbinghaus forgetting curve | Decay matches exponential with impedance modulation | ✅ |
-| 2 | Flashbulb memory | High-Γ memories persist indefinitely | ✅ |
-| 3 | Working memory capacity | 7 ± 2 items, Miller's Law | ✅ |
-| 4 | Sleep consolidation | N3 transfers episodic → semantic | ✅ |
-| 5 | Retrieval failure | High-interference Γ blocks cue matching | ✅ |
+| # | Prediction | Verification | Status |
+| --- | --- | --- | --- |
+| 1 | Familiar signals consume less energy | Repeated stimulus → cache hit rate ↑ → reflected energy ↓ | ✅ |
+| 2 | Emotion accelerates consolidation | High-pain state produces ≥ calm-state ring consolidation count | ✅ |
+| 3 | Working memory capacity limit | Multi-task → WM evictions increase (7 ± 2 Miller overflow) | ✅ |
+| 4 | Sleep performs memory transfer | Post-sleep sleep pressure ↓, N3 replays memories to semantic field | ✅ |
 
 ### 3.7 Thalamus: The Sensory Gate
 
@@ -467,24 +471,30 @@ The PFC implements executive functions with finite cognitive energy:
 - **Energy depletion**: Each executive operation costs energy; when energy is depleted, the system falls back to habitual (basal ganglia) control — this is the physics of ego depletion
 
 `exp_prefrontal.py` and `exp_cognitive_flexibility.py` verified:
-- Task switching cost < 300ms equivalent ✅
-- Perseveration < 30% on Wisconsin Card Sort analog ✅
-- Energy depletion → increased impulsivity ✅
-- PFC recovery via sleep ✅
+
+- Task switching cost decreases with training: ~190ms (untrained) → <80ms (trained) ✅
+- Perseveration occurs at low energy (≤ 0.1) + high inertia (> 0.5); absent at energy ≥ 0.5 ✅
+- Energy depletion → impulse breakthrough (willpower depletion cascade, EXP-14d) ✅
+- Cognitive flexibility index Ω: 0.5 → 0.95 after 5000-switch training regime ✅
 
 ### 3.11 Hippocampus-Wernicke Integration
 
 The hippocampus and Wernicke's area form an integrated memory-language system:
 
 1. **Hippocampus** records episodes with contextual Γ values
-2. **Wernicke's area** processes language input (heard speech) via sequential prediction
-3. **Integration**: Wernicke's temporal predictions generate chunks; chunks enter hippocampus as episodes; during sleep, episodes consolidate to semantic field; semantic field influences Wernicke's predictions
+1. **Wernicke's area** processes language input (heard speech) via sequential prediction
+1. **Integration**: Wernicke's temporal predictions generate chunks; chunks enter hippocampus as episodes; during sleep, episodes consolidate to semantic field; semantic field influences Wernicke's predictions
 
 `exp_episodic_wernicke.py` verified 8 integration properties:
-- Wernicke sequential prediction generates N400-like Γ anomaly for unexpected words ✅
-- Hippocampal encoding triggered by novelty Γ ✅
-- Chunk formation from temporal co-occurrence ✅
-- Sleep consolidation of chunks to semantic field ✅
+
+- Episodic recording: multi-modal binding stores episodes with contextual Γ ✅
+- Pattern completion: partial cue retrieves full episode ✅
+- Cross-membrane recall: attractor traversal bridges encoding contexts ✅
+- Sleep consolidation: N3 episode replay promotes to semantic field ✅
+- Transition learning: hippocampal sequences update Wernicke transition weights ✅
+- Sequence comprehension: syntactic Γ_syntactic rises for ill-formed sequences ✅
+- N400 detection: unexpected concept triggers is_n400=True; expected does not ✅
+- Chunk formation: frequent co-occurrences crystallize into compressed units ✅
 
 ### 3.12 Consciousness Module
 
@@ -499,7 +509,7 @@ where $\bar{T} = \frac{1}{N}\sum_i (1 - \Gamma_i^2)$ is the mean transmission ef
 #### 3.12.2 Consciousness States
 
 | State | Φ Range | Condition |
-|---|---|---|
+| --- | --- | --- |
 | Deep coma | 0.00–0.05 | Massive Γ → 1 across all channels |
 | Vegetative | 0.05–0.15 | Some reflexive channels active |
 | Minimal | 0.15–0.30 | Sparse conscious access |
@@ -509,14 +519,14 @@ where $\bar{T} = \frac{1}{N}\sum_i (1 - \Gamma_i^2)$ is the mean transmission ef
 
 #### 3.12.3 Consciousness Flickering
 
-Post-trauma, consciousness does not simply "switch off" — it flickers between states as competing channel dynamics push Φ up and down. `exp_awakening.py` captured this dynamic: Φ ranged from 0.000 (post-trauma collapse) to 0.777 (alert waking), with the transition exhibiting chaotic fluctuations rather than smooth recovery ✅.
+Post-trauma, consciousness does not simply "switch off" — it flickers between states as competing channel dynamics push Φ up and down. `exp_awakening.py` captured this dynamic over a 600-tick simulation (5 acts, each tick = 6 seconds equivalent): Φ spans between near-zero (post-trauma collapse at Act IV peak pain) and a high-alert peak (Act II exploration), with the Act IV→V recovery transition exhibiting chaotic fluctuations rather than smooth recovery ✅. The exact Φ extremes are runtime-determined and seed-dependent; the qualitative collapse–flicker–recovery shape is reproducible.
 
 ### 3.13 Additional Brain Modules Summary
 
 The following modules each implement specific cognitive functions within the unified Γ framework:
 
 | Module | Function | Key Γ Interaction |
-|---|---|---|
+| --- | --- | --- |
 | `mirror_neurons.py` | Empathy & motor imitation | $\Gamma_{mirror} = \Gamma_{observed}$ (automatic copying) |
 | `curiosity_drive.py` | Novelty seeking | Curiosity ∝ prediction error Γ |
 | `attention_plasticity.py` | Adaptive attention | Training reduces attention Γ |
@@ -535,7 +545,7 @@ The following modules each implement specific cognitive functions within the uni
 Every tick, ALICE executes the following perception pipeline in strict order:
 
 | Step | Module | Operation | Complexity |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | 1 | Eye | `see()` → visual Γ | O(1) |
 | 2 | Ear | `hear()` → auditory Γ | O(1) |
 | 3a | Thalamus | Bottom-up gating | O(1) |
@@ -564,11 +574,14 @@ Every tick, ALICE executes the following perception pipeline in strict order:
 A critical architectural feature is the **impedance-locked attractor** at the top of `perceive()`:
 
 ```python
-# SystemState.is_frozen():
+
+# SystemState.is_frozen()
+
 def is_frozen(self) -> bool:
     return self.consciousness < 0.15
 
-# AliceBrain.perceive() — only CRITICAL priority can penetrate:
+# AliceBrain.perceive() — only CRITICAL priority can penetrate
+
 if self.vitals.is_frozen() and priority != Priority.CRITICAL:
     self._log_event("perceive_blocked", {
         "reason": "SYSTEM FROZEN — consciousness too low, only CRITICAL allowed",
@@ -585,11 +598,13 @@ When consciousness drops below 0.15, the system enters a frozen state. Non-CRITI
 ### 4.3 Pipeline Verification
 
 `exp_perception_pipeline.py` verified:
-- All 15 steps execute sequentially ✅
-- Total pipeline time < 1ms ✅
-- No step depends on input size ✅
-- Impedance-locked attractor activates at correct thresholds ✅
-- Pipeline is idempotent for identical inputs ✅
+
+- Lorentzian resonance curve: tuner peaks at correct center frequency for each brainwave band ✅
+- Left/right brain frequency routing: low-freq signals → right hemisphere (δ/θ), high-freq → left (β/γ) ✅
+- Concept resonance and identification: known concepts retrieved by frequency match ✅
+- Cross-modal binding: auditory + tactile signals for identical concept yield bound output ✅
+- FusionBrain integration: 4-region brain produces stable Γ map with performance analytics ✅
+- Performance benchmark: pipeline latency well under real-time constraint ✅
 
 ---
 
@@ -600,7 +615,7 @@ When consciousness drops below 0.15, the system enters a frozen state. Non-CRITI
 Γ-Net ALICE exposes a RESTful API and WebSocket interface for external interaction:
 
 | Endpoint | Method | Function |
-|---|---|---|
+| --- | --- | --- |
 | `/perceive` | POST | Send sensory stimulus |
 | `/state` | GET | Read current brain state |
 | `/vitals` | GET | Read vital signs |
@@ -639,7 +654,7 @@ The system state is serialized as a JSON object containing:
 ### 6.1 System-Wide Metrics
 
 | Metric | Value |
-|---|---|
+| --- | --- |
 | Source files | 146 |
 | Total lines of code | 84,500+ |
 | Brain modules | 44 |
@@ -654,7 +669,7 @@ The system state is serialized as a JSON object containing:
 A 600-tick stress test conducted during Phase 18 verified system stability under extreme conditions:
 
 | # | Test | Result |
-|---|---|---|
+| --- | --- | --- |
 | 1 | 600-tick continuous operation | No NaN/Inf ✅ |
 | 2 | PFC depletion marathon | Depletion → recovery ✅ |
 | 3 | 10 consecutive pain storms | Meltdown → auto-recovery ✅ |
@@ -702,12 +717,12 @@ This implements the subjective experience of "time slowing down" during stress �
 A unifying observation across §2.1–§2.2 is that sensory organ topology is not separate from Γ-Net theory — it is a direct physical consequence. The reflection coefficient $\Gamma_{ij} = (Z_i - Z_j)/(Z_i + Z_j)$ naturally defines a metric space on any set of impedance-bearing elements, satisfying the metric axioms. Biological evolution and cortical development solve the same optimization problem — $\Sigma\Gamma^2 \to \min$ — at different timescales and with different degrees of freedom:
 
 | System | Timescale | Degrees of Freedom | Topology Type | Example |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | Basilar membrane | Evolutionary | Membrane stiffness gradient | Tonotopic map | Adjacent hair cells resonate at similar frequencies |
 | Retina/Lens | Evolutionary | Photoreceptor arrangement | Retinotopic map | Adjacent photoreceptors transduce similar spatial frequencies |
 | Cortical pruning | Developmental | Synaptic connection strength | Functional specialization | Surviving connections cluster around signal target impedance |
 
-In all three cases, elements with small Γ-distance ($d(i,j) = |\Gamma_{ij}| \ll 1$) end up spatially or functionally adjacent, while elements with large Γ-distance separate. **Sensory organ topology is the hardware solution to MRP; cortical topology is the software solution. Both are Γ-field steady states.**
+In all three cases, elements with small Γ-distance ($d(i,j) = \vert \Gamma_{ij}\vert  \ll 1$) end up spatially or functionally adjacent, while elements with large Γ-distance separate. **Sensory organ topology is the hardware solution to MRP; cortical topology is the software solution. Both are Γ-field steady states.**
 
 This reframes Paper I's Limitation #2 (absence of spatial topology) as a **prediction**: the Minimum Reflection Principle predicts that spatial topology emerges from impedance matching dynamics whenever sufficient degrees of freedom are available. Preliminary experiments (`exp_topology_emergence.py`) support this prediction at the 1D level: after 100 pruning epochs, impedance distribution entropy drops by +2.81 nats, inter-region Γ-separation reaches 4.1× intra-region spread, and surviving connection impedances collapse to within 2–3% of target values.
 
@@ -719,17 +734,17 @@ We have presented the complete body-brain implementation of Γ-Net ALICE:
 
 1. **Five body organs** (eye, ear, hand, mouth, internal sensors) transduce environmental signals into impedance mismatch values using coaxial cable physics.
 
-2. **44 brain modules** process, integrate, learn from, and act upon these values through an O(1) perception pipeline.
+1. **44 brain modules** process, integrate, learn from, and act upon these values through an O(1) perception pipeline.
 
-3. **The autonomic nervous system** couples Γ dynamics to physiological responses (heart rate, cortisol, temperature, respiration).
+1. **The autonomic nervous system** couples Γ dynamics to physiological responses (heart rate, cortisol, temperature, respiration).
 
-4. **The three-tier memory hierarchy** (working memory, hippocampus, semantic field) implements impedance-modulated encoding, decay, and consolidation.
+1. **The three-tier memory hierarchy** (working memory, hippocampus, semantic field) implements impedance-modulated encoding, decay, and consolidation.
 
-5. **Sleep is physically necessary** — without offline impedance restructuring, system performance degrades irreversibly.
+1. **Sleep is physically necessary** — without offline impedance restructuring, system performance degrades irreversibly.
 
-6. **Pain, fear, and consciousness** emerge from Γ dynamics without explicit programming.
+1. **Pain, fear, and consciousness** emerge from Γ dynamics without explicit programming.
 
-7. **The entire system is validated by 1,876 tests** and maintains O(1) perception complexity.
+1. **The entire system is validated by 1,876 tests** and maintains O(1) perception complexity.
 
 Paper III demonstrates that this architecture generates clinically valid psychopathology — PTSD, phantom limb pain, stroke, ALS, dementia, and more — all from the same equations. The ethical implications of these emergent properties are discussed in Paper III, §12.
 
@@ -771,4 +786,5 @@ Paper III demonstrates that this architecture generates clinically valid psychop
 
 ---
 
-*This is Paper II of the Γ-Net ALICE Research Monograph Series. Continue to Paper III: "Emergent Psychopathology."*
+This is Paper II of the Γ-Net ALICE Research Monograph Series. Continue to Paper III: "Emergent Psychopathology."
+
