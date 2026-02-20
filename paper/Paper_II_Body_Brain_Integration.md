@@ -245,10 +245,10 @@ The FusionBrain is the central integration module that combines all sensory inpu
 
 ```python
 class FusionBrain:
-    """Fusion Brain: v3 neural substrate + v4 communication protocol.
-    
-    Unifies 4 brain regions (motor, somatosensory, limbic, prefrontal),
-    Γ-Net v4 messaging protocol, and performance analytics.
+    """
+    Fusion Brain: v3 neural substrate + v4 communication protocol
+
+    Unifies 4 brain regions, Γ-Net v4 messaging protocol, and performance analytics.
     Supports the complete stimulus → cognition → emotion → motor → memory cycle.
     """
 ```
@@ -275,12 +275,13 @@ The LifeLoop is the master control loop that keeps ALICE alive:
 
 ```
 while alive:
-    perceive()      # 15-step perception pipeline
-    if should_sleep():
-        sleep_cycle()   # Offline impedance restructuring
-    if should_learn():
-        learn()         # Active impedance calibration
-    tick += 1
+    signals = perceive()              # Multi-modal sensory input
+    errors  = estimate_errors()       # Cross-modal error estimation
+    commands = compensate(errors)      # Generate motor compensation commands
+    execute(commands)                  # Body execution
+    feedback = re_perceive()           # Action changes perception
+    calibrate(feedback)               # Update calibration parameters
+    adapt(performance)                # Meta-learning adjusts the system
 ```
 
 `exp_life_loop.py` verified continuous autonomous operation over 1000+ ticks with no NaN, no Inf, and stable vital signs ✅.
@@ -569,7 +570,14 @@ def is_frozen(self) -> bool:
 
 # AliceBrain.perceive() — only CRITICAL priority can penetrate:
 if self.vitals.is_frozen() and priority != Priority.CRITICAL:
-    return  # Frozen — only CRITICAL signals allowed
+    self._log_event("perceive_blocked", {
+        "reason": "SYSTEM FROZEN — consciousness too low, only CRITICAL allowed",
+        "consciousness": self.vitals.consciousness,
+        "pain_level": self.vitals.pain_level,
+    })
+    self.vitals.tick(...)  # Still update tick (let the system cool down naturally)
+    self._state = "frozen"
+    return {"status": "FROZEN", "vitals": self.vitals.get_vitals()}
 ```
 
 When consciousness drops below 0.15, the system enters a frozen state. Non-CRITICAL signals are blocked from progressing through the pipeline — only CRITICAL-priority stimuli can penetrate. This is the mechanism of PTSD freezing: the impedance-locked attractor blocks the processing pipeline required for recovery, but leaves a narrow emergency channel open.
@@ -607,14 +615,20 @@ The system state is serialized as a JSON object containing:
 
 ```json
 {
-  "tick": 12345,
-  "consciousness": {"phi": 0.72, "state": "alert"},
-  "vitals": {"heart_rate": 72, "cortisol": 0.15, "temperature": 0.3},
-  "emotion": {"valence": 0.6, "arousal": 0.3},
-  "pain": 0.0,
-  "working_memory": ["concept_1", "concept_2"],
-  "gamma_mean": 0.25,
-  "sleep_stage": "WAKE"
+  "ram_temperature": 0.0,
+  "stability_index": 1.0,
+  "heart_rate": 72.0,
+  "pain_level": 0.0,
+  "consciousness": 0.72,
+  "throttle_factor": 1.0,
+  "is_frozen": false,
+  "pain_events": 0,
+  "freeze_events": 0,
+  "recovery_events": 0,
+  "total_ticks": 12345,
+  "pain_sensitivity": 1.0,
+  "baseline_temperature": 0.0,
+  "trauma_count": 0
 }
 ```
 
