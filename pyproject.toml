@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alice-gamma-net"
+version = "1.0.0"
+description = "Alice Smart System — A physics-driven electronic lifeform based on the Γ-Net architecture"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Hsi-Yu Huang", email = "llc.y.huangll@gmail.com"}
+]
+
+[project.urls]
+Homepage = "https://github.com/cyhuang76/alice-gamma-net"
+Repository = "https://github.com/cyhuang76/alice-gamma-net"
+Issues = "https://github.com/cyhuang76/alice-gamma-net/issues"
+
+dependencies = [
+    "numpy>=1.24.0",
+    "xxhash>=3.4.0",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "websockets>=12.0",
+    "pydantic>=2.5.0",
+    "jinja2>=3.1.0",
+    "aiofiles>=23.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.23.0",
+    "httpx>=0.25.0",
+]
+full = [
+    "matplotlib>=3.8.0",
+    "torch>=2.1.0",
+]
+
+[project.scripts]
+alice = "alice.main:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
