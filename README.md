@@ -1,17 +1,17 @@
 # 🧠 Alice Smart System
 
-**Physics-Driven Electronic Lifeform Based on Γ-Net Architecture**
+Physics-Driven Electronic Lifeform Based on Γ-Net Architecture
 
-**Author**: Hsi-Yu Huang (黃璽宇) — Independent Researcher, Taiwan  
-**GitHub**: [github.com/cyhuang76/alice-gamma-net](https://github.com/cyhuang76/alice-gamma-net)  
+**Author**: Hsi-Yu Huang (黃璽宇) — Independent Researcher, Taiwan
+**GitHub**: [github.com/cyhuang76/alice-gamma-net](https://github.com/cyhuang76/alice-gamma-net)
 **License**: Apache 2.0
 
-> "The brain's essence is not computation — it is communication"  
-> "Pain is not a feeling — it is protocol collapse"  
-> "All behavior is calibration error compensation"  
+> "The brain's essence is not computation — it is communication"
+> "Pain is not a feeling — it is protocol collapse"
+> "All behavior is calibration error compensation"
 > "Language is not communication — it is thermodynamic heat dissipation"
 
-**146 source files · 84,500+ lines · 1,876 tests · 100% passing**
+146 source files · 84,500+ lines · 1,876 tests · 100% passing
 
 ---
 
@@ -20,7 +20,7 @@
 Alice is not a traditional AI. She is an **electronic lifeform** — built with physics laws, not statistical training.
 
 | Traditional AI | Alice Γ-Net |
-|----------------|-------------|
+| :--- | --- |
 | Open-loop: Input → Output | **Closed-loop**: Perceive → Error → Compensate → Re-perceive |
 | Statistical function approximator | **Physics simulator** (FFT, PID, LC resonance) |
 | No body | **Full-body** (eye, ear, hand, mouth) |
@@ -43,7 +43,7 @@ Alice is not a traditional AI. She is an **electronic lifeform** — built with 
 
 ## Architecture Overview
 
-```
+```text
 ┌──────────────────────────────────────────────────────────────────────┐
 │  Layer 6 · Application Interface                                     │
 │  ├── FastAPI REST (19 endpoints) + WebSocket real-time streaming      │
@@ -124,7 +124,7 @@ Alice is not a traditional AI. She is an **electronic lifeform** — built with 
 
 ## Core Closed-Loop: Life Loop
 
-```
+```text
      Perception           Error Estimation       Compensation         Execution
   ┌─────────┐         ┌──────────────┐      ┌──────────┐      ┌──────────┐
   │ Eye see │──┐      │ Cross-modal  │      │ PID ctrl │      │ Hand rch │
@@ -179,7 +179,7 @@ Communication between brain regions is not "passing values" — it is physical t
 
 ### 👁 Visual Engine — Forward Engineering
 
-```
+```text
 Photons → Pupil (aperture) → Lens (FFT) → Retina (photoelectric) → Optic nerve (ElectricalSignal)
                          ↑
                     Focal plane of a physical convex lens
@@ -194,7 +194,7 @@ Spatial frequency → brainwave frequency mapping:
 
 ### ✋ Motor Engine — Inverse Engineering
 
-```
+```text
 Intent (ElectricalSignal) → PID controller → Muscle tension → Motor output
 
 Anxiety modulation:
@@ -204,7 +204,7 @@ Anxiety modulation:
 
 ### 🫀 Autonomic Nervous System
 
-```
+```text
 Sympathetic (throttle)    Parasympathetic (brake)
   Heart rate ↑               Heart rate ↓
   Blood pressure ↑           Blood pressure ↓
@@ -217,7 +217,7 @@ Sympathetic (throttle)    Parasympathetic (brake)
 
 ### 😴 Sleep Cycle
 
-```
+```text
 Awake → N1 (drowsy) → N2 (light sleep) → N3 (deep sleep / δ waves) → REM (dreaming)
                                     ↓
                               Memory consolidation + offline impedance renormalization
@@ -228,7 +228,7 @@ Awake → N1 (drowsy) → N2 (light sleep) → N3 (deep sleep / δ waves) → RE
 
 ### 🗣️ Language Emergence — Semantic Pressure Driven
 
-```
+```text
 Pain/emotion → Semantic pressure accumulation P_sem = f(emotion × concept_mass × arousal × Φ)
                               ↓
                   P_sem > threshold → Spontaneous concept resonance (inner monologue)
@@ -245,7 +245,7 @@ Pain/emotion → Semantic pressure accumulation P_sem = f(emotion × concept_mas
 
 ## Project Structure
 
-```
+```text
 Alice Smart System/                         84,500+ lines · 146 files
 ├── alice/                                  Source core (58 files · 36,200+ lines)
 │   ├── alice_brain.py                      Unified intelligence controller (2,262 lines)
@@ -351,13 +351,15 @@ pip install fastapi uvicorn websockets
 python -m alice.main server --port 8000
 ```
 
-- **CRT Oscilloscope Dashboard**: http://localhost:8000/dashboard
-- **API Documentation**: http://localhost:8000/docs
+- **CRT Oscilloscope Dashboard**: <http://localhost:8000/dashboard>
+- **API Documentation**: <http://localhost:8000/docs>
 
 ### Run Experiments
 
 ```bash
+
 # ── Foundation Physics ──
+
 python -m experiments.exp_coaxial_physics         # Coaxial cable physics verification
 python -m experiments.exp_eye_oscilloscope        # Visual physics
 python -m experiments.exp_hand_coordination       # Hand coordination + anxiety tremor
@@ -365,84 +367,104 @@ python -m experiments.exp_perception_pipeline     # Perception pipeline resonanc
 python -m experiments.exp_temporal_calibration    # Temporal calibration
 
 # ── Life Loop and Pain ──
+
 python -m experiments.exp_life_loop               # Closed-loop life loop
 python -m experiments.exp_pain_collapse           # Pain collapse clinical experiment
 python -m experiments.exp_motor_development       # Motor development 5 clinical scenarios
 
 # ── Memory and Sleep ──
+
 python -m experiments.exp_memory_theory           # Memory theory 4 core predictions
 python -m experiments.exp_sleep_physics           # Sleep physics 5 experiments
 python -m experiments.exp_neural_pruning          # Neural pruning 5 experiments
 
 # ── Language and Audition ──
+
 python -m experiments.exp_language_physics        # Semantic field + Broca's area
 python -m experiments.exp_episodic_wernicke       # Hippocampus + Wernicke's area
 python -m experiments.exp_auditory_grounding      # Pavlovian cross-modal conditioning
 
 # ── Emotion and Control ──
+
 python -m experiments.exp_thalamus_amygdala       # Thalamic gate + amygdala emotion
 python -m experiments.exp_prefrontal              # Prefrontal executive control + willpower
 python -m experiments.exp_basal_ganglia           # Basal ganglia habits + action selection
 
 # ── Γ Unified Theory and Stress ──
+
 python -m experiments.exp_gamma_verification      # Γ unified currency verification
 python -m experiments.exp_stress_adaptation       # Stress adaptation Yerkes-Dodson
 python -m experiments.exp_consciousness_gradient  # Consciousness gradient Φ level verification
 
 # ── Awakening and PTSD Therapy ──
+
 python -m experiments.exp_awakening               # Awakening 600-tick continuous survival
 python -m experiments.exp_therapy_mechanism       # 5 parallel controlled therapy groups
 python -m experiments.exp_digital_twin            # Digital twin PTSD subtypes
 python -m experiments.exp_dream_therapy           # Day-night healer sleep therapy
 
 # ── Higher Cognition ──
+
 python -m experiments.exp_attention_training      # Attention plasticity training
 python -m experiments.exp_cognitive_flexibility   # Cognitive flexibility task switching
 python -m experiments.exp_curiosity_boredom       # Curiosity / boredom / self-awareness
 python -m experiments.exp_mirror_neurons          # Mirror neurons + empathy
 
 # ── Homeostasis and Circadian ──
+
 python -m experiments.exp_dynamic_homeostasis     # Dynamic homeostasis + energy metabolism
 python -m experiments.exp_day_night_cycle         # 24h complete circadian cycle
 
 # ── Language Thermodynamics ──
+
 python -m experiments.exp_inner_monologue         # Semantic pressure + inner monologue + first utterance
 
 # ── Metacognition and Social Intelligence ──
+
 python -m experiments.exp_metacognition            # Metacognition System 1/2 + self-correction
 python -m experiments.exp_social_resonance         # Social resonance + cultural inheritance
 python -m experiments.exp_social_resonance_phase19 # Collective intelligence emergence Phase 19
 python -m experiments.exp_collective_intelligence  # Group decision-making + cultural memes
 
 # ── Predictive Processing ──
+
 python -m experiments.exp_predictive_planning      # Predictive planning + surprise signal
 
 # ── Stress Tests ──
+
 python -m experiments.exp_stress_test              # Extreme conditions stress test
 python -m experiments.exp_human_intelligence_month # 30-day human intelligence stress test (HIP=86.7)
 
 # ── Narrative Memory and Recursive Grammar ──
+
 python -m experiments.exp_narrative_grammar_phase20 # Narrative memory + recursive grammar Phase 20
 
 # ── Architecture Fix Verification ──
+
 python -m experiments.exp_architecture_fix_phase21 # Semantic pressure engine + 4 major loop fixes Phase 21
 
 # ── Homeostatic Reward (Phase 22) ──
+
 python -m experiments.exp_homeostatic_reward   # Homeostatic drive + physics reward 10/10
 
 # ── Neural Aging (Phase 23) ──
+
 python -m experiments.exp_pinch_fatigue        # Lorentz compression fatigue Pollock-Barraclough 10/10
 
 # ── Phantom Limb Pain (Phase 24) ──
+
 python -m experiments.exp_phantom_limb         # Ramachandran mirror therapy 10/10
 
 # ── Clinical Neurology (Phase 25) ──
+
 python -m experiments.exp_clinical_neurology   # Five-disease unified impedance model 34/34
 
 # ── Computational Pharmacology (Phase 26) ──
+
 python -m experiments.exp_pharmacology         # MS/PD/Epilepsy/Depression + unified α_drug 10/10
 
 # ── Γ-Topology Emergence (Phase 30) ──
+
 python -m experiments.exp_topology_emergence   # MRP generates metric topology 5/5
 ```
 
@@ -450,9 +472,10 @@ python -m experiments.exp_topology_emergence   # MRP generates metric topology 5
 
 ## API Endpoints
 
+| Method | Path | Description |
+
 | Method | Path                   | Description                  |
-|--------|------------------------|------------------------------|
-| GET    | `/dashboard`           | CRT oscilloscope dashboard   |
+| :----- | :--------------------- | :--------------------------- |
 | GET    | `/api/status`          | System status                |
 | GET    | `/api/brain`           | Brain state snapshot         |
 | GET    | `/api/vitals`          | Vital signs real-time data   |
@@ -481,20 +504,24 @@ from alice import AliceBrain
 brain = AliceBrain()
 
 # Perception
+
 brain.see(image_array)              # Visual input (numpy ndarray)
 brain.hear(audio_array)             # Auditory input (numpy ndarray)
 brain.reach_for(x, y)               # Hand reaches toward (x, y) coordinates
 brain.say(440.0, 0.7, "a", "hello") # Speak (pitch, volume, vowel, concept)
 
 # Cognition
+
 brain.perceive(stimulus, "visual")   # Perceive stimulus
 brain.think("What is this?")         # Thinking / reasoning
 brain.act(state, actions)            # Action selection
 
 # Learning
+
 brain.learn_from_feedback(state, action, reward, next_state, actions)
 
 # Status
+
 vitals = brain.vitals                # SystemState (property)
 vitals.ram_temperature               # RAM temperature = anxiety
 vitals.pain_level                    # Pain level
@@ -507,7 +534,7 @@ vitals.total_ticks                   # Life cycle tick count
 
 ## Fundamental Differences from Modern AI
 
-```
+```text
          Modern AI (LLM/CNN)                Alice (Γ-Net)
          ─────────────────                  ────────────
 
@@ -535,7 +562,7 @@ Scale     10^11 parameters                  ~84,500 lines of physics equations
 ## Version History
 
 | Version | Phase | Main Content |
-|---------|-------|--------------|
+| :--- | :--- | :--- |
 | v3 | Neural Foundation | Neurons, synapses, brain region simulation |
 | v4 Genesis | Communication Protocol | O(1) routing, year-ring cache, fusion brain |
 | v5 | Cognitive Modules | Reinforcement learning, causal reasoning, meta-learning |

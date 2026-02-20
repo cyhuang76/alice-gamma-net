@@ -10,7 +10,7 @@
 ## Executive Summary
 
 | Audit Category | Completion | Grade | vs v11.0 |
-|----------------|------------|-------|----------|
+| --- | --- | --- | --- |
 | 1. Architecture Integrity | **100%** | ★★★★★ | ↑ 93% |
 | 2. Closed-Loop Verification | **99%** | ★★★★★ | ↑ 78% |
 | 3. Cross-Module Wiring | **99%** | ★★★★★ | ↑ 85% |
@@ -31,7 +31,7 @@ v11.0: Compensation commands were only serialized as JSON reports; motor end was
 v16.0: `_dispatch_commands()` method (alice_brain.py ~L508-590) dispatches commands to body organs:
 
 | Compensation Action | Dispatch Target | Status |
-|---------------------|-----------------|--------|
+| --- | --- | --- |
 | REACH | `hand.reach()` | ✅ Connected |
 | VOCALIZE | `mouth.speak()` | ✅ Connected |
 | ADJUST_PUPIL | `eye.adjust_pupil()` | ✅ Connected |
@@ -55,7 +55,7 @@ v16.0: `_stimulate_pruning()` is called during each `perceive()` step (~L965), p
 All 35 brain modules + 5 body organs + 4 cognitive modules are instantiated in `alice_brain.py` and integrated into the main loop:
 
 | Category | Module | Instantiated | Runtime Use |
-|----------|--------|--------------|-------------|
+| --- | --- | --- | --- |
 | **Brain (35)** | fusion_brain | ✅ | ✅ |
 | | calibrator | ✅ | ✅ |
 | | autonomic | ✅ | ✅ |
@@ -118,7 +118,7 @@ All 35 brain modules + 5 body organs + 4 cognitive modules are instantiated in `
 ### 2.1 Verified Closed Loops
 
 | Loop | Path | Status |
-|------|------|--------|
+| --- | --- | --- |
 | **Pain loop** | Reflected energy → temperature ↑ → pain_level ↑ → throttle ↓ → cognitive slowdown | ✅ Complete |
 | **Perception-memory loop** | stimulus → fusion_brain → working_memory → causal.observe | ✅ Complete |
 | **Autonomic loop** | pain/temp/emotion → autonomic.tick() → pupil → eye.adjust | ✅ Complete |
@@ -143,7 +143,7 @@ All 35 brain modules + 5 body organs + 4 cognitive modules are instantiated in `
 ### 2.2 Residual Issues
 
 | Issue | Description | Severity |
-|-------|-------------|----------|
+| --- | --- | --- |
 | SACCADE not immediately executed | Deferred to next frame, reasonable but not fully closed | 🟢 Low |
 | ~~Language loop only in experiments~~ | ~~Phase 21 integrated SemanticPressureEngine into perceive() Step 12e~~ | ✅ **Fixed** |
 
@@ -225,7 +225,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 3.5 Wiring Status
 
 | Connection | v11.0 Status | v25.0 Status |
-|------------|--------------|--------------|
+| --- | --- | --- |
 | Pruning ↔ main loop | 🔴 Dead code | ✅ **Fixed** |
 | LifeLoop → body | 🔴 Open-loop | ✅ **Fixed** |
 | Hippocampus → semantic field (consolidation transfer) | 🟡 Missing | ✅ **Phase 21 fixed** |
@@ -243,7 +243,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 4.1 Implemented Biological Features
 
 | Feature | Module | Implementation Quality |
-|---------|--------|----------------------|
+| --- | --- | --- |
 | Pain/temperature sensation | vitals + pain loop | ★★★★★ Excellent (physics emergence) |
 | Vision (basic) | eye (physical optics model) | ★★★★☆ |
 | Hearing (basic) | ear + cochlea (24 ERB channels) | ★★★★☆ |
@@ -273,7 +273,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 4.2 Still Missing Biological Features
 
 | Missing Feature | Biological Counterpart | Importance | Notes |
-|-----------------|----------------------|------------|-------|
+| --- | --- | --- | --- |
 | ~~**Hunger/thirst**~~ | ~~Hypothalamic homeostatic drive~~ | ~~🔴 High~~ | ✅ **Phase 22 fixed** — HomeostaticDriveEngine glucose/hydration physics model |
 | ~~**Growth/development curve**~~ | ~~Full-body development~~ | ~~🟡 Medium~~ | ✅ **Phase 23 partially fixed** — PinchFatigueEngine provides multi-channel aging trajectories |
 | **Immune system analogy** | Immune system | 🟡 Medium | No "self/non-self" identification, no repair mechanism |
@@ -289,7 +289,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 5.1 Test Statistics
 
 | Item | v11.0 | v16.0 | v25.0 | v28.0 | v29.0 |
-|------|-------|-------|-------|-------|-------|
+| --- | --- | --- | --- | --- | --- |
 | Total tests | 1,042 | 1,305 | 1,755 | 1,815 (+60) | **1,876** (+61) |
 | Pass rate | 100% | 100% | 100% | 100% | **100%** |
 | Test files | 20 | 27 | 37 | 37 | **38** |
@@ -298,7 +298,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 5.2 Per-Module Test Distribution
 
 | Test File | Tests | Sufficient? |
-|-----------|-------|-------------|
+| --- | --- | --- |
 | test_eye | 104 | ✅ |
 | test_language_physics | 95 | ✅ |
 | test_hippocampus_wernicke | 72 | ✅ |
@@ -340,7 +340,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 5.3 Test Categories
 
 | Category | Present | Notes |
-|----------|---------|-------|
+| --- | --- | --- |
 | Unit tests | ✅ Sufficient | All 39 files |
 | Physics invariant tests | ✅ Present | Multiple modules with physics conservation verification |
 | Integration tests (AliceBrain) | ✅ Present | test_alice + multi-module cross tests |
@@ -350,7 +350,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 5.4 Test Coverage Gaps
 
 | Gap | Description | Priority |
-|-----|-------------|----------|
+| --- | --- | --- |
 | ~~**End-to-end lifeform test**~~ | ~~Phase 22 added test_lifecycle_e2e.py (48 tests)~~ | ✅ **Fixed** |
 | **Long-term stability test** | No 10,000+ tick automated test | 🟢 Low |
 | **Adversarial test** | No extreme/malformed input resilience test | 🟢 Low |
@@ -363,7 +363,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 6.1 Verified Claims ✅
 
 | Paper Claim | Code Implementation | Consistency |
-|-------------|---------------------|-------------|
+| --- | --- | --- |
 | LC resonance O(1) perception pipeline | perception.py | ✅ Fully consistent |
 | Pain = reflected energy physics emergence | vitals + reflected_energy | ✅ Fully consistent |
 | 7 closed-loop error compensations | life_loop.py + `_dispatch_commands()` | ✅ **Fixed** |
@@ -394,7 +394,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 6.2 Claims with Gaps ⚠️
 
 | Paper Claim | Reality | Gap |
-|-------------|---------|-----|
+| --- | --- | --- |
 | "103 source files, 54,500+ lines" | Actual: 133 files, 74,920 lines | 🟢 Paper figures are v14.0 snapshot |
 | "1,305 tests" | Actual: 1,659 | 🟢 Paper figures are v16.0 snapshot |
 | Paper §9 does not mention Phase 14 language thermodynamics | exp_inner_monologue completed 10/10 clinical validation | 🟡 Paper needs update |
@@ -402,6 +402,7 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 ### 6.3 Limitations Acknowledged in Paper
 
 Paper §8.4 honestly lists:
+
 1. Sensory precision simplified (no color processing, no directional localization)
 2. No recursive grammar/long-range dependencies
 3. Scalability unverified
@@ -453,7 +454,7 @@ Paper §8.4 honestly lists:
 v26.0 has **42 experiments** (44 files including __init__.py and _diagnose_errors.py), covering all major functional aspects of the system:
 
 | Category | Experiments | Clinical Validation |
-|----------|------------|---------------------|
+| --- | --- | --- |
 | Foundation physics | exp_coaxial_physics, exp_perception_pipeline | ✅ |
 | Sensory organs | exp_eye_oscilloscope | ✅ |
 | Motor control | exp_hand_coordination, exp_motor_development | ✅ |
@@ -485,7 +486,7 @@ v26.0 has **42 experiments** (44 files including __init__.py and _diagnose_error
 ## Priority Fix Leaderboard
 
 | Rank | Item | Category | Est. Effort | Impact |
-|------|------|----------|-------------|--------|
+| --- | --- | --- | --- | --- |
 | ~~#1~~ | ~~LifeLoop compensation command dispatch~~ | ~~Closed-loop~~ | ~~2-4 hours~~ | ✅ **Fixed** |
 | ~~#2~~ | ~~Pruning into main loop~~ | ~~Architecture~~ | ~~3-5 hours~~ | ✅ **Fixed** |
 | ~~#1~~ | ~~Semantic pressure engine into main loop~~ | ~~Architecture~~ | ~~3-4 hours~~ | ✅ **Phase 21 fixed** |
@@ -507,24 +508,29 @@ v26.0 has **42 experiments** (44 files including __init__.py and _diagnose_error
 **Fix Content**: All four priority architecture gaps from AUDIT_REPORT v16.0 fixed
 
 ### Fix #1: Semantic Pressure Engine → Main Loop
+
 - Created `alice/brain/semantic_pressure.py` (~450 lines)
 - SemanticPressureEngine integrated into `alice_brain.py` perceive() Step 12e
 - Pressure release added to say(), engine state added to introspect()
 - 10/10 experiment + 42 unit test verification
 
 ### Fix #2: Hippocampus → Semantic Field Consolidation
+
 - `hippocampus.consolidate(semantic_field, max_episodes=5)` added to sleep consolidation loop
 - Episodic memories automatically transferred to semantic field long-term memory
 
 ### Fix #3: Wernicke → Broca Direct Connection
+
 - `wernicke_drives_broca()` called every frame in SemanticPressureEngine.tick()
 - γ_syntactic < 0.3 automatically triggers Broca articulation plan
 
 ### Fix #4: Prefrontal → Thalamus Top-Down Attention
+
 - perceive() Step 3b: prefrontal.get_top_goal() → thalamus.set_attention()
 - Goal-directed attention bias affects sensory gate
 
 ### Fix Verification
+
 - **Experiment**: `exp_architecture_fix_phase21.py` — 10/10 passed
 - **Unit tests**: `test_semantic_pressure.py` — 42/42 passed
 - **Regression tests**: 1,573/1,573 passed (+42 new)
@@ -537,6 +543,7 @@ v26.0 has **42 experiments** (44 files including __init__.py and _diagnose_error
 **Fix Content**: AUDIT_REPORT #5, #7, #8 — all three remaining audit gaps fixed
 
 ### Fix #5: Hunger/Thirst Homeostatic Drive
+
 - Created `alice/brain/homeostatic_drive.py` (~400 lines)
 - HomeostaticDriveEngine: hypothalamus-level glucose/hydration physics model
 - Drive function D = Γ² (nonlinear quadratic), digestion buffer delayed absorption
@@ -545,11 +552,13 @@ v26.0 has **42 experiments** (44 files including __init__.py and _diagnose_error
 - Integrated into perceive() before autonomic.tick()
 
 ### Fix #7: End-to-End Lifecycle pytest
+
 - Created `tests/test_lifecycle_e2e.py` (~460 lines, 48 tests)
 - 8 test categories: basic life loop, homeostatic drive, physics reward, perception-learning-action closed-loop, sleep-wake, pain recovery, HomeostaticDrive unit, PhysicsReward unit
 - 100-tick stability, hunger/thirst cycles, Boltzmann selection, dopamine pipeline unification
 
 ### Fix #8: Reward System Physicalization (replacing Q-learning)
+
 - Created `alice/brain/physics_reward.py` (~430 lines)
 - PhysicsRewardEngine: impedance matching replaces Q-table + TD(0)
 - Each (state, action) = RewardChannel (Z impedance, Γ reflection, T transmission)
@@ -559,6 +568,7 @@ v26.0 has **42 experiments** (44 files including __init__.py and _diagnose_error
 - Full replacement of Q-learning calls in act() and learn_from_feedback()
 
 ### Fix Verification
+
 - **Experiment**: `exp_homeostatic_reward.py` — 10/10 passed
 - **Unit tests**: `test_lifecycle_e2e.py` — 48/48 passed
 - **Regression tests**: 1,621/1,621 passed (+48 new)
@@ -600,10 +610,12 @@ This audit report acknowledges the following limitations:
 **Physics Basis**: In 1905, Pollock & Barraclough studied hollow copper lightning rods twisted by lightning strikes and discovered that conductors were not melted by high temperature but **physically compressed by the magnetic field force of their own current**. This is the Lorentz self-compression effect (Pinch Effect) — Lorentz force J×B produces inward radial pressure P = μ₀I²/(8πR²).
 
 **Core Insight**: This fills the "biological aging" gap in the system:
+
 - ImpedanceDebtTracker (existing) = **elastic strain** (thermal fatigue, sleep-repairable) = "fatigue"
 - PinchFatigueEngine (new) = **plastic strain** (Lorentz compression force, permanently irreversible) = "aging" ★
 
 **Implementation**:
+
 - Created `alice/brain/pinch_fatigue.py` (~500 lines)
 - Dual fatigue model: elastic (ε < ε_yield, recoverable) + plastic (ε > ε_yield, permanent)
 - Coffin-Manson fatigue life law: N_f = C / (Δε_p)^β
@@ -615,6 +627,7 @@ This audit report acknowledges the following limitations:
 - Integrated into perceive() after sleep physics
 
 ### Fix Verification
+
 - **Experiment**: `exp_pinch_fatigue.py` — 10/10 passed
 - **Unit tests**: `test_pinch_fatigue.py` — 38/38 passed
 - **Regression tests**: 1,659/1,659 passed (+38 new)
@@ -622,7 +635,7 @@ This audit report acknowledges the following limitations:
 ### Audit Score Update
 
 | Audit Category | v24.0 | v25.0 | Change |
-|----------------|-------|-------|--------|
+| --- | --- | --- | --- |
 | 4. Missing Biological Features | 60% → 85% | **90%** | ↑ Aging mechanism filled |
 | Weighted Total | 98% | **99%** | ↑ The last puzzle piece |
 
@@ -640,16 +653,19 @@ This audit report acknowledges the following limitations:
 **Physics Basis**: Amputation = coaxial cable **open circuit**. Load impedance $Z_L \to \infty$, reflection coefficient $\Gamma = (Z_L - Z_0)/(Z_L + Z_0) \to 1.0$. Signal is 100% reflected back to source — this is the physical essence of phantom limb pain.
 
 **Core Insight**: Phantom limb pain is not hallucination, it is **physical necessity**:
+
 - Amputation → $Z_L = \infty$ (open circuit) → $\Gamma = 1.0$ → total signal reflection → "feeling" a limb that no longer exists
 - Neuroma → $Z_{neuroma} = 500\Omega$ (abnormal impedance but not infinite) → $\Gamma < 1.0$ → random burst stinging
 - Mirror therapy → visual feedback deceives the brain into re-matching impedance → $\Gamma$ gradually decreases → pain relief
 
 **Clinical Validation Basis**:
+
 1. **Ramachandran (1996)** — Mirror therapy original paper: visual feedback reduced VAS score from 7.2 to 2.8
 2. **Flor et al. (2006)** — Cortical reorganization and phantom pain intensity Pearson correlation $r = 0.93$
 3. **Makin et al. (2013)** — PNAS-level evidence on phantom pain and residual cortical structure/function
 
 **Implementation**:
+
 - Created `alice/brain/phantom_limb.py` (~550 lines)
 - $\Gamma = 1.0$ open-circuit physics: amputation → load impedance infinite → total reflection
 - Motor efferent signal decay: initial 0.8, decays with $\tau = 0.002$, never reaches zero ($e_{min} = 0.05$)
@@ -662,6 +678,7 @@ This audit report acknowledges the following limitations:
 - Integrated into perceive() after Lorentz compression fatigue
 
 ### Fix Verification
+
 - **Experiment**: `exp_phantom_limb.py` — 10/10 passed
 - **Unit tests**: `test_phantom_limb.py` — 41/41 passed
 - **Regression tests**: 1,700/1,700 passed (+41 new)
@@ -669,7 +686,7 @@ This audit report acknowledges the following limitations:
 ### Audit Score Update
 
 | Audit Category | v25.0 | v26.0 | Change |
-|----------------|-------|-------|--------|
+| --- | --- | --- | --- |
 | 4. Missing Biological Features | 90% | **92%** | ↑ Clinical neuroscience validation |
 | Weighted Total | 99% | **99%** | = Maintained highest level |
 
@@ -685,7 +702,7 @@ This audit report acknowledges the following limitations:
 **Physics Basis**: The essence of all neurological diseases = **different impedance mismatch patterns in communication channels, but the same physical laws**.
 
 | Disease | Impedance Failure Mode | Clinical Scale |
-|---------|----------------------|----------------|
+| --- | --- | --- |
 | Stroke | Acute vascular occlusion → regional Γ spike | NIHSS 0-42 |
 | ALS | Motor neurons die sequentially → Γ progressive | ALSFRS-R 0-48 |
 | Dementia | Diffuse cognitive channel Γ drift | MMSE 0-30 + CDR |
@@ -693,6 +710,7 @@ This audit report acknowledges the following limitations:
 | Cerebral Palsy (CP) | Developmental calibration failure → Γ_baseline > 0 | GMFCS I-V |
 
 **Core Equations**:
+
 - Stroke: $\Gamma_{territory} = (Z_{ischemic} - Z_0)/(Z_{ischemic} + Z_0) \to 1.0$
 - ALS: $health_i(t) = e^{-k(t-t_{onset})}$, Riluzole: $k' = k \times 0.70$
 - Dementia: $\Gamma_{domain}(t) = drift\_rate \times (t - onset - delay)$
@@ -700,6 +718,7 @@ This audit report acknowledges the following limitations:
 - CP: $\Gamma_{spastic}(v) = \Gamma_{baseline} + 0.8 \times |v|$ (Lance 1980)
 
 **Implementation**:
+
 - Created `alice/brain/clinical_neurology.py` (~991 lines, 5 models + unified engine)
 - Stroke: 4 vascular territories (MCA/ACA/PCA/basilar) mapping, penumbra rescue, 13-item NIHSS auto-calculation
 - ALS: El Escorial criteria spread (limb/bulbar onset), Riluzole 30% slowing, ALSFRS-R 4-domain 12-item
@@ -709,6 +728,7 @@ This audit report acknowledges the following limitations:
 - Integrated into perceive() after phantom limb engine
 
 ### Fix Verification
+
 - **Experiment**: `exp_clinical_neurology.py` — 34/34 passed (10 experiment groups)
 - **Unit tests**: `test_clinical_neurology.py` — 55/55 passed (17 test categories)
 - **Regression tests**: 1,755/1,755 passed (+55 new)
@@ -716,7 +736,7 @@ This audit report acknowledges the following limitations:
 ### Audit Score Update
 
 | Audit Category | v26.0 | v27.0 | Change |
-|----------------|-------|-------|--------|
+| --- | --- | --- | --- |
 | 4. Missing Biological Features | 92% | **95%** | ↑ Five clinical diseases validated |
 | 5. Test Coverage | 95% | **96%** | ↑ 55 new tests |
 | Weighted Total | 99% | **99%** | = Maintained highest level |
@@ -728,6 +748,7 @@ This audit report acknowledges the following limitations:
 ## Phase 26 Fix Record (v28.0)
 
 ### New Modules
+
 - **pharmacology.py** (~1,100 lines) — Unified pharmacology engine + four neurological diseases
   - PharmacologyEngine: $Z_{eff} = Z_0 \times (1 + \alpha_{drug})$
   - MSModel: Demyelination = insulation layer peeling, EDSS 0-10
@@ -736,6 +757,7 @@ This audit report acknowledges the following limitations:
   - DepressionModel: Monoamine hypothesis, HAM-D 0-52, SSRI delayed onset
 
 ### Fix Verification
+
 - **Experiment**: `exp_pharmacology.py` — 34/34 passed (10 experiment groups)
 - **Unit tests**: `test_pharmacology.py` — 60/60 passed
 - **Regression tests**: 1,876/1,876 passed (+61 new)
@@ -743,7 +765,7 @@ This audit report acknowledges the following limitations:
 ### Audit Score Update
 
 | Audit Category | v27.0 | v28.0 | Change |
-|----------------|-------|-------|--------|
+| --- | --- | --- | --- |
 | 4. Missing Biological Features | 95% | **96%** | ↑ Unified pharmacology + four new diseases |
 | 5. Test Coverage | 96% | **97%** | ↑ 60 new tests |
 | Weighted Total | 99% | **99%** | = Maintained highest level |

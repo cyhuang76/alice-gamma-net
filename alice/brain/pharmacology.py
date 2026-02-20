@@ -463,7 +463,8 @@ class MSModel:
                 lesion.severity = max(0.0, lesion.severity - MS_REMYELINATION_RATE)
 
             # Active lesions convert to remission during non-relapse period
-            if lesion.active and not self.state.in_relapse:
+            # Progressive MS (PPMS/SPMS) does not have spontaneous remission deactivation
+            if ms_type == "RRMS" and lesion.active and not self.state.in_relapse:
                 age = self._tick - lesion.onset_tick
                 if age > 50:
                     lesion.active = False

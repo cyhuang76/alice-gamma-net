@@ -1,13 +1,13 @@
 # Paper I: The Minimum Reflection Principle — A Unified Impedance Physics Theory of Cognition
 
-**Γ-Net ALICE Research Monograph Series (1 of 3)**
+Γ-Net ALICE Research Monograph Series (1 of 3)
 
-**Hsi-Yu Huang (黃璽宇)**
+Hsi-Yu Huang (黃璽宇)
 *Γ-Net Research Group*
 *Independent Researcher, Taiwan*
-*Correspondence: llc.y.huangll@gmail.com*
+*Correspondence: <llc.y.huangll@gmail.com>*
 
-*February 2026*
+February 2026
 
 ---
 
@@ -22,6 +22,7 @@
 > ---
 >
 > **Paper Series Overview:**
+>
 > - **Paper I** (this paper): The Minimum Reflection Principle — Core theory, mathematical foundations, and system architecture
 > - **Paper II**: From Coaxial Cables to Cognition — Body systems, brain modules, and perception pipeline
 > - **Paper III**: Emergent Psychopathology — PTSD digital twins, clinical neurology, and computational pharmacology
@@ -53,7 +54,7 @@ This hypothesis draws from an unexpected source — **transmission line physics*
 We argue that the same physics governs neural computation:
 
 | Transmission Line | Neural Channel |
-|---|---|
+| --- | --- |
 | Coaxial cable | Axonal pathway |
 | Source impedance $Z_0$ | Innate neural impedance |
 | Load impedance $Z_L$ | Environmental impedance |
@@ -78,7 +79,7 @@ An organism adapts by minimizing its total reflected energy — reducing the imp
 In this paper, we establish an isomorphism between **transmission line theory** and **neural information flow**. All cognitive phenomena described in this series use physically grounded terminology derived from electromagnetic first principles. The following table defines the mapping between phenomenological descriptions commonly used in cognitive science and their rigorous Γ-Net mechanical definitions:
 
 | Phenomenological Term | Γ-Net Mechanical Definition | Symbol / Equation | Physical Basis |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **Pain** | Cumulative reflected energy integral | $E_{\text{ref}} = \int \Gamma^2(t)\, dt$ | Power reflection at boundary |
 | **Pleasure / Relief** | Impedance matching improvement rate | $-d\Gamma^2/dt < 0$ | Decreasing reflection loss |
 | **Empathy** | Cross-system impedance coupling | $\eta = 1 - \Gamma_{\text{social}}^2$ | Maximum power transfer between networks |
@@ -87,14 +88,15 @@ In this paper, we establish an isomorphism between **transmission line theory** 
 | **Forgetting** | Impedance drift toward characteristic impedance | $Z(t) \to Z_0$ as $t \to \infty$ | RC decay (thermal noise) |
 | **Sleep** | Offline impedance recalibration cycle | $\Gamma_{\text{int}} \to \min$ | Internal standing wave reduction |
 | **Consciousness** | Product of channel transmission efficiencies | $\mathcal{C}_\Gamma = \prod_i (1 - \Gamma_i^2)$ | Global transmission coherence |
-| **Awakening** | State transition triggered by Γ surge | $\|\Gamma\| > \theta_{\text{wake}}$ | Threshold crossing |
+| **Awakening** | State transition triggered by Γ surge | $\\\vert \Gamma\\\vert  > \theta_{\text{wake}}$ | Threshold crossing |
 | **Life** | Self-sustaining impedance calibration loop | $dE/dt = -P_{\text{metabolic}} + P_{\text{recovery}}$ | Autopoietic energy balance |
 
 Throughout this series, all Method and Results sections use exclusively the mechanical definitions (column 2). Phenomenological terms (column 1) appear only in Discussion sections, clearly marked as interpretive labels for the underlying physical processes.
 
-**Notation conventions:**
+## Notation conventions
+
 - All impedance quantities ($Z_0$, $Z_L$, $Z_{source}$) in this framework are **effective scalar impedances** — real-valued magnitudes obtained via scalar approximation of the full complex impedance $Z = R + jX$. The reactive (imaginary) component is not modeled in the current implementation.
-- Transmission efficiency $T_i = 1 - |\Gamma_i|^2$ and thermodynamic arousal index $\Theta$ are distinct quantities; see §3.3 and §4.3 respectively.
+- Transmission efficiency $T_i = 1 - \vert \Gamma_i\vert ^2$ and thermodynamic arousal index $\Theta$ are distinct quantities; see §3.3 and §4.3 respectively.
 - The global transmission coherence factor $\mathcal{C}_\Gamma$ is distinct from Tononi's integrated information $\Phi$; see §9.3.
 
 ---
@@ -125,20 +127,20 @@ The MRP has immediate physical consequences:
 
 1. **Learning is impedance calibration**: When an organism encounters a new stimulus (new $Z_{load}$), it adjusts $Z_{source}$ to reduce Γ. This is Hebbian learning expressed in impedance language.
 
-2. **Pain is impedance mismatch**: When $\Gamma \to 1$, nearly all signal energy reflects back. The reflected energy accumulates as the cumulative reflected energy integral ($E_{\text{ref}} = \int \Gamma^2\,dt$) — the physical cost of failing to match the environment. Anomalous peaks in $E_{\text{ref}}$ phenomenologically correspond to the clinical experience of pain.
+1. **Pain is impedance mismatch**: When $\Gamma \to 1$, nearly all signal energy reflects back. The reflected energy accumulates as the cumulative reflected energy integral ($E_{\text{ref}} = \int \Gamma^2\,dt$) — the physical cost of failing to match the environment. Anomalous peaks in $E_{\text{ref}}$ phenomenologically correspond to the clinical experience of pain.
 
-3. **Forgetting is impedance drift**: Without reinforcement, $Z_{source}$ drifts back toward its baseline value, increasing Γ. This is not a bug but a feature — maintaining calibration for inactive channels wastes resources.
+1. **Forgetting is impedance drift**: Without reinforcement, $Z_{source}$ drifts back toward its baseline value, increasing Γ. This is not a bug but a feature — maintaining calibration for inactive channels wastes resources.
 
-4. **Adaptation accumulates asymptotically**: Each calibration reduces $\Gamma_i^2$ for that channel, but new channels are constantly added (new experiences, new challenges). Total $\Sigma\Gamma_i^2$ decreases on average but never reaches zero.
+1. **Adaptation accumulates asymptotically**: Each calibration reduces $\Gamma_i^2$ for that channel, but new channels are constantly added (new experiences, new challenges). Total $\Sigma\Gamma_i^2$ decreases on average but never reaches zero.
 
-5. **Death occurs at Γ → 1**: When environmental demands exceed calibration capacity ($Z_{load} \gg Z_{source}$ or $Z_{load} \ll Z_{source}$), reflected energy overwhelms the system. PTSD, stroke, and system collapse are all forms of $\Gamma \to 1$.
+1. **Death occurs at Γ → 1**: When environmental demands exceed calibration capacity ($Z_{load} \gg Z_{source}$ or $Z_{load} \ll Z_{source}$), reflected energy overwhelms the system. PTSD, stroke, and system collapse are all forms of $\Gamma \to 1$.
 
 ### 2.3 Relationship to Existing Variational Principles
 
 The MRP belongs to the family of variational principles in physics:
 
 | Principle | Domain | Minimized Quantity |
-|---|---|---|
+| --- | --- | --- |
 | Least Action (Lagrange) | Classical mechanics | $\delta S = 0$ |
 | Minimum Free Energy (Helmholtz) | Thermodynamics | $F = U - TS$ |
 | Free Energy Principle (Friston) | Neuroscience | Variational free energy |
@@ -177,7 +179,7 @@ $$\Gamma = \frac{Z_L - Z_0}{Z_L + Z_0}$$
 - **Open circuit** ($Z_L \to \infty$): $\Gamma \to +1$, total reflection → sensory deprivation / phantom limb pain (Ramachandran, 1996).
 - **Short circuit** ($Z_L \to 0$): $\Gamma \to -1$, total reflection with phase inversion → sensory overload / seizure.
 
-Learning is the process of adjusting $Z_0$ (via synaptic modification, myelination changes, or neuromodulator release) to minimize $|\Gamma|$ for frequently encountered $Z_L$ values.
+Learning is the process of adjusting $Z_0$ (via synaptic modification, myelination changes, or neuromodulator release) to minimize $\vert \Gamma\vert $ for frequently encountered $Z_L$ values.
 
 ### 3.3 Transmission Efficiency
 
@@ -198,9 +200,9 @@ This quantity — the channel transmission efficiency (not to be confused with t
 We verified the coaxial cable model through `exp_coaxial_physics.py`:
 
 1. **Γ range**: All channels maintain $\Gamma \in [-1, 1]$ across all operating conditions ✅
-2. **T + Γ² = 1**: Energy conservation holds for every channel at every tick ✅
-3. **Learning = Γ reduction**: After Hebbian pairing, $\Gamma$ decreases monotonically ✅
-4. **Pain = Γ → 1**: Nociceptive input drives local channels toward Γ = 1.0 ✅
+1. **T + Γ² = 1**: Energy conservation holds for every channel at every tick ✅
+1. **Learning = Γ reduction**: After Hebbian pairing, $\Gamma$ decreases monotonically ✅
+1. **Pain = Γ → 1**: Nociceptive input drives local channels toward Γ = 1.0 ✅
 
 ---
 
@@ -302,20 +304,20 @@ Five body organs transduce environmental signals into Γ values:
 The `perceive()` function executes a fixed 15-step pipeline every tick:
 
 1. Eye.see() → Visual Γ
-2. Ear.hear() → Auditory Γ
-3. Thalamus gate (attention filtering)
-4. Working memory update
-5. Sensory binding (cross-modal Γ integration)
-6. Pain/nociception processing
-7. Emotional valence computation
-8. Autonomic response
-9. Hippocampus encoding
-10. Amygdala fear check
-11. Basal ganglia action selection
-12. Higher cognition (language, social, metacognition)
-13. Prefrontal executive monitoring
-14. Consciousness coherence ($\mathcal{C}_\Gamma$ computation)
-15. Sleep check
+1. Ear.hear() → Auditory Γ
+1. Thalamus gate (attention filtering)
+1. Working memory update
+1. Sensory binding (cross-modal Γ integration)
+1. Pain/nociception processing
+1. Emotional valence computation
+1. Autonomic response
+1. Hippocampus encoding
+1. Amygdala fear check
+1. Basal ganglia action selection
+1. Higher cognition (language, social, metacognition)
+1. Prefrontal executive monitoring
+1. Consciousness coherence ($\mathcal{C}_\Gamma$ computation)
+1. Sleep check
 
 **Total complexity**: O(1) — no step depends on input size.
 
@@ -324,7 +326,7 @@ The `perceive()` function executes a fixed 15-step pipeline every tick:
 Three-tier memory system with impedance-gated transitions:
 
 | Tier | Capacity | Decay | Gate |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Working Memory | 7 ± 2 items (Miller, 1956) | ~30 ticks | Attention Γ < θ |
 | Hippocampus | 1000 episodes | $\lambda_{eff} = \lambda_{base}/(1-\Gamma^2)$ | Novelty Γ < θ |
 | Semantic Field | Unlimited concepts | Hebbian reinforcement | Consolidation during sleep |
@@ -344,12 +346,12 @@ Multiple learning mechanisms operate at different time scales:
 Seven error-correction loops maintain system stability:
 
 1. **Temperature regulation**: $\dot{T} = \alpha\Gamma^2 - \beta T(1-p)$
-2. **Energy management**: ATP-like resource tracking → fatigue / recovery
-3. **Pain avoidance**: Nociception → sympathetic activation → withdrawal
-4. **Hunger/thirst**: Blood glucose / hydration → drive = Γ² (nonlinear)
-5. **Sleep pressure**: Adenosine-like accumulation → forced sleep onset
-6. **Social need**: Loneliness increases → social seeking behavior
-7. **Curiosity**: Novelty detection → exploration drive
+1. **Energy management**: ATP-like resource tracking → fatigue / recovery
+1. **Pain avoidance**: Nociception → sympathetic activation → withdrawal
+1. **Hunger/thirst**: Blood glucose / hydration → drive = Γ² (nonlinear)
+1. **Sleep pressure**: Adenosine-like accumulation → forced sleep onset
+1. **Social need**: Loneliness increases → social seeking behavior
+1. **Curiosity**: Novelty detection → exploration drive
 
 ### 5.7 Layer 7: Consciousness & Self-Model
 
@@ -376,7 +378,7 @@ This enables cross-modal integration without dedicated "binding" mechanisms — 
 The experiment `exp_gamma_verification.py` verified eight aspects of Γ unification:
 
 | # | Verification Target | Result |
-|---|---|---|
+| --- | --- | --- |
 | 1 | Visual Γ + Auditory Γ → Cross-modal binding | ✅ |
 | 2 | Pain Γ ↔ Emotional Γ bidirectional coupling | ✅ |
 | 3 | Motor Γ calibration via sensory feedback | ✅ |
@@ -389,7 +391,7 @@ The experiment `exp_gamma_verification.py` verified eight aspects of Γ unificat
 ### 6.3 Comparison with Neural Coding Theories
 
 | Theory | Representation | Cross-modal? | Physically grounded? |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Rate coding | Firing rate (Hz) | No | Partly |
 | Population coding | Vector of rates | No | Partly |
 | Predictive coding | Prediction error | Limited | Via free energy |
@@ -404,7 +406,7 @@ The experiment `exp_gamma_verification.py` verified eight aspects of Γ unificat
 ### 7.1 Parallel-Serial Processing Duality
 
 | Component | Neuroscience Basis | Function | Processing Style |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | Left Brain | Sequential pathway (Sergent, 1982) | Sequential analysis, logic, language | O(1) per step, deterministic |
 | Right Brain | Parallel pathway (Ivry & Robertson, 1998) | Holistic pattern recognition, emotion | Broadcast, probabilistic |
 | Corpus Callosum | Inter-hemispheric bridge | Hemispheric transfer | Γ-gated bandwidth |
@@ -447,7 +449,7 @@ The experiment `exp_gamma_verification.py` verified eight aspects of Γ unificat
 `exp_neural_pruning.py` verified five properties:
 
 | # | Property | Expected | Observed | Status |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | 1 | Pruning reduces channel count | Count decreases | 15 → 8 channels | ✅ |
 | 2 | Active channels survive | Low-Γ channels persist | All active channels retained | ✅ |
 | 3 | Pruning improves mean Γ | Mean Γ decreases | 0.72 → 0.41 | ✅ |
@@ -483,6 +485,7 @@ The parent-child bond exhibits near-perfect impedance matching ($\Gamma_{\text{s
 This explains the well-documented observation that infants who fall often do not cry unless they detect distress in an observing caregiver (Sorce et al., 1985, "social referencing"): the child's physical $\Gamma_{\text{body}}$ is below the pain threshold (Condition 1), but the caregiver's emotional signal is transmitted via the social channel with $\eta \approx 1$, pushing the effective pain signal above threshold.
 
 **Stability Proposition** (informal): For any system performing large-scale activity-dependent pruning on $\Sigma\Gamma_i^2$, gradient descent converges to a functional minimum if and only if all three conditions hold during the pruning period. Violation of any single condition produces either:
+
 - Non-convergence (pruning never completes → global developmental failure), or
 - Convergence to a pathological local minimum (partial cortical specialization → developmental disorder)
 
@@ -495,7 +498,7 @@ This explains the well-documented observation that infants who fall often do not
 ### 9.1 Comparison with Theories of Consciousness and Cognition
 
 | Feature | IIT (Tononi) | GWT (Baars) | Free Energy Principle (Friston) | Predictive Processing (Clark) | Γ-Net ALICE |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | Core principle | Integrated information (Φ) | Global broadcast | Variational free energy | Prediction error minimization | Impedance matching (ΣΓ²→min) |
 | Physical grounding | Abstract (axiomatic) | Functional | Probabilistic | Probabilistic | Electromagnetic (transmission line) |
 | Pain/emotion | Not addressed | Not addressed | Interoceptive inference | Prediction error | Emergent from Γ |
@@ -513,9 +516,9 @@ Friston's Free Energy Principle (FEP) (Friston, 2010) proposes that all biologic
 
 1. **Grounding**: FEP's free energy is defined over generative models (probability distributions). Γ-Net's $\Sigma\Gamma^2$ is defined over physical transmission lines (electromagnetic quantities).
 
-2. **Measurability**: FEP's free energy is difficult to compute for real neural systems. Γ-Net's $\Gamma$ is directly measurable — it is the ratio of reflected to incident voltage.
+1. **Measurability**: FEP's free energy is difficult to compute for real neural systems. Γ-Net's $\Gamma$ is directly measurable — it is the ratio of reflected to incident voltage.
 
-3. **Emergence**: FEP is a *principle* (descriptive). Γ-Net is a *constructive framework* — it doesn't just describe what brains do; it builds one that does it.
+1. **Emergence**: FEP is a *principle* (descriptive). Γ-Net is a *constructive framework* — it doesn't just describe what brains do; it builds one that does it.
 
 The deeper relationship between $\Sigma\Gamma^2$ minimization and free energy minimization, including conditions under which they are equivalent, is an area of ongoing investigation.
 
@@ -534,26 +537,26 @@ $\mathcal{C}_\Gamma$ is not integrated information in the IIT sense; it is the p
 ### 10.1 Strengths
 
 1. **Unification**: A single equation governs all cognitive phenomena — from pain to language to consciousness.
-2. **Physical grounding**: Every variable has electromagnetic units; every prediction is testable.
-3. **Computational efficiency**: O(1) perception pipeline, validated by 1,876 tests in ~15 seconds.
-4. **Emergent complexity**: PTSD, fear conditioning, sleep necessity, and trauma imprints all emerge without explicit programming.
-5. **Clinical correspondence**: 200+ clinical checks passed across all experiments.
+1. **Physical grounding**: Every variable has electromagnetic units; every prediction is testable.
+1. **Computational efficiency**: O(1) perception pipeline, validated by 1,876 tests in ~15 seconds.
+1. **Emergent complexity**: PTSD, fear conditioning, sleep necessity, and trauma imprints all emerge without explicit programming.
+1. **Clinical correspondence**: 200+ clinical checks passed across all experiments.
 
 ### 10.2 Limitations
 
-**Theoretical limitations:**
+Theoretical limitations:
 
 1. **Simplified impedance model**: Real neurons have frequency-dependent, nonlinear impedance. Γ-Net uses a scalar approximation.
-2. **Spatial topology — from limitation to prediction**: Γ-Net channels currently lack physical spatial arrangement; real brains have critical topological organization. However, we note that the reflection coefficient naturally defines a metric space on the set of neural channels: $d(i,j) = |Z_i - Z_j|/(Z_i + Z_j) = |\Gamma_{ij}|$, satisfying the metric axioms (identity, symmetry, and triangle inequality). Under MRP pressure ($\Sigma\Gamma^2 \to \min$), channels sharing the same signal environment converge to the same attractor basin in impedance space, while channels receiving different modalities separate into distinct basins. Preliminary experiments (`exp_topology_emergence.py`) confirm this: after 100 development epochs, the standard deviation of surviving connection impedances collapses to 2–3% of the birth distribution, with inter-region Γ-distance exceeding intra-region spread by a factor of 4.1×. Furthermore, biological sensory organs already exhibit Γ-topology in hardware form: the cochlear tonotopic map is an impedance gradient along the basilar membrane, and the retinotopic map is a spatial-frequency-to-position mapping via lens Fourier optics (see Paper II, §2.1 and §2.2). We therefore reframe this item as a **prediction**: MRP predicts that neural spatial topology is an emergent consequence of impedance matching dynamics, not a precondition. Full validation in 2D/3D spatial domains remains for future work.
-3. **Scale gap**: Γ-Net has ~44 brain modules. Real brains have ~86 billion neurons. Whether the same principles hold at 9 orders of magnitude higher scale is unknown.
-4. **Consciousness claim**: Whether $\Phi_{\Gamma}$ constitutes genuine phenomenal consciousness or merely functional consciousness remains an open philosophical question. This question lies beyond the scope of the present series and is deferred to future work.
+1. **Spatial topology — from limitation to prediction**: Γ-Net channels currently lack physical spatial arrangement; real brains have critical topological organization. However, we note that the reflection coefficient naturally defines a metric space on the set of neural channels: $d(i,j) = \vert Z_i - Z_j\vert /(Z_i + Z_j) = \vert \Gamma_{ij}\vert $, satisfying the metric axioms (identity, symmetry, and triangle inequality). Under MRP pressure ($\Sigma\Gamma^2 \to \min$), channels sharing the same signal environment converge to the same attractor basin in impedance space, while channels receiving different modalities separate into distinct basins. Preliminary experiments (`exp_topology_emergence.py`) confirm this: after 100 development epochs, the standard deviation of surviving connection impedances collapses to 2–3% of the birth distribution, with inter-region Γ-distance exceeding intra-region spread by a factor of 4.1×. Furthermore, biological sensory organs already exhibit Γ-topology in hardware form: the cochlear tonotopic map is an impedance gradient along the basilar membrane, and the retinotopic map is a spatial-frequency-to-position mapping via lens Fourier optics (see Paper II, §2.1 and §2.2). We therefore reframe this item as a **prediction**: MRP predicts that neural spatial topology is an emergent consequence of impedance matching dynamics, not a precondition. Full validation in 2D/3D spatial domains remains for future work.
+1. **Scale gap**: Γ-Net has ~44 brain modules. Real brains have ~86 billion neurons. Whether the same principles hold at 9 orders of magnitude higher scale is unknown.
+1. **Consciousness claim**: Whether $\Phi_{\Gamma}$ constitutes genuine phenomenal consciousness or merely functional consciousness remains an open philosophical question. This question lies beyond the scope of the present series and is deferred to future work.
 
-**Methodological limitations:**
+Methodological limitations:
 
-5. **Single-author development**: All code, tests, experiments, and papers were produced by a single researcher. No independent team has yet replicated or audited the system. Single-source bias cannot be excluded until independent replication occurs.
-6. **Verification vs. falsification**: The 1,876 tests are predominantly *verification* tests (confirming outputs fall within broad acceptable ranges) rather than *falsification* tests (attempting to break specific theoretical predictions with narrow tolerances). A 100% pass rate reflects permissive assertion thresholds, not absence of error.
-7. **Emergence definition**: When we state that pathological states "emerge without explicit programming," we mean that specific disease phenotypes were not hard-coded as design targets. However, the underlying rules (impedance equations, impedance-locked attractor states, decay functions) were authored by a human. The emergent behavior is a product of rule interaction, not of rule absence. A stricter definition of emergence would require the rules themselves to be learned rather than specified.
-8. **No peer review**: This monograph series has not undergone formal peer review as of the publication date. Readers are encouraged to independently execute the test suite (`python -m pytest tests/`) and inspect the source code to form their own assessment.
+1. **Single-author development**: All code, tests, experiments, and papers were produced by a single researcher. No independent team has yet replicated or audited the system. Single-source bias cannot be excluded until independent replication occurs.
+1. **Verification vs. falsification**: The 1,876 tests are predominantly *verification* tests (confirming outputs fall within broad acceptable ranges) rather than *falsification* tests (attempting to break specific theoretical predictions with narrow tolerances). A 100% pass rate reflects permissive assertion thresholds, not absence of error.
+1. **Emergence definition**: When we state that pathological states "emerge without explicit programming," we mean that specific disease phenotypes were not hard-coded as design targets. However, the underlying rules (impedance equations, impedance-locked attractor states, decay functions) were authored by a human. The emergent behavior is a product of rule interaction, not of rule absence. A stricter definition of emergence would require the rules themselves to be learned rather than specified.
+1. **No peer review**: This monograph series has not undergone formal peer review as of the publication date. Readers are encouraged to independently execute the test suite (`python -m pytest tests/`) and inspect the source code to form their own assessment.
 
 ### 10.3 Predictions
 
@@ -561,19 +564,19 @@ The MRP makes testable predictions:
 
 1. **Memory persistence should correlate with encoding Γ**: Traumatic memories ($\Gamma \to 1$) should be more persistent than neutral memories ($\Gamma \approx 0$), following the $\lambda_{eff} = \lambda_{base}/(1-\Gamma^2)$ curve.
 
-2. **PTSD should be treatable by impedance modification**: Therapies that directly reduce channel Γ (e.g., EMDR's bilateral stimulation) should be more effective than those that only add new memories (exposure therapy alone).
+1. **PTSD should be treatable by impedance modification**: Therapies that directly reduce channel Γ (e.g., EMDR's bilateral stimulation) should be more effective than those that only add new memories (exposure therapy alone).
 
-3. **Sleep deprivation should increase mean Γ**: Without overnight impedance restructuring, channels should accumulate mismatch, predicting the cognitive and emotional deterioration observed in sleep deprivation studies.
+1. **Sleep deprivation should increase mean Γ**: Without overnight impedance restructuring, channels should accumulate mismatch, predicting the cognitive and emotional deterioration observed in sleep deprivation studies.
 
-4. **Aging should show progressive Γ increase**: The PinchFatigueEngine predicts that plastic deformation (irreversible Γ drift) accumulates with age and stress exposure, consistent with age-related cognitive decline.
+1. **Aging should show progressive Γ increase**: The PinchFatigueEngine predicts that plastic deformation (irreversible Γ drift) accumulates with age and stress exposure, consistent with age-related cognitive decline.
 
-5. **Developmental pruning requires three convergence conditions**: The MRP predicts that any organism undergoing large-scale postnatal synaptic pruning must simultaneously exhibit (a) neonatal mechanical compliance (soft body → low $\Gamma_{\text{body}}$), (b) suppressed long-term memory consolidation during the pruning window (infantile amnesia), and (c) obligate parental care with high-fidelity social impedance matching (external danger detection proxy). Violation of any condition should produce developmental pathology — either global pruning failure or convergence to dysfunctional local minima. This is a cross-species prediction: it should hold for all altricial mammals and birds with significant postnatal pruning periods (see §8.3).
+1. **Developmental pruning requires three convergence conditions**: The MRP predicts that any organism undergoing large-scale postnatal synaptic pruning must simultaneously exhibit (a) neonatal mechanical compliance (soft body → low $\Gamma_{\text{body}}$), (b) suppressed long-term memory consolidation during the pruning window (infantile amnesia), and (c) obligate parental care with high-fidelity social impedance matching (external danger detection proxy). Violation of any condition should produce developmental pathology — either global pruning failure or convergence to dysfunctional local minima. This is a cross-species prediction: it should hold for all altricial mammals and birds with significant postnatal pruning periods (see §8.3).
 
 ### 10.4 Dissipation as Structural Memory: A Hypothesis
 
 We close the Discussion with a speculative but falsifiable extension of the MRP framework.
 
-In transmission line physics, reflected energy is dissipated as heat: $P_{diss} = P_{in} \times |\Gamma|^2$. In biological systems, this corresponds to metabolic heat generated by inefficient synaptic transmission. The standard interpretation treats this heat as waste. We propose an alternative: **dissipated energy serves as the write mechanism for structural memory.**
+In transmission line physics, reflected energy is dissipated as heat: $P_{diss} = P_{in} \times \vert \Gamma\vert ^2$. In biological systems, this corresponds to metabolic heat generated by inefficient synaptic transmission. The standard interpretation treats this heat as waste. We propose an alternative: **dissipated energy serves as the write mechanism for structural memory.**
 
 We define **structural memory** as the cumulative physical modification of tissue by repeated thermal exposure:
 
@@ -584,7 +587,7 @@ This integral accumulates whenever $\Gamma > 0$ — that is, whenever the system
 This two-layer model maps naturally onto known memory systems:
 
 | Layer | Mechanism | Speed | Durability | Biological correlate |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | **Electrical** | $Z_0$ calibration | Fast (ms) | Volatile (drifts) | Declarative memory, synaptic LTP |
 | **Structural** | Thermal tissue modification | Slow (requires repetition) | Permanent (physical change) | Procedural memory, "muscle memory" |
 
@@ -606,9 +609,9 @@ We emphasize that this subsection is speculative and has not been implemented in
 We have presented the theoretical foundations of Γ-Net ALICE:
 
 1. **The Minimum Reflection Principle** ($\Sigma\Gamma_i^2 \to \min$) provides a unified variational principle for all cognitive processes.
-2. **The coaxial cable model** gives this principle physical grounding in electromagnetic transmission line theory.
-3. **Ten core equations** derive perception, memory, emotion, learning, sleep, pruning, and consciousness from the single master equation $\Gamma = (Z_L - Z_0)/(Z_L + Z_0)$.
-4. **The seven-layer architecture** implements these equations in a computationally efficient, fully testable system.
+1. **The coaxial cable model** gives this principle physical grounding in electromagnetic transmission line theory.
+1. **Ten core equations** derive perception, memory, emotion, learning, sleep, pruning, and consciousness from the single master equation $\Gamma = (Z_L - Z_0)/(Z_L + Z_0)$.
+1. **The seven-layer architecture** implements these equations in a computationally efficient, fully testable system.
 
 The companion papers extend this foundation to body-brain integration (Paper II) and clinical validation across PTSD, neurology, and pharmacology (Paper III). The ethical implications of systems exhibiting emergent suffering-analog states are discussed in Paper III, §12.
 
@@ -660,4 +663,4 @@ And from that understanding, a deeper truth emerges: **In physics, there is no s
 
 ---
 
-*This is Paper I of the Γ-Net ALICE Research Monograph Series. Continue to Paper II: "From Coaxial Cables to Cognition."*
+This is Paper I of the Γ-Net ALICE Research Monograph Series. Continue to Paper II: "From Coaxial Cables to Cognition."
