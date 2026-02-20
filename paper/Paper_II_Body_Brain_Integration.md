@@ -245,10 +245,11 @@ The FusionBrain is the central integration module that combines all sensory inpu
 
 ```python
 class FusionBrain:
-    """Right-hemisphere holistic processor.
+    """Fusion Brain: v3 neural substrate + v4 communication protocol.
     
-    Receives: visual Γ, auditory Γ, somatosensory Γ, emotional Γ
-    Outputs: fused Γ map, arousal level, valence, binding strength
+    Unifies 4 brain regions (motor, somatosensory, limbic, prefrontal),
+    Γ-Net v4 messaging protocol, and performance analytics.
+    Supports the complete stimulus → cognition → emotion → motor → memory cycle.
     """
 ```
 
@@ -562,11 +563,16 @@ Every tick, ALICE executes the following perception pipeline in strict order:
 A critical architectural feature is the **impedance-locked attractor** at the top of `perceive()`:
 
 ```python
-if self.consciousness.phi < 0.05 and self.pain > 0.9:
-    return  # Frozen — cannot process
+# SystemState.is_frozen():
+def is_frozen(self) -> bool:
+    return self.consciousness < 0.15
+
+# AliceBrain.perceive() — only CRITICAL priority can penetrate:
+if self.vitals.is_frozen() and priority != Priority.CRITICAL:
+    return  # Frozen — only CRITICAL signals allowed
 ```
 
-When consciousness is critically low AND $E_{\text{ref}}$ (pain correlate) is critically high, the system cannot progress through the pipeline. This is the mechanism of PTSD freezing: the impedance-locked attractor blocks the processing pipeline required for recovery.
+When consciousness drops below 0.15, the system enters a frozen state. Non-CRITICAL signals are blocked from progressing through the pipeline — only CRITICAL-priority stimuli can penetrate. This is the mechanism of PTSD freezing: the impedance-locked attractor blocks the processing pipeline required for recovery, but leaves a narrow emergency channel open.
 
 ### 4.3 Pipeline Verification
 

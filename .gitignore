@@ -26,5 +26,8 @@ Desktop.ini
 # Experiment output (regeneratable)
 exp_out.txt
 
+# Generated PDFs (regeneratable via pandoc)
+paper/*.pdf
+
 # Restricted papers (not for public release)
 paper/Paper_IV_Consciousness_Ethics.md

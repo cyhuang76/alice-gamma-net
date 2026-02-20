@@ -432,18 +432,7 @@ The experiment `exp_gamma_verification.py` verified eight aspects of Γ unificat
 
 Γ-Net implements activity-dependent pruning that reproduces the Huttenlocher (1979) developmental curve:
 
-```
-Synaptic Density
-     ▲
-     │    ╱╲
-     │   ╱  ╲
-     │  ╱    ╲__________
-     │ ╱                 ╲___
-     │╱                       ╲___
-     └─────────────────────────────► Age
-     Birth  2yr  10yr    20yr    60yr
-       Phase1  Phase2  Phase3   Phase4
-```
+![Figure 5. Huttenlocher synaptic density curve (solid) with Γ-Net simulation overlay (dashed). Four developmental phases annotated: synaptogenesis (0–2 yr), activity-dependent pruning (2–10 yr), Fibonacci-scheduled pruning (10–20 yr), and maintenance (20+ yr).](fig5_huttenlocher_curve.png)
 
 **Phase 1 (Synaptogenesis)**: Rapid channel creation. New channels are added with random initial impedance ($Z_0 \sim \mathcal{U}[Z_{min}, Z_{max}]$). This corresponds to the explosive synaptogenesis of early infancy.
 
