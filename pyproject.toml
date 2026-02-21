@@ -7,7 +7,7 @@ name = "alice-gamma-net"
 version = "1.0.0"
 description = "Alice Smart System — A physics-driven electronic lifeform based on the Γ-Net architecture"
 readme = "README.md"
-license = {text = "Apache-2.0"}
+license = {text = "AGPL-3.0-or-later"}
 requires-python = ">=3.10"
 authors = [
     {name = "Hsi-Yu Huang", email = "llc.y.huangll@gmail.com"}

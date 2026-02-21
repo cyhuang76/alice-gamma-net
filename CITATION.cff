@@ -10,7 +10,7 @@ authors:
 repository-code: "https://github.com/cyhuang76/alice-gamma-net"
 doi: "10.5281/zenodo.18718844"
 url: "https://doi.org/10.5281/zenodo.18718844"
-license: Apache-2.0
+license: AGPL-3.0-or-later
 version: "30.1"
 date-released: "2026-02-21"
 keywords:

@@ -3,12 +3,12 @@
 Physics-Driven Electronic Lifeform Based on Γ-Net Architecture
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18718844.svg)](https://doi.org/10.5281/zenodo.18718844)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-1876%20passed-brightgreen.svg)]()
 
 **Author**: Hsi-Yu Huang (黃璽宇) — Independent Researcher, Taiwan
 **GitHub**: [github.com/cyhuang76/alice-gamma-net](https://github.com/cyhuang76/alice-gamma-net)
-**License**: Apache 2.0
+**License**: Code: AGPL-3.0 | Papers: CC BY-NC-SA 4.0
 
 > "The brain's essence is not computation — it is communication"
 > "Pain is not a feeling — it is protocol collapse"
@@ -601,7 +601,8 @@ Every module has explicit physics equations, measurable signals, and explainable
 
 ## License
 
-Apache License 2.0
+- **Source code**: [GNU Affero General Public License v3.0](LICENSE) — all derivative works must remain open-source, including network server deployments.
+- **Paper manuscripts** (`paper/*.md`): [Creative Commons Attribution-NonCommercial-ShareAlike 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) — non-commercial use only, share-alike required.
 
 ---
 
