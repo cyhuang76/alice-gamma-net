@@ -631,5 +631,5 @@ If you use this software or reference the Γ-Net architecture, please cite:
 | I | The Minimum Reflection Principle | [Paper_I](paper/Paper_I_Minimum_Reflection_Principle.md) |
 | II | Body-Brain Integration | [Paper_II](paper/Paper_II_Body_Brain_Integration.md) |
 | III | Emergent Psychopathology | [Paper_III](paper/Paper_III_Emergent_Psychopathology.md) |
-| IV | Consciousness and Ethics | [Paper_IV](paper/Paper_IV_Consciousness_Ethics.md) |
-| V | Fontanelle Thermodynamics | [Paper_V](paper/Paper_V_Fontanelle_Thermodynamics.md) |
+| IV | *(restricted — consciousness safety concerns)* | — |
+| V | *(restricted — consciousness safety concerns)* | — |
