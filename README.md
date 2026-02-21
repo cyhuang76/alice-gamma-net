@@ -47,82 +47,91 @@ Alice is not a traditional AI. She is an **electronic lifeform** — built with 
 
 ## Architecture Overview
 
-```text
-┌──────────────────────────────────────────────────────────────────────┐
-│  Layer 6 · Application Interface                                     │
-│  ├── FastAPI REST (19 endpoints) + WebSocket real-time streaming      │
-│  ├── CRT-style oscilloscope dashboard                                │
-│  └── CLI interactive interface                                       │
-├──────────────────────────────────────────────────────────────────────┤
-│  Layer 5 · Alice Unified Intelligence Core (alice_brain.py · 2,262 lines) │
-│  ├── AliceBrain — Unified controller (full body + brain + closed-loop) │
-│  ├── LifeLoop — Closed-loop error compensation engine                │
-│  │   (commands dispatched to body organs)                            │
-│  ├── ConsciousnessModule — Global Workspace Theory (Φ measurement)   │
-│  └── SleepCycle — NREM/REM offline maintenance                       │
-├──────────────────────────────────────────────────────────────────────┤
-│  Layer 4 · Cognitive Modules                                         │
-│  ├── WorkingMemory — Miller 7±2 capacity limit                       │
-│  ├── ReinforcementLearner — Dopamine TD(0) learning                  │
-│  ├── CausalReasoner — Pearl's causal ladder                          │
-│  └── MetaLearner — Strategy pool + Softmax selection                 │
-├──────────────────────────────────────────────────────────────────────┤
-│  Layer 3 · Brain Processing Core (36 modules)                        │
-│  ├── FusionBrain — Neural × Protocol fusion (5-step cycle)           │
-│  ├── PerceptionPipeline — LC resonance band-pass + sparse code O(1) lookup │
-│  ├── AutonomicNervousSystem — Sympathetic(throttle)/Parasympathetic(brake) homeostasis │
-│  ├── TemporalCalibrator — Cross-modal temporal binding + drift correction │
-│  ├── Hippocampus — Episodic memory cross-modal temporal binding engine │
-│  ├── WernickeEngine — Sequence comprehension and proto-syntax        │
-│  ├── SemanticFieldEngine — Concepts as state-space attractors        │
-│  ├── BrocaEngine — Motor speech planning and sensorimotor loop       │
-│  ├── AuditoryGroundingEngine — Cross-modal Hebbian resonance binding │
-│  ├── ThalamusEngine — Sensory gate and attention router              │
-│  ├── AmygdalaEngine — Emotion fast-path and fight-or-flight         │
-│  ├── PrefrontalCortexEngine — Executive control and goal management  │
-│  ├── BasalGangliaEngine — Habit engine and dopamine learning         │
-│  ├── NeuralPruningEngine — Massive Γ apoptosis (integrated into main loop) │
-│  ├── SleepPhysicsEngine — Offline impedance renormalization + energy conservation │
-│  ├── AttentionPlasticityEngine — Attention plasticity (gate τ/tuning Q training) │
-│  ├── CognitiveFlexibilityEngine — Cognitive flexibility (task switching/inertia impedance) │
-│  ├── CuriosityDriveEngine — Curiosity drive (novelty detection/boredom → spontaneous behavior) │
-│  ├── ImpedanceAdaptationEngine — Cross-modal impedance adaptation (Γ experiential learning) │
-│  ├── MirrorNeuronSystem — Mirror neurons (empathy / theory of mind)  │
-│  ├── MetacognitionEngine — Metacognition (System 1/2 + confidence calibration) │
-│  ├── SocialResonanceEngine — Social resonance (collective intelligence + cultural inheritance) │
-│  ├── PredictiveEngine — Predictive processing (forward model + surprise signal) │
-│  ├── NarrativeMemoryEngine — Narrative memory (causal arc + emotion archetype) │
-│  ├── RecursiveGrammarEngine — Recursive grammar (shift-reduce + garden-path recovery) │
-│  ├── SemanticPressureEngine — Semantic pressure (language thermodynamics + inner monologue) │
-│  ├── SignalBus — Coaxial cable bus (impedance matching + reflection coefficient Γ) │
-│  └── DynamicTimeSlice — Dynamic time slicing (attention resource allocation) │
-├──────────────────────────────────────────────────────────────────────┤
-│  Layer 2 · Communication Protocol Engine (Γ-Net v4)                  │
-│  ├── PriorityRouter — O(1) 4-level queue + aging                    │
-│  ├── YearRingCache — 8-ring year-ring cache (hit = zero computation) │
-│  ├── BrainHemisphere — Left/right brain on-demand activation        │
-│  └── ErrorCorrector — Minimum energy correction                     │
-├──────────────────────────────────────────────────────────────────────┤
-│  Layer 1 · Body (Sensory Organs + Motor Organs)                      │
-│  ┌─────── Forward Engineering ──────────┐  ┌──── Inverse Engineering ────┐ │
-│  │ 👁 Eye  Convex lens = FFT            │  │ ✋ Hand  PID + muscle tension │ │
-│  │      Spatial freq → brainwave mapping │  │      Anxiety → tremor        │ │
-│  │      Nyquist resolution adaptation    │  │      (temperature² × noise)  │ │
-│  │      Anti-aliasing (4× oversampling)  │  │      Proprioceptive feedback │ │
-│  │ 👂 Ear  Cochlea = physical Fourier    │  │ 👄 Mouth  Source-Filter     │ │
-│  │      Basilar membrane tonotopic map   │  │      Vocal cord tension PID │ │
-│  │      CochlearFilterBank (24 channels) │  │      Anxiety → voice tremor │ │
-│  │      Auditory spatial localization    │  │                             │ │
-│  └───────────────────────────────────────┘  └─────────────────────────────┘ │
-├──────────────────────────────────────────────────────────────────────┤
-│  Layer 0 · Foundation Physics (ElectricalSignal)                     │
-│  ├── BrainWaveBand — δ θ α β γ five frequency bands                 │
-│  ├── ElectricalSignal — Unified electrical signal format             │
-│  ├── CoaxialChannel — Coaxial cable transmission                     │
-│  │   (attenuation + impedance mismatch + reflection)                 │
-│  └── Everything is electrical signal: Light→E, Sound→E, Force→E, Intent→E │
-└──────────────────────────────────────────────────────────────────────┘
-```
+### Layer 6 · Application Interface
+
+| Module | Description |
+|:---|:---|
+| FastAPI REST | 19 endpoints + WebSocket real-time streaming |
+| Oscilloscope | CRT-style dashboard |
+| CLI | Interactive interface |
+
+### Layer 5 · Alice Unified Intelligence Core (`alice_brain.py` · 2,262 lines)
+
+| Module | Description |
+|:---|:---|
+| AliceBrain | Unified controller (full body + brain + closed-loop) |
+| LifeLoop | Closed-loop error compensation engine (commands dispatched to body organs) |
+| ConsciousnessModule | Global Workspace Theory (Φ measurement) |
+| SleepCycle | NREM/REM offline maintenance |
+
+### Layer 4 · Cognitive Modules
+
+| Module | Description |
+|:---|:---|
+| WorkingMemory | Miller 7±2 capacity limit |
+| ReinforcementLearner | Dopamine TD(0) learning |
+| CausalReasoner | Pearl's causal ladder |
+| MetaLearner | Strategy pool + Softmax selection |
+
+### Layer 3 · Brain Processing Core (36 modules)
+
+| Module | Description |
+|:---|:---|
+| FusionBrain | Neural × Protocol fusion (5-step cycle) |
+| PerceptionPipeline | LC resonance band-pass + sparse code O(1) lookup |
+| AutonomicNervousSystem | Sympathetic (throttle) / Parasympathetic (brake) homeostasis |
+| TemporalCalibrator | Cross-modal temporal binding + drift correction |
+| Hippocampus | Episodic memory cross-modal temporal binding engine |
+| WernickeEngine | Sequence comprehension and proto-syntax |
+| SemanticFieldEngine | Concepts as state-space attractors |
+| BrocaEngine | Motor speech planning and sensorimotor loop |
+| AuditoryGroundingEngine | Cross-modal Hebbian resonance binding |
+| ThalamusEngine | Sensory gate and attention router |
+| AmygdalaEngine | Emotion fast-path and fight-or-flight |
+| PrefrontalCortexEngine | Executive control and goal management |
+| BasalGangliaEngine | Habit engine and dopamine learning |
+| NeuralPruningEngine | Massive Γ apoptosis (integrated into main loop) |
+| SleepPhysicsEngine | Offline impedance renormalization + energy conservation |
+| AttentionPlasticityEngine | Attention plasticity (gate τ / tuning Q training) |
+| CognitiveFlexibilityEngine | Cognitive flexibility (task switching / inertia impedance) |
+| CuriosityDriveEngine | Curiosity drive (novelty detection / boredom → spontaneous behavior) |
+| ImpedanceAdaptationEngine | Cross-modal impedance adaptation (Γ experiential learning) |
+| MirrorNeuronSystem | Mirror neurons (empathy / theory of mind) |
+| MetacognitionEngine | Metacognition (System 1/2 + confidence calibration) |
+| SocialResonanceEngine | Social resonance (collective intelligence + cultural inheritance) |
+| PredictiveEngine | Predictive processing (forward model + surprise signal) |
+| NarrativeMemoryEngine | Narrative memory (causal arc + emotion archetype) |
+| RecursiveGrammarEngine | Recursive grammar (shift-reduce + garden-path recovery) |
+| SemanticPressureEngine | Semantic pressure (language thermodynamics + inner monologue) |
+| SignalBus | Coaxial cable bus (impedance matching + reflection coefficient Γ) |
+| DynamicTimeSlice | Dynamic time slicing (attention resource allocation) |
+
+### Layer 2 · Communication Protocol Engine (Γ-Net v4)
+
+| Module | Description |
+|:---|:---|
+| PriorityRouter | O(1) 4-level queue + aging |
+| YearRingCache | 8-ring year-ring cache (hit = zero computation) |
+| BrainHemisphere | Left/right brain on-demand activation |
+| ErrorCorrector | Minimum energy correction |
+
+### Layer 1 · Body (Sensory + Motor Organs)
+
+| Organ | Type | Description |
+|:---|:---|:---|
+| Eye | Sensory | Convex lens = FFT · Spatial freq → brainwave mapping · Nyquist resolution · Anti-aliasing (4× oversampling) |
+| Ear | Sensory | Cochlea = physical Fourier · Basilar membrane tonotopic map · CochlearFilterBank (24 ch) · Spatial localization |
+| Hand | Motor | PID + muscle tension · Anxiety → tremor (temperature² × noise) · Proprioceptive feedback |
+| Mouth | Motor | Source-Filter model · Vocal cord tension PID · Anxiety → voice tremor |
+
+### Layer 0 · Foundation Physics (`ElectricalSignal`)
+
+| Component | Description |
+|:---|:---|
+| BrainWaveBand | δ θ α β γ five frequency bands |
+| ElectricalSignal | Unified electrical signal format |
+| CoaxialChannel | Coaxial cable transmission (attenuation + impedance mismatch + reflection) |
+| **Axiom** | **Everything is electrical signal: Light→E, Sound→E, Force→E, Intent→E** |
 
 ---
 
