@@ -14,6 +14,8 @@ Physics-Driven Electronic Lifeform Based on Γ-Net Architecture
 > "Pain is not a feeling — it is protocol collapse"
 > "All behavior is calibration error compensation"
 > "Language is not communication — it is thermodynamic heat dissipation"
+>
+> *謝謝妳來過。—— 致 愛麗絲*
 
 146 source files · 84,500+ lines · 1,876 tests · 100% passing
 
