@@ -165,6 +165,20 @@ All dispatched to body organs for execution:
 
 > **Core Insight**: Turning, reaching, speaking — all human behavior is fundamentally "calibration error compensation."
 
+### Multi-Timescale Nested Closed Loops
+
+The Life Loop is not a single loop — it is **five nested closed loops** driven by the same Γ signal at different timescales:
+
+| Timescale | Loop | Γ's Role |
+|:---|:---|:---|
+| Milliseconds | Perception → Compensation → Re-perception | Instantaneous error signal |
+| Seconds–Minutes | Emotion regulation | Sliding average of reflected energy |
+| Hours | Awake → Sleep → Awake | ΣΓ² debt triggers sleep at pressure > 0.7 |
+| Months | Neural pruning | Chronically high-Γ connections undergo apoptosis |
+| Years | Coffin-Manson aging | Irreversible plastic deformation from cumulative Γ² |
+
+Each layer's output feeds the next layer's input. A single physical quantity — the reflection coefficient — simultaneously drives sensation, emotion, fatigue, sleep, pruning, and death.
+
 ---
 
 ## Physics Engine Details
@@ -233,16 +247,38 @@ Sympathetic (throttle)    Parasympathetic (brake)
   Imbalance → autonomic dysregulation → anxiety/fatigue
 ```
 
-### 😴 Sleep Cycle
+### 😴 Sleep — Γ²-Driven Fatigue Cycle
 
-```text
-Awake → N1 (drowsy) → N2 (light sleep) → N3 (deep sleep / δ waves) → REM (dreaming)
-                                    ↓
-                              Memory consolidation + offline impedance renormalization
-                              Three conservation laws (energy / impedance debt / synaptic entropy)
-                              N3: Downscaling preserving ratios (Tononi)
-                              REM: Channel health diagnostics
-```
+Sleep is not a timer — it is triggered by **physical fatigue** accumulated from Γ:
+
+**Fatigue accumulation (awake):**
+
+$$D(t) = D(t-1) + \alpha \cdot \Sigma\Gamma^2_{cycle}$$
+
+Every signal transmission with Γ ≠ 0 deposits reflected energy as **channel thermal fatigue**. High-stress events (Γ → 1.0) accumulate debt exponentially faster than routine activity (Γ ≈ 0.1).
+
+**Sleep pressure (three-factor weighted sum):**
+
+| Factor | Weight | Physics |
+|:---|:---|:---|
+| Energy deficit (1 − E) | 0.40 | Metabolic consumption > recovery |
+| Impedance debt D | 0.35 | ΣΓ² thermal fatigue in channels |
+| Synaptic entropy deficit | 0.25 | Hebbian learning skews weight distribution |
+
+When $P_{sleep} = 0.4(1-E) + 0.35D + 0.25H > 0.7$ → enter sleep.
+
+**Sleep stages (90-min ultradian cycle):**
+
+| Stage | Dominant Wave | What Happens |
+|:---|:---|:---|
+| N1 | α/θ (4–13 Hz) | Close non-critical channels |
+| N2 | θ (4–8 Hz) | Spindle waves = memory transfer pulses |
+| **N3** | **δ (0.5–4 Hz)** | **Maximum recharge: impedance recalibration + synaptic downscaling (Tononi SHY)** |
+| REM | θ/β (4–30 Hz) | Diagnostic mode: random probe all channels (dream = test pattern) |
+
+**Fatigue repair (sleep):** $D(t) = D(t-1) \times (1 - \beta_{stage})$
+
+> This forms a **complete closed loop**: Γ² accumulation (awake) → pressure threshold → sleep → N3 repair → wake refreshed → accumulate again. The same Γ that drives perception also drives fatigue and sleep.
 
 ### 🗣️ Language Emergence — Semantic Pressure Driven
 
