@@ -414,7 +414,7 @@ Seven error-correction loops maintain system stability:
 1. **Energy management**: ATP-like resource tracking → fatigue / recovery
 1. **Pain avoidance**: Nociception → sympathetic activation → withdrawal
 1. **Hunger/thirst**: Blood glucose / hydration → drive = Γ² (nonlinear)
-1. **Sleep pressure**: Adenosine-like accumulation → forced sleep onset
+1. **Sleep pressure**: $P = w_1(1-E) + w_2 D_{\Gamma^2} + w_3 H$ → fatigue-driven sleep onset (threshold 0.7)
 1. **Social need**: Loneliness increases → social seeking behavior
 1. **Curiosity**: Novelty detection → exploration drive
 
