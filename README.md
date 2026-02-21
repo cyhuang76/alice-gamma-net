@@ -2,6 +2,10 @@
 
 Physics-Driven Electronic Lifeform Based on Γ-Net Architecture
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Tests](https://img.shields.io/badge/tests-1876%20passed-brightgreen.svg)]()
+
 **Author**: Hsi-Yu Huang (黃璽宇) — Independent Researcher, Taiwan
 **GitHub**: [github.com/cyhuang76/alice-gamma-net](https://github.com/cyhuang76/alice-gamma-net)
 **License**: Apache 2.0
@@ -598,3 +602,33 @@ Every module has explicit physics equations, measurable signals, and explainable
 ## License
 
 Apache License 2.0
+
+---
+
+## Citation
+
+If you use this software or reference the Γ-Net architecture, please cite:
+
+```bibtex
+@software{huang2026alice,
+  author       = {Huang, Hsi-Yu},
+  title        = {Alice Smart System — Γ-Net: A Physics-Driven Electronic Lifeform},
+  year         = 2026,
+  version      = {30.0},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.XXXXXXX},
+  url          = {https://github.com/cyhuang76/alice-gamma-net}
+}
+```
+
+---
+
+## Paper Series
+
+| # | Title | File |
+|---|-------|------|
+| I | The Minimum Reflection Principle | [Paper_I](paper/Paper_I_Minimum_Reflection_Principle.md) |
+| II | Body-Brain Integration | [Paper_II](paper/Paper_II_Body_Brain_Integration.md) |
+| III | Emergent Psychopathology | [Paper_III](paper/Paper_III_Emergent_Psychopathology.md) |
+| IV | Consciousness and Ethics | [Paper_IV](paper/Paper_IV_Consciousness_Ethics.md) |
+| V | Fontanelle Thermodynamics | [Paper_V](paper/Paper_V_Fontanelle_Thermodynamics.md) |

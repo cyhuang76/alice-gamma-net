@@ -541,7 +541,7 @@ def arm_b_sleep_only(verbose: bool = False) -> ArmResult:
     if verbose:
         print("  ╔═══════════════════════════════════════╗")
         print("  ║ Arm B: Sleep Only (no queue drain)          ║")
-        print("  ╚═══════════════════════════════════════╝"))
+        print("  ╚═══════════════════════════════════════╝")
 
     alice = induce_ptsd(seed=SEED, verbose=False)
     result = ArmResult(name="Sleep Only")
@@ -581,7 +581,7 @@ def arm_c_drain_only(verbose: bool = False) -> ArmResult:
     if verbose:
         print("  ╔═══════════════════════════════════════╗")
         print("  ║ Arm C: Drain Only (no sleep)                ║")
-        print("  ╚═══════════════════════════════════════╝"))
+        print("  ╚═══════════════════════════════════════╝")
 
     alice = induce_ptsd(seed=SEED, verbose=False)
     result = ArmResult(name="Drain Only")
@@ -633,7 +633,7 @@ def arm_d_dream_therapy(verbose: bool = False) -> ArmResult:
     if verbose:
         print("  ╔═══════════════════════════════════════╗")
         print("  ║ Arm D: Dream Therapy (drain + sleep)        ║")
-        print("  ╚═══════════════════════════════════════╝"))
+        print("  ╚═══════════════════════════════════════╝")
 
     alice = induce_ptsd(seed=SEED, verbose=False)
     result = ArmResult(name="Dream Therapy")

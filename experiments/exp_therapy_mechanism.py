@@ -970,7 +970,7 @@ def run_experiment(verbose: bool = True):
 
     print(f"\n  ┌─────────────────┬───────┬──────┬───────┬───────┬───────┬──────┐")
     print(f" │ Treatment Plan  │ Score │ Cons │ Pain  │ Γ Imp │ Relapse│ Doses│")
-    print(f"  ├─────────────────┼───────┼──────┼───────┼───────┼───────┼──────┤"))
+    print(f"  ├─────────────────┼───────┼──────┼───────┼───────┼───────┼──────┤")
     for tag, s in sorted_by_score:
         name = s["therapy"][:15].ljust(15)
         score = f"{s['recovery_score']:.3f}"

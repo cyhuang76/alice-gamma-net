@@ -23,11 +23,44 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
+# pytest
+.pytest_cache/
+
 # Experiment output (regeneratable)
 exp_out.txt
 
-# Generated PDFs (regeneratable via pandoc)
-paper/*.pdf
+# ── Paper: what to EXCLUDE ──────────────────────────────────
+# Pandoc intermediate / temp files
+paper/_tmp_*
+paper/media-*
+paper/system-commandline-sentinel-files/
 
-# Restricted papers (not for public release)
+# LaTeX build artefacts
+paper/latex/*.aux
+paper/latex/*.log
+paper/latex/*.out
+paper/latex/*.toc
+paper/latex/*.png
+
+# Figure PDFs (keep PNGs, PDFs are regeneratable)
+paper/*.pdf
+paper/fig*.pdf
+paper/latex/*.pdf
+
+# Restricted papers (not for public release — Papers IV & V)
 paper/Paper_IV_Consciousness_Ethics.md
+paper/Paper_V_Fontanelle_Thermodynamics.md
+
+# Legacy / superseded paper drafts
+paper/Γ_Net_ALICE_Paper.md
+
+# ── Paper: what to INCLUDE (for clarity) ────────────────────
+# paper/Paper_I_Minimum_Reflection_Principle.md   ← tracked
+# paper/Paper_II_Body_Brain_Integration.md         ← tracked
+# paper/Paper_III_Emergent_Psychopathology.md      ← tracked
+# paper/THE_RECONSTRUCTION_OF_ALICE.md             ← tracked
+# paper/fig*.png                                   ← tracked (figures)
+# paper/latex/*.tex                                ← tracked (Nature LaTeX)
+# paper/md2pdf.py                                  ← tracked (converter)
+# paper/md2nature.py                               ← tracked (converter)
+# paper/gen_fig*.py                                ← tracked (figure generators)

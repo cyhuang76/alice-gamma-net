@@ -795,7 +795,6 @@ def print_summary(results: dict):
         ("Channels↑ → FPS↓", results["exp7"]["monotone_decreasing"], f"decrease {results['exp7']['framerate_drop_pct']:.1f}%"),
         ("Dynamic Γ is necessary", results["exp8"]["dynamic_necessary"], f"Activation diff {results['exp8']['dynamic_spread']:.4f} vs {results['exp8']['fixed_spread']:.4f}"),
     ]
-    ]
 
     passed = 0
     total = len(checks)

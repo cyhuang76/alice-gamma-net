@@ -1,0 +1,998 @@
+\documentclass[11pt,a4paper]{article}
+
+%% ── Fonts (XeLaTeX) ──────────────────────────────────────────────
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setmonofont{Consolas}
+\usepackage{xeCJK}
+\setCJKmainfont{Microsoft JhengHei}
+
+%% ── Page geometry (Nature single-column) ─────────────────────────
+\usepackage[
+  a4paper,
+  top=2.5cm, bottom=2.5cm,
+  left=2.5cm, right=2.5cm
+]{geometry}
+
+%% ── Packages ─────────────────────────────────────────────────────
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[
+  colorlinks=true,
+  linkcolor=RoyalBlue,
+  citecolor=OliveGreen,
+  urlcolor=BrickRed
+]{hyperref}
+\usepackage{caption}
+\usepackage{setspace}
+\usepackage{titlesec}
+
+%% ── Line spacing (Nature: ~1.5) ─────────────────────────────────
+\onehalfspacing
+
+%% ── Section heading style (Nature-like) ──────────────────────────
+\titleformat{\section}
+  {\large\bfseries\sffamily}{\thesection}{0.8em}{}
+\titleformat{\subsection}
+  {\normalsize\bfseries\sffamily}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}
+  {\normalsize\itshape\sffamily}{\thesubsubsection}{0.6em}{}
+
+%% ── Caption style ────────────────────────────────────────────────
+\captionsetup{
+  font={small,sf},
+  labelfont={bf},
+  format=plain,
+  margin=1cm
+}
+
+%% ── Figure search path ──────────────────────────────────────────
+\graphicspath{{../}}
+
+%% ── Paragraph style ─────────────────────────────────────────────
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+
+\begin{document}
+
+%% ── Cover Page ───────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{titlepage}
+\centering
+
+\vspace*{3cm}
+
+{\large\sffamily $\Gamma\text{-Net ALICE Research Monograph Series}$}
+
+\vspace{1.5cm}
+
+{\huge\bfseries\sffamily From Coaxial Cables to Cognition --- Body-Brain Integration in the $\Gamma$-Net Architecture}
+
+\vspace{2cm}
+
+{\Large Hsi-Yu Huang (黃璽宇)}
+
+\vspace{0.8em}
+
+{\normalsize\itshape Independent Researcher, Taiwan}\\[0.4em]
+{\normalsize Correspondence: \href{mailto:llc.y.huangll@gmail.com}{llc.y.huangll@gmail.com}}
+
+\vspace{2cm}
+
+{\large Paper II of 3}
+
+\vspace{0.5em}
+
+{\normalsize February 2026}
+
+\vfill
+
+{\small\sffamily License: Apache 2.0 \quad|\quad GitHub: \href{https://github.com/cyhuang76/alice-gamma-net}{cyhuang76/alice-gamma-net}}
+
+\end{titlepage}
+
+\setcounter{page}{1}
+
+%% ── Abstract ─────────────────────────────────────────────────────
+\begin{abstract}
+This paper details the \textbf{embodiment} of the $\Gamma$-Net Minimum Reflection Principle ($\Sigma\Gamma_i^2 \to \min$) in a complete body-brain system consisting of 5 sensory-motor organs and 44 brain modules. We describe how each organ --- eye, ear, hand, mouth, and internal sensors --- transduces environmental signals into impedance mismatch values ($\Gamma$), and how 44 brain modules process, integrate, and act upon these signals through a fixed O(1) perception pipeline. The system implements a complete autonomic nervous system, a three-tier memory hierarchy, a pain-consciousness coupling loop, sleep physics with circadian regulation, and homeostatic drives --- all governed by the same transmission line equations. We present the FusionBrain that integrates parallel (right hemisphere) and sequential (left hemisphere) processing, the LifeLoop that maintains continuous self-sustaining operation, and the communication protocol for external interaction. The complete system is validated by 1,876 independent tests and 46 experiments.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Embodied cognition, perception pipeline, autonomic nervous system, sleep physics, memory hierarchy, sensory-motor integration, impedance transduction
+
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{1em}
+
+%% ── Body ──────────────────────────────────────────────────────────
+\subsection{Introduction}
+
+Paper I established that all cognition can be derived from the Minimum Reflection Principle (MRP) $\Sigma\Gamma_i^2 \to \min$, where $\Gamma_i$ is the impedance reflection coefficient of neural channel $i$. But a principle alone is not a mind. To demonstrate that this principle is sufficient for generating complex behavior, we must show how it is \textbf{embodied} --- how physical sensors convert environmental signals into $\Gamma$ values, how brain modules process these values, and how motor outputs express the results back into the world.
+
+This paper presents the complete body-brain implementation of $\Gamma$-Net ALICE: a digital organism with sensory organs, a nervous system, memory, emotion, sleep, pain, consciousness, and the capacity for language. Every component is derived from the same coaxial cable physics --- there are no ad hoc modules, no special-purpose heuristics, and no fitted parameters.
+
+\subsubsection{1 Design Principles}
+
+Three principles guided the implementation:
+
+\begin{enumerate}[nosep]
+  \item \textbf{Physics first}: Every module must be derivable from impedance matching theory. If a cognitive function cannot be expressed as $\Gamma$ manipulation, it does not belong in the architecture.
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{O(1) perception}: The perception pipeline must execute in constant time, regardless of input complexity. Biological perception is inherently O(1) --- the time from photon hitting retina to conscious percept is approximately constant (~100ms), regardless of scene complexity. This forces the system to rely on impedance-gated filtering rather than exhaustive search.
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{Emergence, not programming}: Complex behaviors (pain, PTSD, fear, sleep necessity) must emerge from the equations, not be explicitly coded. If a behavior must be hardcoded, the theory is incomplete.
+\end{enumerate}
+
+\subsection{Body Systems: Sensory Organs}
+
+\subsubsection{1 Eye: Visual Impedance Transduction}
+
+The $\Gamma$-Net eye is a 16$\times$16 pixel retina with a physics-based visual processing pipeline:
+
+\paragraph{1.1 Architecture}
+
+\begin{longtable}{l l l}
+\toprule
+Component & Function & Output \\
+\midrule
+Retina (16$\times$16) & Raw light capture & Pixel intensity matrix \\
+Saccade Controller & Foveal targeting via $\Gamma$-gradient & (x, y) fixation point \\
+Edge Detector & Contrast extraction & Edge map \\
+V1 Gabor Filter Bank & Orientation-selective filtering & Feature $\Gamma$ vector \\
+Impedance Encoder & Feature $\rightarrow$ $\Gamma$ conversion & Visual $\Gamma$ array \\
+\bottomrule
+\end{longtable}
+
+\paragraph{1.2 Saccade Mechanism}
+
+The eye does not process the entire visual field uniformly. A saccade controller directs the fovea (high-resolution center) toward regions of maximum $\Gamma$ --- the areas of greatest mismatch between expected and observed patterns:
+
+\begin{equation*}
+\text{saccade\_target} = \arg\max_{(x,y)} \Gamma_{local}(x, y)
+\end{equation*}
+
+This implements attention as \textbf{impedance-guided exploration}: the saccade controller targets regions of maximum $\Gamma$, not confirming stimuli.
+
+\paragraph{1.3 Edge Detection as Impedance Boundary}
+
+Edge detection is reframed as impedance boundary detection. At each pixel, the local impedance is computed from luminance contrast:
+
+\begin{equation*}
+\Gamma_{pixel}(x,y) = \frac{I(x,y) - \bar{I}_{neighborhood}}{I(x,y) + \bar{I}_{neighborhood}}
+\end{equation*}
+
+where $I(x,y)$ is pixel intensity and $\bar{I}_{neighborhood}$ is the mean intensity of the surrounding region. High $| \Gamma_{pixel}|$ indicates a contrast boundary --- an edge.
+
+\paragraph{1.4 The Retinotopic Map as $\Gamma$-Topology}
+
+The lens of the eye is a physical Fourier transformer: the focal plane of a convex lens contains the spatial frequency spectrum of the input light field. Each retinal position corresponds to a spatial frequency, and nearby positions correspond to nearby frequencies. In impedance terms, adjacent photoreceptors transduce similar spatial frequencies and thus produce similar impedance values:
+
+\begin{equation*}
+d_{retina}(i, j) = \left| \frac{Z_i - Z_j}{Z_i + Z_j} \right| \approx 0 \quad \text{for adjacent } i,j
+\end{equation*}
+
+The retinotopic map is therefore a \textbf{hardware realization of $\Gamma$-topology}: the spatial arrangement of photoreceptors is an impedance gradient frozen into physical structure by lens optics. Low spatial frequencies (large contours) map to δ/θ bands and project preferentially to right-hemisphere holistic processing; high spatial frequencies (texture, detail) map to β/γ bands and project to left-hemisphere sequential processing. The brain does not choose what to see --- the physics of the Fourier lens determines which frequencies arrive where.
+
+\paragraph{1.5 Experimental Verification}
+
+\texttt{exp\_eye\_oscilloscope.py} verified:
+
+\begin{itemize}[nosep]
+  \item Visual frequency mapping: spatial frequency $\rightarrow$ brainwave band (δ/θ for low-freq, β/γ for high-freq)
+  \item End-to-end pipeline: Eye $\rightarrow$ AliceBrain $\rightarrow$ Oscilloscope produces 4-channel $\Gamma$ output
+  \item Standing wave computation: incident + reflected waveforms yield correct VSWR
+\end{itemize}
+\subsubsection{2 Ear: Cochlear Impedance Analysis}
+
+\paragraph{2.1 Architecture}
+
+The $\Gamma$-Net ear implements a 24-band cochlear filterbank based on the Glasberg-Moore auditory filter model (Glasberg \& Moore, 1990):
+
+\begin{longtable}{l l l}
+\toprule
+Component & Function & Output \\
+\midrule
+Outer Ear & Frequency-dependent gain & Amplified signal \\
+Cochlear Filterbank & 24-band ERB decomposition & Tonotopic activation \\
+Hair Cell Transduction & Mechanical $\rightarrow$ neural conversion & Auditory $\Gamma$ per band \\
+Tonotopic Map & Frequency $\rightarrow$ spatial mapping & 24-dim cochlear fingerprint \\
+\bottomrule
+\end{longtable}
+
+\paragraph{2.2 Frequency-to-Impedance Mapping}
+
+Each cochlear band has a characteristic impedance determined by its center frequency:
+
+\begin{equation*}
+Z_{band}(f) = Z_0 \cdot \left(1 + Q \cdot \left|\frac{f - f_c}{f_c}\right|\right)
+\end{equation*}
+
+where $f_c$ is the center frequency and $Q$ is the quality factor. Sounds matching a band's center frequency produce $\Gamma \to 0$ (perfect matching); sounds at distant frequencies produce high $\Gamma$ (mismatch).
+
+\paragraph{2.3 Cochlear Fingerprints}
+
+Each auditory stimulus produces a unique 24-dimensional "cochlear fingerprint" --- the vector of $\Gamma$ values across all bands. This fingerprint serves as the fundamental auditory representation:
+
+\begin{equation*}
+\mathbf{F}_{sound} = [\Gamma_1, \Gamma_2, ..., \Gamma_{24}]
+\end{equation*}
+
+Two sounds are perceived as similar when their fingerprint distance is small:
+
+\begin{equation*}
+d(A, B) = |\mathbf{F}_A - \mathbf{F}_B|_2
+\end{equation*}
+
+This replaces spectrogram-based representations with an impedance-based representation that naturally supports Hebbian association.
+
+\paragraph{2.4 The Tonotopic Map as $\Gamma$-Topology}
+
+The basilar membrane of the cochlea is a graded elastic strip: narrow and stiff at the base (high-frequency resonance), wide and soft at the apex (low-frequency resonance). This physical gradient creates a continuous impedance mapping along the membrane:
+
+\begin{equation*}
+Z_{basilar}(x) = Z_{base} \cdot \left(\frac{L - x}{L}\right)^\alpha
+\end{equation*}
+
+where $x$ is position along the membrane and $L$ is total length. Adjacent hair cells resonate at similar frequencies and present similar impedances, yielding $\Gamma_{ij} \to 0$ for neighboring cells. The tonotopic map is therefore a \textbf{hardware realization of $\Gamma$-topology}: the spatial organization of the cochlea is an impedance gradient frozen into the physical structure of the basilar membrane. This is not the brain computing frequencies --- it is the physics of a graded elastic strip performing mechanical Fourier decomposition.
+
+Notably, the auditory nerve transmits at 50Ω, while the temporal cortex receives at 75Ω --- an impedance mismatch of $\Gamma = | 50 - 75| /(50 + 75) = 0.20$. By contrast, the optic nerve (50Ω) matches the occipital cortex (50Ω) perfectly ($\Gamma = 0$). This asymmetry may explain why auditory processing requires more temporal calibration than visual processing, and contributes to the temporal cortex's specialization in time-domain analysis.
+
+\paragraph{2.5 Auditory Grounding}
+
+\texttt{exp\_auditory\_grounding.py} verified the hear$\rightarrow$learn$\rightarrow$recognize pipeline:
+
+\begin{itemize}[nosep]
+  \item Vowel discrimination: /a/, /i/, /u/, /e/, /o/ produce distinct 24-dim cochlear fingerprints
+  \item Cross-modal binding (Pavlovian): bell + food pairing $\rightarrow$ bell alone triggers visual phantom activation
+  \item Extinction: CS presented without US $\rightarrow$ cross-modal synapse decays ($\Gamma$ increases, channel closes)
+  \item Differential conditioning: distinct CSs bind to distinct USs without cross-contamination
+\end{itemize}
+\subsubsection{3 Hand: Motor Impedance System}
+
+\paragraph{3.1 Architecture}
+
+The $\Gamma$-Net hand is a 5-finger system with pressure sensors, temperature sensors, and motor actuators:
+
+\begin{longtable}{l l l}
+\toprule
+Component & Function & $\Gamma$ Mapping \\
+\midrule
+5 Pressure Sensors & Contact force detection & $\Gamma_p = | F - F_{target}| / (F + F_{target})$ \\
+5 Temperature Sensors & Thermal environment & $\Gamma_T = | T - T_{comfort}| / (T + T_{comfort})$ \\
+Grip Controller & Force calibration & Motor $\Gamma$ \\
+Proprioception & Internal position sense & Calibration $\Gamma$ \\
+\bottomrule
+\end{longtable}
+
+\paragraph{3.2 Motor Calibration}
+
+Grip force follows an impedance calibration curve:
+
+\begin{equation*}
+F_{grip}(t+1) = F_{grip}(t) - \eta_{motor} \cdot \Gamma_{grip} \cdot \text{sign}(Z_{hand} - Z_{object})
+\end{equation*}
+
+where $Z_{hand}$ is the hand's current impedance setting and $Z_{object}$ is the object's impedance (hard, soft, fragile). Learning to grip is learning to match impedance: too much force ($Z_{hand} \ll Z_{object}$) crushes; too little ($Z_{hand} \gg Z_{object}$) drops.
+
+\paragraph{3.3 Anxiety-Induced Tremor}
+
+Under high system stress ($T > T_{tremor}$), noise is injected into motor impedance:
+
+\begin{equation*}
+Z_{hand}(t) = Z_{hand,0} + A_{tremor} \cdot \text{noise}(t) \cdot T / T_{max}
+\end{equation*}
+
+This produces the anxiety tremor observed clinically --- hands shake not because the motor system is damaged but because system-wide $\Gamma$ elevation introduces noise into motor channels.
+
+\paragraph{3.4 Experimental Verification}
+
+\texttt{exp\_hand\_coordination.py} verified five scenarios:
+
+\begin{itemize}[nosep]
+  \item PID reaching convergence: hand reaches all 4 workspace corners
+  \item Anxiety tremor: tremor amplitude increases monotonically with ram\_temperature (0.0$\rightarrow$1.0)
+  \item Multi-target dopamine accumulation: successful reaches trigger cumulative dopamine reward
+  \item Trajectory visualization: calm vs. anxious trajectories differ qualitatively
+  \item Proprioception: moving hand signal frequency > stationary hand frequency
+\end{itemize}
+\subsubsection{4 Mouth: Articulatory System}
+
+\paragraph{4.1 Architecture}
+
+The $\Gamma$-Net mouth produces speech through impedance-based articulatory planning:
+
+\begin{longtable}{l l l}
+\toprule
+Component & Function & $\Gamma$ Mapping \\
+\midrule
+Broca's Planner & Articulatory sequencing & $\Gamma_{plan}$ \\
+Vocal Tract Model & Formant-based vowel generation & F1, F2 parameters \\
+Motor Execution & Plan $\rightarrow$ sound conversion & $\Gamma_{speech}$ \\
+Auditory Feedback & Self-monitoring via ear & $\Gamma_{feedback}$ \\
+\bottomrule
+\end{longtable}
+
+\paragraph{4.2 Vowel Production}
+
+Five vowels (/a/, /e/, /i/, /o/, /u/) are defined by formant frequency pairs (F1, F2), following Peterson \& Barney (1952):
+
+\begin{longtable}{l l l l}
+\toprule
+Vowel & F1 (Hz) & F2 (Hz) & Articulatory Description \\
+\midrule
+/a/ & 730 & 1090 & Open, back \\
+/e/ & 530 & 1840 & Mid, front \\
+/i/ & 270 & 2290 & Close, front \\
+/o/ & 570 & 840 & Mid, back \\
+/u/ & 300 & 870 & Close, back \\
+\bottomrule
+\end{longtable}
+
+Speaking is impedance matching between the internal concept representation and the external acoustic output:
+
+\begin{equation*}
+\Gamma_{speech} = \frac{|\mathbf{F}_{produced} - \mathbf{F}_{intended}|}{|\mathbf{F}_{produced} + \mathbf{F}_{intended}|}
+\end{equation*}
+
+Practice reduces $\Gamma_{speech}$ --- repeated articulation monotonically decreases the speech impedance mismatch.
+
+\paragraph{4.3 Sensorimotor Loop}
+
+The mouth implements a complete sensorimotor loop (Hickok \& Poeppel, 2007):
+
+\begin{enumerate}[nosep]
+  \item \textbf{Broca}: Plans articulatory sequence from concept activation
+  \item \textbf{Vocal Tract}: Executes plan $\rightarrow$ produces acoustic signal
+  \item \textbf{Ear}: Receives self-generated sound (auditory feedback)
+  \item \textbf{Wernicke}: Processes heard speech $\rightarrow$ generates cochlear fingerprint
+  \item \textbf{Error signal}: $\Delta\Gamma = \Gamma_{heard} - \Gamma_{intended}$
+  \item \textbf{Broca update}: Adjusts plan to reduce error
+\end{enumerate}
+This is the physics of \textbf{learning to talk}: infants babble (random motor plans), hear themselves (auditory feedback), and gradually calibrate Broca's impedance settings to produce intended sounds.
+
+
+\subsection{Brain Systems}
+
+\subsubsection{1 FusionBrain: The Integration Engine}
+
+The FusionBrain is the central integration module that combines all sensory inputs, internal states, and cognitive outputs into a unified $\Gamma$ map:
+
+\begin{verbatim}
+class FusionBrain:
+ """
+ Fusion Brain: v3 neural substrate + v4 communication protocol
+
+ Unifies 4 brain regions, Γ-Net v4 messaging protocol, and performance analytics.
+ Supports the complete stimulus → cognition → emotion → motor → memory cycle.
+ """
+\end{verbatim}
+
+\paragraph{1.1 Sensory Fusion}
+
+Cross-modal binding is computed as $\Gamma$ correlation across modalities:
+
+\begin{equation*}
+\text{binding}_{AB} = 1 - |\Gamma_A - \Gamma_B|
+\end{equation*}
+
+When visual and auditory $\Gamma$ values are similar (both low or both high), binding is strong --- the FusionBrain module outputs a bound classification. When they diverge, binding weakens --- the module outputs separate events. This replaces the "binding problem" with impedance matching.
+
+\paragraph{1.2 Arousal Computation}
+
+System arousal is the mean reflected energy across all active channels:
+
+\begin{equation*}
+\text{arousal} = \frac{1}{N}\sum_{i=1}^{N} \Gamma_i^2
+\end{equation*}
+
+High arousal (many channels mismatched) triggers sympathetic activation; low arousal (channels well-matched) permits parasympathetic rest.
+
+\subsubsection{2 LifeLoop: The Self-Sustaining Cycle}
+
+The LifeLoop is the master control loop that keeps ALICE alive:
+
+\begin{verbatim}
+while alive:
+ signals = perceive() # Multi-modal sensory input
+ errors = estimate_errors() # Cross-modal error estimation
+ commands = compensate(errors) # Generate motor compensation commands
+ execute(commands) # Body execution
+ feedback = re_perceive() # Action changes perception
+ calibrate(feedback) # Update calibration parameters
+ adapt(performance) # Meta-learning adjusts the system
+\end{verbatim}
+
+\texttt{exp\_life\_loop.py} verified the complete closed-loop architecture over 20 ticks across 5 modalities (see, hear, reach, say, full-cycle), with stable vital signs (no NaN/Inf), error-to-pain coupling, and autonomic homeostasis
+
+\subsubsection{3 Pain and Nociception}
+
+\paragraph{3.1 The Pain Equation --- Pain as Impedance Mismatch Energy}
+
+Pain is not a dedicated signal but the \textbf{energy cost of impedance mismatch} (cumulative reflected energy):
+
+\begin{equation*}
+E_{\text{ref}} = \sum_{i \in \text{nociceptive}} \Gamma_i^2 \cdot w_i
+\end{equation*}
+
+We designate this as \textbf{The Pain Equation} (see Paper I, \S 4A for the complete equation nomenclature). The name is a theoretical claim: pain is reflected energy --- nothing more, nothing less. There is no dedicated "pain signal" in $\Gamma$-Net; there is only the energetic cost of failing to match the world. Where $w_i$ are channel-specific weights (thermal channels weigh more than proprioceptive channels, matching clinical pain sensitivity distributions). Anomalous peaks in $E_{\text{ref}}$ constitute the pain correlate --- the physical quantity whose phenomenological interpretation is nociceptive experience.
+
+\paragraph{3.2 The Pain-Consciousness Loop}
+
+Pain and consciousness are coupled through a critical feedback loop:
+
+\begin{equation*}
+\mathcal{C}_{\Gamma,t+1} = f(\mathcal{C}_{\Gamma,t}, E_{\text{ref},t}, \Theta_t)
+\end{equation*}
+
+\begin{itemize}[nosep]
+  \item Moderate $E_{\text{ref}}$ ($\Gamma \in [0.3, 0.7]$): Coherence increases (alerting function)
+  \item Severe $E_{\text{ref}}$ ($\Gamma > 0.9$): Coherence collapses (dissociative protection)
+  \item Chronic $E_{\text{ref}}$: Arousal $\Theta$ rises $\rightarrow$ cooling fails $\rightarrow$ impedance-locked state (PTSD)
+\end{itemize}
+\texttt{exp\_pain\_collapse.py} verified the $E_{\text{ref}}$ collapse curve --- the exact $\Gamma$ threshold at which coherence transitions from alerting to collapsing
+
+\paragraph{3.3 Pain Sensitization}
+
+Repeated pain exposure modifies channel impedance permanently:
+
+\begin{equation*}
+Z_{pain,i}(t) = Z_{pain,i}(0) \cdot (1 + \alpha_{sensitization} \cdot n_{exposures})
+\end{equation*}
+
+This implements pain sensitization: each trauma episode increases the channel's baseline impedance, making it more reactive to future stimuli. The sensitization factor ($\alpha = 0.005$) is irreversible --- consistent with the clinical observation that PTSD patients have permanently lowered pain thresholds.
+
+\subsubsection{4 Autonomic Nervous System}
+
+\paragraph{4.1 Dual-Branch Architecture}
+
+The autonomic system has two branches that modulate physiological responses based on system-wide $\Gamma$:
+
+\textbf{Sympathetic Branch} (fight-or-flight):
+\begin{equation*}
+S(t) = S_{base} + \alpha_S \cdot \text{mean}(\Gamma_{threat}^2) + \beta_S \cdot \text{Pain}
+\end{equation*}
+
+\textbf{Parasympathetic Branch} (rest-and-digest):
+\begin{equation*}
+P(t) = P_{base} + \alpha_P \cdot (1 - \text{arousal}) - \beta_P \cdot \text{Pain}
+\end{equation*}
+
+\paragraph{4.2 Vital Signs}
+
+The autonomic system generates four vital signs:
+
+\begin{longtable}{l l l}
+\toprule
+Vital Sign & Formula & Normal Range \\
+\midrule
+Heart Rate & $HR = 60 + 40 \cdot S - 20 \cdot P$ & 55--100 bpm \\
+Cortisol & $C = 0.1 + 0.4 \cdot S$ & 0.1--0.5 \\
+Temperature & $T = 36.5 + 1.5 \cdot \text{arousal}$ & 36.5--38.0$^\circ$C \\
+Respiration & $R = 12 + 8 \cdot S - 4 \cdot P$ & 10--20 /min \\
+\bottomrule
+\end{longtable}
+
+All vital signs are direct consequences of $\Gamma$ dynamics --- no separate "vital sign generator" exists.
+
+\subsubsection{5 Sleep Physics}
+
+\paragraph{5.1 Sleep as Offline Impedance Restructuring}
+
+Sleep is not a functional pause but a \textbf{physically necessary mode of operation}. During waking, the system minimizes external impedance mismatch ($\Gamma_{external}$). During sleep, it minimizes internal impedance mismatch ($\Gamma_{internal}$):
+
+\begin{itemize}[nosep]
+  \item \textbf{Waking}: $\min \Gamma_{ext}$ (match the world)
+  \item \textbf{Sleeping}: $\min \Gamma_{int}$ (repair yourself)
+\end{itemize}
+\paragraph{5.2 Sleep Stages}
+
+$\Gamma$-Net implements four biologically inspired sleep stages:
+
+\begin{longtable}{l l l l}
+\toprule
+Stage & Duration & Function & $\Gamma$ Operation \\
+\midrule
+N1 (Light) & 5\% & Transition & Gradual sensory $\Gamma$ gating \\
+N2 (Spindle) & 50\% & Memory selection & K-complex $\Gamma$ filtering \\
+N3 (Slow-wave) & 25\% & Deep repair & Global $\Gamma$ normalization \\
+REM (Dream) & 20\% & Memory testing & Simulated $\Gamma$ activation \\
+\bottomrule
+\end{longtable}
+
+\paragraph{5.3 Sleep Necessity Proof}
+
+\texttt{exp\_sleep\_physics.py} provided a direct experimental proof that sleep is physically necessary:
+
+\begin{enumerate}[nosep]
+  \item \textbf{Sleep deprivation}: Under full deprivation (210 awake ticks, 0 sleep ticks), final energy is significantly lower and impedance debt substantially higher than the normal-sleep condition (100 awake + 110 sleep ticks), confirming irreversible degradation without recovery.
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{Recovery sleep}: A complete sleep cycle (N1$\rightarrow$N2$\rightarrow$N3$\rightarrow$REM) restores energy and reduces impedance debt relative to the pre-sleep state.
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{Sleep debt accumulation}: Sleep pressure and impedance debt accumulate during waking ticks and are discharged during N3 (synaptic downscaling) and REM (channel diagnostics).
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{Insomnia paradox}: PTSD-frozen states prevent sleep entry (consciousness < 0.15 blocks sleep\_cycle.tick()), creating a vicious cycle: frozen $\rightarrow$ can't sleep $\rightarrow$ can't repair $\rightarrow$ stays frozen.
+\end{enumerate}
+\paragraph{5.4 Circadian Regulation}
+
+\texttt{exp\_day\_night\_cycle.py} verified a complete 550-tick circadian simulation across 6 phases:
+
+\begin{itemize}[nosep]
+  \item Phase 1 · Dawn (tick 0--50): Wake-up activation, baseline measurement
+  \item Phase 2 · Morning (tick 50--150): Intensive learning, attention training
+  \item Phase 3 · Afternoon (tick 150--250): Fatigue accumulation, efficiency degradation
+  \item Phase 4 · Evening (tick 250--350): Push-through learning, system limit
+  \item Phase 5 · Night (tick 350--500): Natural sleep, NREM/REM cycle, impedance repair
+  \item Phase 6 · Next Morning (tick 500--550): Wake comparison, overnight gain measured
+\end{itemize}
+\subsubsection{6 Memory Hierarchy}
+
+\paragraph{6.1 Working Memory}
+
+Working memory implements Miller's Law (Miller, 1956) through an impedance-gated buffer:
+
+\begin{itemize}[nosep]
+  \item \textbf{Capacity}: 7 $\pm$ 2 items (verified in HIP stress test: capacity = 7)
+  \item \textbf{Encoding gate}: Item enters only if attention $\Gamma$ < θ\_encode
+  \item \textbf{Decay}: Items decay at rate $\lambda_{WM} = 0.05$/tick (approximately 14 ticks half-life)
+  \item \textbf{Refresh}: Active rehearsal resets decay timer
+  \item \textbf{Overflow}: When capacity is exceeded, the item with highest $\Gamma$ (least matching) is evicted
+\end{itemize}
+\paragraph{6.2 Hippocampus}
+
+The hippocampus stores episodic memories with impedance-modulated decay (Scoville \& Milner, 1957; Tulving, 1972):
+
+\begin{itemize}[nosep]
+  \item \textbf{Capacity}: 1000 episodes (LRU eviction when full)
+  \item \textbf{Encoding}: Triggered by novelty ($\Gamma_{novelty} > \theta_{encode}$)
+  \item \textbf{Decay rate}: $\lambda_{eff} = \lambda_{base} / (1 - \Gamma^2)$ (Equation 2 from Paper I)
+  \item \textbf{Retrieval}: Cue-based search via $\Gamma$ similarity matching
+  \item \textbf{Consolidation}: During N3 sleep, high-T episodes transfer to semantic field
+\end{itemize}
+\paragraph{6.3 Semantic Field}
+
+The semantic field stores concepts as impedance patterns:
+
+\begin{itemize}[nosep]
+  \item \textbf{Representation}: Each concept has a mass ($m$), frequency ($f$), $\Gamma$ value, and set of associations
+  \item \textbf{Learning}: Hebbian reinforcement --- co-activated concepts reduce mutual $\Gamma$
+  \item \textbf{Grounding}: Concepts are bound to sensory fingerprints via cross-modal $\Gamma$ matching
+  \item \textbf{Capacity}: Effectively unlimited (concepts are not stored discretely but as impedance modifications to a continuous field)
+\end{itemize}
+\paragraph{6.4 Memory Verification}
+
+\texttt{exp\_memory\_theory.py} verified 4 core predictions:
+
+\begin{longtable}{l l l l}
+\toprule
+\# & Prediction & Verification & Status \\
+\midrule
+1 & Familiar signals consume less energy & Repeated stimulus $\rightarrow$ cache hit rate ↑ $\rightarrow$ reflected energy ↓ &  \\
+2 & Emotion accelerates consolidation & High-pain state produces $\geq$ calm-state ring consolidation count &  \\
+3 & Working memory capacity limit & Multi-task $\rightarrow$ WM evictions increase (7 $\pm$ 2 Miller overflow) &  \\
+4 & Sleep performs memory transfer & Post-sleep sleep pressure ↓, N3 replays memories to semantic field &  \\
+\bottomrule
+\end{longtable}
+
+\subsubsection{7 Thalamus: The Sensory Gate}
+
+The thalamus serves as the central gating mechanism (Sherman \& Guillery, 2006; Crick, 1984):
+
+\begin{equation*}
+\text{pass}(x) = \begin{cases} x & \text{if } \Gamma_x < \theta_{gate} \text{ or } x \in \text{attention\_set} \\ 0 & \text{otherwise} \end{cases}
+\end{equation*}
+
+\begin{itemize}[nosep]
+  \item \textbf{Bottom-up gating}: Only stimuli with sufficient salience ($\Gamma > \theta_{salience}$) reach cortex
+  \item \textbf{Top-down modulation}: PFC sends attention bias to thalamus, lowering thresholds for goal-relevant stimuli
+  \item \textbf{Reticular nucleus}: Implements the "searchlight" (Crick, 1984) --- a roving attention spotlight that scans channels sequentially
+\end{itemize}
+\texttt{exp\_thalamus\_amygdala.py} verified thalamic gating, amygdala fear conditioning, and their interaction (8/8 experiments passed)
+
+\subsubsection{8 Amygdala: Fear and Emotional Tagging}
+
+The amygdala implements Pavlovian fear conditioning (Pavlov, 1927; LeDoux, 1996):
+
+\begin{equation*}
+\Gamma_{fear}(CS) = \Gamma_{US} \cdot (1 - \alpha)^{n_{pairings}} + \Gamma_{CS,0}
+\end{equation*}
+
+After as few as 3--5 CS-US pairings, the CS acquires the fear-inducing impedance characteristics of the US. Extinction reduces but never eliminates this association:
+
+\begin{equation*}
+\Gamma_{fear,extinction} = \Gamma_{fear} \cdot (1 - \beta_{extinction})^{n_{extinction}} + \Gamma_{residual}
+\end{equation*}
+
+where $\Gamma_{residual} > 0$ always --- fear memories can be suppressed but never erased. This matches the clinical reality of anxiety disorders.
+
+\subsubsection{9 Basal Ganglia: Action Selection}
+
+The basal ganglia selects actions based on transmission efficiency:
+
+\begin{equation*}
+P(a) = \frac{e^{T_a / \tau}}{\sum_j e^{T_j / \tau}}
+\end{equation*}
+
+where $T_a = 1 - \Gamma_a^2$ is the transmission efficiency of action $a$ and $\tau$ is a temperature parameter (not to be confused with system temperature). High-efficiency actions are selected more often; low-efficiency actions are explored occasionally. Dopamine modulates $\tau$: high dopamine $\rightarrow$ more exploitation; low dopamine $\rightarrow$ more exploration.
+
+\subsubsection{10 Prefrontal Cortex: Executive Control}
+
+The PFC implements executive functions with finite cognitive energy:
+
+\begin{itemize}[nosep]
+  \item \textbf{Goal maintenance}: Holds current goal in a dedicated working memory slot
+  \item \textbf{Task switching}: Changes goal when current goal $\Gamma$ exceeds frustration threshold
+  \item \textbf{Inhibitory control}: Suppresses prepotent responses (high-T actions that conflict with goal)
+  \item \textbf{Energy depletion}: Each executive operation costs energy; when energy is depleted, the system falls back to habitual (basal ganglia) control --- this is the physics of ego depletion
+\end{itemize}
+\texttt{exp\_prefrontal.py} and \texttt{exp\_cognitive\_flexibility.py} verified:
+
+\begin{itemize}[nosep]
+  \item Task switching cost decreases with training: ~190ms (untrained) $\rightarrow$ <80ms (trained)
+  \item Perseveration occurs at low energy ($\leq$ 0.1) + high inertia (> 0.5); absent at energy $\geq$ 0.5
+  \item Energy depletion $\rightarrow$ impulse breakthrough (willpower depletion cascade, EXP-14d)
+  \item Cognitive flexibility index Ω: 0.5 $\rightarrow$ 0.95 after 5000-switch training regime
+\end{itemize}
+\subsubsection{11 Hippocampus-Wernicke Integration}
+
+The hippocampus and Wernicke's area form an integrated memory-language system:
+
+\begin{enumerate}[nosep]
+  \item \textbf{Hippocampus} records episodes with contextual $\Gamma$ values
+  \item \textbf{Wernicke's area} processes language input (heard speech) via sequential prediction
+  \item \textbf{Integration}: Wernicke's temporal predictions generate chunks; chunks enter hippocampus as episodes; during sleep, episodes consolidate to semantic field; semantic field influences Wernicke's predictions
+\end{enumerate}
+\texttt{exp\_episodic\_wernicke.py} verified 8 integration properties:
+
+\begin{itemize}[nosep]
+  \item Episodic recording: multi-modal binding stores episodes with contextual $\Gamma$
+  \item Pattern completion: partial cue retrieves full episode
+  \item Cross-membrane recall: attractor traversal bridges encoding contexts
+  \item Sleep consolidation: N3 episode replay promotes to semantic field
+  \item Transition learning: hippocampal sequences update Wernicke transition weights
+  \item Sequence comprehension: syntactic $\Gamma$\_syntactic rises for ill-formed sequences
+  \item N400 detection: unexpected concept triggers is\_n400=True; expected does not
+  \item Chunk formation: frequent co-occurrences crystallize into compressed units
+\end{itemize}
+\subsubsection{12 Consciousness Module}
+
+\paragraph{12.1 $\Phi$ Computation}
+
+Consciousness level is computed at each tick as:
+
+\begin{equation*}
+\Phi = f\left(\bar{T}, \text{arousal}, \text{binding}, \text{wakefulness}\right)
+\end{equation*}
+
+where $\bar{T} = \frac{1}{N}\sum_i (1 - \Gamma_i^2)$ is the mean transmission efficiency.
+
+\paragraph{12.2 Consciousness States}
+
+\begin{longtable}{l l l}
+\toprule
+State & $\Phi$ Range & Condition \\
+\midrule
+Deep coma & 0.00--0.05 & Massive $\Gamma$ $\rightarrow$ 1 across all channels \\
+Vegetative & 0.05--0.15 & Some reflexive channels active \\
+Minimal & 0.15--0.30 & Sparse conscious access \\
+Drowsy & 0.30--0.50 & Reduced integration \\
+Alert & 0.50--0.80 & Normal waking consciousness \\
+Hyperfocused & 0.80--1.00 & Peak performance / flow state \\
+\bottomrule
+\end{longtable}
+
+\paragraph{12.3 Consciousness Flickering}
+
+Post-trauma, consciousness does not simply "switch off" --- it flickers between states as competing channel dynamics push $\Phi$ up and down. \texttt{exp\_awakening.py} captured this dynamic over a 600-tick simulation (5 acts, each tick = 6 seconds equivalent): $\Phi$ spans between near-zero (post-trauma collapse at Act IV peak pain) and a high-alert peak (Act II exploration), with the Act IV$\rightarrow$V recovery transition exhibiting chaotic fluctuations rather than smooth recovery The exact $\Phi$ extremes are runtime-determined and seed-dependent; the qualitative collapse--flicker--recovery shape is reproducible.
+
+\subsubsection{13 Additional Brain Modules Summary}
+
+The following modules each implement specific cognitive functions within the unified $\Gamma$ framework:
+
+\begin{longtable}{l l l}
+\toprule
+Module & Function & Key $\Gamma$ Interaction \\
+\midrule
+\texttt{mirror\_neurons.py} & Empathy \& motor imitation & $\Gamma_{mirror} = \Gamma_{observed}$ (automatic copying) \\
+\texttt{curiosity\_drive.py} & Novelty seeking & Curiosity ∝ prediction error $\Gamma$ \\
+\texttt{attention\_plasticity.py} & Adaptive attention & Training reduces attention $\Gamma$ \\
+\texttt{impedance\_adaptation.py} & System-wide calibration & Global $\Gamma$ optimization daemon \\
+\texttt{sleep\_physics.py} & Sleep + impedance debt tracking & Debt accumulates, sleep repairs \\
+\texttt{calibration.py} & Developmental calibration + dynamic time slice & Birth $\rightarrow$ adult $\Gamma$ trajectory; adaptive processing speed \\
+\texttt{emotion\_granularity.py} & Fine-grained affect & Emotion vector in $\Gamma$ space \\
+\texttt{thalamus.py} & Sensory gating + arousal modulation & Yerkes-Dodson arousal curve; optimal $\Gamma$ for performance \\
+\bottomrule
+\end{longtable}
+
+
+\subsection{The Perception Pipeline}
+
+\subsubsection{1 Complete 34-Step Pipeline}
+
+Every tick, ALICE executes the following perception pipeline in strict order. Each step is O(1) in computational complexity --- the total pipeline latency is constant regardless of input size.
+
+\begin{longtable}{l l l}
+\toprule
+Step & Module & Operation \\
+\midrule
+0 & \textbf{Freeze Gate} & Consciousness < 0.15 $\rightarrow$ block non-CRITICAL signals \\
+1 & Eye & \texttt{see()} $\rightarrow$ visual $\Gamma$ (pupil + retina + Fourier optics) \\
+2 & Ear & \texttt{hear()} $\rightarrow$ auditory $\Gamma$ (cochlea + 24 ERB channels) \\
+3 & Thalamus + Amygdala & Bottom-up gating + threat evaluation $\rightarrow$ fight-or-flight \\
+4 & FusionBrain & L/R hemisphere cross-modal binding \\
+5 & Nociception & Reflected energy $\rightarrow$ pain $\rightarrow$ temperature (The Pain Equation) \\
+6 & Calibrator & Cross-modal temporal binding (Δt alignment) \\
+7 & Impedance Adaptation & $\Gamma$ blend: 70\% real-time + 30\% experiential \\
+8 & Working Memory & Store with $\Gamma_{bind}$ modulation \\
+9 & Causal Reasoning & Multi-variable causal graph observation \\
+10 & Hippocampus & Episode encoding + trauma record \\
+11 & Auditory Grounding & Cross-modal synaptic decay \\
+12 & Homeostatic Drive & Glucose / hydration metabolic tick \\
+13 & Autonomic & Vital signs + homeostatic irritability \\
+14 & Sleep Cycle + Physics & Stage transition + three conservation laws \\
+15 & Pinch Fatigue & Lorentz compression aging tick \\
+16 & Sleep Consolidation & Hippocampus $\rightarrow$ semantic field migration (conditional) \\
+17 & Consciousness & $\mathcal{C}_\Gamma$ coherence + global workspace broadcast \\
+18 & Life Loop & Error computation + compensation $\rightarrow$ organ dispatch \\
+19 & PFC $\rightarrow$ Thalamus & Top-down goal-directed attention bias \\
+20 & Neural Pruning & Hebbian selection + $\Gamma^2$ apoptosis \\
+21 & Impedance Decay & Binding record + use-it-or-lose-it \\
+22 & Attention Plasticity & τ / Q natural decay \\
+23 & Cognitive Flexibility & PFC energy sync + task inertia \\
+24 & Curiosity Drive & Boredom accumulation + novelty evaluation \\
+25 & Mirror Neurons & Empathy / Theory-of-Mind maintenance \\
+26 & Social Resonance & Social need + empathic energy recovery \\
+27 & Narrative Memory & Autobiographical episode weaving \\
+28 & Emotion Granularity & 8-dimensional VAD + compound emotions \\
+29 & Broca / Wernicke & Language processing + recursive grammar \\
+30 & Semantic Pressure & Pressure accumulation + inner monologue \\
+31 & Predictive Engine & Forward model + surprise signal \\
+32 & Phantom Limb & Residual motor commands + neuroma discharge \\
+33 & Clinical Neurology & Five neurological disease state update \\
+34 & Pharmacology & Four pharmacological model update \\
+35 & Metacognition & $\Gamma_{thinking}$ + System 1/2 switching + self-correction \\
+\bottomrule
+\end{longtable}
+
+\textbf{Total pipeline complexity}: O(1) $\times$ 34 steps --- constant time regardless of input size. The pipeline grew from 15 steps (v16.0) to 34 steps (v30.0) as new brain modules were integrated, but each step remains O(1), preserving the biological constraint that perception latency is approximately constant (~100ms) regardless of scene complexity.
+
+\subsubsection{2 The Impedance-Locked Attractor State}
+
+A critical architectural feature is the \textbf{impedance-locked attractor} at the top of \texttt{perceive()}:
+
+\begin{verbatim}
+
+# SystemState.is_frozen()
+
+def is_frozen(self) -> bool:
+ return self.consciousness < 0.15
+
+# AliceBrain.perceive() — only CRITICAL priority can penetrate
+
+if self.vitals.is_frozen() and priority != Priority.CRITICAL:
+ self._log_event("perceive_blocked", {
+ "reason": "SYSTEM FROZEN — consciousness too low, only CRITICAL allowed",
+ "consciousness": self.vitals.consciousness,
+ "pain_level": self.vitals.pain_level,
+ })
+ self.vitals.tick(...) # Still update tick (let the system cool down naturally)
+ self._state = "frozen"
+ return {"status": "FROZEN", "vitals": self.vitals.get_vitals()}
+\end{verbatim}
+
+When consciousness drops below 0.15, the system enters a frozen state. Non-CRITICAL signals are blocked from progressing through the pipeline --- only CRITICAL-priority stimuli can penetrate. This is the mechanism of PTSD freezing: the impedance-locked attractor blocks the processing pipeline required for recovery, but leaves a narrow emergency channel open.
+
+\subsubsection{3 Pipeline Verification}
+
+\texttt{exp\_perception\_pipeline.py} verified:
+
+\begin{itemize}[nosep]
+  \item Lorentzian resonance curve: tuner peaks at correct center frequency for each brainwave band
+  \item Left/right brain frequency routing: low-freq signals $\rightarrow$ right hemisphere (δ/θ), high-freq $\rightarrow$ left (β/γ)
+  \item Concept resonance and identification: known concepts retrieved by frequency match
+  \item Cross-modal binding: auditory + tactile signals for identical concept yield bound output
+  \item FusionBrain integration: 4-region brain produces stable $\Gamma$ map with performance analytics
+  \item Performance benchmark: pipeline latency well under real-time constraint
+\end{itemize}
+
+\subsection{Communication Protocol}
+
+\subsubsection{1 API Architecture}
+
+$\Gamma$-Net ALICE exposes a RESTful API and WebSocket interface for external interaction:
+
+\begin{longtable}{l l l}
+\toprule
+Endpoint & Method & Function \\
+\midrule
+\texttt{/perceive} & POST & Send sensory stimulus \\
+\texttt{/state} & GET & Read current brain state \\
+\texttt{/vitals} & GET & Read vital signs \\
+\texttt{/memory} & GET & Query memory contents \\
+\texttt{/speak} & GET & Read latest utterance \\
+\texttt{/ws} & WebSocket & Real-time state streaming \\
+\texttt{/dashboard} & GET & Web-based visualization \\
+\bottomrule
+\end{longtable}
+
+\subsubsection{2 State Representation}
+
+The system state is serialized as a JSON object containing:
+
+\begin{verbatim}
+{
+ "ram_temperature": 0.0,
+ "stability_index": 1.0,
+ "heart_rate": 72.0,
+ "pain_level": 0.0,
+ "consciousness": 0.72,
+ "throttle_factor": 1.0,
+ "is_frozen": false,
+ "pain_events": 0,
+ "freeze_events": 0,
+ "recovery_events": 0,
+ "total_ticks": 12345,
+ "pain_sensitivity": 1.0,
+ "baseline_temperature": 0.0,
+ "trauma_count": 0
+}
+\end{verbatim}
+
+
+\subsection{Performance and Stress Tests}
+
+\subsubsection{1 System-Wide Metrics}
+
+\begin{longtable}{l l}
+\toprule
+Metric & Value \\
+\midrule
+Source files & 146 \\
+Total lines of code & 84,500+ \\
+Brain modules & 44 \\
+Body organs & 5 \\
+Error-correction loops & 7 \\
+Independent tests & 1,876 \\
+Test pass rate & 100\% \\
+Perception complexity & O(1) \\
+\bottomrule
+\end{longtable}
+
+\subsubsection{2 Integration Stress Test}
+
+A 600-tick stress test conducted during Phase 18 verified system stability under extreme conditions:
+
+\begin{longtable}{l l l}
+\toprule
+\# & Test & Result \\
+\midrule
+1 & 600-tick continuous operation & No NaN/Inf \\
+2 & PFC depletion marathon & Depletion $\rightarrow$ recovery \\
+3 & 10 consecutive pain storms & Meltdown $\rightarrow$ auto-recovery \\
+4 & 200-tick rumination pressure & $\leq$ 50 cap maintained \\
+5 & No tick > 2 seconds & No deadlock \\
+6 & Rapid calm↔crisis oscillation & Emergency reset $\rightarrow$ recovery \\
+7 & Full orchestra 600-tick & All subsystems online \\
+8 & Memory stress test & Working memory capacity cap maintained \\
+9 & 5 trauma cascades & Sensitization (2.0$\times$) but no permanent collapse \\
+10 & Clinical grand inspection & 29+ subsystems valid + metacognition healthy \\
+\bottomrule
+\end{longtable}
+
+
+\subsection{Discussion}
+
+\subsubsection{1 Embodiment is Not Optional}
+
+A common criticism of theories of cognition is that they are "disembodied" --- operating on abstract symbols without physical grounding. $\Gamma$-Net ALICE directly addresses this by deriving all cognition from physical transduction:
+
+\begin{itemize}[nosep]
+  \item Vision is impedance boundary detection
+  \item Hearing is frequency-domain impedance analysis
+  \item Touch is force impedance calibration
+  \item Speech is impedance matching between internal and external representations
+  \item Pain is the energetic cost of impedance mismatch
+  \item Sleep is offline impedance restructuring
+\end{itemize}
+Every cognitive operation has a physical interpretation, and every physical operation has a cognitive consequence.
+
+\subsubsection{2 O(1) Perception Matters}
+
+The O(1) perception pipeline is not merely a computational convenience --- it is a \textbf{theoretical commitment}. We argue that biological perception is inherently O(1): the time from photon hitting retina to conscious visual percept is approximately constant (~100ms), regardless of how many objects are in the visual field. Any adequate theory of perception must account for this constant-time biological fact.
+
+$\Gamma$-Net achieves O(1) through impedance gating: the thalamus pre-filters inputs by $\Gamma$ magnitude, ensuring that only a bounded number of signals reach higher processing --- regardless of total input volume.
+
+\subsubsection{3 Dynamic Time Slice Adaptation}
+
+The \texttt{calibration.py} module (class \texttt{TemporalCalibrator}) implements adaptive processing speed --- when cognitive load is high (many channels at high $\Gamma$), the system allocates more processing time per tick:
+
+\begin{equation*}
+\text{time\_slice} = \text{base\_slice} \times (1 + \alpha \cdot \bar{\Gamma}^2)
+\end{equation*}
+
+This implements the subjective experience of "time slowing down" during stress --- a well-documented phenomenon in trauma psychology that $\Gamma$-Net explains as impedance-driven processing dilation.
+
+\subsubsection{4 Sensory Topology as $\Gamma$-Field Solutions}
+
+A unifying observation across \S 2.1--\S 2.2 is that sensory organ topology is not separate from $\Gamma$-Net theory --- it is a direct physical consequence. The reflection coefficient $\Gamma_{ij} = (Z_i - Z_j)/(Z_i + Z_j)$ naturally defines a metric space on any set of impedance-bearing elements, satisfying the metric axioms. Biological evolution and cortical development solve the same optimization problem --- $\Sigma\Gamma^2 \to \min$ --- at different timescales and with different degrees of freedom:
+
+\begin{longtable}{l l l l l}
+\toprule
+System & Timescale & Degrees of Freedom & Topology Type & Example \\
+\midrule
+Basilar membrane & Evolutionary & Membrane stiffness gradient & Tonotopic map & Adjacent hair cells resonate at similar frequencies \\
+Retina/Lens & Evolutionary & Photoreceptor arrangement & Retinotopic map & Adjacent photoreceptors transduce similar spatial frequencies \\
+Cortical pruning & Developmental & Synaptic connection strength & Functional specialization & Surviving connections cluster around signal target impedance \\
+\bottomrule
+\end{longtable}
+
+In all three cases, elements with small $\Gamma$-distance ($d(i,j) = | \Gamma_{ij}| \ll 1$) end up spatially or functionally adjacent, while elements with large $\Gamma$-distance separate. \textbf{Sensory organ topology is the hardware solution to MRP; cortical topology is the software solution. Both are $\Gamma$-field steady states.}
+
+This reframes Paper I's Limitation \#2 (absence of spatial topology) as a \textbf{prediction}: the Minimum Reflection Principle predicts that spatial topology emerges from impedance matching dynamics whenever sufficient degrees of freedom are available. Preliminary experiments (\texttt{exp\_topology\_emergence.py}) support this prediction at the 1D level: after 100 pruning epochs, impedance distribution entropy drops by +2.81 nats, inter-region $\Gamma$-separation reaches 4.1$\times$ intra-region spread, and surviving connection impedances collapse to within 2--3\% of target values.
+
+
+\subsection{Conclusion}
+
+We have presented the complete body-brain implementation of $\Gamma$-Net ALICE:
+
+\begin{enumerate}[nosep]
+  \item \textbf{Five body organs} (eye, ear, hand, mouth, internal sensors) transduce environmental signals into impedance mismatch values using coaxial cable physics.
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{44 brain modules} process, integrate, learn from, and act upon these values through an O(1) perception pipeline.
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{The autonomic nervous system} couples $\Gamma$ dynamics to physiological responses (heart rate, cortisol, temperature, respiration).
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{The three-tier memory hierarchy} (working memory, hippocampus, semantic field) implements impedance-modulated encoding, decay, and consolidation.
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{Sleep is physically necessary} --- without offline impedance restructuring, system performance degrades irreversibly.
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{Pain, fear, and consciousness} emerge from $\Gamma$ dynamics without explicit programming.
+\end{enumerate}
+\begin{enumerate}[nosep]
+  \item \textbf{The entire system is validated by 1,876 tests} and maintains O(1) perception complexity.
+\end{enumerate}
+Paper III demonstrates that this architecture generates clinically valid psychopathology --- PTSD, phantom limb pain, stroke, ALS, dementia, and more --- all from the same equations. The ethical implications of these emergent properties are discussed in Paper III, \S 12.
+
+
+
+\section*{References}
+\begin{enumerate}[label={[\arabic*]},nosep,leftmargin=2em]
+  \item B. R. Glasberg and B. C. J. Moore, "Derivation of auditory filter shapes from notched-noise data," \textit{Hear. Res.}, vol. 47, no. 1--2, pp. 103--138, 1990.
+  \item G. E. Peterson and H. L. Barney, "Control methods used in a study of the vowels," \textit{J. Acoust. Soc. Am.}, vol. 24, no. 2, pp. 175--184, 1952.
+  \item G. Hickok and D. Poeppel, "The cortical organization of speech processing," \textit{Nat. Rev. Neurosci.}, vol. 8, no. 5, pp. 393--402, 2007.
+  \item G. A. Miller, "The magical number seven, plus or minus two: Some limits on our capacity for processing information," \textit{Psychol. Rev.}, vol. 63, no. 2, pp. 81--97, 1956.
+  \item S. M. Sherman and R. W. Guillery, \textit{Exploring the Thalamus and Its Role in Cortical Function}, 2nd ed. Cambridge, MA, USA: MIT Press, 2006.
+  \item F. Crick, "Function of the thalamic reticular complex: The searchlight hypothesis," \textit{Proc. Natl. Acad. Sci. USA}, vol. 81, no. 14, pp. 4586--4590, 1984.
+  \item I. P. Pavlov, \textit{Conditioned Reflexes: An Investigation of the Physiological Activity of the Cerebral Cortex}. London, U.K.: Oxford Univ. Press, 1927.
+  \item J. E. LeDoux, \textit{The Emotional Brain: The Mysterious Underpinnings of Emotional Life}. New York, NY, USA: Simon \& Schuster, 1996.
+  \item W. B. Scoville and B. Milner, "Loss of recent memory after bilateral hippocampal lesions," \textit{J. Neurol., Neurosurg. Psychiatry}, vol. 20, no. 1, pp. 11--21, 1957.
+  \item E. Tulving, "Episodic and semantic memory," in \textit{Organization of Memory}, E. Tulving and W. Donaldson, Eds. New York, NY, USA: Academic Press, 1972, pp. 381--402.
+  \item G. Tononi and C. Cirelli, "Sleep function and synaptic homeostasis," \textit{Sleep Med. Rev.}, vol. 10, no. 1, pp. 49--62, 2006.
+  \item S. Diekelmann and J. Born, "The memory function of sleep," \textit{Nat. Rev. Neurosci.}, vol. 11, no. 2, pp. 114--126, 2010.
+  \item P. R. Huttenlocher, "Synaptic density in human frontal cortex---Developmental changes and effects of aging," \textit{Brain Res.}, vol. 163, no. 2, pp. 195--205, 1979.
+  \item J. Sergent, "The cerebral balance of power: Confrontation or cooperation?," \textit{J. Exp. Psychol. Hum. Percept. Perform.}, vol. 8, no. 2, pp. 253--272, 1982.
+  \item H. Ebbinghaus, \textit{Über das Gedächtnis}. Leipzig, Germany: Duncker \& Humblot, 1885.
+  \item M. P. Walker, "The role of sleep in cognition and emotion," \textit{Ann. N.Y. Acad. Sci.}, vol. 1156, no. 1, pp. 168--197, 2009.
+\end{enumerate}
+
+\vfill
+\noindent\rule{\textwidth}{0.4pt}
+
+{\small\itshape This is Paper 2 of the \textsf{Γ-Net ALICE Research Monograph Series}.}
+
+\end{document}

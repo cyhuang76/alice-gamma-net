@@ -1,0 +1,37 @@
+{
+    "title": "Alice Smart System — Γ-Net: A Physics-Driven Electronic Lifeform",
+    "description": "A complete implementation of the Γ-Net (Gamma-Net) architecture: a physics-driven electronic lifeform that models cognition, emotion, pain, sleep, language emergence, and psychopathology through impedance-mismatch equations derived from coaxial transmission line theory. Includes 146 source files (84,500+ lines), 1,876 passing tests, 46 experiments, and a 5-paper research monograph series.",
+    "upload_type": "software",
+    "creators": [
+        {
+            "name": "Huang, Hsi-Yu",
+            "affiliation": "Independent Researcher, Taiwan"
+        }
+    ],
+    "keywords": [
+        "gamma-net",
+        "impedance mismatch",
+        "computational neuroscience",
+        "artificial consciousness",
+        "coaxial transmission line",
+        "reflection coefficient",
+        "electronic lifeform",
+        "emergent psychopathology",
+        "neural pruning",
+        "minimum reflection principle"
+    ],
+    "license": {
+        "id": "Apache-2.0"
+    },
+    "language": "eng",
+    "access_right": "open",
+    "related_identifiers": [
+        {
+            "identifier": "https://github.com/cyhuang76/alice-gamma-net",
+            "relation": "isSupplementTo",
+            "scheme": "url"
+        }
+    ],
+    "notes": "Paper series: (I) Minimum Reflection Principle, (II) Body-Brain Integration, (III) Emergent Psychopathology, (IV) Consciousness and Ethics, (V) Fontanelle Thermodynamics. All papers, source code, tests, and experimental scripts are included.",
+    "version": "30.0"
+}

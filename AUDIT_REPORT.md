@@ -187,29 +187,46 @@ ear.hear(audio)
   → perceive()
 ```
 
-### 3.3 `perceive()` Data Flow (21 steps, verified complete)
+### 3.3 `perceive()` Data Flow (34 steps, verified complete)
 
 ```
-Freeze check → physics penalty (overheating delay)
-  → FusionBrain.process_stimulus()
-  → vitals tick (THE PAIN LOOP)
-  → calibrator.receive_and_bind() → cross-modal temporal binding
-  → impedance_adaptation Γ blend (70% real-time + 30% experiential)   ← new
-  → working_memory store (with binding_gamma)
-  → causal_reasoning.observe()
-  → pain event → trauma memory (autonomic + hand protective reflex)
-  → auditory_grounding.tick()
-  → autonomic.tick()
-  → sleep_cycle.tick() + sleep_physics
-  → consciousness.tick()
-  → closed-loop integration (THE LIFE LOOP)
-  → _dispatch_commands() → body organ execution               ← fixed
-  → _stimulate_pruning() → Hebbian selection                   ← fixed
-  → impedance_adaptation.decay_tick()                          ← new
-  → attention_plasticity.decay_tick()                          ← new
-  → cognitive_flexibility.sync_pfc_energy() + tick()           ← new
-  → curiosity_drive.tick()                                     ← new
-  → mirror_neurons.tick()                                      ← new
+[0]  Freeze check → physics penalty (overheating delay)
+[1]  FusionBrain.process_stimulus()
+[2]  vitals tick (THE PAIN LOOP — reflected energy → pain)
+[3]  calibrator.receive_and_bind() → cross-modal temporal binding
+[4]  impedance_adaptation Γ blend (70% real-time + 30% experiential)
+[5]  working_memory store (with binding_gamma)
+[6]  causal_reasoning.observe()
+[7]  pain event → trauma memory (autonomic + hand protective reflex)
+[8]  auditory_grounding.tick()
+[9]  homeostatic_drive.tick() → glucose/hydration                   ← Phase 22
+[10] autonomic.tick() (+ homeostatic irritability)
+[11] sleep_cycle.tick() + sleep_physics (three conservation laws)
+[12] pinch_fatigue.tick() → Lorentz compression aging               ← Phase 23
+[13] sleep consolidation → hippocampus → semantic field (conditional)
+[14] consciousness.tick() → Φ + global workspace broadcast
+[15] closed-loop integration (THE LIFE LOOP)
+     → autonomic → pupil → eye
+     → PFC → thalamus top-down attention                           ← Phase 21
+     → life_loop.tick() → error + compensation
+     → _dispatch_commands() → body organ execution                 ← fixed
+[16] _stimulate_pruning() → Hebbian selection                       ← fixed
+[17] impedance_adaptation.record_binding_attempt() + decay_tick()
+[18] attention_plasticity.decay_tick()
+[19] cognitive_flexibility.sync_pfc_energy() + tick()
+[20] curiosity_drive.tick()
+[21] mirror_neurons.tick()
+[22] social_resonance.tick()                                        ← Phase 19
+[23] narrative_memory.tick()                                        ← Phase 20
+[24] emotion_granularity.tick() → 8-dim VAD                        ← Phase 36
+[25] recursive_grammar.tick()                                       ← Phase 20
+[26] semantic_pressure.tick() → inner monologue                     ← Phase 21
+[27] predictive_engine.tick() → forward model + surprise            ← Phase 17
+[28] phantom_limb.tick()                                            ← Phase 24
+[29] clinical_neurology.tick() → five diseases                      ← Phase 25
+[30] pharmacology.tick() → four drug models                         ← Phase 26
+[31] metacognition.tick() → Γ_thinking + System 1/2                 ← Phase 18
+[32] metacognition physical execution → throttle + self-correction
 ```
 
 ### 3.4 `say()` Data Flow (verified complete)
