@@ -138,27 +138,32 @@ Alice is not a traditional AI. She is an **electronic lifeform** — built with 
 ## Core Closed-Loop: Life Loop
 
 ```text
-     Perception           Error Estimation       Compensation         Execution
-  ┌─────────┐         ┌──────────────┐      ┌──────────┐      ┌──────────┐
-  │ Eye see │──┐      │ Cross-modal  │      │ PID ctrl │      │ Hand rch │
-  │ Ear hear│──┤──→   │ comparison   │──→   │ Motor cmd│──→   │ Eye turn │
-  │ Hand tch│──┤      │ Reflection   │      │ Feedfwd  │      │ Mouth say│
-  │ Mouth sp│──┘      │ measurement  │      │ predict  │      │          │
-       ↑               │ Time calib.  │      └──────────┘      └──────────┘
-       │               └──────────────┘                             │
-       └──────────── Proprioceptive feedback ←──────────────────────┘
-
-  7 Error Types (all dispatched to body organs for execution):
-  ├── VISUAL_MOTOR      — Seen vs hand position → hand.reach()
-  ├── AUDITORY_VISUAL   — Heard vs seen direction → head turn (deferred)
-  ├── AUDITORY_VOCAL    — Target pitch vs actual → mouth.speak()
-  ├── PROPRIOCEPTIVE    — Target position vs actual → fine-tune
-  ├── TEMPORAL          — Event timing offset → temporal calibration
-  ├── INTEROCEPTIVE     — Homeostatic deviation → autonomic regulation
-  └── SENSORY_PREDICTION — Predicted vs actual → consciousness.focus_attention()
+  Perception        Error Estimation      Compensation        Execution
+  ┌─────────┐      ┌──────────────┐      ┌──────────┐      ┌──────────┐
+  │ Eye see │──┐   │ Cross-modal  │      │ PID ctrl │      │ Hand rch │
+  │ Ear hear│──┤──→│ comparison   │──→   │ Motor cmd│──→   │ Eye turn │
+  │ Hand tch│──┤   │ Reflection   │      │ Feedfwd  │      │ Mouth say│
+  │ Mouth sp│──┘   │ measurement  │      │ predict  │      │          │
+       ↑           │ Time calib.  │      └──────────┘      └──────────┘
+       │           └──────────────┘                             │
+       └──────────── Proprioceptive feedback ←──────────────────┘
 ```
 
-**Core Insight**: Turning, reaching, speaking — all human behavior is fundamentally "calibration error compensation."
+### 7 Error Types
+
+All dispatched to body organs for execution:
+
+| Error Type | Mismatch | Action |
+|:---|:---|:---|
+| VISUAL_MOTOR | Seen vs hand position | `hand.reach()` |
+| AUDITORY_VISUAL | Heard vs seen direction | Head turn (deferred) |
+| AUDITORY_VOCAL | Target pitch vs actual | `mouth.speak()` |
+| PROPRIOCEPTIVE | Target position vs actual | Fine-tune |
+| TEMPORAL | Event timing offset | Temporal calibration |
+| INTEROCEPTIVE | Homeostatic deviation | Autonomic regulation |
+| SENSORY_PREDICTION | Predicted vs actual | `consciousness.focus_attention()` |
+
+> **Core Insight**: Turning, reaching, speaking — all human behavior is fundamentally "calibration error compensation."
 
 ---
 
