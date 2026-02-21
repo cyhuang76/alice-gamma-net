@@ -14,9 +14,10 @@ Endpoints:
   POST /api/think           : Think/reason
   POST /api/act             : Action selection
   POST /api/learn           : Learning feedback
-  POST /api/inject-pain     : ★ Manually inject pain
-  POST /api/emergency-reset : ★ Emergency reset
-  POST /api/broadcast-storm : ★ Broadcast storm attack
+  POST /api/stabilize       : ★ Stabilize system (gentle homeostatic reset)
+  POST /api/time-scale      : ★ Time accelerator (adjust tick multiplier)
+  POST /api/dream-input     : ★ Dream input (inject language during REM)
+  POST /api/administer-drug : ★ Pharmacology (administer drug by name)
   GET  /api/introspect      : Full introspection report
   GET  /api/working-memory  : Working memory contents
   GET  /api/causal-graph    : Causal graph
@@ -150,42 +151,120 @@ def create_app(alice: Optional[AliceBrain] = None) -> Any:
     async def waveforms(last_n: int = 60):
         return alice.get_waveforms(last_n)
 
-    @app.post("/api/inject-pain")
-    async def inject_pain(intensity: float = 0.5):
-        alice.inject_pain(intensity)
-        result = alice.get_vitals()
-        await broadcast({"event": "pain_injected", "data": result})
-        return result
-
-    @app.post("/api/emergency-reset")
-    async def emergency_reset():
+    @app.post("/api/stabilize")
+    async def stabilize():
+        """Gentle homeostatic stabilization — gradually return vitals toward baseline."""
         alice.emergency_reset()
         result = alice.get_vitals()
-        await broadcast({"event": "emergency_reset", "data": result})
+        await broadcast({"event": "stabilize", "data": result})
         return result
 
-    @app.post("/api/broadcast-storm")
-    async def broadcast_storm(count: int = 50, intensity: float = 3.0):
-        """Broadcast storm: mass-inject CRITICAL packets → observe pain collapse"""
+    @app.post("/api/time-scale")
+    async def time_scale(multiplier: float = 1.0, ticks: int = 100):
+        """Time accelerator — run N ticks at accelerated pace.
+
+        Args:
+            multiplier: Display label only (physics is tick-based, so 1× or 100× use the same equations).
+            ticks: Number of ticks to advance (max 10000).
+        """
+        ticks = min(ticks, 10000)
         results = []
-        for i in range(count):
-            signal = np.random.randn(20) * intensity
-            result = alice.perceive(signal, Modality.TACTILE, Priority.CRITICAL, f"storm_{i}")
-            results.append({
-                "i": i,
-                "pain": result.get("vitals", {}).get("pain_level", 0),
-                "temp": result.get("vitals", {}).get("ram_temperature", 0),
-                "consciousness": result.get("vitals", {}).get("consciousness", 1),
-                "frozen": result.get("status") == "FROZEN",
-            })
-            if result.get("status") == "FROZEN":
-                break
-        await broadcast({"event": "broadcast_storm", "data": {"packets_sent": len(results), "final_vitals": alice.get_vitals()}})
+        for i in range(ticks):
+            # Run a quiet perceive cycle (internal tick)
+            r = alice.perceive(np.zeros(10), Modality.INTERNAL, Priority.BACKGROUND, "time_accel")
+            if i % max(1, ticks // 10) == 0:
+                results.append({
+                    "tick": i,
+                    "vitals": {k: round(v, 4) if isinstance(v, float) else v
+                               for k, v in alice.get_vitals().items()},
+                })
+        final = alice.get_vitals()
+        await broadcast({"event": "time_scale", "data": {"ticks": ticks, "multiplier": multiplier, "final_vitals": final}})
         return {
-            "packets_sent": len(results),
-            "final_vitals": alice.get_vitals(),
+            "ticks_advanced": ticks,
+            "multiplier_label": f"{multiplier}×",
+            "final_vitals": final,
             "trajectory": results,
         }
+
+    @app.post("/api/dream-input")
+    async def dream_input(text: str = "mama", language: str = "proto"):
+        """Inject language stimulus during REM sleep for language acquisition verification.
+
+        If Alice is not sleeping, this gently nudges sleep pressure up first.
+        The stimulus is delivered as an auditory signal during REM phase.
+        """
+        is_sleeping = alice.sleep_cycle.is_sleeping()
+        # Encode text as simple frequency pattern
+        encoded = np.array([float(ord(c)) / 127.0 for c in text[:50]], dtype=np.float64)
+        if not is_sleeping:
+            # Nudge toward sleep so the dream can be received
+            alice.sleep_cycle.sleep_pressure = max(alice.sleep_cycle.sleep_pressure, 0.75)
+
+        result = alice.perceive(encoded, Modality.AUDITORY, Priority.BACKGROUND, f"dream_{language}")
+        output = {
+            "text": text,
+            "language": language,
+            "was_sleeping": is_sleeping,
+            "signal_length": len(encoded),
+            "vitals": alice.get_vitals(),
+        }
+        await broadcast({"event": "dream_input", "data": output})
+        return output
+
+    @app.post("/api/administer-drug")
+    async def administer_drug(drug_name: str = "SSRI", alpha: Optional[float] = None):
+        """Administer a drug via the pharmacology engine.
+
+        Predefined drugs: L-DOPA, Valproate, Carbamazepine, SSRI.
+        Or specify custom alpha for research.
+        """
+        from alice.brain.pharmacology import DrugProfile, ALL_CHANNELS
+
+        DRUG_PRESETS = {
+            "L-DOPA": DrugProfile(name="L-DOPA", alpha=-0.35,
+                target_channels=["basal_ganglia", "motor", "prefrontal"],
+                onset_delay=10, half_life=200),
+            "Valproate": DrugProfile(name="Valproate", alpha=-0.25,
+                target_channels=["temporal", "hippocampus", "thalamus"],
+                onset_delay=30, half_life=400),
+            "Carbamazepine": DrugProfile(name="Carbamazepine", alpha=-0.20,
+                target_channels=["temporal", "hippocampus"],
+                onset_delay=20, half_life=350),
+            "SSRI": DrugProfile(name="SSRI", alpha=-0.20,
+                target_channels=["amygdala", "prefrontal", "hippocampus", "insular"],
+                onset_delay=300, half_life=600),
+        }
+
+        drug_key = drug_name.upper().replace("-", "_").replace(" ", "_")
+        # Try preset match
+        preset = None
+        for k, v in DRUG_PRESETS.items():
+            if k.upper().replace("-", "_") == drug_key:
+                preset = v
+                break
+
+        if preset:
+            drug = preset
+        else:
+            # Custom drug with user-specified alpha
+            _alpha = alpha if alpha is not None else -0.15
+            drug = DrugProfile(name=drug_name, alpha=_alpha,
+                target_channels=list(ALL_CHANNELS)[:5],
+                onset_delay=10, half_life=300)
+
+        alice.pharmacology.administer(drug)
+        output = {
+            "drug": drug.name,
+            "alpha": drug.alpha,
+            "targets": drug.target_channels,
+            "onset_delay": drug.onset_delay,
+            "half_life": drug.half_life,
+            "active_drugs": len(alice.pharmacology.active_drugs),
+            "vitals": alice.get_vitals(),
+        }
+        await broadcast({"event": "administer_drug", "data": output})
+        return output
 
     @app.post("/api/perceive")
     async def perceive(req: PerceiveRequest):
@@ -530,8 +609,8 @@ def _get_dashboard_html() -> str:
     <div class="freeze-overlay" id="freeze-overlay">
         <div class="freeze-text">SYSTEM FREEZE</div>
         <div class="freeze-sub">Consciousness below threshold — only CRITICAL signals can penetrate</div>
-        <button class="btn heal" onclick="emergencyReset()" style="margin-top:16px;font-size:14px;padding:10px 20px;">
-            EMERGENCY RESET
+        <button class="btn heal" onclick="stabilize()" style="margin-top:16px;font-size:14px;padding:10px 20px;">
+            STABILIZE
         </button>
     </div>
 
@@ -584,10 +663,10 @@ def _get_dashboard_html() -> str:
                     <button class="btn" onclick="sendAct()">Act</button>
                 </div>
                 <div class="btn-row">
-                    <button class="btn danger" onclick="injectPain(0.8)">Pain</button>
-                    <button class="btn storm" onclick="broadcastStorm(30)">Storm×30</button>
-                    <button class="btn storm" onclick="broadcastStorm(100)">Storm×100</button>
-                    <button class="btn heal" onclick="emergencyReset()">Reset</button>
+                    <button class="btn heal" onclick="stabilize()">Stabilize</button>
+                    <button class="btn" onclick="timeScale(100)">Accel×100</button>
+                    <button class="btn" onclick="dreamInput()">Dream</button>
+                    <button class="btn" onclick="administerDrug()">Drug</button>
                 </div>
                 <div class="vitals-mini" style="margin-top:4px;">
                     <div class="vm-row">
@@ -662,20 +741,29 @@ async function sendStimulus(priority, intensity) {
     }
     refresh();
 }
-async function broadcastStorm(count) {
-    log('warn', 'Storm x'+count+'...');
-    const d = await api('/api/broadcast-storm?count='+count+'&intensity=3.0', {method:'POST'});
-    if (d) log('pain', 'Storm: '+d.packets_sent+' pkts, pain='+(d.final_vitals?.pain_level?.toFixed(3)));
+async function stabilize() {
+    await api('/api/stabilize', {method:'POST'});
+    log('ok', 'Stabilized');
     refresh();
 }
-async function injectPain(intensity) {
-    await api('/api/inject-pain?intensity='+intensity, {method:'POST'});
-    log('pain', 'Pain injected ('+intensity+')');
+async function timeScale(ticks) {
+    log('info', 'Time accelerating ×'+ticks+'...');
+    const d = await api('/api/time-scale?multiplier='+ticks+'&ticks='+ticks, {method:'POST'});
+    if (d) log('ok', 'Advanced '+d.ticks_advanced+' ticks');
     refresh();
 }
-async function emergencyReset() {
-    await api('/api/emergency-reset', {method:'POST'});
-    log('ok', 'EMERGENCY RESET');
+async function dreamInput() {
+    const text = prompt('Dream language input:', 'mama');
+    if (!text) return;
+    const d = await api('/api/dream-input?text='+encodeURIComponent(text), {method:'POST'});
+    if (d) log('info', 'Dream: "'+d.text+'" (sleeping='+d.was_sleeping+')');
+    refresh();
+}
+async function administerDrug() {
+    const name = prompt('Drug name (L-DOPA / Valproate / Carbamazepine / SSRI):', 'SSRI');
+    if (!name) return;
+    const d = await api('/api/administer-drug?drug_name='+encodeURIComponent(name), {method:'POST'});
+    if (d) log('ok', 'Administered: '+d.drug+' (α='+d.alpha+')');
     refresh();
 }
 async function sendThink() {
@@ -1155,9 +1243,10 @@ function connectWS() {
         ws = new WebSocket(proto+'//'+location.host+'/ws/stream');
         ws.onmessage = (e) => {
             const d = JSON.parse(e.data);
-            if (d.event==='pain_injected') log('pain','Pain injected');
-            else if (d.event==='emergency_reset') log('ok','Reset');
-            else if (d.event==='broadcast_storm') log('pain','Storm: '+d.data?.packets_sent+' pkts');
+            if (d.event==='stabilize') log('ok','Stabilized');
+            else if (d.event==='time_scale') log('ok','Time: +'+d.data?.ticks+' ticks');
+            else if (d.event==='dream_input') log('info','Dream: "'+d.data?.text+'"');
+            else if (d.event==='administer_drug') log('ok','Drug: '+d.data?.drug);
             else if (d.event) log('info','Event: '+d.event);
             refresh();
         };
