@@ -2,7 +2,7 @@
 
 Physics-Driven Electronic Lifeform Based on Γ-Net Architecture
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18718844.svg)](https://doi.org/10.5281/zenodo.18718844)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18720107.svg)](https://doi.org/10.5281/zenodo.18720107)
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-1876%20passed-brightgreen.svg)]()
 
@@ -617,7 +617,7 @@ If you use this software or reference the Γ-Net architecture, please cite:
   year         = 2026,
   version      = {30.0},
   publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.18718844},
+  doi          = {10.5281/zenodo.18720107},
   url          = {https://github.com/cyhuang76/alice-gamma-net}
 }
 ```
