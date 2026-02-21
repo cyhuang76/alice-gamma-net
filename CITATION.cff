@@ -11,6 +11,7 @@ repository-code: "https://github.com/cyhuang76/alice-gamma-net"
 license: Apache-2.0
 version: "30.0"
 date-released: "2026-02-21"
+doi: 10.5281/zenodo.18718762
 keywords:
   - gamma-net
   - impedance mismatch
