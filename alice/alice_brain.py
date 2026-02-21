@@ -44,7 +44,7 @@ from alice.brain.prefrontal import PrefrontalCortexEngine
 from alice.brain.basal_ganglia import BasalGangliaEngine
 from alice.brain.attention_plasticity import AttentionPlasticityEngine
 from alice.brain.cognitive_flexibility import CognitiveFlexibilityEngine
-from alice.brain.curiosity_drive import CuriosityDriveEngine
+from alice.brain.curiosity_drive import CuriosityDriveEngine, SpontaneousActionType
 from alice.brain.mirror_neurons import MirrorNeuronEngine
 from alice.brain.impedance_adaptation import ImpedanceAdaptationEngine
 from alice.brain.predictive_engine import PredictiveEngine
@@ -957,6 +957,17 @@ class AliceBrain:
                 self.vitals.ram_temperature + homeostatic_signal.pain_contribution * 0.05,
             )
 
+        # ★ Homeostatic closed-loop: hunger/thirst → eat/drink → Γ → 0
+        #    When drive exceeds threshold, hypothalamus triggers consummatory behavior.
+        #    This closes the loop:  glucose↓ → hunger_drive↑ → eat() → digestion_buffer → glucose↑ → hunger_drive↓
+        #    Without this, hunger/thirst accumulate infinitely (open-loop failure).
+        #    Biological analogy: lateral hypothalamus "feeding center" activation threshold.
+        if not self.sleep_cycle.is_sleeping():
+            if homeostatic_signal.needs_food:
+                self.homeostatic_drive.eat()
+            if homeostatic_signal.needs_water:
+                self.homeostatic_drive.drink()
+
         # ★ Autonomic update (add homeostatic irritability → negative emotion)
         _emotional_valence = brain_result["emotional"]["emotional_valence"]
         _emotional_valence -= homeostatic_signal.irritability  # Hunger biases emotion negative
@@ -1176,6 +1187,55 @@ class AliceBrain:
             energy=self.autonomic.energy,
             is_sleeping=self.sleep_cycle.is_sleeping(),
         )
+
+        # 11b. ★ Spontaneous action dispatch — close the curiosity→body loop
+        #    CuriosityDrive produces spontaneous actions; AliceBrain dispatches them
+        #    to the appropriate body organ so the loop actually closes:
+        #      Boredom↑ → spontaneous action → body execution → sensory feedback → novelty → Boredom↓
+        _spont = curiosity_result.get("spontaneous_action")
+        if _spont is not None:
+            _s_type = _spont["type"]
+            _s_intensity = _spont["intensity"]
+            try:
+                if _s_type == SpontaneousActionType.BABBLE.value:
+                    # Babble → vocalize at a random pitch proportional to intensity
+                    _babble_pitch = 200.0 + _s_intensity * 300.0  # 200~500 Hz range
+                    self.mouth.speak(
+                        target_pitch=_babble_pitch,
+                        volume=float(np.clip(_s_intensity * 0.6, 0.1, 0.8)),
+                        ram_temperature=self.vitals.ram_temperature,
+                    )
+                elif _s_type == SpontaneousActionType.EXPLORE_VISUAL.value:
+                    # Visual exploration → shift pupil aperture (curiosity widens eyes)
+                    _curiosity_pupil = 0.4 + _s_intensity * 0.4  # 0.4~0.8
+                    self.eye.adjust_pupil(_curiosity_pupil)
+                elif _s_type == SpontaneousActionType.EXPLORE_MOTOR.value:
+                    # Motor exploration → reach toward a random target
+                    _explore_x = self.hand.x + (_s_intensity - 0.5) * 100.0
+                    _explore_y = self.hand.y + (_s_intensity - 0.5) * 100.0
+                    self.hand.reach(
+                        target_x=_explore_x,
+                        target_y=_explore_y,
+                        ram_temperature=self.vitals.ram_temperature,
+                        max_steps=20,
+                    )
+                elif _s_type == SpontaneousActionType.SEEK_NOVELTY.value:
+                    # Seek novelty → focus attention on external stimuli
+                    self.consciousness.focus_attention(
+                        target="novelty_seeking",
+                        modality="cross_modal",
+                        salience=_s_intensity,
+                    )
+                elif _s_type == SpontaneousActionType.SELF_EXAMINE.value:
+                    # Self-examination → focus attention inward
+                    self.consciousness.focus_attention(
+                        target="self_examination",
+                        modality="interoceptive",
+                        salience=_s_intensity,
+                    )
+                # IDLE_DREAM → pure internal process, no body dispatch needed
+            except Exception:
+                pass  # Body dispatch failure is non-fatal
 
         # 12. ★ Mirror neurons — update each tick
         #    Empathy decay + social bond maintenance + maturation update
