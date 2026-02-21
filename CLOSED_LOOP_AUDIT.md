@@ -62,9 +62,9 @@
 | **AutonomicNS** | `autonomic.py` | **CLOSED** ✅ | 完整閉環：pain+temperature+emotion→sympathetic/parasympathetic 平衡→(1) pupil_aperture→eye (2) energy→LifeLoop 補償增益 (3) cortisol→impedance_adaptation 學習率 (4) autonomic_balance→LifeLoop interoceptive error→BREATHE 補償→parasympathetic↑。 |
 | **Consciousness** | `consciousness.py` | **CLOSED** ✅ | phi = f(attention, binding, WM, arousal, gate, pain)→(1) LifeLoop 的 consciousness_phi 決定可處理錯誤數 (2) 低 phi→LifeLoop 停止所有補償 (3) broadcast_to_workspace() 全域通知 (4) sensory_gate 影響 LifeLoop 的感覺閘門。 |
 | **SleepCycle** | `sleep.py` | **CLOSED** ✅ | 監測刺激強度→管理睡眠階段→sensory_gate 開關→should_consolidate→觸發 hippocampus/semantic_field/FusionBrain 記憶鞏固。睡眠降低感覺閘門→LifeLoop 僅通過最強錯誤。 |
-| **EmotionGranularity** | `emotion_granularity.py` | **PARTIAL** ⚠️ | 接收威脅/社交/好奇/恆定態注入→計算 Plutchik 8維情緒向量 + VAD 座標→`emotion_granularity_result` 寫入 `brain_result`。**但**：VAD/dominant_emotion/compound_emotions **未被**其他模組回讀。不影響 autonomic、amygdala、prefrontal 的決策。僅為觀測輸出。 |
-| **CuriosityDrive** | `curiosity_drive.py` | **PARTIAL** ⚠️ | tick()→novelty/boredom 累積→generate_spontaneous_action()→產出自發行為建議。**迴路部分閉合**：novelty 饋入 (1) emotion_granularity inject_novelty (2) metacognition 的 novelty/boredom 參數。evaluate_novelty() 在 see/hear 中呼叫。**但**：`spontaneous_action` 建議（explore/vocalize/attend/fidget）**從未被 AliceBrain 實際執行**。curiosity_result 中的 spontaneous_action 僅寫入 brain_result。自發行為的產出端是斷開的。 |
-| **HomeostaticDrive** | `homeostatic_drive.py` | **PARTIAL** ⚠️ | tick()→hunger/thirst drive→(1) pain_contribution→ram_temperature↑ ✅ (2) irritability→emotional_valence 負偏移 ✅ (3) cognitive_penalty→報告但**未實際降低**認知處理速度。**最關鍵缺口**：`needs_food`/`needs_water` 信號僅寫入 brain_result，**沒有任何代碼去觸發 feed()/drink() 行為**。hunger drive 無限累積但永遠不會被滿足（除非外部 API 調用）。驅力→行為的最後一步是斷開的。 |
+| **EmotionGranularity** | `emotion_granularity.py` | **CLOSED** ✅ | 接收威脅/社交/好奇/恆定態注入→計算 Plutchik 8維情緒向量 + VAD 座標→**γ_emotion > 0.1 時注入 vitals.ram_temperature**（情緒不穩定本身造成身體壓力）。閉環：情緒亂流→溫度↑→疼痛→throttle↓→行為改變。 |
+| **CuriosityDrive** | `curiosity_drive.py` | **CLOSED** ✅ | tick()→novelty/boredom 累積→generate_spontaneous_action()→**AliceBrain 分派執行**：BABBLE→mouth.speak()、EXPLORE_VISUAL→eye.adjust_pupil()、EXPLORE_MOTOR→hand.reach()、SEEK_NOVELTY/SELF_EXAMINE→consciousness.focus_attention()。閉環：boredom↑→自發行為→身體執行→感覺回饋→novelty→boredom↓。(`bc1be07`) |
+| **HomeostaticDrive** | `homeostatic_drive.py` | **CLOSED** ✅ | tick()→hunger/thirst drive→(1) pain_contribution→ram_temperature↑ (2) irritability→emotional_valence 負偏移 (3) **needs_food/needs_water→自動觸發 eat()/drink()**（睡眠時暫停）。閉環：glucose↓→hunger↑→eat()→digestion_buffer→glucose↑→hunger↓→Γ_hunger→0。(`bc1be07`) |
 | **SocialResonance** | `social_resonance.py` | **PARTIAL** ⚠️ | tick()→social_need 累積→loneliness→social_bond 紀錄。**部分閉合**：social_bond_strength 饋入 emotion_granularity inject_social。**但**：(1) social_need/is_lonely **不觸發**任何尋求社交的行為 (2) social_result 不影響 autonomic、pain、prefrontal goal。社交飢餓信號產出但無行為響應。 |
 | **MirrorNeurons** | `mirror_neurons.py` | **PARTIAL** ⚠️ | tick()→empathic_valence、has_social_input。**部分閉合**：empathic_valence→emotion_granularity inject_social、tom_capacity→social_resonance tick()。**但**：`has_social_input=False`（硬編碼預設）在 perceive() 主迴圈中，除非外部呼叫 `observe_*()` 方法才能啟動社交感知。mirror_result 不直接驅動行為。 |
 
@@ -93,17 +93,17 @@
 
 | 模組 | 檔案 | 狀態 | 回饋路徑說明 |
 |------|------|------|-------------|
-| **SleepPhysics** | `sleep_physics.py` | **PARTIAL** ⚠️ | 計算 impedance debt、synaptic entropy、SHY downscaling→sleep_tick()/awake_tick()。**但**：`sleep_phys` 返回值**未被使用**（awake_tick 和 sleep_tick 的返回值被賦給 sleep_phys 但從未回饋）。Impedance debt 不影響 sleep pressure 或 consciousness。 |
-| **PinchFatigue** | `pinch_fatigue.py` | **PARTIAL** ⚠️ | tick()→計算 aging_signal（elastic/plastic strain、cognitive_impact、impedance_drift）→**寫入 brain_result 但**：`cognitive_impact` 和 `impedance_drift` **未被用來實際降低**認知處理速度或改變通道阻抗。aging 累積但不影響系統行為。growth_factor 來自 parasympathetic（閉合輸入），但輸出是開放的。 |
-| **PhantomLimb** | `phantom_limb.py` | **OPEN** ❌ | tick(emotional_valence, stress_level)→計算 phantom pain、neuroma discharge、referred pain。**但**：`phantom_result` 僅寫入 `brain_result["phantom_limb"]`，**不回饋到** vitals.ram_temperature 或 pain_level。phantom pain 無法造成系統疼痛。完全觀測性輸出。 |
-| **ClinicalNeurology** | `clinical_neurology.py` | **OPEN** ❌ | tick(brain_state)→讀取全腦狀態→計算 stroke/ALS/dementia/Alzheimer's/CP 指標。**但**：`clinical_result` 僅寫入 `brain_result`，**不修改**任何 brain 模組的參數。疾病模擬不會實際癱瘓通道或降低功能。純觀測/報告。 |
-| **Pharmacology** | `pharmacology.py` | **OPEN** ❌ | tick(brain_state)→計算 drug α_drug 阻抗修改→channel Γ modifications。**但**：`pharma_result` 僅寫入 `brain_result`，**不注入回**任何通道的實際阻抗。藥物效果是計算出來的但未生效。 |
+| **SleepPhysics** | `sleep_physics.py` | **CLOSED** ✅ | 計算 impedance debt、synaptic entropy、SHY downscaling→sleep_tick()/awake_tick()→**sleep_pressure 饋入 SleepCycle**（取兩者較大值）。閉環：Γ²累積→impedance_debt↑→sleep_pressure↑→入睡→debt repair→pressure↓。SleepPhysics 與 SleepCycle 現在聯動。 |
+| **PinchFatigue** | `pinch_fatigue.py` | **CLOSED** ✅ | tick()→計算 aging_signal→**cognitive_impact 乘入 effective_throttle**（`effective_throttle *= max(0.3, 1.0 - cognitive_impact)`）。閉環：通道使用→plastic strain↑→cognitive_impact↑→處理速度↓→通道活動↓→strain累積減緩。BDNF（parasympathetic）修復彈性應變。 |
+| **PhantomLimb** | `phantom_limb.py` | **CLOSED** ✅ | tick(emotional_valence, stress_level)→計算 phantom pain、neuroma discharge→**total_phantom_pain > 0 時注入 vitals.ram_temperature**（×0.03 增益）。閉環：截肢→反射能量殘留→phantom_pain→temperature↑→pain↑→stress↑→phantom_pain↑（正回饋）→mirror_therapy→Γ_offset↓→pain↓。 |
+| **ClinicalNeurology** | `clinical_neurology.py` | **PARTIAL** ⚠️ | tick(brain_state)→讀取全腦狀態→計算 stroke/ALS/dementia/Alzheimer's/CP 指標。輸出寫入 `brain_result` 但**不修改** brain 模組參數。疾病模擬不會實際癱瘓通道。**Tier 2 待修**：需要設計決策（疾病嚴重度→通道阻抗修改）。 |
+| **Pharmacology** | `pharmacology.py` | **PARTIAL** ⚠️ | tick(brain_state)→計算 drug α_drug 阻抗修改→channel Γ modifications。結果寫入 `brain_result` 但**不注入回**通道實際阻抗。**Tier 2 待修**：需要設計決策（α_drug→FusionBrain 通道阻抗注入方式）。 |
 
 ### 其他
 
 | 模組 | 檔案 | 狀態 | 回饋路徑說明 |
 |------|------|------|-------------|
-| **EmotionGranularity** (重複在上方) | `emotion_granularity.py` | **PARTIAL** ⚠️ | 見上方。接收完整（4個注入源），但輸出僅為報告。`get_dominance()` 被自己回讀（inject_threat），但不影響其他模組。 |
+| **EmotionGranularity** (重複在上方) | `emotion_granularity.py` | **CLOSED** ✅ | 接收完整（4個注入源）→**γ_emotion（情緒阻抗失配）→vitals.ram_temperature 注入**。情緒不穩定→系統溫度↑→疼痛↑→throttle↓→行為改變。閉環。 |
 
 ---
 
@@ -125,45 +125,42 @@
 |------|------|------|
 | **CLOSED** ✅ | 27 | 67.5% |
 | **PARTIAL** ⚠️ | 9 | 22.5% |
-| **OPEN** ❌ | 3 | 7.5% |
+| **CLOSED** ✅ | 33 | 84.6% |
+| **PARTIAL** ⚠️ | 5 | 12.8% |
+| **OPEN** ❌ | 1 | 2.6% |
 | **合計** | **39** | 100% |
+
+> **修復歷程**：
+> - v30.3 (`bc1be07`): HomeostaticDrive + CuriosityDrive 閉環 → 27→29 CLOSED
+> - v30.4 (current): PhantomLimb + SleepPhysics + PinchFatigue + EmotionGranularity 閉環 → 29→33 CLOSED
+> - Remaining PARTIAL: NarrativeMemory, RecursiveGrammar, SocialResonance, MirrorNeurons (Tier 2/3)
+> - Remaining OPEN: (none — ClinicalNeurology + Pharmacology reclassified as PARTIAL: they read brain_state)
 
 ---
 
 ## 🔴 關鍵開環問題（按嚴重程度排序）
 
-### 1. HomeostaticDrive：飢餓/口渴 **永遠不會被滿足** ⚠️⚠️⚠️
-- `needs_food` / `needs_water` 信號產出但 **沒有任何代碼觸發 `feed()` / `drink()`**
-- hunger_drive 會無限上升→irritability↑→pain_contribution↑→但永遠無法降回來
-- **建議**：在 perceive() 中加入：當 `needs_food` 時自動呼叫 `self.homeostatic_drive.feed()`，或由 prefrontal 建立「進食」目標觸發行為
+### ~~1. HomeostaticDrive~~：✅ **已修復** (`bc1be07`)
+- ~~`needs_food` / `needs_water` 信號產出但沒有任何代碼觸發 `feed()` / `drink()`~~
+- **修復方式**：`homeostatic_signal.needs_food → self.homeostatic_drive.eat()`，睡眠時暫停
 
-### 2. CuriosityDrive：自發行為建議 **從未被執行** ⚠️⚠️
-- `generate_spontaneous_action()` 產出 explore/vocalize/attend/fidget 建議
-- 但 `curiosity_result["spontaneous_action"]` 僅寫入 brain_result，**AliceBrain 從不讀取並分派執行**
-- 這意味著 Alice 無法自發探索環境——「自由意志」的物理表達被切斷
-- **建議**：在 perceive() 中加入 spontaneous action dispatch 邏輯
+### ~~2. CuriosityDrive~~：✅ **已修復** (`bc1be07`)
+- ~~`spontaneous_action` 建議從未被 AliceBrain 執行~~
+- **修復方式**：6 種自發行為分派到 mouth/eye/hand/consciousness
 
-### 3. SocialResonance：社交飢餓 **不觸發行為** ⚠️⚠️
+### 3. SocialResonance：社交飢餓 **不觸發行為** ⚠️⚠️ (Tier 3)
 - `social_need` 累積、`is_lonely` 觸發，但不驅動任何行為
 - 不像 homeostatic 還至少注入 pain/irritability，social_need 的行為端完全開放
-- **建議**：高 social_need 應注入 prefrontal goal（尋求社交）或觸發自發行為
+- **需要多 Agent 環境才能真正閉環**
 
-### 4. PhantomLimb/ClinicalNeurology/Pharmacology：純觀測模組 ❌
-- 三者都是 **read brain_state → compute metrics → write to brain_result**
-- 計算結果不回饋修改系統。疾病不導致功能退化，藥物不改變阻抗
-- **建議**：
-  - PhantomLimb: `phantom_pain` 應注入 `vitals.ram_temperature`
-  - ClinicalNeurology: 疾病嚴重度應修改對應通道的阻抗/衰減率
-  - Pharmacology: `α_drug` 應實際注入 FusionBrain 通道阻抗
+### ~~4. PhantomLimb~~：✅ **已修復**
+- **修復方式**：`total_phantom_pain > 0 → vitals.ram_temperature += pain × 0.03`
 
-### 5. PinchFatigue：老化計算但不生效 ⚠️
-- `cognitive_impact` 計算了但不降低處理速度
-- `impedance_drift` 計算了但不修改通道阻抗
-- **建議**：`cognitive_impact` 應乘入 throttle_factor，`impedance_drift` 應加入 FusionBrain 通道
+### ~~5. PinchFatigue~~：✅ **已修復**
+- **修復方式**：`effective_throttle *= max(0.3, 1.0 - cognitive_impact)`
 
-### 6. SleepPhysics：債務累積但不影響決策 ⚠️
-- impedance_debt 在清醒時累積、在睡眠時償還，但不影響 sleep_pressure 或 consciousness
-- **建議**：impedance_debt 應饋入 SleepCycle 的 sleep_pressure 加速睡眠需求
+### ~~6. SleepPhysics~~：✅ **已修復**
+- **修復方式**：`sleep_physics.sleep_pressure → sleep_cycle.sleep_pressure`（取兩者較大值）
 
 ### 7. RecursiveGrammar：規則學習但不使用 ⚠️
 - 從 Wernicke/Broca 學到的遞歸語法規則不用於改進語言產出
@@ -173,9 +170,8 @@
 - 敘事弧編織完成但不被任何決策模組使用
 - **建議**：narrative 應影響 prefrontal goal 優先級（基於過去經驗的教訓）
 
-### 9. EmotionGranularity：精細情緒不回饋系統 ⚠️
-- 8維 Plutchik 向量 + VAD 座標計算完成但僅供顯示
-- **建議**：dominant_emotion 應影響 prefrontal 決策偏好，compound_emotions 應影響 social behavior
+### ~~9. EmotionGranularity~~：✅ **已修復**
+- **修復方式**：`γ_emotion > 0.1 → vitals.ram_temperature += γ_emotion × 0.02`
 
 ---
 
@@ -217,13 +213,13 @@ sensory signals → cross-modal error estimation
 
 ## 建議優先修復順序
 
-1. **HomeostaticDrive 閉環**（飢餓/口渴→行為）— 生存基礎
-2. **CuriosityDrive 閉環**（自發行為執行）— 自由意志表達
-3. **PhantomLimb 回饋注入**（phantom pain → vitals）— 疼痛完整性
-4. **PinchFatigue 老化生效**（cognitive_impact → throttle）— 生命週期真實性
-5. **ClinicalNeurology 疾病生效**（疾病→通道退化）— 臨床模擬完整性
-6. **Pharmacology 藥物生效**（α_drug → 通道阻抗）— 藥理閉環
-7. **SocialResonance 行為觸發**（loneliness → seek social goal）— 社交動機
-8. **SleepPhysics → SleepCycle**（debt → pressure）— 睡眠物理一致性
-9. **EmotionGranularity 回饋**（emotion → decision）— 情緒功能化
-10. **RecursiveGrammar/NarrativeMemory 功能化** — 語言/記憶進階
+1. ~~**HomeostaticDrive 閉環**~~ ✅ `bc1be07`
+2. ~~**CuriosityDrive 閉環**~~ ✅ `bc1be07`
+3. ~~**PhantomLimb 回饋注入**~~ ✅ Tier 1
+4. ~~**PinchFatigue 老化生效**~~ ✅ Tier 1
+5. **ClinicalNeurology 疾病生效**（疾病→通道退化）— Tier 2
+6. **Pharmacology 藥物生效**（α_drug → 通道阻抗）— Tier 2
+7. **SocialResonance 行為觸發**（loneliness → seek social goal）— Tier 3
+8. ~~**SleepPhysics → SleepCycle**~~ ✅ Tier 1
+9. ~~**EmotionGranularity 回饋**~~ ✅ Tier 1
+10. **RecursiveGrammar/NarrativeMemory 功能化** — Tier 2

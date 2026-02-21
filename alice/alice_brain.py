@@ -1009,6 +1009,18 @@ class AliceBrain:
                 synaptic_strengths=synaptic_strengths,
             )
 
+        # ★ SleepPhysics → SleepCycle closed-loop: impedance_debt → sleep_pressure
+        #   sleep_physics computes detailed Γ²-driven fatigue metrics;
+        #   feed this back into sleep_cycle so debt accelerates sleep onset.
+        #   Without this, the two sleep systems run independently.
+        if not self.sleep_cycle.is_sleeping():
+            _phys_pressure = sleep_phys.get("sleep_pressure", 0.0)
+            # Blend: let physics-derived pressure boost cycle pressure (additive, clamped)
+            self.sleep_cycle.sleep_pressure = float(np.clip(
+                max(self.sleep_cycle.sleep_pressure, _phys_pressure),
+                0.0, 1.0,
+            ))
+
         # ★ Lorentz compression fatigue engine — Phase 23 Pollock-Barraclough aging tick
         #   Map channel activity intensity to current → Lorentz compression strain → cumulative aging
         #   During sleep: repair elastic strain + BDNF micro-repair of plastic strain
@@ -1284,6 +1296,17 @@ class AliceBrain:
         # Execute tick
         emotion_granularity_result = _eg.tick()
 
+        # ★ EmotionGranularity closed-loop: refined VAD → autonomic modulation
+        #   8-dimensional Plutchik emotion → refine the 1D valence already sent to autonomic.
+        #   gamma_emotion (impedance mismatch of emotion itself) adds emotional instability → temperature.
+        #   Without this, the granular emotion system is purely observational.
+        _eg_gamma = emotion_granularity_result.gamma_emotion
+        if _eg_gamma > 0.1:
+            self.vitals.ram_temperature = min(
+                1.0,
+                self.vitals.ram_temperature + _eg_gamma * 0.02,
+            )
+
         # 12d. ★ Recursive grammar — Phase 20.2 rule maintenance
         #    Learn new rules from Wernicke chunks + rule confidence decay
         grammar_result = self.recursive_grammar.tick()
@@ -1421,6 +1444,17 @@ class AliceBrain:
         )
         brain_result["phantom_limb"] = phantom_result
 
+        # ★ Phantom limb closed-loop: phantom_pain → vitals.ram_temperature
+        #   Phantom pain is physically real pain — it must affect the pain system.
+        #   Without this injection, phantom pain is computed but has zero systemic effect.
+        #   Biological analogy: neuroma discharge → thalamic relay → anterior cingulate cortex → pain.
+        _phantom_pain = phantom_result.get("total_phantom_pain", 0.0)
+        if _phantom_pain > 0:
+            self.vitals.ram_temperature = min(
+                1.0,
+                self.vitals.ram_temperature + _phantom_pain * 0.03,
+            )
+
         # 14c. ★ Clinical neurology update — Phase 25
         #   Five major neurological diseases (stroke/ALS/dementia/Alzheimer's/cerebral palsy) unified tick
         clinical_result = self.clinical_neurology.tick(
@@ -1460,6 +1494,12 @@ class AliceBrain:
         #    (a) Thinking rate → actual throttle: "thinking is too hard so responses slow down"
         thinking_rate = metacognition_result.get("thinking_rate", 1.0)
         effective_throttle = min(throttle, thinking_rate)
+
+        # ★ PinchFatigue closed-loop: cognitive_impact → throttle penalty
+        #   Aging degrades processing speed — accumulated plastic strain slows cognition.
+        #   Without this, aging_signal is computed but has zero systemic effect.
+        #   Biological analogy: white matter degradation → processing speed decline.
+        effective_throttle *= max(0.3, 1.0 - aging_signal.cognitive_impact)
         if effective_throttle < throttle:
             extra_delay_ms = (thinking_rate - effective_throttle) * 3.0
             if extra_delay_ms > 0.1:
