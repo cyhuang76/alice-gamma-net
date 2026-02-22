@@ -8,50 +8,59 @@ exp_dream_language.py — Dream Language Genesis Experiment
 Core Hypothesis:
   Language does not originate in communication — it originates in dreams.
   During REM sleep, PGO waves randomly traverse neural channels.
-  If visual/auditory stimuli are presented during REM (like mirror therapy
-  provides visual feedback to a phantom limb), the sensory signals change
-  the impedance landscape of language-related channels.
+  External sensory stimulation does NOT enter the sleeping brain.
+  Instead, the stimulus changes the TERMINAL IMPEDANCE at the sensory
+  boundary — exactly as mirror therapy changes Z_load at a phantom limb.
 
-  Mirror therapy analogy:
+  Non-invasive impedance modulation (replaces invasive signal injection):
     Phantom limb: Z_load = ∞ (open circuit) → Γ = 1.0 → pain
     Mirror: visual_feedback → Z_load approaches Z_normal → Γ decreases
 
     Language channels: Z_load = undefined (no experience) → high Γ
-    Dream video: sensory input during REM → Z_load acquires structure → Γ decreases
+    Dream video: changes Z_terminus at retina/cochlea → Γ landscape shifts
+    Brain's own PGO waves reflect off modified terminus → dream content
 
-  Key insight: We do NOT inject language. We provide raw sensory stimulation
-  (video = pixels, audio = waveforms) during REM sleep. The existing
-  perception pipeline (eye → semantic field → Wernicke → hippocampus)
-  processes these signals normally. What emerges — if anything — is the
-  system's own discovery.
+  Key insight: We do NOT inject signals into the sleeping brain.
+  This explicitly rejects the invasive-chip approach (Neuralink-style
+  direct neural writing). Instead, we change BOUNDARY CONDITIONS
+  at the sensory terminus. The brain's own PGO waves do the rest.
+
+  The three faces of the same equation:
+    Pruning:      birth Z_random → Hebbian Γ screening → specialisation
+    Phantom limb: amputation Z_∞ → mirror Z_match → therapy
+    Dream:        fatigue D_imp → video Z_terminus → PGO reflection → content
+
+  All driven by: E_reflected = E_signal × Γ²
 
 Experimental Design:
-  Two Alice instances (Alice-α, Alice-β) each watch a DIFFERENT "video"
-  during REM sleep across multiple sleep cycles:
+  Two Alice instances (Alice-α, Alice-β) sleep with a DIFFERENT "video"
+  playing near them during REM:
 
-  Video A: Repeating visual pattern + vowel /a/ at 2Hz
-  Video B: Different visual pattern + vowel /i/ at 3Hz
+  Video A: spatial freq=5 Hz, vowel /a/, rhythm 2Hz
+  Video B: spatial freq=30 Hz, vowel /i/, rhythm 3Hz
 
-  Each video is a structured but meaningless sensory stream:
-  - Visual: sinusoidal pixel patterns at specific spatial frequencies
-  - Auditory: vowel sounds at specific temporal rhythms
+  The video does NOT enter through brain.see() / brain.hear().
+  Instead, the video's properties modulate the terminal impedance
+  of the sensory channels that PGO probes encounter:
+  - Visual channels: Z_terminus shaped by spatial frequency
+  - Auditory channels: Z_terminus shaped by vowel formants
+  - Rhythm: temporal modulation of impedance landscape
 
   After N dream cycles, let the two Alices communicate via the
   Social Resonance Engine's bidirectional coupling.
 
   Measurement:
-  1. Do semantic field attractors form from dream content?
-  2. Do Wernicke transition matrices develop non-uniform structure?
-  3. When Alice-α and Alice-β communicate, do their semantic pressures
-     change? Do they develop shared or divergent symbol systems?
-  4. Does inner monologue reference dream-formed concepts?
+  1. Do PGO probe reflections show structured Γ patterns?
+  2. Do semantic field attractors form from impedance fingerprints?
+  3. When Alice-α and Alice-β communicate, does Γ_social decrease?
+  4. Does inner monologue reference dream-formed patterns?
 
   "We don't teach her to speak. We let her dream,
    and observe whether she invents words."
 
 Design Principles (Paper II §1.1 compliance):
-  1. Physics first: Video → eye.see() / ear.hear() → existing Γ pipeline
-  2. O(1) perception: Stimuli processed within standard perceive() tick
+  1. Physics first: Video → Z_terminus modulation → PGO reflection (NOT injection)
+  2. O(1) perception: Impedance modulation is O(1) per channel
   3. Emergence: NO language is programmed. We observe what forms.
 
 Run: python -m experiments.exp_dream_language
@@ -87,7 +96,7 @@ N_NIGHTS = 3                # Number of nights of dream incubation
 
 # REM dream video parameters
 REM_TICKS_PER_CYCLE = 22    # ~20% of 110 ticks = REM window
-VIDEO_INJECT_INTERVAL = 2   # Inject stimuli every 2 ticks during REM
+IMPEDANCE_MOD_INTERVAL = 2  # Modulate Z_terminus every 2 ticks during REM
 
 # Communication phase
 COMM_ROUNDS = 20            # Rounds of bidirectional coupling
@@ -105,6 +114,36 @@ VIDEO_B_RHYTHM_HZ = 3.0
 # Print control
 PRINT_INTERVAL = 20
 
+# ============================================================
+# Non-invasive impedance modulation constants
+# (Rejects invasive chip approach — mirror therapy principle)
+# ============================================================
+
+Z_BASE = 75.0                        # Characteristic impedance (Ω)
+IMPEDANCE_MOD_DEPTH = 0.4            # Max Z_load modulation fraction
+SPATIAL_FREQ_BOUNDARY = 15.0         # Visual channel split point (Hz)
+
+# Vowel formant centres (Hz) — from acoustic phonetics
+VOWEL_FORMANTS: Dict[str, Tuple[float, float]] = {
+    "a": (700.0, 1220.0),     # /a/ F1≈700, F2≈1220
+    "i": (280.0, 2500.0),     # /i/ F1≈280, F2≈2500
+    "u": (310.0, 870.0),      # /u/ F1≈310, F2≈870
+}
+
+# Auditory channel frequency bands
+FORMANT_BAND_F1 = (200.0, 1500.0)
+FORMANT_BAND_F2 = (1500.0, 4000.0)
+
+# Named channels — each is a coaxial terminus in the sensory pathway
+DREAM_CHANNEL_NAMES = [
+    "visual_low",       # Low spatial frequency (retinal wide-field cells)
+    "visual_high",      # High spatial frequency (retinal detail cells)
+    "auditory_f1",      # First formant band (cochlear low)
+    "auditory_f2",      # Second formant band (cochlear high)
+    "somatosensory",    # Body sense (unmodulated reference)
+    "motor",            # Motor efference (unmodulated reference)
+]
+
 
 # ============================================================
 # Data structures
@@ -117,7 +156,7 @@ class DreamRecord:
     cycle: int
     video_label: str
     ticks_in_rem: int = 0
-    stimuli_presented: int = 0
+    stimuli_presented: int = 0         # Back-compat: counts Z_terminus modulations
     concepts_recognized: List[str] = field(default_factory=list)
     gammas: List[float] = field(default_factory=list)
     wernicke_observations: int = 0
@@ -127,6 +166,9 @@ class DreamRecord:
     amp_multipliers: List[float] = field(default_factory=list)
     peak_fatigue: float = 0.0
     peak_amp_multiplier: float = 1.0
+    # Non-invasive impedance modulation (替代入侵式晶片)
+    modulations_applied: int = 0       # Z_terminus modulation events
+    modulated_gammas: List[float] = field(default_factory=list)  # Γ at modulated channels
 
 
 @dataclass
@@ -154,7 +196,7 @@ class CommunicationRecord:
 
 
 # ============================================================
-# Video generators
+# Video generators (stimulus models — NOT injected into brain)
 # ============================================================
 
 def generate_video_frame(
@@ -164,6 +206,11 @@ def generate_video_frame(
 ) -> np.ndarray:
     """
     Generate a single video frame as a 1D pixel array.
+
+    NOTE: This models the PHYSICAL stimulus in the environment.
+    The stimulus is NOT fed to brain.see() (that would be invasive-chip
+    injection). Instead, the stimulus properties are used by
+    video_to_impedance_modulation() to compute Z_terminus changes.
 
     Physics: a sinusoidal luminance pattern at a specific spatial frequency.
     Different spatial frequencies → different visual Γ fingerprints.
@@ -184,6 +231,11 @@ def generate_audio_frame(
     """
     Generate audio for one tick, following rhythmic pattern.
 
+    NOTE: This models the PHYSICAL audio in the environment.
+    The audio is NOT fed to brain.hear() (that would be invasive-chip
+    injection). Instead, the vowel/rhythm properties are used by
+    video_to_impedance_modulation() to compute Z_terminus changes.
+
     Only produces sound at rhythm onset ticks (simulating rhythmic speech).
     Returns None for silent ticks.
     """
@@ -192,6 +244,97 @@ def generate_audio_frame(
     if frame_idx % period_ticks == 0:
         return generate_vowel(vowel, fundamental=150.0, duration=tick_duration)
     return None
+
+
+# ============================================================
+# Non-invasive impedance modulation (the mirror therapy principle)
+# ============================================================
+
+def video_to_impedance_modulation(
+    spatial_freq: float,
+    vowel: str,
+    rhythm_hz: float,
+    frame_idx: int,
+    rng: np.random.RandomState,
+) -> List[Tuple[str, float, float]]:
+    """
+    Convert video parameters to terminal impedance modulation.
+
+    NON-INVASIVE — this rejects the invasive-chip paradigm.
+
+    The video sits at the sensory terminus (retina / cochlea), changing
+    the boundary impedance that PGO probes encounter during REM.
+    The brain does NOT receive the video as input.
+    The brain's OWN PGO waves reflect off the modified terminus.
+
+    This is identical to mirror therapy (Ramachandran 1996):
+      Mirror: visual feedback → Z_load at phantom limb changes → Γ↓ → pain↓
+      Video:  sensory pattern → Z_terminus at retina/cochlea changes → Γ pattern
+
+    Same equation: Γ = (Z_load - Z_src) / (Z_load + Z_src)
+    Same as pruning: matching connections survive, mismatched are pruned.
+    Same as fatigue: D_imp drives PGO amplitude for probing.
+
+    Args:
+        spatial_freq: Visual spatial frequency of the video
+        vowel: Vowel sound in the video (/a/, /i/, /u/)
+        rhythm_hz: Temporal rhythm of the video
+        frame_idx: Current frame index (temporal phase)
+        rng: Random state for natural variation
+
+    Returns:
+        List of (channel_name, Z_source, Z_load) tuples
+        Modulated channels have Z_load closer to Z_src (lower Γ)
+        Unmodulated channels have random Z_load (reference noise)
+    """
+    formants = VOWEL_FORMANTS.get(vowel, VOWEL_FORMANTS["a"])
+    f1, f2 = formants
+
+    # Temporal phase from rhythm — sinusoidal impedance modulation
+    phase = np.sin(2 * np.pi * rhythm_hz * frame_idx * 0.01)
+    temporal_mod = 0.5 + 0.5 * phase  # [0, 1]
+
+    channels: List[Tuple[str, float, float]] = []
+
+    for name in DREAM_CHANNEL_NAMES:
+        z_src = Z_BASE + rng.randn() * 5.0          # Natural source variation
+        z_load_base = Z_BASE + rng.randn() * 20.0   # Random terminus
+
+        # Compute match strength: how well this channel resonates
+        match = 0.0
+
+        if name == "visual_low" and spatial_freq < SPATIAL_FREQ_BOUNDARY:
+            # Low-freq video matches low visual channel
+            centre = SPATIAL_FREQ_BOUNDARY / 2.0
+            match = max(0.0, 1.0 - abs(spatial_freq - centre) / centre)
+
+        elif name == "visual_high" and spatial_freq >= SPATIAL_FREQ_BOUNDARY:
+            # High-freq video matches high visual channel
+            centre = (SPATIAL_FREQ_BOUNDARY + 60.0) / 2.0
+            half = (60.0 - SPATIAL_FREQ_BOUNDARY) / 2.0
+            match = max(0.0, 1.0 - abs(spatial_freq - centre) / half)
+
+        elif name == "auditory_f1":
+            lo, hi = FORMANT_BAND_F1
+            if lo <= f1 <= hi:
+                centre = (lo + hi) / 2.0
+                match = max(0.0, 1.0 - abs(f1 - centre) / ((hi - lo) / 2.0))
+
+        elif name == "auditory_f2":
+            lo, hi = FORMANT_BAND_F2
+            if lo <= f2 <= hi:
+                centre = (lo + hi) / 2.0
+                match = max(0.0, 1.0 - abs(f2 - centre) / ((hi - lo) / 2.0))
+
+        # somatosensory, motor: match = 0 (no video modulation → reference)
+
+        # Apply modulation: push Z_load toward Z_src (reducing Γ)
+        modulation = match * temporal_mod * IMPEDANCE_MOD_DEPTH
+        z_load = z_load_base + modulation * (z_src - z_load_base)
+
+        channels.append((name, max(10.0, z_src), max(10.0, z_load)))
+
+    return channels
 
 
 # ============================================================
@@ -297,7 +440,7 @@ def wake_phase(brain: AliceBrain, ticks: int, rng: np.random.RandomState,
 
 
 # ============================================================
-# Phase 2: Dream incubation — REM video injection
+# Phase 2: Dream incubation — non-invasive impedance modulation
 # ============================================================
 
 def dream_incubation_night(
@@ -311,21 +454,31 @@ def dream_incubation_night(
     verbose: bool = False,
 ) -> List[DreamRecord]:
     """
-    One night of dream incubation: multiple sleep cycles,
-    with sensory stimulation during REM windows.
+    One night of dream incubation via NON-INVASIVE impedance modulation.
 
-    Mirror therapy analogy:
-      Mirror therapy tick: visual_feedback = {limb_name: quality}
-        → _apply_mirror_therapy() → Z_load approaches Z_normal → Γ decreases
+    ═══════════════════════════════════════════════════════════════
+    DESIGN PRINCIPLE: Reject the invasive-chip paradigm.
+    ═══════════════════════════════════════════════════════════════
 
-      Dream incubation tick: brain.see(video_frame) + brain.hear(audio_frame)
-        → eye/ear transduction → semantic field → Wernicke → hippocampus
-        → impedance landscape changes naturally
+    We do NOT call brain.see() or brain.hear() during sleep.
+    That would be injecting signals into the perception pipeline —
+    the exact approach used by invasive BCIs (Neuralink-style).
 
-    We do NOT call any special "inject" function.
-    We simply present stimuli through the EXISTING sensory pipeline
-    during REM, exactly as mirror therapy presents visual feedback
-    through the EXISTING visual pipeline during pain.
+    Instead, the video modulates the TERMINAL IMPEDANCE at the
+    sensory boundary (retina/cochlea), and the brain's own PGO
+    waves reflect off these modified boundaries.
+
+    This is identical to mirror therapy (Ramachandran 1996):
+      Mirror:  visual feedback at body midline
+               → Z_load at phantom terminus changes
+               → Γ decreases → pain relief
+
+      Video:   sensory pattern at retina/cochlea
+               → Z_terminus at sensory channels changes
+               → PGO probes reflect structured Γ pattern
+               → dream content emerges from reflection
+
+    Same equation, same physics, no invasion.
     """
     records = []
     brain.sleep_physics.begin_sleep()
@@ -338,14 +491,39 @@ def dream_incubation_night(
         frame_idx = cycle * SLEEP_CYCLE_TICKS
 
         for tick_in_cycle, stage in enumerate(schedule):
-            # --- Sleep physics tick ---
-            channel_impedances = [
-                (f"ch_{i}", float(50 + 10 * rng.randn()),
-                 float(50 + 10 * rng.randn()))
-                for i in range(6)
-            ]
+            # --- Build channel impedances ---
+            # During REM modulation ticks: video shapes the terminus
+            # Otherwise: random impedances (no external influence)
+            if (stage == "rem"
+                    and tick_in_cycle % IMPEDANCE_MOD_INTERVAL == 0):
+                # NON-INVASIVE: video → Z_terminus modulation
+                # (NOT brain.see / brain.hear — that is the invasive path)
+                channel_impedances = video_to_impedance_modulation(
+                    video_spatial_freq, video_vowel, video_rhythm_hz,
+                    frame_idx + tick_in_cycle, rng,
+                )
+                dream_rec.stimuli_presented += 1   # backward compat
+                dream_rec.modulations_applied += 1
+
+                # Track Γ at modulated channels
+                mod_gammas = []
+                for _, zs, zl in channel_impedances:
+                    denom = zs + zl
+                    g = abs((zl - zs) / denom) if denom > 0 else 1.0
+                    mod_gammas.append(g)
+                dream_rec.modulated_gammas.extend(mod_gammas)
+            else:
+                channel_impedances = [
+                    (f"ch_{i}", float(50 + 10 * rng.randn()),
+                     float(50 + 10 * rng.randn()))
+                    for i in range(6)
+                ]
+
             synaptic_strengths = list(rng.uniform(0.3, 1.5, 100))
 
+            # --- Sleep physics tick ---
+            # PGO probes inside sleep_tick now encounter the
+            # video-modulated impedances (non-invasive boundary change)
             sleep_result = brain.sleep_physics.sleep_tick(
                 stage=stage,
                 recent_memories=[f"mem_{i}" for i in range(5)],
@@ -353,11 +531,10 @@ def dream_incubation_night(
                 synaptic_strengths=synaptic_strengths,
             )
 
-            # --- REM window: present video stimuli ---
+            # --- REM: track fatigue and probe metrics ---
             if stage == "rem":
                 dream_rec.ticks_in_rem += 1
 
-                # Track fatigue-modulated dream metrics
                 if sleep_result.get("dream_result"):
                     dr = sleep_result["dream_result"]
                     ff = dr.get("fatigue_factor", 0.0)
@@ -365,38 +542,8 @@ def dream_incubation_night(
                     dream_rec.fatigue_factors.append(ff)
                     dream_rec.amp_multipliers.append(am)
                     dream_rec.peak_fatigue = max(dream_rec.peak_fatigue, ff)
-                    dream_rec.peak_amp_multiplier = max(dream_rec.peak_amp_multiplier, am)
-
-                if tick_in_cycle % VIDEO_INJECT_INTERVAL == 0:
-                    # Visual stimulus: video frame through eye
-                    vf = generate_video_frame(
-                        video_spatial_freq, frame_idx + tick_in_cycle,
-                    )
-                    see_result = brain.see(vf, priority=Priority.NORMAL)
-
-                    # Auditory stimulus: vowel through ear (if rhythm allows)
-                    audio = generate_audio_frame(
-                        video_vowel, video_rhythm_hz,
-                        frame_idx + tick_in_cycle,
-                    )
-                    if audio is not None:
-                        hear_result = brain.hear(audio, priority=Priority.NORMAL)
-                        # Track what Wernicke observed
-                        if "wernicke" in hear_result:
-                            dream_rec.wernicke_observations += 1
-                            w = hear_result["wernicke"]
-                            if w.get("is_n400"):
-                                dream_rec.n400_events += 1
-
-                    dream_rec.stimuli_presented += 1
-
-                    # Track concept recognition
-                    if "semantic" in see_result:
-                        bc = see_result["semantic"].get("best_concept")
-                        g = see_result["semantic"].get("gamma", 1.0)
-                        if bc:
-                            dream_rec.concepts_recognized.append(bc)
-                            dream_rec.gammas.append(g)
+                    dream_rec.peak_amp_multiplier = max(
+                        dream_rec.peak_amp_multiplier, am)
 
         records.append(dream_rec)
 
@@ -503,17 +650,20 @@ def communication_phase(
 
 def run_experiment(verbose: bool = True) -> Dict[str, Any]:
     """
-    Dream Language Genesis — Full Experiment
+    Dream Language Genesis — Full Experiment (Non-Invasive)
 
-    Architecture:
+    Architecture:  (NO brain.see/hear during sleep — rejects invasive chips)
       ┌────────────────┐     ┌────────────────┐
       │   Alice-α      │     │   Alice-β      │
       │                │     │                │
-      │  Video A:      │     │  Video B:      │
-      │  f=5, /a/, 2Hz │     │  f=30, /i/, 3Hz│
+      │  Video A →     │     │  Video B →     │
+      │  Z_terminus    │     │  Z_terminus    │
+      │  modulation    │     │  modulation    │
+      │  (f=5,/a/,2Hz) │     │  (f=30,/i/,3Hz)│
       │                │     │                │
-      │  REM × 4 cycles│     │  REM × 4 cycles│
-      │  × 3 nights    │     │  × 3 nights    │
+      │  PGO probes →  │     │  PGO probes →  │
+      │  reflect off   │     │  reflect off   │
+      │  modified Z    │     │  modified Z    │
       └───────┬────────┘     └───────┬────────┘
               │                      │
               └──── Communication ───┘
@@ -523,7 +673,7 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
                           │
                           ▼
                    Observe:
-                   - Shared symbols?
+                   - Γ patterns in PGO probes?
                    - Γ_social trend?
                    - Emergent structure?
     """
@@ -532,11 +682,11 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
     if verbose:
         print("╔══════════════════════════════════════════════════════════════╗")
         print("║  Phase 27 — The Cradle of Language                         ║")
-        print("║  Dream Incubation & Emergent Communication                 ║")
+        print("║  Non-Invasive Dream Incubation (Z_terminus modulation)     ║")
         print("║                                                            ║")
-        print("║  'We don't teach her to speak.                             ║")
-        print("║   We let her dream,                                        ║")
-        print("║   and observe whether she invents words.'                  ║")
+        print("║  Rejects invasive-chip paradigm:                           ║")
+        print("║   Video → Z_terminus, NOT Video → brain.see()             ║")
+        print("║   Same physics as mirror therapy & synaptic pruning.       ║")
         print("╚══════════════════════════════════════════════════════════════╝")
         print()
 
@@ -607,18 +757,14 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
 
         # Night summary
         if verbose:
-            total_stim_a = sum(r.stimuli_presented for r in records_a)
-            total_stim_b = sum(r.stimuli_presented for r in records_b)
-            concepts_a = set()
-            concepts_b = set()
-            for r in records_a:
-                concepts_a.update(r.concepts_recognized)
-            for r in records_b:
-                concepts_b.update(r.concepts_recognized)
-            print(f"    Summary: α={total_stim_a} stimuli, "
-                  f"{len(concepts_a)} unique concepts | "
-                  f"β={total_stim_b} stimuli, "
-                  f"{len(concepts_b)} unique concepts")
+            total_mod_a = sum(r.modulations_applied for r in records_a)
+            total_mod_b = sum(r.modulations_applied for r in records_b)
+            mg_a = [g for r in records_a for g in r.modulated_gammas]
+            mg_b = [g for r in records_b for g in r.modulated_gammas]
+            mean_g_a = np.mean(mg_a) if mg_a else 1.0
+            mean_g_b = np.mean(mg_b) if mg_b else 1.0
+            print(f"    Summary: α={total_mod_a} Z-modulations (Γ̅={mean_g_a:.3f}) | "
+                  f"β={total_mod_b} Z-modulations (Γ̅={mean_g_b:.3f})")
             # Fatigue metrics
             peak_f_a = max((r.peak_fatigue for r in records_a), default=0)
             peak_f_b = max((r.peak_fatigue for r in records_b), default=0)
@@ -718,8 +864,19 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
         print(f"{'=' * 64}")
         print()
         print("  Observations (NOT conclusions — emergence must be observed):")
-        print(f"    Dream stimuli presented:  α={sum(r.stimuli_presented for r in all_dream_records_a)}"
-              f"  β={sum(r.stimuli_presented for r in all_dream_records_b)}")
+        total_mod_a = sum(r.modulations_applied for r in all_dream_records_a)
+        total_mod_b = sum(r.modulations_applied for r in all_dream_records_b)
+        print(f"    Z_terminus modulations:   α={total_mod_a}  β={total_mod_b}")
+        print(f"    (Non-invasive: video→Z_terminus, NOT video→brain)")
+        # Modulated Gamma stats
+        all_mg_a = [g for r in all_dream_records_a for g in r.modulated_gammas]
+        all_mg_b = [g for r in all_dream_records_b for g in r.modulated_gammas]
+        if all_mg_a:
+            print(f"    Modulated Γ: α mean={np.mean(all_mg_a):.3f} "
+                  f"min={min(all_mg_a):.3f} max={max(all_mg_a):.3f}")
+        if all_mg_b:
+            print(f"                 β mean={np.mean(all_mg_b):.3f} "
+                  f"min={min(all_mg_b):.3f} max={max(all_mg_b):.3f}")
         # Fatigue-modulated dreaming metrics
         all_fatigue_a = [f for r in all_dream_records_a for f in r.fatigue_factors]
         all_fatigue_b = [f for r in all_dream_records_b for f in r.fatigue_factors]
@@ -742,6 +899,7 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
         print(f"    Shared concepts after communication: {len(shared)}")
         print()
         print("  'The physics will tell us the answer.'")
+        print("  'We change the boundary, not the brain.'")
         print()
 
     return {
