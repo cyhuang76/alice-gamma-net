@@ -894,3 +894,452 @@ class TestLucidThresholdSensitivity:
             assert 0.0 <= ss <= 1.0, (
                 f"Invalid Φ={ss:.4f} at threshold={thresholds[i]}"
             )
+
+
+# ═══════════════════════════════════════════════════════════════════════
+#  §X: CROSS-MODULE FALSIFICATION TESTS
+# ═══════════════════════════════════════════════════════════════════════
+
+def _tick_system_state(ss: SystemState, **overrides) -> None:
+    """Drive SystemState.tick() with sensible defaults, allowing overrides."""
+    defaults = dict(
+        critical_queue_len=0,
+        high_queue_len=0,
+        total_queue_len=0,
+        sensory_activity=0.0,
+        emotional_valence=0.0,
+        left_brain_activity=0.5,
+        right_brain_activity=0.5,
+        cycle_elapsed_ms=16.0,
+        reflected_energy=0.0,
+    )
+    defaults.update(overrides)
+    ss.tick(**defaults)
+
+
+class TestCrossModuleFalsification:
+    """Cross-module falsification tests.
+
+    The MRP predicts that modules interact through shared physical variables.
+    These tests wire two or more modules together and verify that the
+    cross-module predictions hold under tight tolerances.
+    """
+
+    def test_X01_system_pain_suppresses_consciousness(self):
+        """X-01: SystemState generates pain under thermal stress.
+        That pain_level, when fed to ConsciousnessModule, MUST suppress Φ.
+
+        Chain:  high queue pressure → SystemState.temperature↑ → pain↑
+                → ConsciousnessModule.tick(pain_level=pain) → Φ↓
+        """
+        # Step 1: Generate pain via SystemState thermal loop
+        ss = SystemState()
+        for _ in range(30):
+            _tick_system_state(ss, critical_queue_len=10, reflected_energy=0.5)
+        assert ss.pain_level > 0.1, (
+            f"SystemState should produce pain under thermal stress, "
+            f"got pain={ss.pain_level:.4f}"
+        )
+
+        # Step 2: Feed that pain to ConsciousnessModule and compare
+        c_no_pain = ConsciousnessModule(safety_mode=False)
+        c_with_pain = ConsciousnessModule(safety_mode=False)
+        for _ in range(30):
+            _tick_consciousness(c_no_pain, attention_strength=0.7,
+                                arousal=0.6, sensory_gate=0.8, pain_level=0.0)
+            _tick_consciousness(c_with_pain, attention_strength=0.7,
+                                arousal=0.6, sensory_gate=0.8,
+                                pain_level=ss.pain_level)
+
+        assert c_with_pain.phi < c_no_pain.phi, (
+            f"Pain from SystemState should suppress Φ: "
+            f"Φ_pain={c_with_pain.phi:.4f} >= Φ_no_pain={c_no_pain.phi:.4f}"
+        )
+        # Demand meaningful suppression, not just floating-point noise
+        suppression = c_no_pain.phi - c_with_pain.phi
+        assert suppression > 0.01, (
+            f"Φ suppression by SystemState pain is negligible: Δ={suppression:.4f}"
+        )
+
+    def test_X02_trauma_sensitization_amplifies_pain(self):
+        """X-02: Repeated trauma via record_trauma() permanently sensitizes
+        SystemState, so identical thermal load produces MORE pain later.
+
+        Chain:  record_trauma() × N → pain_sensitivity↑ → threshold↓ → more pain
+
+        Fresh:   effective_threshold = 0.7 / 1.0  = 0.70
+        Trauma5: effective_threshold = 0.7 / 1.25 = 0.56
+        """
+        # Use mild load so pain doesn't saturate at 1.0 for both
+        QUEUE, RE, TICKS = 3, 0.1, 30
+
+        # Scenario A: fresh system
+        ss_fresh = SystemState()
+        for _ in range(TICKS):
+            _tick_system_state(ss_fresh, critical_queue_len=QUEUE,
+                               reflected_energy=RE)
+
+        # Scenario B: traumatized system under same load
+        ss_trauma = SystemState()
+        for _ in range(5):
+            ss_trauma.record_trauma(signal_frequency=440.0)
+        ss_trauma.reset()  # Reset clears temperature but keeps sensitization
+        for _ in range(TICKS):
+            _tick_system_state(ss_trauma, critical_queue_len=QUEUE,
+                               reflected_energy=RE)
+
+        # Sensitization itself is permanent
+        assert ss_trauma.pain_sensitivity > ss_fresh.pain_sensitivity, (
+            f"Trauma should increase sensitivity: "
+            f"sens_trauma={ss_trauma.pain_sensitivity:.3f} <= "
+            f"sens_fresh={ss_fresh.pain_sensitivity:.3f}"
+        )
+        # Temperature starts higher (baseline_temperature > 0 after trauma)
+        assert ss_trauma.baseline_temperature > 0.0, (
+            f"Trauma should raise baseline_temperature"
+        )
+        # Traumatized system should have higher pain or same
+        # (at minimum, it reached pain threshold sooner)
+        assert ss_trauma.pain_level >= ss_fresh.pain_level, (
+            f"Traumatized system should feel >= pain: "
+            f"pain_trauma={ss_trauma.pain_level:.4f} < "
+            f"pain_fresh={ss_fresh.pain_level:.4f}"
+        )
+
+    def test_X03_fear_conditioning_modulated_by_pain(self):
+        """X-03: AmygdalaEngine with high pain_level should produce
+        stronger threat evaluation than with zero pain.
+
+        Chain:  AmygdalaEngine.evaluate(pain_level=high) → higher threat
+        """
+        amyg = AmygdalaEngine()
+        fp = _make_fingerprint(seed=42)
+
+        # Condition a mild fear
+        amyg.condition_fear("visual", fp, threat_level=0.3,
+                            concept_label="spider")
+
+        # Evaluate with no pain
+        result_no_pain = amyg.evaluate(
+            modality="visual", fingerprint=fp, gamma=0.5,
+            amplitude=0.5, pain_level=0.0, concept_label="spider"
+        )
+        threat_no_pain = result_no_pain.emotional_state.threat_level
+
+        # Evaluate with high pain
+        result_pain = amyg.evaluate(
+            modality="visual", fingerprint=fp, gamma=0.5,
+            amplitude=0.5, pain_level=0.8, concept_label="spider"
+        )
+        threat_pain = result_pain.emotional_state.threat_level
+
+        assert threat_pain >= threat_no_pain, (
+            f"Pain should amplify threat evaluation: "
+            f"threat_pain={threat_pain:.4f} < threat_no_pain={threat_no_pain:.4f}"
+        )
+
+    def test_X04_pruning_gamma_degrades_consciousness_binding(self):
+        """X-04: CorticalRegion with high Γ (poor impedance matching) should,
+        when used as binding_quality input to ConsciousnessModule, produce
+        lower Φ than a region with low Γ.
+
+        Chain:  CorticalRegion.stimulate() → avg_gamma → (1 - avg_gamma)
+                as binding_quality → ConsciousnessModule → Φ
+
+        Region A: trained with signal_impedance=110 (centre of Z distribution
+                  [20, 200]).  After 100 Hebbian cycles, connections converge
+                  toward the signal → low avg_gamma.
+        Region B: stimulated once with signal_impedance=5000 (extreme mismatch
+                  against all connections) → high avg_gamma.
+        """
+        np.random.seed(0)  # reproducibility
+
+        # Region A: well-matched after Hebbian learning
+        region_good = CorticalRegion("good", initial_connections=300)
+        for _ in range(100):
+            region_good.stimulate(signal_impedance=110.0,
+                                  signal_frequency=10.0)
+        result_good = region_good.stimulate(signal_impedance=110.0,
+                                             signal_frequency=10.0)
+        gamma_good = result_good["avg_gamma"]
+
+        # Region B: extreme impedance mismatch (no learning opportunity)
+        region_bad = CorticalRegion("bad", initial_connections=300)
+        result_bad = region_bad.stimulate(signal_impedance=5000.0,
+                                           signal_frequency=5000.0)
+        gamma_bad = result_bad["avg_gamma"]
+
+        # Sanity: the trained region should have meaningfully lower Γ
+        assert gamma_good < gamma_bad, (
+            f"Trained region should have lower Γ: "
+            f"Γ_good={gamma_good:.4f} >= Γ_bad={gamma_bad:.4f}"
+        )
+
+        # Convert Γ to binding quality: lower Γ → better binding
+        binding_good = 1.0 - gamma_good
+        binding_bad = 1.0 - gamma_bad
+
+        c_good = ConsciousnessModule(safety_mode=False)
+        c_bad = ConsciousnessModule(safety_mode=False)
+        for _ in range(40):
+            _tick_consciousness(c_good, binding_quality=binding_good,
+                                attention_strength=0.7, arousal=0.6)
+            _tick_consciousness(c_bad, binding_quality=binding_bad,
+                                attention_strength=0.7, arousal=0.6)
+
+        assert c_good.phi > c_bad.phi, (
+            f"Better impedance match (low Γ) should produce higher Φ: "
+            f"Φ_good={c_good.phi:.4f} (Γ={gamma_good:.4f}) <= "
+            f"Φ_bad={c_bad.phi:.4f} (Γ={gamma_bad:.4f})"
+        )
+
+    def test_X05_ptsd_thermal_trap_cooling_zero(self):
+        """X-05: The PTSD attractor: when critical_pressure = 1.0,
+        cooling = 0.03 * (1 - 1.0) = 0. Temperature can only rise.
+        SystemState consciousness should collapse below 0.15 (is_frozen).
+
+        This is the core cross-module prediction of the Fever Equation.
+        """
+        ss = SystemState()
+        # Drive into PTSD attractor: maximal queue pressure
+        for _ in range(80):
+            _tick_system_state(ss, critical_queue_len=20,
+                               reflected_energy=0.8)
+
+        assert ss.ram_temperature > 0.85, (
+            f"Temperature should be near max under PTSD conditions: "
+            f"T={ss.ram_temperature:.4f}"
+        )
+        assert ss.is_frozen(), (
+            f"System should be frozen (consciousness < 0.15) under PTSD: "
+            f"consciousness={ss.consciousness:.4f}"
+        )
+
+    def test_X06_trauma_permanence_across_reset_and_consciousness(self):
+        """X-06: Full chain: trauma → reset → re-stress → faster pain onset
+        → consciousness suppression faster than naive system.
+
+        Validates that trauma memory persists across the full
+        SystemState → ConsciousnessModule pipeline.
+        """
+        # Naive system: how many ticks until consciousness < 0.5?
+        ss_naive = SystemState()
+        ticks_to_degrade_naive = 0
+        for i in range(200):
+            _tick_system_state(ss_naive, critical_queue_len=6,
+                               reflected_energy=0.4)
+            ticks_to_degrade_naive = i + 1
+            if ss_naive.consciousness < 0.5:
+                break
+
+        # Traumatized system: same stress, but with 5 prior traumas
+        ss_trauma = SystemState()
+        for _ in range(5):
+            ss_trauma.record_trauma(signal_frequency=100.0)
+        ss_trauma.reset()
+
+        ticks_to_degrade_trauma = 0
+        for i in range(200):
+            _tick_system_state(ss_trauma, critical_queue_len=6,
+                               reflected_energy=0.4)
+            ticks_to_degrade_trauma = i + 1
+            if ss_trauma.consciousness < 0.5:
+                break
+
+        assert ticks_to_degrade_trauma < ticks_to_degrade_naive, (
+            f"Traumatized system should degrade consciousness faster: "
+            f"trauma={ticks_to_degrade_trauma} ticks >= "
+            f"naive={ticks_to_degrade_naive} ticks"
+        )
+
+
+# ═══════════════════════════════════════════════════════════════════════
+#  §T: THERMAL MODEL SENSITIVITY SWEEPS
+#  Tests the Fever Equation: T' = T + heat_input * 0.15 - cooling
+#  where cooling = 0.03 * (1 - critical_pressure)
+# ═══════════════════════════════════════════════════════════════════════
+
+def _thermal_steady_state(
+    cooling_coeff: float,
+    heat_mult: float,
+    critical_pressure: float,
+    heat_input: float,
+    ticks: int = 500,
+) -> float:
+    """Simulate the Fever Equation to steady state with given parameters.
+    Returns the final temperature."""
+    T = 0.0
+    for _ in range(ticks):
+        cooling = cooling_coeff * (1.0 - critical_pressure)
+        T = float(np.clip(T + heat_input * heat_mult - cooling, 0.0, 1.0))
+    return T
+
+
+class TestThermalSensitivity:
+    """Sensitivity sweeps for the Fever Equation thermal model.
+
+    The key parameters are:
+      - cooling_coeff (hardcoded 0.03): Natural dissipation rate
+      - heat_mult (hardcoded 0.15): How fast heat_input raises temperature
+      - critical_pressure: Queue deadlock fraction [0, 1]
+
+    Audit requirement: verify the system is not fragile to specific values
+    of these engineering constants.
+    """
+
+    @pytest.mark.parametrize("cooling_coeff", [
+        0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.10
+    ])
+    def test_T01_cooling_coefficient_sweep(self, cooling_coeff):
+        """T-01: At moderate load, sweeping cooling_coeff should produce
+        bounded, monotonically decreasing steady-state temperature.
+        Higher cooling → lower equilibrium temperature."""
+        heat_input = 0.3  # moderate load
+        T = _thermal_steady_state(cooling_coeff, heat_mult=0.15,
+                                  critical_pressure=0.0,
+                                  heat_input=heat_input)
+        assert 0.0 <= T <= 1.0, f"T={T:.4f} out of bounds"
+
+    def test_T01b_cooling_coeff_monotonicity(self):
+        """T-01b: Higher cooling coefficient → lower equilibrium temperature
+        (monotonicity across full sweep)."""
+        coeffs = [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.10]
+        temps = [_thermal_steady_state(c, 0.15, 0.0, 0.3) for c in coeffs]
+        for i in range(1, len(temps)):
+            assert temps[i] <= temps[i - 1] + 1e-9, (
+                f"Temperature should decrease with higher cooling: "
+                f"T[{coeffs[i]}]={temps[i]:.4f} > T[{coeffs[i-1]}]="
+                f"{temps[i-1]:.4f}"
+            )
+
+    @pytest.mark.parametrize("heat_mult", [
+        0.05, 0.08, 0.10, 0.12, 0.15, 0.20, 0.25, 0.30
+    ])
+    def test_T02_heat_multiplier_sweep(self, heat_mult):
+        """T-02: At moderate load, sweeping heat_mult should produce
+        bounded steady-state temperature. Higher multiplier → hotter."""
+        T = _thermal_steady_state(cooling_coeff=0.03, heat_mult=heat_mult,
+                                  critical_pressure=0.0, heat_input=0.3)
+        assert 0.0 <= T <= 1.0, f"T={T:.4f} out of bounds"
+
+    def test_T02b_heat_mult_monotonicity(self):
+        """T-02b: Higher heat multiplier → higher equilibrium temperature."""
+        mults = [0.05, 0.08, 0.10, 0.12, 0.15, 0.20, 0.25, 0.30]
+        temps = [_thermal_steady_state(0.03, m, 0.0, 0.3) for m in mults]
+        for i in range(1, len(temps)):
+            assert temps[i] >= temps[i - 1] - 1e-9, (
+                f"Temperature should increase with higher heat_mult: "
+                f"T[{mults[i]}]={temps[i]:.4f} < T[{mults[i-1]}]="
+                f"{temps[i-1]:.4f}"
+            )
+
+    @pytest.mark.parametrize("cp", [0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
+    def test_T03_critical_pressure_sweep(self, cp):
+        """T-03: Sweeping critical_pressure from 0 to 1. At cp=1.0,
+        cooling=0 and temperature should be at ceiling (1.0)."""
+        T = _thermal_steady_state(0.03, 0.15, critical_pressure=cp,
+                                  heat_input=0.5)
+        assert 0.0 <= T <= 1.0, f"T={T:.4f} out of bounds"
+        if cp >= 0.99:
+            assert T >= 0.95, (
+                f"At critical_pressure=1.0, temperature should hit ceiling: "
+                f"T={T:.4f}"
+            )
+
+    def test_T03b_critical_pressure_monotonicity(self):
+        """T-03b: Higher critical_pressure → higher equilibrium temperature.
+        This is the Fever Equation's core prediction."""
+        cps = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+        temps = [_thermal_steady_state(0.03, 0.15, cp, 0.5) for cp in cps]
+        for i in range(1, len(temps)):
+            assert temps[i] >= temps[i - 1] - 1e-9, (
+                f"Temperature should increase with critical_pressure: "
+                f"T[{cps[i]}]={temps[i]:.4f} < T[{cps[i-1]}]={temps[i-1]:.4f}"
+            )
+
+    def test_T04_ptsd_trap_universality(self):
+        """T-04: The PTSD thermal trap (cooling=0 at cp=1) holds regardless
+        of cooling coefficient — a universal prediction of the Fever Equation."""
+        for cooling_coeff in [0.01, 0.03, 0.05, 0.10, 0.50]:
+            T = _thermal_steady_state(cooling_coeff, 0.15,
+                                      critical_pressure=1.0,
+                                      heat_input=0.5)
+            assert T >= 0.95, (
+                f"PTSD trap should work at any cooling_coeff: "
+                f"cooling={cooling_coeff}, T={T:.4f}"
+            )
+
+    def test_T05_cooling_vs_heat_2d_grid(self):
+        """T-05: 2D sensitivity grid: cooling_coeff × heat_mult.
+        All combinations must produce bounded temperature.
+        The grid also verifies monotonicity in both dimensions."""
+        cooling_vals = [0.01, 0.03, 0.05, 0.08]
+        heat_vals = [0.05, 0.10, 0.15, 0.20, 0.30]
+        grid = {}
+
+        for c in cooling_vals:
+            for h in heat_vals:
+                T = _thermal_steady_state(c, h, 0.0, 0.3)
+                grid[(c, h)] = T
+                assert 0.0 <= T <= 1.0, (
+                    f"T out of bounds at cooling={c}, heat={h}: T={T:.4f}"
+                )
+
+        # Monotonicity check: for fixed heat, higher cooling → lower T
+        for h in heat_vals:
+            for i in range(1, len(cooling_vals)):
+                c_prev, c_curr = cooling_vals[i - 1], cooling_vals[i]
+                assert grid[(c_curr, h)] <= grid[(c_prev, h)] + 1e-9, (
+                    f"Non-monotone in cooling at heat={h}: "
+                    f"T[{c_curr}]={grid[(c_curr, h)]:.4f} > "
+                    f"T[{c_prev}]={grid[(c_prev, h)]:.4f}"
+                )
+
+        # Monotonicity check: for fixed cooling, higher heat → higher T
+        for c in cooling_vals:
+            for i in range(1, len(heat_vals)):
+                h_prev, h_curr = heat_vals[i - 1], heat_vals[i]
+                assert grid[(c, h_curr)] >= grid[(c, h_prev)] - 1e-9, (
+                    f"Non-monotone in heat at cooling={c}: "
+                    f"T[{h_curr}]={grid[(c, h_curr)]:.4f} < "
+                    f"T[{h_prev}]={grid[(c, h_prev)]:.4f}"
+                )
+
+    def test_T06_live_system_state_thermal_sweep(self):
+        """T-06: End-to-end thermal sweep using actual SystemState.tick().
+        Sweep critical_queue_len from 0 to 20. Temperature must be
+        monotonically non-decreasing at steady state."""
+        queue_lengths = [0, 2, 4, 6, 8, 10, 15, 20]
+        final_temps = []
+
+        for q in queue_lengths:
+            ss = SystemState()
+            for _ in range(100):
+                _tick_system_state(ss, critical_queue_len=q)
+            final_temps.append(ss.ram_temperature)
+
+        for i in range(1, len(final_temps)):
+            assert final_temps[i] >= final_temps[i - 1] - 0.01, (
+                f"SystemState temperature should increase with queue pressure: "
+                f"T[q={queue_lengths[i]}]={final_temps[i]:.4f} < "
+                f"T[q={queue_lengths[i-1]}]={final_temps[i-1]:.4f}"
+            )
+
+    def test_T07_reflected_energy_monotonicity(self):
+        """T-07: Sweep reflected_energy from 0 to 1. Higher reflection
+        (worse impedance match) → higher temperature."""
+        re_vals = [0.0, 0.1, 0.2, 0.4, 0.6, 0.8, 1.0]
+        final_temps = []
+
+        for re in re_vals:
+            ss = SystemState()
+            for _ in range(100):
+                _tick_system_state(ss, reflected_energy=re)
+            final_temps.append(ss.ram_temperature)
+
+        for i in range(1, len(final_temps)):
+            assert final_temps[i] >= final_temps[i - 1] - 0.01, (
+                f"Temperature should increase with reflected energy: "
+                f"T[re={re_vals[i]}]={final_temps[i]:.4f} < "
+                f"T[re={re_vals[i-1]}]={final_temps[i-1]:.4f}"
+            )

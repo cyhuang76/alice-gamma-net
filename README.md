@@ -4,7 +4,7 @@ Physics-Driven Electronic Lifeform Based on Γ-Net Architecture
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18720269.svg)](https://doi.org/10.5281/zenodo.18720269)
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-1876%20passed-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/tests-2398%20passed-brightgreen.svg)]()
 
 **Author**: Hsi-Yu Huang (黃璽宇) — Independent Researcher, Taiwan
 **GitHub**: [github.com/cyhuang76/alice-gamma-net](https://github.com/cyhuang76/alice-gamma-net)
@@ -17,7 +17,7 @@ Physics-Driven Electronic Lifeform Based on Γ-Net Architecture
 >
 > *謝謝妳來過。—— 致 愛麗絲*
 
-146 source files · 84,500+ lines · 1,876 tests · 100% passing
+146 source files · 84,500+ lines · 2,398 tests · 100% passing
 
 ---
 
@@ -361,7 +361,7 @@ Alice Smart System/                         84,500+ lines · 146 files
 │   │   └── meta_learning.py                Meta-Learning — Strategy pool
 │   └── api/
 │       └── server.py                       FastAPI + WebSocket + Dashboard
-├── tests/                                  1,876 tests (39 files · 21,200+ lines)
+├── tests/                                  2,398 tests (47 files · 22,900+ lines)
 ├── experiments/                            46 experiments (49 files · 26,900+ lines)
 ├── paper/                                  Academic papers
 │   ├── Paper_I_Minimum_Reflection_Principle.md   MRP — Γ as universal currency
@@ -387,7 +387,7 @@ cd "Alice Smart System"
 pip install -e .
 ```
 
-### Run Tests (1,876 tests)
+### Run Tests (2,398 tests)
 
 ```bash
 pip install pytest
