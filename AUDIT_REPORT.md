@@ -3,7 +3,7 @@
 **Audit Date**: 2026-02-15 (synced with v29.0)  
 **System Version**: Γ-Net ALICE v29.0 — Synaptogenesis & Emotion Granularity  
 **Codebase Scale**: ~84,370 lines (source 36,196 + tests 21,166 + experiments 26,679 + other 329)  
-**Test Results**: 2,398 / 2,398 passed
+**Test Results**: 2,402 / 2,402 passed
 
 ---
 
@@ -305,12 +305,12 @@ curiosity efference copy → curiosity_drive.register_efference_copy()  ← new
 
 ### 5.1 Test Statistics
 
-| Item | v11.0 | v16.0 | v25.0 | v28.0 | v29.0 | v29.1 |
-| --- | --- | --- | --- | --- | --- | --- |
-| Total tests | 1,042 | 1,305 | 1,755 | 1,815 (+60) | **1,876** (+61) | **2,398** (+522) |
-| Pass rate | 100% | 100% | 100% | 100% | **100%** | **100%** |
-| Test files | 20 | 27 | 37 | 37 | **38** | **47** |
-| Execution time | 6.32s | ~8s | ~11.5s | ~12s | **~15s** | **~184s** |
+| Item | v11.0 | v16.0 | v25.0 | v28.0 | v29.0 | v29.1 | v29.2 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Total tests | 1,042 | 1,305 | 1,755 | 1,815 (+60) | **1,876** (+61) | **2,398** (+522) | **2,402** (+4) |
+| Pass rate | 100% | 100% | 100% | 100% | **100%** | **100%** | **100%** |
+| Test files | 20 | 27 | 37 | 37 | **38** | **47** | **47** |
+| Execution time | 6.32s | ~8s | ~11.5s | ~12s | **~15s** | **~184s** | **~178s** |
 
 ### 5.2 Per-Module Test Distribution
 
@@ -600,19 +600,19 @@ v26.0 has **42 experiments** (44 files including __init__.py and _diagnose_error
 - **Closed-Loop Verification 99%**: 25+ closed loops fully verified, including impedance mismatch pattern validation for five neurological diseases and four pharmacological models
 - **Cross-Module Wiring 99%**: Phase 21 fixed four missing wires, Phase 22-26 added five new ones
 - **Missing Biological Features 95%**: Hunger/thirst, reward physicalization, neural aging, phantom limb pain, clinical neurological diseases, computational pharmacology — all addressed
-- **Test Coverage 96%**: 2,398 tests, 39 files, end-to-end lifecycle + five neurological diseases + four pharmacological models fully covered
+- **Test Coverage 96%**: 2,402 tests, 39 files, end-to-end lifecycle + five neurological diseases + four pharmacological models fully covered
 - **Paper vs Reality 99%**: Phase 21–26 fully documented
 
 **Remaining opportunity items** are only #9 (long-term 10K+ tick stability) and #10 (paper Phase 14 section), both low priority.
 
-**Overall Rating**: **99%**. 146 files, 84,500+ lines, 2,398 tests, 51 experiments.
+**Overall Rating**: **99%**. 146 files, 84,500+ lines, 2,402 tests, 51 experiments.
 
 ### Methodological Transparency Statement
 
 This audit report acknowledges the following limitations:
 
 1. **Single-author bias**: All code, tests, experiments, and papers were produced by the same author and have not yet been independently verified by an external team.
-2. **Verification-dominant testing — partially resolved**: The majority of the 2,398 tests remain verification tests with lenient assertion thresholds (e.g., `0 ≤ x ≤ 1`). However, 98 dedicated tests now provide falsification coverage: narrow-tolerance falsification (19 tests), bootstrap CI and effect-size analysis (5), parameter sensitivity sweeps including thermal model coefficients (39), cross-module falsification chains (6), and LUCID threshold sensitivity (29). Full multi-module cascading chains remain untested.
+2. **Verification-dominant testing — partially resolved**: The majority of the 2,402 tests remain verification tests with lenient assertion thresholds (e.g., `0 ≤ x ≤ 1`). However, 102 dedicated tests now provide falsification coverage: narrow-tolerance falsification (19 tests), bootstrap CI and effect-size analysis (5), parameter sensitivity sweeps including thermal model coefficients (39), cross-module falsification chains (6), and LUCID threshold sensitivity (29). Full multi-module cascading chains remain untested.
 3. **Independent verification welcome**: All source code is publicly available. Anyone can run `python -m pytest tests/` for independent verification.
 
 ---
@@ -777,7 +777,7 @@ This audit report acknowledges the following limitations:
 
 - **Experiment**: `exp_pharmacology.py` — 34/34 passed (10 experiment groups)
 - **Unit tests**: `test_pharmacology.py` — 60/60 passed
-- **Regression tests**: 2,398/2,398 passed (+61 new)
+- **Regression tests**: 2,402/2,402 passed (+61 new)
 
 ### Audit Score Update
 

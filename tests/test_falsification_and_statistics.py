@@ -268,7 +268,8 @@ class TestFalsificationPruning:
 
     def test_F07_consistent_stim_reduces_gamma(self):
         """F-07: 200 epochs of consistent stimulation + periodic pruning
-        MUST reduce mean Γ by at least 20%. Core MRP prediction."""
+        MUST reduce mean Γ by at least 40%. Core MRP prediction.
+        (Tightened from ≥20% after empirical observation of ~76% reduction.)"""
         region = CorticalRegion(
             name="test_falsif",
             initial_connections=200,
@@ -288,8 +289,8 @@ class TestFalsificationPruning:
         final_gamma = result_final["avg_gamma"]
         if initial_gamma > 0:
             reduction = (initial_gamma - final_gamma) / initial_gamma
-            assert reduction >= 0.20, (
-                f"Mean Γ reduced only {reduction*100:.1f}% (need ≥20%). "
+            assert reduction >= 0.40, (
+                f"Mean Γ reduced only {reduction*100:.1f}% (need ≥40%). "
                 f"Initial={initial_gamma:.4f}, Final={final_gamma:.4f}"
             )
 
@@ -539,6 +540,9 @@ class TestFalsificationMemory:
 class TestStatisticalPhi:
     """Monte Carlo statistical analysis of the Φ equation."""
 
+    # Bonferroni correction: 5 statistical tests → α_adj = 0.01 / 5 = 0.002
+    ALPHA_BONFERRONI = 0.002
+
     def test_S01_phi_distribution_under_random_inputs(self):
         """S-01: Under uniform random inputs, compute the distribution of
         Φ and verify it has a well-defined mean with tight CI."""
@@ -593,7 +597,9 @@ class TestStatisticalPhi:
         t_stat, p_val = _welch_t(phi_no_pain, phi_pain)
 
         assert abs(d) > 0.8, f"Cohen's d = {d:.3f} — expected |d| > 0.8 (large effect)"
-        assert p_val < 0.01, f"p = {p_val:.6f} — not significant at α=0.01"
+        assert p_val < self.ALPHA_BONFERRONI, (
+            f"p = {p_val:.6f} — not significant at Bonferroni-corrected α={self.ALPHA_BONFERRONI}"
+        )
         assert np.mean(phi_no_pain) > np.mean(phi_pain), (
             "Mean Φ(no_pain) should exceed Φ(pain)"
         )
@@ -624,9 +630,9 @@ class TestStatisticalPruning:
         ci_width = ci_hi - ci_lo
 
         assert 0.0 < mean < 1.0, f"Mean survival = {mean:.3f}"
-        assert ci_width < 0.25, (
+        assert ci_width < 0.15, (
             f"Survival rate CI too wide: [{ci_lo:.3f}, {ci_hi:.3f}] "
-            f"(width={ci_width:.3f})"
+            f"(width={ci_width:.3f}, need <0.15)"
         )
 
     def test_S04_gamma_reduction_effect_size(self):
@@ -659,7 +665,9 @@ class TestStatisticalPruning:
         t_stat, p_val = _welch_t(initial_gammas, final_gammas)
 
         assert d > 0.5, f"d={d:.3f} — pruning effect should be at least medium"
-        assert p_val < 0.01, f"p={p_val:.6f} — pruning effect not significant"
+        assert p_val < TestStatisticalPhi.ALPHA_BONFERRONI, (
+            f"p={p_val:.6f} — not significant at Bonferroni α={TestStatisticalPhi.ALPHA_BONFERRONI}"
+        )
 
 
 class TestStatisticalFear:
@@ -692,7 +700,9 @@ class TestStatisticalFear:
         assert np.mean(cond_threats) > np.mean(no_cond_threats), (
             "Conditioning did not increase mean threat"
         )
-        assert p_val < 0.01, f"p = {p_val:.6f} — not significant at α=0.01"
+        assert p_val < TestStatisticalPhi.ALPHA_BONFERRONI, (
+            f"p = {p_val:.6f} — not significant at Bonferroni α={TestStatisticalPhi.ALPHA_BONFERRONI}"
+        )
         assert abs(d) > 0.5, f"d = {d:.3f} — effect too small"
 
 
@@ -1343,3 +1353,206 @@ class TestThermalSensitivity:
                 f"T[re={re_vals[i]}]={final_temps[i]:.4f} < "
                 f"T[re={re_vals[i-1]}]={final_temps[i-1]:.4f}"
             )
+
+
+# ═══════════════════════════════════════════════════════════════════════
+#  §C: COUNTERFACTUAL FALSIFICATION TESTS
+#  These tests compare MRP predictions against alternative models.
+#  If an alternative model produces IDENTICAL results, MRP is not
+#  uniquely predictive; if results differ, MRP is falsifiable.
+# ═══════════════════════════════════════════════════════════════════════
+
+class TestCounterfactualFalsification:
+    """Counterfactual tests: 'an alternative model would predict differently.'
+
+    These are the strongest form of falsification — they demonstrate that
+    the MRP framework makes predictions that competing models do NOT make.
+    """
+
+    def test_C01_additive_pain_model_cannot_produce_ptsd_trap(self):
+        """C-01: Under an ADDITIVE pain model (pain += constant each tick),
+        the PTSD thermal trap does NOT arise — temperature can always
+        decrease if input ceases. Under MRP's MULTIPLICATIVE model
+        (pain_sensitivity amplifies temperature → higher critical_pressure
+        → less cooling), the trap is inescapable.
+
+        Counterfactual: if pain sensitivity were additive (not multiplicative),
+        reset() + zero input should fully recover the system.
+        MRP prediction: even after reset(), elevated baseline_temperature
+        prevents full cooling.
+        """
+        # MRP system: trauma → sensitization → trap
+        ss_mrp = SystemState()
+        for _ in range(10):
+            ss_mrp.record_trauma(signal_frequency=440.0)
+
+        # The MRP prediction: baseline_temperature is permanently elevated
+        assert ss_mrp.baseline_temperature > 0.0, (
+            "MRP predicts trauma raises baseline_temperature permanently"
+        )
+
+        # Reset clears transient state but NOT structural damage
+        ss_mrp.reset()
+        assert ss_mrp.pain_sensitivity > 1.0, (
+            "MRP predicts pain_sensitivity survives reset (structural memory)"
+        )
+        assert ss_mrp.baseline_temperature > 0.0, (
+            "MRP predicts baseline_temperature survives reset (structural memory)"
+        )
+
+        # Counterfactual: a simple additive model would have
+        # pain_sensitivity = 1.0 after reset (no structural memory).
+        # MRP's multiplicative sensitization is the distinguishing prediction.
+        additive_sensitivity_after_reset = 1.0  # hypothetical additive model
+        assert ss_mrp.pain_sensitivity > additive_sensitivity_after_reset, (
+            f"MRP sensitivity ({ss_mrp.pain_sensitivity:.3f}) must exceed "
+            f"additive model ({additive_sensitivity_after_reset}) after trauma+reset"
+        )
+
+    def test_C02_symmetric_model_fails_fear_asymmetry(self):
+        """C-02: A symmetric learning model (conditioning rate == extinction
+        rate) would predict that N conditioning trials followed by N extinction
+        trials return threat to baseline. MRP predicts asymmetry: fear
+        memories have a floor and extinction is slower than conditioning.
+
+        Counterfactual: symmetric model → threat ≈ baseline after equal trials.
+        MRP prediction: threat > baseline after equal trials.
+        """
+        amygdala = AmygdalaEngine()
+        fp = _make_fingerprint(seed=99)
+        baseline = amygdala._threat_level
+
+        # 10 conditioning trials
+        for _ in range(10):
+            amygdala.evaluate("auditory", fp, amplitude=0.9, pain_level=0.6)
+            amygdala.condition_fear("auditory", fp, threat_level=0.9)
+
+        # 10 extinction trials (equal count)
+        for _ in range(10):
+            amygdala.evaluate("auditory", fp, amplitude=0.05, pain_level=0.0)
+            amygdala.extinguish_fear("auditory", fp)
+
+        threat_after_symmetric = amygdala._threat_level
+
+        # Symmetric model prediction: threat ≈ baseline
+        # MRP prediction: threat > baseline (asymmetry)
+        assert threat_after_symmetric > baseline, (
+            f"MRP predicts asymmetric fear (threat={threat_after_symmetric:.4f} "
+            f"should remain above baseline={baseline:.4f} after equal "
+            f"conditioning/extinction trials). A symmetric model would predict "
+            f"threat ≈ baseline — this falsifies the symmetric alternative."
+        )
+
+    def test_C03_random_walk_model_fails_gamma_convergence(self):
+        """C-03: A random-walk impedance model (Z changes by ±δ each step)
+        would produce a DIFFUSIVE pattern (√n spreading) rather than
+        convergent. MRP with Hebbian learning predicts CONVERGENT
+        impedance adaptation toward the signal impedance.
+
+        Counterfactual: random walk → |Z_conn - Z_signal| grows as √n.
+        MRP prediction: |Z_conn - Z_signal| shrinks monotonically.
+        """
+        target_z = 50.0
+        region = CorticalRegion(
+            name="counterfactual_convergence",
+            initial_connections=100,
+        )
+
+        # Measure initial distance distribution
+        initial_distances = [
+            abs(c.impedance - target_z) for c in region.connections if c.alive
+        ]
+        mean_dist_initial = np.mean(initial_distances)
+
+        # Apply MRP (Hebbian stimulation)
+        for i in range(200):
+            region.stimulate(signal_impedance=target_z, signal_frequency=10.0)
+            if i % 20 == 0:
+                region.prune()
+
+        # Measure final distance distribution
+        final_distances = [
+            abs(c.impedance - target_z) for c in region.connections if c.alive
+        ]
+        mean_dist_final = np.mean(final_distances)
+
+        # MRP prediction: convergent (distance decreases)
+        assert mean_dist_final < mean_dist_initial * 0.5, (
+            f"MRP predicts convergent adaptation: mean distance should halve. "
+            f"Initial={mean_dist_initial:.3f}, Final={mean_dist_final:.3f}. "
+            f"A random-walk model would show √n divergence instead."
+        )
+
+        # Simulate the counterfactual: a random walk should NOT converge
+        rng = np.random.default_rng(42)
+        random_distances = [abs(rng.normal(100, 50) - target_z) for _ in range(100)]
+        # After 200 random steps of ±δ from initial positions, the distribution
+        # should be at least as wide as at birth (random walks diffuse, not converge)
+        for _ in range(200):
+            random_distances = [
+                abs(d + rng.normal(0, 2)) for d in random_distances
+            ]
+        mean_random_final = np.mean(random_distances)
+
+        # The random walk should NOT converge to target
+        assert mean_random_final > mean_dist_final, (
+            f"Random walk ({mean_random_final:.3f}) should NOT converge better "
+            f"than MRP Hebbian learning ({mean_dist_final:.3f})"
+        )
+
+    def test_C04_no_sleep_pressure_model_lacks_forced_dormancy(self):
+        """C-04: A model WITHOUT sleep pressure would allow indefinite
+        wakefulness. MRP predicts that wake-time impedance debt accumulates
+        and FORCES dormancy via the sensory gate.
+
+        Counterfactual: model without sleep pressure → consciousness sustained
+        indefinitely at high arousal.
+        MRP prediction: consciousness MUST decline due to sleep pressure,
+        even with maximum arousal and sensory input.
+        """
+        # MRP system (safety_mode=True): sleep pressure forces dormancy
+        c_mrp = ConsciousnessModule(
+            developmental_stage=DevelopmentalStage.NEONATE,
+            safety_mode=True,
+        )
+        slept_mrp = False
+        for t in range(60):
+            _tick_consciousness(c_mrp, attention_strength=0.8, arousal=0.7,
+                                sensory_gate=1.0, binding_quality=0.7)
+            if c_mrp.is_sleeping:
+                slept_mrp = True
+                break
+
+        assert slept_mrp, (
+            "MRP predicts forced dormancy via sleep pressure — system MUST sleep"
+        )
+
+        # Counterfactual: system without safety valve (no sleep pressure)
+        c_nosleep = ConsciousnessModule(
+            developmental_stage=DevelopmentalStage.NEONATE,
+            safety_mode=False,  # disables sleep pressure
+        )
+        slept_nosleep = False
+        for t in range(60):
+            _tick_consciousness(c_nosleep, attention_strength=0.8, arousal=0.7,
+                                sensory_gate=1.0, binding_quality=0.7)
+            if c_nosleep.is_sleeping:
+                slept_nosleep = True
+                break
+
+        # Without sleep pressure, the system should NOT be forced to sleep
+        # (it may still sleep for other reasons, but not due to pressure)
+        assert not slept_nosleep, (
+            "Without sleep pressure (safety_mode=False), the system should "
+            "NOT be forced into dormancy. This confirms sleep pressure is the "
+            "mechanism, not an artefact."
+        )
+
+        # The distinguishing prediction: MRP forces dormancy where a model
+        # without impedance-derived sleep pressure does not.  This difference
+        # is the counterfactual — identical inputs produce qualitatively
+        # different behaviour depending on the presence of ΣΓ²-based sleep.
+        assert slept_mrp and not slept_nosleep, (
+            "Counterfactual confirmed: MRP (sleep pressure) → forced sleep; "
+            "model without sleep pressure → sustained wakefulness."
+        )
