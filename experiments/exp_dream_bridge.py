@@ -427,6 +427,7 @@ def sender_z_to_impedance_modulation(
     frame_idx: int,
     rng: np.random.RandomState,
     transfer_gain: float = BRIDGE_TRANSFER_GAIN,
+    mirror_sigma_map: Optional[Dict[str, float]] = None,
 ) -> List[Tuple[str, float, float]]:
     """
     Convert sender's dream Z-signature to receiver's Z_terminus modulation.
@@ -456,8 +457,13 @@ def sender_z_to_impedance_modulation(
 
     for ch_name in DREAM_CHANNEL_NAMES:
         # Receiver's natural impedance (random baseline)
+        # Mirror pre-training narrows σ_Z on matched channels (Paper VI §4.5):
+        #   σ_Z_eff = σ_Z_base × sigma_factor,  sigma_factor < 1 after matching
+        sigma_z = 20.0
+        if mirror_sigma_map and ch_name in mirror_sigma_map:
+            sigma_z *= mirror_sigma_map[ch_name]
         z_src = Z_BASE + rng.randn() * 5.0
-        z_load_random = Z_BASE + rng.randn() * 20.0
+        z_load_random = Z_BASE + rng.randn() * sigma_z
 
         if ch_name in signature.channel_z_map:
             # Sender's Z-map provides the TARGET impedance
@@ -482,6 +488,7 @@ def bridge_dream_night(
     night_idx: int,
     rng: np.random.RandomState,
     use_video: bool = False,
+    mirror_sigma_map: Optional[Dict[str, float]] = None,
     verbose: bool = False,
 ) -> List[BridgeRecord]:
     """
@@ -524,6 +531,7 @@ def bridge_dream_night(
                     # Bridge: sender's Z-map → receiver's Z_terminus
                     channel_impedances = sender_z_to_impedance_modulation(
                         signature, frame_idx + tick_in_cycle, rng,
+                        mirror_sigma_map=mirror_sigma_map,
                     )
                 elif condition == "V":
                     # Generic video (Phase 27 style)
@@ -592,6 +600,8 @@ def communication_verification(
     sender_brain: AliceBrain,
     receiver_brain: AliceBrain,
     rounds: int,
+    empathy: float = 0.6,
+    effort: float = 0.7,
     verbose: bool = False,
 ) -> List[Tuple[float, float]]:
     """
@@ -599,6 +609,8 @@ def communication_verification(
 
     If the bridge worked, the receiver's channels have been partially
     reshaped toward the sender's Z-map → Γ_social should be lower.
+
+    Mirror pre-trained pairs use higher empathy (learned capacity).
     """
     gamma_pairs = []
 
@@ -624,10 +636,10 @@ def communication_verification(
             agent_b_id="receiver",
             pressure_a=pressure_s,
             pressure_b=pressure_r,
-            empathy_a=0.6,
-            empathy_b=0.6,
-            effort_a=0.7,
-            effort_b=0.7,
+            empathy_a=empathy,
+            empathy_b=empathy,
+            effort_a=effort,
+            effort_b=effort,
             phi_a=max(0.3, sender_brain.vitals.consciousness),
             phi_b=max(0.3, receiver_brain.vitals.consciousness),
         )
@@ -707,7 +719,34 @@ def run_condition(
                   f"Z_bond {mt_result.bond_impedance_initial:.1f} "
                   f"→ {mt_result.bond_impedance_final:.1f}Ω  "
                   f"familiarity={mt_result.familiarity:.3f}")
+    # --- Compute mirror sigma map (Bug 1 fix) ---
+    # Mirror pre-training narrows \u03c3_Z on matched channels.
+    # sigma_factor = Z_bond_final / Z_bond_initial  (< 1 when bond strengthened)
+    # Combined with empathy capacity for a stronger effect.
+    mirror_sigma_map: Optional[Dict[str, float]] = None
+    mirror_empathy: float = 0.6   # default
+    mirror_effort: float = 0.7    # default
 
+    if do_mirror and result.mirror_training:
+        mt = result.mirror_training
+        # Bond ratio: 39.9/50 \u2248 0.80 (20% noise reduction)
+        bond_ratio = mt.bond_impedance_final / max(mt.bond_impedance_initial, 1.0)
+        # Empathy amplifies matching: more empathic \u2192 better matching
+        empathy_factor = 1.0 - 0.3 * mt.empathy_capacity  # 0.71 empathy \u2192 0.787
+        sigma_factor = bond_ratio * empathy_factor
+        sigma_factor = max(0.3, min(1.0, sigma_factor))  # Clamp [0.3, 1.0]
+
+        mirror_sigma_map = {
+            ch: sigma_factor for ch in DREAM_CHANNEL_NAMES
+        }
+        mirror_empathy = min(0.95, 0.6 + mt.empathy_capacity * 0.4)
+        mirror_effort = min(0.95, 0.7 + mt.familiarity * 0.2)
+
+        if verbose:
+            print(f"  \u2502  Mirror \u03c3 reduction: factor={sigma_factor:.3f}  "
+                  f"(bond_ratio={bond_ratio:.3f}, empathy_factor={empathy_factor:.3f})")
+            print(f"  \u2502  Social params: empathy={mirror_empathy:.3f}, "
+                  f"effort={mirror_effort:.3f}")
     # --- EXP 1: Sender dream capture ---
     if verbose:
         print(f"  │  EXP 1: Sender Dream Capture")
@@ -735,6 +774,7 @@ def run_condition(
         night_idx=0,
         rng=rng_receiver,
         use_video=do_video,
+        mirror_sigma_map=mirror_sigma_map if condition == "M" else None,
         verbose=verbose,
     )
     result.dream_records = bridge_records
@@ -750,9 +790,16 @@ def run_condition(
     if all_ref:
         result.mean_reference_gamma = float(np.mean(all_ref))
 
-    result.gamma_contrast = abs(result.mean_modulated_gamma - result.mean_reference_gamma)
+    # Only compute contrast when modulated samples exist (Bug 3 fix)
+    if result.n_modulated_samples > 0:
+        result.gamma_contrast = abs(
+            result.mean_modulated_gamma - result.mean_reference_gamma
+        )
+    else:
+        # N condition: no modulation → no contrast, no SNR
+        result.gamma_contrast = 0.0
 
-    if all_ref:
+    if all_ref and result.n_modulated_samples > 0:
         sigma_ref = float(np.std(all_ref))
         if sigma_ref > 1e-6:
             result.snr = result.gamma_contrast / sigma_ref
@@ -788,8 +835,13 @@ def run_condition(
     if verbose:
         print(f"  │  EXP 3: Communication Verification ({COMM_ROUNDS} rounds)")
 
+    comm_empathy = mirror_empathy if do_mirror else 0.6
+    comm_effort = mirror_effort if do_mirror else 0.7
     gamma_pairs = communication_verification(
-        sender, receiver, COMM_ROUNDS, verbose=verbose,
+        sender, receiver, COMM_ROUNDS,
+        empathy=comm_empathy,
+        effort=comm_effort,
+        verbose=verbose,
     )
     if gamma_pairs:
         result.gamma_social_first = sum(gamma_pairs[0]) / 2

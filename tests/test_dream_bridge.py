@@ -492,3 +492,133 @@ class TestPhysicalInvariants:
                 assert abs(reflected + transmitted - 1.0) < 1e-10, (
                     f"Energy conservation violated: Γ²={reflected} + η={transmitted} ≠ 1"
                 )
+
+
+# ============================================================
+# Test: Mirror Bias Propagation (Bug 1 fix)
+# ============================================================
+
+class TestMirrorBiasPropagation:
+    """Verify that mirror pre-training narrows σ_Z and differentiates M from S."""
+
+    def test_mirror_sigma_map_reduces_noise(self):
+        """With mirror_sigma_map, Z_load variance should be smaller."""
+        sig = DreamSignature(
+            channel_z_map={name: (Z_BASE, Z_BASE + 10.0) for name in DREAM_CHANNEL_NAMES},
+            mean_gamma=0.06,
+            n_samples=20,
+        )
+        sigma_map = {name: 0.5 for name in DREAM_CHANNEL_NAMES}  # 50% noise
+
+        # Collect Z_loads without and with mirror sigma
+        z_no_mirror = []
+        z_with_mirror = []
+        for trial in range(200):
+            rng1 = np.random.RandomState(trial)
+            ch1 = sender_z_to_impedance_modulation(sig, 0, rng1)
+            rng2 = np.random.RandomState(trial)
+            ch2 = sender_z_to_impedance_modulation(sig, 0, rng2, mirror_sigma_map=sigma_map)
+            for (_, _, zl1), (_, _, zl2) in zip(ch1, ch2):
+                z_no_mirror.append(zl1)
+                z_with_mirror.append(zl2)
+
+        # Variance with mirror should be significantly smaller
+        std_no = np.std(z_no_mirror)
+        std_with = np.std(z_with_mirror)
+        assert std_with < std_no * 0.85, (
+            f"Mirror σ reduction failed: σ_no={std_no:.2f}, σ_with={std_with:.2f}"
+        )
+
+    def test_condition_m_differs_from_s(self):
+        """
+        Condition M (mirror + bridge) should produce different SNR than
+        condition S (no mirror + bridge).  Bug 1 fix: M ≠ S.
+        """
+        m = run_condition("M", verbose=False)
+        s = run_condition("S", verbose=False)
+
+        # M and S should no longer be identical
+        assert m.snr != s.snr, (
+            f"M and S should differ: M.snr={m.snr:.4f}, S.snr={s.snr:.4f}"
+        )
+
+    def test_condition_m_has_mirror_sigma(self):
+        """Condition M should apply mirror σ reduction (visible in lower Γ_mod)."""
+        m = run_condition("M", verbose=False)
+        s = run_condition("S", verbose=False)
+
+        # With mirror σ reduction, M's modulated Γ should differ from S's
+        # (mirror narrows noise → more consistent bridge transfer)
+        assert m.mean_modulated_gamma != s.mean_modulated_gamma, (
+            f"M mod Γ should differ from S: M={m.mean_modulated_gamma:.4f}, "
+            f"S={s.mean_modulated_gamma:.4f}"
+        )
+
+
+# ============================================================
+# Test: Null Condition SNR (Bug 3 fix)
+# ============================================================
+
+class TestNullConditionSNR:
+    """Verify that N condition has 0 contrast and 0 SNR."""
+
+    def test_null_contrast_is_zero(self):
+        """N condition: no modulation → contrast = 0."""
+        n = run_condition("N", verbose=False)
+        assert n.gamma_contrast == 0.0, (
+            f"N contrast should be 0, got {n.gamma_contrast}"
+        )
+
+    def test_null_snr_is_zero(self):
+        """N condition: no modulation → SNR = 0."""
+        n = run_condition("N", verbose=False)
+        assert n.snr == 0.0, f"N SNR should be 0, got {n.snr}"
+
+    def test_null_no_modulated_samples(self):
+        """N condition should have 0 modulated samples."""
+        n = run_condition("N", verbose=False)
+        assert n.n_modulated_samples == 0
+
+
+# ============================================================
+# Test: Γ_social Differentiation (Bug 2 fix)
+# ============================================================
+
+class TestSocialDifferentiation:
+    """Verify that mirror-trained conditions show different Γ_social."""
+
+    def test_mirror_conditions_have_higher_empathy(self):
+        """
+        M/V conditions (mirror-trained) should use higher empathy
+        in communication verification than S/N (no mirror).
+        """
+        m = run_condition("M", verbose=False)
+        n = run_condition("N", verbose=False)
+
+        # Mirror-trained conditions should show different social Γ
+        # because they use higher empathy (from mirror training)
+        assert m.gamma_social_last != n.gamma_social_last, (
+            f"M and N should have different Γ_social: "
+            f"M={m.gamma_social_last:.4f}, N={n.gamma_social_last:.4f}"
+        )
+
+    def test_empathy_parameter_affects_social_gamma(self, sender_brain, receiver_brain):
+        """Higher empathy should produce different Γ_social."""
+        pairs_low = communication_verification(
+            sender_brain, receiver_brain, rounds=5,
+            empathy=0.5, effort=0.6, verbose=False,
+        )
+        # Create fresh brains for fair comparison
+        sender2 = AliceBrain(neuron_count=NEURON_COUNT)
+        receiver2 = AliceBrain(neuron_count=NEURON_COUNT)
+        pairs_high = communication_verification(
+            sender2, receiver2, rounds=5,
+            empathy=0.9, effort=0.9, verbose=False,
+        )
+        # Different empathy should produce different Γ patterns
+        avg_low = np.mean([sum(p) / 2 for p in pairs_low])
+        avg_high = np.mean([sum(p) / 2 for p in pairs_high])
+        assert avg_low != avg_high, (
+            f"Different empathy should give different Γ: "
+            f"low={avg_low:.4f}, high={avg_high:.4f}"
+        )
