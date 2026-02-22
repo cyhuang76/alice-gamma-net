@@ -26,6 +26,7 @@ from alice.body.eye import AliceEye
 from alice.body.hand import AliceHand
 from alice.body.ear import AliceEar
 from alice.body.mouth import AliceMouth
+from alice.body.lung import AliceLung
 from alice.brain.calibration import TemporalCalibrator
 from alice.brain.autonomic import AutonomicNervousSystem
 from alice.brain.sleep import SleepCycle
@@ -396,6 +397,7 @@ class AliceBrain:
         self.hand = AliceHand()
         self.ear = AliceEar()
         self.mouth = AliceMouth()
+        self.lung = AliceLung()
 
         # ★ Temporal calibrator — cross-modal signal binding (action model)
         self.calibrator = TemporalCalibrator()
@@ -978,6 +980,39 @@ class AliceBrain:
             sensory_load=brain_result["sensory"]["sensory_activity"],
             is_sleeping=self.sleep_cycle.is_sleeping(),
         )
+
+        # ★ Lung organ tick — LC resonator breathing
+        #   Connects: autonomic.breath_rate → oscillator frequency
+        #             homeostatic._digestion_buffer → stomach diaphragm compression
+        #             homeostatic.hydration → mucosal hydration factor
+        #             hand.total_movements → motor-driven C_base growth
+        #             vitals.ram_temperature → heat dissipation
+        #   Outputs:  lung_pressure → mouth (dynamic speech supply)
+        #             heat_dissipated → vitals.ram_temperature ↓
+        #             water_lost → homeostatic.hydration ↓ (respiratory evaporation)
+        try:
+            lung_result = self.lung.tick(
+                breath_rate=self.autonomic.breath_rate,
+                digestion_buffer=self.homeostatic_drive._digestion_buffer,
+                hydration=self.homeostatic_drive.hydration,
+                motor_movements=self.hand.total_movements,
+                ram_temperature=self.vitals.ram_temperature,
+                sympathetic=self.autonomic.sympathetic,
+            )
+            # Lung → Vitals: heat dissipation (exhale cools the system)
+            self.vitals.ram_temperature = float(np.clip(
+                self.vitals.ram_temperature - lung_result["heat_dissipated"],
+                0.0, 1.0,
+            ))
+            # Lung → Homeostatic: respiratory water loss
+            self.homeostatic_drive.hydration = float(np.clip(
+                self.homeostatic_drive.hydration - lung_result["water_lost"],
+                0.0, 1.2,
+            ))
+            # Lung → Mouth: dynamic air supply (replaces static LUNG_PRESSURE_DEFAULT)
+            self.mouth._lung_pressure = lung_result["lung_pressure"]
+        except Exception:
+            lung_result = {}
 
         # ★ Sleep cycle update
         sleep_info = self.sleep_cycle.tick(
@@ -1741,6 +1776,7 @@ class AliceBrain:
                 "eye": self.eye.get_stats(),
                 "ear": self.ear.get_stats(),
                 "mouth": self.mouth.get_stats(),
+                "lung": self.lung.get_stats(),
                 "calibrator": self.calibrator.get_stats(),
                 "autonomic": self.autonomic.get_stats(),
                 "sleep": self.sleep_cycle.get_stats(),
