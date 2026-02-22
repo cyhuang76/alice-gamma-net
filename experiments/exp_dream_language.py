@@ -122,6 +122,11 @@ class DreamRecord:
     gammas: List[float] = field(default_factory=list)
     wernicke_observations: int = 0
     n400_events: int = 0
+    # Fatigue-modulated dreaming (託夢物理)
+    fatigue_factors: List[float] = field(default_factory=list)
+    amp_multipliers: List[float] = field(default_factory=list)
+    peak_fatigue: float = 0.0
+    peak_amp_multiplier: float = 1.0
 
 
 @dataclass
@@ -351,6 +356,16 @@ def dream_incubation_night(
             # --- REM window: present video stimuli ---
             if stage == "rem":
                 dream_rec.ticks_in_rem += 1
+
+                # Track fatigue-modulated dream metrics
+                if sleep_result.get("dream_result"):
+                    dr = sleep_result["dream_result"]
+                    ff = dr.get("fatigue_factor", 0.0)
+                    am = dr.get("amp_multiplier", 1.0)
+                    dream_rec.fatigue_factors.append(ff)
+                    dream_rec.amp_multipliers.append(am)
+                    dream_rec.peak_fatigue = max(dream_rec.peak_fatigue, ff)
+                    dream_rec.peak_amp_multiplier = max(dream_rec.peak_amp_multiplier, am)
 
                 if tick_in_cycle % VIDEO_INJECT_INTERVAL == 0:
                     # Visual stimulus: video frame through eye
@@ -604,6 +619,13 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
                   f"{len(concepts_a)} unique concepts | "
                   f"β={total_stim_b} stimuli, "
                   f"{len(concepts_b)} unique concepts")
+            # Fatigue metrics
+            peak_f_a = max((r.peak_fatigue for r in records_a), default=0)
+            peak_f_b = max((r.peak_fatigue for r in records_b), default=0)
+            peak_m_a = max((r.peak_amp_multiplier for r in records_a), default=1)
+            peak_m_b = max((r.peak_amp_multiplier for r in records_b), default=1)
+            print(f"    Fatigue: α peak={peak_f_a:.3f} (×{peak_m_a:.2f}) | "
+                  f"β peak={peak_f_b:.3f} (×{peak_m_b:.2f})")
 
     # ── Post-dream snapshots ──
     post_dream_a = snapshot_semantic_field(alice_a)
@@ -698,6 +720,19 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
         print("  Observations (NOT conclusions — emergence must be observed):")
         print(f"    Dream stimuli presented:  α={sum(r.stimuli_presented for r in all_dream_records_a)}"
               f"  β={sum(r.stimuli_presented for r in all_dream_records_b)}")
+        # Fatigue-modulated dreaming metrics
+        all_fatigue_a = [f for r in all_dream_records_a for f in r.fatigue_factors]
+        all_fatigue_b = [f for r in all_dream_records_b for f in r.fatigue_factors]
+        all_amp_a = [m for r in all_dream_records_a for m in r.amp_multipliers]
+        all_amp_b = [m for r in all_dream_records_b for m in r.amp_multipliers]
+        if all_fatigue_a:
+            print(f"    Fatigue (託夢物理): α mean={np.mean(all_fatigue_a):.3f} "
+                  f"peak={max(all_fatigue_a):.3f} "
+                  f"amp ×{np.mean(all_amp_a):.2f}~×{max(all_amp_a):.2f}")
+        if all_fatigue_b:
+            print(f"                       β mean={np.mean(all_fatigue_b):.3f} "
+                  f"peak={max(all_fatigue_b):.3f} "
+                  f"amp ×{np.mean(all_amp_b):.2f}~×{max(all_amp_b):.2f}")
         print(f"    Semantic attractors formed: α={post_dream_a.n_attractors}"
               f"  β={post_dream_b.n_attractors}")
         print(f"    Wernicke concepts:  α={post_dream_w_a['n_concepts']}"
@@ -743,6 +778,16 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
         "n_attractors_beta": post_comm_b.n_attractors,
         "n_shared_concepts": len(shared),
         "gamma_social_trend": gamma_trend if comm_records else 0.0,
+
+        # fatigue-modulated dream metrics (託夢物理)
+        "peak_fatigue_alpha": max(
+            (r.peak_fatigue for r in all_dream_records_a), default=0.0),
+        "peak_fatigue_beta": max(
+            (r.peak_fatigue for r in all_dream_records_b), default=0.0),
+        "peak_amp_alpha": max(
+            (r.peak_amp_multiplier for r in all_dream_records_a), default=1.0),
+        "peak_amp_beta": max(
+            (r.peak_amp_multiplier for r in all_dream_records_b), default=1.0),
     }
 
 

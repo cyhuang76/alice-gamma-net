@@ -42,6 +42,15 @@ from experiments.exp_dream_language import (
     CommunicationRecord,
 )
 
+from alice.brain.sleep_physics import (
+    REMDreamDiagnostic,
+    SleepPhysicsEngine,
+    REM_DREAM_NOISE_AMP,
+    FATIGUE_DREAM_AMP_MAX,
+    FATIGUE_DREAM_PROBE_BONUS,
+    REM_PROBE_COUNT,
+)
+
 
 # ================================================================
 # Fixtures
@@ -560,3 +569,212 @@ class TestEmergenceObservation:
         assert isinstance(result["shared_concepts"], list)
         assert isinstance(result["only_alpha_concepts"], list)
         assert isinstance(result["only_beta_concepts"], list)
+
+
+# ================================================================
+# Fatigue-Modulated Dreaming Tests (託夢物理)
+# ================================================================
+
+class TestFatigueModulatedDreaming:
+    """
+    Validate the fatigue→dream intensity coupling.
+
+    Physics: impedance_debt drives PGO amplitude.
+    Safety: amplitude capped, net REM energy recovery ≥ 0.
+    """
+
+    def test_zero_fatigue_baseline(self):
+        """With zero fatigue, probe_channels should use base amp and count."""
+        diag = REMDreamDiagnostic()
+        channels = [(f"ch_{i}", 50.0, 50.0 + i * 10) for i in range(10)]
+        result = diag.probe_channels(channels, fatigue_factor=0.0)
+        assert result["amp_multiplier"] == 1.0
+        assert result["probes"] == REM_PROBE_COUNT
+
+    def test_max_fatigue_capped(self):
+        """At maximum fatigue, amplitude must be capped at FATIGUE_DREAM_AMP_MAX."""
+        diag = REMDreamDiagnostic()
+        channels = [(f"ch_{i}", 50.0, 80.0) for i in range(20)]
+        result = diag.probe_channels(channels, fatigue_factor=1.0)
+        assert result["amp_multiplier"] <= FATIGUE_DREAM_AMP_MAX + 0.001
+        assert result["amp_multiplier"] >= 1.5  # Should be noticeably higher
+
+    def test_fatigue_increases_amplitude(self):
+        """Higher fatigue → higher PGO amplitude multiplier."""
+        diag = REMDreamDiagnostic()
+        channels = [(f"ch_{i}", 50.0, 80.0) for i in range(20)]
+        r_low = diag.probe_channels(channels, fatigue_factor=0.1)
+        r_high = diag.probe_channels(channels, fatigue_factor=0.9)
+        assert r_high["amp_multiplier"] > r_low["amp_multiplier"]
+
+    def test_fatigue_increases_probe_count(self):
+        """Higher fatigue → more channels scanned per tick."""
+        diag = REMDreamDiagnostic()
+        channels = [(f"ch_{i}", 50.0, 80.0) for i in range(20)]
+        r_low = diag.probe_channels(channels, fatigue_factor=0.0)
+        r_high = diag.probe_channels(channels, fatigue_factor=1.0)
+        assert r_high["probes"] >= r_low["probes"]
+        assert r_high["probes"] <= REM_PROBE_COUNT + FATIGUE_DREAM_PROBE_BONUS
+
+    def test_fatigue_factor_clipped_to_01(self):
+        """fatigue_factor should be clipped to [0, 1] — no overflow."""
+        diag = REMDreamDiagnostic()
+        channels = [(f"ch_{i}", 50.0, 80.0) for i in range(20)]
+        r_over = diag.probe_channels(channels, fatigue_factor=5.0)
+        r_under = diag.probe_channels(channels, fatigue_factor=-1.0)
+        assert r_over["fatigue_factor"] == 1.0
+        assert r_under["fatigue_factor"] == 0.0
+        assert r_over["amp_multiplier"] <= FATIGUE_DREAM_AMP_MAX + 0.001
+
+    def test_empty_channels_returns_safe_dict(self):
+        """Empty channel list should return safe default with fatigue fields."""
+        diag = REMDreamDiagnostic()
+        result = diag.probe_channels([], fatigue_factor=0.5)
+        assert result["probes"] == 0
+        assert result["amp_multiplier"] == 1.0
+        assert result["fatigue_factor"] == 0.0
+
+    def test_dream_fragments_include_probe_amp(self):
+        """Dream fragments should record the actual probe amplitude used."""
+        diag = REMDreamDiagnostic()
+        channels = [("ch_0", 50.0, 100.0)]
+        diag.probe_channels(channels, fatigue_factor=0.5)
+        assert len(diag.dream_fragments) >= 1
+        frag = diag.dream_fragments[-1]
+        assert "probe_amp" in frag
+        assert frag["probe_amp"] > REM_DREAM_NOISE_AMP  # Amplified
+
+
+class TestFatigueSleepPhysicsSafety:
+    """
+    Safety tests: fatigue-modulated REM must NOT drain energy below zero
+    or create positive feedback runaway.
+    """
+
+    def test_rem_energy_net_positive(self):
+        """
+        Even at max fatigue, REM tick should have net positive energy recovery.
+        
+        This is the critical safety invariant:
+          recovery - cost - extra_dream_cost ≥ 0
+        """
+        engine = SleepPhysicsEngine(energy=0.5)
+        # Deliberately accumulate max debt
+        for _ in range(100):
+            engine.awake_tick(reflected_energy=0.5)
+        assert engine.impedance_debt.debt > 0.3  # Confirm fatigued
+
+        engine.begin_sleep()
+        e_before = engine.energy
+        # Run many REM ticks
+        channels = [(f"ch_{i}", 50.0, 80.0) for i in range(20)]
+        for _ in range(50):
+            engine.sleep_tick(
+                stage="rem",
+                channel_impedances=channels,
+                synaptic_strengths=list(np.random.uniform(0.3, 1.5, 100)),
+            )
+        e_after = engine.energy
+        # Energy should not have decreased (REM is net recovery)
+        assert e_after >= e_before, \
+            f"REM drained energy: {e_before:.4f} → {e_after:.4f}"
+
+    def test_no_runaway_positive_feedback(self):
+        """
+        Fatigue → vivid dream → more energy cost → more debt → ...
+        This loop MUST be stable (debt should decrease during sleep, not increase).
+        """
+        engine = SleepPhysicsEngine(energy=0.3)
+        # Max out debt
+        for _ in range(200):
+            engine.awake_tick(reflected_energy=1.0)
+        initial_debt = engine.impedance_debt.debt
+
+        engine.begin_sleep()
+        channels = [(f"ch_{i}", 50.0, 80.0) for i in range(20)]
+        # One full sleep cycle: N3 then REM
+        for _ in range(30):
+            engine.sleep_tick(stage="n3", channel_impedances=channels,
+                              synaptic_strengths=list(np.ones(100)))
+        for _ in range(20):
+            engine.sleep_tick(stage="rem", channel_impedances=channels,
+                              synaptic_strengths=list(np.ones(100)))
+        final_debt = engine.impedance_debt.debt
+        # Debt must decrease during sleep (N3 + REM both repair)
+        assert final_debt < initial_debt, \
+            f"Debt increased during sleep: {initial_debt:.4f} → {final_debt:.4f}"
+
+    def test_energy_never_negative(self):
+        """Energy must NEVER go below 0 regardless of fatigue level."""
+        engine = SleepPhysicsEngine(energy=0.01)  # Near-empty
+        for _ in range(50):
+            engine.awake_tick(reflected_energy=1.0)
+        engine.begin_sleep()
+        channels = [(f"ch_{i}", 50.0, 100.0) for i in range(20)]
+        for _ in range(100):
+            engine.sleep_tick(stage="rem", channel_impedances=channels)
+        assert engine.energy >= 0.0, f"Negative energy: {engine.energy}"
+
+
+class TestFatigueDreamExperimentIntegration:
+    """
+    Integration tests: fatigue modulation visible in dream experiment results.
+    """
+
+    def test_experiment_records_fatigue(self):
+        """Dream records should contain fatigue metrics."""
+        result = run_experiment(verbose=False)
+        assert "peak_fatigue_alpha" in result
+        assert "peak_fatigue_beta" in result
+        assert "peak_amp_alpha" in result
+        assert "peak_amp_beta" in result
+
+    def test_dream_records_have_fatigue_data(self):
+        """Individual dream records should track fatigue factors."""
+        result = run_experiment(verbose=False)
+        for rec in result["dream_records_alpha"]:
+            assert hasattr(rec, "fatigue_factors")
+            assert hasattr(rec, "amp_multipliers")
+            assert hasattr(rec, "peak_fatigue")
+            assert hasattr(rec, "peak_amp_multiplier")
+            assert rec.peak_amp_multiplier >= 1.0
+
+    def test_fatigue_present_after_wake(self):
+        """
+        After 80 awake ticks, impedance debt should be non-zero,
+        meaning dream amplitude should be > 1.0×.
+        """
+        result = run_experiment(verbose=False)
+        # At least one dream cycle should show fatigue > 0
+        all_fatigue = [
+            f for r in result["dream_records_alpha"]
+            for f in r.fatigue_factors
+        ]
+        if all_fatigue:
+            assert max(all_fatigue) > 0.0, \
+                "No fatigue detected after 80 awake ticks"
+            # And amp should be elevated
+            all_amp = [
+                m for r in result["dream_records_alpha"]
+                for m in r.amp_multipliers
+            ]
+            assert max(all_amp) > 1.0, \
+                "Amplitude not elevated despite fatigue"
+
+    def test_later_nights_show_different_fatigue(self):
+        """
+        Night 1 vs Night 3 fatigue profiles may differ
+        (as debt is partially repaired each night).
+        """
+        result = run_experiment(verbose=False)
+        records = result["dream_records_alpha"]
+        night_0 = [r for r in records if r.night == 0]
+        night_2 = [r for r in records if r.night == 2]
+        # Both should have dream data
+        assert len(night_0) > 0
+        assert len(night_2) > 0
+        # Just verify the recording works — we don't prescribe the direction
+        f0 = [f for r in night_0 for f in r.fatigue_factors]
+        f2 = [f for r in night_2 for f in r.fatigue_factors]
+        assert isinstance(f0, list)
+        assert isinstance(f2, list)

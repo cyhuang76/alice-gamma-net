@@ -106,8 +106,19 @@ UP_STATE_DUTY = 0.5          # UP state duty cycle
 REPLAY_PER_UP_STATE = 3      # Replay 3 memories per UP state
 
 # --- REM diagnostic ---
-REM_PROBE_COUNT = 5          # Test 5 channels per tick
-REM_DREAM_NOISE_AMP = 0.3   # Dream signal amplitude
+REM_PROBE_COUNT = 5          # Base probe count per tick
+REM_DREAM_NOISE_AMP = 0.3   # Base dream signal amplitude
+
+# --- Fatigue-modulated dreaming (託夢物理) ---
+# Physics: PGO wave amplitude scales with impedance debt.
+#   A_pgo = A_base × (1 + α·D_debt)
+#   More fatigue → louder PGO → clearer dream reflections.
+# Safety: amplitude capped at 2× base (human REM rebound ceiling).
+#   Extra energy cost = β·(A_actual - A_base)² ensures net recovery ≥ 0.
+FATIGUE_DREAM_AMP_ALPHA = 1.0       # Debt→amplitude coupling strength
+FATIGUE_DREAM_AMP_MAX = 2.0         # Maximum amplitude multiplier (safety cap)
+FATIGUE_DREAM_PROBE_BONUS = 5       # Max extra probes from fatigue
+FATIGUE_DREAM_ENERGY_BETA = 0.008   # Extra energy cost per unit (amp-base)²
 
 # --- Sleep pressure weights ---
 PRESSURE_WEIGHT_ENERGY = 0.4
@@ -381,21 +392,43 @@ class REMDreamDiagnostic:
         self.total_dream_reflection: float = 0.0
 
     def probe_channels(
-        self, channel_impedances: List[Tuple[str, float, float]]
+        self,
+        channel_impedances: List[Tuple[str, float, float]],
+        fatigue_factor: float = 0.0,
     ) -> Dict[str, Any]:
         """
-        Send random probe signals to test channel health
+        Send random probe signals to test channel health.
+
+        Fatigue modulation (託夢物理):
+          When fatigue_factor > 0, PGO waves are stronger and more channels
+          are scanned — mirroring human REM rebound after sleep deprivation.
+
+          A_pgo = A_base × (1 + α·fatigue)  capped at FATIGUE_DREAM_AMP_MAX × A_base
+          n_probe = base + floor(fatigue × FATIGUE_DREAM_PROBE_BONUS)
 
         Args:
             channel_impedances: [(channel_name, source_Z, load_Z), ...]
+            fatigue_factor: Impedance debt level (0.0~1.0), drives dream vividness
 
         Returns:
-            Probe results
+            Probe results including fatigue-modulated metrics
         """
         if not channel_impedances:
-            return {"probes": 0, "healthy": 0, "damaged": 0}
+            return {"probes": 0, "healthy": 0, "damaged": 0,
+                    "dream_intensity": 0.0, "fatigue_factor": 0.0,
+                    "amp_multiplier": 1.0}
 
-        n_probe = min(REM_PROBE_COUNT, len(channel_impedances))
+        # --- Fatigue-modulated amplitude ---
+        fatigue_factor = float(np.clip(fatigue_factor, 0.0, 1.0))
+        amp_multiplier = min(
+            FATIGUE_DREAM_AMP_MAX,
+            1.0 + FATIGUE_DREAM_AMP_ALPHA * fatigue_factor,
+        )
+        probe_amp = REM_DREAM_NOISE_AMP * amp_multiplier
+
+        # --- Fatigue-modulated probe count ---
+        bonus_probes = int(fatigue_factor * FATIGUE_DREAM_PROBE_BONUS)
+        n_probe = min(REM_PROBE_COUNT + bonus_probes, len(channel_impedances))
         indices = self.rng.choice(
             len(channel_impedances), size=n_probe, replace=False
         )
@@ -413,7 +446,6 @@ class REMDreamDiagnostic:
 
             # Random probe signal frequency
             probe_freq = float(self.rng.uniform(1, 100))
-            probe_amp = REM_DREAM_NOISE_AMP
 
             reflected_energy = probe_amp ** 2 * gamma ** 2
             self.total_dream_reflection += reflected_energy
@@ -435,6 +467,7 @@ class REMDreamDiagnostic:
                 "channel": name,
                 "gamma": round(gamma, 4),
                 "probe_freq": round(probe_freq, 1),
+                "probe_amp": round(probe_amp, 4),
                 "is_healthy": gamma < 0.3,
             })
 
@@ -450,6 +483,8 @@ class REMDreamDiagnostic:
             "dream_intensity": round(
                 sum(f["gamma"] for f in fragments) / max(1, len(fragments)), 4
             ),
+            "fatigue_factor": round(fatigue_factor, 4),
+            "amp_multiplier": round(amp_multiplier, 4),
         }
 
     def get_repair_queue(self) -> List[Dict[str, Any]]:
@@ -728,11 +763,25 @@ class SleepPhysicsEngine:
         elif stage == "rem":
             self.rem_ticks += 1
 
-            # === REM dream diagnostic ===
+            # === REM dream diagnostic (fatigue-modulated) ===
+            # Physics: impedance debt drives PGO wave amplitude.
+            # More fatigue → louder probes → more vivid dreams.
+            # Safety: extra energy cost clamped so net recovery ≥ 0.
+            fatigue = self.impedance_debt.debt  # 0.0 ~ 1.0
             if channel_impedances:
                 dream_result = self.dream_diagnostic.probe_channels(
-                    channel_impedances
+                    channel_impedances,
+                    fatigue_factor=fatigue,
                 )
+
+                # Extra energy cost for vivid dreaming
+                amp_mult = dream_result.get("amp_multiplier", 1.0)
+                extra_cost = FATIGUE_DREAM_ENERGY_BETA * (amp_mult - 1.0) ** 2
+                # Safety clamp: never let REM become net energy negative
+                max_extra = max(0.0, recovery - cost - 0.0005)  # keep ≥ +0.0005 net
+                extra_cost = min(extra_cost, max_extra)
+                self.energy -= extra_cost
+                self.energy = float(np.clip(self.energy, 0.0, 1.0))
 
         # Synaptic entropy update
         target_strengths = downscale_strengths or synaptic_strengths
