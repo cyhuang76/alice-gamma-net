@@ -1,0 +1,56 @@
+# Γ-Net ALICE — VS Code / AI Agent Context Exclusions
+# Purpose: Prevent AI agents from loading irrelevant files into context window
+# This reduces hallucination and keeps focus on core physics logic
+
+# ── Python / Build Artifacts ──
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Virtual Environment ──
+.venv/
+
+# ── Git Internals ──
+.git/
+
+# ── pytest / Coverage Cache ──
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# ── IDE / Editor ──
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Experiment Outputs (large, not source code) ──
+exp_out.txt
+
+# ── Media / Binary Assets ──
+paper/media-9c7ef1d12bf0c9e5/
+paper/system-commandline-sentinel-files/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.ico
+*.pdf
+*.wav
+*.mp3
+*.mp4
+
+# ── Temporary / Transient ──
+*.tmp
+*.bak
+*.log
