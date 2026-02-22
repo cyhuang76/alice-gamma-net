@@ -6,6 +6,7 @@ from alice.body.ear import AliceEar
 from alice.body.hand import AliceHand
 from alice.body.mouth import AliceMouth
 from alice.body.lung import AliceLung
+from alice.body.cardiovascular import CardiovascularSystem
 from alice.body.cochlea import (
     CochlearFilterBank,
     TonotopicActivation,
@@ -21,6 +22,7 @@ __all__ = [
     "AliceHand",
     "AliceMouth",
     "AliceLung",
+    "CardiovascularSystem",
     # Cochlear filter bank (Phase 4.1)
     "CochlearFilterBank",
     "TonotopicActivation",

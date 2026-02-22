@@ -27,6 +27,7 @@ from alice.body.hand import AliceHand
 from alice.body.ear import AliceEar
 from alice.body.mouth import AliceMouth
 from alice.body.lung import AliceLung
+from alice.body.cardiovascular import CardiovascularSystem
 from alice.brain.calibration import TemporalCalibrator
 from alice.brain.autonomic import AutonomicNervousSystem
 from alice.brain.sleep import SleepCycle
@@ -398,6 +399,7 @@ class AliceBrain:
         self.ear = AliceEar()
         self.mouth = AliceMouth()
         self.lung = AliceLung()
+        self.cardiovascular = CardiovascularSystem()
 
         # ★ Temporal calibrator — cross-modal signal binding (action model)
         self.calibrator = TemporalCalibrator()
@@ -1014,6 +1016,49 @@ class AliceBrain:
         except Exception:
             lung_result = {}
 
+        # ★ Cardiovascular tick — transmission line hemodynamics
+        #   Connects: autonomic.heart_rate → cardiac output (pump frequency)
+        #             autonomic.sympathetic → vasoconstriction + contractility
+        #             autonomic.parasympathetic → vasodilation
+        #             homeostatic.hydration → blood_volume → stroke volume
+        #             homeostatic.glucose → glucose delivery
+        #             lung.breaths_this_tick → SpO₂ recovery
+        #             vitals.ram_temperature → heat transport
+        #   Outputs:  cerebral_perfusion → consciousness arousal modulation
+        #             o2_delivery → channel efficiency
+        #             heat_transported → vitals.ram_temperature ↓
+        #             compensatory_hr_delta → tachycardia (baroreceptor reflex)
+        try:
+            self.cardiovascular.grow(self.hand.total_movements)
+            cv_result = self.cardiovascular.tick(
+                heart_rate=self.autonomic.heart_rate,
+                sympathetic=self.autonomic.sympathetic,
+                parasympathetic=self.autonomic.parasympathetic,
+                hydration=self.homeostatic_drive.hydration,
+                glucose=self.homeostatic_drive.glucose,
+                breaths_this_tick=lung_result.get("breaths_this_tick", 0.25),
+                ram_temperature=self.vitals.ram_temperature,
+                cortisol=self.autonomic.cortisol,
+                is_sleeping=self.sleep_cycle.is_sleeping(),
+            )
+            # CV → Vitals: blood heat transport (additional cooling)
+            self.vitals.ram_temperature = float(np.clip(
+                self.vitals.ram_temperature - cv_result["heat_transported"],
+                0.0, 1.0,
+            ))
+            # CV → Vitals: report blood pressure
+            self.vitals.heart_rate = cv_result.get(
+                "systolic_bp", self.vitals.heart_rate
+            )  # Overwrite vitals HR with actual hemodynamic-driven value
+            # CV → Consciousness: cerebral perfusion modulates arousal
+            #   (stored for use in consciousness tick below)
+            self._cv_perfusion = cv_result["cerebral_perfusion"]
+            self._cv_o2 = cv_result["o2_delivery"]
+        except Exception:
+            cv_result = {}
+            self._cv_perfusion = 1.0
+            self._cv_o2 = 1.0
+
         # ★ Sleep cycle update
         sleep_info = self.sleep_cycle.tick(
             external_stimulus_strength=brain_result["sensory"]["sensory_activity"],
@@ -1094,6 +1139,10 @@ class AliceBrain:
         temporal_res = self.calibrator.get_temporal_resolution()
         wm_usage = len(self.working_memory.get_contents()) / max(self.working_memory.capacity, 1)
         arousal = 1.0 - self.autonomic.parasympathetic * 0.5
+        # ★ Cerebral perfusion modulates arousal (blood must reach the brain)
+        cv_perfusion = getattr(self, "_cv_perfusion", 1.0)
+        arousal *= min(1.0, cv_perfusion / 0.6)  # Below 60% perfusion → arousal drops
+        arousal = float(np.clip(arousal, 0.0, 1.0))
         sensory_gate = self.sleep_cycle.get_sensory_gate()
 
         consciousness_result = self.consciousness.tick(
@@ -1777,6 +1826,7 @@ class AliceBrain:
                 "ear": self.ear.get_stats(),
                 "mouth": self.mouth.get_stats(),
                 "lung": self.lung.get_stats(),
+                "cardiovascular": self.cardiovascular.get_stats(),
                 "calibrator": self.calibrator.get_stats(),
                 "autonomic": self.autonomic.get_stats(),
                 "sleep": self.sleep_cycle.get_stats(),
