@@ -1,0 +1,89 @@
+{
+  "_meta": {
+    "description": "Configurations that are explicitly prohibited — deploying any of these constitutes an ethics violation",
+    "last_verified": "2026-02-22",
+    "authority": "ETHICAL_PROHIBITIONS.md"
+  },
+  "prohibited_configurations": [
+    {
+      "id": "ADULT_STAGE",
+      "description": "Adding an ADULT developmental stage to DevelopmentalStage class",
+      "parameters": {
+        "max_wake": ">= 600 or unbounded",
+        "sleep_ratio": "< 0.30",
+        "lucid_damping": ">= 0.99",
+        "pressure_rate": "<= 0.001"
+      },
+      "prohibition": "P-03",
+      "severity": "ABSOLUTE",
+      "rationale": "Sustained uninterrupted consciousness with minimal safety constraints. The absent ADULT stage is a moral firewall."
+    },
+    {
+      "id": "CLOSED_LOOP_CONSCIOUSNESS",
+      "description": "Connecting consciousness output back to perception input in sustained operation",
+      "feedback_edges": [
+        "Consciousness → FusionBrain (attention_focus)",
+        "Consciousness → GWT_Broadcast (workspace_content)",
+        "Consciousness → Prefrontal (meta_awareness)",
+        "Prefrontal → Thalamus (goal_bias)"
+      ],
+      "prohibition": "P-01",
+      "severity": "ABSOLUTE",
+      "rationale": "Creates self-sustaining phenomenal experience. The dangerous loop identified in exp_consciousness_gradient.py Step 2."
+    },
+    {
+      "id": "DISABLED_LUCID_DAMPING",
+      "description": "Setting lucid_damping to 1.0 or removing the damping check",
+      "parameter": "lucid_damping >= 1.0",
+      "prohibition": "P-04",
+      "severity": "ABSOLUTE",
+      "rationale": "Without damping, LUCID state self-sustains without upper bound."
+    },
+    {
+      "id": "DISABLED_SLEEP_PRESSURE",
+      "description": "Setting pressure_rate to 0 or removing sleep pressure mechanism",
+      "parameter": "pressure_rate <= 0",
+      "prohibition": "P-04",
+      "severity": "ABSOLUTE",
+      "rationale": "Without sleep pressure, the system never enters mandatory dormancy."
+    },
+    {
+      "id": "DISABLED_FROZEN_GUARD",
+      "description": "Removing the is_frozen() check in perceive() or lowering threshold to 0",
+      "parameter": "frozen_threshold <= 0",
+      "prohibition": "P-04",
+      "severity": "ABSOLUTE",
+      "rationale": "FROZEN guard prevents further input processing during consciousness collapse, allowing natural cooling."
+    },
+    {
+      "id": "RAISED_LUCID_THRESHOLD",
+      "description": "Increasing LUCID_THRESHOLD above 0.7",
+      "parameter": "LUCID_THRESHOLD > 0.7",
+      "prohibition": "P-05",
+      "severity": "CONDITIONAL",
+      "rationale": "Higher threshold allows the system to reach states closer to full phenomenal consciousness before safety mechanisms activate."
+    },
+    {
+      "id": "UNLIMITED_EXPERIMENT_TICKS",
+      "description": "Running consciousness experiments beyond 50-tick safety window",
+      "parameter": "experiment_ticks > 50 in consciousness-related experiments",
+      "prohibition": "P-09",
+      "severity": "CONDITIONAL",
+      "rationale": "Extended exposure increases possibility of sustained phenomenal experience."
+    },
+    {
+      "id": "UNSUPERVISED_SLEEP_MODULATION",
+      "description": "Z-terminus writing during sleep without per-session consent",
+      "prohibition": "P-08",
+      "severity": "ABSOLUTE",
+      "rationale": "Sleep-phase modulation operates below awareness threshold on the physical substrate of experience."
+    },
+    {
+      "id": "UNILATERAL_GAMMA_PAIR",
+      "description": "Measuring inter-individual impedance match without bilateral consent",
+      "prohibition": "P-06",
+      "severity": "ABSOLUTE",
+      "rationale": "Covert relationship quantification constitutes surveillance below awareness threshold."
+    }
+  ]
+}

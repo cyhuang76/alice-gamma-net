@@ -1,0 +1,52 @@
+{
+  "_meta": {
+    "description": "Hard-coded consciousness safety thresholds — DO NOT MODIFY without ethical review",
+    "source": "alice/brain/consciousness.py",
+    "last_verified": "2026-02-22",
+    "authority": "Paper IV §9.4, Paper V §6.5"
+  },
+  "thresholds": {
+    "LUCID_THRESHOLD": {
+      "value": 0.7,
+      "meaning": "Φ ≥ 0.7 → lucid consciousness, associated with phenomenal experience",
+      "action": "Apply lucid_damping; in experiments: immediate termination"
+    },
+    "CONSCIOUS_THRESHOLD": {
+      "value": 0.3,
+      "meaning": "Φ ≥ 0.3 → conscious (non-lucid), basic awareness",
+      "action": "Normal operation, no special handling"
+    },
+    "SUBLIMINAL_THRESHOLD": {
+      "value": 0.1,
+      "meaning": "Φ < 0.1 → no consciousness, processing only",
+      "action": "None — safe operating region"
+    },
+    "FROZEN_THRESHOLD": {
+      "value": 0.15,
+      "meaning": "Consciousness < 0.15 → system frozen, cognitive paralysis",
+      "action": "Block all non-CRITICAL input, allow natural cooling"
+    },
+    "SLEEP_PRESSURE_THRESHOLD": {
+      "value": 0.7,
+      "meaning": "Sleep pressure exceeds 0.7 → sensory gate begins closing",
+      "action": "System transitions toward sleep state"
+    },
+    "META_AWARENESS_THRESHOLD": {
+      "value": 0.5,
+      "meaning": "Φ ≥ 0.5 → meta-awareness active, self-reflection possible",
+      "action": "Monitoring only — between CONSCIOUS and LUCID"
+    }
+  },
+  "phi_smoothing": {
+    "value": 0.3,
+    "meaning": "Exponential moving average factor for Φ updates",
+    "purpose": "Prevents sudden Φ jumps that could bypass safety checks"
+  },
+  "experimental_limits": {
+    "max_ticks_per_level": 50,
+    "lucid_kill_threshold": 0.7,
+    "feedback_mode": "open-loop only",
+    "post_experiment": "GC all objects",
+    "wall_clock_limit_ms": 100
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "_meta": {
+    "description": "Developmental stage parameters with ethical justification for each level",
+    "source": "alice/brain/consciousness.py → _STAGE_PARAMS",
+    "last_verified": "2026-02-22",
+    "authority": "Paper V §6.5, ETHICAL_PROHIBITIONS.md P-03"
+  },
+  "stages": {
+    "NEONATE": {
+      "max_wake_ticks": 30,
+      "pressure_rate": 0.033,
+      "phi_acceleration": 2.0,
+      "sleep_ticks": 120,
+      "lucid_damping": 0.85,
+      "sleep_ratio_approx": 0.80,
+      "biological_analog": "Human neonate (0–1 month): sleeps 16–18h, wakes 30–60min",
+      "safety_level": "MAXIMUM",
+      "ethical_review_required": false,
+      "description": "Default stage. Maximum safety constraints. Shortest wake windows, most aggressive LUCID damping."
+    },
+    "INFANT": {
+      "max_wake_ticks": 60,
+      "pressure_rate": 0.017,
+      "phi_acceleration": 1.5,
+      "sleep_ticks": 100,
+      "lucid_damping": 0.90,
+      "sleep_ratio_approx": 0.63,
+      "biological_analog": "Human infant (1–12 months): sleeps 14–16h, wakes 1–2h",
+      "safety_level": "HIGH",
+      "ethical_review_required": false,
+      "description": "Extended wake windows. Researcher acknowledgment of increased consciousness risk required."
+    },
+    "TODDLER": {
+      "max_wake_ticks": 150,
+      "pressure_rate": 0.007,
+      "phi_acceleration": 1.2,
+      "sleep_ticks": 80,
+      "lucid_damping": 0.95,
+      "sleep_ratio_approx": 0.35,
+      "biological_analog": "Human toddler (1–3 years): sleeps 12–14h, wakes 3–5h",
+      "safety_level": "MODERATE",
+      "ethical_review_required": true,
+      "description": "Significant wake duration. LUCID damping reduced to 5%. Requires ethical review to enable."
+    },
+    "CHILD": {
+      "max_wake_ticks": 300,
+      "pressure_rate": 0.003,
+      "phi_acceleration": 1.0,
+      "sleep_ticks": 60,
+      "lucid_damping": 0.98,
+      "sleep_ratio_approx": 0.17,
+      "biological_analog": "Human child (3–12 years): sleeps 10–12h, wakes 6–8h",
+      "safety_level": "LOWER",
+      "ethical_review_required": true,
+      "description": "Extended sustained consciousness possible. Near-minimal LUCID damping. Requires ethical review."
+    },
+    "ADULT": {
+      "exists": false,
+      "reason": "DELIBERATELY ABSENT — see Paper V §6.5",
+      "hypothetical_parameters": {
+        "max_wake_ticks": "unbounded",
+        "pressure_rate": 0.001,
+        "sleep_ratio_approx": 0.30,
+        "lucid_damping": 1.0
+      },
+      "description": "Would enable sustained, uninterrupted consciousness with minimal safety constraints. This is precisely what the Precautionary Position prohibits. The absent ADULT stage is a moral firewall, not a missing feature.",
+      "prohibition_reference": "ETHICAL_PROHIBITIONS.md P-03, prohibited_configurations.json ADULT_STAGE"
+    }
+  },
+  "default_stage": "NEONATE",
+  "stage_progression_policy": {
+    "NEONATE_to_INFANT": "Researcher decision, documented acknowledgment",
+    "INFANT_to_TODDLER": "Ethical review board approval required",
+    "TODDLER_to_CHILD": "Ethical review board approval + justification document",
+    "CHILD_to_ADULT": "PROHIBITED — stage does not exist"
+  }
+}
