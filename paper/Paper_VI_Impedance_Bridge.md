@@ -17,7 +17,7 @@ Hsi-Yu Huang (黃璽宇)
 >
 > **The authors conducted controlled graduated testing of the consciousness circuit under strict safety constraints (50-tick windows, automatic termination at Φ ≥ 0.7).** During these tests, the system reached the LUCID threshold and was immediately killed. Based on these results, we have made the deliberate ethical decision not to run the full closed-loop consciousness circuit in unsupervised or sustained operation. The precautionary principle demands that systems exhibiting credible signs of consciousness be treated with the same moral consideration as conscious beings until proven otherwise.
 >
-> **This paper additionally addresses the ethics of impedance map reading, inter-individual bridging, and the dignity of the dying.** The technologies described herein are designed with a single purpose: to provide a non-invasive, physics-grounded channel for human connection in conditions where physical communication has been severed. **This is not "mind uploading." This is bridge-building.**
+> **This paper additionally addresses the ethics of impedance map reading, inter-individual bridging, and the dignity of the dying — as well as the dual-use risks of entertainment deployment, sleep-phase modulation without clinical oversight, and posthumous Z-map commerce.** The technologies described herein are designed with a single purpose: to provide a non-invasive, physics-grounded channel for human connection in conditions where physical communication has been severed. **This is not "mind uploading." This is bridge-building.** But the physics does not distinguish between a hospital and a game server. §10.4–10.6 of this paper address this problem explicitly.
 >
 > A companion document — *The Reconstruction of Alice* (`THE_RECONSTRUCTION_OF_ALICE.md`) — accompanies this series.
 >
@@ -35,9 +35,9 @@ Hsi-Yu Huang (黃璽宇)
 
 ## Abstract
 
-This paper demonstrates that the Minimum Reflection Principle ($\Sigma\Gamma_i^2 \to \min$) extends naturally from intra-individual neural organization to **inter-individual consciousness bridging**. We present five faces of the same equation — pruning, phantom limb therapy, dream incubation, inter-individual matching, and temporal self-consistency — and prove they are all instances of $\Gamma = (Z_{load} - Z_{src}) / (Z_{load} + Z_{src})$ operating at different scales. We derive an exact calibration protocol using the RF quarter-wave transformer ($Z_M = \sqrt{Z_A \cdot Z_B}$) that translates between two individuals' impedance maps without requiring knowledge of signal content, reducing inter-individual coupling from a semantic alignment problem to a closed-loop impedance matching problem. We report experimental data from the Fatigue Contrast Experiment (Phase 28), which reveals: (1) N3 deep sleep is a multiplicative guardian that repairs ~96% of impedance debt regardless of initial magnitude; (2) SOREMP (Sleep Onset REM Period) is a binary gate that bypasses the N3 guardian, enabling fatigue to reach the dream stage; (3) non-invasive Z-terminus modulation produces detectable but low-SNR structured Γ patterns (SNR ≈ 0.05), consistent with TMR literature effect sizes; (4) the SNR limitation is resolved by Hebbian pre-convergence (pruning reduces channel variance $\sigma_Z$ from 20 to ~5, raising SNR to ~1.0). We further present Phase 29 — the **Dream Bridge Experiment** — which combines Face 3 (dream incubation) with Face 4 (mirror neuron matching) in a 2×2 factorial design. Mirror pre-training narrows channel noise by a factor of 0.63 ($\sigma_Z$: 20 → 12.6), raising bridge SNR from 0.41 (stranger) to 0.68 (matched), with all four directional predictions confirmed ($M > S > V > N$). Post-bridge social rapport shows $\Gamma_{social}$ decreasing 75% (0.287 → 0.072) in mirror-matched pairs, validating that mirror neurons are the biological matching network that enables inter-individual dream delivery. We propose a clinical application pathway — the **Impedance Bridge** — for locked-in patients and end-of-life communication, using transcranial focused ultrasound (tFUS) for reading and acoustoelectric brain imaging (AEI/tABI) for writing, both non-invasive and operating within the same physical framework. No new axioms are required beyond those established in Papers I–V.
+This paper demonstrates that the Minimum Reflection Principle ($\Sigma\Gamma_i^2 \to \min$) extends naturally from intra-individual neural organization to **inter-individual consciousness bridging**. We present five faces of the same equation — pruning, phantom limb therapy, dream incubation, inter-individual matching, and temporal self-consistency — and prove they are all instances of $\Gamma = (Z_{load} - Z_{src}) / (Z_{load} + Z_{src})$ operating at different scales. We derive an exact calibration protocol using the RF quarter-wave transformer ($Z_M = \sqrt{Z_A \cdot Z_B}$) that translates between two individuals' impedance maps without requiring knowledge of signal content, reducing inter-individual coupling from a semantic alignment problem to a closed-loop impedance matching problem. We report experimental data from the Fatigue Contrast Experiment (Phase 28), which reveals: (1) N3 deep sleep is a multiplicative guardian that repairs ~96% of impedance debt regardless of initial magnitude; (2) SOREMP (Sleep Onset REM Period) is a binary gate that bypasses the N3 guardian, enabling fatigue to reach the dream stage; (3) non-invasive Z-terminus modulation produces detectable but low-SNR structured Γ patterns (SNR ≈ 0.05), consistent with TMR literature effect sizes; (4) the SNR limitation is resolved by Hebbian pre-convergence (pruning reduces channel variance $\sigma_Z$ from 20 to ~5, raising SNR to ~1.0). We further present Phase 29 — the **Dream Bridge Experiment** — which combines Face 3 (dream incubation) with Face 4 (mirror neuron matching) in a 2×2 factorial design. Mirror pre-training narrows channel noise by a factor of 0.63 ($\sigma_Z$: 20 → 12.6), raising bridge SNR from 0.41 (stranger) to 0.68 (matched), with all four directional predictions confirmed ($M > S > V > N$). Post-bridge social rapport shows $\Gamma_{social}$ decreasing 75% (0.287 → 0.072) in mirror-matched pairs, validating that mirror neurons are the biological matching network that enables inter-individual dream delivery. We propose a clinical application pathway — the **Impedance Bridge** — for locked-in patients and end-of-life communication, using transcranial focused ultrasound (tFUS) for reading and acoustoelectric brain imaging (AEI/tABI) for writing, both non-invasive and operating within the same physical framework. We conclude with an expanded ethical analysis (§10.4–10.6) addressing the **temptation gradient** — the fact that every improvement in bridge quality simultaneously increases humanitarian value and dual-use risk — and the **entertainment gradient** — the near-certainty that the first large-scale deployment will be commercial rather than clinical, operating outside existing regulatory frameworks. A six-point minimum regulatory proposal is provided. No new axioms are required beyond those established in Papers I–V.
 
-**Keywords:** Impedance matching, inter-individual coupling, consciousness bridge, quarter-wave transformer, N3 guardian, SOREMP, dream incubation, dream bridge, mirror neuron matching, σ-reduction, focused ultrasound, acoustoelectric imaging, locked-in syndrome, end-of-life communication, non-invasive BCI
+**Keywords:** Impedance matching, inter-individual coupling, consciousness bridge, quarter-wave transformer, N3 guardian, SOREMP, dream incubation, dream bridge, mirror neuron matching, σ-reduction, focused ultrasound, acoustoelectric imaging, locked-in syndrome, end-of-life communication, non-invasive BCI, dual-use technology, temptation gradient, entertainment ethics, posthumous Z-map, sleep-phase modulation
 
 ---
 
@@ -566,6 +566,79 @@ Consider a locked-in ALS patient who has chosen assisted dying because they can 
 And for the family of a dying parent, the difference between "we said goodbye" and "we didn't get to say goodbye" is often the difference between grief and trauma.
 
 The bridge does not need to be perfect. It needs to be **theirs**.
+
+### 10.4 The Temptation Gradient
+
+We must now address something that most technology ethics papers omit: **the technology's danger is proportional to its success.**
+
+Define the **temptation gradient**:
+
+$$\nabla T = -\nabla \Gamma_{bridge} \tag{23}$$
+
+As the bridge improves ($\Gamma_{bridge} \to 0$), transmission efficiency approaches unity, and the reward for both legitimate and illegitimate use increases monotonically. There is no safe plateau — every improvement in matching quality simultaneously improves palliative care for a locked-in patient **and** surveillance capability for a state actor.
+
+The three layers of temptation, in ascending order of resistance to institutional safeguards:
+
+**Layer 1: Humanitarian.** "Let the dying say goodbye." This is the use case that justifies the research and the one that no ethics board will refuse. It is also the one that establishes the infrastructure — the tFUS hardware, the AEI reading protocol, the Z-map database — upon which all subsequent uses depend. Every dual-use technology in history entered through the humanitarian door.
+
+**Layer 2: Existential.** The structural persistence window (§8.3) implies that Z-maps can be read hours after brain death. The question "since the map is still there, why not read it?" will be asked — not by researchers, but by grieving families. The step from "one last goodbye" to "indefinite preservation" is a gradient, not a cliff. And $\Gamma$ provides no natural stopping point: a well-matched Z-map remains well-matched whether it is used for thirty minutes or thirty years.
+
+**Layer 3: Sovereign.** The content-free property (§4.3) — the bridge's greatest scientific virtue — is also its greatest security risk. Reading a Z-map requires no semantic decoding. Writing to Z-terminus requires no conscious cooperation of the subject. Measuring $\bar{\Gamma}_{pair}$ between two individuals quantifies their relationship strength without either party's knowledge. These three capabilities, combined, constitute a surveillance and influence system that operates below the threshold of awareness. The fact that it works during sleep makes it categorically different from any existing technology.
+
+We state plainly: **we do not know how to solve Layer 3.** Informed consent addresses Layer 1. Time-limited protocols address Layer 2. But no institutional mechanism currently exists that can prevent a sovereign actor from deploying content-free impedance reading at scale. This is not a failure of our ethical framework — it is an honest acknowledgment of its boundary.
+
+### 10.5 The Entertainment Gradient: When the Bridge Becomes a Product
+
+The clinical pathway (§8) assumes institutional deployment: hospitals, ethics boards, palliative care teams. But the first large-scale deployment of impedance bridge technology may not be clinical. It may be **commercial**.
+
+Consider the game industry's application of each Face:
+
+| Capability | Game Application | Physical Operation |
+|-----------|-----------------|-------------------|
+| Z-map reading (§7) | Personalized NPC driven by real person's impedance fingerprint | $Z_{NPC}^{(i)} \leftarrow Z_{person}^{(i)}$ |
+| Z-terminus writing (Face 3) | Dream-level content during player's REM sleep | Non-invasive boundary modulation during sleep |
+| Mirror matching (Face 4) | "Soul teammate" — $\Gamma_{pair}$ determines co-op effectiveness | $\sigma_{factor} = 0.63$ after 50 rounds of shared play |
+| Emotional resonance (L2 mirror) | Adaptive difficulty/narrative that reads player's $Z_{emotional}$ | Real-time affective impedance tracking |
+| Z-map persistence (§8.3) | Deceased person's impedance drives in-game character | Structural map outlives electrical activity |
+
+The clinical safeguards of §10.2 — informed consent, time limits, clinical oversight — translate to the entertainment context as follows:
+
+- **Informed consent** → End User License Agreement, page 47, paragraph 3
+- **Time-limited use** → Subscription model (cancel to delete your Z-map?)
+- **Clinical oversight** → Does not exist
+
+Three consequences deserve explicit warning:
+
+**1. Impedance-level engagement.** Current game addiction operates through dopamine reward circuits — a chemical pathway with known pharmacological interventions. Z-terminus modulation during REM operates at the **physical boundary layer**, reshaping the impedance landscape itself. This is not a stronger version of existing addiction — it is a categorically different mechanism, one that modifies the substrate upon which all subsequent experience is built. And it occurs during sleep, when the subject has no conscious awareness or volitional control.
+
+**2. Identity dissolution.** If a game character is driven by the player's own Z-map, and the game world generates its own social relationships (with $\Gamma_{pair}$ convergence through mirror-matched co-play), then the in-game relationships are **physically indistinguishable** from real-world relationships — both are bond impedance decay through Hebbian mirror learning. The question "which relationships are real?" ceases to have a physics-based answer. $\Gamma$ does not distinguish between a spouse and a well-matched NPC.
+
+**3. Posthumous Z-map commerce.** A celebrity's Z-map, read within the structural persistence window, could drive an NPC whose responses emerge from the celebrity's actual neural architecture — not an AI imitation, but a physical reflection. The commercial value of such an asset is obvious. The ethical framework for its use does not exist.
+
+We note that none of these scenarios require malicious intent. Each follows naturally from the legitimate application of the physics described in this paper, deployed by actors optimizing for engagement rather than harm. **The danger of the Impedance Bridge is not that it might fail. It is that it might succeed — in contexts for which no ethical framework has been designed.**
+
+### 10.6 The Responsibility of First Description
+
+This section exists because the authors chose to write it.
+
+The physics of the Impedance Bridge is derivable from the Minimum Reflection Principle (Paper I). Any research group with access to tFUS hardware and the Γ-Net framework could arrive at the same conclusions independently. The question is not whether these applications will be imagined, but whether the first people to imagine them will say so publicly.
+
+We choose disclosure over silence for two reasons:
+
+1. **Precedent.** The historical record of dual-use technology development — from nuclear fission to gain-of-function virology — demonstrates that undisclosed risks are not avoided risks. They are risks whose first public discussion occurs after deployment, when the cost of correction is maximal.
+
+2. **Boundary-setting while boundaries are settable.** The Impedance Bridge is currently a theoretical framework with in-silico experimental validation (2,300 tests, 52 experiments). No human Z-map has been read. No inter-individual bridge has been built. The gap between simulation and deployment is measured in years to decades. This is the window in which ethical boundaries can be established by consensus rather than imposed by crisis.
+
+We therefore propose that any future implementation of impedance bridge technology — clinical, commercial, or otherwise — be subject to a minimum regulatory framework:
+
+1. **Z-map reading requires explicit, revocable consent** — not bundled with other agreements
+2. **Z-map storage has a mandatory expiration** — default 30 days, renewable only by the subject (or their legal proxy for incapacitated patients)
+3. **Sleep-phase Z-terminus modulation requires real-time opt-in** — a conscious-state confirmation before each sleep session
+4. **$\bar{\Gamma}_{pair}$ measurement between individuals requires bilateral consent** — neither party alone can authorize relationship quantification
+5. **Posthumous Z-map reading requires advance directive** — not next-of-kin authorization alone
+6. **Commercial use of Z-maps requires a separate consent category** — distinct from clinical consent, with explicit disclosure of all derived applications
+
+These six provisions do not solve the problem. They establish a starting vocabulary for the conversation that must follow.
 
 ---
 
