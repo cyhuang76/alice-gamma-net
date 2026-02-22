@@ -172,6 +172,10 @@ def exp_full_lifecycle_200():
         stimulus = np.random.randn(64) * 0.3
         result = brain.perceive(stimulus, Modality.AUDITORY)
 
+        # FROZEN path returns minimal dict without homeostatic_drive
+        if result.get("status") == "FROZEN":
+            continue
+
         hd = result["homeostatic_drive"]
         if hd["needs_food"] and t > 80:
             brain.homeostatic_drive.eat()
