@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Phase 27 — The Cradle of Language (Dream Incubation & Emergent Communication)
+Phase 33 — The Cradle of Language (Dream Incubation & Emergent Communication)
 
 exp_dream_language.py — Dream Language Genesis Experiment
 
@@ -681,7 +681,7 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
 
     if verbose:
         print("╔══════════════════════════════════════════════════════════════╗")
-        print("║  Phase 27 — The Cradle of Language                         ║")
+        print("║  Phase 33 — The Cradle of Language                         ║")
         print("║  Non-Invasive Dream Incubation (Z_terminus modulation)     ║")
         print("║                                                            ║")
         print("║  Rejects invasive-chip paradigm:                           ║")

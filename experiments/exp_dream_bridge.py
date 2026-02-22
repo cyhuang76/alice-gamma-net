@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Phase 29 — The Dream Bridge (託夢橋)
+Phase 35 — The Dream Bridge (託夢橋)
 
 exp_dream_bridge.py — Inter-Individual Dream Delivery via Mirror Neuron Matching
 
 Core Hypothesis:
   "託夢" (dream delivery) = Face 3 (dream incubation) + Face 4 (matching network).
 
-  Phase 27 demonstrated non-invasive impedance modulation (Face 3 alone),
+  Phase 33 demonstrated non-invasive impedance modulation (Face 3 alone),
   but SNR was only ~0.05 because the two Alices were STRANGERS — their
   channels had random impedance with σ_Z ≈ 20.
 
-  Phase 28 showed that:
+  Phase 34 showed that:
     - N3 guardian repairs ~96% of impedance debt (multiplicative)
     - SOREMP bypasses N3, preserving fatigue for dream amplification
     - Amplitude ≠ structure (vivid ≠ meaningful)
@@ -38,7 +38,7 @@ Core Hypothesis:
 Experimental Design:
   Condition M (Matched):    Mirror pre-training → Sender dream → Bridge delivery
   Condition S (Stranger):   No pre-training     → Sender dream → Bridge delivery
-  Condition V (Video-only): Mirror pre-training → Generic video (Phase 27 style)
+  Condition V (Video-only): Mirror pre-training → Generic video (Phase 33 style)
   Condition N (Null):       No pre-training     → No modulation (control)
 
   This 2×2 design separates the effects of:
@@ -66,7 +66,7 @@ from alice.brain.mirror_neurons import (
 )
 from alice.core.protocol import Priority
 
-# Re-use Phase 27's Z_terminus modulation and schedule helpers
+# Re-use Phase 33's Z_terminus modulation and schedule helpers
 from experiments.exp_dream_language import (
     video_to_impedance_modulation,
     make_sleep_schedule,
@@ -339,7 +339,7 @@ def capture_sender_dream(
     """
     Sender sleeps with a video → capture the Z-pattern fingerprint.
 
-    This is Phase 27's dream incubation, but we record the per-channel
+    This is Phase 33's dream incubation, but we record the per-channel
     impedance landscape that the sender's PGO probes reflected off.
     This landscape IS the sender's dream — not the content, but the
     structural impedance fingerprint.
@@ -497,7 +497,7 @@ def bridge_dream_night(
     Conditions:
       M (Matched):    use signature (sender's Z-map) as Z_terminus modulation
       S (Stranger):   use signature but without mirror pre-matching
-      V (Video-only): use generic video (Phase 27 style)
+      V (Video-only): use generic video (Phase 33 style)
       N (Null):       no modulation at all
     """
     records = []
@@ -534,7 +534,7 @@ def bridge_dream_night(
                         mirror_sigma_map=mirror_sigma_map,
                     )
                 elif condition == "V":
-                    # Generic video (Phase 27 style)
+                    # Generic video (Phase 33 style)
                     channel_impedances = video_to_impedance_modulation(
                         VIDEO_A_SPATIAL_FREQ, VIDEO_A_VOWEL, VIDEO_A_RHYTHM_HZ,
                         frame_idx + tick_in_cycle, rng,
@@ -874,7 +874,7 @@ def run_condition(
 
 def run_experiment(verbose: bool = True) -> Dict[str, Any]:
     """
-    Phase 29 — The Dream Bridge (託夢橋)
+    Phase 35 — The Dream Bridge (託夢橋)
 
     2×2 Experimental Design:
       ┌─────────────────────┬──────────────────┬──────────────────┐
@@ -895,7 +895,7 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
 
     if verbose:
         print("╔══════════════════════════════════════════════════════════════╗")
-        print("║  Phase 29 — The Dream Bridge (託夢橋)                      ║")
+        print("║  Phase 35 — The Dream Bridge (託夢橋)                      ║")
         print("║                                                            ║")
         print("║  Face 3 (dream incubation) + Face 4 (matching network)     ║")
         print("║  Mirror neurons pre-match → sender Z-map → receiver dream  ║")
@@ -918,7 +918,7 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
     # ══════════════════════════════════════════════════════════
     if verbose:
         print(f"\n{'=' * 64}")
-        print(f"  COMPARATIVE ANALYSIS — Phase 29 Dream Bridge")
+        print(f"  COMPARATIVE ANALYSIS — Phase 35 Dream Bridge")
         print(f"{'=' * 64}")
         print()
         print(f"  {'Cond':4s} │ {'Mirror':6s} │ {'Source':10s} │ "

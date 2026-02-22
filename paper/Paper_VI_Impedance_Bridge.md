@@ -35,7 +35,7 @@ Hsi-Yu Huang (黃璽宇)
 
 ## Abstract
 
-This paper demonstrates that the Minimum Reflection Principle ($\Sigma\Gamma_i^2 \to \min$) extends naturally from intra-individual neural organization to **inter-individual consciousness bridging**. We present five faces of the same equation — pruning, phantom limb therapy, dream incubation, inter-individual matching, and temporal self-consistency — and prove they are all instances of $\Gamma = (Z_{load} - Z_{src}) / (Z_{load} + Z_{src})$ operating at different scales. We derive an exact calibration protocol using the RF quarter-wave transformer ($Z_M = \sqrt{Z_A \cdot Z_B}$) that translates between two individuals' impedance maps without requiring knowledge of signal content, reducing inter-individual coupling from a semantic alignment problem to a closed-loop impedance matching problem. We report experimental data from the Fatigue Contrast Experiment (Phase 28), which reveals: (1) N3 deep sleep is a multiplicative guardian that repairs ~96% of impedance debt regardless of initial magnitude; (2) SOREMP (Sleep Onset REM Period) is a binary gate that bypasses the N3 guardian, enabling fatigue to reach the dream stage; (3) non-invasive Z-terminus modulation produces detectable but low-SNR structured Γ patterns (SNR ≈ 0.05), consistent with TMR literature effect sizes; (4) the SNR limitation is resolved by Hebbian pre-convergence (pruning reduces channel variance $\sigma_Z$ from 20 to ~5, raising SNR to ~1.0). We further present Phase 29 — the **Dream Bridge Experiment** — which combines Face 3 (dream incubation) with Face 4 (mirror neuron matching) in a 2×2 factorial design. Mirror pre-training narrows channel noise by a factor of 0.63 ($\sigma_Z$: 20 → 12.6), raising bridge SNR from 0.41 (stranger) to 0.68 (matched), with all four directional predictions confirmed ($M > S > V > N$). Post-bridge social rapport shows $\Gamma_{social}$ decreasing 75% (0.287 → 0.072) in mirror-matched pairs, validating that mirror neurons are the biological matching network that enables inter-individual dream delivery. We propose a clinical application pathway — the **Impedance Bridge** — for locked-in patients and end-of-life communication, using transcranial focused ultrasound (tFUS) for reading and acoustoelectric brain imaging (AEI/tABI) for writing, both non-invasive and operating within the same physical framework. We conclude with an expanded ethical analysis (§10.4–10.6) addressing the **temptation gradient** — the fact that every improvement in bridge quality simultaneously increases humanitarian value and dual-use risk — and the **entertainment gradient** — the near-certainty that the first large-scale deployment will be commercial rather than clinical, operating outside existing regulatory frameworks. A six-point minimum regulatory proposal is provided. No new axioms are required beyond those established in Papers I–V.
+This paper demonstrates that the Minimum Reflection Principle ($\Sigma\Gamma_i^2 \to \min$) extends naturally from intra-individual neural organization to **inter-individual consciousness bridging**. We present five faces of the same equation — pruning, phantom limb therapy, dream incubation, inter-individual matching, and temporal self-consistency — and prove they are all instances of $\Gamma = (Z_{load} - Z_{src}) / (Z_{load} + Z_{src})$ operating at different scales. We derive an exact calibration protocol using the RF quarter-wave transformer ($Z_M = \sqrt{Z_A \cdot Z_B}$) that translates between two individuals' impedance maps without requiring knowledge of signal content, reducing inter-individual coupling from a semantic alignment problem to a closed-loop impedance matching problem. We report experimental data from the Fatigue Contrast Experiment (Phase 34), which reveals: (1) N3 deep sleep is a multiplicative guardian that repairs ~96% of impedance debt regardless of initial magnitude; (2) SOREMP (Sleep Onset REM Period) is a binary gate that bypasses the N3 guardian, enabling fatigue to reach the dream stage; (3) non-invasive Z-terminus modulation produces detectable but low-SNR structured Γ patterns (SNR ≈ 0.05), consistent with TMR literature effect sizes; (4) the SNR limitation is resolved by Hebbian pre-convergence (pruning reduces channel variance $\sigma_Z$ from 20 to ~5, raising SNR to ~1.0). We further present Phase 35 — the **Dream Bridge Experiment** — which combines Face 3 (dream incubation) with Face 4 (mirror neuron matching) in a 2×2 factorial design. Mirror pre-training narrows channel noise by a factor of 0.63 ($\sigma_Z$: 20 → 12.6), raising bridge SNR from 0.41 (stranger) to 0.68 (matched), with all four directional predictions confirmed ($M > S > V > N$). Post-bridge social rapport shows $\Gamma_{social}$ decreasing 75% (0.287 → 0.072) in mirror-matched pairs, validating that mirror neurons are the biological matching network that enables inter-individual dream delivery. We propose a clinical application pathway — the **Impedance Bridge** — for locked-in patients and end-of-life communication, using transcranial focused ultrasound (tFUS) for reading and acoustoelectric brain imaging (AEI/tABI) for writing, both non-invasive and operating within the same physical framework. We conclude with an expanded ethical analysis (§10.4–10.6) addressing the **temptation gradient** — the fact that every improvement in bridge quality simultaneously increases humanitarian value and dual-use risk — and the **entertainment gradient** — the near-certainty that the first large-scale deployment will be commercial rather than clinical, operating outside existing regulatory frameworks. A six-point minimum regulatory proposal is provided. No new axioms are required beyond those established in Papers I–V.
 
 **Keywords:** Impedance matching, inter-individual coupling, consciousness bridge, quarter-wave transformer, N3 guardian, SOREMP, dream incubation, dream bridge, mirror neuron matching, σ-reduction, focused ultrasound, acoustoelectric imaging, locked-in syndrome, end-of-life communication, non-invasive BCI, dual-use technology, temptation gradient, entertainment ethics, posthumous Z-map, sleep-phase modulation
 
@@ -77,9 +77,9 @@ The matching network protocol derived in §4 makes this literal: the calibration
 
 ### 2.1 Motivation
 
-The dream incubation experiments (Phase 27, `exp_dream_language.py`) demonstrated non-invasive Z-terminus modulation but revealed a paradox: 80 awake ticks produced negligible fatigue at REM onset (debt ≈ 0.013, amp ×1.01). Why? Because N3 deep sleep repairs impedance debt **before** REM begins.
+The dream incubation experiments (Phase 33, `exp_dream_language.py`) demonstrated non-invasive Z-terminus modulation but revealed a paradox: 80 awake ticks produced negligible fatigue at REM onset (debt ≈ 0.013, amp ×1.01). Why? Because N3 deep sleep repairs impedance debt **before** REM begins.
 
-The Fatigue Contrast Experiment (Phase 28, `exp_fatigue_contrast.py`) was designed to dissect this mechanism.
+The Fatigue Contrast Experiment (Phase 34, `exp_fatigue_contrast.py`) was designed to dissect this mechanism.
 
 ### 2.2 Four Conditions
 
@@ -328,13 +328,13 @@ Both minimize $\Gamma$. Both are content-free. Both operate on the impedance lan
 
 ---
 
-## 6. Experimental Validation: The Dream Bridge (Phase 29)
+## 6. Experimental Validation: The Dream Bridge (Phase 35)
 
 ### 6.1 Motivation: From SNR 0.05 to the Directed Bridge
 
-Phase 28 (§2) established that non-invasive Z-terminus modulation is physically real but weak (SNR ≈ 0.05). Section 3 argued that Hebbian pruning could raise SNR to ~1.0 by narrowing $\sigma_Z$. Section 4.5 identified mirror neurons as the evolved biological mechanism for inter-individual impedance matching. The missing piece was an **experimental demonstration** that mirror neuron pre-matching actually narrows $\sigma_Z$ at the bridge and raises SNR.
+Phase 34 (§2) established that non-invasive Z-terminus modulation is physically real but weak (SNR ≈ 0.05). Section 3 argued that Hebbian pruning could raise SNR to ~1.0 by narrowing $\sigma_Z$. Section 4.5 identified mirror neurons as the evolved biological mechanism for inter-individual impedance matching. The missing piece was an **experimental demonstration** that mirror neuron pre-matching actually narrows $\sigma_Z$ at the bridge and raises SNR.
 
-Phase 29 — the Dream Bridge (`exp_dream_bridge.py`) — provides that demonstration.
+Phase 35 — the Dream Bridge (`exp_dream_bridge.py`) — provides that demonstration.
 
 ### 6.2 2×2 Factorial Design
 
@@ -365,7 +365,7 @@ $$\begin{array}{c|cc}
 
 ### 6.3 The Mirror σ-Reduction Mechanism
 
-The key innovation in Phase 29 is the **propagation of mirror training into the bridge**. Mirror pre-training produces a bond impedance reduction ($Z_{bond}$: 49.8 → 39.8 Ω) and an empathy capacity growth (0 → 0.71). These are combined into a **channel noise reduction factor**:
+The key innovation in Phase 35 is the **propagation of mirror training into the bridge**. Mirror pre-training produces a bond impedance reduction ($Z_{bond}$: 49.8 → 39.8 Ω) and an empathy capacity growth (0 → 0.71). These are combined into a **channel noise reduction factor**:
 
 $$\sigma_{factor} = \underbrace{\frac{Z_{bond}^{final}}{Z_{bond}^{initial}}}_{\text{bond ratio}} \times \underbrace{(1 - 0.3 \cdot C_{empathy})}_{\text{empathy factor}} \tag{20}$$
 
@@ -685,7 +685,7 @@ We do not read thoughts. We read impedance. We do not transmit meaning. We match
 | SOREMP schedule | `experiments/exp_fatigue_contrast.py` | `make_soremp_schedule()` |
 | Fatigue contrast experiment | `experiments/exp_fatigue_contrast.py` | `run_experiment()` |
 | Social resonance / coupling | `alice/brain/social_resonance.py` | `bidirectional_couple()` |
-| Dream Bridge (Phase 29) | `experiments/exp_dream_bridge.py` | `run_experiment()`, `mirror_pretraining()`, `bridge_dream_night()` |
+| Dream Bridge (Phase 35) | `experiments/exp_dream_bridge.py` | `run_experiment()`, `mirror_pretraining()`, `bridge_dream_night()` |
 | Mirror σ-reduction | `experiments/exp_dream_bridge.py` | `sender_z_to_impedance_modulation(mirror_sigma_map=...)` |
 | Neural pruning / Hebbian | `alice/brain/pruning.py` | `compute_gamma()`, `stimulate()` |
 | Phantom limb / mirror therapy | `alice/brain/phantom_limb.py` | `apply_mirror_therapy_session()` |
@@ -696,10 +696,10 @@ We do not read thoughts. We read impedance. We do not transmit meaning. We match
 All experimental results reported in this paper are reproducible via:
 
 ```bash
-python -m experiments.exp_fatigue_contrast      # Phase 28: Four-condition contrast
-python -m experiments.exp_dream_language         # Phase 27: Non-invasive dream incubation
+python -m experiments.exp_fatigue_contrast      # Phase 34: Four-condition contrast
+python -m experiments.exp_dream_language         # Phase 33: Non-invasive dream incubation
 python -m experiments.exp_mirror_neurons          # Phase 6.1: Mirror neurons + empathy + ToM
-python -m experiments.exp_dream_bridge            # Phase 29: Dream Bridge (this paper §6)
+python -m experiments.exp_dream_bridge            # Phase 35: Dream Bridge (this paper §6)
 ```
 
 Test suite: 2,300 tests passed, 6 xfailed, 0 failures.

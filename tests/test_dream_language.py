@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Tests for Phase 27 — Dream Language Genesis
+Tests for Phase 33 — Dream Language Genesis
 
 Validates the dream incubation experiment:
   1. Video generators produce valid stimuli

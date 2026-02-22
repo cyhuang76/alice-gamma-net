@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Tests for Phase 29 — The Dream Bridge (託夢橋)
+Tests for Phase 35 — The Dream Bridge (託夢橋)
 
 Verifies:
   1. Mirror pre-training converges Γ_mirror and lowers bond impedance

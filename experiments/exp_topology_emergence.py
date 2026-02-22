@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Experiment: Γ-Field Topology Emergence (Level 0)
+Phase 30 — Γ-Field Topology Emergence (Level 0)
 ═══════════════════════════════════════════════════
 
 Hypothesis:

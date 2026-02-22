@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Phase 28 — Fatigue Contrast Experiment (疲勞對照實驗)
+Phase 34 — Fatigue Contrast Experiment (疲勞對照實驗)
 
 exp_fatigue_contrast.py — "託夢物理" Empirical Verification
 
@@ -491,7 +491,7 @@ def run_experiment(verbose: bool = True) -> Dict[str, Any]:
 
     if verbose:
         print("╔══════════════════════════════════════════════════════════════╗")
-        print("║  Phase 28 — Fatigue Contrast Experiment                     ║")
+        print("║  Phase 34 — Fatigue Contrast Experiment                     ║")
         print("║  Fatigue-Dream Physics Empirical Verification              ║")
         print("║                                                            ║")
         print("║  Predicts: N3 ≈ guardian, SOREMP ≈ gate, video ≈ content   ║")

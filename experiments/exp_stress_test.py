@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-exp_stress_test.py — 600-tick Integration Stress Test
+Phase 28 — 600-tick Integration Stress Test
 Integration Stress Test: Full-System Validation Under Extreme Load
 
 Purpose: 

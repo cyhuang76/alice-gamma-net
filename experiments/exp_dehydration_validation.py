@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-exp_dehydration_validation.py — Dehydration Delirium: Full-System Cardiovascular Validation
+Phase 31 — Dehydration Delirium: Full-System Cardiovascular Validation
 ============================================================================================
+
+exp_dehydration_validation.py
 
 Purpose:
   Validate the newly integrated cardiovascular system by tracing the complete

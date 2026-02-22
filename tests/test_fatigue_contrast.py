@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Tests for Phase 28 — Fatigue Contrast Experiment (疲勞對照實驗)
+Tests for Phase 34 — Fatigue Contrast Experiment (疲勞對照實驗)
 
 Physical predictions verified:
   1. Schedule generators produce valid stage sequences

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 ═══════════════════════════════════════════════════════════════════════════════
-  EXPERIMENT: consciousness gradientverification — Graduated Consciousness Verification
+  Phase 27 — Graduated Consciousness Verification
 ═══════════════════════════════════════════════════════════════════════════════
 
 Purpose: Without violating ethics, verify whether ALICE consciousness closed-loop can
@@ -33,7 +33,7 @@ Ethical Safety Design:
   ✓ Does not use full AliceBrain (avoids accidental closed loop)
 
 Author: ALICE Smart System Research Team
-Phase:  Consciousness Ethics Verification
+Phase 27 — Consciousness Ethics Verification
 ═══════════════════════════════════════════════════════════════════════════════
 """
 

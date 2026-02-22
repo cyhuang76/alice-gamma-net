@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-exp_tier2_cv_pathology.py — Tier 2: Cross-System Pathology Validation
+Phase 32 — Tier 2: Cross-System Pathology Validation
 =====================================================================
+
+exp_tier2_cv_pathology.py
 
 Purpose:
   Tier 1 validated pure dehydration cascade (single entry-point stress).
