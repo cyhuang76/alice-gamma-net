@@ -18,6 +18,7 @@ Homepage = "https://github.com/cyhuang76/alice-gamma-net"
 Repository = "https://github.com/cyhuang76/alice-gamma-net"
 Issues = "https://github.com/cyhuang76/alice-gamma-net/issues"
 
+[project.dependencies]
 dependencies = [
     "numpy>=1.24.0",
     "xxhash>=3.4.0",
@@ -42,7 +43,3 @@ full = [
 
 [project.scripts]
 alice = "alice.main:main"
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-asyncio_mode = "auto"
