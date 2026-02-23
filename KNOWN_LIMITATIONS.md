@@ -182,3 +182,37 @@
 > — Paper IV, §9
 
 這些限制的誠實記錄，本身就是那份考量的一部分。
+
+---
+
+## Pre-Commit Error Log
+
+> Written by AI Agent or human whenever a task fails the Pre-Commit Gate.
+> Resolved entries must be kept for audit trail — do not delete.
+
+### Severity Levels
+
+| Level | Meaning |
+|---|---|
+| **E1** | Physics constraint violation — (1)/(2)/(3) |
+| **E2** | Test regression — previously passing test now fails |
+| **E3** | File misclassification — code in wrong directory |
+| **E4** | Paper number mismatch — counts inconsistent across files |
+
+### Template — Copy this block to create a new entry
+
+[YYYY-MM-DD] SOP-[ID] [Task Name]
+Failed test : <test_id or "physics check">
+
+Root cause : <one sentence>
+
+Severity : E1 / E2 / E3 / E4
+
+Physics viol : yes — constraint (1)/(2)/(3) / no
+
+Affected file: <path/to/file.py>
+
+Status : open / resolved in <commit-sha>
+
+
+<!-- Append new error log entries below this line -->

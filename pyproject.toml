@@ -1,3 +1,20 @@
+# =============================================================================
+# PHYSICS CONSTRAINTS — All AI agents and contributors must satisfy all three:
+#
+#   (1) SIGNAL PROTOCOL   Every inter-module value must be carried by an
+#                         ElectricalSignal object. Raw floats are forbidden.
+#
+#   (2) HEBBIAN UPDATE    All learning must flow through impedance calibration:
+#                         ΔZ = −η · Γ · x_pre · x_post
+#                         Direct weight assignment bypassing Γ is forbidden.
+#
+#   (3) ENERGY CONSERVATION  Every channel must satisfy at every tick:
+#                         Γ² + T = 1   (reflected + transmitted = incident)
+#                         No module may create or destroy signal energy.
+#
+# PRE-COMMIT GATE: pytest → physics check → KNOWN_LIMITATIONS.md → classify → commit
+# =============================================================================
+
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
@@ -12,13 +29,6 @@ requires-python = ">=3.10"
 authors = [
     {name = "Hsi-Yu Huang", email = "llc.y.huangll@gmail.com"}
 ]
-
-[project.urls]
-Homepage = "https://github.com/cyhuang76/alice-gamma-net"
-Repository = "https://github.com/cyhuang76/alice-gamma-net"
-Issues = "https://github.com/cyhuang76/alice-gamma-net/issues"
-
-[project.dependencies]
 dependencies = [
     "numpy>=1.24.0",
     "xxhash>=3.4.0",
@@ -29,6 +39,11 @@ dependencies = [
     "jinja2>=3.1.0",
     "aiofiles>=23.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/cyhuang76/alice-gamma-net"
+Repository = "https://github.com/cyhuang76/alice-gamma-net"
+Issues = "https://github.com/cyhuang76/alice-gamma-net/issues"
 
 [project.optional-dependencies]
 dev = [
@@ -43,3 +58,10 @@ full = [
 
 [project.scripts]
 alice = "alice.main:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
