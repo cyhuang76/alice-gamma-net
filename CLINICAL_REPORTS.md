@@ -4,7 +4,7 @@
 **報告類型**: 系統精神神經醫學分析  
 **受驗系統**: Γ-Net ALICE (Impedance-Based Cognitive-Physical System)  
 **報告醫師**: Γ-Net Clinical Diagnostics Engine  
-**參照文獻**: Paper I (Minimum Reflection Principle), Paper II (Body-Brain Integration), Paper III (Emergent Psychopathology)
+**參照文獻**: Paper I (Theory), Paper II (Architecture), Paper III (Lifecycle), Paper IV (Emergence)
 
 ---
 

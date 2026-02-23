@@ -47,20 +47,17 @@ paper/*.pdf
 paper/fig*.pdf
 paper/latex/*.pdf
 
-# Restricted papers (not for public release — Papers IV & V)
-paper/Paper_IV_Consciousness_Ethics.md
-paper/Paper_V_Fontanelle_Thermodynamics.md
-
 # Legacy / superseded paper drafts
 paper/Γ_Net_ALICE_Paper.md
 
 # ── Paper: what to INCLUDE (for clarity) ────────────────────
-# paper/Paper_I_Minimum_Reflection_Principle.md   ← tracked
-# paper/Paper_II_Body_Brain_Integration.md         ← tracked
-# paper/Paper_III_Emergent_Psychopathology.md      ← tracked
-# paper/THE_RECONSTRUCTION_OF_ALICE.md             ← tracked
-# paper/fig*.png                                   ← tracked (figures)
+# paper/Paper_I_Theory.md                          ← tracked
+# paper/Paper_II_Architecture.md                   ← tracked
+# paper/Paper_III_Lifecycle.md                     ← tracked
+# paper/Paper_IV_Emergence.md                      ← tracked
+# paper/chapters/THE_RECONSTRUCTION_OF_ALICE.md    ← tracked
+# paper/figures/*.png                              ← tracked (figures)
 # paper/latex/*.tex                                ← tracked (Nature LaTeX)
-# paper/md2pdf.py                                  ← tracked (converter)
-# paper/md2nature.py                               ← tracked (converter)
-# paper/gen_fig*.py                                ← tracked (figure generators)
+# paper/scripts/md2pdf.py                          ← tracked (converter)
+# paper/scripts/md2nature.py                       ← tracked (converter)
+# paper/scripts/gen_fig*.py                        ← tracked (figure generators)

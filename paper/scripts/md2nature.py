@@ -1,30 +1,34 @@
-"""Convert ALICE Papers I/II/III from Markdown → Nature single-column LaTeX + PDF.
+"""Convert ALICE Papers I/II/III/IV from Markdown → Nature single-column LaTeX + PDF.
 
 Produces:
   paper/latex/Paper_I_nature.tex  +  .pdf
   paper/latex/Paper_II_nature.tex +  .pdf
   paper/latex/Paper_III_nature.tex + .pdf
+  paper/latex/Paper_IV_nature.tex +  .pdf
 
 Usage:
-  python md2nature.py          # all three
+  python md2nature.py          # all four
   python md2nature.py 1        # Paper I only
 """
 import re, sys, subprocess, shutil
 from pathlib import Path
 
-PAPER_DIR = Path(__file__).parent
+PAPER_DIR = Path(__file__).resolve().parent.parent
 LATEX_DIR = PAPER_DIR / "latex"
 
 PAPERS = {
-    "1": ("Paper_I_Minimum_Reflection_Principle",
-          "The Minimum Reflection Principle — A Unified Impedance "
-          "Physics Theory of Cognition"),
-    "2": ("Paper_II_Body_Brain_Integration",
-          "From Coaxial Cables to Cognition — Body-Brain Integration "
-          "in the Γ-Net Architecture"),
-    "3": ("Paper_III_Emergent_Psychopathology",
-          "Emergent Psychopathology — PTSD Digital Twins, Clinical "
-          "Neurology, and Computational Pharmacology"),
+    "1": ("Paper_I_Theory",
+          "The Minimum Reflection Principle — Core Theory, Mathematical "
+          "Foundations, and Γ as Universal Currency"),
+    "2": ("Paper_II_Architecture",
+          "From Coaxial Cables to Cognition — Body-Brain Architecture, "
+          "Seven-Layer Pipeline, and O(1) Perception"),
+    "3": ("Paper_III_Lifecycle",
+          "The Lifecycle Equation — Fontanelle Thermodynamics, Emergent "
+          "Psychopathology, and Coffin-Manson Aging"),
+    "4": ("Paper_IV_Emergence",
+          "Emergence — Language Physics, Social Impedance Coupling, "
+          "Consciousness, and the Impedance Bridge"),
 }
 
 AUTHOR = "Hsi-Yu Huang"

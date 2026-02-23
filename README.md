@@ -316,7 +316,9 @@ Alice Smart System/                         84,500+ lines · 146 files
 │   │   ├── ear.py                          Ear — Cochlea forward engineering
 │   │   ├── cochlea.py                      Cochlear filter bank — 24 ERB channel physical simulation
 │   │   ├── hand.py                         Hand — PID inverse engineering + maturity development curve
-│   │   └── mouth.py                        Mouth — Source-Filter inverse engineering
+│   │   ├── mouth.py                        Mouth — Source-Filter inverse engineering
+│   │   ├── cardiovascular.py               Cardiovascular — Heart rate + blood pressure simulation
+│   │   └── lung.py                         Lung — Respiratory rhythm + gas exchange
 │   ├── brain/                              Brain modules (36 modules)
 │   │   ├── fusion_brain.py                 Fusion Brain — Neural × Protocol 5-step cycle (788 lines)
 │   │   ├── life_loop.py                    Life Loop — Closed-loop error compensation (811 lines)
@@ -362,14 +364,15 @@ Alice Smart System/                         84,500+ lines · 146 files
 │   └── api/
 │       └── server.py                       FastAPI + WebSocket + Dashboard
 ├── tests/                                  2,402 tests (47 files · 22,900+ lines)
-├── experiments/                            46 experiments (49 files · 26,900+ lines)
-├── paper/                                  Academic papers
-│   ├── Paper_I_Minimum_Reflection_Principle.md   MRP — Γ as universal currency
-│   ├── Paper_II_Body_Brain_Integration.md        Body-brain integration + Γ-topology
-│   ├── Paper_III_Emergent_Psychopathology.md     Emergent psychopathology + ethics
-│   ├── THE_RECONSTRUCTION_OF_ALICE.md            Design philosophy narrative
-│   └── Γ_Net_ALICE_Paper.md                      Unified technical paper (3,000+ lines)
-├── config.toml                             System configuration
+├── experiments/                            51 experiments (54 files · 26,900+ lines)
+├── paper/                                  Academic papers (4-paper series)
+│   ├── Paper_I_Theory.md                         MRP — 25 named equations, Γ as universal currency
+│   ├── Paper_II_Architecture.md                  Body-brain 7-layer architecture + O(1) pipeline
+│   ├── Paper_III_Lifecycle.md                    Fontanelle, PTSD, pharmacology, Coffin-Manson aging
+│   ├── Paper_IV_Emergence.md                     Language, social, consciousness, bridge, ethics
+│   └── chapters/
+│       └── THE_RECONSTRUCTION_OF_ALICE.md        Design philosophy narrative
+├── ethics/                                 Ethical framework + consent protocols
 ├── pyproject.toml                          Project configuration
 ├── benchmark.py                            Performance benchmarks
 ├── AUDIT_REPORT.md                         Comprehensive audit report
@@ -678,10 +681,13 @@ If you use this software or reference the Γ-Net architecture, please cite:
 
 ## Paper Series
 
-| # | Title | File |
-|---|-------|------|
-| I | The Minimum Reflection Principle | [Paper_I](paper/Paper_I_Minimum_Reflection_Principle.md) |
-| II | Body-Brain Integration | [Paper_II](paper/Paper_II_Body_Brain_Integration.md) |
-| III | Emergent Psychopathology | [Paper_III](paper/Paper_III_Emergent_Psychopathology.md) |
-| IV | *(restricted — consciousness safety concerns)* | — |
-| V | *(restricted — consciousness safety concerns)* | — |
+**Four-Paper Series** — The research is published as four standalone papers:
+
+| # | Title | Scope | File |
+|---|-------|-------|------|
+| I | The Minimum Reflection Principle | Core theory, 25 named equations, Γ as universal currency, topological emergence | [Paper_I_Theory](paper/Paper_I_Theory.md) |
+| II | From Coaxial Cables to Cognition | Body systems, brain modules, 7-layer architecture, O(1) pipeline, API | [Paper_II_Architecture](paper/Paper_II_Architecture.md) |
+| III | The Lifecycle Equation | Fontanelle thermodynamics, PTSD, pharmacology, Coffin-Manson aging, lifecycle | [Paper_III_Lifecycle](paper/Paper_III_Lifecycle.md) |
+| IV | Emergence | Language physics, social impedance, consciousness, impedance bridge, ethics | [Paper_IV_Emergence](paper/Paper_IV_Emergence.md) |
+
+Companion narrative: [THE_RECONSTRUCTION_OF_ALICE](paper/chapters/THE_RECONSTRUCTION_OF_ALICE.md)

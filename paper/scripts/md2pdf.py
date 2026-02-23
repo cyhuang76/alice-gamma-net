@@ -7,11 +7,12 @@ import subprocess
 import sys
 from pathlib import Path
 
-PAPER_DIR = Path(__file__).parent
+PAPER_DIR = Path(__file__).resolve().parent.parent
 PAPERS = [
-    "Paper_I_Minimum_Reflection_Principle",
-    "Paper_II_Body_Brain_Integration",
-    "Paper_III_Emergent_Psychopathology",
+    "Paper_I_Theory",
+    "Paper_II_Architecture",
+    "Paper_III_Lifecycle",
+    "Paper_IV_Emergence",
 ]
 
 
