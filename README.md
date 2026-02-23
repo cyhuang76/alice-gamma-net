@@ -4,7 +4,9 @@ Physics-Driven Electronic Lifeform Based on Γ-Net Architecture
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18720269.svg)](https://doi.org/10.5281/zenodo.18720269)
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-2398%20passed-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/tests-2402%20passed-brightgreen.svg)]()
+[![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
+[![Papers](https://img.shields.io/badge/papers-4%20published-orange.svg)](paper/)
 
 **Author**: Hsi-Yu Huang (黃璽宇) — Independent Researcher, Taiwan
 **GitHub**: [github.com/cyhuang76/alice-gamma-net](https://github.com/cyhuang76/alice-gamma-net)
@@ -670,7 +672,7 @@ If you use this software or reference the Γ-Net architecture, please cite:
   author       = {Huang, Hsi-Yu},
   title        = {Alice Smart System — Γ-Net: A Physics-Driven Electronic Lifeform},
   year         = 2026,
-  version      = {30.0},
+  version      = {31.0},
   publisher    = {Zenodo},
   doi          = {10.5281/zenodo.18720269},
   url          = {https://github.com/cyhuang76/alice-gamma-net}
@@ -691,3 +693,9 @@ If you use this software or reference the Γ-Net architecture, please cite:
 | IV | Emergence | Language physics, social impedance, consciousness, impedance bridge, ethics | [Paper_IV_Emergence](paper/Paper_IV_Emergence.md) |
 
 Companion narrative: [THE_RECONSTRUCTION_OF_ALICE](paper/chapters/THE_RECONSTRUCTION_OF_ALICE.md)
+
+---
+
+## Keywords
+
+`computational-neuroscience` · `artificial-consciousness` · `cognitive-architecture` · `brain-simulation` · `artificial-life` · `electronic-lifeform` · `impedance-matching` · `coaxial-transmission-line` · `physics-driven-ai` · `emergent-behavior` · `predictive-processing` · `mirror-neurons` · `sleep-cycles` · `language-emergence` · `phantom-limb` · `PTSD-simulation`
