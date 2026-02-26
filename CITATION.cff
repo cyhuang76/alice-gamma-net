@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+title: "Alice Smart System — Γ-Net: A Physics-Driven Electronic Lifeform"
+message: "If you use this software or reference the Γ-Net architecture, please cite it using the metadata from this file."
+type: software
+authors:
+  - family-names: Huang
+    given-names: Hsi-Yu
+    email: llc.y.huangll@gmail.com
+    affiliation: "Independent Researcher, Taiwan"
+repository-code: "https://github.com/cyhuang76/alice-gamma-net"
+doi: "10.5281/zenodo.18720269"
+url: "https://doi.org/10.5281/zenodo.18720269"
+license: AGPL-3.0-or-later
+version: "31.0"
+date-released: "2026-02-23"
+keywords:
+  - gamma-net
+  - impedance mismatch
+  - computational neuroscience
+  - artificial consciousness
+  - coaxial transmission line
+  - reflection coefficient
+  - electronic lifeform
+  - emergent psychopathology
+  - minimum reflection principle
+abstract: >-
+  Γ-Net (Gamma-Net) is a physics-driven cognitive architecture that models
+  the brain as an impedance-matching network derived from coaxial transmission
+  line theory. The system implements a complete electronic lifeform (ALICE)
+  with body organs (eye, ear, hand, mouth), autonomic nervous system,
+  sleep cycles, language emergence, and emergent psychopathology — all
+  governed by a single unified equation: the reflection coefficient
+  Γ = (Z_L − Z_0) / (Z_L + Z_0). The Minimum Reflection Principle states
+  that all cognition is impedance minimization. Includes 146 source files,
+  84,500+ lines, 2,402 tests, 51 experiments, and a 4-paper research
+  series.

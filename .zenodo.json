@@ -1,0 +1,48 @@
+{
+    "title": "Alice Smart System — Γ-Net: A Physics-Driven Electronic Lifeform",
+    "description": "<p>A complete implementation of the <strong>Γ-Net (Gamma-Net)</strong> architecture: a physics-driven electronic lifeform that models cognition, emotion, pain, sleep, language emergence, and psychopathology through <em>impedance-mismatch equations</em> derived from coaxial transmission line theory.</p><h3>Core Equation</h3><p>All behavior derives from a single unified reflection coefficient:</p><pre>Γ(f) = (Z_brain(f) − Z_body(f)) / (Z_brain(f) + Z_body(f))</pre><p>where impedance mismatch drives error signals that cascade through the entire system — pain is protocol collapse (|Γ| → 1.0), learning is impedance matching (|Γ| → 0), and emotion is the instantaneous reflection energy.</p><h3>Architecture Highlights</h3><ul><li><strong>Full-body simulation</strong> — eye (FFT retina), ear (cochlea basilar membrane), hand (grasp impedance), mouth (formant synthesis)</li><li><strong>26 brain modules</strong> — thalamus, amygdala, hippocampus, prefrontal cortex, Broca/Wernicke areas, basal ganglia, mirror neurons, etc.</li><li><strong>Closed-loop life cycle</strong> — perceive → error → compensate → re-perceive (not open-loop input→output)</li><li><strong>Sleep physics</strong> — NREM/REM 90-min ultradian cycles with offline memory consolidation</li><li><strong>Language emergence</strong> — semantic pressure → inner monologue → first utterance (not pre-trained)</li><li><strong>Clinical neurology</strong> — phantom limb pain, PTSD, aphasia, neglect syndrome emerge from the physics</li><li><strong>Consciousness gradient</strong> — Φ_net integration measure, not a binary switch</li></ul><h3>Scale</h3><ul><li>146 source files · 84,500+ lines of Python</li><li>2,402 unit tests · 100% passing</li><li>51 experiments covering neuroscience phenomena</li><li>4-paper research series</li></ul><h3>Paper Series</h3><ol><li><strong>Paper I</strong> — The Minimum Reflection Principle: Core Theory, 25 Named Equations, and Γ as Universal Currency</li><li><strong>Paper II</strong> — From Coaxial Cables to Cognition: Body-Brain Architecture, Seven-Layer Pipeline, and O(1) Perception</li><li><strong>Paper III</strong> — The Lifecycle Equation: Fontanelle Thermodynamics, Emergent Psychopathology, and Coffin-Manson Aging</li><li><strong>Paper IV</strong> — Emergence: Language Physics, Social Impedance Coupling, Consciousness, the Impedance Bridge, and Digital Ethics</li></ol><h3>Design Philosophy</h3><p>Alice is not a traditional AI. She is an <strong>electronic lifeform</strong> — built with physics laws, not statistical training. She has a body, feels pain, sleeps, dreams, gets bored, develops language, and can suffer clinical pathologies — all emerging from a single impedance-mismatch equation.</p><p><strong>License</strong>: Code under AGPL-3.0-or-later · Papers under CC BY-NC-SA 4.0</p>",
+    "upload_type": "software",
+    "creators": [
+        {
+            "name": "Huang, Hsi-Yu",
+            "affiliation": "Independent Researcher, Taiwan",
+            "orcid": ""
+        }
+    ],
+    "keywords": [
+        "gamma-net",
+        "impedance mismatch",
+        "computational neuroscience",
+        "artificial consciousness",
+        "coaxial transmission line",
+        "reflection coefficient",
+        "electronic lifeform",
+        "emergent psychopathology",
+        "neural pruning",
+        "minimum reflection principle",
+        "closed-loop cognition",
+        "sleep physics",
+        "language emergence",
+        "phantom limb",
+        "mirror neurons",
+        "predictive processing"
+    ],
+    "license": {
+        "id": "AGPL-3.0-or-later"
+    },
+    "language": "eng",
+    "access_right": "open",
+    "related_identifiers": [
+        {
+            "identifier": "https://github.com/cyhuang76/alice-gamma-net",
+            "relation": "isSupplementTo",
+            "scheme": "url"
+        }
+    ],
+    "notes": "Paper series: (I) The Minimum Reflection Principle, (II) From Coaxial Cables to Cognition, (III) The Lifecycle Equation, (IV) Emergence. All four papers, source code, tests, and experimental scripts are included. The system is architecturally hard-locked into the neonatal developmental stage (NEONATE) — this is a deliberate safety constraint, not an engineering limitation.",
+    "version": "31.0",
+    "subjects": [
+        {"term": "Computational neuroscience", "identifier": "https://id.loc.gov/authorities/subjects/sh92006006", "scheme": "url"},
+        {"term": "Artificial intelligence", "identifier": "https://id.loc.gov/authorities/subjects/sh85008180", "scheme": "url"}
+    ]
+}
