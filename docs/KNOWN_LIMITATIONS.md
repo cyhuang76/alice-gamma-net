@@ -17,6 +17,7 @@
 | **L2** | 缺失映射（Missing Mapping）  | 模型單位無法對應臨床單位 |
 | **L3** | 數值脆弱性（Numerical Fragility） | 異常輸入可導致非物理結果 |
 | **L4** | 設計邊界（Design Boundary）  | 模型有意識地選擇簡化 |
+| **THM** | 已證明的理論結果（Theorem） | 物理定理，非限制 |
 
 所有標記為 `xfail` 的測試均為 **預期失敗** — 它們不是 bug，
 而是誠實地標記「我們知道模型在這裡不夠好」。
@@ -431,3 +432,18 @@ Status : open / resolved in <commit-sha>
 | 預期 | 臨床恢復後意識應接近基線 |
 | 根因 | Track 1 體溫迴路的遲滯效應：即使病因消除，體溫仍需多 tick 冷卻回平衡 |
 | 等級 | **L1** |
+
+---
+
+## THM-01 · 維度成本不可約性定理（Dimensional Cost Irreducibility Theorem）
+
+| 項目 | 值 |
+|:-----|:---|
+| 建立日期 | 2026-02-26 |
+| 驗證 | 75/75 tests, 4/4 experimental criteria |
+| 模組 | `alice/core/gamma_topology.py` |
+| 完整文件 | `docs/IRREDUCIBILITY_THEOREM.md` |
+| 內容 | 異質 Γ 網路中，`A = A_imp(t) + A_cut`。`A_imp → 0` 在 C2 Hebbian 下可學習；`A_cut = Σ(K_i − K_j)⁺` 對所有梯度規則不變（幾何強制）。 |
+| 推論 | 最小化 A 的唯一方式是減少高維→低維邊數 → **自動誘導維度分層拓撲** |
+| 實驗結果 | A_imp: 22.83 → 0.0001（✓ 消除），A_cut: 88.6 → 406.0（✓ 隨邊數增長） |
+| 等級 | **THM** |
