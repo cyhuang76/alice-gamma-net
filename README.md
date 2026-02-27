@@ -2,7 +2,7 @@
 
 Physics-Driven Medical Lifeform Simulator Based on Γ-Net Architecture
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18720269.svg)](https://doi.org/10.5281/zenodo.18720269)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18739641.svg)](https://doi.org/10.5281/zenodo.18739641)
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-2734%20passed-brightgreen.svg)]()
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
@@ -547,7 +547,7 @@ Scale     10¹¹ parameters                   ~89,000 lines of physics equations
   year         = 2026,
   version      = {2.0.0},
   publisher    = {Zenodo},
-  doi          = {10.5281/zenodo.18720269},
+    doi         = {10.5281/zenodo.18739641},
   url          = {https://github.com/cyhuang76/alice-gamma-net}
 }
 ```
