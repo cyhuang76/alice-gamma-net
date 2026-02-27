@@ -22,7 +22,7 @@
 \title{Irreducible Dimensional Cost in Heterogeneous Impedance Networks:\\
        Scaling Laws, Fractal Topology, and the Minimum Reflection Principle}
 
-\author{C.-Y. Huang}
+\author{Hsi-Yu Huang (黃璽宇)}
 % \affiliation{...}
 
 \date{\today}
@@ -48,7 +48,8 @@ variables: $\nabla_{\mathbf{Z}} \Acut \equiv 0$.
 At fixed topology, $\Acut$ is therefore invariant under
 all local impedance update rules, including C2.
 Numerical experiments confirm that convergence time scales as
-$\tau_{\text{conv}} \sim N^{-1.05}$ ($R^2 = 0.95$),
+$\tau_{\text{conv}} \sim N^{-0.91}$ ($R^2 = 0.95$, five sizes
+$N \in \{16, 32, 64, 128, 256\}$),
 and that a soft-cutoff parameter $\gamma$ continuously tunes the
 K-space fractal dimension
 $D_K = 0.49\gamma + 1.00$,
@@ -277,27 +278,32 @@ Code is available at \url{https://github.com/cyhuang76/alice-gamma-net}.
 \label{sec:convergence}
 
 Figure~\ref{fig:action} shows the action decomposition for a
-$N = 64$ network evolved for 200 ticks.
+$N = 64$ network evolved for 1000 ticks.
 $\Aimp$ decays exponentially with time constant
-$\tau \approx 20$ ticks, reaching $\Aimp < 10^{-3}$ by $t = 50$.
-$\Acut$ is not constant but \emph{increases} monotonically
-because spontaneous edge sprouting continually introduces new
-cross-$K$ edges, each adding its dimensional cost.
+$\tau \approx 20$ ticks, reaching $\Aimp < 10^{-3}$ by $t = 50$
+and $\Aimp = 0$ (to machine precision) by $t = 200$.
+$\Acut$ increases monotonically in the early phase
+because spontaneous edge sprouting introduces new cross-$K$
+edges, each adding its dimensional cost.
+However, $\Acut$ \emph{saturates} at $\Acut \approx 1386$
+for $t > 500$, corresponding to a fully explored topology
+(edge count stabilizes at 2796).
 This does not contradict the theorem, which states that
 $\nabla_{\mathbf{Z}} \Acut \equiv 0$ at \emph{fixed topology};
-the growth of $\Acut$ reflects topological exploration
-(new edges), not impedance dynamics.
+the growth of $\Acut$ in the early phase reflects topological
+exploration, while the saturation reveals a natural
+\emph{geometric cost ceiling} determined by the tissue
+composition and connectivity constraints.
 The theorem is validated: $\Aimp \to 0$ under C2 while
-$\Acut$ accumulates as the topology explores.
+$\Acut$ accumulates and then saturates.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig1_action_decomposition}
 \caption{%
-Action decomposition $A = \Aimp(t) + \Acut$.
-Blue: $\Aimp \to 0$ (exponential decay).
-Red dashed: $\Acut$ (irreducible, increasing with sprouting).
-Inset: log-scale zoom of $\Aimp$ in the late-time regime.
+Action decomposition $A = \Aimp(t) + \Acut$ over 1000 ticks.
+Blue: $\Aimp \to 0$ (exponential decay, reaches zero by $t = 200$).
+Red dashed: $\Acut$ (increases then saturates at $\approx 1386$ for $t > 500$).
 $N = 64$, $\Delta K_{\max} = 2$.
 }
 \label{fig:action}
@@ -308,12 +314,12 @@ $N = 64$, $\Delta K_{\max} = 2$.
 
 We measure the convergence time $\tau_{\text{conv}}$
 (ticks until $\Aimp < 0.01 \cdot \Aimp(t{=}5)$)
-across network sizes $N \in \{16, 32, 64, 128\}$,
+across network sizes $N \in \{16, 32, 64, 128, 256\}$,
 with 5 independent trials per size.
 A power-law fit yields
 \begin{equation}
 \tau_{\text{conv}} = C \cdot N^{\alpha},
-\quad \alpha = -1.05 \pm 0.08,
+\quad \alpha = -0.91 \pm 0.06,
 \quad R^2 = 0.95.
 \label{eq:scaling}
 \end{equation}
@@ -354,6 +360,7 @@ $N$ & $\tau_{\text{conv}}$ & $\gamma_{\text{decay}}$ \\
  32  & $167 \pm 8$   & $0.033 \pm 0.002$ \\
  64  & $82 \pm 3$    & $0.062 \pm 0.003$ \\
 128  & $55 \pm 3$    & $0.082 \pm 0.005$ \\
+256  & $36 \pm 2$    & $0.121 \pm 0.006$ \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -465,7 +472,7 @@ control of the fractal dimension from $D_K \approx 0.7$
 
 \subsection{Negative Scaling Exponent and Brain-Scale Feasibility}
 
-The scaling $\tau_{\text{conv}} \sim N^{-1.05}$ is the most
+The scaling $\tau_{\text{conv}} \sim N^{-0.91}$ is the most
 surprising result.
 It predicts that a brain-scale network ($N \sim 10^{10}$)
 would converge in $\tau \sim 10^{-10.5}$ ticks---effectively
@@ -518,7 +525,7 @@ invariant under all local impedance rules at fixed topology.
 \item
 \emph{Negative scaling}
 [Eq.~\eqref{eq:scaling}]:
-$\tau_{\text{conv}} \sim N^{-1.05}$,
+$\tau_{\text{conv}} \sim N^{-0.91}$,
 so convergence accelerates with network size (mean-field effect).
 
 \item
