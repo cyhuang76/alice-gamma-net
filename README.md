@@ -6,7 +6,7 @@
 
 *No training data. No black boxes. Pure physics.*
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18795843.svg)](https://doi.org/10.5281/zenodo.18795843)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18739641.svg)](https://doi.org/10.5281/zenodo.18739641)
 [![Tests](https://img.shields.io/badge/tests-2734%20passed-brightgreen.svg)]()
 [![Paper I](https://img.shields.io/badge/Paper_I-submitted_to_PRE-orange.svg)](paper/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
@@ -175,7 +175,7 @@ $$A = \underbrace{A_{\text{imp}}(t)}_{\to\, 0 \text{ (learnable)}} + \underbrace
   title   = {Alice Smart System — Physics-Driven Medical Lifeform Simulator},
   year    = 2026,
   version = {2.0.0},
-  doi     = {10.5281/zenodo.18795843},
+  doi     = {10.5281/zenodo.18739641},
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }
 ```
