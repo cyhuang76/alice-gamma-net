@@ -55,43 +55,21 @@ When $|\Gamma| \to 1$: total mismatch → pain, collapse, pathology.
 
 ---
 
-## Architecture at a Glance
+## Architecture
 
-```mermaid
-graph TB
-    subgraph "Layer 0 · Physics"
-        ES[ElectricalSignal] --> CC[CoaxialChannel]
-        CC --> GT[GammaTopology]
-    end
-
-    subgraph "Layer 1 · Body  (18 organs)"
-        Eye & Ear & Hand & Mouth
-        CV[Cardiovascular] & Lung
-        more["+ 12 more organs"]
-    end
-
-    subgraph "Layer 2 · Protocol  (Γ-Net v4)"
-        Router[PriorityRouter] --> Cache[YearRingCache]
-    end
-
-    subgraph "Layer 3 · Brain  (42 modules)"
-        Perc[Perception] --> Mem[Memory]
-        Mem --> Lang[Language]
-        Lang --> Exec[Executive]
-        Emo[Emotion] --> Exec
-    end
-
-    subgraph "Layer 5 · Controller"
-        AB[AliceBrain]
-        LL[LifeLoop]
-        Sleep[SleepCycle]
-    end
-
-    Eye & Ear & Hand --> Router
-    Router --> Perc
-    Exec --> Hand & Mouth
-    AB --> LL --> Sleep
 ```
+Layer 5  AliceBrain ← LifeLoop ← SleepCycle        Controller
+Layer 4  WorkingMemory · RL · Causal · MetaLearner  Cognition
+Layer 3  42 brain modules (perception → memory →    Brain
+         language → emotion → executive control)
+Layer 2  PriorityRouter · YearRingCache · Γ-Net v4  Protocol
+Layer 1  18 organs (eye · ear · hand · mouth ·      Body
+         heart · lung · liver · kidney + 10 more)
+Layer 0  ElectricalSignal · CoaxialChannel ·        Physics
+         GammaTopology · BrainWaveBand
+```
+
+> **Closed loop**: Perceive → Error (Γ²) → Compensate → Re-perceive → ...
 
 ---
 
