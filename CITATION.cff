@@ -11,8 +11,8 @@ repository-code: "https://github.com/cyhuang76/alice-gamma-net"
 doi: "10.5281/zenodo.18720269"
 url: "https://doi.org/10.5281/zenodo.18720269"
 license: AGPL-3.0-or-later
-version: "31.0"
-date-released: "2026-02-23"
+version: "2.0.0"
+date-released: "2026-02-27"
 keywords:
   - gamma-net
   - impedance mismatch
@@ -23,6 +23,10 @@ keywords:
   - electronic lifeform
   - emergent psychopathology
   - minimum reflection principle
+  - heterogeneous-topology
+  - irreducibility-theorem
+  - fractal-dimension
+  - soft-cutoff
 abstract: >-
   Γ-Net (Gamma-Net) is a physics-driven cognitive architecture that models
   the brain as an impedance-matching network derived from coaxial transmission
@@ -31,6 +35,7 @@ abstract: >-
   sleep cycles, language emergence, and emergent psychopathology — all
   governed by a single unified equation: the reflection coefficient
   Γ = (Z_L − Z_0) / (Z_L + Z_0). The Minimum Reflection Principle states
-  that all cognition is impedance minimization. Includes 146 source files,
-  84,500+ lines, 2,402 tests, 51 experiments, and a 4-paper research
-  series.
+  that all cognition is impedance minimization. v2.0.0 introduces the
+  Dimensional Cost Irreducibility Theorem, heterogeneous Γ-topology with
+  soft-cutoff fractal control, and K-space scaling analysis. Includes
+  200 source files, 89,400+ lines, 2,734 tests, and 49 experiments.

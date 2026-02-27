@@ -4,9 +4,9 @@ Physics-Driven Medical Lifeform Simulator Based on Γ-Net Architecture
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18720269.svg)](https://doi.org/10.5281/zenodo.18720269)
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-2400%2B%20passed-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/tests-2734%20passed-brightgreen.svg)]()
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
-[![Papers](https://img.shields.io/badge/papers-5%20published-orange.svg)](paper/)
+[![Paper I](https://img.shields.io/badge/Paper_I-submitted_to_PRE-orange.svg)](paper/)
 
 **Author**: Hsi-Yu Huang (黃璽宇) — Independent Researcher, Taiwan
 **GitHub**: [github.com/cyhuang76/alice-gamma-net](https://github.com/cyhuang76/alice-gamma-net)
@@ -58,6 +58,16 @@ where $\Gamma_i = (Z_{\text{load},i} - Z_{\text{source},i}) / (Z_{\text{load},i}
 
 A single physical quantity — the reflection coefficient — simultaneously drives
 sensation, emotion, fatigue, sleep, neural pruning, and aging.
+
+### Dimensional Cost Irreducibility Theorem (v2.0.0)
+
+For networks with heterogeneous mode counts $K_i$, the action decomposes as:
+
+$$A = A_{\text{imp}}(t) + A_{\text{cut}}$$
+
+where $A_{\text{imp}} \to 0$ under Hebbian learning while $A_{\text{cut}} = \sum_{\text{edges}} (K_{\text{src}} - K_{\text{tgt}})^+$ has zero gradient with respect to all impedance variables. Relay nodes emerge as a thermodynamic necessity.
+
+**Key results**: $\tau_{\text{conv}} \sim N^{-1.05}$ (larger networks converge faster) and soft-cutoff parameter $\gamma$ tunes K-space fractal dimension $D_K = 0.49\gamma + 1.00$.
 
 ---
 
@@ -275,6 +285,7 @@ Alice Smart System/
 │   ├── core/                               Foundation physics
 │   │   ├── signal.py                       ElectricalSignal + CoaxialChannel
 │   │   ├── protocol.py                     Γ-Net v4 protocol engine
+│   │   ├── gamma_topology.py               Heterogeneous Γ-topology (v2.0.0)
 │   │   ├── cache_analytics.py              Cache analytics
 │   │   └── cache_persistence.py            Persistence
 │   ├── body/                               Body organs
@@ -328,9 +339,11 @@ Alice Smart System/
 │   │   └── meta_learning.py                Meta-Learning
 │   └── api/
 │       └── server.py                       FastAPI + WebSocket
-├── tests/                                  Test suite (2400+ tests)
-├── experiments/                            Experiment scripts
-├── paper/                                  Academic papers (5-paper series)
+├── tests/                                  Test suite (2,734 tests)
+├── experiments/                            Experiment scripts (49)
+├── figures/                                Publication-quality figures
+├── paper/                                  Academic papers
+│   └── paper_I_irreducibility.tex          Paper I (RevTeX4-2, submitted to PRE)
 ├── docs/                                   Architecture docs + audit reports
 ├── pyproject.toml                          Project configuration
 └── README.md                               This document
@@ -513,7 +526,7 @@ Sleep     None                              NREM/REM 90-minute cycles
 Time      No internal clock                 50ms/200ms temporal binding windows
 Language  Statistical token prediction      Semantic pressure → impedance matching
 Clinical  None                              10 pathology models + pharmacology
-Scale     10¹¹ parameters                   ~90,000 lines of physics equations
+Scale     10¹¹ parameters                   ~89,000 lines of physics equations
 ```
 
 ---
@@ -532,7 +545,7 @@ Scale     10¹¹ parameters                   ~90,000 lines of physics equations
   author       = {Huang, Hsi-Yu},
   title        = {Alice Smart System — Physics-Driven Medical Lifeform Simulator},
   year         = 2026,
-  version      = {35.0},
+  version      = {2.0.0},
   publisher    = {Zenodo},
   doi          = {10.5281/zenodo.18720269},
   url          = {https://github.com/cyhuang76/alice-gamma-net}
@@ -543,13 +556,13 @@ Scale     10¹¹ parameters                   ~90,000 lines of physics equations
 
 ## Paper Series
 
-| # | Title | Scope |
-|---|-------|-------|
-| I | The Minimum Reflection Principle | Core theory, 25 equations, Γ as universal currency |
-| II | From Coaxial Cables to Cognition | Body + brain 7-layer architecture |
-| III | The Lifecycle Equation | PTSD, pharmacology, Coffin-Manson aging |
-| IV | Emergence | Language physics, impedance bridge |
-| V | Grand Unification | 1 action → 25 specialisations → 13 predictions |
+| # | Title | Status |
+|---|-------|--------|
+| I | Irreducible Dimensional Cost in Heterogeneous Impedance Networks | **Submitted to PRE** (2026) |
+| II | From Coaxial Cables to Cognition | In preparation |
+| III | The Lifecycle Equation | In preparation |
+| IV | Emergence | In preparation |
+| V | Grand Unification | Planned |
 
 ---
 
