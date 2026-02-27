@@ -1,8 +1,8 @@
 # Alice Smart System
 
-Physics-Driven Medical Lifeform Simulator Based on Γ-Net Architecture
+**Physics-Driven Medical Lifeform Simulator Based on Γ-Net Architecture**
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18739641.svg)](https://doi.org/10.5281/zenodo.18739641)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18795843.svg)](https://doi.org/10.5281/zenodo.18795843)
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-2734%20passed-brightgreen.svg)]()
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
@@ -31,12 +31,12 @@ Action) and three inviolable constraints.
 | :--- | :--- |
 | Open-loop: Input → Output | **Closed-loop**: Perceive → Error → Compensate → Re-perceive |
 | Statistical function approximator | **Physics simulator** (FFT, PID, LC resonance) |
-| No body | **Full-body** (eye, ear, hand, mouth, cardiovascular, lung) |
+| No body | **Full-body** (eye, ear, hand, mouth, cardiovascular, lung, + 12 more organs) |
 | No pain | **Impedance mismatch = pain**, reflected energy = anxiety |
 | No sleep | **NREM/REM 90-min cycles** (offline impedance recalibration) |
 | Black box | **Fully transparent physics equations** |
 | No aging | **Lorentz compression fatigue** (Pollock-Barraclough plastic strain) |
-| No clinical pathology | **Five-disease model** + computational pharmacology |
+| No clinical pathology | **10+ disease models** + computational pharmacology |
 
 ---
 
@@ -65,13 +65,16 @@ For networks with heterogeneous mode counts $K_i$, the action decomposes as:
 
 $$A = A_{\text{imp}}(t) + A_{\text{cut}}$$
 
-where $A_{\text{imp}} \to 0$ under Hebbian learning while $A_{\text{cut}} = \sum_{\text{edges}} (K_{\text{src}} - K_{\text{tgt}})^+$ has zero gradient with respect to all impedance variables. Relay nodes emerge as a thermodynamic necessity.
+where $A_{\text{imp}} \to 0$ under Hebbian learning while $A_{\text{cut}} = \sum_{\text{edges}} (K_{\text{src}} - K_{\text{tgt}})^+$ has zero gradient with respect to all impedance variables at fixed topology. This geometric cost is **irreducible** — relay nodes emerge as a thermodynamic necessity.
 
-**Key results**: $\tau_{\text{conv}} \sim N^{-1.05}$ (larger networks converge faster) and soft-cutoff parameter $\gamma$ tunes K-space fractal dimension $D_K = 0.49\gamma + 1.00$.
+**Key results**:
+- **Scaling**: $\tau_{\text{conv}} \sim N^{-0.91}$ — larger networks converge *faster* (mean-field effect)
+- **Fractal control**: soft-cutoff $\gamma$ tunes K-space dimension $D_K = 0.49\gamma + 1.00$
+- **Cost ceiling**: $A_{\text{cut}}$ saturates, revealing a natural geometric cost ceiling
 
 ---
 
-## Architecture Overview
+## Architecture
 
 ### Layer 6 · Application Interface
 
@@ -81,7 +84,7 @@ where $A_{\text{imp}} \to 0$ under Hebbian learning while $A_{\text{cut}} = \sum
 | Oscilloscope | CRT-style physiological dashboard |
 | CLI | Interactive interface |
 
-### Layer 5 · Unified Controller (`alice_brain.py`)
+### Layer 5 · Unified Controller (`alice_brain.py`, 2951 lines)
 
 | Module | Description |
 |:---|:---|
@@ -99,43 +102,24 @@ where $A_{\text{imp}} \to 0$ under Hebbian learning while $A_{\text{cut}} = \sum
 | CausalReasoner | Pearl's causal ladder |
 | MetaLearner | Strategy pool + Softmax selection |
 
-### Layer 3 · Brain Processing Core
+### Layer 3 · Brain Processing Core (42 modules)
 
-| Module | Description |
+| Category | Modules |
 |:---|:---|
-| FusionBrain | Neural × Protocol fusion (5-step cycle) |
-| PerceptionPipeline | LC resonance band-pass + sparse code O(1) lookup |
-| AutonomicNervousSystem | Sympathetic / Parasympathetic homeostasis |
-| TemporalCalibrator | Cross-modal temporal binding + drift correction |
-| Hippocampus | Episodic memory engine |
-| WernickeEngine | Sequence comprehension and proto-syntax |
-| SemanticFieldEngine | Concepts as state-space attractors |
-| BrocaEngine | Motor speech planning and sensorimotor loop |
-| AuditoryGroundingEngine | Cross-modal Hebbian resonance binding |
-| ThalamusEngine | Sensory gate and attention router |
-| AmygdalaEngine | Emotion fast-path and fight-or-flight |
-| PrefrontalCortexEngine | Executive control and goal management |
-| BasalGangliaEngine | Habit engine and dopamine learning |
-| NeuralPruningEngine | Massive Γ apoptosis |
-| SleepPhysicsEngine | Offline impedance renormalization + energy conservation |
-| AttentionPlasticityEngine | Attention gate τ / tuning Q training |
-| CognitiveFlexibilityEngine | Task switching / inertia impedance |
-| CuriosityDriveEngine | Novelty detection + boredom-driven behaviour |
-| ImpedanceAdaptationEngine | Cross-modal impedance experiential learning |
-| MetacognitionEngine | System 1/2 + confidence calibration |
-| PredictiveEngine | Forward model + surprise signal |
-| NarrativeMemoryEngine | Causal arc + emotion archetype |
-| RecursiveGrammarEngine | Shift-reduce + garden-path recovery |
-| SemanticPressureEngine | Language thermodynamics + inner monologue |
-| EmotionGranularityEngine | Fine-grained affect vector |
-| HomeostaticDriveEngine | Hunger / thirst physiological model |
-| PhysicsRewardEngine | Impedance matching reward |
-| PinchFatigueEngine | Lorentz compression fatigue — Pollock-Barraclough neural aging |
-| PhantomLimbEngine | Ramachandran mirror therapy simulation |
-| ClinicalNeurologyEngine | Five-disease unified impedance failure model |
-| PharmacologyEngine | MS / PD / Epilepsy / Depression — unified α_drug |
-| SignalBus | Coaxial cable bus (impedance matching + Γ) |
-| DynamicTimeSlice | Attention resource allocation |
+| **Perception & Fusion** | FusionBrain, PerceptionPipeline, TemporalCalibrator |
+| **Sensory Gating** | ThalamusEngine, AuditoryGroundingEngine |
+| **Memory** | Hippocampus, NarrativeMemoryEngine |
+| **Language** | WernickeEngine, BrocaEngine, RecursiveGrammarEngine, SemanticPressureEngine |
+| **Emotion** | AmygdalaEngine, EmotionGranularityEngine |
+| **Executive** | PrefrontalCortexEngine, CognitiveFlexibilityEngine, MetacognitionEngine |
+| **Motor** | BasalGangliaEngine, CerebellumEngine |
+| **Homeostasis** | AutonomicNervousSystem, HomeostaticDriveEngine |
+| **Learning** | AttentionPlasticityEngine, CuriosityDriveEngine, ImpedanceAdaptationEngine, PredictiveEngine |
+| **Sleep** | SleepPhysicsEngine |
+| **Plasticity** | NeuralPruningEngine, NeurogenesisThermalEngine |
+| **Clinical** | ClinicalNeurologyEngine, PharmacologyEngine, PhantomLimbEngine, PinchFatigueEngine |
+| **Reward** | PhysicsRewardEngine |
+| **Topology (v2.0.0)** | GammaTopology — heterogeneous Γ-network with soft cutoff |
 
 ### Layer 2 · Communication Protocol Engine (Γ-Net v4)
 
@@ -146,29 +130,42 @@ where $A_{\text{imp}} \to 0$ under Hebbian learning while $A_{\text{cut}} = \sum
 | BrainHemisphere | Left/right brain on-demand activation |
 | ErrorCorrector | Minimum energy correction |
 
-### Layer 1 · Body (Sensory + Motor Organs)
+### Layer 1 · Body (18 Organs)
 
 | Organ | Type | Description |
 |:---|:---|:---|
 | Eye | Sensory | Convex lens FFT · Spatial freq → brainwave mapping · Nyquist resolution |
 | Ear | Sensory | Cochlea physical Fourier · 24-channel filter bank · Spatial localization |
+| Nose | Sensory | Olfactory receptor array · concentration detection |
 | Hand | Motor | PID + muscle tension · Anxiety → tremor · Proprioceptive feedback |
 | Mouth | Motor | Source-Filter model · Vocal cord tension PID |
-| Cardiovascular | Organ | Heart rate + blood pressure simulation |
+| Skin | Sensory | Mechanoreceptor array · pressure/temperature mapping |
+| Vestibular | Sensory | Semicircular canal model · balance feedback |
+| Interoception | Sensory | Internal organ state monitoring |
+| Cardiovascular | Organ | Heart rate + blood pressure + vascular resistance |
 | Lung | Organ | Respiratory rhythm + gas exchange |
+| Liver | Organ | Metabolic processing + detoxification |
+| Kidney | Organ | Filtration + electrolyte balance |
+| Immune | System | Innate + adaptive immune response |
+| Endocrine | System | Hormone regulation + feedback loops |
+| Digestive | System | Nutrient absorption + peristalsis |
+| Lymphatic | System | Tissue drainage + immune cell transport |
+| Reproductive | System | Hormonal cycling model |
+| Cochlea | Component | Basilar membrane 24-ERB filter bank |
 
-### Layer 0 · Foundation Physics (`ElectricalSignal`)
+### Layer 0 · Foundation Physics
 
 | Component | Description |
 |:---|:---|
-| BrainWaveBand | δ θ α β γ five frequency bands |
 | ElectricalSignal | Unified electrical signal format (waveform, impedance, SNR) |
 | CoaxialChannel | Coaxial cable transmission (attenuation + Γ reflection) |
+| GammaTopology | Dynamic network topology with heterogeneous K modes |
+| BrainWaveBand | δ θ α β γ five frequency bands |
 | **Axiom** | **Everything is electrical signal: Light→E, Sound→E, Force→E, Intent→E** |
 
 ---
 
-## Core Closed-Loop: Life Loop
+## Closed-Loop Architecture
 
 ```text
   Perception        Error Estimation      Compensation        Execution
@@ -182,18 +179,6 @@ where $A_{\text{imp}} \to 0$ under Hebbian learning while $A_{\text{cut}} = \sum
        └──────────── Proprioceptive feedback ←──────────────────┘
 ```
 
-### 7 Error Types
-
-| Error Type | Mismatch | Compensatory Action |
-|:---|:---|:---|
-| VISUAL_MOTOR | Seen vs hand position | `hand.reach()` |
-| AUDITORY_VISUAL | Heard vs seen direction | Head turn |
-| AUDITORY_VOCAL | Target pitch vs actual | `mouth.speak()` |
-| PROPRIOCEPTIVE | Target vs actual position | Fine-tune |
-| TEMPORAL | Event timing offset | Temporal calibration |
-| INTEROCEPTIVE | Homeostatic deviation | Autonomic regulation |
-| SENSORY_PREDICTION | Predicted vs actual | Attention refocus |
-
 ### Multi-Timescale Nested Closed Loops
 
 | Timescale | Loop | Γ's Role |
@@ -206,72 +191,22 @@ where $A_{\text{imp}} \to 0$ under Hebbian learning while $A_{\text{cut}} = \sum
 
 ---
 
-## Physics Engine Details
+## Clinical Pathology Models
 
-### Unified Electrical Signal
+| Pathology | Mechanism |
+|:---|:---|
+| Stroke | Acute impedance rupture → downstream signal loss |
+| ALS | Progressive motor channel degradation |
+| Dementia | Diffuse Γ elevation across cognitive channels |
+| Alzheimer's | Hippocampal impedance failure → episodic memory loss |
+| Cerebral Palsy | Developmental impedance miscalibration |
+| Phantom Limb | Amputation = open-circuit Γ = 1.0 → mirror therapy |
+| MS | Demyelination → impedance increase → conduction block |
+| Parkinson's | Dopamine depletion → basal ganglia impedance shift |
+| Epilepsy | E-I impedance imbalance → runaway oscillation |
+| Depression | Monoamine-mediated global Γ elevation |
 
-```python
-@dataclass
-class ElectricalSignal:
-    waveform: np.ndarray    # Waveform
-    amplitude: float         # Amplitude (V)
-    frequency: float         # Dominant frequency (Hz)
-    phase: float             # Phase (rad)
-    impedance: float         # Impedance (Ω)
-    snr: float              # Signal-to-noise ratio (dB)
-    source: str             # Source organ
-    modality: str           # Sensory modality
-```
-
-### Coaxial Cable Physics
-
-- **Impedance matching**: Source ↔ target mismatch → reflection
-- **Reflection coefficient** Γ = (Z_load − Z_source) / (Z_load + Z_source)
-- **Reflected energy** → channel thermal rise → anxiety
-- **Perfect match** (Γ = 0) = zero pain, zero anxiety → "flow state"
-
-### Sleep — Γ²-Driven Fatigue Cycle
-
-**Fatigue accumulation**: $D(t) = D(t-1) + \alpha \cdot \Sigma\Gamma^2_{\text{cycle}}$
-
-**Sleep pressure** (three-factor):
-
-| Factor | Weight | Physics |
-|:---|:---|:---|
-| Energy deficit (1 − E) | 0.40 | Metabolic consumption > recovery |
-| Impedance debt D | 0.35 | ΣΓ² thermal fatigue |
-| Synaptic entropy deficit | 0.25 | Hebbian learning skews distribution |
-
-When $P_{\text{sleep}} > 0.7$ → enter sleep.
-
-**Sleep stages** (90-min ultradian cycle):
-
-| Stage | Wave | Function |
-|:---|:---|:---|
-| N1 | α/θ | Close non-critical channels |
-| N2 | θ | Spindle waves = memory transfer pulses |
-| N3 | δ | Maximum recharge: impedance recalibration + synaptic downscaling |
-| REM | θ/β | Diagnostic mode: random probe all channels |
-
-### Clinical Pathology Models
-
-| Pathology | Mechanism | Validation |
-|:---|:---|:---|
-| Stroke | Acute impedance rupture → downstream signal loss | Clinical cascade verified |
-| ALS | Progressive motor channel degradation | Fasciculation + weakness progression |
-| Dementia | Diffuse Γ elevation across cognitive channels | Memory + executive decline |
-| Alzheimer's | Hippocampal impedance failure → episodic memory loss | Braak staging compatible |
-| Cerebral Palsy | Developmental impedance miscalibration | Motor pattern verified |
-| Phantom Limb Pain | Amputation = open-circuit Γ = 1.0 → mirror therapy | Ramachandran protocol validated |
-| MS | Demyelination → impedance increase → conduction block | Relapse-remit pattern |
-| Parkinson's | Dopamine depletion → basal ganglia impedance shift | Bradykinesia + tremor |
-| Epilepsy | E-I impedance imbalance → runaway oscillation | Seizure threshold verified |
-| Depression | Monoamine-mediated global Γ elevation | Anhedonia + fatigue pattern |
-
-### Computational Pharmacology
-
-Unified drug model: all pharmacological agents modify channel impedance via a single
-parameter $\alpha_{\text{drug}}$ — enabling dose-response prediction from first principles.
+**Computational Pharmacology**: All drugs modify channel impedance via a single parameter $\alpha_{\text{drug}}$ — enabling dose-response prediction from first principles.
 
 ---
 
@@ -279,8 +214,8 @@ parameter $\alpha_{\text{drug}}$ — enabling dose-response prediction from firs
 
 ```text
 Alice Smart System/
-├── alice/                                  Source core
-│   ├── alice_brain.py                      Unified controller
+├── alice/                                  Source core (200 files, 89,400+ lines)
+│   ├── alice_brain.py                      Unified controller (2951 lines)
 │   ├── main.py                             Entry point (CLI / Server)
 │   ├── core/                               Foundation physics
 │   │   ├── signal.py                       ElectricalSignal + CoaxialChannel
@@ -288,62 +223,20 @@ Alice Smart System/
 │   │   ├── gamma_topology.py               Heterogeneous Γ-topology (v2.0.0)
 │   │   ├── cache_analytics.py              Cache analytics
 │   │   └── cache_persistence.py            Persistence
-│   ├── body/                               Body organs
-│   │   ├── eye.py                          Eye — FFT forward engineering
-│   │   ├── ear.py                          Ear — Cochlea forward engineering
-│   │   ├── cochlea.py                      Cochlear filter bank (24 ERB channels)
-│   │   ├── hand.py                         Hand — PID inverse engineering
-│   │   ├── mouth.py                        Mouth — Source-Filter model
-│   │   ├── cardiovascular.py               Cardiovascular system
-│   │   └── lung.py                         Respiratory system
-│   ├── brain/                              Brain processing modules
-│   │   ├── awareness_monitor.py            System awareness index Φ
-│   │   ├── neural_display.py               Thalamic gateway display
-│   │   ├── fusion_brain.py                 Neural × Protocol fusion
-│   │   ├── life_loop.py                    Closed-loop error compensation
-│   │   ├── perception.py                   LC resonance perception
-│   │   ├── calibration.py                  Temporal calibration
-│   │   ├── autonomic.py                    Autonomic nervous system
-│   │   ├── sleep.py                        Sleep cycle controller
-│   │   ├── sleep_physics.py                Sleep physics engine
-│   │   ├── hippocampus.py                  Episodic memory
-│   │   ├── wernicke.py                     Sequence comprehension
-│   │   ├── semantic_field.py               Semantic attractors
-│   │   ├── broca.py                        Motor speech planning
-│   │   ├── auditory_grounding.py           Cross-modal binding
-│   │   ├── thalamus.py                     Thalamus sensory gate
-│   │   ├── amygdala.py                     Amygdala emotion fast-path
-│   │   ├── prefrontal.py                   Executive control
-│   │   ├── pruning.py                      Neural pruning
-│   │   ├── basal_ganglia.py                Habit engine
-│   │   ├── attention_plasticity.py         Attention training
-│   │   ├── cognitive_flexibility.py        Task switching
-│   │   ├── curiosity_drive.py              Novelty detection
-│   │   ├── impedance_adaptation.py         Cross-modal adaptation
-│   │   ├── metacognition.py                System 1/2
-│   │   ├── predictive_engine.py            Forward model
-│   │   ├── narrative_memory.py             Causal arc memory
-│   │   ├── recursive_grammar.py            Recursive syntax
-│   │   ├── semantic_pressure.py            Language thermodynamics
-│   │   ├── emotion_granularity.py          Fine-grained affect
-│   │   ├── homeostatic_drive.py            Hunger / thirst model
-│   │   ├── physics_reward.py               Impedance reward
-│   │   ├── pinch_fatigue.py                Lorentz compression aging
-│   │   ├── phantom_limb.py                 Phantom limb pain
-│   │   ├── clinical_neurology.py           Five-disease model
-│   │   └── pharmacology.py                 Computational pharmacology
-│   ├── modules/                            Cognitive modules
-│   │   ├── working_memory.py               Working Memory
-│   │   ├── reinforcement.py                Reinforcement Learning
-│   │   ├── causal_reasoning.py             Causal Reasoning
-│   │   └── meta_learning.py                Meta-Learning
-│   └── api/
-│       └── server.py                       FastAPI + WebSocket
+│   ├── body/                               Body organs (18 modules)
+│   │   ├── eye.py, ear.py, hand.py, mouth.py
+│   │   ├── cardiovascular.py, lung.py, liver.py, kidney.py
+│   │   ├── immune.py, endocrine.py, digestive.py, lymphatic.py
+│   │   ├── skin.py, nose.py, vestibular.py, interoception.py
+│   │   ├── reproductive.py, cochlea.py
+│   │   └── __init__.py
+│   ├── brain/                              Brain processing (42 modules)
+│   └── modules/                            Cognitive modules (4 modules)
 ├── tests/                                  Test suite (2,734 tests)
 ├── experiments/                            Experiment scripts (49)
 ├── figures/                                Publication-quality figures
 ├── paper/                                  Academic papers
-│   └── paper_I_irreducibility.tex          Paper I (RevTeX4-2, submitted to PRE)
+│   └── paper_I_irreducibility.tex          Paper I (RevTeX4-2)
 ├── docs/                                   Architecture docs + audit reports
 ├── pyproject.toml                          Project configuration
 └── README.md                               This document
@@ -382,100 +275,6 @@ python -m alice.main server --port 8000
 
 - **Oscilloscope Dashboard**: <http://localhost:8000/dashboard>
 - **API Documentation**: <http://localhost:8000/docs>
-
-### Run Experiments
-
-```bash
-# Foundation Physics
-python -m experiments.exp_coaxial_physics         # Coaxial cable physics
-python -m experiments.exp_eye_oscilloscope        # Visual physics
-python -m experiments.exp_hand_coordination       # Motor coordination
-python -m experiments.exp_perception_pipeline     # Perception pipeline
-python -m experiments.exp_temporal_calibration    # Temporal calibration
-
-# Life Loop and Pain
-python -m experiments.exp_life_loop               # Closed-loop engine
-python -m experiments.exp_pain_collapse           # Pain collapse clinical
-python -m experiments.exp_motor_development       # Motor development
-
-# Memory and Sleep
-python -m experiments.exp_memory_theory           # Memory theory
-python -m experiments.exp_sleep_physics           # Sleep physics
-python -m experiments.exp_neural_pruning          # Neural pruning
-
-# Language and Audition
-python -m experiments.exp_language_physics        # Semantic field + Broca
-python -m experiments.exp_episodic_wernicke       # Hippocampus + Wernicke
-python -m experiments.exp_auditory_grounding      # Cross-modal conditioning
-
-# Emotion and Executive Control
-python -m experiments.exp_thalamus_amygdala       # Thalamic gate + amygdala
-python -m experiments.exp_prefrontal              # Prefrontal executive control
-python -m experiments.exp_basal_ganglia           # Basal ganglia habits
-
-# Γ Verification and Stress
-python -m experiments.exp_gamma_verification      # Γ unified currency
-python -m experiments.exp_stress_adaptation       # Stress adaptation
-
-# Therapy and Clinical
-python -m experiments.exp_awakening               # 600-tick survival
-python -m experiments.exp_therapy_mechanism       # 5 controlled therapy groups
-python -m experiments.exp_digital_twin            # Digital twin PTSD subtypes
-
-# Higher Cognition
-python -m experiments.exp_attention_training      # Attention plasticity
-python -m experiments.exp_cognitive_flexibility   # Task switching
-python -m experiments.exp_curiosity_boredom       # Curiosity + boredom
-
-# Homeostasis and Circadian
-python -m experiments.exp_dynamic_homeostasis     # Dynamic homeostasis
-python -m experiments.exp_day_night_cycle         # 24h circadian cycle
-
-# Language Thermodynamics
-python -m experiments.exp_inner_monologue         # Semantic pressure + first utterance
-
-# Metacognition and Prediction
-python -m experiments.exp_metacognition           # System 1/2
-python -m experiments.exp_predictive_planning     # Predictive planning
-
-# Clinical Pathology
-python -m experiments.exp_clinical_neurology      # Five-disease model (34/34)
-python -m experiments.exp_pharmacology            # Pharmacology (10/10)
-python -m experiments.exp_phantom_limb            # Phantom limb pain (10/10)
-python -m experiments.exp_pinch_fatigue           # Lorentz fatigue aging (10/10)
-
-# Topology and Cardiovascular
-python -m experiments.exp_topology_emergence      # MRP topology (5/5)
-python -m experiments.exp_dehydration_validation  # Dehydration validation
-python -m experiments.exp_tier2_cv_pathology      # Compound pathology
-
-# Stress Tests
-python -m experiments.exp_stress_test             # Extreme conditions
-```
-
----
-
-## API Endpoints
-
-| Method | Path                   | Description                  |
-| :----- | :--------------------- | :--------------------------- |
-| GET    | `/api/status`          | System status                |
-| GET    | `/api/brain`           | Brain state snapshot         |
-| GET    | `/api/vitals`          | Vital signs                  |
-| GET    | `/api/waveforms`       | Waveform data                |
-| GET    | `/api/oscilloscope`    | Oscilloscope channels        |
-| GET    | `/api/introspect`      | Full introspection report    |
-| GET    | `/api/working-memory`  | Working memory contents      |
-| GET    | `/api/causal-graph`    | Causal graph                 |
-| GET    | `/api/stats`           | Full statistics              |
-| POST   | `/api/perceive`        | Perception stimulus          |
-| POST   | `/api/think`           | Reasoning                    |
-| POST   | `/api/act`             | Action selection             |
-| POST   | `/api/learn`           | Learning feedback            |
-| POST   | `/api/inject-pain`     | Pain injection (clinical)    |
-| POST   | `/api/emergency-reset` | Emergency reset              |
-| POST   | `/api/broadcast-storm` | Broadcast storm attack       |
-| WS     | `/ws/stream`           | Real-time status stream      |
 
 ---
 
@@ -519,37 +318,14 @@ vitals.total_ticks                   # Life cycle tick count
 Topology  Feedforward DAG                   Closed-loop recursive feedback
 Training  Offline gradient descent          Online PID + Hebbian + impedance matching
 Inference y = f(x) single output            Continuous compensation until error < ε
-Body      None                              Full limbs (eye/ear/hand/mouth) + organs
+Body      None                              Full body (18 organs) + autonomic system
 Pain      None                              Impedance mismatch → reflected energy
 Attention Transformer self-attention        Global workspace bottleneck
 Sleep     None                              NREM/REM 90-minute cycles
 Time      No internal clock                 50ms/200ms temporal binding windows
 Language  Statistical token prediction      Semantic pressure → impedance matching
-Clinical  None                              10 pathology models + pharmacology
+Clinical  None                              10+ pathology models + pharmacology
 Scale     10¹¹ parameters                   ~89,000 lines of physics equations
-```
-
----
-
-## License
-
-- **Source code**: [GNU Affero General Public License v3.0](LICENSE)
-- **Papers** (`paper/*.md`): [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-
----
-
-## Citation
-
-```bibtex
-@software{huang2026alice,
-  author       = {Huang, Hsi-Yu},
-  title        = {Alice Smart System — Physics-Driven Medical Lifeform Simulator},
-  year         = 2026,
-  version      = {2.0.0},
-  publisher    = {Zenodo},
-    doi         = {10.5281/zenodo.18739641},
-  url          = {https://github.com/cyhuang76/alice-gamma-net}
-}
 ```
 
 ---
@@ -566,9 +342,33 @@ Scale     10¹¹ parameters                   ~89,000 lines of physics equations
 
 ---
 
+## License
+
+- **Source code**: [GNU Affero General Public License v3.0](LICENSE)
+- **Papers** (`paper/*.tex`): [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+---
+
+## Citation
+
+```bibtex
+@software{huang2026alice,
+  author       = {Huang, Hsi-Yu},
+  title        = {Alice Smart System — Physics-Driven Medical Lifeform Simulator},
+  year         = 2026,
+  version      = {2.0.0},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.18795843},
+  url          = {https://github.com/cyhuang76/alice-gamma-net}
+}
+```
+
+---
+
 ## Keywords
 
 `computational-neuroscience` · `cognitive-architecture` · `medical-simulation` ·
 `impedance-matching` · `coaxial-transmission-line` · `physics-driven` ·
 `clinical-pathology` · `computational-pharmacology` · `digital-twin` ·
-`phantom-limb` · `PTSD-simulation` · `sleep-cycles` · `language-emergence`
+`heterogeneous-topology` · `irreducibility-theorem` · `fractal-dimension` ·
+`sleep-cycles` · `language-emergence`
