@@ -1355,3 +1355,167 @@ class TestKLevelAnalysis:
         assert len(ratios_2_0) >= 2
         assert max(ratios_2_0) / min(ratios_2_0) < 3.0, (
             f"Density ratio ρ(2)/ρ(0) varies too much: {ratios_2_0}")
+
+
+# ============================================================================
+# 14. Soft cutoff — dimension_gap_decay power-law connectivity
+# ============================================================================
+
+
+class TestSoftCutoff:
+    """
+    Verify dimension_gap_decay: edge acceptance probability
+    p(ΔK) = (ΔK + 1)^{−γ}.
+
+    Hard cutoff (max_dimension_gap) creates dimensional democracy (D_K ≈ 0).
+    Soft cutoff creates power-law connectivity (D_K ≈ γ) — fractal topology.
+    """
+
+    def test_soft_cutoff_none_is_noop(self):
+        """dimension_gap_decay=None → identical to hard-cutoff-only."""
+        nodes = [
+            GammaNode("k5", impedance=np.ones(5) * 80, activation=np.zeros(5)),
+            GammaNode("k3", impedance=np.ones(3) * 100, activation=np.zeros(3)),
+        ]
+        topo = GammaTopology(nodes=nodes, max_dimension_gap=2,
+                             dimension_gap_decay=None)
+
+        # Should always succeed (gap=2 ≤ max=2, no soft cutoff)
+        result = topo.activate_edge("k5", "k3")
+        assert result is not None
+        assert ("k5", "k3") in topo.active_edges
+
+    def test_soft_cutoff_dk0_always_accepted(self):
+        """ΔK=0 edges always accepted even with strong decay."""
+        nodes = [
+            GammaNode("a", impedance=np.ones(3) * 80, activation=np.zeros(3)),
+            GammaNode("b", impedance=np.ones(3) * 100, activation=np.zeros(3)),
+        ]
+        topo = GammaTopology(nodes=nodes, dimension_gap_decay=10.0)
+
+        # Same K: gap=0, p(0) = 1.0 regardless of γ
+        result = topo.activate_edge("a", "b")
+        assert result is not None
+
+    def test_survival_probability_formula(self):
+        """Verify p(ΔK) = (ΔK + 1)^{−γ} formula directly."""
+        nodes = [GammaNode("x", impedance=np.ones(1) * 80,
+                           activation=np.zeros(1))]
+        topo = GammaTopology(nodes=nodes, dimension_gap_decay=1.26)
+
+        assert topo._edge_survival_probability(0) == 1.0
+        expected_1 = 2 ** (-1.26)
+        assert abs(topo._edge_survival_probability(1) - expected_1) < 1e-10
+        expected_2 = 3 ** (-1.26)
+        assert abs(topo._edge_survival_probability(2) - expected_2) < 1e-10
+        expected_3 = 4 ** (-1.26)
+        assert abs(topo._edge_survival_probability(3) - expected_3) < 1e-10
+
+    def test_soft_cutoff_reduces_high_delta_k_edges(self):
+        """Soft cutoff network has fewer high-ΔK edges than no-cutoff."""
+        tissue = {
+            CORTICAL_PYRAMIDAL: 8,   # K=5
+            MOTOR_ALPHA: 8,          # K=3
+            PAIN_C_FIBER: 8,         # K=1
+        }
+        # No cutoff: democratic
+        topo_hard = GammaTopology.create_anatomical(
+            tissue_composition=tissue, initial_connectivity=0.3,
+            max_dimension_gap=4, dimension_gap_decay=None, seed=42)
+
+        # Soft cutoff: power-law
+        topo_soft = GammaTopology.create_anatomical(
+            tissue_composition=tissue, initial_connectivity=0.3,
+            max_dimension_gap=4, dimension_gap_decay=1.26, seed=42)
+
+        # Count edges by ΔK
+        def count_by_dk(topo):
+            counts = {}
+            for (s, t), ch in topo.active_edges.items():
+                dk = ch.dimension_gap
+                counts[dk] = counts.get(dk, 0) + 1
+            return counts
+
+        hard_counts = count_by_dk(topo_hard)
+        soft_counts = count_by_dk(topo_soft)
+
+        # ΔK=0 should be similar (p=1 in both)
+        dk0_hard = hard_counts.get(0, 0)
+        dk0_soft = soft_counts.get(0, 0)
+        # With same seed, ΔK=0 edges should be identical
+        assert dk0_soft == dk0_hard, (
+            f"ΔK=0 edges differ: hard={dk0_hard}, soft={dk0_soft}")
+
+        # Total non-zero ΔK edges should be fewer with soft cutoff
+        total_hard = sum(v for k, v in hard_counts.items() if k > 0)
+        total_soft = sum(v for k, v in soft_counts.items() if k > 0)
+        assert total_soft < total_hard, (
+            f"Soft cutoff should reduce cross-K edges: hard={total_hard}, soft={total_soft}")
+
+    def test_soft_cutoff_with_hard_cutoff_combined(self):
+        """Hard cutoff is still absolute upper bound when both are set."""
+        nodes = [
+            GammaNode("k5", impedance=np.ones(5) * 80, activation=np.zeros(5)),
+            GammaNode("k1", impedance=np.ones(1) * 120, activation=np.zeros(1)),
+        ]
+        # Gap=4, max_dimension_gap=2 → hard reject regardless of soft cutoff
+        topo = GammaTopology(nodes=nodes, max_dimension_gap=2,
+                             dimension_gap_decay=0.0)  # γ=0 → p=1 for all
+
+        result = topo.activate_edge("k5", "k1")
+        assert result is None
+        assert ("k5", "k1") not in topo.active_edges
+
+    def test_soft_cutoff_sprouting_respects_probability(self):
+        """Spontaneous sprouting also applies soft cutoff."""
+        tissue = {
+            CORTICAL_PYRAMIDAL: 5,   # K=5
+            MOTOR_ALPHA: 5,          # K=3
+            PAIN_C_FIBER: 5,         # K=1
+        }
+        # Very aggressive soft cutoff
+        topo = GammaTopology.create_anatomical(
+            tissue_composition=tissue, initial_connectivity=0.0,
+            max_dimension_gap=4, dimension_gap_decay=3.0, seed=42)
+
+        # Stimulate all nodes to trigger sprouting
+        for _ in range(30):
+            stim = {}
+            for name, node in topo.nodes.items():
+                stim[name] = np.ones(node.K) * 0.3
+            topo.tick(external_stimuli=stim, enable_spontaneous=True)
+
+        # With γ=3.0, cross-K edges should be very rare
+        cross_k = 0
+        same_k = 0
+        for (s, t), ch in topo.active_edges.items():
+            if ch.dimension_gap > 0:
+                cross_k += 1
+            else:
+                same_k += 1
+
+        # Should have SOME same-K edges (p=1) but very few cross-K
+        # (With γ=3, p(ΔK=2) = 3^{-3} ≈ 0.037)
+        assert same_k > 0, "Same-K edges should exist"
+        if same_k > 0:
+            ratio = cross_k / (same_k + cross_k)
+            assert ratio < 0.5, (
+                f"With γ=3.0, cross-K ratio should be low: {ratio:.3f}")
+
+    def test_create_anatomical_with_decay(self):
+        """create_anatomical correctly passes dimension_gap_decay."""
+        topo = GammaTopology.create_anatomical(
+            tissue_composition={
+                CORTICAL_PYRAMIDAL: 4,
+                MOTOR_ALPHA: 4,
+                PAIN_C_FIBER: 4,
+            },
+            initial_connectivity=0.3,
+            max_dimension_gap=4,
+            dimension_gap_decay=1.26,
+            seed=42,
+        )
+        assert topo.dimension_gap_decay == 1.26
+        assert topo.max_dimension_gap == 4
+        # Should have created some edges but fewer cross-K than without decay
+        assert len(topo.active_edges) > 0

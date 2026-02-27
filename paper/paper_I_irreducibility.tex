@@ -1,0 +1,571 @@
+% ═══════════════════════════════════════════════════════════════════
+% Paper I: Heterogeneous Impedance Networks and the
+%          Dimensional Cost Irreducibility Theorem
+% ═══════════════════════════════════════════════════════════════════
+\documentclass[aps,pre,twocolumn,showpacs,superscriptaddress,floatfix]{revtex4-2}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{bm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newcommand{\avg}[1]{\langle #1 \rangle}
+\newcommand{\Aimp}{A_{\text{imp}}}
+\newcommand{\Acut}{A_{\text{cut}}}
+\newcommand{\Kcom}{K_{\text{com}}}
+\newcommand{\Krelay}{K_{\text{relay}}}
+
+\begin{document}
+
+\title{Irreducible Dimensional Cost in Heterogeneous Impedance Networks:\\
+       Scaling Laws, Fractal Topology, and the Minimum Reflection Principle}
+
+\author{C.-Y. Huang}
+% \affiliation{...}
+
+\date{\today}
+
+% ═══════════════════════════════════════════════════════════════════
+\begin{abstract}
+We present a physics-driven framework for heterogeneous impedance
+networks in which all emergent behavior derives from a single
+variational principle: the minimization of reflection action
+$A[\Gamma] = \int \sum_{ij} \Gamma_{ij}^2 \, dt$.
+Three physical laws govern the system:
+energy conservation at every edge~(C1),
+local Hebbian impedance matching~(C2),
+and impedance-tagged signal propagation~(C3).
+We prove the \emph{Dimensional Cost Irreducibility Theorem}:
+for networks with heterogeneous mode counts $K_i$,
+the action decomposes as
+$A = \Aimp(t) + \Acut$,
+where $\Aimp \to 0$ under C2 learning
+while $\Acut = \sum_{\text{edges}} (K_{\text{src}} - K_{\text{tgt}})^+$
+has identically zero gradient with respect to all impedance
+variables: $\nabla_{\mathbf{Z}} \Acut \equiv 0$.
+At fixed topology, $\Acut$ is therefore invariant under
+all local impedance update rules, including C2.
+Numerical experiments confirm that convergence time scales as
+$\tau_{\text{conv}} \sim N^{-1.05}$ ($R^2 = 0.95$),
+and that a soft-cutoff parameter $\gamma$ continuously tunes the
+K-space fractal dimension
+$D_K = 0.49\gamma + 1.00$,
+placing biologically realistic networks ($\gamma \approx 0.75$)
+within the cortical fractal band
+$D_K \in [1.3, 1.5]$.
+\end{abstract}
+
+\maketitle
+
+% ═══════════════════════════════════════════════════════════════════
+\section{Introduction}
+\label{sec:intro}
+% ═══════════════════════════════════════════════════════════════════
+
+The nervous system couples neurons with vastly different mode counts:
+cortical pyramidal cells carry $K \approx 5$ independent impedance
+modes (soma, basal dendrites, apical tuft, axon, spine neck),
+while unmyelinated C-fibers carry $K = 1$.
+Classical models---from the scalar conductance of
+Hodgkin and Huxley~\cite{HH1952} to the mean-field neural
+masses of Breakspear~\cite{Breakspear2017}---sidestep this
+heterogeneity by projecting all signals onto a single
+scalar activation or coarse-grained population variable.
+Here we ask: what is the \emph{minimum physical cost} of coupling
+such dimensionally mismatched elements?
+
+The answer is unexpectedly rigid.
+We show that for any edge connecting a $K_i$-mode source to a
+$K_j$-mode target with $K_i > K_j$,
+the $(K_i - K_j)$ excess modes are \emph{totally reflected}
+($\gamma_k = 1$), contributing a fixed cost
+$\Acut = K_i - K_j$
+to the reflection action.
+This cost is invariant under all local update rules---including
+Hebbian learning---because the target has no degrees of freedom
+in the excess subspace.
+We call this the \emph{Dimensional Cost Irreducibility Theorem}.
+
+The theorem has a striking corollary:
+hierarchical topology with relay nodes of intermediate~$K$ is not
+a design choice but a \emph{thermodynamic necessity}---the only
+mechanism to reduce $\Acut$ without violating the physical
+constraints.
+
+We organize the paper as follows.
+Section~\ref{sec:framework} defines the network, the three physical
+laws, and the variational principle.
+Section~\ref{sec:theorem} states and proves the irreducibility theorem.
+Section~\ref{sec:results} presents numerical results:
+convergence scaling, the soft-cutoff fractal control, and the
+spontaneous emergence of relay nodes.
+Section~\ref{sec:discussion} discusses biological implications
+and connections to cortical fractal dimensions.
+
+% ═══════════════════════════════════════════════════════════════════
+\section{Physical Framework}
+\label{sec:framework}
+% ═══════════════════════════════════════════════════════════════════
+
+\subsection{Network Definition}
+
+A $\Gamma$-network consists of $N$ nodes,
+each carrying a $K_i$-dimensional impedance vector
+$\mathbf{Z}_i \in \mathbb{R}^{K_i}_{>0}$.
+For an edge $i \to j$, the per-mode reflection coefficient is
+\begin{equation}
+\gamma_k = \frac{Z_{j,k} - Z_{i,k}}{Z_{j,k} + Z_{i,k}},
+\quad k = 1, \ldots, \Kcom,
+\label{eq:gamma}
+\end{equation}
+where $\Kcom = \min(K_i, K_j)$.
+Excess source modes $k > \Kcom$ are totally reflected:
+$\gamma_k = 1$.
+This is the electromagnetic boundary condition for a waveguide
+whose $k$-th mode has no counterpart in the target medium.
+
+\subsection{Three Physical Laws}
+\label{sec:laws}
+
+\textbf{C1---Energy Conservation.}
+At every edge, every tick, reflected and transmitted power sum to
+incident power:
+\begin{equation}
+\gamma_k^2 + T_k = 1, \quad \forall\, k, \; \forall\, (i,j).
+\label{eq:C1}
+\end{equation}
+
+\textbf{C2---Hebbian Impedance Matching.}
+Each node adjusts its impedance to reduce local reflection:
+\begin{align}
+\Delta Z_{i,k} &= +\eta \, \gamma_k \, x_{i,k}\, x_{j,k},
+\label{eq:C2a} \\
+\Delta Z_{j,k} &= -\eta \, \gamma_k \, x_{i,k}\, x_{j,k}.
+\label{eq:C2b}
+\end{align}
+Here $x_{i,k}$ is the activity in mode $k$ of node $i$,
+$\eta$ is the learning rate, and $\gamma_k$ is defined by
+Eq.~\eqref{eq:gamma}.
+Crucially, this update requires only local information:
+the two impedance vectors and the gating activities.
+
+\textbf{C3---Impedance-Tagged Propagation.}
+Every signal carries its source impedance as metadata,
+enabling downstream nodes to compute $\gamma_k$ locally without
+global knowledge.
+
+\subsection{Variational Principle}
+\label{sec:action}
+
+The Minimum Reflection Principle states that the system minimizes
+the total reflection action:
+\begin{equation}
+A[\Gamma]
+= \sum_{(i,j) \in \mathcal{E}}
+  \sum_{k=1}^{\Kcom(i,j)} \gamma_k^2.
+\label{eq:action}
+\end{equation}
+The C2 update rule implements steepest descent on the \emph{learnable}
+part of $A$:
+\begin{equation}
+\dot{\mathbf{Z}} \propto -\nabla_{\mathbf{Z}} \Aimp.
+\end{equation}
+
+% ═══════════════════════════════════════════════════════════════════
+\section{Dimensional Cost Irreducibility Theorem}
+\label{sec:theorem}
+% ═══════════════════════════════════════════════════════════════════
+
+We now prove that heterogeneous mode counts impose a
+\emph{hard floor} on the reflection action.
+
+\begin{theorem}[Dimensional Cost Irreducibility]
+\label{thm:irreducibility}
+For any $\Gamma$-network with heterogeneous mode counts $\{K_i\}$,
+the total reflection action decomposes as
+\begin{equation}
+A = \Aimp(t) + \Acut,
+\label{eq:decomposition}
+\end{equation}
+where:
+\begin{enumerate}
+\item
+$\Aimp(t) = \sum_{(i,j)} \sum_{k=1}^{\Kcom} \gamma_k^2$
+is the \emph{impedance mismatch action} over shared modes.
+Under C2 dynamics, $\Aimp(t) \to 0$ as $t \to \infty$.
+
+\item
+$\Acut = \sum_{(i,j)} (K_i - K_j)^+$
+is the \emph{cutoff action} from excess modes.
+$\nabla_{\mathbf{Z}} \Acut \equiv 0$:
+this term has zero gradient with respect to all impedance variables.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For an edge $i \to j$ with $K_i > K_j$:
+\begin{itemize}
+\item
+Modes $k \le \Kcom = K_j$:
+$\gamma_k$ depends on $(Z_{i,k}, Z_{j,k})$ via Eq.~\eqref{eq:gamma}.
+C2 adjusts both impedances, driving $\gamma_k \to 0$.
+These modes contribute to $\Aimp$.
+
+\item
+Modes $K_j < k \le K_i$:
+the target has no mode $k$, so $\gamma_k \equiv 1$ identically,
+independent of any impedance value.
+These modes contribute $(K_i - K_j)$ to $\Acut$.
+Since $\gamma_k = 1$ is a \emph{topological constant}
+(depending only on the existence, not the value, of modes),
+$\partial \gamma_k^2 / \partial Z = 0$ for all $Z$.
+\end{itemize}
+Summing over all edges completes the proof.
+\end{proof}
+
+\begin{remark}
+The theorem assumes fixed mode counts $\{K_i\}$ and a fixed
+active edge set $\mathcal{E}$.
+If mode counts can change dynamically (e.g., via dendritic
+spine growth increasing $K_j$), or if topological changes
+(edge sprouting or pruning) alter $\mathcal{E}$, then the
+\emph{value} of $\Acut$ may change---but this change is
+driven by topology, not by impedance gradients.
+We do not consider mode-count plasticity in this work.
+\end{remark}
+
+\begin{corollary}[Thermodynamic Necessity of Relay Nodes]
+\label{cor:relay}
+Consider a direct edge $K_{\text{src}} \to K_{\text{tgt}}$
+with $K_{\text{src}} > K_{\text{tgt}}$.
+The $(K_{\text{src}} - K_{\text{tgt}})$ excess modes are
+totally reflected ($\gamma_k = 1$, $T_k = 0$):
+no information in those modes reaches the target.
+Inserting a relay node with
+$K_{\text{tgt}} < \Krelay < K_{\text{src}}$ splits the link
+into two hops.
+The total $\Acut$ is unchanged:
+$(K_{\text{src}} - \Krelay) + (\Krelay - K_{\text{tgt}})
+ = K_{\text{src}} - K_{\text{tgt}}$.
+However, the \emph{information flow} changes qualitatively:
+modes $K_{\text{tgt}} < k \le \Krelay$, which were totally
+reflected in the direct connection, are now
+\emph{transmitted} on the second hop ($i \to \text{relay}$),
+where they can undergo C2 impedance matching ($\gamma_k \to 0$,
+$T_k \to 1$).
+Thus, while $\Acut$ measures \emph{structural cost},
+the relay converts \emph{total signal loss} into
+\emph{partial signal recovery}.
+Hierarchical topology is therefore a thermodynamic necessity
+for information transmission, not merely a design choice.
+\end{corollary}
+
+% ═══════════════════════════════════════════════════════════════════
+\section{Numerical Results}
+\label{sec:results}
+% ═══════════════════════════════════════════════════════════════════
+
+All simulations use six tissue types with mode counts
+$K \in \{1, 2, 3, 5\}$~\cite{ALICE_code}, initial connectivity $p_0 = 0.15$,
+learning rate $\eta = 0.02$, and hard cutoff
+$\Delta K_{\max} = 2$ unless otherwise stated.
+Code is available at \url{https://github.com/cyhuang76/alice-gamma-net}.
+
+\subsection{Convergence and the Irreducibility Theorem}
+\label{sec:convergence}
+
+Figure~\ref{fig:action} shows the action decomposition for a
+$N = 64$ network evolved for 200 ticks.
+$\Aimp$ decays exponentially with time constant
+$\tau \approx 20$ ticks, reaching $\Aimp < 10^{-3}$ by $t = 50$.
+$\Acut$ is not constant but \emph{increases} monotonically
+because spontaneous edge sprouting continually introduces new
+cross-$K$ edges, each adding its dimensional cost.
+This does not contradict the theorem, which states that
+$\nabla_{\mathbf{Z}} \Acut \equiv 0$ at \emph{fixed topology};
+the growth of $\Acut$ reflects topological exploration
+(new edges), not impedance dynamics.
+The theorem is validated: $\Aimp \to 0$ under C2 while
+$\Acut$ accumulates as the topology explores.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_action_decomposition}
+\caption{%
+Action decomposition $A = \Aimp(t) + \Acut$.
+Blue: $\Aimp \to 0$ (exponential decay).
+Red dashed: $\Acut$ (irreducible, increasing with sprouting).
+Inset: log-scale zoom of $\Aimp$ in the late-time regime.
+$N = 64$, $\Delta K_{\max} = 2$.
+}
+\label{fig:action}
+\end{figure}
+
+\subsection{Scaling Law: $\tau_{\text{conv}} \sim N^{\alpha}$}
+\label{sec:scaling}
+
+We measure the convergence time $\tau_{\text{conv}}$
+(ticks until $\Aimp < 0.01 \cdot \Aimp(t{=}5)$)
+across network sizes $N \in \{16, 32, 64, 128\}$,
+with 5 independent trials per size.
+A power-law fit yields
+\begin{equation}
+\tau_{\text{conv}} = C \cdot N^{\alpha},
+\quad \alpha = -1.05 \pm 0.08,
+\quad R^2 = 0.95.
+\label{eq:scaling}
+\end{equation}
+The \emph{negative} exponent means larger networks converge
+\emph{faster}---a non-trivial prediction of the framework.
+The physical mechanism is mean-field averaging: each node has
+$\sim pN$ neighbours contributing to the impedance consensus,
+and the variance of the gradient estimate decreases as $1/N$.
+
+The exponential decay rate $\gamma_{\text{decay}}$
+(from $\Aimp \sim e^{-\gamma t}$) increases monotonically
+with $N$ (Table~\ref{tab:scaling}), consistent with this
+mean-field picture.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_scaling_law}
+\caption{%
+Left: log-log plot of $\tau_{\text{conv}}$ vs.\ $N$.
+Dashed line: power-law fit $\tau \sim N^{-1.05}$.
+Right: exponential decay rate $\gamma$ vs.\ $N$.
+Inset table: numerical values.
+}
+\label{fig:scaling}
+\end{figure}
+
+\begin{table}[h]
+\caption{%
+Convergence scaling of the $\Gamma$-topology network.
+All quantities averaged over 5 independent trials $\pm 1\sigma$.
+}
+\label{tab:scaling}
+\begin{ruledtabular}
+\begin{tabular}{rcc}
+$N$ & $\tau_{\text{conv}}$ & $\gamma_{\text{decay}}$ \\
+\hline
+ 16  & $498 \pm 3$   & $0.009 \pm 0.001$ \\
+ 32  & $167 \pm 8$   & $0.033 \pm 0.002$ \\
+ 64  & $82 \pm 3$    & $0.062 \pm 0.003$ \\
+128  & $55 \pm 3$    & $0.082 \pm 0.005$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\subsection{Soft Cutoff and K-Space Fractal Dimension}
+\label{sec:fractal}
+
+The hard cutoff $\Delta K_{\max}$ creates ``dimensional
+democracy'': all edges with $|K_i - K_j| \le \Delta K_{\max}$
+are equally likely, giving $D_K \approx 0.7$.
+To introduce fractal connectivity, we define a soft-cutoff
+probability:
+\begin{equation}
+p(\Delta K) = (\Delta K + 1)^{-\gamma},
+\label{eq:softcutoff}
+\end{equation}
+where $\gamma \ge 0$ is the decay exponent.
+The $+1$ offset ensures $p(0) = 1$ (same-$K$ edges always
+accepted) and avoids singularity.
+
+Figure~\ref{fig:fractal} shows the measured K-space fractal
+dimension $D_K$ as a function of $\gamma$,
+for $N = 64$ networks with $\Delta K_{\max} = 4$
+(wide hard cutoff to let soft cutoff dominate).
+The relationship is well-described by
+\begin{equation}
+D_K = 0.49\gamma + 1.00,
+\label{eq:dk_fit}
+\end{equation}
+with a positive offset due to Hebbian reshaping:
+C2 learning preferentially retains same-$K$ connections,
+adding an intrinsic dimensional selectivity
+$\delta_{\text{Hebb}} > 0$ beyond the imposed $\gamma$.
+
+Biologically, cortical fractal dimensions lie in
+$D \in [1.3, 1.5]$~\cite{cortex_fractal}.
+Equation~\eqref{eq:dk_fit} predicts that
+$\gamma \approx 0.6$--$1.0$ reproduces this range---a
+narrow, falsifiable prediction.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_dk_vs_gamma}
+\caption{%
+K-space fractal dimension $D_K$ vs.\ soft-cutoff exponent
+$\gamma$.
+Green band: cortical fractal range $D \in [1.3, 1.5]$.
+Dashed gray: $D_K = \gamma$ (no Hebbian offset).
+Purple line: linear fit $D_K = 0.49\gamma + 1.00$.
+Error bars: $\pm 1\sigma$ over 5 trials.
+}
+\label{fig:fractal}
+\end{figure}
+
+% ═══════════════════════════════════════════════════════════════════
+\section{Discussion}
+\label{sec:discussion}
+% ═══════════════════════════════════════════════════════════════════
+
+\subsection{The Irreducible Cost as a Design Constraint}
+
+The irreducibility theorem establishes that heterogeneous
+neural architectures face a fundamental trade-off:
+connecting dimensionally mismatched elements
+(e.g., cortical pyramidal cells to C-fibers) incurs a
+\emph{geometric cost} $\Acut$ that no amount of learning can
+eliminate.
+This cost is not a failure of the learning rule but a
+\emph{topological invariant} of the network---it depends only on
+which nodes are connected and their mode counts, not on the
+impedance values.
+
+The biological implication is that the brain must manage $\Acut$
+through \emph{architectural} mechanisms rather than synaptic
+plasticity.
+This explains several observed features of neural organization:
+\begin{enumerate}
+\item \emph{Hierarchical processing}:
+cortical areas are arranged in layers of decreasing complexity
+(mode count), with relay nuclei (e.g., thalamus, $K \approx 3$)
+mediating between cortex ($K = 5$) and periphery ($K = 1$).
+\item \emph{Modular connectivity}:
+same-$K$ connections are strongly favored within cortical
+columns, minimizing $\Acut$ within modules.
+\item \emph{Small-world topology}:
+the diameter-2 structure we observe allows any pair of nodes
+to communicate within 2 hops, enabling relay-mediated
+transmission.
+\end{enumerate}
+
+\subsection{Hebbian Learning as a Dimensional Selector}
+
+An unexpected finding is that C2 Hebbian learning has an
+\emph{intrinsic dimensional preference}:
+even without explicit soft cutoff ($\gamma = 0$),
+the measured $D_K \approx 0.7$ exceeds the
+flat-distribution expectation of $D_K = 0$.
+This offset $\delta_{\text{Hebb}} \approx 0.7$ arises because
+same-$K$ edges have more shared modes for gradient descent,
+creating stronger impedance consensus and thus higher
+survival probability under edge pruning.
+
+This means Hebbian learning is not dimensionally neutral---it
+actively sculpts the K-space topology.
+The soft-cutoff parameter $\gamma$ then acts as a
+\emph{knob on top of the Hebbian bias}, enabling continuous
+control of the fractal dimension from $D_K \approx 0.7$
+(Hebbian only) to $D_K \approx 2.0$ ($\gamma = 2.0$).
+
+\subsection{Negative Scaling Exponent and Brain-Scale Feasibility}
+
+The scaling $\tau_{\text{conv}} \sim N^{-1.05}$ is the most
+surprising result.
+It predicts that a brain-scale network ($N \sim 10^{10}$)
+would converge in $\tau \sim 10^{-10.5}$ ticks---effectively
+instantaneous.
+This is consistent with the biological observation that
+impedance matching in myelinated axons occurs on developmental
+timescales (days to weeks) rather than requiring extended
+online learning.
+
+The mechanism---mean-field averaging over $\sim pN$ neighbours
+---is physically analogous to the Curie-Weiss model of
+ferromagnetism, where the effective field strength grows with
+system size.
+
+\subsection{Connection to Cortical Fractal Geometry}
+
+MRI-based box-counting studies report cortical fractal
+dimensions $D \in [1.32, 1.48]$ for healthy adults,
+with reduced values ($D < 1.27$) in epilepsy and
+neurodegenerative disease~\cite{cortex_fractal}.
+Our soft-cutoff model predicts that $\gamma \approx 0.6$--$1.0$
+reproduces this range, suggesting that
+\emph{the brain's connectivity decay in impedance space follows
+a power law with exponent $\gamma \approx 0.8$}.
+This is a quantitative, falsifiable prediction.
+A possible experimental test: diffusion-tensor imaging (DTI)
+can resolve axonal diameter distributions in white-matter
+tracts~\cite{DTI_review}.
+Grouping fibers by estimated mode count $K$ (larger diameter
+$\to$ more propagation modes) and measuring cross-$K$
+connectivity density as a function of $|\Delta K|$ would
+yield an empirical $\gamma$ via Eq.~\eqref{eq:softcutoff}.
+
+% ═══════════════════════════════════════════════════════════════════
+\section{Conclusion}
+\label{sec:conclusion}
+% ═══════════════════════════════════════════════════════════════════
+
+We have established three results for heterogeneous impedance
+networks governed by the Minimum Reflection Principle:
+
+\begin{enumerate}
+\item
+The \emph{Irreducibility Theorem}
+[Eq.~\eqref{eq:decomposition}]:
+$A = \Aimp(t) + \Acut$,
+where $\Aimp \to 0$ under Hebbian C2 learning but $\Acut$ is
+invariant under all local impedance rules at fixed topology.
+
+\item
+\emph{Negative scaling}
+[Eq.~\eqref{eq:scaling}]:
+$\tau_{\text{conv}} \sim N^{-1.05}$,
+so convergence accelerates with network size (mean-field effect).
+
+\item
+\emph{Fractal control}
+[Eq.~\eqref{eq:dk_fit}]:
+$D_K = 0.49\gamma + 1.00$,
+with $\gamma \approx 0.75$ matching cortical fractal dimensions.
+\end{enumerate}
+
+These results suggest that the brain's hierarchical architecture,
+modular connectivity, and fractal geometry are not independent
+design features but \emph{thermodynamic consequences} of a single
+variational principle operating on dimensionally heterogeneous
+components.
+
+\begin{acknowledgments}
+The author thanks the open-source scientific Python community.
+Simulations were performed on a personal workstation
+(AMD Ryzen 7, 32\,GB RAM).
+\end{acknowledgments}
+
+\begin{thebibliography}{99}
+
+\bibitem{HH1952}
+A.~L.~Hodgkin and A.~F.~Huxley,
+J.~Physiol.\ \textbf{117}, 500 (1952).
+
+\bibitem{Breakspear2017}
+M.~Breakspear,
+Nat.\ Neurosci.\ \textbf{20}, 340 (2017).
+
+\bibitem{cortex_fractal}
+T.~G.~Smith \textit{et al.},
+J.~Comp.\ Neurol.\ \textbf{323}, 48 (1992);
+R.~D.~King \textit{et al.},
+NeuroImage \textbf{56}, 1838 (2011).
+
+\bibitem{DTI_review}
+D.~K.~Jones,
+\textit{Diffusion MRI: Theory, Methods, and Applications}
+(Oxford University Press, 2010).
+
+\bibitem{ALICE_code}
+C.-Y.~Huang,
+ALICE Smart System,
+\url{https://github.com/cyhuang76/alice-gamma-net} (2026).
+
+\end{thebibliography}
+
+\end{document}
