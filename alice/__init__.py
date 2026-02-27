@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Alice Smart System — Top-level Package
-A biologically-inspired digital brain intelligence system based on the Γ-Net architecture
+Alice Smart System ??Top-level Package
+A biologically-inspired digital brain intelligence system based on the ?-Net architecture
 """
 
-__version__ = "2.0.0"
+__version__ = "3.0.0"
 __author__ = "Hsi-Yu Huang"
 
 from alice.alice_brain import AliceBrain  # noqa: E402

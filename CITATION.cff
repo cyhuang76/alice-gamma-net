@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-title: "Alice Smart System — Γ-Net: A Physics-Driven Electronic Lifeform"
-message: "If you use this software or reference the Γ-Net architecture, please cite it using the metadata from this file."
+title: "Alice Smart System ???-Net: A Physics-Driven Electronic Lifeform"
+message: "If you use this software or reference the ?-Net architecture, please cite it using the metadata from this file."
 type: software
 authors:
   - family-names: Huang
@@ -8,10 +8,10 @@ authors:
     email: llc.y.huangll@gmail.com
     affiliation: "Independent Researcher, Taiwan"
 repository-code: "https://github.com/cyhuang76/alice-gamma-net"
-doi: "10.5281/zenodo.18739641"
-url: "https://doi.org/10.5281/zenodo.18739641"
+doi: "10.5281/zenodo.18799932"
+url: "https://doi.org/10.5281/zenodo.18799932"
 license: AGPL-3.0-or-later
-version: "2.0.0"
+version: "3.0.0"
 date-released: "2026-02-27"
 keywords:
   - gamma-net
@@ -28,14 +28,14 @@ keywords:
   - fractal-dimension
   - soft-cutoff
 abstract: >-
-  Γ-Net (Gamma-Net) is a physics-driven cognitive architecture that models
+  ?-Net (Gamma-Net) is a physics-driven cognitive architecture that models
   the brain as an impedance-matching network derived from coaxial transmission
   line theory. The system implements a complete electronic lifeform (ALICE)
   with body organs (eye, ear, hand, mouth), autonomic nervous system,
-  sleep cycles, language emergence, and emergent psychopathology — all
+  sleep cycles, language emergence, and emergent psychopathology ??all
   governed by a single unified equation: the reflection coefficient
-  Γ = (Z_L − Z_0) / (Z_L + Z_0). The Minimum Reflection Principle states
-  that all cognition is impedance minimization. v2.0.0 introduces the
-  Dimensional Cost Irreducibility Theorem, heterogeneous Γ-topology with
+  ? = (Z_L ??Z_0) / (Z_L + Z_0). The Minimum Reflection Principle states
+  that all cognition is impedance minimization. v3.0.0 introduces the
+  Dimensional Cost Irreducibility Theorem, heterogeneous ?-topology with
   soft-cutoff fractal control, and K-space scaling analysis. Includes
   200 source files, 89,400+ lines, 2,734 tests, and 49 experiments.
