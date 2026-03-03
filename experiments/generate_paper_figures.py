@@ -86,7 +86,7 @@ def figure_1():
     print("  Figure 1: A(t) decomposition...")
 
     N = 64
-    TICKS = 200
+    TICKS = 1000
     tissue = build_composition(N)
 
     topo = GammaTopology.create_anatomical(

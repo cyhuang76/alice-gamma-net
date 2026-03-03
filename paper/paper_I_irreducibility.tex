@@ -2,7 +2,7 @@
 % Paper I: Heterogeneous Impedance Networks and the
 %          Dimensional Cost Irreducibility Theorem
 % ═══════════════════════════════════════════════════════════════════
-\documentclass[aps,pre,twocolumn,showpacs,superscriptaddress,floatfix]{revtex4-2}
+\documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
 
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
@@ -11,6 +11,7 @@
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
 \newcommand{\avg}[1]{\langle #1 \rangle}
 \newcommand{\Aimp}{A_{\text{imp}}}
 \newcommand{\Acut}{A_{\text{cut}}}
@@ -22,8 +23,9 @@
 \title{Irreducible Dimensional Cost in Heterogeneous Impedance Networks:\\
        Scaling Laws, Fractal Topology, and the Minimum Reflection Principle}
 
-\author{Hsi-Yu Huang (黃璽宇)}
-% \affiliation{...}
+\author{Hsi-Yu Huang}
+\email{llc.y.huangll@gmail.com}
+\affiliation{Independent Researcher, Taiwan}
 
 \date{\today}
 
@@ -48,11 +50,11 @@ variables: $\nabla_{\mathbf{Z}} \Acut \equiv 0$.
 At fixed topology, $\Acut$ is therefore invariant under
 all local impedance update rules, including C2.
 Numerical experiments confirm that convergence time scales as
-$\tau_{\text{conv}} \sim N^{-0.91}$ ($R^2 = 0.95$, five sizes
-$N \in \{16, 32, 64, 128, 256\}$),
+$\tau_{\text{conv}} \sim N^{-1.12}$ ($R^2 = 0.93$, four sizes
+$N \in \{16, 32, 64, 128\}$),
 and that a soft-cutoff parameter $\gamma$ continuously tunes the
 K-space fractal dimension
-$D_K = 0.49\gamma + 1.00$,
+$D_K = 0.76\gamma + 0.78$,
 placing biologically realistic networks ($\gamma \approx 0.75$)
 within the cortical fractal band
 $D_K \in [1.3, 1.5]$.
@@ -280,8 +282,8 @@ Code is available at \url{https://github.com/cyhuang76/alice-gamma-net}.
 Figure~\ref{fig:action} shows the action decomposition for a
 $N = 64$ network evolved for 1000 ticks.
 $\Aimp$ decays exponentially with time constant
-$\tau \approx 20$ ticks, reaching $\Aimp < 10^{-3}$ by $t = 50$
-and $\Aimp = 0$ (to machine precision) by $t = 200$.
+$\tau \approx 15$ ticks, reaching $\Aimp < 10^{-3}$ by $t \approx 140$
+and $\Aimp = 0$ (to machine precision) by $t \approx 170$.
 $\Acut$ increases monotonically in the early phase
 because spontaneous edge sprouting introduces new cross-$K$
 edges, each adding its dimensional cost.
@@ -299,7 +301,7 @@ $\Acut$ accumulates and then saturates.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig1_action_decomposition}
+\includegraphics[width=\columnwidth]{../figures/fig1_action_decomposition}
 \caption{%
 Action decomposition $A = \Aimp(t) + \Acut$ over 1000 ticks.
 Blue: $\Aimp \to 0$ (exponential decay, reaches zero by $t = 200$).
@@ -314,13 +316,13 @@ $N = 64$, $\Delta K_{\max} = 2$.
 
 We measure the convergence time $\tau_{\text{conv}}$
 (ticks until $\Aimp < 0.01 \cdot \Aimp(t{=}5)$)
-across network sizes $N \in \{16, 32, 64, 128, 256\}$,
+across network sizes $N \in \{16, 32, 64, 128\}$,
 with 5 independent trials per size.
 A power-law fit yields
 \begin{equation}
 \tau_{\text{conv}} = C \cdot N^{\alpha},
-\quad \alpha = -0.91 \pm 0.06,
-\quad R^2 = 0.95.
+\quad \alpha = -1.12 \pm 0.12,
+\quad R^2 = 0.93.
 \label{eq:scaling}
 \end{equation}
 The \emph{negative} exponent means larger networks converge
@@ -336,10 +338,10 @@ mean-field picture.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig2_scaling_law}
+\includegraphics[width=\columnwidth]{../figures/fig2_scaling_law}
 \caption{%
 Left: log-log plot of $\tau_{\text{conv}}$ vs.\ $N$.
-Dashed line: power-law fit $\tau \sim N^{-1.05}$.
+Dashed line: power-law fit $\tau \sim N^{-1.12}$.
 Right: exponential decay rate $\gamma$ vs.\ $N$.
 Inset table: numerical values.
 }
@@ -356,11 +358,10 @@ All quantities averaged over 5 independent trials $\pm 1\sigma$.
 \begin{tabular}{rcc}
 $N$ & $\tau_{\text{conv}}$ & $\gamma_{\text{decay}}$ \\
 \hline
- 16  & $498 \pm 3$   & $0.009 \pm 0.001$ \\
- 32  & $167 \pm 8$   & $0.033 \pm 0.002$ \\
- 64  & $82 \pm 3$    & $0.062 \pm 0.003$ \\
-128  & $55 \pm 3$    & $0.082 \pm 0.005$ \\
-256  & $36 \pm 2$    & $0.121 \pm 0.006$ \\
+ 16  & $416 \pm 74$  & $0.011 \pm 0.003$ \\
+ 32  & $111 \pm 12$  & $0.053 \pm 0.006$ \\
+ 64  & $60 \pm 3$    & $0.105 \pm 0.006$ \\
+128  & $39 \pm 2$    & $0.133 \pm 0.006$ \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -387,7 +388,7 @@ for $N = 64$ networks with $\Delta K_{\max} = 4$
 (wide hard cutoff to let soft cutoff dominate).
 The relationship is well-described by
 \begin{equation}
-D_K = 0.49\gamma + 1.00,
+D_K = 0.76\gamma + 0.78,
 \label{eq:dk_fit}
 \end{equation}
 with a positive offset due to Hebbian reshaping:
@@ -398,18 +399,18 @@ $\delta_{\text{Hebb}} > 0$ beyond the imposed $\gamma$.
 Biologically, cortical fractal dimensions lie in
 $D \in [1.3, 1.5]$~\cite{cortex_fractal}.
 Equation~\eqref{eq:dk_fit} predicts that
-$\gamma \approx 0.6$--$1.0$ reproduces this range---a
+$\gamma \approx 0.7$--$0.9$ reproduces this range---a
 narrow, falsifiable prediction.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{figures/fig3_dk_vs_gamma}
+\includegraphics[width=\columnwidth]{../figures/fig3_dk_vs_gamma}
 \caption{%
 K-space fractal dimension $D_K$ vs.\ soft-cutoff exponent
 $\gamma$.
 Green band: cortical fractal range $D \in [1.3, 1.5]$.
 Dashed gray: $D_K = \gamma$ (no Hebbian offset).
-Purple line: linear fit $D_K = 0.49\gamma + 1.00$.
+Purple line: linear fit $D_K = 0.76\gamma + 0.78$.
 Error bars: $\pm 1\sigma$ over 5 trials.
 }
 \label{fig:fractal}
@@ -456,9 +457,9 @@ transmission.
 An unexpected finding is that C2 Hebbian learning has an
 \emph{intrinsic dimensional preference}:
 even without explicit soft cutoff ($\gamma = 0$),
-the measured $D_K \approx 0.7$ exceeds the
+the measured $D_K \approx 0.66$ exceeds the
 flat-distribution expectation of $D_K = 0$.
-This offset $\delta_{\text{Hebb}} \approx 0.7$ arises because
+This offset $\delta_{\text{Hebb}} \approx 0.66$ arises because
 same-$K$ edges have more shared modes for gradient descent,
 creating stronger impedance consensus and thus higher
 survival probability under edge pruning.
@@ -467,15 +468,15 @@ This means Hebbian learning is not dimensionally neutral---it
 actively sculpts the K-space topology.
 The soft-cutoff parameter $\gamma$ then acts as a
 \emph{knob on top of the Hebbian bias}, enabling continuous
-control of the fractal dimension from $D_K \approx 0.7$
-(Hebbian only) to $D_K \approx 2.0$ ($\gamma = 2.0$).
+control of the fractal dimension from $D_K \approx 0.66$
+(Hebbian only) to $D_K \approx 2.3$ ($\gamma = 2.0$).
 
 \subsection{Negative Scaling Exponent and Brain-Scale Feasibility}
 
-The scaling $\tau_{\text{conv}} \sim N^{-0.91}$ is the most
+The scaling $\tau_{\text{conv}} \sim N^{-1.12}$ is the most
 surprising result.
 It predicts that a brain-scale network ($N \sim 10^{10}$)
-would converge in $\tau \sim 10^{-10.5}$ ticks---effectively
+would converge in $\tau \sim 10^{-11}$ ticks---effectively
 instantaneous.
 This is consistent with the biological observation that
 impedance matching in myelinated axons occurs on developmental
@@ -493,7 +494,7 @@ MRI-based box-counting studies report cortical fractal
 dimensions $D \in [1.32, 1.48]$ for healthy adults,
 with reduced values ($D < 1.27$) in epilepsy and
 neurodegenerative disease~\cite{cortex_fractal}.
-Our soft-cutoff model predicts that $\gamma \approx 0.6$--$1.0$
+Our soft-cutoff model predicts that $\gamma \approx 0.7$--$0.9$
 reproduces this range, suggesting that
 \emph{the brain's connectivity decay in impedance space follows
 a power law with exponent $\gamma \approx 0.8$}.
@@ -525,13 +526,13 @@ invariant under all local impedance rules at fixed topology.
 \item
 \emph{Negative scaling}
 [Eq.~\eqref{eq:scaling}]:
-$\tau_{\text{conv}} \sim N^{-0.91}$,
+$\tau_{\text{conv}} \sim N^{-1.12}$,
 so convergence accelerates with network size (mean-field effect).
 
 \item
 \emph{Fractal control}
 [Eq.~\eqref{eq:dk_fit}]:
-$D_K = 0.49\gamma + 1.00$,
+$D_K = 0.76\gamma + 0.78$,
 with $\gamma \approx 0.75$ matching cortical fractal dimensions.
 \end{enumerate}
 
@@ -569,7 +570,7 @@ D.~K.~Jones,
 (Oxford University Press, 2010).
 
 \bibitem{ALICE_code}
-C.-Y.~Huang,
+H.-Y.~Huang,
 ALICE Smart System,
 \url{https://github.com/cyhuang76/alice-gamma-net} (2026).
 
