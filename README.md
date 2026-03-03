@@ -1,4 +1,4 @@
-# Alice Smart System — v3.1.0
+# Alice Smart System — v3.2.0
 
 <div align="center">
 
@@ -201,7 +201,7 @@ alice-gamma-net/
   author  = {Huang, Hsi-Yu},
   title   = {Alice Smart System — Physics-Driven Electronic Lifeform Simulator},
   year    = 2026,
-  version = {3.1.0},
+  version = {3.2.0},
   doi     = {10.5281/zenodo.18799932},
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }

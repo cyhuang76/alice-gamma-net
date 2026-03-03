@@ -563,6 +563,22 @@ class GammaTopology:
 
     # ── Edge management ───────────────────────────────────────────────
 
+    # ── Soft cutoff ────────────────────────────────────────────────
+
+    def _edge_survival_probability(self, delta_k: int) -> float:
+        """Survival probability for an edge with dimensional gap ΔK.
+
+        p(ΔK) = (ΔK + 1)^{−γ}  where γ = dimension_gap_decay.
+
+        - γ = None → p = 1 for all ΔK (hard cutoff only)
+        - γ = 0   → p = 1 for all ΔK
+        - γ = 1.26 → power-law fractal connectivity
+        - γ → ∞   → only ΔK = 0 survives
+        """
+        if self.dimension_gap_decay is None or self.dimension_gap_decay == 0.0:
+            return 1.0
+        return float((delta_k + 1) ** (-self.dimension_gap_decay))
+
     def activate_edge(self, source_name: str, target_name: str,
                       coupling: Optional[np.ndarray] = None) -> Optional[MulticoreChannel]:
         """Activate an edge (create channel) between two nodes.
@@ -571,6 +587,9 @@ class GammaTopology:
         the edge is rejected (returns None).  This models the biological
         constraint that very different fiber types cannot form direct
         synapses — relay neurons are needed.
+
+        If dimension_gap_decay is set, edges with ΔK > 0 are accepted
+        with probability p(ΔK) = (ΔK + 1)^{−γ} (soft cutoff).
         """
         key = (source_name, target_name)
         if key not in self.active_edges:
@@ -579,6 +598,15 @@ class GammaTopology:
             gap = abs(src.K - tgt.K)
             if self.max_dimension_gap is not None and gap > self.max_dimension_gap:
                 return None  # dimensional gap too large
+            # Soft cutoff: probabilistic acceptance
+            if gap > 0 and self.dimension_gap_decay is not None:
+                p = self._edge_survival_probability(gap)
+                if p < 1.0:
+                    rng = np.random.default_rng(
+                        hash((source_name, target_name, self.tick_count)) & 0xFFFFFFFF
+                    )
+                    if rng.random() > p:
+                        return None  # soft cutoff rejection
             ch = MulticoreChannel(source=src, target=tgt, coupling=coupling)
             self.active_edges[key] = ch
         return self.active_edges[key]
@@ -790,6 +818,12 @@ class GammaTopology:
                     if (self.max_dimension_gap is not None
                             and gap > self.max_dimension_gap):
                         continue
+
+                    # Soft cutoff for sprouting
+                    if gap > 0 and self.dimension_gap_decay is not None:
+                        p = self._edge_survival_probability(gap)
+                        if p < 1.0 and rng.random() > p:
+                            continue
 
                     K_c = min(node.K, tgt_node.K)
                     K_max = max(node.K, tgt_node.K)
@@ -1422,6 +1456,7 @@ class GammaTopology:
         initial_connectivity: float = 0.2,
         eta: float = 0.01,
         max_dimension_gap: Optional[int] = None,
+        dimension_gap_decay: Optional[float] = None,
         seed: Optional[int] = None,
     ) -> "GammaTopology":
         """
@@ -1461,7 +1496,8 @@ class GammaTopology:
                 ))
                 node_idx += 1
 
-        topo = cls(nodes=nodes, eta=eta, max_dimension_gap=max_dimension_gap)
+        topo = cls(nodes=nodes, eta=eta, max_dimension_gap=max_dimension_gap,
+                   dimension_gap_decay=dimension_gap_decay)
 
         # Activate random edges
         names = [n.name for n in nodes]

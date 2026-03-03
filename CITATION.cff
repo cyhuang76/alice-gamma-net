@@ -11,8 +11,8 @@ repository-code: "https://github.com/cyhuang76/alice-gamma-net"
 doi: "10.5281/zenodo.18799932"
 url: "https://doi.org/10.5281/zenodo.18799932"
 license: AGPL-3.0-or-later
-version: "3.0.0"
-date-released: "2026-02-27"
+version: "3.2.0"
+date-released: "2026-03-03"
 keywords:
   - gamma-net
   - impedance mismatch
@@ -28,14 +28,13 @@ keywords:
   - fractal-dimension
   - soft-cutoff
 abstract: >-
-  ?-Net (Gamma-Net) is a physics-driven cognitive architecture that models
-  the brain as an impedance-matching network derived from coaxial transmission
-  line theory. The system implements a complete electronic lifeform (ALICE)
-  with body organs (eye, ear, hand, mouth), autonomic nervous system,
-  sleep cycles, language emergence, and emergent psychopathology ??all
-  governed by a single unified equation: the reflection coefficient
-  ? = (Z_L ??Z_0) / (Z_L + Z_0). The Minimum Reflection Principle states
-  that all cognition is impedance minimization. v3.0.0 introduces the
-  Dimensional Cost Irreducibility Theorem, heterogeneous ?-topology with
-  soft-cutoff fractal control, and K-space scaling analysis. Includes
-  200 source files, 89,400+ lines, 2,734 tests, and 49 experiments.
+  Gamma-Net is a physics-driven cognitive architecture modelling the brain
+  as an impedance-matching network derived from coaxial transmission line
+  theory. The system implements a complete electronic lifeform (ALICE)
+  with 42 brain modules, 31 body organs, and closed-loop consciousness,
+  governed by a single variational principle: A[Gamma] = integral of
+  sum Gamma_i^2 dt -> min. v3.2.0 adds the Lab-Gamma Diagnostic Engine
+  (53 labs -> 12 organ Z -> 125 disease signatures across 14 specialties),
+  REST API + Streamlit dashboard, C2 Hebbian feedback, 12 clinical
+  specialty modules, vascular impedance, and Papers II-IV. Includes
+  283 source files, 119,200+ lines, 3,078 tests, and 83 experiments.
