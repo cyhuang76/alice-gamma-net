@@ -1,7 +1,9 @@
 \documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{hyperref}
+
+\newtheorem{remark}{Remark}
 
 \begin{document}
 
@@ -167,6 +169,51 @@ over time:
 \end{enumerate}
 All three increase the integrand in Eq.~\eqref{eq:DZ},
 producing a monotonically rising $D_Z(t)$ during wakefulness.
+
+\subsection{Adenosine as impedance-debt readout}
+\label{sec:adenosine}
+
+The traditional sleep-homeostasis narrative assigns adenosine
+the role of metabolic waste product: ATP is consumed,
+adenosine accumulates, and Process~S rises~\cite{Porkka2011}.
+The impedance-debt framework reveals a richer picture.
+
+Because $|\Gamma|^2 > 0$ at every active interface, a fraction
+of incident signalling power is reflected and dissipated.
+To maintain the same downstream output, mitochondria must
+compensate by increasing ATP turnover.
+The resulting adenosine concentration is therefore
+proportional to the \emph{time-integrated} mismatch energy:
+\begin{equation}
+  [\text{adenosine}](t)
+  \;\propto\;
+  \int_0^{t} |\Gamma(t')|^2\, P_{\mathrm{in}}(t')\,dt'
+  \;=\; D_Z(t)\,.
+  \label{eq:adenosine-DZ}
+\end{equation}
+Adenosine is thus not a waste product but a \emph{molecular
+proxy for $D_Z$}---a real-time impedance-debt sensor.
+
+Critically, adenosine also \emph{feeds back} onto the
+impedance landscape.  Acting on presynaptic A$_1$ receptors,
+it reduces glutamate release (lowering $P_{\mathrm{in}}$,
+a stabilising negative feedback).  Simultaneously,
+it modifies membrane leakage conductance $g_L$ and
+capacitance $c_m$ (item~3 above), shifting
+$Z_0(\omega) = \sqrt{r_a/(g_L + i\omega c_m)}$
+and thereby \emph{increasing} $|\Gamma|^2$---a destabilising
+positive feedback that accelerates the approach to the
+sleep-onset threshold $D_Z^*$.
+
+This dual role explains two otherwise puzzling observations.
+First, caffeine (an A$_1$/A$_{2\mathrm{A}}$ antagonist)
+blocks the feedback signal without reducing the underlying
+debt; $D_Z$ continues to accumulate, producing an amplified
+homeostatic rebound once the blockade clears.
+Second, adenosine concentrations are highest in the basal
+forebrain---precisely the region where cortico-thalamic
+projections with heterogeneous $Z_0$ converge, creating
+a natural impedance bottleneck with elevated local $|\Gamma|^2$.
 
 It is useful to decompose impedance debt into two components:
 \begin{equation}
@@ -582,15 +629,102 @@ at least nine times across Metazoa
 Convergent evolution of this magnitude implies a
 \emph{common selective pressure} rather than shared ancestry.
 
-We identify that pressure as the
-\textbf{loss of the oceanic heat sink}.
+We argue that this pressure is ultimately traceable to a
+single thermodynamic event: the saturation of the
+filter-feeding ecological niche in the late Ediacaran,
+and the cascade of phase transitions it triggered.
 
-\subsection{Water-to-land transition}
+\subsection{The Cambrian phase transition:
+from filter-feeding to predation}
+\label{sec:cambrian}
+
+For roughly two billion years following the origin of
+eukaryotes, the dominant marine strategy was passive
+filter-feeding---exemplified today by cnidarians.
+A filter-feeder's impedance to its nutrient source
+is essentially set by diffusion:
+\begin{equation}
+  Z_{\mathrm{food}} \;\approx\;
+    \frac{1}{\rho_{\mathrm{micro}}\,D_{\mathrm{diff}}\,A_{\mathrm{oral}}}\,,
+  \label{eq:Zfood}
+\end{equation}
+where $\rho_{\mathrm{micro}}$ is the local microorganism
+density, $D_{\mathrm{diff}}$ the diffusion coefficient,
+and $A_{\mathrm{oral}}$ the oral surface area.
+So long as $\rho_{\mathrm{micro}}$ remained high,
+$\Gamma_{\mathrm{feeding}}^2$ was small and the strategy
+was thermodynamically optimal: minimal infrastructure,
+minimal $D_Z$ accumulation, no brain required.
+
+\emph{Population overshoot broke this equilibrium.}
+As multicellular filter-feeders proliferated in the
+late Ediacaran ($\sim$570--540~Ma),
+$\rho_{\mathrm{micro}}$ declined.
+Via Eq.~\eqref{eq:Zfood}, $Z_{\mathrm{food}} \to \infty$,
+and therefore $\Gamma_{\mathrm{feeding}}^2 \to 1$,
+$T_{\mathrm{feeding}} \to 0$:
+the passive feeding channel shut down.
+
+The system faced a binary choice encoded in the
+action landscape: remain at the diverging-$\Gamma$ fixed
+point (extinction), or undergo a \emph{topological phase
+transition}---open a new channel with lower $\Gamma^2$.
+That channel was predation.
+The energy return per unit impedance of consuming another
+animal vastly exceeds that of filtering microorganisms:
+\begin{equation}
+  \frac{E_{\mathrm{prey}}}{Z_{\mathrm{hunt}}}
+  \;\gg\;
+  \frac{E_{\mathrm{micro}}}{Z_{\mathrm{filter}}}\,.
+  \label{eq:predation-advantage}
+\end{equation}
+However, exploiting this channel required new hardware
+---eyes to locate prey ($\Gamma_{\mathrm{sensory}}^2\!\downarrow$),
+appendages to capture it ($\Gamma_{\mathrm{motor}}^2\!\downarrow$),
+and a digestive tract capable of processing protein
+($\Gamma_{\mathrm{GI}}^2\!\downarrow$).
+Each new organ introduced new internal interfaces,
+raising $A_{\mathrm{cut}}$
+(the topological cost of Paper~I~\cite{PaperI}),
+and each demanded coordinated impedance management
+---i.e., a centralised nervous system.
+
+The result was the Cambrian explosion ($\sim$540--520~Ma):
+a positive-feedback cascade in which
+predation pressure drove prey to evolve defenses
+(mineralized shells, spines, toxins---all of which raise
+$Z_{\mathrm{body}}$),
+which in turn drove predators to evolve sharper senses
+and harder mouthparts.
+Each cycle of attack and defense simultaneously increased
+\emph{both} the number of impedance channels per organism
+and the irreducible cut cost $A_{\mathrm{cut}}$ connecting them.
+This is the biological expression of the irreducibility
+theorem (Paper~I): once a new dimension is added to the
+$\Gamma$-network, its $A_{\mathrm{cut}}$ contribution
+cannot be removed by any local update rule.
+
+Critically, this arms race produced a spectrum of
+\emph{competitive fitness} measured by position on the
+$A[\Gamma]$ landscape.
+Apex predators (e.g., \emph{Anomalocaris}) occupied
+deep minima; marginal species occupied shallow local
+minima vulnerable to perturbation.
+When the oceanic ecological landscape saturated---when
+all accessible low-$\Gamma$ niches were occupied---the
+remaining option for displaced lineages was to
+exploit an entirely empty landscape: land.
+
+\subsection{Water-to-land transition as niche displacement}
 \label{sec:water-land}
 
-When tetrapods colonised land in the Devonian,
-they exchanged seawater (infinite heat sink)
-for air (poor heat sink).
+The colonisation of land by tetrapods in the Devonian
+($\sim$375~Ma) was not an ``advance'' but a
+\emph{displacement}---the minimum-action solution for
+lineages whose oceanic $\Gamma$ had saturated.
+Upon leaving the water, they exchanged seawater
+(effectively infinite heat sink, $\kappa \ge 1$)
+for air ($\kappa \le 0.04$).
 Impedance-debt heat could no longer be passively
 removed; it accumulated in neural tissue,
 creating selective pressure for:
@@ -603,16 +737,30 @@ creating selective pressure for:
     to manage both microscopic $D_Z$ discharge
     and macroscopic thermal regulation.
 \end{itemize}
+This explains why brain complexity accelerated
+\emph{after} the water-to-land transition, not before:
+the oceanic heat sink had previously masked the
+thermodynamic need for centralised management.
 
 \subsection{Metabolic overflow in aquatic predators}
 
 Cephalopods remained marine yet evolved complex brains.
 This is consistent with the framework:
-their high metabolic rates as active predators
-drive $P_{\mathrm{in}}$ beyond what passive oceanic
+as active predators occupying the high-metabolic-rate
+branch of the Cambrian arms race
+(Sec.~\ref{sec:cambrian}),
+their $P_{\mathrm{in}}$ exceeds what passive oceanic
 conduction can dissipate,
 effectively \emph{exceeding} the heat-sink capacity
 of the surrounding water~\cite{Moroz2012}.
+They solved the predator's impedance problem
+without leaving the ocean---by evolving a distributed
+brain architecture (nine ganglia) that
+distributes $D_Z$ dissipation spatially,
+in contrast to the centralised hub strategy
+of vertebrates
+(Experiment~7 confirms this architectural crossover
+at $\kappa_{\mathrm{cross}} \approx 0.30$).
 
 \subsection{Karbowski's thermodynamic constraint}
 
@@ -1425,6 +1573,38 @@ dual-network lifecycle dynamics is
 in preparation as part of the series
 (Paper~IV: Cognition, Emotion, and Aging).
 
+\subsection{No-waste corollary of energy conservation}
+\label{sec:no-waste}
+
+A striking consequence of C1 energy conservation
+($\Gamma^2 + T = 1$) deserves explicit statement.
+Every molecular species present in a living system
+possesses a nonzero impedance $Z$; its presence therefore
+modifies local $\Gamma$ at every interface it contacts.
+A substance with \emph{no} effect on $\Gamma$ would
+require $Z = 0$---a physical impossibility for any
+molecule with nonzero mass, charge, or dielectric constant.
+
+\begin{remark}[No-waste corollary]
+\label{rem:no-waste}
+In any system obeying $\Gamma^2 + T = 1$,
+every molecular species modifies$\;\Gamma$
+at some interface and therefore has a nonzero
+functional role.  The concept of ``metabolic waste''
+is an observational artefact arising from incomplete
+knowledge of the full $\Gamma$-network.
+\end{remark}
+
+This is consistent with the repeated historical pattern
+in which substances once classified as waste are later
+found to serve critical signalling or protective
+functions---nitric oxide (vasodilator), lactate
+(neuronal fuel and vasodilator), bilirubin (antioxidant),
+uric acid (plasma antioxidant), and adenosine itself
+(Sec.~\ref{sec:adenosine}).
+The no-waste corollary predicts that this reclassification
+process will continue for every remaining ``waste'' metabolite.
+
 \subsection{Minimum action and the evolution of life}
 
 The impedance-debt framework is consistent with the
@@ -1464,7 +1644,7 @@ simulator possible.
 
 \section*{Data and Code Availability}
 Source code for the Alice $\Gamma$-Net simulator, including all
-experiment scripts and the 2\,910-test verification suite
+experiment scripts and the 3\,025-test verification suite
 referenced in this paper, will be made available at
 \url{https://github.com/cyhuang76/alice-gamma-net}
 upon acceptance (AGPL-3.0 license).
