@@ -1,0 +1,4263 @@
+[
+  {
+    "disease_id": "mi_acute",
+    "specialty": "cardiology",
+    "display_name": "急性心肌梗塞 Acute MI",
+    "gamma_signature": {
+      "cardiac": 0.85,
+      "vascular": 0.35,
+      "immune": 0.2,
+      "pulmonary": 0.15,
+      "heme": 0.05,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "cardiac",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "ECG",
+      "Serial Troponin",
+      "Coronary angiography",
+      "Echocardiogram"
+    ],
+    "key_labs": [
+      "Troponin",
+      "CK_MB",
+      "BNP"
+    ]
+  },
+  {
+    "disease_id": "heart_failure",
+    "specialty": "cardiology",
+    "display_name": "心衰竭 Heart Failure",
+    "gamma_signature": {
+      "cardiac": 0.7,
+      "pulmonary": 0.3,
+      "renal": 0.25,
+      "hepatic": 0.15,
+      "vascular": 0.2,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "cardiac",
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "Echocardiogram",
+      "BNP",
+      "Chest X-ray",
+      "Cardiac MRI"
+    ],
+    "key_labs": [
+      "BNP",
+      "Troponin",
+      "Na",
+      "Cr"
+    ]
+  },
+  {
+    "disease_id": "atrial_fibrillation",
+    "specialty": "cardiology",
+    "display_name": "心房顫動 Atrial Fibrillation",
+    "gamma_signature": {
+      "cardiac": 0.55,
+      "vascular": 0.15,
+      "pulmonary": 0.1,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "cardiac"
+    ],
+    "suggested_tests": [
+      "ECG",
+      "Holter monitor",
+      "Echocardiogram",
+      "TSH"
+    ],
+    "key_labs": [
+      "BNP",
+      "TSH",
+      "K"
+    ]
+  },
+  {
+    "disease_id": "hypertension",
+    "specialty": "cardiology",
+    "display_name": "高血壓 Hypertension",
+    "gamma_signature": {
+      "cardiac": 0.4,
+      "vascular": 0.45,
+      "renal": 0.25,
+      "neuro": 0.1,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "cardiac",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "24h ABPM",
+      "Echocardiogram",
+      "Renal US",
+      "Fundoscopy"
+    ],
+    "key_labs": [
+      "Cr",
+      "K",
+      "Na",
+      "LDL"
+    ]
+  },
+  {
+    "disease_id": "aortic_stenosis",
+    "specialty": "cardiology",
+    "display_name": "主動脈瓣狹窄 Aortic Stenosis",
+    "gamma_signature": {
+      "cardiac": 0.65,
+      "pulmonary": 0.1,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "cardiac"
+    ],
+    "suggested_tests": [
+      "Echocardiogram",
+      "Cardiac catheterisation"
+    ],
+    "key_labs": [
+      "BNP",
+      "Troponin"
+    ]
+  },
+  {
+    "disease_id": "cardiomyopathy",
+    "specialty": "cardiology",
+    "display_name": "心肌病變 Cardiomyopathy",
+    "gamma_signature": {
+      "cardiac": 0.6,
+      "pulmonary": 0.2,
+      "hepatic": 0.1,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "cardiac"
+    ],
+    "suggested_tests": [
+      "Echocardiogram",
+      "Cardiac MRI",
+      "Genetic testing",
+      "Endomyocardial biopsy"
+    ],
+    "key_labs": [
+      "BNP",
+      "Troponin",
+      "CK_MB"
+    ]
+  },
+  {
+    "disease_id": "pericarditis",
+    "specialty": "cardiology",
+    "display_name": "心包膜炎 Pericarditis",
+    "gamma_signature": {
+      "cardiac": 0.5,
+      "immune": 0.25,
+      "pulmonary": 0.1,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "cardiac",
+      "immune"
+    ],
+    "suggested_tests": [
+      "ECG",
+      "Echocardiogram",
+      "CRP",
+      "CT chest"
+    ],
+    "key_labs": [
+      "CRP",
+      "ESR",
+      "Troponin"
+    ]
+  },
+  {
+    "disease_id": "pulmonary_htn",
+    "specialty": "cardiology",
+    "display_name": "肺高壓 Pulmonary Hypertension",
+    "gamma_signature": {
+      "cardiac": 0.45,
+      "pulmonary": 0.55,
+      "vascular": 0.2,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary",
+      "cardiac"
+    ],
+    "suggested_tests": [
+      "Right heart catheterisation",
+      "CT pulmonary angiogram",
+      "V/Q scan"
+    ],
+    "key_labs": [
+      "BNP",
+      "D_Dimer"
+    ]
+  },
+  {
+    "disease_id": "endocarditis",
+    "specialty": "cardiology",
+    "display_name": "心內膜炎 Endocarditis",
+    "gamma_signature": {
+      "cardiac": 0.6,
+      "immune": 0.5,
+      "vascular": 0.15,
+      "heme": 0.1,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "cardiac",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Blood cultures ×3",
+      "Echocardiogram (TEE)",
+      "Duke criteria"
+    ],
+    "key_labs": [
+      "CRP",
+      "ESR",
+      "WBC",
+      "PCT"
+    ]
+  },
+  {
+    "disease_id": "aortic_dissection",
+    "specialty": "cardiology",
+    "display_name": "主動脈剝離 Aortic Dissection",
+    "gamma_signature": {
+      "cardiac": 0.7,
+      "vascular": 0.8,
+      "renal": 0.2,
+      "neuro": 0.15,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "cardiac",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "CT aorta with contrast",
+      "TEE",
+      "D-Dimer"
+    ],
+    "key_labs": [
+      "D_Dimer",
+      "Troponin",
+      "Lactate"
+    ]
+  },
+  {
+    "disease_id": "pneumonia",
+    "specialty": "pulmonology",
+    "display_name": "肺炎 Pneumonia",
+    "gamma_signature": {
+      "pulmonary": 0.65,
+      "immune": 0.4,
+      "cardiac": 0.1,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Chest X-ray",
+      "Sputum culture",
+      "Blood cultures",
+      "CT chest"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "PCT"
+    ]
+  },
+  {
+    "disease_id": "copd_exacerbation",
+    "specialty": "pulmonology",
+    "display_name": "COPD 急性惡化 COPD Exacerbation",
+    "gamma_signature": {
+      "pulmonary": 0.6,
+      "cardiac": 0.2,
+      "immune": 0.15,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "Spirometry",
+      "ABG",
+      "Chest X-ray"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "CO2"
+    ]
+  },
+  {
+    "disease_id": "asthma_acute",
+    "specialty": "pulmonology",
+    "display_name": "急性氣喘 Acute Asthma",
+    "gamma_signature": {
+      "pulmonary": 0.55,
+      "immune": 0.2,
+      "cardiac": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "Spirometry",
+      "Peak flow",
+      "ABG",
+      "Chest X-ray"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP"
+    ]
+  },
+  {
+    "disease_id": "pulmonary_embolism",
+    "specialty": "pulmonology",
+    "display_name": "肺栓塞 Pulmonary Embolism",
+    "gamma_signature": {
+      "pulmonary": 0.7,
+      "cardiac": 0.3,
+      "vascular": 0.25,
+      "heme": 0.1,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "CT pulmonary angiogram",
+      "V/Q scan",
+      "Lower limb US"
+    ],
+    "key_labs": [
+      "D_Dimer",
+      "Troponin",
+      "BNP"
+    ]
+  },
+  {
+    "disease_id": "pleural_effusion",
+    "specialty": "pulmonology",
+    "display_name": "肋膜積液 Pleural Effusion",
+    "gamma_signature": {
+      "pulmonary": 0.5,
+      "hepatic": 0.15,
+      "cardiac": 0.15,
+      "immune": 0.1,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "Chest X-ray",
+      "Thoracentesis (Light criteria)",
+      "CT chest"
+    ],
+    "key_labs": [
+      "Albumin",
+      "Total_Protein",
+      "WBC"
+    ]
+  },
+  {
+    "disease_id": "ards",
+    "specialty": "pulmonology",
+    "display_name": "急性呼吸窘迫症 ARDS",
+    "gamma_signature": {
+      "pulmonary": 0.85,
+      "cardiac": 0.25,
+      "immune": 0.35,
+      "renal": 0.15,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary",
+      "immune"
+    ],
+    "suggested_tests": [
+      "ABG",
+      "Chest X-ray/CT",
+      "Echocardiogram"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "PCT",
+      "Lactate"
+    ]
+  },
+  {
+    "disease_id": "lung_cancer",
+    "specialty": "pulmonology",
+    "display_name": "肺癌 Lung Cancer",
+    "gamma_signature": {
+      "pulmonary": 0.55,
+      "immune": 0.2,
+      "heme": 0.15,
+      "cardiac": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "CT chest",
+      "PET-CT",
+      "Bronchoscopy + biopsy",
+      "Tumour markers"
+    ],
+    "key_labs": [
+      "Hb",
+      "Plt",
+      "ALP",
+      "Ca"
+    ]
+  },
+  {
+    "disease_id": "pneumothorax",
+    "specialty": "pulmonology",
+    "display_name": "氣胸 Pneumothorax",
+    "gamma_signature": {
+      "pulmonary": 0.6,
+      "cardiac": 0.15,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "Chest X-ray",
+      "CT chest"
+    ],
+    "key_labs": []
+  },
+  {
+    "disease_id": "tuberculosis",
+    "specialty": "pulmonology",
+    "display_name": "肺結核 Tuberculosis",
+    "gamma_signature": {
+      "pulmonary": 0.5,
+      "immune": 0.4,
+      "hepatic": 0.05,
+      "cardiac": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Chest X-ray",
+      "Sputum AFB ×3",
+      "Quantiferon/PPD",
+      "CT chest"
+    ],
+    "key_labs": [
+      "WBC",
+      "ESR",
+      "CRP",
+      "Albumin"
+    ]
+  },
+  {
+    "disease_id": "sleep_apnea",
+    "specialty": "pulmonology",
+    "display_name": "睡眠呼吸中止 Sleep Apnea",
+    "gamma_signature": {
+      "pulmonary": 0.35,
+      "cardiac": 0.2,
+      "endocrine": 0.15,
+      "neuro": 0.1,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "Polysomnography",
+      "Epworth Sleepiness Scale"
+    ],
+    "key_labs": [
+      "Glucose",
+      "HbA1c",
+      "TSH"
+    ]
+  },
+  {
+    "disease_id": "hepatitis_acute",
+    "specialty": "gastroenterology",
+    "display_name": "急性肝炎 Acute Hepatitis",
+    "gamma_signature": {
+      "hepatic": 0.75,
+      "immune": 0.25,
+      "GI": 0.15,
+      "heme": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "hepatic",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Hepatitis A/B/C serology",
+      "Liver US",
+      "Ceruloplasmin",
+      "Autoimmune markers"
+    ],
+    "key_labs": [
+      "AST",
+      "ALT",
+      "Bil_total",
+      "Albumin",
+      "INR"
+    ]
+  },
+  {
+    "disease_id": "cirrhosis",
+    "specialty": "gastroenterology",
+    "display_name": "肝硬化 Cirrhosis",
+    "gamma_signature": {
+      "hepatic": 0.7,
+      "GI": 0.3,
+      "heme": 0.25,
+      "renal": 0.2,
+      "immune": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "endocrine": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "hepatic",
+      "GI"
+    ],
+    "suggested_tests": [
+      "Liver US",
+      "FibroScan",
+      "Upper GI endoscopy",
+      "AFP"
+    ],
+    "key_labs": [
+      "Albumin",
+      "INR",
+      "Bil_total",
+      "Plt",
+      "AST",
+      "ALT"
+    ]
+  },
+  {
+    "disease_id": "pancreatitis_acute",
+    "specialty": "gastroenterology",
+    "display_name": "急性胰臟炎 Acute Pancreatitis",
+    "gamma_signature": {
+      "GI": 0.75,
+      "hepatic": 0.15,
+      "immune": 0.2,
+      "renal": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "GI"
+    ],
+    "suggested_tests": [
+      "CT abdomen",
+      "MRCP",
+      "Ranson criteria"
+    ],
+    "key_labs": [
+      "Amylase",
+      "Lipase",
+      "CRP",
+      "Ca",
+      "WBC"
+    ]
+  },
+  {
+    "disease_id": "gerd",
+    "specialty": "gastroenterology",
+    "display_name": "胃食道逆流 GERD",
+    "gamma_signature": {
+      "GI": 0.3,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "GI"
+    ],
+    "suggested_tests": [
+      "Upper GI endoscopy",
+      "24h pH monitoring",
+      "PPI trial"
+    ],
+    "key_labs": []
+  },
+  {
+    "disease_id": "ibd_crohn",
+    "specialty": "gastroenterology",
+    "display_name": "克隆氏症 Crohn's Disease",
+    "gamma_signature": {
+      "GI": 0.55,
+      "immune": 0.4,
+      "heme": 0.2,
+      "bone": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "GI",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Colonoscopy + biopsy",
+      "MR enterography",
+      "Faecal calprotectin"
+    ],
+    "key_labs": [
+      "CRP",
+      "ESR",
+      "Albumin",
+      "Hb",
+      "Plt"
+    ]
+  },
+  {
+    "disease_id": "ibd_uc",
+    "specialty": "gastroenterology",
+    "display_name": "潰瘍性大腸炎 Ulcerative Colitis",
+    "gamma_signature": {
+      "GI": 0.5,
+      "immune": 0.35,
+      "heme": 0.2,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "GI",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Colonoscopy + biopsy",
+      "Faecal calprotectin",
+      "Stool cultures"
+    ],
+    "key_labs": [
+      "CRP",
+      "ESR",
+      "Albumin",
+      "Hb"
+    ]
+  },
+  {
+    "disease_id": "gi_bleed_upper",
+    "specialty": "gastroenterology",
+    "display_name": "上消化道出血 Upper GI Bleed",
+    "gamma_signature": {
+      "GI": 0.6,
+      "heme": 0.45,
+      "cardiac": 0.15,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "GI",
+      "heme"
+    ],
+    "suggested_tests": [
+      "Upper GI endoscopy",
+      "Angiography if massive"
+    ],
+    "key_labs": [
+      "Hb",
+      "Hct",
+      "BUN",
+      "INR",
+      "Plt"
+    ]
+  },
+  {
+    "disease_id": "cholecystitis",
+    "specialty": "gastroenterology",
+    "display_name": "膽囊炎 Cholecystitis",
+    "gamma_signature": {
+      "GI": 0.45,
+      "hepatic": 0.3,
+      "immune": 0.2,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "GI",
+      "hepatic"
+    ],
+    "suggested_tests": [
+      "RUQ ultrasound",
+      "HIDA scan",
+      "MRCP"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "ALP",
+      "GGT",
+      "Bil_total"
+    ]
+  },
+  {
+    "disease_id": "hcc",
+    "specialty": "gastroenterology",
+    "display_name": "肝細胞癌 Hepatocellular Carcinoma",
+    "gamma_signature": {
+      "hepatic": 0.65,
+      "GI": 0.2,
+      "immune": 0.15,
+      "heme": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "hepatic"
+    ],
+    "suggested_tests": [
+      "Liver US",
+      "CT/MRI triphasic",
+      "AFP",
+      "Liver biopsy"
+    ],
+    "key_labs": [
+      "AST",
+      "ALT",
+      "Albumin",
+      "Bil_total",
+      "Plt"
+    ]
+  },
+  {
+    "disease_id": "celiac",
+    "specialty": "gastroenterology",
+    "display_name": "乳糜瀉 Celiac Disease",
+    "gamma_signature": {
+      "GI": 0.45,
+      "immune": 0.3,
+      "heme": 0.2,
+      "bone": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "GI",
+      "immune"
+    ],
+    "suggested_tests": [
+      "tTG-IgA",
+      "Duodenal biopsy",
+      "HLA-DQ2/DQ8"
+    ],
+    "key_labs": [
+      "Hb",
+      "Ferritin",
+      "Vit_D",
+      "Folate",
+      "Albumin"
+    ]
+  },
+  {
+    "disease_id": "aki",
+    "specialty": "nephrology",
+    "display_name": "急性腎損傷 AKI",
+    "gamma_signature": {
+      "renal": 0.8,
+      "cardiac": 0.15,
+      "hepatic": 0.1,
+      "pulmonary": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal"
+    ],
+    "suggested_tests": [
+      "Renal US",
+      "Urinalysis",
+      "FENa",
+      "Renal biopsy if indicated"
+    ],
+    "key_labs": [
+      "Cr",
+      "BUN",
+      "K",
+      "Na",
+      "CO2"
+    ]
+  },
+  {
+    "disease_id": "ckd",
+    "specialty": "nephrology",
+    "display_name": "慢性腎病 CKD",
+    "gamma_signature": {
+      "renal": 0.6,
+      "vascular": 0.2,
+      "heme": 0.25,
+      "bone": 0.2,
+      "endocrine": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal"
+    ],
+    "suggested_tests": [
+      "eGFR trend",
+      "UACR",
+      "Renal US",
+      "PTH/Ca/PO4"
+    ],
+    "key_labs": [
+      "Cr",
+      "BUN",
+      "K",
+      "Ca",
+      "Hb",
+      "Albumin"
+    ]
+  },
+  {
+    "disease_id": "nephrotic_syndrome",
+    "specialty": "nephrology",
+    "display_name": "腎病症候群 Nephrotic Syndrome",
+    "gamma_signature": {
+      "renal": 0.65,
+      "vascular": 0.15,
+      "immune": 0.2,
+      "heme": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Urinalysis (proteinuria)",
+      "Serum albumin",
+      "Lipid panel",
+      "Renal biopsy"
+    ],
+    "key_labs": [
+      "Albumin",
+      "TC",
+      "Cr",
+      "Total_Protein"
+    ]
+  },
+  {
+    "disease_id": "glomerulonephritis",
+    "specialty": "nephrology",
+    "display_name": "腎絲球腎炎 Glomerulonephritis",
+    "gamma_signature": {
+      "renal": 0.7,
+      "immune": 0.35,
+      "heme": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Urinalysis",
+      "Complement C3/C4",
+      "ANA/ANCA",
+      "Renal biopsy"
+    ],
+    "key_labs": [
+      "Cr",
+      "BUN",
+      "Hb",
+      "Albumin",
+      "CRP"
+    ]
+  },
+  {
+    "disease_id": "rta",
+    "specialty": "nephrology",
+    "display_name": "腎小管酸中毒 Renal Tubular Acidosis",
+    "gamma_signature": {
+      "renal": 0.5,
+      "bone": 0.2,
+      "neuro": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal"
+    ],
+    "suggested_tests": [
+      "ABG",
+      "Urine pH",
+      "Urine anion gap",
+      "Serum K/Ca"
+    ],
+    "key_labs": [
+      "K",
+      "CO2",
+      "Ca",
+      "Cl",
+      "Na"
+    ]
+  },
+  {
+    "disease_id": "pyelonephritis",
+    "specialty": "nephrology",
+    "display_name": "腎盂腎炎 Pyelonephritis",
+    "gamma_signature": {
+      "renal": 0.55,
+      "immune": 0.4,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Urinalysis",
+      "Urine culture",
+      "Renal US/CT"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "PCT",
+      "Cr"
+    ]
+  },
+  {
+    "disease_id": "kidney_stone",
+    "specialty": "nephrology",
+    "display_name": "腎結石 Nephrolithiasis",
+    "gamma_signature": {
+      "renal": 0.4,
+      "bone": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal"
+    ],
+    "suggested_tests": [
+      "CT KUB (non-contrast)",
+      "Urinalysis",
+      "24h urine collection"
+    ],
+    "key_labs": [
+      "Ca",
+      "Uric_Acid",
+      "Cr"
+    ]
+  },
+  {
+    "disease_id": "hyponatremia",
+    "specialty": "nephrology",
+    "display_name": "低血鈉 Hyponatremia",
+    "gamma_signature": {
+      "renal": 0.45,
+      "neuro": 0.35,
+      "endocrine": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal",
+      "neuro"
+    ],
+    "suggested_tests": [
+      "Serum osmolality",
+      "Urine osmolality",
+      "Urine Na",
+      "TSH",
+      "Cortisol"
+    ],
+    "key_labs": [
+      "Na",
+      "Glucose",
+      "TSH",
+      "Cr"
+    ]
+  },
+  {
+    "disease_id": "hyperkalemia",
+    "specialty": "nephrology",
+    "display_name": "高血鉀 Hyperkalemia",
+    "gamma_signature": {
+      "renal": 0.5,
+      "cardiac": 0.35,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal",
+      "cardiac"
+    ],
+    "suggested_tests": [
+      "ECG",
+      "ABG",
+      "Urine K",
+      "Renal function"
+    ],
+    "key_labs": [
+      "K",
+      "Cr",
+      "CO2"
+    ]
+  },
+  {
+    "disease_id": "dialysis_need",
+    "specialty": "nephrology",
+    "display_name": "需透析 End-Stage Renal Disease",
+    "gamma_signature": {
+      "renal": 0.9,
+      "heme": 0.35,
+      "bone": 0.3,
+      "vascular": 0.25,
+      "cardiac": 0.2,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal"
+    ],
+    "suggested_tests": [
+      "Dialysis access planning",
+      "PTH",
+      "Iron studies",
+      "Hepatitis panel"
+    ],
+    "key_labs": [
+      "Cr",
+      "BUN",
+      "K",
+      "Ca",
+      "Hb",
+      "Ferritin"
+    ]
+  },
+  {
+    "disease_id": "dka",
+    "specialty": "endocrinology",
+    "display_name": "糖尿病酮酸中毒 DKA",
+    "gamma_signature": {
+      "endocrine": 0.8,
+      "renal": 0.35,
+      "neuro": 0.3,
+      "vascular": 0.2,
+      "cardiac": 0.15,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine",
+      "renal",
+      "neuro"
+    ],
+    "suggested_tests": [
+      "ABG",
+      "Serum ketones",
+      "Urine ketones",
+      "Serum osmolality"
+    ],
+    "key_labs": [
+      "Glucose",
+      "K",
+      "Na",
+      "CO2",
+      "BUN",
+      "Cr"
+    ]
+  },
+  {
+    "disease_id": "dm_type2",
+    "specialty": "endocrinology",
+    "display_name": "第二型糖尿病 Type 2 DM",
+    "gamma_signature": {
+      "endocrine": 0.5,
+      "vascular": 0.3,
+      "renal": 0.2,
+      "neuro": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "HbA1c",
+      "Fasting glucose",
+      "OGTT",
+      "Lipid panel",
+      "UACR"
+    ],
+    "key_labs": [
+      "HbA1c",
+      "Glucose",
+      "LDL",
+      "Cr",
+      "TC"
+    ]
+  },
+  {
+    "disease_id": "hyperthyroid",
+    "specialty": "endocrinology",
+    "display_name": "甲狀腺亢進 Hyperthyroidism",
+    "gamma_signature": {
+      "endocrine": 0.65,
+      "cardiac": 0.3,
+      "bone": 0.15,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine",
+      "cardiac"
+    ],
+    "suggested_tests": [
+      "TSH",
+      "FT4",
+      "FT3",
+      "TSH-receptor Ab",
+      "Thyroid US",
+      "Uptake scan"
+    ],
+    "key_labs": [
+      "TSH",
+      "FT4",
+      "FT3"
+    ]
+  },
+  {
+    "disease_id": "hypothyroid",
+    "specialty": "endocrinology",
+    "display_name": "甲狀腺低下 Hypothyroidism",
+    "gamma_signature": {
+      "endocrine": 0.55,
+      "cardiac": 0.15,
+      "heme": 0.15,
+      "neuro": 0.1,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine"
+    ],
+    "suggested_tests": [
+      "TSH",
+      "FT4",
+      "Anti-TPO",
+      "Lipid panel"
+    ],
+    "key_labs": [
+      "TSH",
+      "FT4",
+      "TC",
+      "Hb"
+    ]
+  },
+  {
+    "disease_id": "addison",
+    "specialty": "endocrinology",
+    "display_name": "愛迪生氏症 Adrenal Insufficiency",
+    "gamma_signature": {
+      "endocrine": 0.7,
+      "renal": 0.25,
+      "immune": 0.15,
+      "neuro": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine"
+    ],
+    "suggested_tests": [
+      "AM cortisol",
+      "ACTH stimulation test",
+      "ACTH level",
+      "21-hydroxylase Ab"
+    ],
+    "key_labs": [
+      "Na",
+      "K",
+      "Glucose",
+      "Ca"
+    ]
+  },
+  {
+    "disease_id": "cushing",
+    "specialty": "endocrinology",
+    "display_name": "乙萬氏症候群 Cushing Syndrome",
+    "gamma_signature": {
+      "endocrine": 0.6,
+      "vascular": 0.25,
+      "bone": 0.2,
+      "immune": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine"
+    ],
+    "suggested_tests": [
+      "24h urine cortisol",
+      "Dexamethasone suppression",
+      "Midnight salivary cortisol"
+    ],
+    "key_labs": [
+      "Glucose",
+      "K",
+      "Na",
+      "WBC"
+    ]
+  },
+  {
+    "disease_id": "pheo",
+    "specialty": "endocrinology",
+    "display_name": "嗜鉻細胞瘤 Pheochromocytoma",
+    "gamma_signature": {
+      "endocrine": 0.55,
+      "cardiac": 0.4,
+      "vascular": 0.35,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine",
+      "cardiac"
+    ],
+    "suggested_tests": [
+      "Plasma free metanephrines",
+      "24h urine catecholamines",
+      "CT/MRI adrenal"
+    ],
+    "key_labs": [
+      "Glucose",
+      "Ca"
+    ]
+  },
+  {
+    "disease_id": "hypoparathyroid",
+    "specialty": "endocrinology",
+    "display_name": "副甲狀腺低下 Hypoparathyroidism",
+    "gamma_signature": {
+      "endocrine": 0.45,
+      "bone": 0.3,
+      "neuro": 0.25,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine",
+      "bone"
+    ],
+    "suggested_tests": [
+      "PTH",
+      "Ca",
+      "PO4",
+      "Mg",
+      "Vitamin D"
+    ],
+    "key_labs": [
+      "Ca",
+      "Vit_D",
+      "ALP"
+    ]
+  },
+  {
+    "disease_id": "hypoglycemia",
+    "specialty": "endocrinology",
+    "display_name": "低血糖 Hypoglycemia",
+    "gamma_signature": {
+      "endocrine": 0.5,
+      "neuro": 0.4,
+      "cardiac": 0.15,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine",
+      "neuro"
+    ],
+    "suggested_tests": [
+      "72h fast",
+      "C-peptide",
+      "Insulin level",
+      "Cortisol"
+    ],
+    "key_labs": [
+      "Glucose",
+      "K"
+    ]
+  },
+  {
+    "disease_id": "metabolic_syndrome",
+    "specialty": "endocrinology",
+    "display_name": "代謝症候群 Metabolic Syndrome",
+    "gamma_signature": {
+      "endocrine": 0.4,
+      "vascular": 0.4,
+      "hepatic": 0.15,
+      "renal": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "Fasting glucose",
+      "Lipid panel",
+      "Waist circumference",
+      "BP"
+    ],
+    "key_labs": [
+      "HbA1c",
+      "Glucose",
+      "TG",
+      "HDL",
+      "LDL"
+    ]
+  },
+  {
+    "disease_id": "sepsis",
+    "specialty": "immunology",
+    "display_name": "敗血症 Sepsis",
+    "gamma_signature": {
+      "immune": 0.8,
+      "cardiac": 0.3,
+      "renal": 0.35,
+      "pulmonary": 0.25,
+      "hepatic": 0.2,
+      "heme": 0.15,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "renal",
+      "cardiac"
+    ],
+    "suggested_tests": [
+      "Blood cultures ×2",
+      "Lactate",
+      "PCT",
+      "qSOFA/SOFA score"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "PCT",
+      "Lactate",
+      "Cr",
+      "Plt"
+    ]
+  },
+  {
+    "disease_id": "sle",
+    "specialty": "immunology",
+    "display_name": "全身性紅斑狼瘡 SLE",
+    "gamma_signature": {
+      "immune": 0.65,
+      "renal": 0.35,
+      "heme": 0.3,
+      "bone": 0.2,
+      "vascular": 0.15,
+      "neuro": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "renal",
+      "heme"
+    ],
+    "suggested_tests": [
+      "ANA",
+      "Anti-dsDNA",
+      "C3/C4",
+      "Urinalysis",
+      "CBC"
+    ],
+    "key_labs": [
+      "WBC",
+      "Hb",
+      "Plt",
+      "Cr",
+      "ESR",
+      "CRP"
+    ]
+  },
+  {
+    "disease_id": "rheumatoid_arthritis",
+    "specialty": "immunology",
+    "display_name": "類風濕性關節炎 RA",
+    "gamma_signature": {
+      "immune": 0.55,
+      "bone": 0.45,
+      "heme": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "bone"
+    ],
+    "suggested_tests": [
+      "RF",
+      "Anti-CCP",
+      "X-ray hands/feet",
+      "Joint US"
+    ],
+    "key_labs": [
+      "CRP",
+      "ESR",
+      "Hb",
+      "Plt"
+    ]
+  },
+  {
+    "disease_id": "anaphylaxis",
+    "specialty": "immunology",
+    "display_name": "過敏性休克 Anaphylaxis",
+    "gamma_signature": {
+      "immune": 0.85,
+      "cardiac": 0.35,
+      "pulmonary": 0.3,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "cardiac",
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "Tryptase",
+      "IgE",
+      "Allergy testing (after recovery)"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP"
+    ]
+  },
+  {
+    "disease_id": "hiv_aids",
+    "specialty": "immunology",
+    "display_name": "HIV/AIDS",
+    "gamma_signature": {
+      "immune": 0.75,
+      "heme": 0.2,
+      "pulmonary": 0.15,
+      "neuro": 0.15,
+      "GI": 0.1,
+      "cardiac": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune"
+    ],
+    "suggested_tests": [
+      "HIV Ag/Ab",
+      "CD4 count",
+      "Viral load",
+      "Resistance testing"
+    ],
+    "key_labs": [
+      "WBC",
+      "Lymphocytes",
+      "Hb",
+      "Plt"
+    ]
+  },
+  {
+    "disease_id": "vasculitis",
+    "specialty": "immunology",
+    "display_name": "血管炎 Vasculitis",
+    "gamma_signature": {
+      "immune": 0.6,
+      "vascular": 0.45,
+      "renal": 0.3,
+      "pulmonary": 0.15,
+      "cardiac": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "ANCA (c-ANCA/p-ANCA)",
+      "Biopsy",
+      "Angiography"
+    ],
+    "key_labs": [
+      "CRP",
+      "ESR",
+      "Cr",
+      "Hb",
+      "WBC"
+    ]
+  },
+  {
+    "disease_id": "gout",
+    "specialty": "immunology",
+    "display_name": "痛風 Gout",
+    "gamma_signature": {
+      "immune": 0.4,
+      "bone": 0.5,
+      "renal": 0.2,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Synovial fluid analysis (crystals)",
+      "Joint X-ray",
+      "Dual-energy CT"
+    ],
+    "key_labs": [
+      "Uric_Acid",
+      "CRP",
+      "Cr",
+      "WBC"
+    ]
+  },
+  {
+    "disease_id": "sjogren",
+    "specialty": "immunology",
+    "display_name": "乾燥症 Sjögren Syndrome",
+    "gamma_signature": {
+      "immune": 0.5,
+      "GI": 0.15,
+      "neuro": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune"
+    ],
+    "suggested_tests": [
+      "Anti-SSA/SSB",
+      "Schirmer test",
+      "Salivary gland biopsy"
+    ],
+    "key_labs": [
+      "ESR",
+      "CRP",
+      "Total_Protein"
+    ]
+  },
+  {
+    "disease_id": "sarcoidosis",
+    "specialty": "immunology",
+    "display_name": "類肉瘤病 Sarcoidosis",
+    "gamma_signature": {
+      "immune": 0.5,
+      "pulmonary": 0.4,
+      "bone": 0.15,
+      "hepatic": 0.1,
+      "endocrine": 0.1,
+      "cardiac": 0.0,
+      "renal": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "Chest X-ray/CT",
+      "ACE level",
+      "Biopsy",
+      "Ca"
+    ],
+    "key_labs": [
+      "Ca",
+      "ALP",
+      "CRP",
+      "ESR"
+    ]
+  },
+  {
+    "disease_id": "drug_allergy",
+    "specialty": "immunology",
+    "display_name": "藥物過敏 Drug Allergy",
+    "gamma_signature": {
+      "immune": 0.55,
+      "hepatic": 0.2,
+      "heme": 0.15,
+      "renal": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune"
+    ],
+    "suggested_tests": [
+      "Drug provocation testing",
+      "Patch testing",
+      "IgE specific"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "AST",
+      "ALT",
+      "Cr"
+    ]
+  },
+  {
+    "disease_id": "iron_deficiency_anemia",
+    "specialty": "hematology",
+    "display_name": "缺鐵性貧血 Iron Deficiency Anemia",
+    "gamma_signature": {
+      "heme": 0.65,
+      "GI": 0.15,
+      "cardiac": 0.1,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme"
+    ],
+    "suggested_tests": [
+      "Iron studies",
+      "Ferritin",
+      "TIBC",
+      "Stool OB",
+      "Upper/lower GI scope"
+    ],
+    "key_labs": [
+      "Hb",
+      "MCV",
+      "Ferritin",
+      "RBC"
+    ]
+  },
+  {
+    "disease_id": "b12_folate_anemia",
+    "specialty": "hematology",
+    "display_name": "巨球性貧血 Megaloblastic Anemia",
+    "gamma_signature": {
+      "heme": 0.55,
+      "neuro": 0.25,
+      "GI": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme",
+      "neuro"
+    ],
+    "suggested_tests": [
+      "B12",
+      "Folate",
+      "MMA",
+      "Homocysteine",
+      "Peripheral smear"
+    ],
+    "key_labs": [
+      "Hb",
+      "MCV",
+      "Vit_B12",
+      "Folate"
+    ]
+  },
+  {
+    "disease_id": "hemolytic_anemia",
+    "specialty": "hematology",
+    "display_name": "溶血性貧血 Hemolytic Anemia",
+    "gamma_signature": {
+      "heme": 0.7,
+      "hepatic": 0.2,
+      "immune": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme"
+    ],
+    "suggested_tests": [
+      "Reticulocyte count",
+      "Haptoglobin",
+      "LDH",
+      "Direct Coombs",
+      "Peripheral smear"
+    ],
+    "key_labs": [
+      "Hb",
+      "Bil_total",
+      "Bil_direct",
+      "Hct"
+    ]
+  },
+  {
+    "disease_id": "thrombocytopenia",
+    "specialty": "hematology",
+    "display_name": "血小板低下 Thrombocytopenia",
+    "gamma_signature": {
+      "heme": 0.55,
+      "immune": 0.25,
+      "hepatic": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Peripheral smear",
+      "Bone marrow biopsy",
+      "Anti-platelet Ab"
+    ],
+    "key_labs": [
+      "Plt",
+      "WBC",
+      "Hb"
+    ]
+  },
+  {
+    "disease_id": "dic",
+    "specialty": "hematology",
+    "display_name": "瀰漫性血管內凝血 DIC",
+    "gamma_signature": {
+      "heme": 0.8,
+      "hepatic": 0.25,
+      "immune": 0.3,
+      "vascular": 0.2,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme",
+      "immune"
+    ],
+    "suggested_tests": [
+      "D-Dimer",
+      "Fibrinogen",
+      "PT/INR",
+      "Peripheral smear"
+    ],
+    "key_labs": [
+      "Plt",
+      "INR",
+      "D_Dimer",
+      "Hb",
+      "Bil_total"
+    ]
+  },
+  {
+    "disease_id": "leukemia_acute",
+    "specialty": "hematology",
+    "display_name": "急性白血病 Acute Leukemia",
+    "gamma_signature": {
+      "heme": 0.85,
+      "immune": 0.45,
+      "hepatic": 0.15,
+      "bone": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Peripheral smear",
+      "Bone marrow biopsy",
+      "Flow cytometry",
+      "Cytogenetics"
+    ],
+    "key_labs": [
+      "WBC",
+      "Hb",
+      "Plt",
+      "Neutrophils",
+      "Lymphocytes"
+    ]
+  },
+  {
+    "disease_id": "lymphoma",
+    "specialty": "hematology",
+    "display_name": "淋巴瘤 Lymphoma",
+    "gamma_signature": {
+      "heme": 0.55,
+      "immune": 0.45,
+      "hepatic": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Lymph node biopsy",
+      "PET-CT",
+      "Bone marrow biopsy",
+      "LDH"
+    ],
+    "key_labs": [
+      "WBC",
+      "Hb",
+      "ESR",
+      "CRP",
+      "Albumin"
+    ]
+  },
+  {
+    "disease_id": "myelodysplastic",
+    "specialty": "hematology",
+    "display_name": "骨髓化生不良 MDS",
+    "gamma_signature": {
+      "heme": 0.6,
+      "immune": 0.2,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme"
+    ],
+    "suggested_tests": [
+      "Peripheral smear",
+      "Bone marrow biopsy",
+      "Cytogenetics",
+      "Flow cytometry"
+    ],
+    "key_labs": [
+      "Hb",
+      "WBC",
+      "Plt",
+      "MCV"
+    ]
+  },
+  {
+    "disease_id": "polycythemia_vera",
+    "specialty": "hematology",
+    "display_name": "真性紅血球增多 Polycythemia Vera",
+    "gamma_signature": {
+      "heme": 0.55,
+      "vascular": 0.25,
+      "cardiac": 0.1,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "JAK2 V617F",
+      "EPO level",
+      "Bone marrow biopsy"
+    ],
+    "key_labs": [
+      "Hb",
+      "Hct",
+      "RBC",
+      "Plt",
+      "WBC"
+    ]
+  },
+  {
+    "disease_id": "thalassemia",
+    "specialty": "hematology",
+    "display_name": "地中海型貧血 Thalassemia",
+    "gamma_signature": {
+      "heme": 0.5,
+      "hepatic": 0.15,
+      "bone": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme"
+    ],
+    "suggested_tests": [
+      "Hb electrophoresis",
+      "Genetic testing",
+      "Iron studies",
+      "Peripheral smear"
+    ],
+    "key_labs": [
+      "Hb",
+      "MCV",
+      "RBC",
+      "Ferritin"
+    ]
+  },
+  {
+    "disease_id": "osteoporosis",
+    "specialty": "orthopedics",
+    "display_name": "骨質疏鬆 Osteoporosis",
+    "gamma_signature": {
+      "bone": 0.55,
+      "endocrine": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone"
+    ],
+    "suggested_tests": [
+      "DEXA scan",
+      "FRAX score",
+      "Spine X-ray"
+    ],
+    "key_labs": [
+      "Ca",
+      "Vit_D",
+      "ALP",
+      "Cr"
+    ]
+  },
+  {
+    "disease_id": "osteoarthritis",
+    "specialty": "orthopedics",
+    "display_name": "骨關節炎 Osteoarthritis",
+    "gamma_signature": {
+      "bone": 0.4,
+      "immune": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone"
+    ],
+    "suggested_tests": [
+      "X-ray affected joint",
+      "MRI if needed"
+    ],
+    "key_labs": [
+      "CRP",
+      "ESR",
+      "Uric_Acid"
+    ]
+  },
+  {
+    "disease_id": "fracture_pathologic",
+    "specialty": "orthopedics",
+    "display_name": "病理性骨折 Pathologic Fracture",
+    "gamma_signature": {
+      "bone": 0.65,
+      "heme": 0.15,
+      "immune": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone"
+    ],
+    "suggested_tests": [
+      "X-ray",
+      "CT/MRI",
+      "Bone biopsy",
+      "Bone scan"
+    ],
+    "key_labs": [
+      "Ca",
+      "ALP",
+      "Vit_D",
+      "Total_Protein"
+    ]
+  },
+  {
+    "disease_id": "osteomyelitis",
+    "specialty": "orthopedics",
+    "display_name": "骨髓炎 Osteomyelitis",
+    "gamma_signature": {
+      "bone": 0.6,
+      "immune": 0.45,
+      "heme": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone",
+      "immune"
+    ],
+    "suggested_tests": [
+      "MRI",
+      "Blood cultures",
+      "Bone biopsy",
+      "Bone scan"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "ESR",
+      "PCT"
+    ]
+  },
+  {
+    "disease_id": "gout_tophaceous",
+    "specialty": "orthopedics",
+    "display_name": "痛風石 Tophaceous Gout",
+    "gamma_signature": {
+      "bone": 0.55,
+      "renal": 0.25,
+      "immune": 0.2,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone",
+      "renal"
+    ],
+    "suggested_tests": [
+      "Synovial fluid",
+      "Dual-energy CT",
+      "X-ray"
+    ],
+    "key_labs": [
+      "Uric_Acid",
+      "Cr",
+      "CRP"
+    ]
+  },
+  {
+    "disease_id": "paget_disease",
+    "specialty": "orthopedics",
+    "display_name": "乳頭狀骨病 Paget Disease of Bone",
+    "gamma_signature": {
+      "bone": 0.5,
+      "cardiac": 0.1,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone"
+    ],
+    "suggested_tests": [
+      "ALP",
+      "Bone scan",
+      "X-ray",
+      "Bone biopsy"
+    ],
+    "key_labs": [
+      "ALP",
+      "Ca"
+    ]
+  },
+  {
+    "disease_id": "multiple_myeloma",
+    "specialty": "orthopedics",
+    "display_name": "多發性骨髓瘤 Multiple Myeloma",
+    "gamma_signature": {
+      "bone": 0.65,
+      "heme": 0.4,
+      "renal": 0.35,
+      "immune": 0.25,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone",
+      "heme",
+      "renal"
+    ],
+    "suggested_tests": [
+      "SPEP/UPEP",
+      "Bone marrow biopsy",
+      "Skeletal survey",
+      "Beta-2 microglobulin"
+    ],
+    "key_labs": [
+      "Ca",
+      "Cr",
+      "Total_Protein",
+      "Hb",
+      "Albumin"
+    ]
+  },
+  {
+    "disease_id": "vitamin_d_deficiency",
+    "specialty": "orthopedics",
+    "display_name": "維生素D缺乏 Vitamin D Deficiency",
+    "gamma_signature": {
+      "bone": 0.4,
+      "immune": 0.1,
+      "endocrine": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone"
+    ],
+    "suggested_tests": [
+      "25-OH Vitamin D",
+      "PTH",
+      "Ca",
+      "PO4"
+    ],
+    "key_labs": [
+      "Vit_D",
+      "Ca",
+      "ALP"
+    ]
+  },
+  {
+    "disease_id": "ankylosing_spondylitis",
+    "specialty": "orthopedics",
+    "display_name": "僵直性脊椎炎 Ankylosing Spondylitis",
+    "gamma_signature": {
+      "bone": 0.55,
+      "immune": 0.35,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone",
+      "immune"
+    ],
+    "suggested_tests": [
+      "HLA-B27",
+      "SI joint X-ray/MRI",
+      "CRP/ESR"
+    ],
+    "key_labs": [
+      "CRP",
+      "ESR",
+      "ALP"
+    ]
+  },
+  {
+    "disease_id": "bone_metastasis",
+    "specialty": "orthopedics",
+    "display_name": "骨轉移 Bone Metastasis",
+    "gamma_signature": {
+      "bone": 0.7,
+      "heme": 0.15,
+      "hepatic": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone"
+    ],
+    "suggested_tests": [
+      "Bone scan",
+      "PET-CT",
+      "Biopsy",
+      "Tumour markers"
+    ],
+    "key_labs": [
+      "Ca",
+      "ALP",
+      "Hb"
+    ]
+  },
+  {
+    "disease_id": "stroke_ischemic",
+    "specialty": "neurology",
+    "display_name": "缺血性中風 Ischemic Stroke",
+    "gamma_signature": {
+      "neuro": 0.75,
+      "vascular": 0.35,
+      "cardiac": 0.2,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "CT head (non-contrast)",
+      "CT angiogram",
+      "MRI/DWI",
+      "Carotid US"
+    ],
+    "key_labs": [
+      "Glucose",
+      "Na",
+      "Hb",
+      "INR",
+      "LDL"
+    ]
+  },
+  {
+    "disease_id": "stroke_hemorrhagic",
+    "specialty": "neurology",
+    "display_name": "出血性中風 Hemorrhagic Stroke",
+    "gamma_signature": {
+      "neuro": 0.8,
+      "vascular": 0.3,
+      "cardiac": 0.15,
+      "heme": 0.1,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro",
+      "vascular"
+    ],
+    "suggested_tests": [
+      "CT head (non-contrast)",
+      "CT angiogram",
+      "MRI",
+      "Coagulation panel"
+    ],
+    "key_labs": [
+      "INR",
+      "Plt",
+      "Glucose",
+      "Na"
+    ]
+  },
+  {
+    "disease_id": "meningitis",
+    "specialty": "neurology",
+    "display_name": "腦膜炎 Meningitis",
+    "gamma_signature": {
+      "neuro": 0.7,
+      "immune": 0.5,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro",
+      "immune"
+    ],
+    "suggested_tests": [
+      "LP (CSF analysis)",
+      "Blood cultures",
+      "CT head (before LP)",
+      "PCR panel"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "PCT",
+      "Na",
+      "Glucose"
+    ]
+  },
+  {
+    "disease_id": "seizure_disorder",
+    "specialty": "neurology",
+    "display_name": "癲癇 Seizure Disorder",
+    "gamma_signature": {
+      "neuro": 0.55,
+      "endocrine": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro"
+    ],
+    "suggested_tests": [
+      "EEG",
+      "MRI brain",
+      "Metabolic panel",
+      "Drug levels"
+    ],
+    "key_labs": [
+      "Na",
+      "Ca",
+      "Glucose",
+      "NH3"
+    ]
+  },
+  {
+    "disease_id": "hepatic_encephalopathy",
+    "specialty": "neurology",
+    "display_name": "肝性腦病 Hepatic Encephalopathy",
+    "gamma_signature": {
+      "neuro": 0.6,
+      "hepatic": 0.55,
+      "GI": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro",
+      "hepatic"
+    ],
+    "suggested_tests": [
+      "NH3 level",
+      "EEG",
+      "CT head (rule out other)",
+      "Lactulose trial"
+    ],
+    "key_labs": [
+      "NH3",
+      "Albumin",
+      "INR",
+      "Bil_total"
+    ]
+  },
+  {
+    "disease_id": "parkinson",
+    "specialty": "neurology",
+    "display_name": "帕金森氏症 Parkinson Disease",
+    "gamma_signature": {
+      "neuro": 0.45,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro"
+    ],
+    "suggested_tests": [
+      "Clinical exam (UPDRS)",
+      "DaTscan",
+      "MRI brain"
+    ],
+    "key_labs": []
+  },
+  {
+    "disease_id": "ms",
+    "specialty": "neurology",
+    "display_name": "多發性硬化 Multiple Sclerosis",
+    "gamma_signature": {
+      "neuro": 0.55,
+      "immune": 0.3,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro",
+      "immune"
+    ],
+    "suggested_tests": [
+      "MRI brain/spine",
+      "LP (oligoclonal bands)",
+      "VEP"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "Vit_D"
+    ]
+  },
+  {
+    "disease_id": "dementia",
+    "specialty": "neurology",
+    "display_name": "失智症 Dementia",
+    "gamma_signature": {
+      "neuro": 0.4,
+      "vascular": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro"
+    ],
+    "suggested_tests": [
+      "MMSE/MoCA",
+      "MRI brain",
+      "FDG-PET",
+      "CSF biomarkers"
+    ],
+    "key_labs": [
+      "TSH",
+      "Vit_B12",
+      "Folate",
+      "Na"
+    ]
+  },
+  {
+    "disease_id": "metabolic_encephalopathy",
+    "specialty": "neurology",
+    "display_name": "代謝性腦病 Metabolic Encephalopathy",
+    "gamma_signature": {
+      "neuro": 0.65,
+      "renal": 0.3,
+      "hepatic": 0.25,
+      "endocrine": 0.2,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro",
+      "renal"
+    ],
+    "suggested_tests": [
+      "Metabolic panel",
+      "ABG",
+      "NH3",
+      "CT head",
+      "EEG"
+    ],
+    "key_labs": [
+      "Na",
+      "Ca",
+      "Glucose",
+      "NH3",
+      "BUN",
+      "Lactate"
+    ]
+  },
+  {
+    "disease_id": "guillain_barre",
+    "specialty": "neurology",
+    "display_name": "乖乖巴利症 Guillain-Barré Syndrome",
+    "gamma_signature": {
+      "neuro": 0.6,
+      "immune": 0.35,
+      "pulmonary": 0.15,
+      "cardiac": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro",
+      "immune"
+    ],
+    "suggested_tests": [
+      "LP (albuminocytologic dissociation)",
+      "NCS/EMG",
+      "Respiratory monitoring"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "Total_Protein"
+    ]
+  },
+  {
+    "disease_id": "tumor_lysis",
+    "specialty": "oncology",
+    "display_name": "腫瘤溶解症候群 Tumor Lysis Syndrome",
+    "gamma_signature": {
+      "renal": 0.6,
+      "cardiac": 0.25,
+      "bone": 0.2,
+      "heme": 0.15,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal",
+      "cardiac"
+    ],
+    "suggested_tests": [
+      "Uric acid q6h",
+      "K/Ca/PO4 q6h",
+      "LDH",
+      "ECG"
+    ],
+    "key_labs": [
+      "Uric_Acid",
+      "K",
+      "Ca",
+      "Cr",
+      "Lactate"
+    ]
+  },
+  {
+    "disease_id": "febrile_neutropenia",
+    "specialty": "oncology",
+    "display_name": "發燒性嗜中性球低下 Febrile Neutropenia",
+    "gamma_signature": {
+      "immune": 0.75,
+      "heme": 0.5,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "heme"
+    ],
+    "suggested_tests": [
+      "Blood cultures ×2",
+      "Urine culture",
+      "Chest X-ray",
+      "MASCC score"
+    ],
+    "key_labs": [
+      "WBC",
+      "Neutrophils",
+      "CRP",
+      "PCT"
+    ]
+  },
+  {
+    "disease_id": "paraneoplastic",
+    "specialty": "oncology",
+    "display_name": "副腫瘤症候群 Paraneoplastic Syndrome",
+    "gamma_signature": {
+      "immune": 0.4,
+      "endocrine": 0.35,
+      "neuro": 0.3,
+      "heme": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "endocrine",
+      "neuro"
+    ],
+    "suggested_tests": [
+      "CT chest/abdomen",
+      "Anti-neuronal Ab",
+      "Tumour markers"
+    ],
+    "key_labs": [
+      "Ca",
+      "Na",
+      "Glucose",
+      "Hb"
+    ]
+  },
+  {
+    "disease_id": "hypercalcemia_malignancy",
+    "specialty": "oncology",
+    "display_name": "惡性高血鈣 Hypercalcemia of Malignancy",
+    "gamma_signature": {
+      "bone": 0.45,
+      "renal": 0.3,
+      "neuro": 0.25,
+      "cardiac": 0.15,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "bone",
+      "renal"
+    ],
+    "suggested_tests": [
+      "PTHrP",
+      "PTH",
+      "PET-CT",
+      "Skeletal survey"
+    ],
+    "key_labs": [
+      "Ca",
+      "Albumin",
+      "Cr",
+      "ALP"
+    ]
+  },
+  {
+    "disease_id": "cancer_cachexia",
+    "specialty": "oncology",
+    "display_name": "癌症惡病質 Cancer Cachexia",
+    "gamma_signature": {
+      "GI": 0.35,
+      "heme": 0.3,
+      "immune": 0.25,
+      "hepatic": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "GI",
+      "heme"
+    ],
+    "suggested_tests": [
+      "Nutritional assessment",
+      "Prealbumin",
+      "CRP",
+      "Body composition"
+    ],
+    "key_labs": [
+      "Albumin",
+      "Total_Protein",
+      "Hb",
+      "CRP"
+    ]
+  },
+  {
+    "disease_id": "chemo_hepatotoxicity",
+    "specialty": "oncology",
+    "display_name": "化療肝毒性 Chemotherapy Hepatotoxicity",
+    "gamma_signature": {
+      "hepatic": 0.6,
+      "immune": 0.15,
+      "GI": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "hepatic"
+    ],
+    "suggested_tests": [
+      "LFTs trend",
+      "Drug level",
+      "Liver US",
+      "Liver biopsy if severe"
+    ],
+    "key_labs": [
+      "AST",
+      "ALT",
+      "Bil_total",
+      "ALP",
+      "INR"
+    ]
+  },
+  {
+    "disease_id": "chemo_nephrotoxicity",
+    "specialty": "oncology",
+    "display_name": "化療腎毒性 Chemotherapy Nephrotoxicity",
+    "gamma_signature": {
+      "renal": 0.55,
+      "heme": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal"
+    ],
+    "suggested_tests": [
+      "Cr trend",
+      "Urinalysis",
+      "Renal US",
+      "Drug levels"
+    ],
+    "key_labs": [
+      "Cr",
+      "BUN",
+      "K",
+      "Ca"
+    ]
+  },
+  {
+    "disease_id": "anemia_of_chronic_disease",
+    "specialty": "oncology",
+    "display_name": "慢性病貧血 Anemia of Chronic Disease",
+    "gamma_signature": {
+      "heme": 0.45,
+      "immune": 0.25,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme",
+      "immune"
+    ],
+    "suggested_tests": [
+      "Iron studies",
+      "Reticulocyte count",
+      "EPO level"
+    ],
+    "key_labs": [
+      "Hb",
+      "Ferritin",
+      "CRP",
+      "MCV"
+    ]
+  },
+  {
+    "disease_id": "dvt",
+    "specialty": "oncology",
+    "display_name": "深部靜脈栓塞 DVT",
+    "gamma_signature": {
+      "vascular": 0.55,
+      "heme": 0.15,
+      "pulmonary": 0.1,
+      "cardiac": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "vascular"
+    ],
+    "suggested_tests": [
+      "Compression US",
+      "D-Dimer",
+      "CT venogram if needed"
+    ],
+    "key_labs": [
+      "D_Dimer",
+      "Plt",
+      "INR"
+    ]
+  },
+  {
+    "disease_id": "siadh",
+    "specialty": "oncology",
+    "display_name": "SIADH 抗利尿激素異常分泌",
+    "gamma_signature": {
+      "renal": 0.4,
+      "neuro": 0.35,
+      "endocrine": 0.25,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "renal",
+      "neuro"
+    ],
+    "suggested_tests": [
+      "Serum osmolality",
+      "Urine osmolality",
+      "Urine Na",
+      "TSH/Cortisol",
+      "CT chest"
+    ],
+    "key_labs": [
+      "Na",
+      "Glucose",
+      "Cr"
+    ]
+  },
+  {
+    "disease_id": "preeclampsia",
+    "specialty": "obstetrics",
+    "display_name": "子癇前症 Preeclampsia",
+    "gamma_signature": {
+      "repro": 0.6,
+      "renal": 0.4,
+      "hepatic": 0.3,
+      "vascular": 0.25,
+      "heme": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "repro",
+      "renal"
+    ],
+    "suggested_tests": [
+      "24h urine protein",
+      "Spot UPCR",
+      "LFTs",
+      "CBC with smear",
+      "Uric acid"
+    ],
+    "key_labs": [
+      "Cr",
+      "AST",
+      "ALT",
+      "Plt",
+      "Uric_Acid"
+    ]
+  },
+  {
+    "disease_id": "hellp",
+    "specialty": "obstetrics",
+    "display_name": "HELLP 症候群 HELLP Syndrome",
+    "gamma_signature": {
+      "repro": 0.55,
+      "hepatic": 0.65,
+      "heme": 0.55,
+      "renal": 0.25,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "hepatic",
+      "heme",
+      "repro"
+    ],
+    "suggested_tests": [
+      "CBC with smear",
+      "LFTs",
+      "LDH",
+      "Haptoglobin",
+      "Coagulation panel"
+    ],
+    "key_labs": [
+      "AST",
+      "ALT",
+      "Plt",
+      "Hb",
+      "Bil_total",
+      "INR"
+    ]
+  },
+  {
+    "disease_id": "gestational_dm",
+    "specialty": "obstetrics",
+    "display_name": "妊娠糖尿病 Gestational DM",
+    "gamma_signature": {
+      "repro": 0.35,
+      "endocrine": 0.45,
+      "vascular": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "endocrine",
+      "repro"
+    ],
+    "suggested_tests": [
+      "OGTT 75g",
+      "Fasting glucose",
+      "HbA1c"
+    ],
+    "key_labs": [
+      "Glucose",
+      "HbA1c"
+    ]
+  },
+  {
+    "disease_id": "ectopic_pregnancy",
+    "specialty": "obstetrics",
+    "display_name": "子宮外孕 Ectopic Pregnancy",
+    "gamma_signature": {
+      "repro": 0.7,
+      "heme": 0.25,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "repro"
+    ],
+    "suggested_tests": [
+      "Quantitative βhCG (serial)",
+      "Transvaginal US",
+      "Progesterone"
+    ],
+    "key_labs": [
+      "Hb",
+      "Hct"
+    ]
+  },
+  {
+    "disease_id": "hyperemesis",
+    "specialty": "obstetrics",
+    "display_name": "妊娠劇吐 Hyperemesis Gravidarum",
+    "gamma_signature": {
+      "repro": 0.4,
+      "endocrine": 0.2,
+      "renal": 0.25,
+      "hepatic": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "repro",
+      "renal"
+    ],
+    "suggested_tests": [
+      "Metabolic panel",
+      "Ketonuria",
+      "TSH/FT4",
+      "Liver US"
+    ],
+    "key_labs": [
+      "Na",
+      "K",
+      "Cl",
+      "TSH",
+      "AST"
+    ]
+  },
+  {
+    "disease_id": "pcos",
+    "specialty": "obstetrics",
+    "display_name": "多囊性卵巢 PCOS",
+    "gamma_signature": {
+      "repro": 0.55,
+      "endocrine": 0.35,
+      "vascular": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "repro",
+      "endocrine"
+    ],
+    "suggested_tests": [
+      "LH/FSH ratio",
+      "Testosterone",
+      "DHEA-S",
+      "Pelvic US",
+      "OGTT"
+    ],
+    "key_labs": [
+      "FSH",
+      "LH",
+      "Testosterone",
+      "Glucose",
+      "HbA1c"
+    ]
+  },
+  {
+    "disease_id": "ovarian_failure",
+    "specialty": "obstetrics",
+    "display_name": "卵巢早衰 Premature Ovarian Failure",
+    "gamma_signature": {
+      "repro": 0.65,
+      "bone": 0.2,
+      "endocrine": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "repro"
+    ],
+    "suggested_tests": [
+      "FSH (×2)",
+      "AMH",
+      "Karyotype",
+      "Anti-adrenal Ab",
+      "DEXA"
+    ],
+    "key_labs": [
+      "FSH",
+      "LH"
+    ]
+  },
+  {
+    "disease_id": "menorrhagia",
+    "specialty": "obstetrics",
+    "display_name": "經血過多 Menorrhagia",
+    "gamma_signature": {
+      "repro": 0.4,
+      "heme": 0.35,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "repro",
+      "heme"
+    ],
+    "suggested_tests": [
+      "Pelvic US",
+      "Endometrial biopsy",
+      "Hysteroscopy",
+      "Coagulation panel"
+    ],
+    "key_labs": [
+      "Hb",
+      "Ferritin",
+      "Plt",
+      "INR"
+    ]
+  },
+  {
+    "disease_id": "male_hypogonadism",
+    "specialty": "obstetrics",
+    "display_name": "男性性腺低下 Male Hypogonadism",
+    "gamma_signature": {
+      "repro": 0.55,
+      "endocrine": 0.2,
+      "bone": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "repro",
+      "endocrine"
+    ],
+    "suggested_tests": [
+      "Testosterone (AM ×2)",
+      "LH/FSH",
+      "Prolactin",
+      "DEXA"
+    ],
+    "key_labs": [
+      "Testosterone",
+      "FSH",
+      "LH"
+    ]
+  },
+  {
+    "disease_id": "infertility_eval",
+    "specialty": "obstetrics",
+    "display_name": "不孕評估 Infertility Evaluation",
+    "gamma_signature": {
+      "repro": 0.45,
+      "endocrine": 0.2,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0
+    },
+    "primary_organs": [
+      "repro"
+    ],
+    "suggested_tests": [
+      "FSH/LH/E2 day 3",
+      "AMH",
+      "Semen analysis",
+      "HSG",
+      "Pelvic US"
+    ],
+    "key_labs": [
+      "FSH",
+      "LH",
+      "Testosterone"
+    ]
+  },
+  {
+    "disease_id": "psoriasis",
+    "specialty": "dermatology",
+    "display_name": "乾癬 Psoriasis",
+    "gamma_signature": {
+      "immune": 0.45,
+      "bone": 0.2,
+      "hepatic": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "bone"
+    ],
+    "suggested_tests": [
+      "Skin biopsy",
+      "CRP/ESR",
+      "HLA typing",
+      "Lipid panel"
+    ],
+    "key_labs": [
+      "CRP",
+      "ESR",
+      "Uric_Acid",
+      "AST"
+    ]
+  },
+  {
+    "disease_id": "pemphigus",
+    "specialty": "dermatology",
+    "display_name": "天疱瘡 Pemphigus",
+    "gamma_signature": {
+      "immune": 0.55,
+      "heme": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune"
+    ],
+    "suggested_tests": [
+      "Skin biopsy (DIF)",
+      "Desmoglein Ab",
+      "Anti-BP180/230"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "Albumin"
+    ]
+  },
+  {
+    "disease_id": "drug_reaction_severe",
+    "specialty": "dermatology",
+    "display_name": "嚴重藥物反應 SJS/TEN",
+    "gamma_signature": {
+      "immune": 0.7,
+      "hepatic": 0.3,
+      "renal": 0.25,
+      "heme": 0.2,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune",
+      "hepatic"
+    ],
+    "suggested_tests": [
+      "Skin biopsy",
+      "Drug causality assessment (ALDEN)",
+      "Renal/LFTs"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "AST",
+      "ALT",
+      "Cr"
+    ]
+  },
+  {
+    "disease_id": "urticaria_chronic",
+    "specialty": "dermatology",
+    "display_name": "慢性蕁麻疹 Chronic Urticaria",
+    "gamma_signature": {
+      "immune": 0.35,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune"
+    ],
+    "suggested_tests": [
+      "CBC",
+      "TSH",
+      "Anti-FcεRI",
+      "IgE",
+      "CRP"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "TSH"
+    ]
+  },
+  {
+    "disease_id": "dermatitis_atopic",
+    "specialty": "dermatology",
+    "display_name": "異位性皮膚炎 Atopic Dermatitis",
+    "gamma_signature": {
+      "immune": 0.3,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune"
+    ],
+    "suggested_tests": [
+      "IgE",
+      "Allergy testing",
+      "Skin biopsy if atypical"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP"
+    ]
+  },
+  {
+    "disease_id": "sinusitis_chronic",
+    "specialty": "ENT",
+    "display_name": "慢性鼻竇炎 Chronic Sinusitis",
+    "gamma_signature": {
+      "immune": 0.3,
+      "pulmonary": 0.1,
+      "cardiac": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune"
+    ],
+    "suggested_tests": [
+      "CT sinuses",
+      "Nasal endoscopy",
+      "Allergy testing"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "ESR"
+    ]
+  },
+  {
+    "disease_id": "sudden_hearing_loss",
+    "specialty": "ENT",
+    "display_name": "突發性聽力喪失 Sudden Sensorineural Hearing Loss",
+    "gamma_signature": {
+      "neuro": 0.4,
+      "vascular": 0.15,
+      "immune": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro"
+    ],
+    "suggested_tests": [
+      "Audiometry",
+      "MRI IAC (rule out acoustic neuroma)",
+      "CBC/BMP"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "Glucose"
+    ]
+  },
+  {
+    "disease_id": "peritonsillar_abscess",
+    "specialty": "ENT",
+    "display_name": "扁桃腺周圍膿瘍 Peritonsillar Abscess",
+    "gamma_signature": {
+      "immune": 0.45,
+      "GI": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "immune"
+    ],
+    "suggested_tests": [
+      "CT neck with contrast",
+      "Needle aspiration",
+      "Culture"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "PCT"
+    ]
+  },
+  {
+    "disease_id": "epistaxis_severe",
+    "specialty": "ENT",
+    "display_name": "嚴重鼻出血 Severe Epistaxis",
+    "gamma_signature": {
+      "heme": 0.3,
+      "vascular": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "heme"
+    ],
+    "suggested_tests": [
+      "CBC",
+      "Coagulation panel",
+      "Nasal endoscopy"
+    ],
+    "key_labs": [
+      "Hb",
+      "Plt",
+      "INR"
+    ]
+  },
+  {
+    "disease_id": "laryngeal_cancer",
+    "specialty": "ENT",
+    "display_name": "喉癌 Laryngeal Cancer",
+    "gamma_signature": {
+      "immune": 0.2,
+      "pulmonary": 0.15,
+      "heme": 0.1,
+      "cardiac": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "pulmonary"
+    ],
+    "suggested_tests": [
+      "Laryngoscopy + biopsy",
+      "CT neck",
+      "PET-CT"
+    ],
+    "key_labs": [
+      "Hb",
+      "Albumin",
+      "CRP"
+    ]
+  },
+  {
+    "disease_id": "diabetic_retinopathy",
+    "specialty": "ophthalmology",
+    "display_name": "糖尿病視網膜病變 Diabetic Retinopathy",
+    "gamma_signature": {
+      "vascular": 0.4,
+      "endocrine": 0.35,
+      "neuro": 0.1,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "vascular",
+      "endocrine"
+    ],
+    "suggested_tests": [
+      "Fundoscopy",
+      "OCT",
+      "Fluorescein angiography",
+      "HbA1c"
+    ],
+    "key_labs": [
+      "HbA1c",
+      "Glucose",
+      "Cr",
+      "LDL"
+    ]
+  },
+  {
+    "disease_id": "glaucoma",
+    "specialty": "ophthalmology",
+    "display_name": "青光眼 Glaucoma",
+    "gamma_signature": {
+      "neuro": 0.3,
+      "vascular": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro"
+    ],
+    "suggested_tests": [
+      "IOP measurement",
+      "Visual field",
+      "OCT RNFL",
+      "Gonioscopy"
+    ],
+    "key_labs": []
+  },
+  {
+    "disease_id": "optic_neuritis",
+    "specialty": "ophthalmology",
+    "display_name": "視神經炎 Optic Neuritis",
+    "gamma_signature": {
+      "neuro": 0.5,
+      "immune": 0.35,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "neuro",
+      "immune"
+    ],
+    "suggested_tests": [
+      "MRI brain/orbits",
+      "VEP",
+      "AQP4-Ab",
+      "MOG-Ab"
+    ],
+    "key_labs": [
+      "WBC",
+      "CRP",
+      "ESR"
+    ]
+  },
+  {
+    "disease_id": "retinal_vein_occlusion",
+    "specialty": "ophthalmology",
+    "display_name": "視網膜靜脈阻塞 Retinal Vein Occlusion",
+    "gamma_signature": {
+      "vascular": 0.45,
+      "heme": 0.15,
+      "cardiac": 0.1,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "endocrine": 0.0,
+      "immune": 0.0,
+      "GI": 0.0,
+      "bone": 0.0,
+      "neuro": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "vascular"
+    ],
+    "suggested_tests": [
+      "Fundoscopy",
+      "OCT",
+      "FFA",
+      "Hypertension/DM workup"
+    ],
+    "key_labs": [
+      "Glucose",
+      "HbA1c",
+      "LDL",
+      "Hb"
+    ]
+  },
+  {
+    "disease_id": "thyroid_eye_disease",
+    "specialty": "ophthalmology",
+    "display_name": "甲狀腺眼病 Thyroid Eye Disease",
+    "gamma_signature": {
+      "endocrine": 0.5,
+      "immune": 0.3,
+      "neuro": 0.15,
+      "cardiac": 0.0,
+      "pulmonary": 0.0,
+      "hepatic": 0.0,
+      "renal": 0.0,
+      "heme": 0.0,
+      "GI": 0.0,
+      "vascular": 0.0,
+      "bone": 0.0,
+      "repro": 0.0
+    },
+    "primary_organs": [
+      "endocrine",
+      "immune"
+    ],
+    "suggested_tests": [
+      "TSH",
+      "FT4",
+      "TSH-receptor Ab",
+      "CT/MRI orbits",
+      "Visual field"
+    ],
+    "key_labs": [
+      "TSH",
+      "FT4",
+      "FT3",
+      "CRP"
+    ]
+  }
+]
