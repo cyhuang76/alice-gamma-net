@@ -2,7 +2,7 @@
 """exp_clinical_neurology.py — Five Major Clinical Neurological Disease Physics Verification Experiments
 ================================================================
 
-10 experiments verifying coaxial cable physics → clinical neuropathology mapping accuracy.
+10 experiments verifying coaxial cable physics -> clinical neuropathology mapping accuracy.
 
 References:
     [46] Brott et al. (1989) — NIHSS
@@ -46,7 +46,7 @@ def _header(title: str) -> None:
 
 def _result(label: str, passed: bool, detail: str = "") -> bool:
     global _pass_count, _fail_count
-    icon = "✓ PASS" if passed else "✗ FAIL"
+    icon = "OK PASS" if passed else "✗ FAIL"
     print(f"  {icon} — {label}")
     if detail:
         for line in detail.split("\n"):
@@ -59,19 +59,19 @@ def _result(label: str, passed: bool, detail: str = "") -> bool:
 
 
 # ============================================================================
-# Exp 01: Stroke MCA Territory → NIHSS Distribution
+# Exp 01: Stroke MCA Territory -> NIHSS Distribution
 # ============================================================================
 
 def exp_01_stroke_mca_nihss():
-    """MCA stroke → NIHSS should be in 10-25 range (corresponding to moderate-severe stroke)"""
-    _header("Exp 01: MCA stroke → NIHSS clinical distribution (Brott 1989)")
+    """MCA stroke -> NIHSS should be in 10-25 range (corresponding to moderate-severe stroke)"""
+    _header("Exp 01: MCA stroke -> NIHSS clinical distribution (Brott 1989)")
 
     model = StrokeModel()
     model.induce("MCA", severity=0.8)
 
     nihss = model.get_nihss()
     _result(
-        "MCA 0.8 severity → NIHSS in clinical moderate-severe range",
+        "MCA 0.8 severity -> NIHSS in clinical moderate-severe range",
         10 <= nihss <= 30,
         f"NIHSS = {nihss} (Clinical literature MCA large area infarction: 15-25)",
     )
@@ -83,7 +83,7 @@ def exp_01_stroke_mca_nihss():
         n = m.get_nihss()
         lo, hi = expected_range
         _result(
-            f"MCA severity={sev} → NIHSS={n}",
+            f"MCA severity={sev} -> NIHSS={n}",
             lo <= n <= hi,
             f"expected range: {lo}-{hi}",
         )
@@ -94,7 +94,7 @@ def exp_01_stroke_mca_nihss():
         m.induce(territory, 0.8)
         n = m.get_nihss()
         _result(
-            f"{territory} stroke → NIHSS={n}",
+            f"{territory} stroke -> NIHSS={n}",
             n > 0,
         )
 
@@ -137,8 +137,8 @@ def exp_02_stroke_penumbra_salvation():
     _result(
         "Reperfusion group NIHSS improvement > control group",
         (nihss_r_initial - nihss_r_final) > (nihss_c_initial - nihss_c_final),
-        f"Reperfusion: {nihss_r_initial}→{nihss_r_final} (improved {nihss_r_initial - nihss_r_final})\n"
-        f"Control: {nihss_c_initial}→{nihss_c_final} (improved {nihss_c_initial - nihss_c_final})",
+        f"Reperfusion: {nihss_r_initial}->{nihss_r_final} (improved {nihss_r_initial - nihss_r_final})\n"
+        f"Control: {nihss_c_initial}->{nihss_c_final} (improved {nihss_c_initial - nihss_c_final})",
     )
 
     _result(
@@ -153,7 +153,7 @@ def exp_02_stroke_penumbra_salvation():
 # ============================================================================
 
 def exp_03_als_limb_progression():
-    """ALS limb-onset → ALSFRS-R decline curve compared with clinical data"""
+    """ALS limb-onset -> ALSFRS-R decline curve compared with clinical data"""
     _header("Exp 03: ALS Limb-Onset ALSFRS-R Decline Curve (Cedarbaum 1999)")
 
     model = ALSModel()
@@ -232,7 +232,7 @@ def exp_04_als_riluzole_comparison():
 # ============================================================================
 
 def exp_05_dementia_multidomain_decline():
-    """Dementia → MMSE decline + CDR staging increase"""
+    """Dementia -> MMSE decline + CDR staging increase"""
     _header("Exp 05: Dementia Multi-Domain Cognitive Decline (Folstein 1975)")
 
     model = DementiaModel()
@@ -258,11 +258,11 @@ def exp_05_dementia_multidomain_decline():
 
     # Memory degrades first
     _result(
-        "Hippocampus Γ > Prefrontal Γ (memory degrades first)",
+        "Hippocampus G > Prefrontal G (memory degrades first)",
         model.domain_gamma.get("hippocampus", 0) >
         model.domain_gamma.get("prefrontal", 0),
-        f"hippocampus Γ = {model.domain_gamma.get('hippocampus', 0):.4f}\n"
-        f"prefrontal Γ  = {model.domain_gamma.get('prefrontal', 0):.4f}",
+        f"hippocampus G = {model.domain_gamma.get('hippocampus', 0):.4f}\n"
+        f"prefrontal G  = {model.domain_gamma.get('prefrontal', 0):.4f}",
     )
 
 
@@ -271,7 +271,7 @@ def exp_05_dementia_multidomain_decline():
 # ============================================================================
 
 def exp_06_alzheimers_braak_cascade():
-    """Alzheimer's: Amyloid→Tau→Braak staging progressively increases"""
+    """Alzheimer's: Amyloid->Tau->Braak staging progressively increases"""
     _header("Exp 06: Alzheimer's Braak Cascade (Braak & Braak 1991)")
 
     model = AlzheimersModel()
@@ -346,7 +346,7 @@ def exp_07_alzheimers_mmse_trajectory():
 # ============================================================================
 
 def exp_08_cp_spasticity_velocity():
-    """CP spastic type: velocity-dependent Γ increase (Lance 1980)"""
+    """CP spastic type: velocity-dependent G increase (Lance 1980)"""
     _header("Exp 08: CP Spasticity Velocity Dependence (Lance 1980)")
 
     velocities = [0.0, 0.1, 0.3, 0.5, 0.7, 1.0]
@@ -360,15 +360,15 @@ def exp_08_cp_spasticity_velocity():
         gammas.append(g)
 
     _result(
-        "Γ monotonically increases with velocity (Lance spasticity definition)",
+        "G monotonically increases with velocity (Lance spasticity definition)",
         all(gammas[i] <= gammas[i+1] for i in range(len(gammas)-1)),
-        "\n".join(f"  v={v:.1f}: Γ={g:.4f}" for v, g in zip(velocities, gammas)),
+        "\n".join(f"  v={v:.1f}: G={g:.4f}" for v, g in zip(velocities, gammas)),
     )
 
     _result(
-        "Resting Γ = GMFCS baseline",
+        "Resting G = GMFCS baseline",
         abs(gammas[0] - GMFCS_BASELINE_GAMMA[3]) < 0.01,
-        f"Resting Γ = {gammas[0]:.4f}, expected = {GMFCS_BASELINE_GAMMA[3]}",
+        f"Resting G = {gammas[0]:.4f}, expected = {GMFCS_BASELINE_GAMMA[3]}",
     )
 
 
@@ -377,7 +377,7 @@ def exp_08_cp_spasticity_velocity():
 # ============================================================================
 
 def exp_09_cp_gmfcs_functional():
-    """GMFCS Level I-V → functional limitation increases stepwise (Palisano 1997)"""
+    """GMFCS Level I-V -> functional limitation increases stepwise (Palisano 1997)"""
     _header("Exp 09: GMFCS Functional Level Staircase (Palisano 1997)")
 
     level_gammas = {}
@@ -389,9 +389,9 @@ def exp_09_cp_gmfcs_functional():
         level_gammas[level] = mean_g
 
     _result(
-        "GMFCS I → V: mean Γ monotonically increasing",
+        "GMFCS I -> V: mean G monotonically increasing",
         all(level_gammas[i] < level_gammas[i+1] for i in range(1, 5)),
-        "\n".join(f"  GMFCS {l}: meanΓ = {g:.4f}"
+        "\n".join(f"  GMFCS {l}: meanG = {g:.4f}"
                   for l, g in level_gammas.items()),
     )
 
@@ -402,7 +402,7 @@ def exp_09_cp_gmfcs_functional():
         model.set_condition(cp_type, gmfcs_level=3)
         r = model.tick(motor_velocity=0.3, precision_demand=0.5)
         g = r["channel_gamma"]["hand"]
-        types_detail += f"  {cp_type:12s}: hand Γ = {g:.4f}\n"
+        types_detail += f"  {cp_type:12s}: hand G = {g:.4f}\n"
     _result("Three CP types @ GMFCS III", True, types_detail)
 
 
@@ -420,7 +420,7 @@ def exp_10_cross_condition_integration():
     # 1. stroke
     engine.stroke.induce("MCA", 0.7)
     r = engine.tick()
-    _result("stroke → merged Γ non-empty", len(r["merged_channel_gamma"]) > 0)
+    _result("stroke -> merged G non-empty", len(r["merged_channel_gamma"]) > 0)
 
     # 2. Reset and test ALS
     engine2 = ClinicalNeurologyEngine()
@@ -428,7 +428,7 @@ def exp_10_cross_condition_integration():
     for _ in range(500):
         engine2.tick()
     _result(
-        "ALS 500 ticks → ALSFRS-R < 48",
+        "ALS 500 ticks -> ALSFRS-R < 48",
         engine2.als.get_alsfrs_r() < 48,
         f"ALSFRS-R = {engine2.als.get_alsfrs_r()}",
     )
@@ -439,7 +439,7 @@ def exp_10_cross_condition_integration():
     for _ in range(1000):
         engine3.tick()
     _result(
-        "Alzheimer's 1000 ticks → Braak > 0",
+        "Alzheimer's 1000 ticks -> Braak > 0",
         engine3.alzheimers.get_braak_stage() > 0,
         f"Braak = {engine3.alzheimers.get_braak_stage()}, MMSE = {engine3.alzheimers.get_mmse()}",
     )
@@ -489,7 +489,7 @@ def main():
 
     print("=" * 70)
     print(" Five Major Clinical Neurological Disease Physics Verification")
-    print(" Coaxial Cable Physics → Clinical Neuropathology Unified Mapping")
+    print(" Coaxial Cable Physics -> Clinical Neuropathology Unified Mapping")
     print("=" * 70)
 
     for exp_fn in experiments:
@@ -499,7 +499,7 @@ def main():
     print(f"\n{'=' * 70}")
     print(f"  Result: {_pass_count}/{total} PASS")
     if _fail_count == 0:
-        print(f" 🏥 All clinical verifications PASSED — Γ uniformly explains five major neurological diseases")
+        print(f" 🏥 All clinical verifications PASSED — G uniformly explains five major neurological diseases")
     print(f"{'=' * 70}")
 
     return 0 if _fail_count == 0 else 1
