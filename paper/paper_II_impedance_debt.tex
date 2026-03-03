@@ -1,14 +1,12 @@
 \documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
-\usepackage{amsmath,amssymb,amsthm}
+\usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{hyperref}
 
-\newtheorem{remark}{Remark}
-
 \begin{document}
 
-\title{The Cost of Life:\\
-Impedance Debt as the Thermodynamic Origin of Sleep and Brain Evolution}
+\title{Impedance Debt as the Thermodynamic Origin of Sleep and Brain Evolution:\\
+Evidence from Brainless Cnidarians to Human Embryogenesis}
 
 \author{Hsi-Yu Huang}
 \email{llc.y.huangll@gmail.com}
@@ -41,25 +39,15 @@ terrestrial species exhibit more structured sleep architecture
 than aquatic ectotherms,
 and preterm neonates display fragile sleep--thermoregulation coupling
 proportional to their premature loss of the maternal heat sink.
-Building on the dual-network organ model of Paper~II---where
-organ health $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$ depends on
-both neural and vascular impedance matching---we decompose
-impedance debt into neural and vascular components,
-$D_Z = D_{Z,n} + D_{Z,v}$, and show that sleep primarily
-discharges the fast neural debt ($\eta_n \sim$ hours) while
-vascular debt requires slower remodeling ($\eta_v \sim$ weeks).
 A dual-field extension couples the impedance field $Z$ to a
-blood-transported material field $\rho$, with the supply rate
-$I_{\mathrm{blood}} = (1-\Gamma_v^2)\,Q_0$ set by the
-vascular reflection coefficient of Paper~II,
-predicting that ischemia ($\Gamma_v \to 1$) simultaneously
-arrests all repair mechanisms through a single shared
-bottleneck---verified numerically at $4.77\times$ mismatch
-ratio between ischemic and healthy tissue.
+blood-transported material field $\rho$, predicting that ischemia
+($I_{\mathrm{blood}} \to 0$) simultaneously arrests all repair
+mechanisms through a single shared bottleneck---verified numerically
+at $4.77\times$ mismatch ratio between ischemic and healthy tissue.
 A final embryogenesis simulation confirms the material-bottleneck
 principle \emph{ab initio}: starting from near-zero tissue
 ($Z \approx 0$, $\rho = 0$), maternal blood supply alone
-drives $Z/Z_0$ from $0.02$ to $0.68$ ($\Gamma^2$ reduced 96\%),
+drives $Z/Z_0$ from $0.02$ to $0.71$ ($\Gamma^2$ reduced 96\%),
 while an identical embryo without maternal supply decays
 entropically ($Z/Z_0 = 0.016$, $\Gamma^2 = 0.94$)---numerically
 demonstrating that the mother's womb is the thermodynamic
@@ -170,51 +158,6 @@ over time:
 All three increase the integrand in Eq.~\eqref{eq:DZ},
 producing a monotonically rising $D_Z(t)$ during wakefulness.
 
-\subsection{Adenosine as impedance-debt readout}
-\label{sec:adenosine}
-
-The traditional sleep-homeostasis narrative assigns adenosine
-the role of metabolic waste product: ATP is consumed,
-adenosine accumulates, and Process~S rises~\cite{Porkka2011}.
-The impedance-debt framework reveals a richer picture.
-
-Because $|\Gamma|^2 > 0$ at every active interface, a fraction
-of incident signalling power is reflected and dissipated.
-To maintain the same downstream output, mitochondria must
-compensate by increasing ATP turnover.
-The resulting adenosine concentration is therefore
-proportional to the \emph{time-integrated} mismatch energy:
-\begin{equation}
-  [\text{adenosine}](t)
-  \;\propto\;
-  \int_0^{t} |\Gamma(t')|^2\, P_{\mathrm{in}}(t')\,dt'
-  \;=\; D_Z(t)\,.
-  \label{eq:adenosine-DZ}
-\end{equation}
-Adenosine is thus not a waste product but a \emph{molecular
-proxy for $D_Z$}---a real-time impedance-debt sensor.
-
-Critically, adenosine also \emph{feeds back} onto the
-impedance landscape.  Acting on presynaptic A$_1$ receptors,
-it reduces glutamate release (lowering $P_{\mathrm{in}}$,
-a stabilising negative feedback).  Simultaneously,
-it modifies membrane leakage conductance $g_L$ and
-capacitance $c_m$ (item~3 above), shifting
-$Z_0(\omega) = \sqrt{r_a/(g_L + i\omega c_m)}$
-and thereby \emph{increasing} $|\Gamma|^2$---a destabilising
-positive feedback that accelerates the approach to the
-sleep-onset threshold $D_Z^*$.
-
-This dual role explains two otherwise puzzling observations.
-First, caffeine (an A$_1$/A$_{2\mathrm{A}}$ antagonist)
-blocks the feedback signal without reducing the underlying
-debt; $D_Z$ continues to accumulate, producing an amplified
-homeostatic rebound once the blockade clears.
-Second, adenosine concentrations are highest in the basal
-forebrain---precisely the region where cortico-thalamic
-projections with heterogeneous $Z_0$ converge, creating
-a natural impedance bottleneck with elevated local $|\Gamma|^2$.
-
 It is useful to decompose impedance debt into two components:
 \begin{equation}
   D_Z = D_{\mathrm{micro}} + D_{\mathrm{thermal}}\,.
@@ -249,54 +192,6 @@ evolved brains appeared in lineages that either left the
 ocean or exceeded its heat-sink capacity metabolically
 (Experiment~5, Sec.~\ref{sec:exp5}).
 
-
-\subsection{Dual-network impedance debt}
-\label{sec:dual-network-debt}
-
-Paper~II of this series~\cite{PaperII} established that every
-organ is governed by \emph{two} impedance networks---neural
-($\Gamma_n$) and vascular ($\Gamma_v$)---with organ health
-$H = (1-\Gamma_n^2)(1-\Gamma_v^2)$.
-Impedance debt inherits this dual structure:
-\begin{equation}
-  D_Z = D_{Z,n} + D_{Z,v}
-      = \int_0^{T_{\rm wake}}\!|\Gamma_n|^2 P_n\,dt
-      + \int_0^{T_{\rm wake}}\!|\Gamma_v|^2 P_v\,dt\,,
-  \label{eq:DZ-dual}
-\end{equation}
-where $P_n$ and $P_v$ are the incident powers on neural and
-vascular interfaces respectively.
-
-The two components differ fundamentally in their
-\emph{discharge time scales}.
-Neural impedance debt $D_{Z,n}$ arises from ion-channel drift,
-synaptic vesicle depletion, and metabolite accumulation
-(Sec.~\ref{sec:framework}); it is dischargeable within hours
-by NREM sleep ($\eta_n \sim 0.08\;\mathrm{tick}^{-1}$).
-Vascular impedance debt $D_{Z,v}$ arises from endothelial
-shear-stress mismatch, vessel-wall strain, and smooth-muscle
-tone drift; its discharge requires slow structural remodeling
-of vessel walls ($\eta_v \sim 10^{-3}\;\mathrm{tick}^{-1}$,
-$\eta_v \ll \eta_n$).
-
-This time-scale separation has two consequences:
-\begin{enumerate}
-  \item A single night of sleep can discharge most of $D_{Z,n}$
-    but barely dents $D_{Z,v}$.
-    Chronic vascular mismatch (hypertension, early atherosclerosis)
-    is therefore \emph{undischarged vascular impedance debt}
-    that accumulates over weeks to years.
-  \item Via the material-supply coupling of Sec.~\ref{sec:dual-field},
-    rising $\Gamma_v$ reduces $I_{\mathrm{blood}}$, which
-    \emph{slows neural debt discharge}
-    ($\eta_{n,\mathrm{eff}} = \eta_n\,f(\rho)$,
-    where $\rho \propto 1-\Gamma_v^2$).
-    Vascular disease thus amplifies neural sleep need---a
-    prediction consistent with the observation that
-    cardiovascular patients report markedly worse sleep
-    quality~\cite{PaperII}.
-\end{enumerate}
-
 \subsection{Sleep as $Z$-map recalibration}
 
 Sleep reduces $P_{\mathrm{in}}$ to near zero (quiescent firing)
@@ -304,30 +199,7 @@ while ion pumps, receptor recycling, and glial clearance
 restore $Z_0$ and $Z_{\mathrm{load}}$ toward their
 matched equilibrium values.
 In the language of this framework, NREM sleep is the
-\emph{homeostatic discharge of neural impedance debt} $D_{Z,n}$.
-
-Vascular impedance debt $D_{Z,v}$ is partially discharged
-during sleep by a complementary mechanism: the drop in
-sympathetic tone and cardiac output during NREM sleep
-reduces shear stress on vessel walls, enabling endothelial
-repair and smooth-muscle relaxation---processes that nudge
-$Z_v$ back toward its matched value.
-However, because $\eta_v \ll \eta_n$ (Sec.~\ref{sec:dual-network-debt}),
-a single night of sleep clears only a fraction of accumulated
-vascular debt.
-The dual-network sleep balance is therefore:
-\begin{equation}
-  T_{\mathrm{sleep}} =
-    T_{\mathrm{NREM}}^{(n)}\!\bigl[\text{clear } D_{Z,n}\bigr]
-  + T_{\mathrm{NREM}}^{(v)}\!\bigl[\text{partial } D_{Z,v}\bigr]
-  + T_{\mathrm{REM}}\!\bigl[\text{verify topology}\bigr]\,,
-  \label{eq:Tsleep-dual}
-\end{equation}
-where the vascular NREM component
-$T_{\mathrm{NREM}}^{(v)} \propto D_{Z,v}/\eta_v$
-explains why sleep duration \emph{increases} in patients with
-cardiovascular risk factors even after controlling for
-neural fatigue~\cite{PaperII}.
+\emph{homeostatic discharge of impedance debt}.
 
 
 \subsection{Maximum tolerable wake duration}
@@ -475,21 +347,6 @@ coupled equations read
 where $\Gamma = (Z - Z_0)/(Z + Z_0)$ is the local
 reflection coefficient, and $\lambda$ is an entropic
 degradation rate.
-
-The source term $I_{\mathrm{blood}}$ connects directly to
-the vascular impedance network of Paper~II~\cite{PaperII}.
-The blood supply rate at any tissue site is
-\begin{equation}
-  I_{\mathrm{blood}} = T_v\,Q_0 = (1 - \Gamma_v^2)\,Q_0\,,
-  \label{eq:Iblood-Gv}
-\end{equation}
-where $\Gamma_v$ is the vascular reflection coefficient and
-$Q_0$ the arterial inflow.
-Vascular disease ($\Gamma_v \uparrow$) therefore reduces
-$I_{\mathrm{blood}}$ and starves the tissue of repair
-material---the positive-feedback cascade of Paper~II
-(Eq.~(12) therein: $\Gamma_v\!\uparrow \to \rho\!\downarrow
-\to \Gamma_n\!\uparrow \to \Gamma_v\!\uparrow\!\uparrow$).
 The auxiliary functions are:
 \begin{itemize}
   \item $f(\rho) = \rho/(\rho + K_\rho)$: a Michaelis--Menten
@@ -526,9 +383,8 @@ under appropriate parameter choices.
 The material field $\rho$ enters \emph{both} the Hebbian
 term and the enzyme term.
 All repair mechanisms draw from the same raw-material pool.
-Setting $\Gamma_v = 1$ (complete vascular occlusion)
-gives $I_{\mathrm{blood}} = 0$ via Eq.~\eqref{eq:Iblood-Gv},
-which drives $\rho \to 0$, whereupon
+Setting $I_{\mathrm{blood}} = 0$ (ischemia)
+drives $\rho \to 0$, whereupon
 \begin{equation}
   \rho \to 0 \;\;\Longrightarrow\;\;
   \frac{\partial Z}{\partial t} \to -\lambda\,Z
@@ -629,138 +485,35 @@ at least nine times across Metazoa
 Convergent evolution of this magnitude implies a
 \emph{common selective pressure} rather than shared ancestry.
 
-We argue that this pressure is ultimately traceable to a
-single thermodynamic event: the saturation of the
-filter-feeding ecological niche in the late Ediacaran,
-and the cascade of phase transitions it triggered.
+We identify that pressure as the
+\textbf{loss of the oceanic heat sink}.
 
-\subsection{The Cambrian phase transition:
-from filter-feeding to predation}
-\label{sec:cambrian}
-
-For roughly two billion years following the origin of
-eukaryotes, the dominant marine strategy was passive
-filter-feeding---exemplified today by cnidarians.
-A filter-feeder's impedance to its nutrient source
-is essentially set by diffusion:
-\begin{equation}
-  Z_{\mathrm{food}} \;\approx\;
-    \frac{1}{\rho_{\mathrm{micro}}\,D_{\mathrm{diff}}\,A_{\mathrm{oral}}}\,,
-  \label{eq:Zfood}
-\end{equation}
-where $\rho_{\mathrm{micro}}$ is the local microorganism
-density, $D_{\mathrm{diff}}$ the diffusion coefficient,
-and $A_{\mathrm{oral}}$ the oral surface area.
-So long as $\rho_{\mathrm{micro}}$ remained high,
-$\Gamma_{\mathrm{feeding}}^2$ was small and the strategy
-was thermodynamically optimal: minimal infrastructure,
-minimal $D_Z$ accumulation, no brain required.
-
-\emph{Population overshoot broke this equilibrium.}
-As multicellular filter-feeders proliferated in the
-late Ediacaran ($\sim$570--540~Ma),
-$\rho_{\mathrm{micro}}$ declined.
-Via Eq.~\eqref{eq:Zfood}, $Z_{\mathrm{food}} \to \infty$,
-and therefore $\Gamma_{\mathrm{feeding}}^2 \to 1$,
-$T_{\mathrm{feeding}} \to 0$:
-the passive feeding channel shut down.
-
-The system faced a binary choice encoded in the
-action landscape: remain at the diverging-$\Gamma$ fixed
-point (extinction), or undergo a \emph{topological phase
-transition}---open a new channel with lower $\Gamma^2$.
-That channel was predation.
-The energy return per unit impedance of consuming another
-animal vastly exceeds that of filtering microorganisms:
-\begin{equation}
-  \frac{E_{\mathrm{prey}}}{Z_{\mathrm{hunt}}}
-  \;\gg\;
-  \frac{E_{\mathrm{micro}}}{Z_{\mathrm{filter}}}\,.
-  \label{eq:predation-advantage}
-\end{equation}
-However, exploiting this channel required new hardware
----eyes to locate prey ($\Gamma_{\mathrm{sensory}}^2\!\downarrow$),
-appendages to capture it ($\Gamma_{\mathrm{motor}}^2\!\downarrow$),
-and a digestive tract capable of processing protein
-($\Gamma_{\mathrm{GI}}^2\!\downarrow$).
-Each new organ introduced new internal interfaces,
-raising $A_{\mathrm{cut}}$
-(the topological cost of Paper~I~\cite{PaperI}),
-and each demanded coordinated impedance management
----i.e., a centralised nervous system.
-
-The result was the Cambrian explosion ($\sim$540--520~Ma):
-a positive-feedback cascade in which
-predation pressure drove prey to evolve defenses
-(mineralized shells, spines, toxins---all of which raise
-$Z_{\mathrm{body}}$),
-which in turn drove predators to evolve sharper senses
-and harder mouthparts.
-Each cycle of attack and defense simultaneously increased
-\emph{both} the number of impedance channels per organism
-and the irreducible cut cost $A_{\mathrm{cut}}$ connecting them.
-This is the biological expression of the irreducibility
-theorem (Paper~I): once a new dimension is added to the
-$\Gamma$-network, its $A_{\mathrm{cut}}$ contribution
-cannot be removed by any local update rule.
-
-Critically, this arms race produced a spectrum of
-\emph{competitive fitness} measured by position on the
-$A[\Gamma]$ landscape.
-Apex predators (e.g., \emph{Anomalocaris}) occupied
-deep minima; marginal species occupied shallow local
-minima vulnerable to perturbation.
-When the oceanic ecological landscape saturated---when
-all accessible low-$\Gamma$ niches were occupied---the
-remaining option for displaced lineages was to
-exploit an entirely empty landscape: land.
-
-\subsection{Water-to-land transition as niche displacement}
+\subsection{Water-to-land transition}
 \label{sec:water-land}
 
-The colonisation of land by tetrapods in the Devonian
-($\sim$375~Ma) was not an ``advance'' but a
-\emph{displacement}---the minimum-action solution for
-lineages whose oceanic $\Gamma$ had saturated.
-Upon leaving the water, they exchanged seawater
-(effectively infinite heat sink, $\kappa \ge 1$)
-for air ($\kappa \le 0.04$).
+When tetrapods colonised land in the Devonian,
+they exchanged seawater (infinite heat sink)
+for air (poor heat sink).
 Impedance-debt heat could no longer be passively
 removed; it accumulated in neural tissue,
 creating selective pressure for:
 \begin{itemize}
-  \item a convective heat-transport network
-    (vasculature---the vascular impedance network
-    of Paper~II~\cite{PaperII}),
+  \item a convective heat-transport network (vasculature),
   \item a centralised controller for that network (brain),
   \item and structured sleep architecture (NREM/REM cycles)
     to manage both microscopic $D_Z$ discharge
     and macroscopic thermal regulation.
 \end{itemize}
-This explains why brain complexity accelerated
-\emph{after} the water-to-land transition, not before:
-the oceanic heat sink had previously masked the
-thermodynamic need for centralised management.
 
 \subsection{Metabolic overflow in aquatic predators}
 
 Cephalopods remained marine yet evolved complex brains.
 This is consistent with the framework:
-as active predators occupying the high-metabolic-rate
-branch of the Cambrian arms race
-(Sec.~\ref{sec:cambrian}),
-their $P_{\mathrm{in}}$ exceeds what passive oceanic
+their high metabolic rates as active predators
+drive $P_{\mathrm{in}}$ beyond what passive oceanic
 conduction can dissipate,
 effectively \emph{exceeding} the heat-sink capacity
 of the surrounding water~\cite{Moroz2012}.
-They solved the predator's impedance problem
-without leaving the ocean---by evolving a distributed
-brain architecture (nine ganglia) that
-distributes $D_Z$ dissipation spatially,
-in contrast to the centralised hub strategy
-of vertebrates
-(Experiment~7 confirms this architectural crossover
-at $\kappa_{\mathrm{cross}} \approx 0.30$).
 
 \subsection{Karbowski's thermodynamic constraint}
 
@@ -791,33 +544,24 @@ and, we argue, reflects thermodynamic causality:
     The heart is the first functional organ,
     initiating circulation before the embryo exceeds
     the $\sim$200--400~$\mu$m diffusion limit.
-    Its role: establish the \emph{vascular impedance
-    network} (Paper~II~\cite{PaperII}), creating
-    the $I_{\mathrm{blood}} = (1-\Gamma_v^2)\,Q_0$
-    supply that all subsequent tissue formation requires.
+    Its role: establish the \emph{convective heat conduit}.
   \item \textbf{Neural tube (week 3--4).}
-    Once the vascular network provides material supply
-    ($\rho > 0$),
+    Once convective cooling is available,
     high-metabolic-rate neural tissue can safely form.
-    Its role: \emph{the neural impedance network}---the
-    second network in the dual-network organ model.
+    Its role: \emph{signal transmission infrastructure}.
   \item \textbf{Brain vesicles (week 5--6).}
     As neuron density increases
     ($\sim$250\,000 neurons/min at peak),
     local heat production exceeds what distributed
     vasculature alone can manage.
     A centralised controller emerges.
-    Its role: \emph{impedance-debt thermal manager}
-    for both networks simultaneously.
+    Its role: \emph{impedance-debt thermal manager}.
 \end{enumerate}
 
 Each step is a thermodynamic prerequisite for the next.
-The heart cannot be omitted---without it, $I_{\mathrm{blood}}=0$
-and only entropic degradation operates (Experiment~9);
-the neural tube cannot precede its vascular supply;
-the brain cannot form before the two networks it will manage.
-Embryogenesis thus recapitulates the \emph{construction of the
-dual-network architecture} of Paper~II in miniature.
+The heart cannot be omitted; the neural tube cannot
+precede its heat conduit; the brain cannot form before
+the transmission lines it will manage.
 
 \subsection{The fetus as a jellyfish}
 \label{sec:fetus}
@@ -889,21 +633,6 @@ falsifiable predictions:
     This is consistent with existing data showing
     that sleep pressure builds more slowly at lower
     temperatures.
-
-  \item \textbf{Chronic vascular diseases as undischarged $D_{Z,v}$.}
-    Because vascular impedance debt discharges on
-    week-to-month time scales ($\eta_v \ll \eta_n$,
-    Sec.~\ref{sec:dual-network-debt}),
-    conditions such as essential hypertension and early
-    atherosclerosis represent accumulated $D_{Z,v}$ that
-    nightly sleep cannot clear.
-    The dual-network cascade of Paper~II
-    ($\Gamma_v\!\uparrow \to \rho\!\downarrow \to
-    \Gamma_n\!\uparrow$) predicts that chronic
-    vascular debt eventually amplifies neural sleep
-    need---consistent with the epidemiological
-    association between cardiovascular risk factors
-    and excessive daytime sleepiness~\cite{PaperII}.
 \end{enumerate}
 
 
@@ -1184,7 +913,7 @@ explaining the universal cephalisation of land animals.
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{../figures/paper_iii_verification.png}
+  \includegraphics[width=\linewidth]{../figures/paper_ii_verification.png}
   \caption{Computational verification of the impedance-debt framework
   (Experiments~1--4).
   (a)~$D_Z$ accumulates linearly during wakefulness and decays
@@ -1268,7 +997,7 @@ and every time step across all simulations
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{../figures/paper_iii_morphogenesis.png}
+  \includegraphics[width=\linewidth]{../figures/paper_ii_morphogenesis.png}
   \caption{Dual-field morphogenesis verification (Experiment~8).
   (a)~Turing instability: bone ($D_\rho/D_Z = 500$) develops
   spatial patterns with $16.4\times$ higher variance than
@@ -1355,7 +1084,7 @@ representing a permanent developmental deficit
 
 \begin{figure}[htbp!]
   \centering
-  \includegraphics[width=\linewidth]{../figures/paper_iii_embryogenesis.png}
+  \includegraphics[width=\linewidth]{../figures/paper_ii_embryogenesis.png}
   \caption{Embryogenesis verification (Experiment~9).
   (a)~Without maternal supply, $Z$ decays entropically
   ($Z/Z_0 < 0.02$ throughout).
@@ -1413,16 +1142,7 @@ that the irreducibility of dimensional cut cost
 $A_{\mathrm{cut}}$ forces any impedance-heterogeneous
 network to self-organise into hierarchical layers
 with relay nodes at intermediate dimensions.
-Paper~II~\cite{PaperII} extended this to the vascular
-network, deriving Murray's Law from MRP and establishing
-the dual-network organ model $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$.
-A systematic stability analysis (Paper~II, Table~IV) confirms
-that this dual-network attractor is globally stable across all
-10~organ territories and 100-run randomised parameter sweeps,
-with a linearised neural self-repair term
-$\Gamma_n(t+1) = \Gamma_n(t)(1-\eta_n)$, $\eta_n = 0.008$,
-preventing saturation.
-This paper extends both results to biology in three concrete ways.
+Paper~II extends this result to biology in two concrete ways.
 
 First, $D_Z$ is the \emph{time integral} of the static
 action $A[\Gamma]$, weighted by incident power:
@@ -1448,17 +1168,6 @@ in vivo, and forces brains to emerge
 whenever the thermodynamic boundary conditions
 demand centralised impedance-debt management.
 
-Third, the dual-network decomposition $D_Z = D_{Z,n} + D_{Z,v}$
-(Sec.~\ref{sec:dual-network-debt}) shows that sleep must
-service \emph{both} impedance networks.
-The time-scale mismatch ($\eta_n / \eta_v \sim 80$) predicts
-that vascular debt accumulates orders of magnitude faster
-than it discharges, explaining why cardiovascular disease---a
-manifestation of chronic $D_{Z,v}$---is the leading cause
-of death worldwide, and why it precedes and accelerates
-neurodegeneration through the material-starvation cascade
-of Paper~II.
-
 \subsection{Dual-field morphogenesis: physical interpretation}
 \label{sec:material-bottleneck}
 
@@ -1481,13 +1190,11 @@ $\mathcal{A}[\Gamma] = \int |\Gamma|^2\,dt$.
 The material-bottleneck limit
 (Eq.~\eqref{eq:ischemia-limit}: $\rho \to 0 \Rightarrow
 \partial Z/\partial t \to -\lambda Z$)
-has a direct clinical correlate via the vascular reflection
-coefficient: $I_{\mathrm{blood}} = (1-\Gamma_v^2)\,Q_0$
-(Eq.~\eqref{eq:Iblood-Gv}), so that vascular disease
-($\Gamma_v\!\uparrow$) simultaneously arrests neural
-plasticity, structural remodeling, and homeostatic regulation
----precisely because all three mechanisms draw from the
-same $\rho$ pool supplied by Paper~II's vascular network.
+has a direct clinical correlate:
+post-ischemic tissue exhibits concurrent loss of
+neural plasticity, structural remodeling capacity, and
+homeostatic regulation---precisely because all three
+mechanisms draw from the same $\rho$ pool.
 Experiment~8 confirms a $4.77\times$ $\Gamma^2$ ratio
 between ischemic and healthy tissue.
 
@@ -1568,42 +1275,9 @@ than full-term controls, consistent with the
 and now quantitatively supported by Experiment~9
 (Table~\ref{tab:embryogenesis}).
 A dedicated study incorporating the Alice
-\emph{Bone China} memory-consolidation engine and the
-dual-network lifecycle dynamics is
+\emph{Bone China} memory-consolidation engine is
 in preparation as part of the series
-(Paper~IV: Cognition, Emotion, and Aging).
-
-\subsection{No-waste corollary of energy conservation}
-\label{sec:no-waste}
-
-A striking consequence of C1 energy conservation
-($\Gamma^2 + T = 1$) deserves explicit statement.
-Every molecular species present in a living system
-possesses a nonzero impedance $Z$; its presence therefore
-modifies local $\Gamma$ at every interface it contacts.
-A substance with \emph{no} effect on $\Gamma$ would
-require $Z = 0$---a physical impossibility for any
-molecule with nonzero mass, charge, or dielectric constant.
-
-\begin{remark}[No-waste corollary]
-\label{rem:no-waste}
-In any system obeying $\Gamma^2 + T = 1$,
-every molecular species modifies$\;\Gamma$
-at some interface and therefore has a nonzero
-functional role.  The concept of ``metabolic waste''
-is an observational artefact arising from incomplete
-knowledge of the full $\Gamma$-network.
-\end{remark}
-
-This is consistent with the repeated historical pattern
-in which substances once classified as waste are later
-found to serve critical signalling or protective
-functions---nitric oxide (vasodilator), lactate
-(neuronal fuel and vasodilator), bilirubin (antioxidant),
-uric acid (plasma antioxidant), and adenosine itself
-(Sec.~\ref{sec:adenosine}).
-The no-waste corollary predicts that this reclassification
-process will continue for every remaining ``waste'' metabolite.
+(Paper~III: Cognition and Emotion).
 
 \subsection{Minimum action and the evolution of life}
 
@@ -1644,7 +1318,7 @@ simulator possible.
 
 \section*{Data and Code Availability}
 Source code for the Alice $\Gamma$-Net simulator, including all
-experiment scripts and the 3\,025-test verification suite
+experiment scripts and the 2\,910-test verification suite
 referenced in this paper, will be made available at
 \url{https://github.com/cyhuang76/alice-gamma-net}
 upon acceptance (AGPL-3.0 license).
@@ -1673,12 +1347,6 @@ Hsi-Yu~Huang,
 Irreducibility of dimensional cut cost,''
 Zenodo (2026).
 \href{https://doi.org/10.5281/zenodo.18847656}{doi:10.5281/zenodo.18847656}
-
-\bibitem{PaperII}
-Hsi-Yu~Huang,
-``Twin impedance networks: A unified neural--vascular organ model
-from the minimum reflection action,''
-Zenodo (2026).
 
 \bibitem{Moroz2012}
 L.~L.~Moroz,

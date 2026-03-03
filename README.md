@@ -6,7 +6,7 @@
 
 *No training data. No black boxes. Pure impedance physics.*
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18799932.svg)](https://doi.org/10.5281/zenodo.18799932)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18847656.svg)](https://doi.org/10.5281/zenodo.18847656)
 [![Tests](https://img.shields.io/badge/tests-3084%20passed-brightgreen.svg)]()
 [![Papers](https://img.shields.io/badge/papers-4%20published-orange.svg)](paper/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
@@ -140,7 +140,7 @@ python -m alice.main server --port 8000
 
 | # | Title | Pages | Status |
 |---|-------|:-----:|--------|
-| I | Irreducible Dimensional Cost in Heterogeneous Impedance Networks | 5 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18799932)) |
+| I | Irreducible Dimensional Cost in Heterogeneous Impedance Networks | 5 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18847656)) |
 | II | Dual Neural–Vascular Impedance Networks: Architecture & Sleep | 10 | **Complete** |
 | III | Impedance Debt, Sleep Homeostasis, and the Evolution of Brains | 13 | **Complete** |
 | IV | The Lifecycle Equation: From Embryo to Senescence | 10 | **Complete** |
@@ -202,7 +202,7 @@ alice-gamma-net/
   title   = {Alice Smart System — Physics-Driven Electronic Lifeform Simulator},
   year    = 2026,
   version = {3.2.0},
-  doi     = {10.5281/zenodo.18799932},
+  doi     = {10.5281/zenodo.18847656},
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }
 ```

@@ -77,7 +77,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 - Dimensional Cost Irreducibility Theorem
 - Heterogeneous Γ-topology (multi-K nodes)
 - K-space scaling analysis (fractal dimension D_K)
-- Paper I: Irreducibility Theorem (DOI: 10.5281/zenodo.18799932)
+- Paper I: Irreducibility Theorem (DOI: 10.5281/zenodo.18847656)
 - 2,734 tests, 49 experiments
 
 ---
