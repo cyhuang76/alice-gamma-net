@@ -5,7 +5,7 @@
 > 本文件基於 64 項對抗性邊界測試的實證結果撰寫（`tests/test_adversarial_boundary.py`）。
 > 每一條限制都附有可重現的測試名稱與量測值，而非抽象推測。
 >
-> 最後更新：2026-03-03 · 標準測試 2959/2959 通過（含 v31.1 非線性物理 + 雙網路器官 + 12 醫學專科 120 疾病模型）
+> 最後更新：2026-03-04 · 標準測試 3059/3059 通過（含 v31.1 非線性物理 + 雙網路器官 + 12 醫學專科 120 疾病模型 + Lab-Γ Phase 2 閉環回饋）
 
 ---
 
@@ -346,7 +346,7 @@ Status : open / resolved in <commit-sha>
 >
 > **凍結判準**：`is_frozen() = screen_phi < 0.15`（單軌）
 > **驗證**：雙向驗證 11/11 PASS（Direction A 6/6 + Direction B 5/5）
-> **回歸**：2959 passed, 4 xfailed, 2 xpassed
+> **回歸**：3059 passed, 4 xfailed, 2 xpassed
 
 ### L-FREEZE-01 · Track 1 體溫迴路過衝（未修正，已繞過）
 
