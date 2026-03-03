@@ -1,6 +1,6 @@
 {
-    "title": "Alice Smart System ???-Net: A Physics-Driven Electronic Lifeform",
-    "description": "<p>A complete implementation of the <strong>?-Net (Gamma-Net)</strong> architecture: a physics-driven electronic lifeform that models cognition, emotion, pain, sleep, language emergence, and psychopathology through <em>impedance-mismatch equations</em> derived from coaxial transmission line theory.</p><h3>Core Equation</h3><p>All behavior derives from a single unified reflection coefficient:</p><pre>?(f) = (Z_brain(f) ??Z_body(f)) / (Z_brain(f) + Z_body(f))</pre><p>where impedance mismatch drives error signals that cascade through the entire system ??pain is protocol collapse (|?| ??1.0), learning is impedance matching (|?| ??0), and emotion is the instantaneous reflection energy.</p><h3>v3.0.0 Highlights</h3><ul><li><strong>Dimensional Cost Irreducibility Theorem</strong> ??A = A_imp(t) + A_cut, where A_cut is invariant under all local impedance update rules at fixed topology</li><li><strong>Heterogeneous ?-topology</strong> ??nodes with different mode counts K ??{1,2,3,5}, spontaneous sprouting/pruning</li><li><strong>Soft-cutoff fractal control</strong> ??p(?K) = (?K + 1)^{-γ} continuously tunes K-space fractal dimension</li><li><strong>Scaling law</strong> ???_conv ~ N^{??.05}, larger networks converge faster (mean-field effect)</li></ul><h3>Architecture</h3><ul><li><strong>Full-body simulation</strong> ??eye (FFT retina), ear (cochlea basilar membrane), hand (grasp impedance), mouth (formant synthesis)</li><li><strong>26+ brain modules</strong> ??thalamus, amygdala, hippocampus, prefrontal cortex, Broca/Wernicke areas, basal ganglia, etc.</li><li><strong>Closed-loop life cycle</strong> ??perceive ??error ??compensate ??re-perceive</li><li><strong>Sleep physics</strong> ??NREM/REM 90-min ultradian cycles with offline memory consolidation</li><li><strong>Clinical neurology</strong> ??phantom limb pain, PTSD, aphasia, neglect syndrome emerge from the physics</li></ul><h3>Scale</h3><ul><li>200 source files · 89,400+ lines of Python</li><li>2,734 unit tests · 100% passing</li><li>49 experiments covering neuroscience phenomena</li></ul><h3>Paper Series</h3><ol><li><strong>Paper I</strong> ??Irreducible Dimensional Cost in Heterogeneous Impedance Networks (submitted to PRE, 2026)</li><li><strong>Paper II</strong> ??From Coaxial Cables to Cognition (in preparation)</li><li><strong>Paper III</strong> ??The Lifecycle Equation (in preparation)</li><li><strong>Paper IV</strong> ??Emergence (planned)</li></ol><p><strong>License</strong>: Code under AGPL-3.0-or-later · Papers under CC BY-NC-SA 4.0</p>",
+    "title": "Alice Smart System Gamma-Net v3.2.0: A Physics-Driven Electronic Lifeform",
+    "description": "<p>A complete implementation of the <strong>Gamma-Net</strong> architecture: a physics-driven electronic lifeform that models cognition, emotion, pain, sleep, language emergence, and psychopathology through <em>impedance-mismatch equations</em> derived from coaxial transmission line theory.</p><h3>Core Equation</h3><p>All behaviour derives from the Minimum Reflection Action:</p><pre>A[Gamma] = integral_0^T sum_i Gamma_i^2(t) dt -> min</pre><p>where Gamma = (Z_load - Z_source) / (Z_load + Z_source). Pain is protocol collapse (|Gamma| -> 1.0), learning is impedance matching (|Gamma| -> 0), and emotion is the instantaneous reflection energy.</p><h3>v3.2.0 Highlights</h3><ul><li><strong>Lab-Gamma Diagnostic Engine</strong> -- 53 lab tests mapped to 12 organ impedances, 125 disease models across 14 medical specialties</li><li><strong>Dual Neural-Vascular Networks</strong> -- H = (1 - Gamma_n^2)(1 - Gamma_v^2), Murray's Law derived from MRP</li><li><strong>Impedance Debt Theory of Sleep</strong> -- Delta_Z = integral rho^2 P_int dt, sleep as homeostatic discharge</li><li><strong>Lifecycle Equation</strong> -- d(rho^2)/dt = -alpha*rho^2 + beta*epsilon_env + gamma*D, bathtub curve from birth to senescence</li><li><strong>Soft-cutoff fractal control</strong> -- p(Delta_K) = (Delta_K + 1)^{-gamma} tunes K-space fractal dimension D in [1.3, 1.5]</li></ul><h3>Architecture</h3><ul><li><strong>Full-body simulation</strong> -- eye (FFT retina), ear (cochlea), hand (grasp impedance), mouth (formant synthesis), 31 body organs</li><li><strong>42 brain modules</strong> -- thalamus, amygdala, hippocampus, prefrontal cortex, Broca/Wernicke areas, basal ganglia, cerebellum, etc.</li><li><strong>Closed-loop life cycle</strong> -- perceive -> error -> compensate -> re-perceive</li><li><strong>Sleep physics</strong> -- NREM/REM 90-min ultradian cycles with offline memory consolidation</li><li><strong>Clinical diagnostics</strong> -- 125 disease models, 14 specialties, REST API + Streamlit dashboard</li></ul><h3>Scale</h3><ul><li>283 source files, 119,200+ lines of Python</li><li>3,084 unit tests, 100% passing</li><li>74 experiments covering neuroscience phenomena</li><li>4 published papers (38 pages total)</li></ul><h3>Paper Series (DOI: 10.5281/zenodo.18847656)</h3><ol><li><strong>Paper I</strong> -- Irreducible Dimensional Cost in Heterogeneous Impedance Networks (5 pp.)</li><li><strong>Paper II</strong> -- Twin Impedance Networks: A Unified Neural-Vascular Organ Model (10 pp.)</li><li><strong>Paper III</strong> -- The Cost of Life: Impedance Debt as the Thermodynamic Origin of Sleep and Brain Evolution (13 pp.)</li><li><strong>Paper IV</strong> -- The Lifecycle Equation: Cognition, Emotion, and Aging as Three-Force Competition (10 pp.)</li></ol><p><strong>License</strong>: Code under AGPL-3.0-or-later. Papers under CC BY-NC-SA 4.0</p>",
     "upload_type": "software",
     "creators": [
         {
@@ -18,7 +18,6 @@
         "reflection coefficient",
         "electronic lifeform",
         "emergent psychopathology",
-        "neural pruning",
         "minimum reflection principle",
         "closed-loop cognition",
         "sleep physics",
@@ -27,7 +26,15 @@
         "irreducibility-theorem",
         "fractal-dimension",
         "soft-cutoff",
-        "scaling-law"
+        "dual-network organ model",
+        "Murray's law",
+        "vascular impedance",
+        "impedance debt",
+        "lifecycle equation",
+        "Coffin-Manson fatigue",
+        "clinical diagnosis",
+        "Hebbian learning",
+        "transmission-line-theory"
     ],
     "license": {
         "id": "AGPL-3.0-or-later"
@@ -39,10 +46,16 @@
             "identifier": "https://github.com/cyhuang76/alice-gamma-net",
             "relation": "isSupplementTo",
             "scheme": "url"
+        },
+        {
+            "identifier": "10.5281/zenodo.18847656",
+            "relation": "isSupplementedBy",
+            "resource_type": "publication-preprint",
+            "scheme": "doi"
         }
     ],
-    "notes": "Paper I (Irreducible Dimensional Cost in Heterogeneous Impedance Networks) submitted to Physical Review E, 2026. Papers II?�IV in preparation. The system is architecturally hard-locked into the neonatal developmental stage (NEONATE) ??this is a deliberate safety constraint, not an engineering limitation.",
-    "version": "3.0.0",
+    "notes": "Four companion papers published at DOI 10.5281/zenodo.18847656. The system operates in full closed-loop ADULT developmental stage. All behaviour emerges from impedance physics -- no statistical training.",
+    "version": "3.2.0",
     "subjects": [
         {
             "term": "Computational neuroscience",
@@ -52,6 +65,11 @@
         {
             "term": "Artificial intelligence",
             "identifier": "https://id.loc.gov/authorities/subjects/sh85008180",
+            "scheme": "url"
+        },
+        {
+            "term": "Biomedical engineering",
+            "identifier": "https://id.loc.gov/authorities/subjects/sh85014237",
             "scheme": "url"
         }
     ]
