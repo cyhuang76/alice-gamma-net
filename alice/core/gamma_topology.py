@@ -561,66 +561,24 @@ class GammaTopology:
 
         return topo
 
-    # ── Soft cutoff probability ─────────────────────────────────────────
-
-    def _edge_survival_probability(self, delta_k: int) -> float:
-        """
-        Soft cutoff: edge survival probability p(ΔK) = (ΔK + 1)^{−γ}.
-
-        - dimension_gap_decay = None  → hard cutoff only (p=1 for all ΔK)
-        - dimension_gap_decay = γ > 0 → soft power-law decay
-
-        The +1 offset ensures p(0) = 1 (same-K edges always accepted)
-        and avoids singularity.
-
-        Physical interpretation:
-          γ = 0   → dimensional democracy (all ΔK equally likely)
-          γ ≈ 1.3 → cortical fractal connectivity (literature value)
-          γ → ∞   → hard cutoff at ΔK = 0 (only same-K connections)
-        """
-        if self.dimension_gap_decay is None:
-            return 1.0
-        if delta_k == 0:
-            return 1.0
-        return float((delta_k + 1) ** (-self.dimension_gap_decay))
-
     # ── Edge management ───────────────────────────────────────────────
 
     def activate_edge(self, source_name: str, target_name: str,
-                      coupling: Optional[np.ndarray] = None,
-                      _rng: Optional[np.random.Generator] = None,
-                      ) -> Optional[MulticoreChannel]:
+                      coupling: Optional[np.ndarray] = None) -> Optional[MulticoreChannel]:
         """Activate an edge (create channel) between two nodes.
 
         If max_dimension_gap is set and the dimensional gap exceeds it,
         the edge is rejected (returns None).  This models the biological
         constraint that very different fiber types cannot form direct
         synapses — relay neurons are needed.
-
-        If dimension_gap_decay is set, edges with ΔK > 0 are accepted
-        probabilistically: p(ΔK) = (ΔK + 1)^{−γ}.  This produces
-        power-law connectivity in K-space (fractal topology).
-
-        Parameters
-        ----------
-        _rng : np.random.Generator, optional
-            RNG for soft cutoff stochastic acceptance.  If None and
-            soft cutoff is active, a default RNG is used.
         """
         key = (source_name, target_name)
         if key not in self.active_edges:
             src = self.nodes[source_name]
             tgt = self.nodes[target_name]
             gap = abs(src.K - tgt.K)
-            # Hard cutoff: absolute upper bound (always enforced)
             if self.max_dimension_gap is not None and gap > self.max_dimension_gap:
                 return None  # dimensional gap too large
-            # Soft cutoff: stochastic acceptance based on power-law decay
-            if self.dimension_gap_decay is not None and gap > 0:
-                p = self._edge_survival_probability(gap)
-                rng = _rng or np.random.default_rng()
-                if rng.random() > p:
-                    return None  # rejected by soft cutoff
             ch = MulticoreChannel(source=src, target=tgt, coupling=coupling)
             self.active_edges[key] = ch
         return self.active_edges[key]
@@ -813,7 +771,7 @@ class GammaTopology:
         for key in to_prune:
             del self.active_edges[key]
 
-        # Sprouting: respect dimension gap constraint + soft cutoff
+        # Sprouting: respect dimension gap constraint
         edges_born = 0
         node_names = list(self.nodes.keys())
         if len(node_names) < 2:
@@ -827,7 +785,7 @@ class GammaTopology:
                 if candidate != name and (name, candidate) not in self.active_edges:
                     tgt_node = self.nodes[candidate]
 
-                    # Reject if dimension gap too large (hard cutoff)
+                    # Reject if dimension gap too large
                     gap = abs(node.K - tgt_node.K)
                     if (self.max_dimension_gap is not None
                             and gap > self.max_dimension_gap):
@@ -844,10 +802,8 @@ class GammaTopology:
                     common_gamma = float(np.mean(z_diff / safe_sum))
                     probe_gamma = (common_gamma * K_c + K_excess) / K_max
                     if probe_gamma < 0.7:
-                        # activate_edge handles soft cutoff internally
-                        result = self.activate_edge(name, candidate, _rng=rng)
-                        if result is not None:
-                            edges_born += 1
+                        self.activate_edge(name, candidate)
+                        edges_born += 1
 
         return edges_born, len(to_prune)
 
@@ -1466,7 +1422,6 @@ class GammaTopology:
         initial_connectivity: float = 0.2,
         eta: float = 0.01,
         max_dimension_gap: Optional[int] = None,
-        dimension_gap_decay: Optional[float] = None,
         seed: Optional[int] = None,
     ) -> "GammaTopology":
         """
@@ -1486,11 +1441,6 @@ class GammaTopology:
             Fraction of possible edges initially active.
         eta : float
             Hebbian learning rate.
-        max_dimension_gap : int, optional
-            Hard cutoff: edges with |ΔK| > max are rejected.
-        dimension_gap_decay : float, optional
-            Soft cutoff exponent γ: p(ΔK) = (ΔK + 1)^{−γ}.
-            None = no soft cutoff (dimensional democracy).
         seed : int, optional
             Random seed.
         """
@@ -1511,15 +1461,14 @@ class GammaTopology:
                 ))
                 node_idx += 1
 
-        topo = cls(nodes=nodes, eta=eta, max_dimension_gap=max_dimension_gap,
-                   dimension_gap_decay=dimension_gap_decay)
+        topo = cls(nodes=nodes, eta=eta, max_dimension_gap=max_dimension_gap)
 
-        # Activate random edges (soft cutoff applied inside activate_edge)
+        # Activate random edges
         names = [n.name for n in nodes]
         for i, ni in enumerate(names):
             for j, nj in enumerate(names):
                 if i != j and rng.random() < initial_connectivity:
-                    topo.activate_edge(ni, nj, _rng=rng)
+                    topo.activate_edge(ni, nj)
 
         return topo
 

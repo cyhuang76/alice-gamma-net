@@ -31,6 +31,14 @@ classified/
 
 # Experiment output (regeneratable)
 exp_out.txt
+fractal_output*.txt
+
+# Temporary analysis scripts
+tmp_*
+
+# Third-party datasets (NOT ours — do NOT commit)
+Figshare EEG/
+PhysioNet PICS/
 
 # ── Paper: what to EXCLUDE ──────────────────────────────────
 # Pandoc intermediate / temp files
@@ -38,20 +46,33 @@ paper/_tmp_*
 paper/media-*
 paper/system-commandline-sentinel-files/
 
-# LaTeX build artefacts
+# LaTeX build artefacts (paper/ root — revtex4-2 direct compile)
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
+paper/*.toc
+paper/*Notes.bib
+
+# LaTeX build artefacts (paper/latex/ — legacy path)
 paper/latex/*.aux
 paper/latex/*.log
 paper/latex/*.out
 paper/latex/*.toc
 paper/latex/*.png
 
-# Figure PDFs (keep PNGs, PDFs are regeneratable)
+# Paper PDFs (regeneratable from .tex source)
 paper/*.pdf
 paper/fig*.pdf
 paper/latex/*.pdf
 
 # Legacy / superseded paper drafts
 paper/Γ_Net_ALICE_Paper.md
+paper/paper_II_vascular.tex
 
 # Full paper backups (published on Zenodo, not on GitHub)
 paper/_full_backup/

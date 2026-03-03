@@ -5,7 +5,7 @@
 > 本文件基於 64 項對抗性邊界測試的實證結果撰寫（`tests/test_adversarial_boundary.py`）。
 > 每一條限制都附有可重現的測試名稱與量測值，而非抽象推測。
 >
-> 最後更新：2025-07-17 · 標準測試 2816/2816 通過（含 Phase 34 丘腦閘門物理修正 + Phase 34b 生理更新去重 + Ondine 中樞性呼吸暫停建模）
+> 最後更新：2026-03-03 · 標準測試 2959/2959 通過（含 v31.1 非線性物理 + 雙網路器官 + 12 醫學專科 120 疾病模型）
 
 ---
 
@@ -346,7 +346,7 @@ Status : open / resolved in <commit-sha>
 >
 > **凍結判準**：`is_frozen() = screen_phi < 0.15`（單軌）
 > **驗證**：雙向驗證 11/11 PASS（Direction A 6/6 + Direction B 5/5）
-> **回歸**：2816 passed, 4 xfailed, 2 xpassed
+> **回歸**：2959 passed, 4 xfailed, 2 xpassed
 
 ### L-FREEZE-01 · Track 1 體溫迴路過衝（未修正，已繞過）
 
@@ -447,3 +447,31 @@ Status : open / resolved in <commit-sha>
 | 推論 | 最小化 A 的唯一方式是減少高維→低維邊數 → **自動誘導維度分層拓撲** |
 | 實驗結果 | A_imp: 22.83 → 0.0001（✓ 消除），A_cut: 88.6 → 406.0（✓ 隨邊數增長） |
 | 等級 | **THM** |
+
+---
+
+## L-CAL-12 · 雙網路級聯需要神經 Hebbian 自修復項（Neural Self-Repair Required）
+
+| 項目 | 值 |
+|:-----|:---|
+| 建立日期 | 2026-03-02 |
+| 模組 | `alice/body/vascular_impedance.py` |
+| 驗證 | `experiments/exp_dual_network_stability.py` — 7/7 通過, 100/100 隨機通過 |
+| 問題 | 雙網路級聯模擬中，血管損傷透過 `VASCULAR_NEURAL_COUPLING × deficit` 每 tick 注入正 ΔΓ_n，但無機制移除。結果：即使無病理壓力，Γ_n 仍飽和至 0.95 上限。 |
+| 修正 | 加入線性化 C2 自修復項 `Γ_n(t+1) = Γ_n(t) × (1 − η_n^repair)`，`η_n^repair = 0.008`。此為血管 Hebbian 更新 (`ΔZ_v = −η_v · Γ_v · τ · ρ`) 的神經側對應，使 Γ_n² 衰減至非平凡健康定點 ≈ 0.08。 |
+| 依據 | 物理約束 C2（Hebbian 更新）要求**兩個**網路都具備梯度下降機制。血管側由 `_vascular_hebbian_update()` 處理；神經側原本依賴外部腦模組更新 Γ_n，但在獨立血管模擬中該路徑不存在。 |
+| η 值選擇 | 0.008 選定使健康定點 Γ_n² ≈ 0.08（對應 92% 神經傳輸效率），與 `DEFICIT_THRESHOLD = 0.05` 配合產生穩定吸引子。過小（< 0.003）→ 飽和不消；過大（> 0.02）→ 級聯效應被壓制。 |
+| 等級 | **L4**（設計邊界：獨立血管模擬需顯式補上腦模組的 C2） |
+
+---
+
+## L-CAL-13 · 物質儲備閾值抑制虛假級聯（Deficit Threshold）
+
+| 項目 | 值 |
+|:-----|:---|
+| 建立日期 | 2026-03-02 |
+| 模組 | `alice/body/vascular_impedance.py` |
+| 問題 | 無閾值時，任何非零 material deficit（包括 0.01）都會啟動 Γ_v → Γ_n 級聯。生理上，組織可透過增加氧萃取率補償小幅供血不足。 |
+| 修正 | `DEFICIT_THRESHOLD = 0.05`：deficit < 5% 不觸發級聯。超過閾值後，有效 deficit = deficit − 0.05。 |
+| 等級 | **L4**（設計邊界） |
+
