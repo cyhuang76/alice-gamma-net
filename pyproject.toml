@@ -1,35 +1,35 @@
 # =============================================================================
-# UNIFIED PHYSICS PRINCIPLE ??The Minimum Reflection Action
+# UNIFIED PHYSICS PRINCIPLE — The Minimum Reflection Action
 #
 #   All Alice behaviour emerges from a single variational principle:
 #
-#     ??[?] = ?��?ᵀ Σ�??ᵢ�?t) dt  ?? min
+#     𝒜[Γ] = ∫₀ᵀ Σᵢ Γᵢ²(t) dt  →  min
 #
-#   where ?�?= (Z_load,i ??Z_source,i) / (Z_load,i + Z_source,i).
+#   where Γᵢ = (Z_load,i − Z_source,i) / (Z_load,i + Z_source,i).
 #
 #   This principle yields three operational constraints (all actively verified):
 #
-#   (C1) ENERGY CONSERVATION  ?² + T = 1 at every channel, every tick.
-#        Derivation: follows directly from ?'s definition and power conservation.
-#        Verification: actively enforced and tested ??numerical drift does NOT
+#   (C1) ENERGY CONSERVATION  Γ² + T = 1 at every channel, every tick.
+#        Derivation: follows directly from Γ's definition and power conservation.
+#        Verification: actively enforced and tested — numerical drift does NOT
 #        self-correct, so this constraint must be checked explicitly.
 #
-#   (C2) HEBBIAN UPDATE  ?Z = ?��?· ? · x_pre · x_post
-#        Derivation: gradient descent of ??[?] with respect to Z_source.
-#        All learning is impedance calibration toward ? ??0.
+#   (C2) HEBBIAN UPDATE  ΔZ = −η · Γ · x_pre · x_post
+#        Derivation: gradient descent of 𝒜[Γ] with respect to Z_source.
+#        All learning is impedance calibration toward Γ → 0.
 #
 #   (C3) SIGNAL PROTOCOL  All inter-module values carried by ElectricalSignal.
-#        Derivation: engineering requirement ??? can only be computed if
-#        signals carry impedance metadata. Raw floats lack Z ??? undefined.
+#        Derivation: engineering requirement — Γ can only be computed if
+#        signals carry impedance metadata. Raw floats lack Z → Γ undefined.
 #
 #   Nonlinear physics models (v31.1):
-#     ??Butterworth 2nd-order bandwidth roll-off: H(f) = 1/??1+(f/f????
-#     ??Johnson-Nyquist thermal noise: N = k_B,alice · T_ram · ?f · L · (1+?²)
-#     ??Arrhenius aging: δ = δ?� · exp(E_a · stress)
-#     ??Quemada viscosity: η = η?� · (1 + a·d + b·d³)
-#     ??Autocorrelation frequency estimation (O(N), no FFT)
+#     • Butterworth 2nd-order bandwidth roll-off: H(f) = 1/√(1+(f/fₒ)⁴)
+#     • Johnson-Nyquist thermal noise: N = k_B,alice · T_ram · Δf · L · (1+Γ²)
+#     • Arrhenius aging: δ = δ₀ · exp(E_a · stress)
+#     • Quemada viscosity: η = η₀ · (1 + a·d + b·d³)
+#     • Autocorrelation frequency estimation (O(N), no FFT)
 #
-# PRE-COMMIT GATE: pytest ??physics check ??docs/KNOWN_LIMITATIONS.md ??classify ??commit
+# PRE-COMMIT GATE: pytest → physics check → KNOWN_LIMITATIONS.md → classify → commit
 # =============================================================================
 
 [build-system]
@@ -38,8 +38,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "alice-gamma-net"
-version = "3.0.0"
-description = "Alice Smart System ??A physics-driven electronic lifeform based on the ?-Net architecture"
+version = "1.0.0"
+description = "Alice Smart System — A physics-driven electronic lifeform based on the Γ-Net architecture"
 readme = "README.md"
 license = {text = "AGPL-3.0-or-later"}
 requires-python = ">=3.10"
@@ -71,6 +71,8 @@ dev = [
 full = [
     "matplotlib>=3.8.0",
     "torch>=2.1.0",
+    "streamlit>=1.30.0",
+    "plotly>=5.18.0",
 ]
 
 [project.scripts]
