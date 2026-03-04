@@ -760,24 +760,63 @@ This corresponds to the morphogenesis and impedance-debt
 results of Paper~III.
 
 \medskip
-The logical chain is then complete and watertight:
+The logical chain is then complete:
 \begin{quote}
 \emph{Self-organised chemistry}
-$\;\longrightarrow\;$
+$\;\xrightarrow{\text{biology}}\;$
 \emph{tissue structure}
-$\;\longrightarrow\;$
+$\;\xrightarrow{\text{physics}}\;$
 \emph{impedance layout}
-$\;\longrightarrow\;$
+$\;\xrightarrow{\text{theorem}}\;$
 \emph{$\Gamma$ at every interface.}
 \end{quote}
-Because the first arrow is an undeniable biological fact
-and the last arrow is a mathematical theorem (First Law),
-the only empirically contestable link is the middle one:
-whether real tissue structures can be meaningfully
-characterised by impedance values.
+Crucially, \emph{every} arrow in this chain has independent
+grounding---none is a modelling choice:
+\begin{itemize}
+  \item \textbf{Arrow~1} (chemistry $\to$ structure):
+    an undeniable fact of developmental biology.
+  \item \textbf{Arrow~2} (structure $\to$ impedance):
+    classical physics.  A tube of radius~$r$ and length~$L$
+    carrying viscous fluid has Poiseuille impedance
+    $Z=8\mu L/\pi r^4$ (Navier--Stokes).
+    A membrane of thickness~$d$ and permittivity~$\varepsilon$
+    has capacitive impedance (Maxwell).
+    An elastic wall of modulus~$E$ has pulse-wave impedance
+    (Moens--Korteweg / solid mechanics).
+    None of these formulae is a hypothesis.
+  \item \textbf{Arrow~3} (impedance $\to$ $\Gamma$):
+    a mathematical theorem following from the First Law
+    (Theorem~\ref{thm:universality}).
+\end{itemize}
+The only empirically open question is therefore not whether
+any arrow is ``true,'' but whether our \emph{specific
+measurement resolution}---mapping NHANES lab values to
+organ impedances---is precise enough to detect the signal.
+This is an engineering question, not a theoretical one.
+And it is precisely here that the framework shows its
+greatest strength: rather than leaving a vague ``maybe,''
+it generates a \textbf{sharp, independently verifiable
+prediction}.
+
+Specifically: if the chain is correct, then organ impedances
+computed from blood biochemistry ($Z_{\text{Lab-}\Gamma}$)
+should correlate with organ impedances measured by physical
+instruments---bioelectrical impedance analysis (BIA),
+ultrasound elastography, or pulse-wave velocity.
+This cross-modal test involves no shared data, no shared
+algorithm, and no fitted parameters.
+If the correlation holds, the chain is closed with zero
+contestable links.
+If it fails, the theory is refuted.
+Either way, the ``contestable'' middle arrow is not a
+weakness; it is the theory's most productive prediction
+engine.
+
 The NHANES results of Section~\ref{sec:nhanes}
 (7/7 organs, $n=7{,}393$, zero fitted parameters)
-provide evidence that they can.
+already provide indirect evidence that the chain holds.
+The cross-modal test proposed above would provide
+direct evidence.
 
 
 % ============================================================
@@ -1001,6 +1040,24 @@ The grand-unification claim is falsifiable in several ways:
     tracking $H=\prod(1-\Gamma_i^2)$ over time should
     predict incident disease.  If $H$ fails to predict
     new diagnoses, the framework has no prognostic value.
+  \item \textbf{Cross-modal impedance validation
+    (chain-closing test)}:
+    The most decisive test of the entire framework.
+    Organ impedances computed from blood biochemistry
+    (Lab-$\Gamma$) should correlate with organ impedances
+    measured by independent physical instruments:
+    bioelectrical impedance analysis (BIA) for body
+    composition, ultrasound shear-wave elastography for
+    liver and muscle stiffness, and carotid--femoral
+    pulse-wave velocity for vascular impedance.
+    These modalities share no data and no algorithm with
+    the Lab-$\Gamma$ pipeline.
+    A significant correlation would close every arrow in
+    the chemistry $\to$ structure $\to$ impedance $\to$
+    $\Gamma$ chain with independent physical measurement,
+    leaving zero contestable links.
+    Absence of correlation would refute the organ-$Z$
+    mapping.
   \item \textbf{Non-biological interfaces}: The acoustic
     reflection coefficient at a tissue boundary
     (ultrasound imaging) should correlate with the
