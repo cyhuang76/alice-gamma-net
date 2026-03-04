@@ -272,16 +272,44 @@ nothing else.
 
 \subsection{From $\Gamma$ to the MRP}
 
-If $\Gamma^2$ represents energy lost at each interface,
+If $\Gamma^2$ represents energy reflected at each interface,
 then a network of $N$ interfaces dissipates total
 reflected energy
 $\mathcal{A} = \int_0^T \sum_{i=1}^N \Gamma_i^2(t)\,dt$.
-Any self-organising system that preserves energy
-(biological, electronic, or economic) will be selected
-for lower $\mathcal{A}$---either by natural selection,
-engineering design, or market forces.
-The MRP is therefore not an \emph{additional} postulate;
-it is the variational statement of thermodynamic fitness.
+
+The Minimum Reflection Principle ($\mathcal{A}\to\min$)
+does \emph{not} require Darwinian natural selection.
+It follows from a more basic fact:
+\emph{thermodynamic viability}.
+
+Consider any structure that depends on a sustained flow
+(blood through a vessel, signals through a nerve, heat
+through a tissue).
+At every interface within that structure, a fraction
+$\Gamma_i^2$ of the incident energy is reflected and
+therefore unavailable downstream.
+If the cumulative reflection loss exceeds the energy
+supply, the flow cannot be sustained and the structure
+fails---a vessel with excessive reflection produces
+ischaemia; a nerve with excessive mismatch cannot
+propagate action potentials; a bone under excessive
+mechanical reflection fatigues and fractures.
+No external ``selector'' is needed: structures with
+$\mathcal{A}$ above the viability threshold
+\emph{physically cannot persist}.
+
+The MRP is therefore not a biological optimality
+principle that requires an evolutionary argument.
+It is the variational statement of a thermodynamic
+constraint: \emph{only structures with sufficiently
+low $\mathcal{A}$ can sustain the flows they require
+to exist.}
+
+Natural selection, engineering design, and market forces
+are \emph{additional} mechanisms that further sharpen
+$\Gamma$-minimisation within the space of already-viable
+structures---but even without any of them, the
+non-viable structures are eliminated by physics alone.
 
 \subsection{C2 (Hebbian update) as gradient descent}
 
