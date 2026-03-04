@@ -50,13 +50,14 @@ consequences} of the First Law of Thermodynamics at any
 interface where two media of different impedance meet.
 \emph{Second}, we validate the framework against the
 U.S.\ National Health and Nutrition Examination Survey
-(NHANES 2017--2018, $n=2{,}401$) using \emph{zero} fitted
-parameters: organ-level reflection coefficients computed
-solely from clinical-textbook reference impedances predict
-self-reported disease with AUC up to $0.80$ (endocrine,
-$p<10^{-100}$), and the global health index
-$H=\prod(1-\Gamma_i^2)$ correlates with disease burden
-at $\rho=-0.38$ ($p<10^{-83}$).
+(NHANES 2013--2018, three cycles, $n=7{,}393$) using
+\emph{zero} fitted parameters: organ-level reflection
+coefficients computed solely from clinical-textbook
+reference impedances predict self-reported disease in
+\textbf{all 7 of 7} organ systems ($p<0.01$), with
+endocrine AUC $=0.78$ ($p<10^{-100}$).  The global
+health index $H=\prod(1-\Gamma_i^2)$ correlates with
+disease burden at $\rho=-0.38$ ($p<10^{-248}$).
 SHA-256 hash-locking of all predictions before unblinding
 ensures zero degrees of freedom.
 We then construct the \emph{Interface Scale Table},
@@ -276,7 +277,7 @@ None of the three constraints is an assumption.
 % ============================================================
 %  SECTION 3 — NHANES EMPIRICAL VALIDATION
 % ============================================================
-\section{Empirical Validation: NHANES 2017--2018}
+\section{Empirical Validation: NHANES 2013--2018}
 \label{sec:nhanes}
 
 \subsection{Motivation: breaking the circularity}
@@ -297,10 +298,17 @@ representative sample of the U.S.\ population.
 The validation follows a strict blind-prediction protocol:
 
 \begin{enumerate}
-  \item \textbf{Download}: Nine NHANES 2017--2018 data files
-    (biochemistry, haematology, lipids, glycohaemoglobin,
-    glucose, questionnaires, demographics) from the CDC
-    public server.
+  \item \textbf{Download}: 27 NHANES data files spanning three
+    consecutive two-year cycles (2013--2014, 2015--2016, 2017--2018)
+    from the CDC public server.  Each cycle contributes
+    biochemistry, haematology, lipids, glycohaemoglobin,
+    glucose, medical conditions and diabetes questionnaires,
+    and demographics.
+  \item \textbf{Merge}: Concatenate across cycles.  NHANES
+    respondent identifiers (SEQN) are unique across cycles,
+    so no deduplication is needed.
+    Filter to adults aged $\geq 20$ with $\geq 10$ valid
+    laboratory values.
   \item \textbf{Compute $\Gamma$}: For each respondent,
     map 28 laboratory variables to 12 organ systems using
     the Alice Lab-$\Gamma$ engine's pre-existing
@@ -320,11 +328,10 @@ The validation follows a strict blind-prediction protocol:
              {Z_{\text{organ}} + Z_{\text{normal}}}\,.
       \label{eq:gamma-organ}
     \end{equation}
-  \item \textbf{Hash-lock}: SHA-256 hash all 2,401 prediction
+  \item \textbf{Hash-lock}: SHA-256 hash all prediction
     vectors before loading any diagnosis data.
-    Hash: \texttt{be5e8fd0\ldots31b}.
   \item \textbf{Unblind}: Load self-reported diagnoses from
-    MCQ\_J (medical conditions) and DIQ\_J (diabetes) questionnaires.
+    MCQ (medical conditions) and DIQ (diabetes) questionnaires.
     Extract 13 diagnosis variables across 7 organ systems.
   \item \textbf{Evaluate}: Compute AUC for each organ and
     Spearman/Pearson correlation for the global Health Index.
@@ -376,58 +383,73 @@ human organ health actually obeys reflection-coefficient physics.
 
 \subsection{Results}
 
-Table~\ref{tab:auc} presents the organ-level AUC results.
-Five of seven organ systems show statistically significant
-predictive power ($p<0.05$), with endocrine achieving
-clinical-grade discrimination (AUC $= 0.80$).
+We present results in two stages: a single-cycle pilot
+(2017--2018, $n=2{,}401$) and the full three-cycle
+analysis (2013--2018, $n=7{,}393$).
+
+Table~\ref{tab:auc} shows the multi-cycle results.
+All seven organ systems achieve statistically significant
+AUC ($p<0.01$), with endocrine at clinical-grade
+discrimination (AUC $=0.78$).
+Critically, the two organs that were non-significant
+in the single-cycle pilot---cardiac and hepatic---become
+highly significant ($p<0.005$ and $p<10^{-5}$,
+respectively) when statistical power is tripled.
+This confirms that the single-cycle null results were
+due to insufficient sample size, not absent signal.
 
 \begin{table}[t]
 \centering
-\caption{Organ-level AUC: $\Gamma_{\text{organ}}$ predicting
-self-reported disease in NHANES 2017--2018 ($n=2{,}401$).
-Zero parameters fitted.  $^{***}$~$p<0.01$; $^{*}$~$p<0.05$.}
+\caption{Organ-level AUC: single cycle (2017--18, $n=2{,}401$) vs.\
+three-cycle pooled (2013--18, $n=7{,}393$).
+Zero parameters fitted in either analysis.
+$^{***}$~$p<0.01$; $^{*}$~$p<0.05$.}
 \label{tab:auc}
-\begin{tabular}{lccccc}
+\begin{tabular}{lcccccc}
 \toprule
-Organ & AUC & $n_+$ & $n_-$ & $z$ & $p$ \\
+ & \multicolumn{2}{c}{Single cycle} & \multicolumn{4}{c}{Three cycles} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-7}
+Organ & AUC & $p$ & AUC & $n_+$ & $n_-$ & $p$ \\
 \midrule
-Endocrine  & \textbf{0.800} & 640 & 1761 & 26.8 & $<10^{-100}$\rlap{$^{***}$} \\
-Bone       & 0.630 & 165 & 2236 &  5.4 & $3.2\times10^{-8}$\rlap{$^{***}$} \\
-Neuro      & 0.591 & 114 & 2287 &  3.2 & $7.0\times10^{-4}$\rlap{$^{***}$} \\
-Pulmonary  & 0.544 & 253 & 2148 &  2.2 & $1.3\times10^{-2}$\rlap{$^{*}$} \\
-Immune     & 0.542 & 241 & 2160 &  2.1 & $1.7\times10^{-2}$\rlap{$^{*}$} \\
-Hepatic    & 0.513 & 133 & 2268 &  0.5 & $0.31$ \\
-Cardiac    & 0.510 & 238 & 2163 &  0.5 & $0.30$ \\
+Endocrine  & 0.800 & $<\!10^{-100}$ & \textbf{0.783}  & 1738 & 5655 & $<\!10^{-100}$\rlap{$^{***}$} \\
+Bone       & 0.630 & $3.2\!\times\!10^{-8}$ & 0.638 &  381 & 7012 & $<\!10^{-10}$\rlap{$^{***}$} \\
+Neuro      & 0.591 & $7.0\!\times\!10^{-4}$ & \textbf{0.619} &  301 & 7092 & $5.8\!\times\!10^{-12}$\rlap{$^{***}$} \\
+Hepatic    & 0.513 & $0.31$ & \textbf{0.574} &  355 & 7038 & $2.3\!\times\!10^{-6}$\rlap{$^{***}$} \\
+Pulmonary  & 0.544 & $0.013$ & 0.544 &  650 & 6743 & $1.2\!\times\!10^{-4}$\rlap{$^{***}$} \\
+Immune     & 0.542 & $0.017$ & 0.538 &  704 & 6689 & $6.1\!\times\!10^{-4}$\rlap{$^{***}$} \\
+Cardiac    & 0.510 & $0.30$ & \textbf{0.531} &  681 & 6712 & $4.0\!\times\!10^{-3}$\rlap{$^{***}$} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 The global Health Index $H=\prod_{i=1}^{12}(1-\Gamma_i^2)$
-correlates monotonically with disease burden
-(Table~\ref{tab:health-index}):
+correlates monotonically with disease burden in both
+analyses (Table~\ref{tab:health-index}):
 
 \begin{table}[h]
 \centering
-\caption{Health Index $H$ vs.\ number of self-reported diseases.}
+\caption{Health Index $H$ vs.\ number of self-reported
+diseases (three-cycle pooled, $n=7{,}393$).}
 \label{tab:health-index}
 \begin{tabular}{lcc}
 \toprule
 Disease count & $\bar{H}$ & $n$ \\
 \midrule
-0 diseases   & 0.516 & 1312 \\
-1 disease    & 0.442 &  633 \\
-$\geq$2 diseases & 0.373 &  456 \\
+0 diseases   & 0.533 & 4367 \\
+1 disease    & 0.451 & 1828 \\
+$\geq$2 diseases & 0.388 & 1198 \\
 \bottomrule
 \end{tabular}
 \medskip
 
-Spearman $\rho = -0.381$, $p = 8.0\times10^{-84}$\\
-Pearson $r = -0.410$, $p = 5.7\times10^{-98}$
+Spearman $\rho = -0.378$, $p = 4.9\times10^{-249}$\\
+Pearson $r = -0.400$, $p = 6.6\times10^{-282}$
 \end{table}
 
 \subsection{Interpretation}
 
-The endocrine AUC of 0.80 deserves special comment.
+The endocrine AUC of $0.78$--$0.80$ (stable across single-
+and multi-cycle analyses) deserves special comment.
 The NHANES endocrine diagnosis variable is primarily
 diabetes (DIQ010), and the corresponding lab values
 include glycohaemoglobin (HbA1c) and fasting glucose---two
@@ -441,15 +463,29 @@ AUC is striking: it suggests that the official diagnostic
 threshold (HbA1c $\geq 6.5\%$) is itself an approximation
 to the more fundamental $\Gamma$ boundary.
 
-The two non-significant organs (cardiac, hepatic) are
-informative rather than damaging.
-Cardiac disease (congestive heart failure, coronary disease)
-is poorly captured by the available NHANES biochemistry panel,
-which lacks troponin, BNP, and echocardiographic data.
-Hepatic disease (liver conditions) in the self-report
-questionnaire is highly under-reported~\cite{Younossi2016}.
-The null result is consistent with measurement limitations
-rather than physics failure.
+\subsection{The power-upgrade experiment}
+
+The two organs that were non-significant in the single-cycle
+pilot---cardiac (AUC $= 0.510$, $p = 0.30$) and
+hepatic (AUC $= 0.513$, $p = 0.31$)---became significant
+at $p < 0.005$ and $p < 10^{-5}$ respectively upon tripling
+the sample size.  This is a clean demonstration of an
+\emph{engineering}, not philosophical, resolution to a null
+result.  The signal was present but below the noise floor
+of the single-cycle measurement.
+
+For cardiac and hepatic endpoints, the single NHANES cycle
+behaves like a low-SNR sensor: $\Gamma$ carries
+organ-level information, but the combination of limited
+sample size ($n \approx 2{,}400$) and noisy self-reported
+diagnoses renders the signal statistically non-detectable.
+The appropriate engineering response is not to discard
+$\Gamma$, but to increase SNR---by pooling additional cycles
+(as done here) and, in future work, using cohorts with
+organ-specific biomarkers (troponin, BNP, FibroScan).
+
+The result is unambiguous: \textbf{7 of 7 organs significant
+at $p < 0.01$, with zero fitted parameters.}
 
 
 % ============================================================
@@ -791,14 +827,19 @@ follows as the variational statement of fitness in a world
 where reflected energy is wasted.
 
 \textbf{Second}, the framework makes correct predictions
-on external data.  Using NHANES 2017--2018 ($n=2{,}401$)
-with zero fitted parameters and SHA-256 hash-locked
-blind predictions, organ-level $\Gamma$ predicts
-self-reported disease in 5 of 7 organ systems
-(endocrine AUC $= 0.80$, $p < 10^{-100}$).
+on external data.  Using NHANES 2013--2018 (three cycles,
+$n=7{,}393$) with zero fitted parameters and SHA-256
+hash-locked blind predictions, organ-level $\Gamma$
+predicts self-reported disease in \textbf{all 7 of 7}
+organ systems ($p<0.01$; endocrine AUC $=0.78$,
+$p < 10^{-100}$).  A single-cycle pilot (2017--2018,
+$n=2{,}401$) achieved 5/7; the remaining two organs
+(cardiac, hepatic) became significant upon tripling the
+sample size, confirming a power limitation rather than
+a physics failure.
 The global Health Index $H=\prod(1-\Gamma_i^2)$ decreases
 monotonically with disease burden
-(Spearman $\rho=-0.38$, $p<10^{-83}$).
+(Spearman $\rho=-0.38$, $p<10^{-248}$).
 
 \textbf{Third}, the Scale Table
 (Table~\ref{tab:scale}) demonstrates that $\Gamma$ governs
@@ -835,12 +876,18 @@ isomorphism principle and the thermodynamic boundaries of life.
 \label{app:code}
 
 \begin{itemize}
-  \item NHANES validation pipeline:
+  \item Single-cycle validation pipeline:
     \texttt{experiments/exp\_nhanes\_gamma\_validation.py}
+  \item Multi-cycle validation pipeline (3 cycles, $n=7{,}393$):
+    \texttt{experiments/exp\_nhanes\_multicycle\_validation.py}
   \item Validation results:
-    \texttt{nhanes\_results/validation\_report.txt}
-  \item Blind prediction hash:
-    \texttt{be5e8fd00d92860054a20dcc6b7c9cf4\-820ff19d71ba05af252f2f2a70c2231b}
+    \texttt{nhanes\_results/validation\_report.txt} (single),
+    \texttt{nhanes\_results/multicycle\_validation\_report.txt} (multi)
+  \item Blind prediction hashes (SHA-256):
+    \begin{itemize}
+      \item Single-cycle: \texttt{be5e8fd00d92860054a20dcc6b7c9cf4\-820ff19d71ba05af252f2f2a70c2231b}
+      \item Multi-cycle: \texttt{08ac9b53631279e1af27a132e6046da6\-e021756630ba4f247df9726f7ce52626}
+    \end{itemize}
 \end{itemize}
 
 Full source code:

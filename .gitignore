@@ -45,6 +45,9 @@ nhanes_data/
 nhanes_results/blind_predictions.json
 nhanes_results/nhanes_gamma_vectors.csv
 nhanes_results/run_output.txt
+nhanes_results/multicycle_blind_predictions.json
+nhanes_results/nhanes_multicycle_gamma_vectors.csv
+nhanes_results/multicycle_run_output.txt
 
 # ── Paper: what to EXCLUDE ──────────────────────────────────
 # Pandoc intermediate / temp files
