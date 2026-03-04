@@ -1,0 +1,128 @@
+{
+  "protocol": "Gamma-Net Blind Predictive Validation v1.0",
+  "timestamp_utc": "2026-03-04T02:14:02.268348+00:00",
+  "sha256_predictions": "be5e8fd00d92860054a20dcc6b7c9cf4820ff19d71ba05af252f2f2a70c2231b",
+  "n_respondents": 2401,
+  "auc_results": {
+    "cardiac": {
+      "auc": 0.5103,
+      "n_positive": 238,
+      "n_negative": 2163,
+      "z_statistic": 0.519,
+      "p_value": 0.3019968979641712,
+      "significant_005": false,
+      "significant_001": false
+    },
+    "hepatic": {
+      "auc": 0.5129,
+      "n_positive": 133,
+      "n_negative": 2268,
+      "z_statistic": 0.497,
+      "p_value": 0.30953678669886964,
+      "significant_005": false,
+      "significant_001": false
+    },
+    "endocrine": {
+      "auc": 0.8004,
+      "n_positive": 640,
+      "n_negative": 1761,
+      "z_statistic": 26.751,
+      "p_value": 0.0,
+      "significant_005": true,
+      "significant_001": true
+    },
+    "pulmonary": {
+      "auc": 0.5436,
+      "n_positive": 253,
+      "n_negative": 2148,
+      "z_statistic": 2.232,
+      "p_value": 0.012820240565929564,
+      "significant_005": true,
+      "significant_001": false
+    },
+    "neuro": {
+      "auc": 0.5914,
+      "n_positive": 114,
+      "n_negative": 2287,
+      "z_statistic": 3.196,
+      "p_value": 0.0006971715882868601,
+      "significant_005": true,
+      "significant_001": true
+    },
+    "immune": {
+      "auc": 0.5422,
+      "n_positive": 241,
+      "n_negative": 2160,
+      "z_statistic": 2.116,
+      "p_value": 0.01716011422513175,
+      "significant_005": true,
+      "significant_001": false
+    },
+    "bone": {
+      "auc": 0.6296,
+      "n_positive": 165,
+      "n_negative": 2236,
+      "z_statistic": 5.408,
+      "p_value": 3.1810910794405345e-08,
+      "significant_005": true,
+      "significant_001": true
+    }
+  },
+  "health_index_validation": {
+    "spearman_rho": -0.3811,
+    "spearman_p": 7.954050628327395e-84,
+    "pearson_r": -0.4099,
+    "pearson_p": 5.6810811308338384e-98,
+    "mean_H_0_diseases": 0.5163,
+    "mean_H_1_disease": 0.4422,
+    "mean_H_2plus": 0.3727,
+    "n_0_diseases": 1312,
+    "n_1_disease": 633,
+    "n_2plus": 456
+  },
+  "organ_z_normal": {
+    "cardiac": 50.0,
+    "pulmonary": 60.0,
+    "hepatic": 65.0,
+    "renal": 70.0,
+    "endocrine": 75.0,
+    "immune": 75.0,
+    "heme": 55.0,
+    "GI": 65.0,
+    "vascular": 45.0,
+    "bone": 120.0,
+    "neuro": 80.0,
+    "repro": 95.0
+  },
+  "nhanes_to_alice_mapping": {
+    "LBXSATSI": "AST",
+    "LBXSASSI": "ALT",
+    "LBXSAPSI": "ALP",
+    "LBXSGB": "GGT",
+    "LBXSTB": "Bil_total",
+    "LBXSAL": "Albumin",
+    "LBXSTP": "Total_Protein",
+    "LBXSCR": "Cr",
+    "LBXSBU": "BUN",
+    "LBXSUA": "Uric_Acid",
+    "LBXSCH": "TC",
+    "LBXSC3SI": "CO2",
+    "LBXSNA": "Na",
+    "LBXSK": "K",
+    "LBXSCL": "Cl",
+    "LBXSCA": "Ca",
+    "LBXSPH": "ALP",
+    "LBXSGL": "Glucose",
+    "LBXSCK": "CK_MB",
+    "LBXWBCSI": "WBC",
+    "LBXRBCSI": "RBC",
+    "LBXHGB": "Hb",
+    "LBXHCT": "Hct",
+    "LBXMCVSI": "MCV",
+    "LBXPLTSI": "Plt",
+    "LBDHDD": "HDL",
+    "LBXTR": "TG",
+    "LBXGH": "HbA1c",
+    "LBXGLU": "Glucose"
+  }
+}

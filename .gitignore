@@ -39,6 +39,12 @@ tmp_*
 # Third-party datasets (NOT ours — do NOT commit)
 Figshare EEG/
 PhysioNet PICS/
+nhanes_data/
+
+# NHANES large output (regeneratable)
+nhanes_results/blind_predictions.json
+nhanes_results/nhanes_gamma_vectors.csv
+nhanes_results/run_output.txt
 
 # ── Paper: what to EXCLUDE ──────────────────────────────────
 # Pandoc intermediate / temp files

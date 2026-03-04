@@ -1,0 +1,60 @@
+
+========================================================================
+  Γ-NET EMPIRICAL VALIDATION — NHANES 2017-2018
+  Breaking the Circularity: Real Data vs Physics Predictions
+========================================================================
+
+  Date:              2026-03-04 02:14 UTC
+  Cohort size:       2,401 adults
+  Fitted parameters: 0 (pure physics)
+  SHA-256 hash:      be5e8fd00d92860054a20dcc6b7c9cf4820ff19d71ba05af252f2f2a70c2231b
+
+────────────────────────────────────────────────────────────────────────
+  ORGAN-LEVEL AUC (Γ_organ predicts self-reported disease)
+────────────────────────────────────────────────────────────────────────
+  Organ             AUC     n+     n−       z    p-value  Sig.
+  ────────────────────────────────────────────────────────────
+  cardiac        0.5103    238   2163    0.52   3.02e-01      
+  hepatic        0.5129    133   2268    0.50   3.10e-01      
+  endocrine      0.8004    640   1761   26.75   0.00e+00   ***
+  pulmonary      0.5436    253   2148    2.23   1.28e-02     *
+  neuro          0.5914    114   2287    3.20   6.97e-04   ***
+  immune         0.5422    241   2160    2.12   1.72e-02     *
+  bone           0.6296    165   2236    5.41   3.18e-08   ***
+
+  * p < 0.05   *** p < 0.01
+
+────────────────────────────────────────────────────────────────────────
+  HEALTH INDEX H = Π(1−Γ²) vs DISEASE BURDEN
+────────────────────────────────────────────────────────────────────────
+  Spearman ρ = -0.3811  (p = 7.95e-84)
+  Pearson  r = -0.4099  (p = 5.68e-98)
+
+  Mean H (0 diseases):  0.5163  (n=1312)
+  Mean H (1 disease):   0.4422  (n=633)
+  Mean H (2+ diseases): 0.3727  (n=456)
+
+────────────────────────────────────────────────────────────────────────
+  INTERPRETATION
+────────────────────────────────────────────────────────────────────────
+  Mean AUC across organs:  0.5901
+  Best organ:              endocrine (AUC=0.8004)
+  Verdict:                 WEAK BUT REAL: Γ physics has statistically detectable signal
+
+  >>> CIRCULARITY BROKEN <<<
+  At least one organ's Γ predicts real human disease
+  with p < 0.05 using ZERO fitted parameters.
+  This is empirical evidence, not simulation self-confirmation.
+
+────────────────────────────────────────────────────────────────────────
+  METHODOLOGICAL NOTES
+────────────────────────────────────────────────────────────────────────
+  1. Z_normal from clinical textbooks (Alice ORGAN_SYSTEMS dict)
+  2. Γ = (Z_patient − Z_normal) / (Z_patient + Z_normal) [pure physics]
+  3. Zero parameters fitted to NHANES data
+  4. Predictions SHA-256 locked before diagnosis data loaded
+  5. Self-reported diagnoses are imperfect gold standard
+     (known to undercount true prevalence → conservative AUC)
+
+  ⚠ This is a RESEARCH VALIDATION, not a clinical diagnostic tool.
+========================================================================

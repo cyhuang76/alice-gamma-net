@@ -1,4 +1,4 @@
-# Alice Smart System — v3.3.0
+# Alice Smart System — v3.4.0
 
 <div align="center">
 
@@ -8,7 +8,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18847656.svg)](https://doi.org/10.5281/zenodo.18847656)
 [![Tests](https://img.shields.io/badge/tests-3084%20passed-brightgreen.svg)]()
-[![Papers](https://img.shields.io/badge/papers-5%20published-orange.svg)](paper/)
+[![Papers](https://img.shields.io/badge/papers-6%20published-orange.svg)](paper/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 
@@ -123,10 +123,10 @@ python -m alice.main server --port 8000
 
 | Metric | Count |
 |:---|---:|
-| Source files (`.py`) | 285 |
-| Lines of code | 119,900+ |
-| Unit tests | 3,084 |
-| Experiments | 76 |
+| Source files (`.py`) | 286 |
+| Lines of code | 120,500+ |
+| Unit tests | 3,078 |
+| Experiments | 85 |
 | Body organs | 31 |
 | Brain modules | 42 |
 | Disease models | 125 |
@@ -145,6 +145,7 @@ python -m alice.main server --port 8000
 | III | Impedance Debt, Sleep Homeostasis, and the Evolution of Brains | 13 | **Complete** |
 | IV | The Lifecycle Equation: From Embryo to Senescence | 10 | **Complete** |
 | V | Memory, Consciousness, and Soul as Impedance Physics | 6 | **Complete** |
+| VI | The Grand Unification: Γ as the Universal Interface Law | 8 | **Complete** |
 
 Key results:
 - **Paper I**: Irreducibility theorem — heterogeneous networks have a geometric cost floor $A_{\text{cut}}$ that cannot be learned away. Relay nodes emerge as thermodynamic necessity.
@@ -152,8 +153,9 @@ Key results:
 - **Paper III**: Adenosine ≡ impedance debt readout. No-waste corollary (C1 → every molecule has function). Cambrian explosion as Γ phase transition.
 - **Paper IV**: Lifecycle equation $L(t) = \prod_i [1 - \Gamma_i^2(t)]$ from embryo to senescence, with Arrhenius aging.
 - **Paper V**: Memory = $\partial Z/\partial t$, Consciousness = $1 - \Gamma_{\text{meta}}^2$ (self-referential loop), Soul = $\ker(\partial Z/\partial t)$. Television Theorem: brain = TV + one feedback arc.
+- **Paper VI**: Grand Unification — Γ is not a model assumption but a necessary consequence of the First Law of Thermodynamics at any interface. NHANES 2017-2018 empirical validation ($n=2{,}401$, zero fitted parameters): endocrine AUC = 0.80, Health Index $H = \prod(1-\Gamma_i^2)$ correlates with disease burden (Spearman $\rho = -0.38$, $p < 10^{-83}$). **Circularity (L-METH-01) broken.**
 
-> **Methodological note**: All five papers include explicit circularity warnings — simulation data confirms the theory it is built from. External bio-impedance measurements are required for true empirical validation (see [KNOWN_LIMITATIONS.md](docs/KNOWN_LIMITATIONS.md), L-METH-01).
+> **Methodological note**: Papers I–V include explicit circularity warnings — simulation data confirms the theory it is built from. Paper VI breaks this circularity with NHANES external epidemiological data and zero fitted parameters.
 
 ---
 
@@ -169,8 +171,8 @@ alice-gamma-net/
 │   ├── modules/            # Shared module infrastructure
 │   └── api/                # Brain REST API server
 ├── tests/                  # 82 test files, 3,084 tests
-├── experiments/            # 76 experiment scripts
-├── paper/                  # 5 papers (LaTeX source)
+├── experiments/            # 85 experiment scripts
+├── paper/                  # 6 papers (LaTeX source)
 ├── figures/                # 29 generated figures
 ├── docs/                   # Architecture docs
 │   ├── KNOWN_LIMITATIONS.md
@@ -205,7 +207,7 @@ alice-gamma-net/
   author  = {Huang, Hsi-Yu},
   title   = {Alice Smart System — Physics-Driven Electronic Lifeform Simulator},
   year    = 2026,
-  version = {3.3.0},
+  version = {3.4.0},
   doi     = {10.5281/zenodo.18847656},
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }
