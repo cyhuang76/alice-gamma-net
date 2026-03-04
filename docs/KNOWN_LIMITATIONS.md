@@ -475,3 +475,17 @@ Status : open / resolved in <commit-sha>
 | 修正 | `DEFICIT_THRESHOLD = 0.05`：deficit < 5% 不觸發級聯。超過閾值後，有效 deficit = deficit − 0.05。 |
 | 等級 | **L4**（設計邊界） |
 
+---
+
+## L-METH-01 · 全部模擬數據為循環論證（Circularity of Computational Evidence）
+
+| 項目 | 值 |
+|:-----|:---|
+| 建立日期 | 2026-03-04 |
+| 影響範圍 | Papers I–V 全部計算實驗 |
+| 問題 | 所有計算實驗使用的模組（ThalamusEngine, PrefrontalCortexEngine, GammaNode 等）均**根據 Γ-Net 理論本身建造**。模擬結果 100% 符合理論預測，zero failure rate，原因是模組程式碼本身就嵌入了理論方程式。這是**內部自洽性驗證**（internal consistency），不是**經驗驗證**（empirical validation）。 |
+| 具體案例 | `exp_consciousness_two_kills.py`：丘腦閘門方程 G = G_arousal × (αG_top + (1-α)G_bot) 寫在 `thalamus.py` 裡，模擬「確認」arousal→0 殺死所有閘門 — 但這只是確認程式碼正確實作了方程式。 |
+| 結論 | 模擬證明的是：公理系統 (C1, C2, C3) 內部沒有矛盾。模擬**不能**證明：真實大腦服從這些公理。 |
+| 所需的真正驗證 | (1) fMRI + 受控升溫量測 K-dependent degradation (2) 腦幹損傷病人的多模態感覺數據 (3) 昏厥前主觀報告臨床統計 (4) TMS 阻斷 efference copy 的 Φ_meta 量測 |
+| 等級 | **L4**（設計邊界：模擬器固有限制，需外部實驗突破） |
+

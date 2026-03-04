@@ -843,6 +843,20 @@ the direction and order of magnitude of the STENO-2 result.
 \section{Discussion}\label{sec:discussion}
 %====================================================================
 
+\subsection{Methodological caveat: internal vs.\ empirical validation}
+
+All computational experiments in this paper---Murray's law recovery,
+organ-health scoring, literature validation---use simulation modules
+built from the $\Gamma$-Net axioms themselves.
+A simulation that obeys $\Gamma^2+T=1$ by construction cannot
+``discover'' a violation of energy conservation; it can only verify
+that the code is self-consistent.
+The 12/12 literature validation pass rate should be interpreted
+as internal consistency of the dual-network model, not as
+empirical proof that real organs obey MRP.
+External validation requires bio-impedance measurements on living
+tissue, which we have not performed.
+
 \subsection{Unification of neural and vascular physics}
 
 Paper~I treated only the neural $\Gamma$.

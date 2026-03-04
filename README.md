@@ -1,4 +1,4 @@
-# Alice Smart System — v3.2.0
+# Alice Smart System — v3.3.0
 
 <div align="center">
 
@@ -8,7 +8,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18847656.svg)](https://doi.org/10.5281/zenodo.18847656)
 [![Tests](https://img.shields.io/badge/tests-3084%20passed-brightgreen.svg)]()
-[![Papers](https://img.shields.io/badge/papers-4%20published-orange.svg)](paper/)
+[![Papers](https://img.shields.io/badge/papers-5%20published-orange.svg)](paper/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 
@@ -123,10 +123,10 @@ python -m alice.main server --port 8000
 
 | Metric | Count |
 |:---|---:|
-| Source files (`.py`) | 283 |
-| Lines of code | 113,000+ |
+| Source files (`.py`) | 285 |
+| Lines of code | 119,900+ |
 | Unit tests | 3,084 |
-| Experiments | 83 |
+| Experiments | 76 |
 | Body organs | 31 |
 | Brain modules | 42 |
 | Disease models | 125 |
@@ -144,12 +144,16 @@ python -m alice.main server --port 8000
 | II | Dual Neural–Vascular Impedance Networks: Architecture & Sleep | 10 | **Complete** |
 | III | Impedance Debt, Sleep Homeostasis, and the Evolution of Brains | 13 | **Complete** |
 | IV | The Lifecycle Equation: From Embryo to Senescence | 10 | **Complete** |
+| V | Memory, Consciousness, and Soul as Impedance Physics | 6 | **Complete** |
 
 Key results:
 - **Paper I**: Irreducibility theorem — heterogeneous networks have a geometric cost floor $A_{\text{cut}}$ that cannot be learned away. Relay nodes emerge as thermodynamic necessity.
 - **Paper II**: Dual neural–vascular coupling — $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$. Vascular debt accumulates on weeks-to-years timescale.
 - **Paper III**: Adenosine ≡ impedance debt readout. No-waste corollary (C1 → every molecule has function). Cambrian explosion as Γ phase transition.
 - **Paper IV**: Lifecycle equation $L(t) = \prod_i [1 - \Gamma_i^2(t)]$ from embryo to senescence, with Arrhenius aging.
+- **Paper V**: Memory = $\partial Z/\partial t$, Consciousness = $1 - \Gamma_{\text{meta}}^2$ (self-referential loop), Soul = $\ker(\partial Z/\partial t)$. Television Theorem: brain = TV + one feedback arc.
+
+> **Methodological note**: All five papers include explicit circularity warnings — simulation data confirms the theory it is built from. External bio-impedance measurements are required for true empirical validation (see [KNOWN_LIMITATIONS.md](docs/KNOWN_LIMITATIONS.md), L-METH-01).
 
 ---
 
@@ -165,8 +169,8 @@ alice-gamma-net/
 │   ├── modules/            # Shared module infrastructure
 │   └── api/                # Brain REST API server
 ├── tests/                  # 82 test files, 3,084 tests
-├── experiments/            # 83 experiment scripts
-├── paper/                  # 4 papers (LaTeX source)
+├── experiments/            # 76 experiment scripts
+├── paper/                  # 5 papers (LaTeX source)
 ├── figures/                # 29 generated figures
 ├── docs/                   # Architecture docs
 │   ├── KNOWN_LIMITATIONS.md
@@ -201,7 +205,7 @@ alice-gamma-net/
   author  = {Huang, Hsi-Yu},
   title   = {Alice Smart System — Physics-Driven Electronic Lifeform Simulator},
   year    = 2026,
-  version = {3.2.0},
+  version = {3.3.0},
   doi     = {10.5281/zenodo.18847656},
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }
