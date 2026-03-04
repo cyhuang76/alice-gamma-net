@@ -742,11 +742,12 @@ minimisation was \emph{switched on} at planetary scale.
 
 \subsection{What the NHANES validation does and does not show}
 
-The NHANES results demonstrate that $\Gamma$-physics has
-\emph{real} predictive power over human disease---not merely
-simulated self-confirmation.
-However, the mean AUC across organs (0.59) is weak by
-clinical standards.
+The three-cycle NHANES results ($n=7{,}393$, 7/7 organs
+significant at $p<0.01$) demonstrate that $\Gamma$-physics
+has \emph{real} predictive power over human disease---not
+merely simulated self-confirmation.
+However, the mean AUC across organs ($\approx 0.60$) is
+modest by clinical standards.
 We attribute this to three factors:
 (i)~self-reported diagnoses undercount true prevalence
 (conservative bias on AUC);
@@ -762,6 +763,73 @@ constitute parameter fitting in the traditional sense,
 because the functional form $\Gamma=(Z-Z_0)/(Z+Z_0)$
 is fixed by physics.  Only the input mapping (which lab
 values contribute to which organ) would change.
+
+\subsection{Corroboration versus proof}
+\label{sec:corroboration}
+
+A natural objection runs as follows: ``You assume that
+interfaces are governed by $\Gamma$, then find that $\Gamma$
+performs well on NHANES.  This may simply mean you have
+chosen a convenient coordinate, not that the universe
+`speaks in~$\Gamma$'.''  The objection is partly correct,
+and we accept its valid core:
+\emph{no finite collection of empirical successes can prove
+a universal theory true.}
+
+What we claim is therefore not proof but two logically
+independent, and considerably more modest, results:
+
+\begin{enumerate}
+  \item \textbf{Uniqueness (mathematical).}
+    Given energy conservation, linearity, and locality at
+    a one-dimensional interface, the scattering matrix
+    has a unique $2\times 2$ form, the reflection
+    coefficient is necessarily
+    $\Gamma=(Z_2-Z_1)/(Z_2+Z_1)$, and
+    $\Gamma^2+T=1$
+    follows from power conservation
+    (Section~\ref{sec:gamma-thermo},
+    Proposition~\ref{prop:uniqueness}).
+    This is a theorem, not a modelling choice.
+    Whether one calls the quantity $\Gamma$, $r$,
+    $\rho$, or $F$ is immaterial;
+    the \emph{difference-over-sum} structure is forced
+    by physics.
+
+  \item \textbf{Non-trivial prediction (empirical).}
+    If this physics-derived $\Gamma$ were merely a
+    ``convenient symbol,'' it would have no obligation
+    to predict disease status in 7{,}393 individuals
+    across 7~organ systems with zero fitted parameters.
+    A convenient reparameterization that does not
+    capture real structure would produce AUC~$\approx 0.50$
+    (chance).  The observed result---every organ
+    significantly above chance, and the composite Health
+    Index monotonically decreasing with disease
+    burden---is a falsifiable prediction that did not
+    have to come out this way.
+\end{enumerate}
+
+The distinction from black-box modelling deserves emphasis.
+In a typical machine-learning pipeline, free weights
+$\{w_i\}$ are optimised to minimise a loss function;
+performance on held-out data reflects both the model's
+structure and the information content of those weights.
+In the $\Gamma$ framework, $Z_{\text{normal}}$ values
+come from clinical textbooks (e.g.\ Guyton~\cite{Guyton2020}),
+the functional form comes from transmission-line /
+Poiseuille / electromagnetic boundary physics, and
+the NHANES pipeline contains no adjustable parameter.
+\emph{If the data do not validate $\Gamma$, there is
+nowhere to hide.}
+
+We therefore adopt the Popperian framing explicitly:
+this paper does not claim that $\Gamma$-physics is
+``proven.''  It claims that $\Gamma$-physics has
+\emph{survived a parameter-free, hash-locked,
+multi-organ, multi-cycle falsification test}---and
+that any future dataset can still refute the framework
+by showing $\Gamma$ to be no better than chance.
 
 \subsection{The status of C1, C2, C3}
 
@@ -785,10 +853,13 @@ Thermodynamics.
 
 The grand-unification claim is falsifiable in several ways:
 \begin{enumerate}
-  \item \textbf{Full-panel NHANES}: Adding troponin, BNP,
-    liver elastography, and spirometry data should raise
-    cardiac and hepatic AUC above 0.60.  If it does not,
-    the organ-$Z$ mapping is wrong.
+  \item \textbf{Specialised-biomarker cohorts}: The current
+    NHANES lab panel lacks troponin, BNP, and liver
+    elastography.  Applying the same $\Gamma$ formula to
+    cohorts that include these organ-specific biomarkers
+    should raise cardiac and hepatic AUC substantially
+    above the current 0.53--0.57.  If it does not, the
+    organ-$Z$ mapping is wrong.
   \item \textbf{Prospective cohort}: A longitudinal study
     tracking $H=\prod(1-\Gamma_i^2)$ over time should
     predict incident disease.  If $H$ fails to predict
