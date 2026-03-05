@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to Alice Smart System (Γ-Net) are documented here.
 
@@ -77,7 +77,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 - Dimensional Cost Irreducibility Theorem
 - Heterogeneous Γ-topology (multi-K nodes)
 - K-space scaling analysis (fractal dimension D_K)
-- Paper I: Irreducibility Theorem (DOI: 10.5281/zenodo.18847656)
+- Paper I: Irreducibility Theorem (DOI: 10.5281/zenodo.18751831)
 - 2,734 tests, 49 experiments
 
 ---

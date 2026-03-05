@@ -1,4 +1,4 @@
-# Alice Smart System — v3.4.0
+﻿# Alice Smart System — v3.4.0
 
 <div align="center">
 
@@ -9,7 +9,7 @@
 > **「公式是固定的，結果是透明的，驗證權在你手上。」**
 > *"Fixed formulas. Transparent results. Verification is yours."*
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18847656.svg)](https://doi.org/10.5281/zenodo.18847656)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18751831.svg)](https://doi.org/10.5281/zenodo.18751831)
 [![Tests](https://img.shields.io/badge/tests-3084%20passed-brightgreen.svg)]()
 [![Papers](https://img.shields.io/badge/papers-6%20published-orange.svg)](paper/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
@@ -187,7 +187,7 @@ python -m alice.main server --port 8000
 
 | # | Title | Pages | Status |
 |---|-------|:-----:|--------|
-| I | Irreducible Dimensional Cost in Heterogeneous Impedance Networks | 5 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18847656)) |
+| I | Irreducible Dimensional Cost in Heterogeneous Impedance Networks | 5 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18751831)) |
 | II | Dual Neural–Vascular Impedance Networks: Architecture & Sleep | 10 | **Complete** |
 | III | Impedance Debt, Sleep Homeostasis, and the Evolution of Brains | 13 | **Complete** |
 | IV | The Lifecycle Equation: From Embryo to Senescence | 10 | **Complete** |
@@ -259,7 +259,7 @@ alice-gamma-net/
   title   = {Alice Smart System — Physics-Driven Electronic Lifeform Simulator},
   year    = 2026,
   version = {3.4.0},
-  doi     = {10.5281/zenodo.18847656},
+  doi     = {10.5281/zenodo.18751831},
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }
 ```
