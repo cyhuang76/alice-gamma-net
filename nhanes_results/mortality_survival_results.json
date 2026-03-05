@@ -1,0 +1,130 @@
+{
+  "protocol": "Gamma-Net Mortality Survival Analysis v1.0",
+  "timestamp_utc": "2026-03-05T02:25:04.788107+00:00",
+  "sha256_predictions": "9c5a030c2398ebc9226c6f231d20fa60062e0a6e8acda07ee70c761def985b5e",
+  "n_respondents": 7371,
+  "n_deaths": 354,
+  "results": {
+    "kaplan_meier_quartiles": {
+      "Q1 (sickest)": {
+        "n": 1843,
+        "deaths": 193,
+        "mortality_rate_pct": 10.47,
+        "median_followup_months": 40.0
+      },
+      "Q2": {
+        "n": 1843,
+        "deaths": 64,
+        "mortality_rate_pct": 3.47,
+        "median_followup_months": 46.0
+      },
+      "Q3": {
+        "n": 1842,
+        "deaths": 69,
+        "mortality_rate_pct": 3.75,
+        "median_followup_months": 49.0
+      },
+      "Q4 (healthiest)": {
+        "n": 1843,
+        "deaths": 28,
+        "mortality_rate_pct": 1.52,
+        "median_followup_months": 53.0
+      }
+    },
+    "mortality_gradient": {
+      "Q1_sickest_rate": 10.47,
+      "Q4_healthiest_rate": 1.52,
+      "relative_risk_Q1_vs_Q4": 6.89
+    },
+    "h_vs_time_to_death": {
+      "spearman_rho": 0.1901,
+      "p_value": 0.0003219637630753504,
+      "n_deaths": 354,
+      "interpretation": "Positive ρ means higher H → later death (longer survival)"
+    },
+    "h_vs_mortality": {
+      "spearman_rho": -0.1474,
+      "p_value": 4.69148124734594e-37,
+      "n_total": 7371,
+      "interpretation": "Negative ρ means lower H → more likely to die"
+    },
+    "logistic_h_only": {
+      "auc": 0.6989,
+      "coef": -4.1594,
+      "interpretation": "Negative coefficient → lower H → higher death probability"
+    },
+    "cause_specific": {
+      "001": {
+        "name": "Heart disease",
+        "organ": "cardiac",
+        "n_deaths": 98,
+        "gamma_organ_mean_cause": 0.1853,
+        "gamma_organ_mean_alive": 0.1619,
+        "auc_cause_vs_alive": 0.6063,
+        "p_value": 0.00014818441189485103
+      },
+      "002": {
+        "name": "Malignant neoplasms",
+        "organ": "immune",
+        "n_deaths": 82,
+        "gamma_organ_mean_cause": 0.1516,
+        "gamma_organ_mean_alive": 0.1226,
+        "auc_cause_vs_alive": 0.5796,
+        "p_value": 0.0065269206342897955
+      },
+      "003": {
+        "name": "Chronic lower respiratory diseases",
+        "organ": "pulmonary",
+        "n_deaths": 7,
+        "gamma_organ_mean_cause": 0.0884,
+        "gamma_organ_mean_alive": 0.0379,
+        "auc_cause_vs_alive": 0.6212,
+        "p_value": 0.1252059044522974
+      },
+      "005": {
+        "name": "Cerebrovascular diseases",
+        "organ": "neuro",
+        "n_deaths": 12,
+        "gamma_organ_mean_cause": 0.1522,
+        "gamma_organ_mean_alive": 0.1372,
+        "auc_cause_vs_alive": 0.5743,
+        "p_value": 0.18657441840377942
+      },
+      "006": {
+        "name": "Alzheimer's disease",
+        "organ": "neuro",
+        "n_deaths": 9,
+        "gamma_organ_mean_cause": 0.1667,
+        "gamma_organ_mean_alive": 0.1372,
+        "auc_cause_vs_alive": 0.5994,
+        "p_value": 0.15093083610518332
+      },
+      "007": {
+        "name": "Diabetes mellitus",
+        "organ": "endocrine",
+        "n_deaths": 8,
+        "gamma_organ_mean_cause": 0.702,
+        "gamma_organ_mean_alive": 0.3246,
+        "auc_cause_vs_alive": 0.9559,
+        "p_value": 4.018007032071313e-06
+      },
+      "009": {
+        "name": "Nephritis / nephrotic syndrome",
+        "organ": "renal",
+        "n_deaths": 7,
+        "gamma_organ_mean_cause": 0.4924,
+        "gamma_organ_mean_alive": 0.2703,
+        "auc_cause_vs_alive": 0.8948,
+        "p_value": 0.00014952551301828575
+      }
+    },
+    "concordance": {
+      "c_statistic": 0.6989,
+      "n_concordant": 1736168,
+      "n_discordant": 747850,
+      "n_tied": 0,
+      "n_pairs": 2484018,
+      "interpretation": "C > 0.5 means H discriminates alive vs dead"
+    }
+  }
+}

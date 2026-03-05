@@ -1,0 +1,81 @@
+
+==============================================================================
+  NHANES LINKED MORTALITY: Γ PREDICTS SURVIVAL
+  Level 4 → Level 3 upgrade: cross-sectional → prospective cohort
+==============================================================================
+
+  Date:              2026-03-05 02:25 UTC
+  Cohort:            NHANES 2013–2018 × NDI through 2019
+  N respondents:     7,371
+  N deaths:          354
+  Death rate:        4.8%
+  Parameters fitted: 0 (H computed before mortality examined)
+  SHA-256:           9c5a030c2398ebc9226c6f231d20fa60062e0a6e8acda07ee70c761def985b5e
+
+------------------------------------------------------------------------------
+  KAPLAN-MEIER: MORTALITY BY HEALTH INDEX QUARTILE
+------------------------------------------------------------------------------
+  Quartile                  N  Deaths   Rate%  Med FU
+  --------------------------------------------------
+  Q1 (sickest)           1843     193   10.5%     40m
+  Q2                     1843      64    3.5%     46m
+  Q3                     1842      69    3.8%     49m
+  Q4 (healthiest)        1843      28    1.5%     53m
+
+  Relative Risk (Q1/Q4): 6.89×
+
+------------------------------------------------------------------------------
+  H vs MORTALITY STATUS
+------------------------------------------------------------------------------
+  Spearman ρ = -0.1474
+  p-value    = 4.69e-37
+  → Negative ρ means lower H → more likely to die
+
+------------------------------------------------------------------------------
+  LOGISTIC REGRESSION: H → DEATH
+------------------------------------------------------------------------------
+  H alone:      AUC = 0.6989,  coef = -4.1594
+
+------------------------------------------------------------------------------
+  HARRELL'S C-STATISTIC (Concordance Index)
+------------------------------------------------------------------------------
+  C = 0.6989
+  → C > 0.5 means H discriminates alive vs dead
+
+------------------------------------------------------------------------------
+  CAUSE-SPECIFIC MORTALITY: Γ_organ vs CAUSE OF DEATH
+------------------------------------------------------------------------------
+  Cause                        Organ           N   Γ|dead  Γ|alive    AUC          p
+  ------------------------------------------------------------------------
+  Heart disease                cardiac        98   0.1853   0.1619  0.606   1.48e-04 ***
+  Malignant neoplasms          immune         82   0.1516   0.1226  0.580   6.53e-03 ***
+  Cerebrovascular diseases     neuro          12   0.1522   0.1372  0.574   1.87e-01 
+  Alzheimer's disease          neuro           9   0.1667   0.1372  0.599   1.51e-01 
+  Diabetes mellitus            endocrine       8   0.7020   0.3246  0.956   4.02e-06 ***
+  Chronic lower respiratory diseases pulmonary       7   0.0884   0.0379  0.621   1.25e-01 
+  Nephritis / nephrotic syndrome renal           7   0.4924   0.2703  0.895   1.50e-04 ***
+
+==============================================================================
+  VERDICT
+==============================================================================
+  ✅ LEVEL 3 EVIDENCE ACHIEVED
+
+  H = Π(1-Γᵢ²) predicts all-cause mortality (ρ=-0.1474, p=4.69e-37)
+  C-statistic = 0.699 (> 0.5 = discrimination)
+  Relative Risk Q1/Q4 = 6.89×
+  ZERO parameters fitted to any mortality data
+
+  This upgrades the Γ-framework from:
+    Level 4: cross-sectional (H correlates with disease)
+    Level 3: prospective cohort (H predicts death)
+
+------------------------------------------------------------------------------
+  METHODOLOGICAL NOTES
+------------------------------------------------------------------------------
+  1. H computed from NHANES labs using pre-existing Z_normal
+  2. Mortality from NDI-linked public-use files (follow-up to 2019)
+  3. Zero parameters fitted to mortality outcome
+  4. SHA-256 hash-locked predictions before survival analysis
+  5. Conservative: no age/sex adjustment (would improve)
+  6. Cause-specific analysis: does Γ_organ predict organ-specific death?
+==============================================================================

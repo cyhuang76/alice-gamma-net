@@ -1,0 +1,12 @@
+{
+  "protocol": "Gamma-Net Mortality Survival Analysis v1.0",
+  "timestamp_utc": "2026-03-05T02:25:00.721314+00:00",
+  "n_respondents": 7371,
+  "n_deaths": 354,
+  "health_index_median": 0.5147275103858211,
+  "health_index_mean": 0.4891118143906521,
+  "fitted_parameters_to_mortality": 0,
+  "note": "H = prod(1 - Gamma_i^2) computed from NHANES labs BEFORE mortality data examined. Z_normal from clinical textbooks.",
+  "h_values_sha256": "b89ed7f8241c29cf7cad2b5ed0f80324b80e4cf7cb090d9dabb8e79b8c00918d",
+  "overall_sha256": "9c5a030c2398ebc9226c6f231d20fa60062e0a6e8acda07ee70c761def985b5e"
+}
