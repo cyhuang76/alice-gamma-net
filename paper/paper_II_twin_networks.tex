@@ -929,6 +929,72 @@ BIA measures the thermometer; MRP describes the
 thermodynamics.
 
 
+\subsection{Wound repair as spatial impedance matching}
+\label{sec:wound-suturing}
+
+A skin laceration severs the local transmission-line
+continuity, creating an impedance discontinuity where
+$|\Gamma_{\text{wound}}|\to 1$.
+The Minimum Reflection Principle demands that the system
+reduce this local $\Gamma^2$ as rapidly as possible.
+
+Histologically, the collagen fibres deposited during wound
+closure are not randomly packed; they form cross-hatched,
+woven bundles whose orientation progressively reduces the
+impedance mismatch between the wound bed and surrounding
+healthy tissue~\cite{Gurtner2008}.
+This is not ``filling a hole'' with new cells---it is a
+\emph{spatial impedance-matching design}, analogous to a
+woven electromagnetic shield that provides a gradual
+$Z$ transition rather than an abrupt boundary.
+
+From the dual-network perspective of this paper, the
+vascular network must \emph{simultaneously} restore
+$\Gamma_v$ (angiogenesis rebuilds blood supply)
+while the neural network restores $\Gamma_n$
+(reinnervation of the wound margin).
+The well-known clinical sequence---haemostasis,
+inflammation, proliferation, remodelling---maps directly
+onto a time-ordered $\Gamma^2$ minimisation cascade:
+\begin{enumerate}
+  \item \textbf{Haemostasis}: emergency clot seals the
+    open boundary ($|\Gamma|=1\to |\Gamma|<1$).
+  \item \textbf{Inflammation}: immune response clears
+    debris that would maintain high $\Gamma_v$.
+  \item \textbf{Proliferation}: fibroblasts deposit
+    cross-woven collagen to progressively match
+    $Z_{\text{scar}}\to Z_{\text{skin}}$.
+  \item \textbf{Remodelling}: years-long fine-tuning
+    of fibre alignment to further reduce $\Gamma^2$.
+\end{enumerate}
+
+The clinical observation that scars never fully recover
+original tissue properties corresponds to a residual
+$\Gamma_{\text{scar}}^2>0$: the impedance match is
+improved but not perfected.
+The term ``healing'' (implying restoration) is therefore
+less precise than ``\emph{suturing}''---the system
+stitches together two impedance domains with a graded
+transition layer.
+
+Pain perception during wound closure provides a direct
+readout of the local $\Gamma^2$: nociceptors respond to
+the magnitude of the impedance discontinuity.
+As collagen remodelling reduces $\Gamma^2$, pain
+subsides---not because of ``neural adaptation'' but
+because the physical mismatch being sensed has diminished.
+
+\begin{remark}[Falsifiable prediction]
+Bioimpedance spectroscopy across a healing wound should
+show a monotonic decrease in the local reflection
+coefficient $|\Gamma(f)|$ over the weeks of wound
+maturation.  The time constant of $\Gamma^2$ decay should
+correlate with the rate of pain resolution as measured by
+visual analogue scale (VAS), providing a direct test of
+the ``pain = $\Gamma$ readout'' hypothesis.
+\end{remark}
+
+
 %====================================================================
 \section{Conclusion}\label{sec:conclusion}
 %====================================================================
@@ -1200,6 +1266,12 @@ L.~H.~Young \emph{et al.},
 H.-Y.~Huang,
 ``Alice Gamma-Net: Source Code and Experiments,''
 Zenodo (2026). \texttt{doi:10.5281/zenodo.18847656}.
+
+\bibitem{Gurtner2008}
+G.~C.~Gurtner, S.~Werner, Y.~Barrandon, and
+M.~T.~Longaker,
+``Wound repair and regeneration,''
+\emph{Nature}\ \textbf{453}, 314 (2008).
 
 \end{thebibliography}
 

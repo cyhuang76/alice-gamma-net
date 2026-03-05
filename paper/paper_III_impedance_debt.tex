@@ -1655,6 +1655,59 @@ The author thanks the open-source scientific Python community
 simulator possible.
 \end{acknowledgments}
 
+\subsection{Scar tissue as permanent impedance debt}
+\label{sec:scar-debt}
+
+The wound-suturing process described in
+Paper~II~\cite{PaperII} has a direct debt interpretation.
+A fresh wound creates an acute, localised impedance debt:
+\begin{equation}
+  D_{Z,\text{wound}} = \int_0^{T_{\text{repair}}}
+    \Gamma_{\text{wound}}^2(t)\,P_{\text{in}}(t)\,dt\,,
+  \label{eq:wound-debt}
+\end{equation}
+where $\Gamma_{\text{wound}}^2(0)\approx 1$ at the moment
+of injury and $P_{\text{in}}$ is the local metabolic
+power demand (inflammation, angiogenesis, collagen
+synthesis).
+
+The biological repair process---haemostasis, inflammation,
+proliferation, remodelling---discharges this debt by
+progressively reducing $|\Gamma_{\text{wound}}|$.
+However, scar tissue never achieves $\Gamma=0$:
+the residual mismatch
+$\Gamma_{\text{scar}}^2>0$ constitutes a
+\emph{permanent, non-dischargeable impedance debt}
+analogous to the irreducible topological cost
+$A_{\text{cut}}$ from Paper~I.
+
+This framework explains several clinical observations:
+\begin{itemize}
+  \item \textbf{Scar tenderness}: persistent $\Gamma^2>0$
+    generates a continuous low-level nociceptive signal.
+  \item \textbf{Scar contracture}: the system continues
+    to remodel collagen fibre orientation for years,
+    attempting to minimise $\Gamma^2$; the mechanical
+    tension is a side-effect of this ongoing optimisation.
+  \item \textbf{Keloid formation}: pathological
+    over-deposition of collagen occurs when the repair
+    loop overshoots, producing $Z_{\text{scar}}>Z_{\text{skin}}$
+    and a new mismatch of opposite sign.
+  \item \textbf{Cumulative surgical debt}: each surgical
+    incision adds a permanent $\Gamma_{\text{scar}}^2$
+    term to the body's total impedance debt budget.
+\end{itemize}
+
+\begin{remark}[Scar debt and the bathtub curve]
+An individual who accumulates many scars (surgical,
+traumatic) shifts their baseline $\Sigma\Gamma^2$
+upward, effectively raising the floor of the lifecycle
+bathtub curve (Paper~IV).  This provides a mechanistic
+link between cumulative tissue trauma and accelerated
+aging.
+\end{remark}
+
+
 \section*{Data and Code Availability}
 Source code for the Alice $\Gamma$-Net simulator, including all
 experiment scripts and the 3\,025-test verification suite

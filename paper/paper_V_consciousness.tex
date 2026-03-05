@@ -773,6 +773,184 @@ is, to our knowledge, the first formal definition that is
 both physically grounded and empirically invariant.
 
 
+\subsection{Infantile amnesia: the SNR floor of episodic memory}
+\label{sec:infantile-amnesia}
+
+Humans reliably fail to recall autobiographical events
+from before age~$\sim$3 (``infantile amnesia'').
+Classical explanations invoke hippocampal immaturity or
+language development.  The impedance framework provides a
+quantitative alternative.
+
+The signal-to-noise ratio for memory \emph{retrieval}
+is:
+\begin{equation}
+  \mathrm{SNR}_{\text{mem}} =
+    \frac{|\Delta Z_{\text{mem}}|^2}
+         {\sigma^2_{Z_{\text{bg}}}}\,,
+  \label{eq:SNR-mem}
+\end{equation}
+where
+$|\Delta Z_{\text{mem}}|^2$ is the impedance change
+written by a single episode (numerator) and
+$\sigma^2_{Z_{\text{bg}}}$ is the background variance of
+the impedance map (denominator).
+
+Before age~3, three processes simultaneously inflate
+$\sigma^2_{Z_{\text{bg}}}$:
+\begin{enumerate}
+  \item \textbf{Myelination}: ongoing myelination
+    shifts the characteristic impedance
+    $Z_0^{\text{axon}}$ on a daily basis,
+    moving the reference plane against which all
+    $\Gamma$ values are defined.
+    A memory encoded against yesterday's $Z_0$ is
+    unrecoverable when $Z_0$ has drifted.
+  \item \textbf{Synaptic pruning}: the neonatal synapse
+    count is approximately twice the adult value;
+    pruning eliminates $\sim$50\% of synapses,
+    deleting the $Z_k$ channels on which early
+    $\Delta Z$ were stored.
+  \item \textbf{PFC immaturity}: with $Q_{\text{PFC}}\ll 1$
+    (Sec.~\ref{sec:consciousness}), the self-referential
+    loop quality is too low to generate the meta-tag
+    ``\emph{I} experienced this''---the necessary encoding
+    for an \emph{episodic} (rather than procedural) memory.
+\end{enumerate}
+
+Crucially, the infant \emph{does} form Hebbian traces
+(C2 operates from birth with maximal $\eta$).
+Motor memories ($\Gamma\to 0$; walking, grasping) survive
+because they are encoded as impedance \emph{structure},
+not as retrievable \emph{reflections}.
+It is only declarative/episodic memory
+($\Gamma\approx\varepsilon>0$, Sec.~\ref{sec:memory})
+that requires $\mathrm{SNR}_{\text{mem}}>\theta_{\text{recall}}$.
+
+\begin{corollary}[Memory requires a stable reference plane]
+Episodic memory formation requires that the background
+impedance variance $\sigma^2_{Z_{\text{bg}}}$ be small
+relative to the single-episode encoding strength
+$|\Delta Z_{\text{mem}}|^2$.
+Since $\sigma^2_{Z_{\text{bg}}}$ decreases monotonically
+with age during development (as myelination completes and
+pruning subsides), the onset of stable episodic memory
+at age~$\sim$3 corresponds to the epoch when
+$\sigma^2_{Z_{\text{bg}}}$ falls below the retrieval
+threshold.
+\end{corollary}
+
+\subsection{Nociception without memory: the three-layer
+  pain architecture}
+\label{sec:infant-pain}
+
+A critical clarification emerges: newborn infants
+\emph{do} exhibit pain responses (flexion withdrawal,
+crying, cortisol elevation) despite having
+$\mathrm{SNR}_{\text{mem}}\approx 0$.
+This is not a contradiction.
+
+Pain processing involves three physically distinct
+circuits ordered by their SNR requirements:
+\begin{enumerate}
+  \item \textbf{Nociception} (spinal reflex arc):
+    a hardware detector of local $|\Gamma_{\text{tissue}}|>\theta_{\text{noci}}$.
+    Requires no calibrated VNA, no PFC, no consciousness.
+    Fully operational at birth.
+  \item \textbf{Pain perception} (thalamo-cortical loop):
+    requires $\Phi_{\text{meta}}>0$, i.e., the television
+    inequality must be satisfied.
+    Partially operational in infancy (low $Q_{\text{PFC}}$).
+  \item \textbf{Pain memory} (hippocampal-PFC encoding):
+    requires $\mathrm{SNR}_{\text{mem}}>\theta_{\text{recall}}$.
+    Non-operational before age~$\sim$3.
+\end{enumerate}
+
+The neonatal design thus prioritises \emph{survival}
+(hardware interrupt) over \emph{experience}
+(consciousness) over \emph{record-keeping} (memory),
+bringing each layer online only when the preceding
+layer's reference plane has stabilised.
+
+\subsection{Mechanical percussion and consciousness
+  restoration}
+\label{sec:percussion}
+
+A universally recognised but rarely analysed phenomenon:
+when a CRT television displays a degraded signal, a
+physical slap to the chassis often temporarily restores
+picture quality.
+Humans exhibit an identical behaviour---slapping one's
+own forehead to ``clear the head'' during drowsiness or
+cognitive fog.
+
+The physics is the same in both systems.
+In an aging television, oxidised solder joints and
+cold-solder cracks create intermittent contact impedance:
+$\Gamma_{\text{contact}}>0$, fluctuating near the
+conduction threshold.
+Mechanical vibration transiently re-seats the contact
+surfaces, reducing $\Gamma_{\text{contact}}\to 0$ for
+seconds to minutes.
+
+In the brain, the analogous ``cold-solder cracks'' are:
+\begin{itemize}
+  \item \textbf{Adenosine-mediated synaptic fatigue}:
+    adenosine accumulation shifts synaptic
+    $Z_{\text{synapse}}$ away from its matched
+    operating point ($\Gamma_{\text{syn}}\uparrow$).
+  \item \textbf{Thalamic gate drift}: with fatigue or
+    hypoglycemia, gate gains $G_i$ drift below threshold.
+  \item \textbf{Arousal fluctuation}: sub-threshold
+    $G_{\text{arousal}}$ causes
+    $\Phi(t)=G_{\text{arousal}}\cdot\sum G_i\cdot Q_{\text{PFC}}$
+    to hover near~$\theta$, producing intermittent
+    consciousness (microsleeps, ``spacing out'').
+\end{itemize}
+
+A physical slap to the head produces three simultaneous
+effects that transiently restore $\Phi>\theta$:
+\begin{enumerate}
+  \item \textbf{Cerebrospinal fluid pressure wave}:
+    mechanical perturbation reaches synaptic junctions,
+    transiently resetting $\Gamma_{\text{syn}}$ closer
+    to the matched position---identical to the television
+    mechanism.
+  \item \textbf{Nociceptive arousal kick}:
+    the slap is a mild nociceptive stimulus;
+    trigeminal afferents activate the brainstem
+    reticular activating system, directly elevating
+    $G_{\text{arousal}}$.
+  \item \textbf{Vestibular startle bypass}:
+    the head acceleration triggers the vestibular
+    startle circuit (Sec.~\ref{sec:two-kills}),
+    which forces $G_{\text{vestibular}}=1$ via
+    hardware interrupt, injecting a strong signal
+    into $\sum G_i$.
+\end{enumerate}
+
+The combined effect pushes $\Phi$ above $\theta$ for
+a transient period---exactly as a slap to the television
+restores picture quality until the contact re-oxidises.
+The critical difference: the brain has $\Gamma_{\text{meta}}$
+(closed-loop self-reference), so the individual is
+\emph{aware} that clarity has been restored;
+the television is not.
+
+\begin{remark}[Not metaphor but identity]
+The television analogy (Theorem~\ref{thm:TV-full}) is not
+a didactic convenience.
+The percussion-restoration effect in both systems arises
+from the same impedance physics: mechanical perturbation
+transiently reduces contact $\Gamma^2$ at degraded
+junctions.
+The identity of the repair mechanism across biological
+and electronic systems is a direct consequence of the
+universality of $\Gamma$ (Theorem~\ref{thm:universality}
+in Paper~VI).
+\end{remark}
+
+
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}

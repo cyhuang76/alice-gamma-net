@@ -1181,8 +1181,104 @@ $\mathcal{A}[\Gamma] = \int \Sigma|\Gamma|^2\,dt
 \to \min$.
 
 
+\subsection{Infant soft tissue as mechanical impedance buffer}
+\label{sec:infant-buffer}
+
+The neonatal body is characterised by soft cartilaginous
+bones, thick subcutaneous fat, and highly elastic skin.
+From an impedance standpoint, these tissues constitute
+\emph{mechanical quarter-wave transformers} that provide
+a graded impedance transition between the external
+environment and the immature neural network:
+\begin{equation}
+  Z_{\text{infant}} \ll Z_{\text{adult}}\,,
+  \qquad
+  \Gamma_{\text{impact}} =
+    \frac{Z_{\text{ground}} - Z_{\text{infant}}}
+         {Z_{\text{ground}} + Z_{\text{infant}}}\,.
+  \label{eq:infant-buffer}
+\end{equation}
+Because $Z_{\text{infant}}$ is low and graded (fat $\to$
+cartilage $\to$ soft bone), the mechanical impact signal
+is significantly attenuated before reaching nociceptors.
+The same fall that would produce $|\Gamma|\approx 0.9$
+in an adult skeleton produces
+$|\Gamma|\approx 0.3$--$0.5$ in an infant.
+
+This buffering is not incidental; it is a \emph{necessary}
+design feature during the calibration phase ($t<t_1$).
+With $\Sigma\Gamma^2\approx 0.8$ at birth
+(Eq.~\ref{eq:novelty-term}), the neural network is
+already saturated with mismatch from normal sensory input.
+Injecting unattenuated mechanical pain signals would
+overwhelm the calibration process, diverting the Hebbian
+update (C2) toward pain-avoidance at the expense of
+sensory-motor learning.
+
+\subsection{Social referencing as external $\Gamma$ calibration}
+\label{sec:social-gamma}
+
+A well-documented developmental phenomenon is
+\emph{social referencing}: when an infant falls, it
+typically looks at the caregiver's face \emph{before}
+deciding whether to cry~\cite{Sorce1985}.
+If the caregiver displays alarm, the infant cries;
+if the caregiver smiles, the infant resumes play.
+
+Within the lifecycle framework, this behaviour is not
+``learned'' but \emph{structurally necessary}.
+The infant's pain-perception threshold is not yet
+calibrated (the PFC decoder quality
+$Q_{\text{PFC}}\ll 1$; Paper~V).
+The caregiver's emotional expression provides an
+external reflection coefficient $\Gamma_{\text{social}}$
+that is superimposed on the mechanical signal:
+\begin{equation}
+  \Gamma_{\text{perceived}} =
+    \Gamma_{\text{mechanical}} +
+    \eta_{\text{social}}\,\Gamma_{\text{social}}\,,
+  \label{eq:social-gamma}
+\end{equation}
+where $\eta_{\text{social}}\gg 1$ during infancy
+(high social coupling) and
+$\eta_{\text{social}}\to 0$ in adulthood
+(self-calibrated system).
+
+Each fall-and-look episode constitutes a Hebbian
+calibration step for the pain threshold:
+\begin{equation}
+  \Delta Z_{\text{pain\_threshold}} =
+    -\eta\,\Gamma_{\text{social}}\,
+    x_{\text{pre}}\,x_{\text{post}}\,,
+  \label{eq:social-hebbian}
+\end{equation}
+where $x_{\text{pre}}$ is the mechanical nociceptive
+signal and $x_{\text{post}}$ is the behavioural response.
+Over hundreds of such episodes, the infant's internal
+pain threshold converges to a culturally and
+environmentally appropriate set-point.
+
+As myelination completes and $Q_{\text{PFC}}$ rises,
+the system transitions from external calibration
+($\eta_{\text{social}}\gg 1$) to autonomous operation
+($\eta_{\text{social}}\to 0$).
+This is the impedance-physics explanation for why
+toddlers gradually stop looking at caregivers for
+emotional cues after painful events.
+
+\begin{remark}[Developmental design principle]
+The infant body uses two complementary strategies---structural
+buffering (soft tissue) and behavioural calibration (social
+referencing)---to minimise $\Gamma^2$ during the
+\emph{most vulnerable phase} of the lifecycle.
+Both strategies are temporary scaffolding: bones harden
+and social coupling decreases as the neural network
+completes its self-calibration.
+\end{remark}
+
+
 % ============================================================
-%  SECTION 9 — CONCLUSION
+%  SECTION 9 --- CONCLUSION
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
@@ -1394,6 +1490,13 @@ A.~R.~Damasio,
 C.~R.~Harris \emph{et al.},
 ``Array programming with NumPy,''
 \emph{Nature}\ \textbf{585}, 357 (2020).
+
+\bibitem{Sorce1985}
+J.~F.~Sorce, R.~N.~Emde, J.~J.~Campos, and
+M.~D.~Klinnert,
+``Maternal emotional signaling: its effect on the
+visual cliff behavior of 1-year-olds,''
+\emph{Dev.\ Psychol.}\ \textbf{21}, 195 (1985).
 
 \end{thebibliography}
 
