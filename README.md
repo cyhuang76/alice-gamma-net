@@ -6,6 +6,9 @@
 
 *No training data. No black boxes. Pure impedance physics.*
 
+> **「我們不能自證清白，就讓所有人替我們驗證。」**
+> *"We cannot prove ourselves innocent. So we ask everyone to verify."*
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18847656.svg)](https://doi.org/10.5281/zenodo.18847656)
 [![Tests](https://img.shields.io/badge/tests-3084%20passed-brightgreen.svg)]()
 [![Papers](https://img.shields.io/badge/papers-6%20published-orange.svg)](paper/)
@@ -42,6 +45,33 @@ Every module, every tick, must obey:
 | **C1** Energy Conservation | Reflected + transmitted = incident | $\Gamma^2 + T = 1$ |
 | **C2** Hebbian Learning | Reduce mismatch through experience | $\Delta Z = -\eta \cdot \Gamma \cdot x_{\text{pre}} \cdot x_{\text{post}}$ |
 | **C3** Signal Protocol | All signals carry impedance metadata | `ElectricalSignal(Z, waveform, SNR)` |
+
+---
+
+## Public Falsification Platform
+
+This is **not** a model you need to trust — it is a **fixed-equation physical law** you can verify.
+
+| | Typical ML Model | Γ-Net |
+|:---|:---|:---|
+| Parameters | Millions (fitted to data) | **Zero** (fixed by physics) |
+| Trust model | "Believe our AUC" | "Run it yourself" |
+| Audit | Requires expertise | Anyone with a health report |
+| Data collection | Server-side | **Browser-only, offline-capable** |
+
+### Three Walls of Verification
+
+1. **Wall 1 — Self-computation**: Enter your health-check values → the calculator runs entirely in your browser. No server, no data collection, no account.
+2. **Wall 2 — Textbook side-by-side**: Same inputs produce Framingham risk, eGFR (CKD-EPI 2021), HOMA-IR, and Metabolic Syndrome (ATP-III) alongside the 12-organ Γ-vector. Where they agree ✓. Where they disagree → Γ-Net shows *which organ channel* drives the discordance.
+3. **Wall 3 — Falsifiable prediction**: Γ-Net predicts which organ will deteriorate first, and tracks cumulative impedance debt D_Z over time. If wrong, **you will know**.
+
+```bash
+# Try it now — textbook vs Γ-Net, four clinical cases
+py -3.11 experiments/demo_dual_rail.py
+
+# Enter your own health-check data
+py -3.11 experiments/demo_dual_rail.py --interactive
+```
 
 ---
 

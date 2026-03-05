@@ -1430,7 +1430,76 @@ principle $A[\Gamma]\to\min$.
 
 
 % ============================================================
-%  SECTION 8 --- CONCLUSION
+%  SECTION 8b --- PUBLIC FALSIFICATION PLATFORM
+% ============================================================
+\subsection{From black-box metrics to public falsification platform}
+\label{sec:falsification-platform}
+
+A predictive framework that cannot be publicly challenged is, in
+Karl Popper's sense, not science.  The $\Gamma$-Net framework has
+one decisive advantage over statistical risk models:
+\emph{it contains zero fitted parameters}.  The impedance reference
+values $Z_{\text{normal},i}$ are fixed by physiology textbooks, not
+by training data; the formula
+$\Gamma_i = (Z_{\text{patient},i} - Z_{\text{normal},i}) /
+(Z_{\text{patient},i} + Z_{\text{normal},i})$ is the unique
+thermodynamic identity at a one-dimensional interface; and
+$H = \prod_i (1 - \Gamma_i^2)$ follows from C1 energy conservation.
+There are no hyperparameters to overfit.
+
+This zero-parameter property enables a verification protocol that
+no regression model can match:
+
+\begin{enumerate}
+  \item \textbf{Wall~1: Self-computation.}
+    The user enters their own health-check data (blood pressure,
+    cholesterol, creatinine, HbA1c, etc.) into a browser-side
+    calculator that runs entirely offline.  No server, no data
+    collection, no account.  The calculation is deterministic and
+    auditable.
+
+  \item \textbf{Wall~2: Textbook side-by-side.}
+    The same inputs are simultaneously fed to established clinical
+    risk calculators---Framingham 10-year CHD risk (Wilson 1998),
+    CKD-EPI 2021 eGFR (Inker 2021), HOMA-IR (Matthews 1985), and
+    ATP-III metabolic syndrome criteria (Grundy 2005).  The user
+    sees two columns: textbook \emph{vs.}\ $\Gamma$-Net.
+    Where both agree, confidence increases.  Where they disagree,
+    the $\Gamma$-Net organ decomposition
+    $\{\Gamma_i^2\}_{i=1}^{12}$ reveals \emph{which channel}
+    drives the discordance---information that no single-number
+    risk score can provide.
+
+  \item \textbf{Wall~3: Falsifiable prediction.}
+    For each user, $\Gamma$-Net outputs a ranked list of organ
+    channels ordered by $|\Gamma_i|$.  It further predicts
+    the cumulative impedance debt
+    $D_Z(T) = \int_0^T \sum_i \Gamma_i^2(t)\,dt$.  These are
+    prospective, falsifiable predictions: if the channel flagged
+    ``worst'' does not deteriorate first in follow-up, the
+    framework is wrong---and the user will know.
+\end{enumerate}
+
+\begin{remark}[Asymmetry of trust]
+We state the design principle explicitly:
+\emph{``We cannot prove ourselves innocent.
+So we ask everyone to verify.''}
+A zero-parameter model has nothing to hide and nothing to overfit.
+The appropriate epistemic posture is not ``trust our AUC'' but
+``run it yourself and tell us where it fails.''
+\end{remark}
+
+A reference implementation of this three-wall protocol is provided
+in the project repository as an open-source dual-rail comparison
+tool, computing Framingham, eGFR, HOMA-IR, and metabolic syndrome
+alongside the 12-organ $\Gamma$-vector for any user-supplied
+health-check input.\footnote{Available at
+\url{https://github.com/cyhuang76/alice-gamma-net},
+file \texttt{experiments/demo\_dual\_rail.py}.}
+
+
+% ============================================================
+%  SECTION 9 --- CONCLUSION
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
