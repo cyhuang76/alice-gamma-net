@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gamma-Net Public Falsification Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <h1>GAMMA-NET PUBLIC FALSIFICATION PLATFORM</h1>
+  <div class="subtitle">Textbook vs Gamma-Net &mdash; Side-by-Side Health Verification</div>
+  <div class="philosophy">&ldquo;We cannot prove ourselves innocent. So we ask everyone to verify.&rdquo;</div>
+</div>
+
+<!-- Loading Pyodide -->
+<div id="loading">
+  <span class="spinner"></span>
+  Loading Pyodide (Python in WebAssembly)&hellip;
+</div>
+
+<div class="container" id="app" style="display:none;">
+
+  <!-- Three Walls -->
+  <div class="walls-banner">
+    <div class="wall-card">
+      <div class="wall-num">Wall 1</div>
+      <div class="wall-title">Self-Computation</div>
+      <div class="wall-desc">Enter YOUR numbers. The formula runs in YOUR browser. Nothing is sent anywhere.</div>
+    </div>
+    <div class="wall-card">
+      <div class="wall-num">Wall 2</div>
+      <div class="wall-title">Textbook Side-by-Side</div>
+      <div class="wall-desc">Framingham, ASCVD, SCORE2, eGFR, FIB-4, HOMA-IR &mdash; published formulas, same input.</div>
+    </div>
+    <div class="wall-card">
+      <div class="wall-num">Wall 3</div>
+      <div class="wall-title">Falsifiable Prediction</div>
+      <div class="wall-desc">Gamma-Net predicts which organ deteriorates first. If wrong, you see it.</div>
+    </div>
+  </div>
+
+  <!-- Input Panel -->
+  <div class="input-panel">
+    <h2>Health Check Input</h2>
+
+    <div class="btn-row" style="margin-bottom:0.8rem;">
+      <button class="btn-preset" onclick="loadPreset('healthy')">Healthy Adult</button>
+      <button class="btn-preset" onclick="loadPreset('metabolic')">Metabolic Risk</button>
+      <button class="btn-preset" onclick="loadPreset('kidney')">Kidney Warning</button>
+      <button class="btn-preset" onclick="loadPreset('smoker')">Young Smoker</button>
+      <button class="btn-preset" onclick="clearAll()">Clear</button>
+    </div>
+
+    <div class="input-grid">
+      <!-- Demographics -->
+      <div class="input-group">
+        <label>Age</label>
+        <input type="number" id="in_age" min="18" max="100" value="55">
+      </div>
+      <div class="input-group">
+        <label>Sex</label>
+        <select id="in_sex">
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label>Waist (cm)</label>
+        <input type="number" id="in_waist" step="0.1">
+      </div>
+
+      <!-- Vitals -->
+      <div class="input-group">
+        <label>Systolic BP (mmHg)</label>
+        <input type="number" id="in_sbp" value="130">
+      </div>
+      <div class="input-group">
+        <label>Diastolic BP (mmHg)</label>
+        <input type="number" id="in_dbp" value="80">
+      </div>
+      <div class="input-group checkbox-group">
+        <input type="checkbox" id="in_bp_treated">
+        <label for="in_bp_treated">On BP medication</label>
+      </div>
+      <div class="input-group checkbox-group">
+        <input type="checkbox" id="in_smoker">
+        <label for="in_smoker">Current smoker</label>
+      </div>
+
+      <!-- Lipids -->
+      <div class="input-group">
+        <label>Total Cholesterol (mg/dL)</label>
+        <input type="number" id="in_TC" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>HDL (mg/dL)</label>
+        <input type="number" id="in_HDL" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>LDL (mg/dL)</label>
+        <input type="number" id="in_LDL" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>Triglycerides (mg/dL)</label>
+        <input type="number" id="in_TG" step="0.1">
+      </div>
+
+      <!-- Metabolic -->
+      <div class="input-group">
+        <label>Fasting Glucose (mg/dL)</label>
+        <input type="number" id="in_Glucose" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>HbA1c (%)</label>
+        <input type="number" id="in_HbA1c" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>Fasting Insulin (&mu;U/mL)</label>
+        <input type="number" id="in_insulin" step="0.1">
+      </div>
+
+      <!-- Renal -->
+      <div class="input-group">
+        <label>Creatinine (mg/dL)</label>
+        <input type="number" id="in_Cr" step="0.01">
+      </div>
+      <div class="input-group">
+        <label>BUN (mg/dL)</label>
+        <input type="number" id="in_BUN" step="0.1">
+      </div>
+
+      <!-- Hepatic -->
+      <div class="input-group">
+        <label>AST (U/L)</label>
+        <input type="number" id="in_AST" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>ALT (U/L)</label>
+        <input type="number" id="in_ALT" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>Albumin (g/dL)</label>
+        <input type="number" id="in_Albumin" step="0.1">
+      </div>
+
+      <!-- Electrolytes -->
+      <div class="input-group">
+        <label>Na (mEq/L)</label>
+        <input type="number" id="in_Na" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>K (mEq/L)</label>
+        <input type="number" id="in_K" step="0.1">
+      </div>
+
+      <!-- CBC -->
+      <div class="input-group">
+        <label>WBC (10&sup3;/&mu;L)</label>
+        <input type="number" id="in_WBC" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>Hemoglobin (g/dL)</label>
+        <input type="number" id="in_Hb" step="0.1">
+      </div>
+      <div class="input-group">
+        <label>Platelets (10&sup3;/&mu;L)</label>
+        <input type="number" id="in_Plt" step="1">
+      </div>
+
+      <!-- Thyroid -->
+      <div class="input-group">
+        <label>TSH (mIU/L)</label>
+        <input type="number" id="in_TSH" step="0.01">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" id="btnCompute" onclick="runCompute()" disabled>Compute</button>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <div id="results">
+    <div class="results-grid">
+
+      <!-- Textbook Card -->
+      <div class="result-card" id="card-textbook">
+        <h3>TEXTBOOK ASSESSMENT</h3>
+        <div id="tb-content"></div>
+      </div>
+
+      <!-- Gamma-Net Card -->
+      <div class="result-card" id="card-gamma">
+        <h3>GAMMA-NET ASSESSMENT</h3>
+        <div id="gn-content"></div>
+      </div>
+
+      <!-- Radar Chart -->
+      <div class="result-card">
+        <h3>12-ORGAN GAMMA RADAR</h3>
+        <div class="radar-container">
+          <canvas id="radarChart" width="320" height="320"></canvas>
+        </div>
+      </div>
+
+      <!-- D_Z Panel -->
+      <div class="result-card" id="card-dz">
+        <h3>D_Z IMPEDANCE DEBT PROJECTION</h3>
+        <div id="dz-content"></div>
+      </div>
+
+      <!-- Cross-Comparison -->
+      <div class="result-card full-width" id="card-cross">
+        <h3>CROSS-COMPARISON</h3>
+        <div id="cross-content"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>Gamma-Net Public Falsification Platform &mdash; Zero-parameter impedance physics</p>
+  <p>All computation runs in your browser via <a href="https://pyodide.org" target="_blank" rel="noopener">Pyodide</a>. No data is sent to any server.</p>
+  <p>Source: <a href="https://github.com/your-repo/alice-gamma-net" target="_blank" rel="noopener">alice-gamma-net</a> | AGPL-3.0</p>
+</div>
+
+<!-- Pyodide -->
+<script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js"></script>
+<script>
+// ============================================================================
+// Preset profiles
+// ============================================================================
+const PRESETS = {
+  healthy: {
+    age:55, sex:"M", waist:88, sbp:118, dbp:75, bp_treated:false, smoker:false,
+    TC:195, HDL:55, LDL:110, TG:120, Glucose:88, HbA1c:5.2, insulin:6,
+    Cr:0.9, BUN:14, AST:22, ALT:25, Albumin:4.5,
+    Na:141, K:4.2, WBC:6.5, Hb:15.0, Plt:250, TSH:2.1
+  },
+  metabolic: {
+    age:55, sex:"M", waist:108, sbp:145, dbp:92, bp_treated:true, smoker:false,
+    TC:242, HDL:36, LDL:165, TG:210, Glucose:118, HbA1c:6.8, insulin:18,
+    Cr:1.1, BUN:18, AST:38, ALT:45, Albumin:4.0,
+    Na:141, K:4.5, WBC:7.8, Hb:14.2, Plt:280, TSH:3.0
+  },
+  kidney: {
+    age:62, sex:"F", waist:98, sbp:155, dbp:95, bp_treated:true, smoker:false,
+    TC:228, HDL:38, LDL:152, TG:195, Glucose:125, HbA1c:7.2, insulin:22,
+    Cr:1.8, BUN:32, AST:42, ALT:38, Albumin:3.4,
+    Na:138, K:5.2, WBC:8.5, Hb:11.5, Plt:310, TSH:4.5
+  },
+  smoker: {
+    age:32, sex:"M", waist:90, sbp:128, dbp:82, bp_treated:false, smoker:true,
+    TC:215, HDL:42, LDL:140, TG:165, Glucose:95, HbA1c:5.5, insulin:8,
+    Cr:0.95, BUN:15, AST:28, ALT:32, Albumin:4.3,
+    Na:140, K:4.3, WBC:7.2, Hb:15.5, Plt:240, TSH:2.0
+  }
+};
+
+// ============================================================================
+// Input helpers
+// ============================================================================
+const FIELD_MAP = {
+  age:'in_age', sex:'in_sex', waist:'in_waist',
+  sbp:'in_sbp', dbp:'in_dbp', bp_treated:'in_bp_treated', smoker:'in_smoker',
+  TC:'in_TC', HDL:'in_HDL', LDL:'in_LDL', TG:'in_TG',
+  Glucose:'in_Glucose', HbA1c:'in_HbA1c', insulin:'in_insulin',
+  Cr:'in_Cr', BUN:'in_BUN', AST:'in_AST', ALT:'in_ALT', Albumin:'in_Albumin',
+  Na:'in_Na', K:'in_K', WBC:'in_WBC', Hb:'in_Hb', Plt:'in_Plt', TSH:'in_TSH'
+};
+
+function loadPreset(name) {
+  const p = PRESETS[name];
+  if (!p) return;
+  for (const [k,v] of Object.entries(p)) {
+    const el = document.getElementById(FIELD_MAP[k]);
+    if (!el) continue;
+    if (el.type === 'checkbox') el.checked = v;
+    else if (el.tagName === 'SELECT') el.value = v;
+    else el.value = v;
+  }
+  document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function clearAll() {
+  for (const id of Object.values(FIELD_MAP)) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    if (el.type === 'checkbox') el.checked = false;
+    else if (el.tagName === 'SELECT') el.selectedIndex = 0;
+    else el.value = '';
+  }
+  document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+  document.getElementById('results').style.display = 'none';
+}
+
+function gatherInput() {
+  const data = {};
+  const numFields = ['age','waist','sbp','dbp','TC','HDL','LDL','TG',
+    'Glucose','HbA1c','insulin','Cr','BUN','AST','ALT','Albumin',
+    'Na','K','WBC','Hb','Plt','TSH'];
+  for (const f of numFields) {
+    const el = document.getElementById(FIELD_MAP[f]);
+    if (el && el.value !== '') data[f] = parseFloat(el.value);
+  }
+  data.sex = document.getElementById('in_sex').value;
+  data.systolic_bp = data.sbp || 120;
+  data.diastolic_bp = data.dbp || 80;
+  data.bp_treated = document.getElementById('in_bp_treated').checked;
+  data.smoker = document.getElementById('in_smoker').checked;
+  if (data.waist) data.waist_cm = data.waist;
+  return data;
+}
+
+// ============================================================================
+// Pyodide init
+// ============================================================================
+let pyodide = null;
+
+async function initPyodide() {
+  pyodide = await loadPyodide();
+  // Load gamma_compute.py
+  const resp = await fetch('gamma_compute.py');
+  const code = await resp.text();
+  pyodide.runPython(code);
+  // Ready
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('btnCompute').disabled = false;
+}
+
+initPyodide().catch(err => {
+  document.getElementById('loading').innerHTML =
+    '<span style="color:#ef5350;">Failed to load Pyodide: ' + err.message + '</span>';
+});
+
+// ============================================================================
+// Compute & Render
+// ============================================================================
+function runCompute() {
+  const data = gatherInput();
+  // Pass to Python
+  pyodide.globals.set('_input_data', pyodide.toPy(data));
+  pyodide.runPython('_result = compute_all(dict(_input_data))');
+  const result = pyodide.globals.get('_result').toJs({dict_converter: Object.fromEntries});
+
+  renderTextbook(result);
+  renderGammaNet(result);
+  renderRadar(result);
+  renderDZ(result);
+  renderCross(result);
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+}
+
+// ---- Textbook ----
+function renderTextbook(r) {
+  let html = '';
+  if (r.framingham) {
+    const f = objFromMap(r.framingham);
+    html += tbLine('[CV] Framingham 10yr CHD', f.risk_10yr_pct + '% (' + f.risk_category + ')', f.risk_category);
+  }
+  if (r.ascvd) {
+    const a = objFromMap(r.ascvd);
+    html += tbLine('[CV] ASCVD Pooled Cohort', a.risk_10yr_pct + '% (' + a.risk_category + ')', a.risk_category);
+  }
+  if (r.score2) {
+    const s = objFromMap(r.score2);
+    html += tbLine('[CV] SCORE2 (ESC)', s.risk_10yr_pct + '% (' + s.risk_category + ')', s.risk_category);
+  }
+  if (r.egfr) {
+    const e = objFromMap(r.egfr);
+    html += tbLine('[Renal] eGFR', e.egfr + ' mL/min (' + e.ckd_stage + ')',
+      e.egfr >= 60 ? 'low' : (e.egfr >= 30 ? 'moderate' : 'high'));
+  }
+  if (r.fib4) {
+    const fi = objFromMap(r.fib4);
+    html += tbLine('[Hepatic] FIB-4', fi.fib4 + ' (' + fi.fibrosis_risk + ')', fi.fibrosis_risk);
+  }
+  if (r.homa) {
+    const h = objFromMap(r.homa);
+    html += tbLine('[Met] HOMA-IR', h.homa_ir + ' (' + h.category + ')', h.category);
+  }
+  if (r.mets) {
+    const m = objFromMap(r.mets);
+    const yn = m.is_mets ? 'YES' : 'NO';
+    html += tbLine('[Met] Metabolic Syndrome', yn + ' (' + m.criteria_met + '/5)',
+      m.is_mets ? 'high' : 'low');
+    if (m.detail) {
+      const detail = objFromMap(m.detail);
+      for (const [k,v] of Object.entries(detail)) {
+        html += '<div class="tb-line" style="padding-left:1.5rem;"><span class="tb-label">' +
+          (v ? '[X]' : '[ ]') + ' ' + k + '</span></div>';
+      }
+    }
+  }
+  if (!html) html = '<div class="tb-line"><span class="tb-label">Enter lab values above</span></div>';
+  document.getElementById('tb-content').innerHTML = html;
+}
+
+function tbLine(label, value, riskClass) {
+  return '<div class="tb-line"><span class="tb-label">' + label +
+    '</span><span class="tb-value risk-' + riskClass + '">' + value + '</span></div>';
+}
+
+function objFromMap(v) {
+  if (v instanceof Map) return Object.fromEntries(v);
+  if (v && typeof v.toJs === 'function') return v.toJs({dict_converter: Object.fromEntries});
+  return v;
+}
+
+// ---- Gamma-Net ----
+function renderGammaNet(r) {
+  const h = r.health_index;
+  const g2 = r.total_gamma_squared;
+  const gamma = objFromMap(r.gamma);
+  const organs = Array.from(r.organ_list);
+
+  let html = '<div style="font-family:var(--mono);font-size:0.85rem;margin-bottom:0.5rem;">';
+  html += 'H = &Pi;(1 &minus; &Gamma;<sub>i</sub>&sup2;) = <b>' + h.toFixed(4) +
+    '</b> (' + (h*100).toFixed(2) + '%)<br>';
+  html += 'Total &Gamma;&sup2; = ' + g2.toFixed(4) + '</div>';
+
+  for (const o of organs) {
+    const g = gamma[o] || 0;
+    const g2o = g * g;
+    const pct = Math.min(Math.abs(g) * 100, 100);
+    const color = pct > 30 ? '#ef5350' : (pct > 15 ? '#ffa726' : '#66bb6a');
+    html += '<div class="gamma-bar-row">' +
+      '<span class="gamma-bar-label">' + o + '</span>' +
+      '<div class="gamma-bar-track"><div class="gamma-bar-fill" style="width:' +
+      pct + '%;background:' + color + ';"></div></div>' +
+      '<span class="gamma-bar-val">' + (g >= 0 ? '+' : '') + g.toFixed(4) + '</span></div>';
+  }
+
+  // Top mismatch
+  const top3 = Array.from(r.top3_organs);
+  html += '<div style="margin-top:0.5rem;font-size:0.78rem;color:var(--text-dim);">Top mismatch:';
+  for (let i = 0; i < top3.length; i++) {
+    const pair = Array.from(top3[i]);
+    html += ' ' + (i+1) + '. ' + pair[0] + ' (&Gamma;=' + (pair[1]>=0?'+':'') + pair[1].toFixed(4) + ')';
+  }
+  html += '</div>';
+  document.getElementById('gn-content').innerHTML = html;
+}
+
+// ---- Radar Chart ----
+function renderRadar(r) {
+  const canvas = document.getElementById('radarChart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2, R = Math.min(W,H)/2 - 30;
+
+  ctx.clearRect(0, 0, W, H);
+
+  const gamma = objFromMap(r.gamma);
+  const organs = Array.from(r.organ_list);
+  const n = organs.length;
+
+  // Grid circles
+  ctx.strokeStyle = '#2a2d36';
+  ctx.lineWidth = 0.5;
+  for (let ring = 1; ring <= 4; ring++) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, R * ring / 4, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+
+  // Axes + labels
+  ctx.fillStyle = '#888';
+  ctx.font = '10px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const ax = cx + R * Math.cos(angle);
+    const ay = cy + R * Math.sin(angle);
+    ctx.strokeStyle = '#2a2d36';
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(ax, ay);
+    ctx.stroke();
+    // Label
+    const lx = cx + (R + 18) * Math.cos(angle);
+    const ly = cy + (R + 18) * Math.sin(angle);
+    ctx.fillText(organs[i], lx, ly);
+  }
+
+  // Data polygon
+  ctx.beginPath();
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const val = Math.min(Math.abs(gamma[organs[i]] || 0), 1.0);
+    const px = cx + R * val * Math.cos(angle);
+    const py = cy + R * val * Math.sin(angle);
+    if (i === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  }
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(79, 195, 247, 0.25)';
+  ctx.fill();
+  ctx.strokeStyle = '#4fc3f7';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Data points
+  for (let i = 0; i < n; i++) {
+    const angle = (Math.PI * 2 * i / n) - Math.PI / 2;
+    const val = Math.min(Math.abs(gamma[organs[i]] || 0), 1.0);
+    const px = cx + R * val * Math.cos(angle);
+    const py = cy + R * val * Math.sin(angle);
+    ctx.beginPath();
+    ctx.arc(px, py, 3, 0, Math.PI * 2);
+    ctx.fillStyle = val > 0.3 ? '#ef5350' : (val > 0.15 ? '#ffa726' : '#66bb6a');
+    ctx.fill();
+  }
+}
+
+// ---- D_Z Panel ----
+function renderDZ(r) {
+  const daily = r.dz_daily;
+  const annual = r.dz_annual;
+  const dzOrgans = objFromMap(r.dz_organs);
+
+  let html = '<div class="dz-big"><div class="num">' + annual.toFixed(1) +
+    '</div><div class="unit">Projected Annual D_Z (impedance-days)</div></div>';
+  html += '<div class="dz-row" style="font-weight:600;border-bottom:1px solid var(--border);">' +
+    '<span>Organ</span><span>Daily &Gamma;&sup2;</span><span>Annual D_Z</span><span>Share</span></div>';
+
+  const entries = Object.entries(dzOrgans).sort((a,b) => {
+    const ao = objFromMap(a[1]), bo = objFromMap(b[1]);
+    return (bo.share || 0) - (ao.share || 0);
+  });
+  for (const [organ, vals] of entries) {
+    const v = objFromMap(vals);
+    html += '<div class="dz-row"><span>' + organ + '</span><span>' +
+      v.g2.toFixed(4) + '</span><span>' + v.annual.toFixed(1) +
+      '</span><span>' + v.share.toFixed(1) + '%</span></div>';
+  }
+
+  html += '<div style="margin-top:0.8rem;font-size:0.75rem;color:var(--warn);">' +
+    'Prediction: The organ with highest D_Z share will deteriorate first. If not, Gamma-Net is wrong.</div>';
+  document.getElementById('dz-content').innerHTML = html;
+}
+
+// ---- Cross-Comparison ----
+function renderCross(r) {
+  const gamma = objFromMap(r.gamma);
+  let html = '';
+
+  // CV
+  if (r.framingham || r.ascvd || r.score2) {
+    html += '<div class="cross-section"><div class="cross-title">Cardiovascular</div>';
+    if (r.framingham) {
+      const f = objFromMap(r.framingham);
+      html += '<div class="cross-line">Framingham: ' + f.risk_10yr_pct + '% (' + f.risk_category + ')</div>';
+    }
+    if (r.ascvd) {
+      const a = objFromMap(r.ascvd);
+      html += '<div class="cross-line">ASCVD PCE: ' + a.risk_10yr_pct + '% (' + a.risk_category + ')</div>';
+    }
+    if (r.score2) {
+      const s = objFromMap(r.score2);
+      html += '<div class="cross-line">SCORE2: ' + s.risk_10yr_pct + '% (' + s.risk_category + ')</div>';
+    }
+    html += '<div class="cross-line">Gamma-Net: cardiac &Gamma;=' + fmt(gamma.cardiac) +
+      ', vascular &Gamma;=' + fmt(gamma.vascular) + '</div>';
+    html += '<div class="cross-insight">Three independent textbook formulas + one physics model on the same data.</div>';
+    html += '</div>';
+  }
+
+  // Renal
+  if (r.egfr) {
+    const e = objFromMap(r.egfr);
+    html += '<div class="cross-section"><div class="cross-title">Renal</div>';
+    html += '<div class="cross-line">eGFR: ' + e.egfr + ' (' + e.ckd_stage + ')</div>';
+    html += '<div class="cross-line">Gamma-Net: renal &Gamma;=' + fmt(gamma.renal) + '</div>';
+    html += '<div class="cross-insight">Which detects earlier: CKD-EPI or &Gamma;?</div></div>';
+  }
+
+  // Hepatic
+  if (r.fib4) {
+    const fi = objFromMap(r.fib4);
+    html += '<div class="cross-section"><div class="cross-title">Hepatic</div>';
+    html += '<div class="cross-line">FIB-4: ' + fi.fib4 + ' (' + fi.fibrosis_risk + ')</div>';
+    html += '<div class="cross-line">Gamma-Net: hepatic &Gamma;=' + fmt(gamma.hepatic) + '</div>';
+    html += '<div class="cross-insight">Discordance reveals what one method misses.</div></div>';
+  }
+
+  // Metabolic
+  if (r.homa || r.mets) {
+    html += '<div class="cross-section"><div class="cross-title">Metabolic</div>';
+    if (r.homa) {
+      const h = objFromMap(r.homa);
+      html += '<div class="cross-line">HOMA-IR: ' + h.homa_ir + ' (' + h.category + ')</div>';
+    }
+    if (r.mets) {
+      const m = objFromMap(r.mets);
+      html += '<div class="cross-line">MetS: ' + (m.is_mets?'YES':'NO') + ' (' + m.criteria_met + '/5)</div>';
+    }
+    html += '<div class="cross-line">Gamma-Net: endocrine &Gamma;=' + fmt(gamma.endocrine) + '</div>';
+    html += '<div class="cross-insight">Endocrine &Gamma; integrates what HOMA-IR + MetS measure separately.</div></div>';
+  }
+
+  html += '<div style="margin-top:1rem;padding:0.6rem;background:var(--bg);border-radius:4px;font-size:0.78rem;">' +
+    '<b style="color:var(--accent);">KEY INSIGHT:</b> Textbook gives separate scores by specialty. ' +
+    'Gamma-Net gives ONE unified framework &mdash; same physics, all organs.<br>' +
+    'H captures cross-organ interactions textbook misses. D_Z tracks cumulative cost textbook cannot.<br>' +
+    'If Gamma-Net is wrong, <b>you can see where it disagrees</b>.</div>';
+
+  document.getElementById('cross-content').innerHTML = html;
+}
+
+function fmt(v) { return (v >= 0 ? '+' : '') + v.toFixed(4); }
+
+</script>
+</body>
+</html>

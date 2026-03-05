@@ -4,7 +4,10 @@
 import pytest
 from alice.diagnostics.textbook_risk import (
     framingham_risk,
+    ascvd_pooled_cohort,
+    score2_esc,
     egfr_ckd_epi_2021,
+    fib4_index,
     homa_ir,
     metabolic_syndrome_atp3,
     TextbookReport,
@@ -67,6 +70,133 @@ class TestFraminghamRisk:
     def test_extreme_age_high(self):
         r = framingham_risk(80, "M", 180, 55, 110)
         assert r.points_total >= 5
+
+
+# ============================================================================
+# 1b. ASCVD Pooled Cohort (Goff 2014)
+# ============================================================================
+
+class TestASCVD:
+    """ACC/AHA Pooled Cohort 10-year ASCVD risk."""
+
+    def test_low_risk_young_female(self):
+        r = ascvd_pooled_cohort(42, "F", 190, 55, 115)
+        assert r.risk_category == "low"
+        assert r.risk_10yr_pct < 5.0
+
+    def test_high_risk_male(self):
+        r = ascvd_pooled_cohort(65, "M", 260, 32, 155,
+                                bp_treated=True, smoker=True, diabetic=True)
+        assert r.risk_category == "high"
+        assert r.risk_10yr_pct >= 20.0
+
+    def test_smoking_increases_risk(self):
+        non = ascvd_pooled_cohort(55, "M", 220, 45, 135, smoker=False)
+        smk = ascvd_pooled_cohort(55, "M", 220, 45, 135, smoker=True)
+        assert smk.risk_10yr_pct > non.risk_10yr_pct
+
+    def test_diabetes_increases_risk(self):
+        non = ascvd_pooled_cohort(55, "M", 220, 45, 135, diabetic=False)
+        dm = ascvd_pooled_cohort(55, "M", 220, 45, 135, diabetic=True)
+        assert dm.risk_10yr_pct > non.risk_10yr_pct
+
+    def test_female_vs_male(self):
+        m = ascvd_pooled_cohort(55, "M", 220, 45, 135)
+        f = ascvd_pooled_cohort(55, "F", 220, 45, 135)
+        # Men generally higher baseline ASCVD risk
+        assert m.risk_10yr_pct > f.risk_10yr_pct
+
+    def test_risk_pct_clamped(self):
+        r = ascvd_pooled_cohort(40, "F", 160, 70, 110)
+        assert 0.0 <= r.risk_10yr_pct <= 100.0
+
+    def test_categories_correct(self):
+        """Risk categories: low<5, borderline<7.5, intermediate<20, high>=20"""
+        r = ascvd_pooled_cohort(45, "F", 180, 60, 120)
+        if r.risk_10yr_pct < 5.0:
+            assert r.risk_category == "low"
+        elif r.risk_10yr_pct < 7.5:
+            assert r.risk_category == "borderline"
+        elif r.risk_10yr_pct < 20.0:
+            assert r.risk_category == "intermediate"
+        else:
+            assert r.risk_category == "high"
+
+
+# ============================================================================
+# 1c. SCORE2 (ESC 2021)
+# ============================================================================
+
+class TestSCORE2:
+    """ESC SCORE2 10-year fatal+non-fatal CVD risk."""
+
+    def test_low_risk_female(self):
+        r = score2_esc(45, "F", 5.0, 1.5, 120)
+        assert r.risk_10yr_pct < 5.0
+
+    def test_high_risk_male_smoker(self):
+        r = score2_esc(65, "M", 7.0, 0.9, 160, smoker=True)
+        assert r.risk_10yr_pct > 5.0
+
+    def test_smoking_increases_risk(self):
+        non = score2_esc(55, "M", 5.5, 1.3, 135, smoker=False)
+        smk = score2_esc(55, "M", 5.5, 1.3, 135, smoker=True)
+        assert smk.risk_10yr_pct > non.risk_10yr_pct
+
+    def test_higher_sbp_increases_risk(self):
+        low = score2_esc(55, "M", 5.5, 1.3, 120)
+        high = score2_esc(55, "M", 5.5, 1.3, 160)
+        assert high.risk_10yr_pct > low.risk_10yr_pct
+
+    def test_higher_hdl_decreases_risk(self):
+        low_hdl = score2_esc(55, "M", 5.5, 0.8, 130)
+        high_hdl = score2_esc(55, "M", 5.5, 1.8, 130)
+        assert high_hdl.risk_10yr_pct < low_hdl.risk_10yr_pct
+
+    def test_risk_clamped(self):
+        r = score2_esc(45, "F", 4.5, 1.8, 110)
+        assert 0.1 <= r.risk_10yr_pct <= 50.0
+
+
+# ============================================================================
+# 1d. FIB-4 Liver Fibrosis
+# ============================================================================
+
+class TestFIB4:
+    """FIB-4 liver fibrosis index."""
+
+    def test_low_risk(self):
+        r = fib4_index(35, 25, 30, 250)
+        assert r.fib4 < 1.30
+        assert r.fibrosis_risk == "low"
+
+    def test_high_risk(self):
+        r = fib4_index(65, 80, 40, 100)
+        assert r.fib4 >= 2.67
+        assert r.fibrosis_risk == "high"
+
+    def test_indeterminate(self):
+        r = fib4_index(50, 40, 35, 200)
+        assert 1.30 <= r.fib4 < 2.67
+        assert r.fibrosis_risk == "indeterminate"
+
+    def test_formula_correctness(self):
+        """FIB-4 = (Age * AST) / (Platelets * sqrt(ALT))"""
+        import math
+        age, ast, alt, plt = 50, 40, 25, 200
+        expected = (age * ast) / (plt * math.sqrt(alt))
+        r = fib4_index(age, ast, alt, plt)
+        assert abs(r.fib4 - round(expected, 2)) < 0.01
+
+    def test_age_increases_fib4(self):
+        young = fib4_index(30, 30, 30, 250)
+        old = fib4_index(70, 30, 30, 250)
+        assert old.fib4 > young.fib4
+
+    def test_low_platelets_increases_fib4(self):
+        normal = fib4_index(50, 30, 30, 250)
+        low = fib4_index(50, 30, 30, 80)
+        assert low.fib4 > normal.fib4
 
 
 # ============================================================================
