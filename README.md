@@ -15,6 +15,8 @@
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
 
+**[>> Launch Live Verification Platform (browser-only, zero server) <<](https://cyhuang76.github.io/alice-gamma-net/app/)**
+
 </div>
 
 ---
@@ -61,16 +63,27 @@ This is **not** a model you need to trust — it is a **fixed-equation physical 
 
 ### Three Walls of Verification
 
-1. **Wall 1 — Self-computation**: Enter your health-check values → the calculator runs entirely in your browser. No server, no data collection, no account.
-2. **Wall 2 — Textbook side-by-side**: Same inputs produce Framingham risk, eGFR (CKD-EPI 2021), HOMA-IR, and Metabolic Syndrome (ATP-III) alongside the 12-organ Γ-vector. Where they agree ✓. Where they disagree → Γ-Net shows *which organ channel* drives the discordance.
-3. **Wall 3 — Falsifiable prediction**: Γ-Net predicts which organ will deteriorate first, and tracks cumulative impedance debt D_Z over time. If wrong, **you will know**.
+1. **Wall 1 — Self-computation**: Enter your health-check values → the calculator runs entirely in your browser via [Pyodide](https://pyodide.org) (Python-in-WebAssembly). No server, no data collection, no account.
+2. **Wall 2 — Textbook side-by-side**: Same inputs produce **6 published clinical risk scores** alongside the 12-organ Γ-vector:
+   - **Cardiovascular**: Framingham ATP-III, ASCVD Pooled Cohort (Goff 2014), SCORE2 (ESC 2021)
+   - **Renal**: eGFR CKD-EPI 2021 (race-free)
+   - **Hepatic**: FIB-4 liver fibrosis (Sterling 2006)
+   - **Metabolic**: HOMA-IR + Metabolic Syndrome (ATP-III)
+   
+   Where they agree ✓. Where they disagree → Γ-Net shows *which organ channel* drives the discordance.
+3. **Wall 3 — Falsifiable prediction**: Γ-Net predicts which organ will deteriorate first, and tracks cumulative impedance debt $D_Z = \int \sum \Gamma_i^2\, dt$ over time. Two patients with identical current labs but different $D_Z$ have **different prognoses** — only Γ-Net captures this.
+
+**[>> Open Web App <<](https://cyhuang76.github.io/alice-gamma-net/app/)** — runs 100% in your browser, works offline after first load.
 
 ```bash
-# Try it now — textbook vs Γ-Net, four clinical cases
+# CLI: textbook vs Γ-Net, four clinical cases
 py -3.11 experiments/demo_dual_rail.py
 
-# Enter your own health-check data
+# CLI: enter your own health-check data
 py -3.11 experiments/demo_dual_rail.py --interactive
+
+# CLI: 5-year longitudinal D_Z impedance debt tracking
+py -3.11 experiments/demo_dual_rail.py --timeline
 ```
 
 ---
@@ -205,6 +218,10 @@ alice-gamma-net/
 ├── paper/                  # 6 papers (LaTeX source)
 ├── figures/                # 29 generated figures
 ├── docs/                   # Architecture docs
+│   ├── app/                # GitHub Pages verification web app
+│   │   ├── index.html      # Single-page Pyodide app
+│   │   ├── gamma_compute.py # Pure-Python calculator (browser)
+│   │   └── style.css       # Responsive UI
 │   ├── KNOWN_LIMITATIONS.md
 │   ├── SYSTEM_MANUAL.md
 │   ├── LAB_GAMMA_ENGINE.md
