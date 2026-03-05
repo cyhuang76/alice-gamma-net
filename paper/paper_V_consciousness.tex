@@ -950,6 +950,150 @@ universality of $\Gamma$ (Theorem~\ref{thm:universality}
 in Paper~VI).
 \end{remark}
 
+\subsection{The $\Gamma$-Pain Index: objective nociceptive
+  burden without consciousness}
+\label{sec:gamma-pain-index}
+
+The three-layer architecture (Sec.~\ref{sec:infant-pain})
+exposes a critical gap in current clinical practice.
+The standard-of-care pain assessment---a subjective
+numeric rating scale (NRS, 0--10)---measures only the
+\emph{Layer~3 verbal report}, which is a nonlinear,
+non-monotonic, and individually variable function of the
+underlying tissue state:
+\begin{equation}
+  \text{Pain\_Score} =
+    g\!\left(
+      \Phi_{\text{meta}}\cdot|\Gamma_{\text{tissue}}|
+      + \varepsilon_{\text{noise}}
+    \right),
+  \label{eq:pain-score-function}
+\end{equation}
+where $g(\cdot)$ encodes psychological defence mechanisms,
+social context, language ability, and arousal state.
+Critically:
+\begin{itemize}
+  \item $\text{Pain\_Score}=0$ does not imply
+    $\Gamma_{\text{tissue}}=0$
+    (the patient may be sedated, aphasic, or stoic);
+  \item $\text{Pain\_Score}=10$ does not imply
+    $|\Gamma|\to 1$
+    (anxiety, catastrophising, or social amplification
+    can inflate $g$ at moderate $\Gamma$).
+\end{itemize}
+
+For populations where Layer~3 is unreliable or
+non-existent---neonates, sedated ICU patients, persons
+with advanced dementia, aphasic stroke survivors---the
+NRS provides \emph{zero information}.
+Yet the Layer~1 nociceptive signal
+($|\Gamma_{\text{tissue}}|>\theta_{\text{noci}}$)
+continues to operate, driving autonomic responses,
+stress hormone release, and cumulative impedance debt
+($D_Z$; Paper~III).
+
+We define the \textbf{$\Gamma$-Pain Index}
+$\Pi_{\Gamma}(t)$ as a consciousness-independent,
+objective measure of nociceptive burden:
+\begin{equation}
+  \boxed{\;
+  \Pi_{\Gamma}(t) =
+    w_n\,\Gamma_n^2(t) + w_v\,\Gamma_v^2(t)
+    + w_D\,\frac{dD_Z}{dt}\;
+  }
+  \label{eq:gamma-pain-index}
+\end{equation}
+where:
+\begin{itemize}
+  \item $\Gamma_n^2(t)$: neural-side mismatch, estimated
+    from EEG spectral changes (delta/theta power shift,
+    pain-related evoked potential amplitude, coherence
+    disruption between somatosensory and frontal regions);
+  \item $\Gamma_v^2(t)$: vascular-side mismatch, estimated
+    from HRV (LF/HF ratio departure from baseline),
+    blood pressure variability, skin conductance, and
+    regional blood flow;
+  \item $dD_Z/dt$: instantaneous rate of impedance debt
+    accumulation (Paper~III), capturing the
+    Coffin--Manson fatigue cost of the current stressor;
+  \item $w_n, w_v, w_D$: organ-specific weighting
+    coefficients (derivable from the dual-network model
+    of Paper~II).
+\end{itemize}
+
+The critical property of $\Pi_{\Gamma}$ is that
+\emph{it does not depend on $\Phi_{\text{meta}}$}.
+Consciousness modulates the \emph{experience} of pain
+(Layer~2) and the \emph{report} of pain (Layer~3), but
+it does not modulate the tissue-level impedance mismatch
+(Layer~1) that $\Pi_{\Gamma}$ measures.
+A patient under general anaesthesia with
+$\Phi_{\text{meta}}\approx 0$ and
+$\text{Pain\_Score}=\text{undefined}$ can nonetheless
+have $\Pi_{\Gamma}\gg 0$, indicating significant
+nociceptive load and ongoing impedance debt accumulation.
+
+\begin{table}[h]
+\caption{Comparison of pain assessment modalities by layer.}
+\label{tab:pain-layers}
+\begin{ruledtabular}
+\begin{tabular}{lcccc}
+\textbf{Modality} & \textbf{Layer} &
+  \textbf{Requires} & \textbf{Fails in} &
+  \textbf{Measures} \\
+  & & \textbf{consciousness?} & & \\
+\hline
+NRS (0--10) & L3 & Yes & neonate, sedated, & subjective \\
+  & & & aphasic, demented & report \\
+FLACC/BPS & L2--L3 & Partial & deeply sedated, & behavioural \\
+  & & & paralysed & proxy \\
+HR/HRV/BP & L1--L2 & No & $\beta$-blocked, & autonomic \\
+  & & & paced & proxy \\
+$\Pi_{\Gamma}$ & L1 & No & none$^*$ & tissue \\
+  & & & & mismatch \\
+\end{tabular}
+\end{ruledtabular}
+{\footnotesize $^*$Requires multi-modal sensor input
+(EEG + HRV + bioimpedance); no dependence on patient
+cooperation or consciousness.}
+\end{table}
+
+\begin{remark}[Falsifiable prediction]
+In sedated ICU patients receiving identical surgical
+stimuli, $\Pi_{\Gamma}$ (computed from EEG + HRV)
+should correlate with tissue damage severity
+(wound area, inflammatory marker levels) with
+$r>0.5$, \emph{independent} of anaesthetic depth
+(BIS score).  A null result---no correlation between
+$\Pi_{\Gamma}$ and tissue damage when consciousness
+is controlled---would falsify the Layer~1/Layer~3
+separation.
+\end{remark}
+
+\begin{remark}[Clinical protocol: multi-layer pain assessment]
+The $\Gamma$-Pain Index motivates a four-tier clinical
+protocol:
+\begin{enumerate}
+  \item \textbf{Subjective report} (NRS/VAS):
+    when available, respect the patient's Layer~3 output.
+  \item \textbf{Behavioural observation}
+    (FLACC/BPS/CPOT): capture Layer~2 when Layer~3 is
+    unavailable.
+  \item \textbf{Autonomic proxies}
+    (HR, HRV, BP, skin conductance): Layer~1--2 surrogates
+    available in any monitored patient.
+  \item \textbf{$\Pi_{\Gamma}$ composite}
+    (EEG + HRV + bioimpedance): direct Layer~1
+    measurement, the only modality that reports tissue
+    mismatch \emph{regardless of consciousness state}.
+\end{enumerate}
+Relying on Layer~3 alone---asking ``how much does it
+hurt?'' as the sole assessment---discards the majority
+of the information and is physically equivalent to
+diagnosing a transmission-line fault by asking the
+television whether the picture looks good.
+\end{remark}
+
 
 % ============================================================
 \section{Conclusion}

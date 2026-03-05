@@ -994,6 +994,85 @@ visual analogue scale (VAS), providing a direct test of
 the ``pain = $\Gamma$ readout'' hypothesis.
 \end{remark}
 
+\subsection{Clinical measurement protocol:
+  dual-network wound monitoring}
+\label{sec:wound-protocol}
+
+The dual-network organ model
+$H=(1-\Gn^2)(1-\Gv^2)$ (Sec.~\ref{sec:organ-model})
+can be applied locally to a wound site.
+The wound-health trajectory is fully characterised by
+two time series:
+\begin{align}
+  \Gn^2(t) &:\quad \text{neural mismatch at wound margin}
+    \nonumber\\
+  &\quad\;\; (\text{EEG somatosensory coherence,
+    evoked-potential amplitude}),
+    \label{eq:wound-Gn}\\
+  \Gv^2(t) &:\quad \text{vascular mismatch across wound}
+    \nonumber\\
+  &\quad\;\; (\text{local bioimpedance spectroscopy,
+    perfusion index}).
+    \label{eq:wound-Gv}
+\end{align}
+
+The local Health Index of the wound site is then:
+\begin{equation}
+  H_{\text{wound}}(t) =
+    \bigl(1-\Gn^2(t)\bigr)
+    \bigl(1-\Gv^2(t)\bigr)\,,
+  \label{eq:wound-health}
+\end{equation}
+with $H_{\text{wound}}(0)\approx 0$ at the moment of
+injury and $H_{\text{wound}}\to H_{\text{scar}}<1$ at
+completion of remodelling.
+
+This formulation has two immediate clinical consequences:
+\begin{enumerate}
+  \item \textbf{Objective wound assessment}:
+    $H_{\text{wound}}(t)$ provides a quantitative,
+    consciousness-independent measure of wound repair
+    progress.
+    Unlike the VAS pain score, it is valid in sedated,
+    neonatal, and aphasic patients.
+  \item \textbf{Complication detection}:
+    if $dH_{\text{wound}}/dt$ reverses sign
+    (health decreasing), this signals early wound
+    dehiscence or infection \emph{before} clinical signs
+    appear.
+    The dual-network model predicts that vascular failure
+    ($\Gv^2\uparrow$, loss of perfusion) and neural failure
+    ($\Gn^2\uparrow$, neuropathic pain) produce
+    distinguishable impedance signatures.
+\end{enumerate}
+
+The $\Gamma$-Pain Index $\Pi_{\Gamma}$ (Paper~V)
+applied to the wound site reduces to:
+\begin{equation}
+  \Pi_{\Gamma,\text{wound}}(t) =
+    w_n\,\Gn^2(t) + w_v\,\Gv^2(t)
+    + w_D\,\frac{dD_{Z,\text{wound}}}{dt}\,,
+  \label{eq:wound-pain-index}
+\end{equation}
+where $D_{Z,\text{wound}}$ is the cumulative impedance
+debt of the wound (Eq.~(\ref{eq:wound-debt}) in Paper~III).
+This provides a \emph{continuous, objective, real-time}
+pain/damage metric that does not require the patient to
+be conscious or verbal.
+
+\begin{remark}[Bedside implementation]
+A minimal bedside prototype requires:
+(i)~a two-electrode bioimpedance probe placed across the
+wound margin (measuring $\Gv^2$ at 1--100\,kHz),
+(ii)~standard ICU monitoring (HR, HRV $\to \Gamma_v$
+at organ level), and
+(iii)~optional EEG (2-channel, somatosensory region
+$\to \Gn^2$).
+All three data streams feed into the dual-network model
+to produce $H_{\text{wound}}(t)$ and
+$\Pi_{\Gamma,\text{wound}}(t)$ in real time.
+\end{remark}
+
 
 %====================================================================
 \section{Conclusion}\label{sec:conclusion}
