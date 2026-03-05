@@ -6,8 +6,8 @@
 
 *No training data. No black boxes. Pure impedance physics.*
 
-> **「我們不能自證清白，就讓所有人替我們驗證。」**
-> *"We cannot prove ourselves innocent. So we ask everyone to verify."*
+> **「公式是固定的，結果是透明的，驗證權在你手上。」**
+> *"Fixed formulas. Transparent results. Verification is yours."*
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18847656.svg)](https://doi.org/10.5281/zenodo.18847656)
 [![Tests](https://img.shields.io/badge/tests-3084%20passed-brightgreen.svg)]()
