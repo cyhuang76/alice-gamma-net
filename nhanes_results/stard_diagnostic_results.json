@@ -1,0 +1,295 @@
+{
+  "protocol": "Gamma-Net STARD Diagnostic Accuracy v1.0",
+  "timestamp_utc": "2026-03-05T04:21:32.214916+00:00",
+  "sha256": "286e837e9c01a1635f22adfba2c229a15be2cd933208ef87e29b3c39c32ce4a8",
+  "n_respondents": 63977,
+  "n_merged": 52545,
+  "n_deaths": 7627,
+  "cycles": [
+    "1999-2000",
+    "2001-2002",
+    "2003-2004",
+    "2005-2006",
+    "2007-2008",
+    "2009-2010",
+    "2011-2012",
+    "2013-2014",
+    "2015-2016",
+    "2017-2018"
+  ],
+  "results": {
+    "stard_flow": {
+      "total_nhanes_10_cycles": "~100,000",
+      "adults_with_labs": 63977,
+      "with_gamma_vectors": 63977,
+      "with_mortality_linkage": 52545,
+      "final_cohort": 52545,
+      "deaths": 7627,
+      "alive": 44918
+    },
+    "cause_counts": {
+      "1": {
+        "organ": "cardiac",
+        "label": "Heart disease",
+        "n": 1965
+      },
+      "2": {
+        "organ": "immune",
+        "label": "Malignant neoplasms",
+        "n": 1646
+      },
+      "3": {
+        "organ": "pulmonary",
+        "label": "Chronic lower respiratory diseases",
+        "n": 412
+      },
+      "5": {
+        "organ": "neuro",
+        "label": "Cerebrovascular diseases",
+        "n": 434
+      },
+      "6": {
+        "organ": "neuro",
+        "label": "Alzheimer's disease",
+        "n": 283
+      },
+      "7": {
+        "organ": "endocrine",
+        "label": "Diabetes mellitus",
+        "n": 277
+      },
+      "8": {
+        "organ": "pulmonary",
+        "label": "Influenza and pneumonia",
+        "n": 158
+      },
+      "9": {
+        "organ": "renal",
+        "label": "Nephritis / nephrotic syndrome",
+        "n": 165
+      },
+      "10": {
+        "organ": null,
+        "label": "All other causes",
+        "n": 2037
+      }
+    },
+    "organ_diagnostic_accuracy": {
+      "cardiac": {
+        "auc": 0.4926108691343268,
+        "ci_lower": 0.47957967551834885,
+        "ci_upper": 0.5064768711590372,
+        "p_value": 0.867195300012942,
+        "sig": "ns",
+        "n_pos": 1965,
+        "n_neg": 50580,
+        "mean_gamma_diseased": 0.17969595937341126,
+        "mean_gamma_healthy": 0.18044236478424952,
+        "causes": "Heart disease",
+        "threshold": 0.2690689932368317,
+        "sensitivity": 0.12010178117048347,
+        "specificity": 0.9007710557532621,
+        "ppv": 0.04490960989533777,
+        "npv": 0.9634383590611123,
+        "youden_j": 0.02087283692374564,
+        "tp": 236,
+        "fp": 5019,
+        "fn": 1729,
+        "tn": 45561
+      },
+      "pulmonary": {
+        "auc": 0.5225442731407643,
+        "ci_lower": 0.4988676595385192,
+        "ci_upper": 0.5460887770445273,
+        "p_value": 0.02770650391262147,
+        "sig": "*",
+        "n_pos": 570,
+        "n_neg": 51975,
+        "mean_gamma_diseased": 0.043662910105364855,
+        "mean_gamma_healthy": 0.03951242473910322,
+        "causes": "Chronic lower respiratory diseases, Influenza and pneumonia",
+        "threshold": 0.06976744186046512,
+        "sensitivity": 0.2543859649122807,
+        "specificity": 0.7866666666666666,
+        "ppv": 0.012908394907860768,
+        "npv": 0.9897124322230829,
+        "youden_j": 0.04105263157894745,
+        "tp": 145,
+        "fp": 11088,
+        "fn": 425,
+        "tn": 40887
+      },
+      "hepatic": {
+        "status": "no_reference",
+        "n_deaths": 0
+      },
+      "renal": {
+        "auc": 0.6738445161812859,
+        "ci_lower": 0.6214726285712004,
+        "ci_upper": 0.7229074593978012,
+        "p_value": 5.665062727497272e-15,
+        "sig": "***",
+        "n_pos": 165,
+        "n_neg": 52380,
+        "mean_gamma_diseased": 0.46941421071520556,
+        "mean_gamma_healthy": 0.36079484600527895,
+        "causes": "Nephritis / nephrotic syndrome",
+        "threshold": 0.455948624934372,
+        "sensitivity": 0.4484848484848485,
+        "specificity": 0.8810232913325697,
+        "ppv": 0.011734855692990803,
+        "npv": 0.9980319643590908,
+        "youden_j": 0.3295081398174182,
+        "tp": 74,
+        "fp": 6232,
+        "fn": 91,
+        "tn": 46148
+      },
+      "endocrine": {
+        "auc": 0.8234213753664466,
+        "ci_lower": 0.7949225199480765,
+        "ci_upper": 0.8511890733221489,
+        "p_value": 1.6929033940023657e-77,
+        "sig": "***",
+        "n_pos": 277,
+        "n_neg": 52268,
+        "mean_gamma_diseased": 0.5275704277186261,
+        "mean_gamma_healthy": 0.27105461485612287,
+        "causes": "Diabetes mellitus",
+        "threshold": 0.4152046783625732,
+        "sensitivity": 0.7111913357400722,
+        "specificity": 0.8528353868523763,
+        "ppv": 0.02497147927493979,
+        "npv": 0.9982085274095306,
+        "youden_j": 0.5640267225924485,
+        "tp": 197,
+        "fp": 7692,
+        "fn": 80,
+        "tn": 44576
+      },
+      "immune": {
+        "auc": 0.5204501376311036,
+        "ci_lower": 0.5069614644499204,
+        "ci_upper": 0.5362972083918522,
+        "p_value": 0.0023368957331434603,
+        "sig": "**",
+        "n_pos": 1646,
+        "n_neg": 50899,
+        "mean_gamma_diseased": 0.13186147494010816,
+        "mean_gamma_healthy": 0.12218900022354635,
+        "causes": "Malignant neoplasms",
+        "threshold": 0.17683778174200387,
+        "sensitivity": 0.2132442284325638,
+        "specificity": 0.8313915794023459,
+        "ppv": 0.03929251091458637,
+        "npv": 0.9703063377052188,
+        "youden_j": 0.04463580783490961,
+        "tp": 351,
+        "fp": 8582,
+        "fn": 1295,
+        "tn": 42317
+      },
+      "heme": {
+        "status": "no_reference",
+        "n_deaths": 0
+      },
+      "GI": {
+        "status": "no_reference",
+        "n_deaths": 0
+      },
+      "vascular": {
+        "status": "no_reference",
+        "n_deaths": 0
+      },
+      "bone": {
+        "status": "no_reference",
+        "n_deaths": 0
+      },
+      "neuro": {
+        "auc": 0.571963491729806,
+        "ci_lower": 0.5507600590133341,
+        "ci_upper": 0.5953139319295401,
+        "p_value": 1.685153533426241e-11,
+        "sig": "***",
+        "n_pos": 717,
+        "n_neg": 51828,
+        "mean_gamma_diseased": 0.18139755389639112,
+        "mean_gamma_healthy": 0.15740816918073933,
+        "causes": "Cerebrovascular diseases, Alzheimer's disease",
+        "threshold": 0.1706024651537842,
+        "sensitivity": 0.42398884239888424,
+        "specificity": 0.6914602145558385,
+        "ppv": 0.018656029456888615,
+        "npv": 0.9886068965517242,
+        "youden_j": 0.11544905695472263,
+        "tp": 304,
+        "fp": 15991,
+        "fn": 413,
+        "tn": 35837
+      },
+      "repro": {
+        "status": "no_reference",
+        "n_deaths": 0
+      }
+    },
+    "all_cause_mortality": {
+      "n": 52545,
+      "n_dead": 7627,
+      "n_alive": 44918,
+      "H_mean_alive": 0.4907345415797977,
+      "H_mean_dead": 0.4306776857970144,
+      "spearman_rho": -0.12996557278351195,
+      "spearman_p": 1.1524310756718367e-196,
+      "auc": 0.6065079485515943,
+      "auc_ci_lower": 0.5995199136697806,
+      "auc_ci_upper": 0.6140598412285864,
+      "c_statistic": 0.6065079485515943,
+      "concordant": 207783307,
+      "discordant": 134806279,
+      "quartiles": {
+        "Q1": {
+          "n": 13137,
+          "deaths": 3048,
+          "rate_pct": 23.201644211007082,
+          "median_fu_months": 89.0
+        },
+        "Q2": {
+          "n": 13136,
+          "deaths": 1656,
+          "rate_pct": 12.606577344701583,
+          "median_fu_months": 103.0
+        },
+        "Q3": {
+          "n": 13136,
+          "deaths": 1475,
+          "rate_pct": 11.228684531059683,
+          "median_fu_months": 118.0
+        },
+        "Q4": {
+          "n": 13136,
+          "deaths": 1448,
+          "rate_pct": 11.0231425091352,
+          "median_fu_months": 152.0
+        }
+      },
+      "H_vs_time_to_death_rho": 0.2877558223642711,
+      "H_vs_time_to_death_p": 2.4500059480693737e-145
+    },
+    "cross_validation": {
+      "early_1999_2008": {
+        "n": 25329,
+        "deaths": 5635,
+        "spearman_rho": -0.1792335675161479,
+        "p": 7.420432751004387e-182,
+        "c_statistic": 0.6244035698268693
+      },
+      "late_2009_2018": {
+        "n": 27216,
+        "deaths": 1992,
+        "spearman_rho": -0.17153630467100278,
+        "p": 9.045534168207982e-179,
+        "c_statistic": 0.690124496559024
+      }
+    }
+  }
+}

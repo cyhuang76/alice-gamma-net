@@ -159,8 +159,8 @@ def parse_mortality_file(filepath: Path) -> list[dict]:
       Col 17-19: UCOD_LEADING (cause of death code)
       Col 20:    DIABETES  (0/1 diabetes as cause/contributor)
       Col 21:    HYPERTEN  (0/1 hypertension as cause/contributor)
-      Col 40-42: PERMTH_INT (months from interview to event/censor)
-      Col 43-45: PERMTH_EXM (months from exam to event/censor)
+      Col 43-45: PERMTH_INT (months from interview to event/censor)
+      Col 46-48: PERMTH_EXM (months from exam to event/censor)
     """
     records = []
     with open(filepath, "r") as f:
@@ -191,8 +191,8 @@ def parse_mortality_file(filepath: Path) -> list[dict]:
             hyperten_flag = line[20:21].strip()
 
             # Follow-up months
-            permth_int_str = line[39:42].strip() if len(line) >= 42 else ""
-            permth_exm_str = line[42:45].strip() if len(line) >= 45 else ""
+            permth_int_str = line[42:45].strip() if len(line) >= 45 else ""
+            permth_exm_str = line[45:48].strip() if len(line) >= 48 else ""
 
             try:
                 permth_int = int(permth_int_str) if permth_int_str and permth_int_str != "." else None
