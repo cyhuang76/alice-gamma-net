@@ -48,6 +48,15 @@ body {
   margin-top: 0.5rem;
   font-size: 0.85rem;
 }
+.header .disclaimer {
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  margin-top: 0.6rem;
+  line-height: 1.5;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /* Loading */
 #loading {

@@ -50,7 +50,9 @@ Every module, every tick, must obey:
 
 ---
 
-## Public Falsification Platform
+## Gamma-Net Health Check
+
+> Zero-parameter impedance physics &middot; Public verification platform
 
 This is **not** a model you need to trust — it is a **fixed-equation physical law** you can verify.
 
@@ -74,6 +76,8 @@ This is **not** a model you need to trust — it is a **fixed-equation physical 
 3. **Wall 3 — Falsifiable prediction**: Γ-Net predicts which organ will deteriorate first, and tracks cumulative impedance debt $D_Z = \int \sum \Gamma_i^2\, dt$ over time. Two patients with identical current labs but different $D_Z$ have **different prognoses** — only Γ-Net captures this.
 
 **[>> Open Web App <<](https://cyhuang76.github.io/alice-gamma-net/app/)** — runs 100% in your browser, works offline after first load.
+
+> **Disclaimer**: 本頁結果僅作研究與自我驗證參考，不構成任何醫療建議，請以正式醫療檢查及專業醫師判斷為準。
 
 ```bash
 # CLI: textbook vs Γ-Net, four clinical cases

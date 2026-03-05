@@ -653,8 +653,11 @@ def main() -> None:
 
     print()
     print(SEP)
-    print("  GAMMA-NET PUBLIC FALSIFICATION PLATFORM")
-    print("  ========================================")
+    print("  GAMMA-NET HEALTH CHECK")
+    print("  =======================")
+    print("  Zero-parameter impedance physics")
+    print("  Public verification platform")
+    print()
     print("  'We cannot prove ourselves innocent.")
     print("   So we ask everyone to verify.'")
     print()
@@ -662,6 +665,9 @@ def main() -> None:
     print("  Textbook: published clinical risk equations.")
     print("  Gamma-Net: zero-parameter impedance physics.")
     print("  Neither side has been fitted to the other.")
+    print()
+    print("  DISCLAIMER: For research and self-verification only.")
+    print("  Not medical advice. Always consult your physician.")
     print(SEP)
 
     if args.interactive:
