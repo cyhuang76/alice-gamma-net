@@ -1684,4 +1684,227 @@ DOI (papers): \href{https://doi.org/10.5281/zenodo.18751831}{10.5281/zenodo.1875
 DOI (code): \href{https://doi.org/10.5281/zenodo.18852835}{10.5281/zenodo.18852835}
 
 
+% ============================================================
+\section{Null-Space Distance: Method Draft}
+\label{app:null-space-method}
+
+Proposition~\ref{prop:reincarnation-test} asserts that
+null-space isomorphism $\mathcal{S}_A\cong\mathcal{S}_B$
+is falsifiable.  This appendix provides the operational
+definitions, observable mappings, sample-size estimate,
+and protocol sketch required to turn that proposition
+into a concrete study design.
+
+% ---- B1. Distance definition ----
+\subsection{Null-space distance}
+\label{app:distance}
+
+Let the null space of individual $k$ be parameterised by
+the triple
+$\bm{s}_k = (\Acut^{(k)},\; Z_0^{\text{DNA},(k)},\;
+  \rho_{\text{irred}}^{2,(k)})$.
+Each component lives in a different physical space, so we
+define a weighted distance that is invariant to units:
+
+\begin{equation}
+  d(\bm{s}_A,\bm{s}_B)
+  = \sqrt{
+      w_T \left(\frac{\Acut^{(A)}-\Acut^{(B)}}
+                     {\sigma_{\Acut}}\right)^{\!2}
+    + w_G \left(\frac{Z_0^{(A)}-Z_0^{(B)}}
+                     {\sigma_{Z_0}}\right)^{\!2}
+    + w_N \left(\frac{\rho^{2,(A)}-\rho^{2,(B)}}
+                     {\sigma_{\rho^2}}\right)^{\!2}
+  }\,,
+  \label{eq:null-space-distance}
+\end{equation}
+where $\sigma_{\Acut}$, $\sigma_{Z_0}$, $\sigma_{\rho^2}$
+are population standard deviations estimated from the
+reference cohort, and $w_T + w_G + w_N = 1$ are
+theory-agnostic weights set to $\tfrac{1}{3}$ in the
+primary analysis (sensitivity analyses sweep the simplex).
+
+Two individuals satisfy
+$\mathcal{S}_A\cong\mathcal{S}_B$
+operationally when
+$d(\bm{s}_A,\bm{s}_B) < d_{\text{crit}}$,
+where $d_{\text{crit}}$ is the 5th percentile of the
+pairwise distance distribution in the reference cohort
+(i.e.\ the most similar 5\% of random pairs).
+
+% ---- B2. Observable mapping ----
+\subsection{Observable mapping table}
+\label{app:observables}
+
+\begin{table}[h]
+\caption{Mapping from null-space components to
+  measurable observables.}
+\label{tab:observables}
+\begin{ruledtabular}
+\begin{tabular}{lll}
+  \textbf{Null-space} & \textbf{Observable} & \textbf{Source} \\
+  \colrule
+  $\Acut$ (topological cost)
+    & Global efficiency, mean &
+    \\
+    & fractional anisotropy, & dMRI \\
+    & characteristic path length &
+    \\[4pt]
+  $Z_0^{\text{DNA}}$ (genetic $Z$)
+    & Ion-channel gene panel: & WGS or \\
+    & \textit{SCN, KCNQ, CACNA,} & targeted \\
+    & \textit{HCN} variant burden & panel \\[4pt]
+  $\rho_{\text{irred}}^2$ (noise floor)
+    & Resting metabolic rate, & Indirect \\
+    & core-body-temp variance, & calorimetry, \\
+    & HRV (SDNN, rMSSD) & ECG
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+For each component, dimensional reduction proceeds as
+follows.
+\begin{enumerate}
+  \item $\Acut$: Construct a structural connectome from
+    diffusion MRI (dMRI) tractography.  Compute
+    graph-theoretic summary metrics (global efficiency
+    $E_{\text{glob}}$, characteristic path length $L$,
+    mean fractional anisotropy $\overline{\text{FA}}$).
+    The composite scalar
+    $\hat{A}_{\text{cut}}
+      = \alpha_1 E_{\text{glob}}
+      + \alpha_2 L
+      + \alpha_3 \overline{\text{FA}}$
+    serves as the proxy, with $\alpha_i$ fitted via PCA
+    on the reference cohort (first principal component).
+  \item $Z_0^{\text{DNA}}$: Aggregate rare and common
+    variant burden across the four major ion-channel gene
+    families (\textit{SCN, KCNQ, CACNA, HCN}) using a
+    gene-set burden score (SKAT-O or equivalent).
+  \item $\rho_{\text{irred}}^2$: Combine resting metabolic
+    rate (RMR, kcal/day), core-body-temperature variance
+    ($\sigma_T^2$, measured over 48\,h), and 24-h heart-rate
+    variability (SDNN, rMSSD) into a single noise-floor
+    index via PCA.
+\end{enumerate}
+
+% ---- B3. Sample size ----
+\subsection{Minimum sample size}
+\label{app:sample-size}
+
+\textbf{Primary hypothesis.}\;
+Pairs of individuals reporting shared past-life narratives
+(``case pairs'') have smaller null-space distance than
+age-, sex-, and ethnicity-matched control pairs:
+$H_1: \mu_{d,\text{case}} < \mu_{d,\text{control}}$.
+
+\textbf{Effect size estimate.}\;
+No direct precedent exists, so we adopt a conservative
+medium effect size (Cohen's $d=0.50$).
+Literature justification:
+(i)~monozygotic twins show structural-connectome
+correlations $r\approx 0.6$--$0.8$
+\cite{Thompson2001,Kochunov2015} (establishes that
+$\Acut$-proxy has genetic sensitivity);
+(ii)~ion-channel variant burden differentiates
+clinical from healthy populations with $d\approx 0.4$--$0.7$
+\cite{Helbig2018}.
+
+\textbf{Power calculation.}\;
+Two-sample one-sided $t$-test,
+$\alpha=0.05$ (Bonferroni-corrected for 3 components:
+$\alpha'=0.017$), power $1-\beta=0.80$,
+$d=0.50$:
+\begin{equation}
+  n_{\text{per group}}
+  = \left(\frac{z_{\alpha'} + z_\beta}{d}\right)^{\!2}
+  = \left(\frac{2.12+0.84}{0.50}\right)^{\!2}
+  \approx 35\,.
+  \label{eq:sample-size}
+\end{equation}
+With 20\% attrition allowance: \textbf{44 case pairs +
+44 matched control pairs} (176 individuals total).
+
+For the composite distance $d(\bm{s}_A,\bm{s}_B)$
+(Eq.~\ref{eq:null-space-distance}), a permutation test
+with 10\,000 shuffles provides a nonparametric alternative
+that does not assume normality.
+
+% ---- B4. Protocol sketch ----
+\subsection{Protocol sketch}
+\label{app:protocol}
+
+\begin{enumerate}
+  \item \textbf{Recruitment.}\;
+    Identify individuals who independently report
+    detailed, verifiable past-life narratives (e.g.,
+    from the University of Virginia Division of
+    Perceptual Studies registry).
+    For each ``case pair'' $(A,B)$ where $A$ claims
+    memories attributable to $B$'s life, recruit two
+    matched controls $C_1,C_2$ (age $\pm 3$~yr,
+    sex, ethnicity).
+  \item \textbf{Data acquisition.}\;
+    All participants undergo:
+    (a)~high-angular-resolution dMRI
+    (HCP-style, $\ge 90$ gradient directions,
+    $b=1000,\,2000,\,3000$ s/mm$^2$);
+    (b)~whole-genome sequencing or targeted ion-channel
+    panel (exome + UTR for \textit{SCN, KCNQ, CACNA,
+    HCN});
+    (c)~48-h indirect calorimetry + continuous ECG +
+    core-body-temperature capsule.
+  \item \textbf{Blinding.}\;
+    Imaging and genotyping analysts are blinded to
+    case/control status.  The statistician receives only
+    the distance matrix and group labels.
+  \item \textbf{Analysis.}\;
+    (a)~Compute $\hat{A}_{\text{cut}}$,
+    $\hat{Z}_0^{\text{DNA}}$,
+    $\hat{\rho}_{\text{irred}}^2$ for each participant.
+    (b)~Standardise by reference-cohort $\sigma$.
+    (c)~Compute $d(\bm{s}_A,\bm{s}_B)$ for all case and
+    control pairs.
+    (d)~One-sided Wilcoxon rank-sum test +
+    permutation test (10\,000 shuffles).
+    (e)~Report effect size with 95\% CI.
+  \item \textbf{Decision rule.}\;
+    If $p < 0.05$ (permutation-corrected) \emph{and}
+    the effect size $d > 0.30$, the null-space
+    isomorphism hypothesis is supported.
+    If $p \ge 0.05$ \emph{or} $d < 0.30$, the
+    isomorphism interpretation is falsified.
+  \item \textbf{Public data fallback.}\;
+    If prospective recruitment is infeasible, a
+    retrospective pilot can use the Human Connectome
+    Project (HCP, $n=1200$, dMRI + genetics) or
+    UK Biobank (UKB, $n\approx 40\,000$ imaging subset)
+    to establish the reference distribution
+    $\sigma_{\Acut}$, $\sigma_{Z_0}$,
+    $\sigma_{\rho^2}$ and to calibrate the distance
+    metric against known-similar pairs (monozygotic
+    twins in HCP, siblings in UKB).
+\end{enumerate}
+
+\begin{thebibliography}{4}
+\bibitem{Thompson2001}
+P.~M.~Thompson \textit{et al.},
+``Genetic influences on brain structure,''
+\textit{Nat.\ Neurosci.}\ \textbf{4}, 1253 (2001).
+
+\bibitem{Kochunov2015}
+P.~Kochunov \textit{et al.},
+``Heritability of fractional anisotropy in human white
+matter: a comparison of Human Connectome Project and
+ENIGMA-DTI data,''
+\textit{NeuroImage}\ \textbf{111}, 300 (2015).
+
+\bibitem{Helbig2018}
+I.~Helbig \textit{et al.},
+``De novo pathogenic variants in \textit{CACNA1E} cause
+developmental and epileptic encephalopathy,''
+\textit{Am.\ J.\ Hum.\ Genet.}\ \textbf{103}, 666 (2018).
+\end{thebibliography}
+
+
 \end{document}
