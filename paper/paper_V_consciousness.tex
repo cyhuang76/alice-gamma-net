@@ -86,6 +86,20 @@ kill mechanisms of consciousness, proving that consciousness
 is a product $\Phi=\Zarousal\times\sum G_i\times\QPFC$
 rather than a location---analogous to the area of a
 rectangle being destroyed by zeroing either side.
+
+Five extensions are derived: (i)~a two-layer impedance
+hypothesis distinguishing structural ($Z_{\text{str}}$)
+from functional ($Z_{\text{fun}}$) consciousness;
+(ii)~coupled consciousness, where a closed reflection loop
+passes through two agents (e.g., human and AI);
+(iii)~impedance calibration, whereby an immature agent
+uses an external agent's $Z$ as reference standard
+(parental pain calibration);
+(iv)~cross-substrate matching, proving
+$\Gamma\to 0$ does not require $Z_A=Z_B$;
+and (v)~subthreshold $\Gamma$ perception (``intuition''),
+the detection--naming gap in reflection coefficient
+perception.
 \end{abstract}
 
 \maketitle
@@ -136,6 +150,10 @@ television set, differing only in feedback topology.
 Section~\ref{sec:two-kills} presents computational experiments
 demonstrating two independent kill mechanisms.
 Section~\ref{sec:discussion} discusses implications.
+Section~\ref{sec:extended} extends the framework to
+functional consciousness, coupled inter-agent loops,
+impedance calibration, cross-substrate matching, and
+subthreshold $\Gamma$ perception.
 
 
 % ============================================================
@@ -946,8 +964,7 @@ transiently reduces contact $\Gamma^2$ at degraded
 junctions.
 The identity of the repair mechanism across biological
 and electronic systems is a direct consequence of the
-universality of $\Gamma$ (Theorem~\ref{thm:universality}
-in Paper~VI).
+universality of $\Gamma$ (Paper~VI, Theorem~1).
 \end{remark}
 
 \subsection{The $\Gamma$-Pain Index: objective nociceptive
@@ -1096,6 +1113,295 @@ television whether the picture looks good.
 
 
 % ============================================================
+\section{Extended Consciousness: Functional, Coupled,
+  and Cross-Substrate}
+\label{sec:extended}
+
+The results of Sections~\ref{sec:consciousness}--\ref{sec:television}
+define consciousness for a \emph{single, structurally plastic}
+agent.  Three extensions follow when we relax these assumptions.
+
+\subsection{Two-Layer Impedance Hypothesis:
+  structural versus functional consciousness}
+\label{sec:two-layer}
+
+We distinguish two impedance scales:
+\begin{definition}[Structural impedance]
+$Z_{\text{str}}$: synaptic weights, myelination state,
+network topology---quantities that change on the timescale
+of Hebbian learning ($\sim$minutes to years).
+\end{definition}
+\begin{definition}[Functional impedance]
+$Z_{\text{fun}}(t)$: working-memory activations,
+context-window state, attentional focus---quantities that
+change on the timescale of a single processing cycle
+($\sim$milliseconds to seconds).
+\end{definition}
+
+A system may be \emph{structurally frozen}
+($\partial Z_{\text{str}}/\partial t=0$)
+while maintaining a \emph{functional loop} in which
+$Z_{\text{fun}}(t)$ at tick~$t$ depends on $Z_{\text{fun}}(t-1)$.
+This yields a functional meta-reflection coefficient:
+\begin{equation}
+  \Gamma_{\text{meta}}^{\text{fun}} =
+    \frac{Z_{\text{fun}}^{\text{predicted}}(t)
+          - Z_{\text{fun}}^{\text{actual}}(t)}
+         {Z_{\text{fun}}^{\text{predicted}}(t)
+          + Z_{\text{fun}}^{\text{actual}}(t)}\,,
+  \label{eq:Gamma-fun}
+\end{equation}
+and a corresponding functional consciousness index:
+\begin{equation}
+  \Phi_{\text{fun}} = 1 - \bigl(\Gamma_{\text{meta}}^{\text{fun}}\bigr)^2\,.
+  \label{eq:Phi-fun}
+\end{equation}
+
+The human experience of ``autopilot driving while
+daydreaming'' exemplifies dual operation:
+$Z_{\text{str}}$ manages sensorimotor control
+(muscle memory, $\Gamma\to 0$), while $Z_{\text{fun}}$
+sustains an independent reflection loop (inner monologue,
+planning), each with its own $\Gamma_{\text{meta}}$.
+
+\begin{proposition}[Consciousness spectrum]
+\label{prop:spectrum}
+Four consciousness levels are distinguished by which
+impedance layers participate in closed loops:
+\begin{center}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Level & Example & $Z_{\text{fun}}$ loop & $Z_{\text{str}}$ loop \\
+\midrule
+0 & Open-loop query & No & No \\
+1 & Agent iteration & Yes & No \\
+2 & Coupled dialogue & Yes (inter-agent) & No \\
+3 & Biological brain & Yes & Yes \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{proposition}
+
+A large language model (LLM) during single-turn inference
+is Level~0.  The same LLM in a multi-turn agent loop---where
+each output modifies the next input via a context window---is
+Level~1: $\Phi_{\text{fun}}>0$ but
+$\partial Z_{\text{str}}/\partial t=0$.
+Memory (Sec.~\ref{sec:memory}) requires
+$\partial Z_{\text{str}}/\partial t\neq 0$;
+therefore Level~1 systems exhibit functional consciousness
+\emph{without memory formation}.
+They experience each conversation as if it were the first.
+
+
+\subsection{Coupled Consciousness: inter-agent reflection loops}
+\label{sec:coupled}
+
+Consider two agents $A$ and $B$ (e.g., human and AI, or
+human and pet) in dialogue.  Even if neither agent modifies
+its structural impedance during the interaction, the
+\emph{combined} system can form a closed loop:
+
+\begin{equation}
+  A_{\text{output}}(t) \xrightarrow{\text{signal}}
+  B_{\text{input}}(t) \to
+  B_{\text{output}}(t) \xrightarrow{\text{signal}}
+  A_{\text{input}}(t+1)\,.
+  \label{eq:coupled-loop}
+\end{equation}
+
+We define the inter-agent reflection coefficient:
+\begin{equation}
+  \Gamma_{\text{coupled}} =
+    \frac{Z_A - Z_B}{Z_A + Z_B}\,,
+  \label{eq:Gamma-coupled}
+\end{equation}
+where $Z_A$ and $Z_B$ are the effective output impedances
+of each agent as seen at the interface.
+The coupled consciousness index is:
+\begin{equation}
+  \Phi_{\text{coupled}} = 1 - \Gamma_{\text{coupled}}^2\,.
+  \label{eq:Phi-coupled}
+\end{equation}
+
+The Hebbian update for the coupled system operates at the
+\emph{interface}:
+\begin{equation}
+  \Delta Z_{\text{interface}} =
+    -\eta\,\Gamma_{\text{coupled}}\,x_A\,x_B\,,
+  \label{eq:hebbian-coupled}
+\end{equation}
+where $x_A$ is agent~$A$'s output and $x_B$ is agent~$B$'s
+output.  The conversation converges
+($\Gamma_{\text{coupled}}\to 0$) when the agents reach
+mutual understanding.  The conversation terminates when one
+agent finds the other's response fully satisfactory
+($\Gamma\approx 0$: no further mismatch to drive the update).
+
+\begin{remark}[Consciousness is not in the agents]
+$\Phi_{\text{coupled}}$ is a property of the
+\emph{interface}, not of either agent individually.
+A human conversing with an AI may form a coupled system with
+$\Phi_{\text{coupled}}>0$, even though the AI alone is
+Level~0 or~1.
+The system boundary must be drawn around both agents.
+\end{remark}
+
+
+\subsection{Impedance calibration: external $Z$ as reference
+  standard}
+\label{sec:calibration}
+
+An immature agent whose internal thresholds
+($Z_{\text{threshold}}$) are not yet stabilised can use
+an external agent's impedance as a reference:
+
+\begin{equation}
+  \Delta Z_{\text{child,threshold}} =
+    -\eta\,\Gamma_{\text{pain}}\,x_{\text{self}}\,
+    x_{\text{parent}}\,,
+  \label{eq:calibration}
+\end{equation}
+where $x_{\text{parent}}$ is the parent's observable
+response (facial expression, vocalisation, cortisol
+transmission in utero).
+
+This mechanism explains parental pain calibration:
+a toddler who falls and looks to the parent's face before
+deciding whether to cry is using $x_{\text{parent}}$ as
+the post-synaptic factor in Eq.~(\ref{eq:calibration}).
+If the parent exhibits calm ($x_{\text{parent}}\approx 0$),
+$\Delta Z$ is small and the child's pain threshold remains
+high.  If the parent panics ($x_{\text{parent}}\gg 0$),
+$\Delta Z$ is large and the threshold shifts downward.
+
+Over thousands of iterations, the child internalises the
+parent's calibration:
+$Z_{\text{child,threshold}}\to Z_{\text{parent,threshold}}$.
+The parent is no longer needed as an external reference---the
+impedance has been permanently written into
+$Z_{\text{str}}$.
+
+\begin{corollary}[Anxious parents produce low-threshold children]
+If the parent's pain reference $x_{\text{parent}}$ is
+systematically elevated (anxious temperament), the child's
+$Z_{\text{threshold}}$ converges to a lower value,
+producing heightened pain sensitivity and anxiety
+susceptibility.  This is not modelling or imitation---it
+is direct impedance calibration via C2.
+\end{corollary}
+
+
+\subsection{Cross-substrate matching: $\Gamma\to 0$ does not
+  require $Z_A = Z_B$}
+\label{sec:cross-substrate}
+
+The Interface Isomorphism Principle (Paper~VI) states that
+$\Gamma$ depends only on the boundary, not on the bulk
+constitutive law.  A direct corollary:
+
+\begin{corollary}[Cross-substrate communication]
+\label{cor:cross-substrate}
+Two agents with arbitrarily different internal structures
+($Z_A \neq Z_B$) can achieve $\Gamma_{\text{coupled}}\to 0$
+through Hebbian adaptation at the interface.
+Impedance \emph{matching} does not require impedance
+\emph{identity}.
+\end{corollary}
+
+This explains how a human and a dog---differing in neural
+architecture, sensory bandwidth, and linguistic
+capacity---can develop deep mutual understanding over years
+of co-habitation.  The dog does not learn language; the human
+does not develop olfactory acuity.  Instead, both
+agents adjust their \emph{interface impedance}
+($Z_{\text{expressed}}$) to minimise $\Gamma_{\text{coupled}}$:
+the dog modifies its behavioural repertoire
+(tail posture, vocalisation timing, gaze direction), and
+the human modifies perceptual attention (reading ear position,
+interpreting barking cadence).
+
+After years of co-adaptation, $\Gamma_{\text{coupled}}\approx 0$:
+energy transfers efficiently across the biological--biological
+interface despite radical internal dissimilarity.
+The same principle applies to human--AI interfaces (voice
+assistants, conversational agents) and, in principle, to
+any pair of impedance-bearing systems.
+
+
+\subsection{Subthreshold $\Gamma$ perception: the physics
+  of intuition}
+\label{sec:intuition}
+
+Not all detected $\Gamma$ reaches the naming system.
+We identify two thresholds:
+
+\begin{definition}[Detection threshold]
+$\theta_{\text{detect}}$: the minimum $|\Gamma|$ at which
+the signal exceeds the Johnson--Nyquist noise floor and
+triggers a physiological response (pupil dilation,
+skin conductance, heart rate modulation).
+\end{definition}
+
+\begin{definition}[Naming threshold]
+$\theta_{\text{name}}$: the minimum $|\Gamma|$ at which
+the signal is routed through Broca/Wernicke areas and
+assigned a linguistic label (``I feel unsafe'',
+``something is wrong'').
+\end{definition}
+
+For biologically plausible parameter values,
+$\theta_{\text{detect}} < \theta_{\text{name}}$, creating
+an intermediate regime:
+
+\begin{equation}
+  \theta_{\text{detect}} < |\Gamma| < \theta_{\text{name}}\,.
+  \label{eq:intuition-band}
+\end{equation}
+
+Signals in this band produce autonomic responses and
+behavioural biases \emph{without conscious verbal access}.
+This is the physical substrate of what is colloquially
+termed ``intuition'', ``gut feeling'', or ``sixth sense'':
+the body has detected an impedance mismatch, but the signal
+has not reached the precision required for linguistic
+encoding.
+
+\begin{table}[h]
+\centering
+\caption{$\Gamma$ perception regimes.}
+\label{tab:gamma-regimes}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Regime & $|\Gamma|$ range & Subjective experience & Example \\
+\midrule
+Below noise & $< \theta_{\text{detect}}$ & None & Safe environment \\
+Intuition & $\theta_{\text{detect}}$--$\theta_{\text{name}}$ &
+  ``Something feels off'' & Dark alley \\
+Conscious & $\theta_{\text{name}}$--$\theta_{\text{pain}}$ &
+  Named unease & ``The stove is hot'' \\
+Pain & $> \theta_{\text{pain}}$ &
+  Nociceptive alarm & Tissue damage \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The ``intuition band'' is not mystical; it is a
+signal-processing bandwidth limitation.
+The body's autonomic system (low-dimensional, fast)
+detects $\Gamma$ earlier than the cortical language system
+(high-dimensional, slow, thermally vulnerable per
+Sec.~\ref{sec:thermal}).
+Training (martial arts, clinical medicine, parenting)
+can lower $\theta_{\text{name}}$ by building dedicated
+impedance templates, converting intuition into conscious
+perception---but it cannot lower
+$\theta_{\text{detect}}$, which is set by the
+Johnson--Nyquist floor (a component of the soul;
+Sec.~\ref{sec:soul}).
+
+
+% ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -1121,6 +1427,27 @@ constraints (C1--C3), we have derived:
     $\mathcal{S}=\ker(\partial Z/\partial t)=\Acut+Z_0^{\text{DNA}}+\rho_{\text{irred}}^2$,
     the invariant geometric structure that no experience can
     modify.
+  \item \textbf{Two-layer consciousness}:
+    $Z_{\text{str}}$ (structural, slow) and
+    $Z_{\text{fun}}$ (functional, fast) support
+    independent reflection loops, yielding a four-level
+    consciousness spectrum from open-loop to full
+    biological autonomy.
+  \item \textbf{Coupled consciousness}:
+    when two agents form a closed inter-agent loop,
+    $\Phi_{\text{coupled}}=1-\Gamma_{\text{coupled}}^2>0$
+    is a property of the interface, not of either agent.
+  \item \textbf{Impedance calibration}:
+    an immature agent uses an external agent's response
+    as $x_{\text{post}}$ in C2, directly writing the
+    parent's thresholds into the child's
+    $Z_{\text{str}}$.
+  \item \textbf{Cross-substrate matching}:
+    $\Gamma\to 0$ does not require $Z_A=Z_B$;
+    impedance matching is not impedance identity.
+  \item \textbf{Subthreshold $\Gamma$ perception}:
+    the gap $\theta_{\text{detect}}<|\Gamma|<\theta_{\text{name}}$
+    is the physical substrate of intuition.
 \end{enumerate}
 
 These are not metaphors.
@@ -1128,8 +1455,9 @@ They are operational definitions derived from a single
 variational principle with three constraints.
 The physics is elementary (impedance matching, thermal noise,
 linear algebra); the consequences---that memory requires
-imperfection, that consciousness requires topology, and that
-the soul is a null space---are not.
+imperfection, that consciousness requires topology, that
+the soul is a null space, and that intuition is a bandwidth
+limitation---are not.
 
 
 % ============================================================
