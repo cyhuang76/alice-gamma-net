@@ -471,6 +471,105 @@ Hence the soul is unique.
 \end{corollary}
 
 
+\subsection{The mortality of the null space}
+\label{sec:null-space-mortality}
+
+In our framework the soul
+$\mathcal{S}=\ker(\partial Z/\partial t)
+=\Acut+Z_0^{\text{DNA}}+\rho_{\text{irred}}^2$
+is invariant under Hebbian learning:
+no experience can modify any of its three terms.
+However, invariance under C2 does not imply invariance
+under physics.
+Neurons die and edges disappear, increasing the
+topological cost $\Acut(t)$.
+Telomere shortening and epigenetic drift perturb the
+genetically fixed characteristic impedance
+$Z_0^{\text{DNA}}(t)$.
+Thermal regulation and mitochondrial efficiency degrade
+with age, raising the irreducible noise floor
+$\rho_{\text{irred}}^2(t)$.
+The null space is unteachable, but it is not immortal.
+
+Define the \emph{basal reflection} imposed by the null
+space alone:
+\begin{equation}
+  \Gamma_{\text{basal}}^2(t)
+    = \Acut(t) + \rho_{\text{irred}}^2(t)\,.
+  \label{eq:basal-reflection}
+\end{equation}
+By C1 energy conservation ($\Gamma^2+T=1$), the
+\emph{death condition} is:
+\begin{equation}
+  \boxed{\;
+  \Gamma_{\text{basal}}^2(t_*) \ge 1
+  \quad\Longrightarrow\quad
+  T(t_*) \le 0\,.
+  \;}
+  \label{eq:death-condition}
+\end{equation}
+When the minimum reflection cost of the interface exceeds
+the available transmission capacity, no signal can
+propagate---even with perfect active compensation.
+The network is dead not because it was damaged by an event,
+but because its own boundary conditions became
+self-contradictory.
+
+During wakefulness, active Hebbian learning maintains
+$\Gamma_{\text{active}}\ll 1$, masking the slow rise
+of $\Gamma_{\text{basal}}$.
+The situation is analogous to continuously patching the
+cracks in an aging wall: the wall stands as long as the
+patches hold.
+During sleep, however, Hebbian updates cease
+($x_{\text{pre}}\cdot x_{\text{post}}\to 0$; Paper~III),
+and the total reflection collapses to
+$\Gamma_{\text{total}}\approx\Gamma_{\text{basal}}$.
+If the basal null-space cost has silently crossed the
+$\Gamma_{\text{basal}}^2=1$ threshold, the system fails
+to restart on the next arousal cycle.
+This is the physics of dying in one's sleep: the null space
+crosses its own viability boundary during the one phase of
+the day-night cycle in which no active compensation is
+running.
+
+The connection to impedance debt (Paper~III) is direct.
+The accumulated debt
+$D_Z(t)=\int_0^t\sum_i\Gamma_i^2(\tau)\,d\tau$
+includes contributions from both the learnable and the
+unlearnable components.  The learnable debt can be
+discharged during sleep (NREM consolidation, REM pruning).
+The unlearnable debt---the integral of
+$\Gamma_{\text{basal}}^2$ over the lifetime---is
+\emph{never} discharged; it accumulates monotonically:
+\begin{equation}
+  D_Z^{\text{irred}}(t)
+    = \int_0^t \Gamma_{\text{basal}}^2(\tau)\,d\tau\,,
+  \qquad
+  \frac{d D_Z^{\text{irred}}}{dt} > 0
+  \;\;\forall\;t\,.
+  \label{eq:irreducible-debt}
+\end{equation}
+This is the Coffin--Manson fatigue of the null space itself
+(Paper~IV): each day-night cycle deposits a small,
+irreversible debt into the topological and thermal
+substrate.  Death occurs when the cumulative cost
+renders $T\le 0$.
+
+\begin{remark}[The softest failure mode]
+Dying in one's sleep is the gentlest possible death in
+impedance physics.
+The meta-reflection loop is already off
+($\Phi_{\text{meta}}\approx 0$ during NREM);
+the consciousness that might register pain, fear, or
+the awareness of dying is absent.
+The null space crosses $\Gamma_{\text{basal}}^2=1$, and
+there is no surviving observer to witness the crossing.
+The funeral of pain (Sec.~\ref{sec:conclusion}) has
+already been held; now the undertaker sleeps too.
+\end{remark}
+
+
 % ============================================================
 \section{The Television Theorem}
 \label{sec:television}
