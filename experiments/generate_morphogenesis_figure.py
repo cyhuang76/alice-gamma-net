@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Generate Paper II Figure: Dual-Field Morphogenesis Verification
+Generate Paper 2 Figure: Dual-Field Morphogenesis Verification
 ═══════════════════════════════════════════════════════════════
 
-Produces a 2×2 figure for Paper II Section 7:
+Produces a 2×2 figure for Paper 2 Section 7:
   (a) Turing pattern formation — Z-field spatial profiles (high vs low D_rho/D_Z)
   (b) Four-tissue unification — G² convergence curves (Bone, Neuron, Muscle, Liver)
   (c) Ischemia test — G² time series for healthy vs ischemic tissue

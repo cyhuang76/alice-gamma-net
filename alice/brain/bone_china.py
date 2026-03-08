@@ -2,7 +2,7 @@
 """
 Bone China Engine — Five-Phase Memory Consolidation
 
-Paper III §2.3: Long-term memory formation requires physical modification
+Paper 3 §2.3: Long-term memory formation requires physical modification
 of the transmission line — a process analogous to ceramic firing:
 
   Phase 1: Clay (wet)      → Working memory     → transient electrical pattern, high Γ
@@ -461,7 +461,7 @@ class BoneChinaEngine:
                     self._total_shattered += 1
                     expired += 1
                 else:
-                    # ★ Hebbian clay decay: ΔΓ = -rate × Γ × T
+                    # ★ impedance-remodeling clay decay: ΔΓ = -rate × Γ × T
                     # Only the transmitted fraction drives learning/decay
                     T = 1.0 - shard.gamma ** 2
                     shard.gamma = max(0.0, shard.gamma - CLAY_DECAY_RATE * shard.gamma * T)
@@ -514,7 +514,7 @@ class BoneChinaEngine:
         return self.get_state()
 
     # ------------------------------------------------------------------
-    # Signal Protocol
+    # Impedance-Tagged Transport
     # ------------------------------------------------------------------
 
     def get_signal(self) -> ElectricalSignal:

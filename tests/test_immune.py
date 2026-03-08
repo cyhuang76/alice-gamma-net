@@ -6,7 +6,7 @@ Tests verify:
     1. Basic construction
     2. Pathogen infection
     3. Innate immune response
-    4. Adaptive immunity (antibody Hebbian learning)
+    4. Adaptive immunity (antibody impedance remodeling)
     5. Inflammation dynamics
     6. Fever response
     7. Pathogen clearance
@@ -90,7 +90,7 @@ class TestInnateImmunity:
 
 
 class TestAdaptiveImmunity:
-    """Adaptive immune response (Hebbian antibody learning)."""
+    """Adaptive immune response (impedance-remodeling antibody learning)."""
 
     def test_antibody_created(self):
         immune = ImmuneSystem()

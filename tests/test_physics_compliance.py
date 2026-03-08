@@ -6,8 +6,8 @@ Unified Variational Principle: 𝒜[Γ] = ∫ΣΓ²dt → min
 
 Verifies all FULL-compliance modules satisfy:
   C1  Energy Conservation: Γ² + T = 1 at every tick
-  C2  Hebbian Update: ΔZ = −η · Γ · x_pre · x_post (learning flows through Γ)
-  C3  Signal Protocol: Every inter-module value = ElectricalSignal
+  C2  impedance remodeling: ΔZ = −η · Γ · x_in · x_out (learning flows through Γ)
+  C3  Impedance-Tagged Transport: Every inter-module value = ElectricalSignal
 
 Covers 13 FULL modules:
   Brain: auditory_grounding, bone_china, broca, calibration, fusion_brain,
@@ -62,7 +62,7 @@ def _make_signal(amplitude=0.5, frequency=10.0, impedance=75.0,
 
 
 # ============================================================================
-# Constraint 1: Signal Protocol — get_signal() → ElectricalSignal
+# Constraint 1: Impedance-Tagged Transport — get_signal() → ElectricalSignal
 # ============================================================================
 
 class TestSignalProtocol:
@@ -190,13 +190,13 @@ class TestEnergyConservation:
 
 
 # ============================================================================
-# Constraint 3: Hebbian Learning — ΔZ flows through Γ
+# Constraint 3: impedance remodeling — ΔZ flows through Γ
 # ============================================================================
 
-class TestHebbianLearning:
+class TestImpedanceLearning:
     """Learning must flow through impedance/Γ — no direct weight bypass."""
 
-    def test_skin_nociception_hebbian(self):
+    def test_skin_nociception_impedance(self):
         """Skin: nociception sensitization is Γ²-weighted, not flat constant."""
         skin = AliceSkin()
         initial_threshold = skin._nociception_threshold
@@ -211,7 +211,7 @@ class TestHebbianLearning:
         drop_high = initial_threshold - threshold_after_high_gamma
         drop_low = initial_threshold - threshold_after_low_gamma
         assert drop_high > drop_low, \
-            f"Hebbian: high-Γ drop ({drop_high}) should exceed low-Γ drop ({drop_low})"
+            f"impedance-remodeling: high-Γ drop ({drop_high}) should exceed low-Γ drop ({drop_low})"
 
     def test_nose_adaptation_t_weighted(self):
         """Nose: adaptation rate depends on transmission (T-weighted)."""
@@ -231,7 +231,7 @@ class TestHebbianLearning:
 
         # Matched should adapt faster (higher T → more signal gets through)
         assert adapt_matched > adapt_far, \
-            f"Hebbian: matched adaptation ({adapt_matched}) should exceed far ({adapt_far})"
+            f"impedance-remodeling: matched adaptation ({adapt_matched}) should exceed far ({adapt_far})"
 
     def test_interoception_prediction_t_weighted(self):
         """Interoception: prediction update uses T factor."""
@@ -242,9 +242,9 @@ class TestHebbianLearning:
         # Prediction should have moved toward 120 but not fully (T < 1)
         pred_after = organ._predictions["cardiac"]
         assert pred_after > 60.0, "Prediction must update toward actual"
-        assert pred_after < 120.0, "Single Hebbian step should not reach target"
+        assert pred_after < 120.0, "Single impedance-remodeling step should not reach target"
 
-    def test_bone_china_clay_decay_hebbian(self):
+    def test_bone_china_clay_decay_impedance(self):
         """Bone china: clay decay rate depends on Γ × T (not flat constant)."""
         eng = BoneChinaEngine()
         eng.create_clay(content_key="decay_test", importance=0.3, emotional_valence=0.2)
@@ -254,15 +254,15 @@ class TestHebbianLearning:
         eng.tick(is_sleeping=False, sleep_stage="wake")
         gamma_after = eng._shards[0].gamma
         decay = gamma_before - gamma_after
-        # Decay should be proportional to Γ (Hebbian), not a flat amount
+        # Decay should be proportional to Γ (impedance-remodeling), not a flat amount
         # With Γ=0.9: decay = rate × 0.9 × (1-0.81) = rate × 0.171
         assert decay > 0, "Clay should decay"
         # Should be different from flat 0.005 (old formula was rate * 0.1)
         # New formula: rate * gamma * T → bigger decay at high gamma but modulated by T
 
 
-class TestVestibularHebbianPrediction:
-    """Vestibular: prediction update is T-weighted Hebbian."""
+class TestVestibularImpedancePrediction:
+    """Vestibular: prediction update is T-weighted impedance-remodeling."""
 
     def test_prediction_updates_with_transmission(self):
         """Prediction converges to actual motion, T-weighted."""
@@ -279,11 +279,11 @@ class TestVestibularHebbianPrediction:
 
 
 # ============================================================================
-# v31.1: AuditoryGrounding — CrossModal Hebbian + Γ
+# v31.1: AuditoryGrounding — CrossModal impedance-remodeling + Γ
 # ============================================================================
 
 class TestAuditoryGroundingCompliance:
-    """AuditoryGroundingEngine: cross-modal Hebbian network with Γ."""
+    """AuditoryGroundingEngine: cross-modal impedance-remodeling network with Γ."""
 
     def test_synapse_gamma_energy_conservation(self):
         """CrossModalSynapse: gamma² + energy_transfer = 1."""
@@ -300,7 +300,7 @@ class TestAuditoryGroundingCompliance:
                 f"Γ²+T should=1, got {g**2}+{et}={g**2+et}"
 
     def test_conditioning_strengthens_synapse(self):
-        """Hebbian: repeated conditioning increases synapse strength."""
+        """impedance-remodeling: repeated conditioning increases synapse strength."""
         eng = AuditoryGroundingEngine()
         wave = np.sin(np.linspace(0, 2 * np.pi * 440, 1000))
         sig = _make_signal(source="test_vis", modality="visual")
@@ -313,10 +313,10 @@ class TestAuditoryGroundingCompliance:
         eng.condition_pair(wave, sig, "beep", "circle")
         strength_2 = eng.network.synapses[0].strength
         assert strength_2 >= strength_1, \
-            f"Hebbian: strength should increase: {strength_1} → {strength_2}"
+            f"impedance-remodeling: strength should increase: {strength_1} → {strength_2}"
 
     def test_tick_decays_synapses(self):
-        """tick() decays synapse strength (Hebbian: use-it-or-lose-it)."""
+        """tick() decays synapse strength (impedance-remodeling: use-it-or-lose-it)."""
         eng = AuditoryGroundingEngine()
         wave = np.sin(np.linspace(0, 2 * np.pi * 440, 1000))
         sig = _make_signal(source="test_vis", modality="visual")
@@ -364,7 +364,7 @@ class TestBrocaCompliance:
             f"Γ²+T should=1, got {g**2}+{et}={g**2+et}"
 
     def test_reinforce_decreases_gamma(self):
-        """Hebbian: reinforce() lowers impedance → Γ decreases."""
+        """impedance-remodeling: reinforce() lowers impedance → Γ decreases."""
         broca = BrocaEngine()
         plan = broca.create_plan("greet", [500, 1500, 2500], 150.0, 0.6, 0.3)
         g_before = plan.gamma()
@@ -374,7 +374,7 @@ class TestBrocaCompliance:
             f"Reinforce should decrease Γ: {g_before} → {g_after}"
 
     def test_weaken_increases_gamma(self):
-        """Anti-Hebbian: weaken() raises impedance → Γ increases."""
+        """Anti-impedance-remodeling: weaken() raises impedance → Γ increases."""
         broca = BrocaEngine()
         plan = broca.create_plan("bad", [500, 1500, 2500], 150.0, 0.6, 0.8)
         g_before = plan.gamma()
@@ -384,7 +384,7 @@ class TestBrocaCompliance:
             f"Weaken should increase Γ: {g_before} → {g_after}"
 
     def test_tick_decays_plans(self):
-        """tick() decays plan confidence (Hebbian: unused plans fade)."""
+        """tick() decays plan confidence (impedance-remodeling: unused plans fade)."""
         broca = BrocaEngine()
         plan = broca.create_plan("fade", [500, 1500, 2500], 150.0, 0.6, 0.7)
         conf_before = plan.confidence
@@ -467,11 +467,11 @@ class TestCalibrationCompliance:
 
 
 # ============================================================================
-# v31.1: FusionBrain — SignalBus + reflected energy + Hebbian
+# v31.1: FusionBrain — SignalBus + reflected energy + impedance-remodeling
 # ============================================================================
 
 class TestFusionBrainCompliance:
-    """FusionBrain: SignalBus routing, reflected energy, Hebbian consolidation."""
+    """FusionBrain: SignalBus routing, reflected energy, impedance-remodeling consolidation."""
 
     def test_signal_bus_exists(self):
         """FusionBrain must have a SignalBus."""
@@ -509,8 +509,8 @@ class TestFusionBrainCompliance:
         assert -1.0 <= cog_gamma <= 1.0
         assert -1.0 <= emo_gamma <= 1.0
 
-    def test_memory_consolidation_hebbian(self):
-        """Memory consolidation adjusts synaptic strength (Hebbian)."""
+    def test_memory_consolidation_impedance(self):
+        """Memory consolidation adjusts synaptic strength (impedance-remodeling)."""
         fb = FusionBrain(neuron_count=20)
         # Process a few stimuli to activate neurons
         for _ in range(3):
@@ -529,7 +529,7 @@ class TestFusionBrainCompliance:
             for neuron in region.neurons:
                 final_strengths.append(neuron.synaptic_strength)
         changes = sum(1 for i, f in zip(initial_strengths, final_strengths) if abs(i - f) > 1e-6)
-        assert changes > 0, "Hebbian consolidation should change some synaptic strengths"
+        assert changes > 0, "impedance-remodeling consolidation should change some synaptic strengths"
 
     def test_reflected_energy_bounded(self):
         """Reflected energy should be bounded (not exploding)."""

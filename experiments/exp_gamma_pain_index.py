@@ -4,7 +4,7 @@ Experiment: Γ-Pain Index (Π_Γ) — Consciousness-Independent
 Nociceptive Burden Estimation
 ═══════════════════════════════════════════════════════════
 
-Paper V validation: The Γ-Pain Index is defined as:
+Paper 4 validation: The Γ-Pain Index is defined as:
 
     Π_Γ(t) = w_n · Γ_n²(t) + w_v · Γ_v²(t) + w_D · dD_Z/dt
 
@@ -27,9 +27,9 @@ This experiment demonstrates:
   5. Comparing Π_Γ sensitivity vs simple HR threshold
 
 Reference:
-  Paper V, Sec. "The Γ-Pain Index: objective nociceptive burden
+  Paper 4, Sec. "The Γ-Pain Index: objective nociceptive burden
   without consciousness"
-  Paper II, Sec. "Clinical measurement protocol: dual-network
+  Paper 2, Sec. "Clinical measurement protocol: dual-network
   wound monitoring"
 """
 
@@ -61,13 +61,13 @@ INFANT_PCA = {
     6: 33, 7: 31, 8: 32, 9: 29, 10: 33,
 }
 
-# Neonatal reference values (from Paper IV lifecycle model)
+# Neonatal reference values (from Paper 3 lifecycle model)
 # Resting HR ~140 bpm → RR ~0.43s, HRV baseline SDNN ~15-25ms
 NEONATAL_RR_REF = 0.43       # seconds (reference matched RR)
 NEONATAL_SDNN_REF = 20.0     # ms (reference autonomic capacity)
 NEONATAL_RMSSD_REF = 15.0    # ms
 
-# Γ-Pain Index weights (from dual-network organ model, Paper II)
+# Γ-Pain Index weights (from dual-network organ model, Paper 2)
 # For neonatal cardiovascular system:
 W_N = 0.4    # neural mismatch weight
 W_V = 0.4    # vascular mismatch weight
@@ -562,11 +562,11 @@ def plot_summary(results: list[DetectionResult]):
 # ============================================================================
 
 def print_report(results: list[DetectionResult]):
-    """Print Paper V-style results report."""
+    """Print Paper 4-style results report."""
 
     print("\n" + "=" * 78)
     print("  Γ-Pain Index (Π_Γ) — Results Report")
-    print("  Paper V: Consciousness-Independent Nociceptive Burden")
+    print("  Paper 4: Consciousness-Independent Nociceptive Burden")
     print("=" * 78)
 
     print(f"\n  N = {len(results)} preterm infants")
@@ -623,7 +623,7 @@ def print_report(results: list[DetectionResult]):
     print("  monitoring (ECG → HRV) without requiring the patient")
     print("  to be conscious or verbal.")
     print()
-    print("  This validates Paper V Eq. (Γ-Pain Index):")
+    print("  This validates Paper 4 Eq. (Γ-Pain Index):")
     print("    Π_Γ(t) = w_n·Γ_n²(t) + w_v·Γ_v²(t) + w_D·dD_Z/dt")
     print()
     print("  Relying on NRS (0-10) alone is equivalent to")
@@ -640,7 +640,7 @@ def main():
     print("=" * 66)
     print("  Γ-Pain Index (Π_Γ) — Consciousness-Independent")
     print("  Nociceptive Burden Estimation")
-    print("  Paper V / Paper II Validation")
+    print("  Paper 4 / Paper 2 Validation")
     print("=" * 66)
 
     results: list[DetectionResult] = []

@@ -23,7 +23,7 @@ Calibration = population impedance matching:
 
 All three constraints preserved:
     C1: Γ² + T = 1  ✓  (algebraic identity)
-    C2: ΔZ = population-level Hebbian correction
+    C2: ΔZ = population-level impedance-remodeling correction
     C3: ElectricalSignal protocol  ✓
 """
 

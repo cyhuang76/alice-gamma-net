@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Auditory Grounding Engine — Cross-Modal Hebbian Resonance Wiring
+Auditory Grounding Engine — Cross-Modal impedance-remodeling Resonance Wiring
 
 Core philosophy: Language is remote resonance control
 
@@ -13,7 +13,7 @@ Core philosophy: Language is remote resonance control
 
 Physical model:
 
-  1. Pavlovian conditioning = cross-modal Hebbian wiring
+  1. Pavlovian conditioning = cross-modal impedance-remodeling wiring
      Bell (auditory) + food (visual) → simultaneous activation
      → Low-impedance channel established between auditory and visual cortex
      → Γ_cross ↓
@@ -67,7 +67,7 @@ from alice.core.signal import ElectricalSignal
 
 # --- Cross-modal synapses ---
 SYNAPSE_Z0 = 100.0             # Base impedance (Ω) (unconditioned)
-SYNAPSE_LEARNING_RATE = 0.15   # Hebbian learning rate η
+SYNAPSE_LEARNING_RATE = 0.15   # impedance remodeling rate η
 SYNAPSE_DECAY_RATE = 0.02      # Extinction decay rate λ (per tick)
 SYNAPSE_MAX_STRENGTH = 5.0     # Maximum synaptic strength
 SYNAPSE_FLOOR = 0.01           # Minimum synaptic strength
@@ -135,7 +135,7 @@ class CrossModalSynapse:
     def strengthen(self, pre_activation: float, post_activation: float,
                    temporal_overlap: float = 1.0):
         """
-        Hebbian strengthening: Δw = η × pre × post × temporal_window
+        impedance-remodeling strengthening: Δw = η × pre × post × temporal_window
 
         pre  = Source modality (auditory) activation strength
         post = Target modality (visual) activation strength
@@ -218,20 +218,20 @@ class SensoryPrototype:
 
 
 # ============================================================================
-# Cross-modal Hebbian network
+# Cross-modal impedance-remodeling network
 # ============================================================================
 
 
-class CrossModalHebbianNetwork:
+class CrossModalImpedanceNetwork:
     """
-    Cross-modal Hebbian network — manages all cross-modal synapses.
+    Cross-modal impedance-remodeling network — manages all cross-modal synapses.
 
     Physical model:
       This is the "cable bundle" from auditory cortex to other cortices.
       Each cable connects an auditory pattern to a pattern in another modality.
       Co-activation → cable impedance decreases → energy flows freely.
 
-    Pavlovian conditioning = Hebbian learning in this network.
+    Pavlovian conditioning = impedance remodeling in this network.
     """
 
     def __init__(self, max_synapses: int = 200):
@@ -262,7 +262,7 @@ class CrossModalHebbianNetwork:
         Conditioning — co-activation → create/strengthen cross-modal synapse.
 
         Physical: Two cortical areas activate simultaneously
-        → Impedance of the cable between them decreases (Hebbian wiring).
+        → Impedance of the cable between them decreases (impedance-remodeling wiring).
 
         Args:
             source_fp: Source fingerprint (e.g., auditory tonotopic activation)
@@ -300,7 +300,7 @@ class CrossModalHebbianNetwork:
                 self.synapses.sort(key=lambda s: s.strength)
                 self.synapses.pop(0)
 
-        # Hebbian strengthening
+        # impedance-remodeling strengthening
         synapse.strengthen(source_activation, target_activation, temporal_overlap)
 
         return synapse
@@ -554,7 +554,7 @@ class AuditoryGroundingEngine:
        Sound pressure waveform → CochlearFilterBank → TonotopicActivation → spectral fingerprint
 
     2. Cross-modal conditioning (Pavlovian)
-       When auditory and other modalities co-occur → Hebbian wiring
+       When auditory and other modalities co-occur → impedance-remodeling wiring
        → Next time, hearing the sound alone can "see" the corresponding image
 
     3. Concept formation
@@ -578,8 +578,8 @@ class AuditoryGroundingEngine:
         # Cochlea analyzer
         self.cochlea = CochlearFilterBank(n_channels=n_cochlea_channels)
 
-        # Cross-modal Hebbian network
-        self.network = CrossModalHebbianNetwork(max_synapses=max_synapses)
+        # Cross-modal impedance-remodeling network
+        self.network = CrossModalImpedanceNetwork(max_synapses=max_synapses)
 
         # Recent sensory inputs (for temporal window comparison)
         self._recent_inputs: Dict[str, Dict[str, Any]] = {}
@@ -725,7 +725,7 @@ class AuditoryGroundingEngine:
                 other_label, other_signal.modality, other_fp
             )
 
-        # Hebbian conditioning
+        # impedance-remodeling conditioning
         syn = self.network.condition(
             source_fp=aud_fp,
             source_modality="auditory",
@@ -799,7 +799,7 @@ class AuditoryGroundingEngine:
         new_modality: str,
         new_fp: np.ndarray,
     ) -> bool:
-        """Attempt cross-modal Hebbian conditioning (within temporal window)."""
+        """Attempt cross-modal impedance-remodeling conditioning (within temporal window)."""
         now = time.monotonic()
         conditioned = False
 
@@ -811,7 +811,7 @@ class AuditoryGroundingEngine:
             if dt_ms > TEMPORAL_WINDOW_MS:
                 continue
 
-            # Within temporal window → Hebbian conditioning!
+            # Within temporal window → impedance-remodeling conditioning!
             temporal_overlap = 1.0 - (dt_ms / TEMPORAL_WINDOW_MS)
 
             if new_modality == "auditory":

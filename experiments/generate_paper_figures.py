@@ -128,7 +128,7 @@ def figure_1():
             label=r"$A_{\mathrm{cut}}$ (irreducible)")
 
     # Annotate
-    ax.annotate(r"$A_{\mathrm{imp}} \to 0$" + "\n(Hebbian C2)",
+    ax.annotate(r"$A_{\mathrm{imp}} \to 0$" + "\n(impedance-remodeling C2)",
                 xy=(TICKS * 0.8, a_imp_arr[-1]),
                 xytext=(TICKS * 0.55, max(a_imp_arr) * 0.3),
                 fontsize=10, color=C_IMP,
@@ -390,7 +390,7 @@ def figure_3():
     # D_K = γ reference line
     g_ref = np.linspace(0, 2.8, 100)
     ax.plot(g_ref, g_ref, "--", color="#9CA3AF", lw=1.2, alpha=0.7,
-            label=r"$D_K = \gamma$ (no Hebbian offset)")
+            label=r"$D_K = \gamma$ (no impedance-remodeling offset)")
 
     # Data points
     ax.errorbar(gamma_arr, dk_means, yerr=dk_stds, fmt="o",
@@ -411,7 +411,7 @@ def figure_3():
     ax.text(2.55, D_KOCH + 0.03, f"$D_{{Koch}} = {D_KOCH:.3f}$",
             fontsize=9, color=C_FIT, ha="right")
 
-    # Annotate δ_Hebbian
+    # Annotate δ_impedance
     idx_126 = list(gamma_arr).index(1.26)
     ax.annotate(
         rf"$\delta_{{\mathrm{{Hebb}}}} = {dk_means[idx_126] - 1.26:.2f}$",
@@ -440,8 +440,8 @@ def figure_3():
 
     # Text box with key finding
     ax.text(0.98, 0.05,
-            r"$D_{K,\mathrm{measured}} = \gamma + \delta_{\mathrm{Hebbian}}(\gamma)$"
-            "\n\nHebbian learning adds\nintrinsic dimensional\npreference to topology",
+            r"$D_{K,\mathrm{measured}} = \gamma + \delta_{\mathrm{impedance-remodeling}}(\gamma)$"
+            "\n\nimpedance remodeling adds\nintrinsic dimensional\npreference to topology",
             transform=ax.transAxes, fontsize=9,
             verticalalignment="bottom", horizontalalignment="right",
             bbox=dict(boxstyle="round,pad=0.4", facecolor="#EDE9FE",

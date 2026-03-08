@@ -284,7 +284,7 @@ class TestFalsificationPruning:
 
     def test_F08_no_stim_no_spontaneous_death(self):
         """F-08: Without stimulation, connections MUST NOT spontaneously die.
-        Pruning requires mismatched Hebbian signal, not mere time passage."""
+        Pruning requires mismatched impedance-remodeling signal, not mere time passage."""
         region = CorticalRegion(
             name="test_no_stim",
             initial_connections=100,
@@ -313,7 +313,7 @@ class TestFalsificationPruning:
             )
 
     def test_F10_impedance_adapts_toward_signal(self):
-        """F-10: After Hebbian learning, surviving connections' impedances
+        """F-10: After impedance remodeling, surviving connections' impedances
         MUST be closer to signal impedance than at birth."""
         target_z = 50.0
         region = CorticalRegion(
@@ -763,8 +763,8 @@ class TestParameterSensitivity:
                 f"to {phi_by_pain[i][1]:.4f} ??should be same at same brightness"
             )
 
-    def test_P04_pruning_hebbian_2d_sweep(self):
-        """P-04: 2D sweep of hebbian_strengthen ? hebbian_weaken.
+    def test_P04_pruning_impedance_2d_sweep(self):
+        """P-04: 2D sweep of impedance_strengthen ? impedance_weaken.
         Verify there is significant variation across parameter space."""
         strengthen_range = [1.01, 1.03, 1.05, 1.07, 1.10]
         weaken_range = [0.90, 0.93, 0.95, 0.97, 0.99]
@@ -775,8 +775,8 @@ class TestParameterSensitivity:
                 region = CorticalRegion(
                     name=f"sweep_{s}_{w}",
                     initial_connections=50,
-                    hebbian_strengthen=s,
-                    hebbian_weaken=w,
+                    impedance_strengthen=s,
+                    impedance_weaken=w,
                 )
                 for i in range(200):
                     region.stimulate(
@@ -1062,14 +1062,14 @@ class TestCrossModuleFalsification:
                 as binding_quality ??ConsciousnessModule ??Î¦
 
         Region A: trained with signal_impedance=110 (centre of Z distribution
-                  [20, 200]).  After 100 Hebbian cycles, connections converge
+                  [20, 200]).  After 100 impedance-remodeling cycles, connections converge
                   toward the signal ??low avg_gamma.
         Region B: stimulated once with signal_impedance=5000 (extreme mismatch
                   against all connections) ??high avg_gamma.
         """
         np.random.seed(0)  # reproducibility
 
-        # Region A: well-matched after Hebbian learning
+        # Region A: well-matched after impedance remodeling
         region_good = CorticalRegion("good", initial_connections=300)
         for _ in range(100):
             region_good.stimulate(signal_impedance=110.0,
@@ -1453,7 +1453,7 @@ class TestCounterfactualFalsification:
     def test_C03_random_walk_model_fails_gamma_convergence(self):
         """C-03: A random-walk impedance model (Z changes by Â±Î´ each step)
         would produce a DIFFUSIVE pattern (?šn spreading) rather than
-        convergent. MRP with Hebbian learning predicts CONVERGENT
+        convergent. MRP with impedance remodeling predicts CONVERGENT
         impedance adaptation toward the signal impedance.
 
         Counterfactual: random walk ??|Z_conn - Z_signal| grows as ?šn.
@@ -1471,7 +1471,7 @@ class TestCounterfactualFalsification:
         ]
         mean_dist_initial = np.mean(initial_distances)
 
-        # Apply MRP (Hebbian stimulation)
+        # Apply MRP (impedance-remodeling stimulation)
         for i in range(200):
             region.stimulate(signal_impedance=target_z, signal_frequency=10.0)
             if i % 20 == 0:
@@ -1504,7 +1504,7 @@ class TestCounterfactualFalsification:
         # The random walk should NOT converge to target
         assert mean_random_final > mean_dist_final, (
             f"Random walk ({mean_random_final:.3f}) should NOT converge better "
-            f"than MRP Hebbian learning ({mean_dist_final:.3f})"
+            f"than MRP impedance remodeling ({mean_dist_final:.3f})"
         )
 
     def test_C04_no_sleep_pressure_model_lacks_forced_dormancy(self):

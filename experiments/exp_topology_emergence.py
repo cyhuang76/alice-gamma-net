@@ -10,7 +10,7 @@ Hypothesis:
 
 Level 0 Verification:
   Using the existing NeuralPruningEngine (no architecture changes), we test
-  whether Γ-driven Hebbian selection + apoptosis transforms a UNIFORM
+  whether Γ-driven impedance-remodeling selection + apoptosis transforms a UNIFORM
   random distribution of (Z, f) into STRUCTURED clusters — the 1D
   manifestation of topology emergence.
 
@@ -450,7 +450,7 @@ def step6_verdict(
   ║  Neural spatial topology is not a precondition —               ║
   ║  it is an EMERGENT CONSEQUENCE of impedance matching.          ║
   ║                                                               ║
-  ║  Paper I Limitation #2 is not a limitation but a PREDICTION.   ║
+  ║  Paper 1 Limitation #2 is not a limitation but a PREDICTION.   ║
   ═══════════════════════════════════════════════════════════════════""")
     elif sum([entropy_pass, separation_pass, attraction_pass, gamma_pass, ks_pass]) >= 3:
         print("""  ═══════════════════════════════════════════════════════════════════

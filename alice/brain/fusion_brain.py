@@ -138,7 +138,7 @@ class BrainRegion:
     # ------------------------------------------------------------------
     def consolidate_memory(self):
         """
-        Memory consolidation: Hebbian synaptic plasticity
+        Memory consolidation: impedance-remodeling synaptic plasticity
 
         - Activation >0.7 → synaptic strengthening +5%
         - Activation <0.3 → synaptic decay -5%
@@ -614,7 +614,7 @@ class FusionBrain:
 
     # ------------------------------------------------------------------
     def memory_consolidation(self):
-        """Step 5: Memory consolidation → Hebbian synaptic plasticity"""
+        """Step 5: Memory consolidation → impedance-remodeling synaptic plasticity"""
         for region in self.regions.values():
             region.consolidate_memory()
 
@@ -650,7 +650,7 @@ class FusionBrain:
         # Consolidated memories removed from queue (already moved to deeper ring)
         self._recent_perceptions = self._recent_perceptions[n_replay:]
 
-        # Hebbian synaptic plasticity (original mechanism retained)
+        # impedance-remodeling synaptic plasticity (original mechanism retained)
         self.memory_consolidation()
 
         return replayed

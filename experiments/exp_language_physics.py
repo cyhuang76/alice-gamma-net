@@ -7,7 +7,7 @@ Phase 4.3: Broca's Area (motor speech planning, sensorimotor loop)
 Eight experiments:
   1. Attractor Formation — registering concepts, mass growth with absorption
   2. Competitive Recognition — multiple attractors, winner-take-all
-  3. Contrastive Learning — anti-Hebbian repulsion sharpens categorical boundary
+  3. Contrastive Learning — anti-impedance-remodeling repulsion sharpens categorical boundary
   4. Multi-Modal Binding — auditory + visual centroids converge
   5. Cross-Modal Prediction — hear sound, predict visual fingerprint
   6. Babbling Phase — random articulatory exploration (infant motor speech)
@@ -187,7 +187,7 @@ def exp2_competitive_recognition() -> bool:
 # ---------------------------------------------------------------------------
 
 def exp3_contrastive_learning() -> bool:
-    """Anti-Hebbian repulsion pushes similar concepts apart."""
+    """Anti-impedance-remodeling repulsion pushes similar concepts apart."""
     print_header("Exp 3: Contrastive Learning — categorical boundary sharpening")
 
     field = SemanticField()

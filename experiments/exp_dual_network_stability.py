@@ -180,10 +180,10 @@ def simulate_dual(
                 active_stenosis = max(0.0, active_stenosis - intervention_delta_v)
                 net.apply_stenosis("arteriole", active_stenosis)
 
-        # --- Neural Hebbian self-repair (C2 approximation) ---
+        # --- Neural impedance-remodeling self-repair (C2 approximation) ---
         # ΔΓ_n = −η_n · Γ_n: drives Γ_n toward 0 when not under
         # active pathological stress.  This is the neural analogue
-        # of the vascular Hebbian update inside VascularImpedanceNetwork.
+        # of the vascular impedance remodeling inside VascularImpedanceNetwork.
         gn = max(0.001, gn * (1.0 - ETA_NEURAL_REPAIR))
 
         # --- Tick ---

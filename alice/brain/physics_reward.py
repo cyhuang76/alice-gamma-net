@@ -25,8 +25,8 @@ Physics:
     R_actual = actual reward (environmental feedback)
 
     RPE = R_actual - R_expected
-    RPE > 0 → Z lowered (Hebbian reinforcement, Γ↓)
-    RPE < 0 → Z raised (Anti-Hebbian, Γ↑)
+    RPE > 0 → Z lowered (impedance-remodeling reinforcement, Γ↓)
+    RPE < 0 → Z raised (Anti-impedance-remodeling, Γ↑)
 
     Dopamine level = DA_baseline + k · RPE (finite duration, exponential decay)
 
@@ -63,9 +63,9 @@ Z_MIN = Z_SOURCE                # Lower limit = source impedance, prevents secon
                                 # Physics: when Z₀ < Z_S, Γ rises again (short-circuit end reflection)
 Z_MAX = 200.0                   # Maximum impedance (complete inhibition → open-circuit end reflection)
 
-# Hebbian learning rate
-REWARD_HEBBIAN_RATE = 0.08      # Impedance decrease rate when RPE > 0
-PUNISH_ANTI_HEBBIAN_RATE = 0.05  # Impedance increase rate when RPE < 0
+# impedance remodeling rate
+REWARD_IMPEDANCE_RATE = 0.08      # Impedance decrease rate when RPE > 0
+PUNISH_ANTI_IMPEDANCE_RATE = 0.05  # Impedance increase rate when RPE < 0
 NEUTRAL_DECAY_RATE = 0.001      # Weak forgetting when RPE ≈ 0
 
 # Dopamine
@@ -165,7 +165,7 @@ class PhysicsRewardEngine:
     1. Each (state, action) = one channel, with channel impedance Z
     2. Reward prediction R_expected = transmission_efficiency × historical average
     3. RPE = R_actual - R_expected
-    4. Z adjusted via Hebbian learning based on RPE (RPE>0 → Z↓, RPE<0 → Z↑)
+    4. Z adjusted via impedance remodeling based on RPE (RPE>0 → Z↓, RPE<0 → Z↑)
     5. Action selection = Boltzmann selection, probability ∝ exp(transmission / T)
     6. Dopamine = DA_baseline + k · RPE (exponential decay)
 
@@ -174,7 +174,7 @@ class PhysicsRewardEngine:
 
     def __init__(
         self,
-        learning_rate: float = REWARD_HEBBIAN_RATE,
+        learning_rate: float = REWARD_IMPEDANCE_RATE,
         temperature: float = BOLTZMANN_TEMPERATURE,
     ):
         # Channel table {(state, action): RewardChannel}
@@ -279,7 +279,7 @@ class PhysicsRewardEngine:
         1. Get channel
         2. Compute R_expected = transmission × running_avg_reward
         3. RPE = R_actual - R_expected
-        4. Z adjustment (Hebbian/Anti-Hebbian)
+        4. Z adjustment (impedance-remodeling/Anti-impedance-remodeling)
         5. Update dopamine
         6. Store experience
 
@@ -302,13 +302,13 @@ class PhysicsRewardEngine:
 
         # === 3. Impedance adjustment ===
         if rpe > 0:
-            # Positive RPE → Hebbian reinforcement → Z decreases (matching improves)
+            # Positive RPE → impedance-remodeling reinforcement → Z decreases (matching improves)
             delta_z = -self._lr * abs(rpe) * ch.impedance * 0.1
             ch.impedance = max(Z_MIN, ch.impedance + delta_z)
             self._total_positive_rpe += 1
         elif rpe < 0:
-            # Negative RPE → Anti-Hebbian → Z increases (matching degrades)
-            delta_z = PUNISH_ANTI_HEBBIAN_RATE * abs(rpe) * (Z_MAX - ch.impedance) * 0.1
+            # Negative RPE → Anti-impedance-remodeling → Z increases (matching degrades)
+            delta_z = PUNISH_ANTI_IMPEDANCE_RATE * abs(rpe) * (Z_MAX - ch.impedance) * 0.1
             ch.impedance = min(Z_MAX, ch.impedance + delta_z)
             self._total_negative_rpe += 1
         else:
@@ -378,7 +378,7 @@ class PhysicsRewardEngine:
                 elif rpe < 0:
                     ch.impedance = min(
                         Z_MAX,
-                        ch.impedance + PUNISH_ANTI_HEBBIAN_RATE * gen_strength * abs(rpe) * 0.02,
+                        ch.impedance + PUNISH_ANTI_IMPEDANCE_RATE * gen_strength * abs(rpe) * 0.02,
                     )
 
     # ------------------------------------------------------------------
@@ -405,7 +405,7 @@ class PhysicsRewardEngine:
                 delta = -self._lr * REPLAY_LEARNING_DISCOUNT * abs(exp.rpe) * ch.impedance * 0.05
                 ch.impedance = max(Z_MIN, ch.impedance + delta)
             elif exp.rpe < 0:
-                delta = PUNISH_ANTI_HEBBIAN_RATE * REPLAY_LEARNING_DISCOUNT * abs(exp.rpe) * 0.05
+                delta = PUNISH_ANTI_IMPEDANCE_RATE * REPLAY_LEARNING_DISCOUNT * abs(exp.rpe) * 0.05
                 ch.impedance = min(Z_MAX, ch.impedance + delta)
 
             total_adjustment += abs(exp.rpe)

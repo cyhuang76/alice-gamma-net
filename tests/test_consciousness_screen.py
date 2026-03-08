@@ -566,7 +566,7 @@ class TestStereoDepth(unittest.TestCase):
 
 
 # ============================================================================
-# C3: Signal Protocol
+# C3: Impedance-Tagged Transport
 # ============================================================================
 
 class TestSignalProtocol(unittest.TestCase):

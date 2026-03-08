@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Generate Paper II Figures — Vascular Impedance Network
+Generate Paper 2 Figures — Vascular Impedance Network
 ======================================================
 
 Figure 1: paper_ii_murray.pdf — Murray's Law from Vascular Action Principle
@@ -232,7 +232,7 @@ def figure_organs(save_prefix="figures/paper_ii_organs"):
 
 
 if __name__ == "__main__":
-    print("Generating Paper II figures...")
+    print("Generating Paper 2 figures...")
     figure_murray()
     figure_cascade()
     figure_organs()

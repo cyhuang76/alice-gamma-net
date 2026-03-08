@@ -6,7 +6,7 @@ disease-template matching via the minimum reflection action.
 
 Physics:  Γ = (Z_patient − Z_normal) / (Z_patient + Z_normal)
 Energy:   Γ² + T = 1  at every organ, every evaluation
-Feedback: ΔW = −η · Γ_error · x_pre · x_post  (C2 Hebbian closed loop)
+Feedback: ΔW = −η · Γ_error · x_in · x_out  (C2 impedance-remodeling closed-loop)
 API:      FastAPI REST + Streamlit Web UI (Phase 3)
 """
 
@@ -17,7 +17,7 @@ from alice.diagnostics.feedback import (
     FeedbackEngine,
     FeedbackRecord,
     FeedbackType,
-    HebbianUpdater,
+    ImpedanceUpdater,
 )
 
 __all__ = [
@@ -31,5 +31,5 @@ __all__ = [
     "FeedbackEngine",
     "FeedbackRecord",
     "FeedbackType",
-    "HebbianUpdater",
+    "ImpedanceUpdater",
 ]

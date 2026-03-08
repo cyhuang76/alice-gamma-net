@@ -16,7 +16,7 @@ Core equations:
     receptor_binding = hormone_level × T_receptor
     T_receptor = 1 − Γ²_receptor  (★ C1)
     Γ_receptor = (Z_hormone − Z_receptor) / (Z_hormone + Z_receptor)
-    ΔZ_receptor = −η × Γ × hormone × target_response  (★ C2 Hebbian)
+    ΔZ_receptor = −η × Γ × hormone × target_response  (★ C2 impedance-remodeling)
 
 Endocrine axes modeled:
     HPA axis: Hypothalamus → Pituitary → Adrenal → Cortisol

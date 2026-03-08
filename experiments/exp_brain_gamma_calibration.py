@@ -5,19 +5,19 @@ Experiment: Brain Γ-Map Calibration (Act III — Prototype)
 
 PURPOSE
 -------
-Bridge the gap between Paper VI's organ-level Γ (blood biochemistry)
-and Paper III's dual-field equations by calibrating brain-specific
+Bridge the gap between Paper 5's organ-level Γ (blood biochemistry)
+and Paper 3's dual-field equations by calibrating brain-specific
 Γ_n (neural) and Γ_v (vascular) from direct electrophysiological
 measurements.
 
 PHYSICS CHAIN
 ─────────────
-  Paper I :  A[Γ] = ∫ Σ Γ_i² dt → min   (topology)
-  Paper II:  H = (1-Γ_n²)(1-Γ_v²)         (dual-network health)
-  Paper III: D_Z = ∫ |Γ|² P_in dt          (impedance debt)
+  Paper 1 :  A[Γ] = ∫ Σ Γ_i² dt → min   (topology)
+  Paper 2:  H = (1-Γ_n²)(1-Γ_v²)         (dual-network health)
+  Paper 3: D_Z = ∫ |Γ|² P_in dt          (impedance debt)
              ∂Z/∂t = D∇²Z − ηΓJf(ρ) − χv_cat E(Γ²)Γρ − λZ
              ∂ρ/∂t = D_ρ∇²ρ − consumption + (1-Γ_v²)Q₀
-  Paper VI:  Z_organ = Z_normal(1 + Σ w_j|δ_j|)  → NHANES 7/7
+  Paper 5:  Z_organ = Z_normal(1 + Σ w_j|δ_j|)  → NHANES 7/7
   ──────────────────────────────────────────────────────
   THIS EXP:  EEG band powers  →  Γ_n  (neural impedance matching)
              ECG HRV metrics  →  Γ_v  (vascular impedance matching)
@@ -139,7 +139,7 @@ def compute_eeg_features(eeg_signal: np.ndarray, fs: float) -> dict:
     - Low entropy = well-organised rhythms = matched neural impedance = low Γ_n
     - High entropy = disorganised activity = mismatched impedance = high Γ_n
 
-    This aligns with Paper III's framework: a mature brain with well-developed
+    This aligns with Paper 3's framework: a mature brain with well-developed
     neural circuits has low Γ² (good impedance matching), which manifests as
     organised EEG rhythms (low spectral entropy).
     """
@@ -187,7 +187,7 @@ def eeg_to_gamma_n(features: dict) -> dict:
 
     TWO METHODS (both zero-parameter):
 
-    Method 1 — Band deviation (same formula as Paper VI):
+    Method 1 — Band deviation (same formula as Paper 5):
       Z_n = Z_n0 × (1 + Σ_band |band_rel - band_ref|)
       Γ_n_dev = (Z_n - Z_n0) / (Z_n + Z_n0)
 
@@ -219,7 +219,7 @@ def eeg_to_gamma_n(features: dict) -> dict:
     # mismatch scatters energy across modes (high entropy).
     gamma_n_ent = features["spectral_entropy"]
 
-    # Map entropy to Z then to Γ for consistency with Paper VI formula
+    # Map entropy to Z then to Γ for consistency with Paper 5 formula
     Z_n = Z_N0 * (1.0 + gamma_n_ent)
     gamma_n = (Z_n - Z_N0) / (Z_n + Z_N0)
 
@@ -355,7 +355,7 @@ def hrv_to_gamma_v(hrv: dict) -> dict:
                        + |HR/HR_ref - 1|)
       Γ_v = (Z_v - Z_v0) / (Z_v + Z_v0)
 
-    Same formula as Paper VI: deviation from textbook reference = impedance
+    Same formula as Paper 5: deviation from textbook reference = impedance
     mismatch. Low HRV (low SDNN) in preterm → high vascular Γ.
     """
     # Normalised deviations from healthy term reference
@@ -598,7 +598,7 @@ def plot_gamma_calibration(eeg_results: list[dict],
 
     fig.suptitle(
         "Brain Γ-Map Calibration: EEG → Γ_n, HRV → Γ_v\n"
-        "Paper III dual-field validation — H_brain = (1−Γ_n²)(1−Γ_v²)",
+        "Paper 3 dual-field validation — H_brain = (1−Γ_n²)(1−Γ_v²)",
         fontsize=14, fontweight="bold", y=1.02)
     fig.tight_layout()
 
@@ -657,7 +657,7 @@ def print_report(eeg_results: list[dict],
     if health['r_eeg'] < 0:
         print("  │ ✅ Γ_n DECREASES with gestational age                   │")
         print("  │    → Neural impedance matching improves with maturity    │")
-        print("  │    → Consistent with Paper III: D_Z,n ↓ as brain matures│")
+        print("  │    → Consistent with Paper 3: D_Z,n ↓ as brain matures│")
     else:
         print("  │ ⚠️  Γ_n does not decrease with age                       │")
         print("  │    → May reflect organised delta growth, not mismatch    │")
@@ -666,13 +666,13 @@ def print_report(eeg_results: list[dict],
     if health['r_hrv'] < 0:
         print("  │ ✅ Γ_v DECREASES with PCA                               │")
         print("  │    → Vascular impedance matching improves with maturity  │")
-        print("  │    → Consistent with Paper II: autonomic regulation ↑    │")
+        print("  │    → Consistent with Paper 2: autonomic regulation ↑    │")
     else:
         print("  │ ⚠️  Γ_v does not decrease with PCA                       │")
 
     # Dual-field coupling
     print("  │                                                          │")
-    print("  │ DUAL-FIELD COUPLING (Paper III):                         │")
+    print("  │ DUAL-FIELD COUPLING (Paper 3):                         │")
     print("  │   H_brain = (1 − Γ_n²)(1 − Γ_v²)                       │")
 
     # Estimate H_brain range
@@ -706,7 +706,7 @@ def main():
     print("=" * 70)
     print("  Act III — Brain Γ-Map Calibration")
     print("  EEG → Γ_n (neural) + HRV → Γ_v (vascular)")
-    print("  Paper III dual-field: H_brain = (1−Γ_n²)(1−Γ_v²)")
+    print("  Paper 3 dual-field: H_brain = (1−Γ_n²)(1−Γ_v²)")
     print("=" * 70)
 
     # ── Check data ──

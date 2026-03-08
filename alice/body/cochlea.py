@@ -29,7 +29,7 @@ Output:
 
   Applications:
     - Auditory grounding (Phase 4.1): use spectral fingerprint as key for
-      cross-modal Hebbian connections
+      cross-modal impedance-remodeling connections
     - Semantic force field (Phase 4.2): specific spectral patterns = specific "concepts"
     - Broca's area (Phase 4.3): inverse engineering — from concept → produce sound
 """
@@ -121,7 +121,7 @@ class TonotopicActivation:
 
     Spectral Fingerprint:
       Normalized channel_activations vector
-      Used as the "key" for cross-modal Hebbian binding
+      Used as the "key" for cross-modal impedance-remodeling binding
       Two sounds with similar fingerprints → they are "the same kind" auditorily
     """
     center_frequencies: np.ndarray          # [n_channels] Hz

@@ -2,7 +2,7 @@
 """
 Gradient Optimizer — Explicit Variational Gradient for MRP
 
-Paper I Eq. 11: The Gradient Equation
+Paper 1 Eq. 11: The Gradient Equation
   ∇W = −∂(ΣΓ²)/∂Z
 
   "The arrow of growth always points toward less reflection."
@@ -24,7 +24,7 @@ Physics:
     
   This drives Z_i → Z_L,i (impedance matching → Γ → 0).
 
-  The existing system uses Hebbian learning, PID control, and various
+  The existing system uses impedance remodeling, PID control, and various
   local optimization rules that *implicitly* achieve gradient descent on ΣΓ².
   This module makes the variational optimization *explicit*.
 
@@ -192,7 +192,7 @@ class GradientOptimizer:
             sigma_gamma_sq += gamma_sq
 
             # Analytic gradient: ∂(Γ²)/∂Z = −4·Z_L·(Z_L−Z)/(Z_L+Z)³
-            # This contains Γ implicitly: ∂(Γ²)/∂Z = 2Γ·∂Γ/∂Z (Hebbian-compatible)
+            # This contains Γ implicitly: ∂(Γ²)/∂Z = 2Γ·∂Γ/∂Z (impedance-remodeling-compatible)
             d_gamma_sq_dz = self.compute_gamma_sq_gradient(z_ch, z_ld)
 
             # Clip gradient
@@ -277,7 +277,7 @@ class GradientOptimizer:
         return self.get_state()
 
     # ------------------------------------------------------------------
-    # Signal Protocol
+    # Impedance-Tagged Transport
     # ------------------------------------------------------------------
 
     def get_signal(self) -> ElectricalSignal:

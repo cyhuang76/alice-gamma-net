@@ -30,9 +30,9 @@ DATA
 
 PHYSICS
 ───────
-  Γ_n = f(spectral_entropy) via Paper III impedance mapping
-  Γ_v = f(SDNN, RMSSD, HR) via Paper II dual-network model
-  H_brain = (1 − Γ_n²)(1 − Γ_v²) from Paper II
+  Γ_n = f(spectral_entropy) via Paper 3 impedance mapping
+  Γ_v = f(SDNN, RMSSD, HR) via Paper 2 dual-network model
+  H_brain = (1 − Γ_n²)(1 − Γ_v²) from Paper 2
 """
 
 from __future__ import annotations

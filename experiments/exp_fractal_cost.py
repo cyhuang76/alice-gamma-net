@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Experiment: Paper VIII — Fractal Cost of Dual-Network Life
+Experiment: Paper 1 — Fractal Cost of Dual-Network Life
 ==========================================================
 
 Numerical verification of all four core claims:
@@ -411,7 +411,7 @@ def test_7_acut_per_cell_decreasing():
 def test_8_fractal_dimension_DK():
     """
     Verify D_K = d for space-filling relay hierarchy.
-    From Paper I: D_K = log(n) / log(1/c) = d.
+    From Paper 1: D_K = log(n) / log(1/c) = d.
     """
     print("\n=== TEST 8: K-Space Fractal Dimension ===")
 

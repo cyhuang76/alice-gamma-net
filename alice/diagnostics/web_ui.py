@@ -36,7 +36,7 @@ from alice.diagnostics.lab_mapping import (
 )
 from alice.diagnostics.gamma_engine import GammaEngine, PatientGammaVector
 from alice.diagnostics.disease_templates import load_disease_templates
-from alice.diagnostics.feedback import FeedbackEngine, HebbianUpdater
+from alice.diagnostics.feedback import FeedbackEngine, ImpedanceUpdater
 
 
 # ============================================================================

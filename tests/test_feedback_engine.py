@@ -2,9 +2,9 @@
 """tests/test_feedback_engine.py — Phase 2 Closed-Loop Feedback Tests
 ======================================================================
 
-Tests the Hebbian feedback loop for the Lab-Γ Diagnostic Engine:
+Tests the impedance-remodeling feedback loop for the Lab-Γ Diagnostic Engine:
     - FeedbackRecord creation and serialisation
-    - HebbianUpdater: C2-compliant weight delta computation
+    - ImpedanceUpdater: C2-compliant weight delta computation
     - FeedbackEngine: record → apply → persist cycle
     - Weight drift tracking and clamping
     - Replay from file
@@ -25,7 +25,7 @@ from alice.diagnostics.feedback import (
     FeedbackEngine,
     FeedbackRecord,
     FeedbackType,
-    HebbianUpdater,
+    ImpedanceUpdater,
 )
 
 
@@ -67,15 +67,15 @@ def mi_labs():
 
 
 # ============================================================================
-# A. HebbianUpdater Tests
+# A. ImpedanceUpdater Tests
 # ============================================================================
 
-class TestHebbianUpdater:
-    """Test the C2 Hebbian weight update computation."""
+class TestImpedanceUpdater:
+    """Test the C2 impedance-remodeling weight update computation."""
 
     def test_zero_error_gives_zero_delta(self):
         """If predicted == target, ΔW should be zero."""
-        updater = HebbianUpdater(eta=0.01)
+        updater = ImpedanceUpdater(eta=0.01)
         gamma = {o: 0.5 for o in ORGAN_LIST}
         deltas = updater.compute_deltas(gamma, gamma, FeedbackType.CONFIRM)
         for organ in ORGAN_LIST:
@@ -83,7 +83,7 @@ class TestHebbianUpdater:
 
     def test_confirm_pulls_toward_target(self):
         """CONFIRM: ΔW sign should reduce Γ_error."""
-        updater = HebbianUpdater(eta=0.1)
+        updater = ImpedanceUpdater(eta=0.1)
         predicted = {o: 0.0 for o in ORGAN_LIST}
         predicted["hepatic"] = 0.8
         target = {o: 0.0 for o in ORGAN_LIST}
@@ -96,7 +96,7 @@ class TestHebbianUpdater:
 
     def test_reject_pushes_away(self):
         """REJECT: ΔW sign should be opposite to CONFIRM."""
-        updater = HebbianUpdater(eta=0.1)
+        updater = ImpedanceUpdater(eta=0.1)
         predicted = {o: 0.0 for o in ORGAN_LIST}
         predicted["hepatic"] = 0.8
         target = {o: 0.0 for o in ORGAN_LIST}
@@ -110,7 +110,7 @@ class TestHebbianUpdater:
 
     def test_correct_same_as_confirm(self):
         """CORRECT uses the same direction as CONFIRM (pull toward truth)."""
-        updater = HebbianUpdater(eta=0.1)
+        updater = ImpedanceUpdater(eta=0.1)
         predicted = {o: 0.3 for o in ORGAN_LIST}
         target = {o: 0.5 for o in ORGAN_LIST}
 
@@ -122,7 +122,7 @@ class TestHebbianUpdater:
 
     def test_gradient_clipping(self):
         """ΔW should be clipped to max_delta."""
-        updater = HebbianUpdater(eta=10.0, max_delta=0.05)  # huge η
+        updater = ImpedanceUpdater(eta=10.0, max_delta=0.05)  # huge η
         predicted = {o: 0.9 for o in ORGAN_LIST}
         target = {o: 0.1 for o in ORGAN_LIST}
 
@@ -132,8 +132,8 @@ class TestHebbianUpdater:
 
     def test_eta_scales_linearly(self):
         """Doubling η should double ΔW (before clipping)."""
-        u1 = HebbianUpdater(eta=0.01, max_delta=1.0)
-        u2 = HebbianUpdater(eta=0.02, max_delta=1.0)
+        u1 = ImpedanceUpdater(eta=0.01, max_delta=1.0)
+        u2 = ImpedanceUpdater(eta=0.02, max_delta=1.0)
         predicted = {o: 0.0 for o in ORGAN_LIST}
         predicted["cardiac"] = 0.6
         target = {o: 0.0 for o in ORGAN_LIST}
@@ -147,7 +147,7 @@ class TestHebbianUpdater:
 
     def test_inactive_organs_get_zero_delta(self):
         """Organs with Γ=0 in both predicted and target get ΔW=0."""
-        updater = HebbianUpdater(eta=0.1)
+        updater = ImpedanceUpdater(eta=0.1)
         predicted = {o: 0.0 for o in ORGAN_LIST}
         predicted["cardiac"] = 0.8
         target = {o: 0.0 for o in ORGAN_LIST}
@@ -290,7 +290,7 @@ class TestFeedbackWeightUpdate:
     def test_weight_clamp_positive(self, fb, hepatitis_labs):
         """Weights should never go below 0.1."""
         # Force a huge negative update
-        fb.updater = HebbianUpdater(eta=100.0, max_delta=5.0)
+        fb.updater = ImpedanceUpdater(eta=100.0, max_delta=5.0)
         fb.record_reject(hepatitis_labs, "hepatitis_acute")
         fb.apply_pending()
 
@@ -300,7 +300,7 @@ class TestFeedbackWeightUpdate:
 
     def test_weight_clamp_upper(self, fb, hepatitis_labs):
         """Weights should never exceed 10.0."""
-        fb.updater = HebbianUpdater(eta=100.0, max_delta=50.0)
+        fb.updater = ImpedanceUpdater(eta=100.0, max_delta=50.0)
         fb.record_confirm(hepatitis_labs, "hepatitis_acute")
         fb.apply_pending()
 
@@ -531,7 +531,7 @@ class TestFeedbackImprovesDiagnosis:
                 break
 
         # Apply 20 confirms
-        fb = FeedbackEngine(engine, updater=HebbianUpdater(eta=0.05))
+        fb = FeedbackEngine(engine, updater=ImpedanceUpdater(eta=0.05))
         for _ in range(20):
             fb.record_confirm(hepatitis_labs, "hepatitis_acute")
         fb.apply_pending()

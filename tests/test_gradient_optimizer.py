@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Tests for GradientOptimizer — Paper I Eq.11 Explicit Variational Gradient
+Tests for GradientOptimizer — Paper 1 Eq.11 Explicit Variational Gradient
 
 Tests verify:
     1. Basic construction

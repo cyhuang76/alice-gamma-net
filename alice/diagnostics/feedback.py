@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
-"""feedback.py — Closed-Loop Hebbian Feedback for Lab-Γ Engine
+"""feedback.py — Closed-Loop Impedance-Remodeling Feedback for Lab-Γ Engine
 ================================================================
 
 Physics:
     When a physician confirms or rejects a diagnosis, the system
     updates its internal impedance mapping weights via C2:
 
-        ΔW_organ = −η · Γ_error · x_pre · x_post
+        ΔW_organ = −η · Γ_error · x_in · x_out
 
     where:
         Γ_error  =  Γ_predicted − Γ_target
-        x_pre    =  normalised lab deviation (input signal)
-        x_post   =  organ activation (|Γ_predicted|)
+        x_in    =  normalised lab deviation (input signal)
+        x_out   =  organ activation (|Γ_predicted|)
         η        =  learning rate (default 0.01)
 
-    This is the Hebbian impedance-matching rule of Paper I applied
+    This is the impedance-remodeling rule of Paper 1 applied
     to the diagnostic mapping weights rather than membrane impedances.
 
     Energy conservation (C1) is preserved because weight updates only
@@ -66,7 +66,7 @@ class FeedbackType(str, Enum):
 class FeedbackRecord:
     """A single feedback event from a physician.
 
-    Stores all context needed to replay the Hebbian update.
+    Stores all context needed to replay the impedance remodeling.
     """
     timestamp: float                     # Unix timestamp
     feedback_type: str                   # FeedbackType value
@@ -88,13 +88,13 @@ class FeedbackRecord:
 
 
 # ============================================================================
-# 2. Hebbian Weight Updater
+# 2. impedance-remodeling weight Updater
 # ============================================================================
 
-class HebbianUpdater:
+class ImpedanceUpdater:
     """Computes C2-compliant weight updates for the Lab→Z mapping.
 
-    The Hebbian rule:
+    The impedance-remodeling rule:
         ΔW_organ = −η · Γ_error · Σ_j |δ_j| · w_j,organ
 
     where the sum runs over lab items contributing to that organ.
@@ -147,14 +147,14 @@ class HebbianUpdater:
             # Γ error = predicted − target
             gamma_error = g_pred - g_target
 
-            # x_pre ≈ |Γ_predicted| (how active this organ is)
-            x_pre = abs(g_pred)
+            # x_in ≈ |Γ_predicted| (how active this organ is)
+            x_in = abs(g_pred)
 
-            # x_post ≈ |Γ_target| (how much this organ matters for the disease)
-            x_post = abs(g_target)
+            # x_out ≈ |Γ_target| (how much this organ matters for the disease)
+            x_out = abs(g_target)
 
-            # C2 Hebbian: ΔW = −η · Γ_error · x_pre · x_post
-            dw = -self.eta * gamma_error * x_pre * x_post
+            # C2 impedance-remodeling: ΔW = −η · Γ_error · x_in · x_out
+            dw = -self.eta * gamma_error * x_in * x_out
 
             # Sign flip for REJECT: push away instead of pull toward
             if feedback_type == FeedbackType.REJECT:
@@ -175,7 +175,7 @@ class HebbianUpdater:
 class FeedbackEngine:
     """Closed-loop feedback controller for the Lab-Γ diagnostic engine.
 
-    Manages the feedback → Hebbian update → weight persistence cycle.
+    Manages the feedback → impedance remodeling → weight persistence cycle.
 
     Usage
     -----
@@ -191,10 +191,10 @@ class FeedbackEngine:
     def __init__(
         self,
         engine: Any,  # GammaEngine — Any to avoid circular import
-        updater: Optional[HebbianUpdater] = None,
+        updater: Optional[ImpedanceUpdater] = None,
     ):
         self.engine = engine
-        self.updater = updater or HebbianUpdater()
+        self.updater = updater or ImpedanceUpdater()
         self.records: List[FeedbackRecord] = []
 
         # Cumulative weight offsets (additive to GammaEngine.organ_weights)
@@ -226,7 +226,7 @@ class FeedbackEngine:
             # Unknown disease — use zero template (maximises error signal)
             target_gamma = {o: 0.0 for o in ORGAN_LIST}
 
-        # Compute Hebbian deltas
+        # Compute impedance-remodeling deltas
         deltas = self.updater.compute_deltas(
             predicted_gamma, target_gamma, feedback_type
         )
@@ -284,13 +284,13 @@ class FeedbackEngine:
     # ---- Applying Updates ----
 
     def apply_pending(self) -> int:
-        """Apply all pending (unapplied) Hebbian updates to engine weights.
+        """Apply all pending (unapplied) impedance remodelings to engine weights.
 
         Returns the number of updates applied.
 
         Physics:
             W_organ(t+1) = W_organ(t) + ΔW_organ
-            where ΔW is computed by C2 Hebbian rule.
+            where ΔW is computed by C2 impedance-remodeling rule.
             Weights are clamped to [0.1, 10.0] to prevent degenerate solutions.
         """
         count = 0

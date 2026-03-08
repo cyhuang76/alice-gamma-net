@@ -2,11 +2,11 @@
 """
 Fontanelle Model — Thermodynamic Window of Neonatal Γ-Field Organization
 
-Paper I §3.5, Eq. 21: The Fontanelle Equation:
+Paper 1 §3.5, Eq. 21: The Fontanelle Equation:
   Z_fontanelle = Z_membrane ≪ Z_bone
   Γ_fontanelle < 1
 
-Paper III §2.2: The Fontanelle as Thermodynamic Necessity
+Paper 3 §2.2: The Fontanelle as Thermodynamic Necessity
 
 Physics:
   If the skull were rigid at birth, expanding neural tissue would encounter
@@ -38,7 +38,7 @@ Developmental Timeline:
     - Topological freeze
     - Narrative self emergence
 
-The Pressure Chamber Effect (Paper III §2.5):
+The Pressure Chamber Effect (Paper 3 §2.5):
   After closure, Γ² waste heat previously dissipated through the fontanelle
   is trapped → constructive consumption → childhood cognitive explosion.
 
@@ -304,7 +304,7 @@ class FontanelleModel:
         return self.get_state()
 
     # ------------------------------------------------------------------
-    # Signal Protocol
+    # Impedance-Tagged Transport
     # ------------------------------------------------------------------
 
     def get_signal(self) -> ElectricalSignal:

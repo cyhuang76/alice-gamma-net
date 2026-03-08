@@ -505,7 +505,7 @@ def main():
     print("=" * 72)
     print("  All 5 experiments completed")
     print("  Core conclusions:")
-    print("    1. Random impedance (birth) auto-forms cortical specialization via Hebbian selection")
+    print("    1. Random impedance (birth) auto-forms cortical specialization via impedance-remodeling selection")
     print("    2. Different sensory inputs determine specialization direction per region")
     print("    3. Frontal motor cortex matures last due to feedback requirement")
     print("    4. Cross-modal signals can rewire cortical function (congenital blindness)")

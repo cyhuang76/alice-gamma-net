@@ -18,7 +18,7 @@ Endpoints:
 Physics:
     Γ = (Z_patient − Z_normal) / (Z_patient + Z_normal)
     C1: Γ² + T = 1  at every organ
-    C2: ΔW = −η · Γ_error · x_pre · x_post  (feedback)
+    C2: ΔW = −η · Γ_error · x_in · x_out  (feedback)
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ from alice.diagnostics.lab_mapping import (
 )
 from alice.diagnostics.gamma_engine import GammaEngine, PatientGammaVector
 from alice.diagnostics.disease_templates import load_disease_templates
-from alice.diagnostics.feedback import FeedbackEngine, HebbianUpdater
+from alice.diagnostics.feedback import FeedbackEngine, ImpedanceUpdater
 
 
 # ============================================================================
@@ -96,7 +96,7 @@ class FeedbackRequest(BaseModel):
     )
     lab_values: Dict[str, float]
     disease_id: str = Field(..., description="Disease template ID")
-    apply_now: bool = Field(default=True, description="Apply Hebbian update immediately")
+    apply_now: bool = Field(default=True, description="Apply impedance remodeling immediately")
 
 
 class FeedbackResponse(BaseModel):
@@ -138,7 +138,7 @@ def create_app() -> FastAPI:
             "Impedance-based differential diagnosis.\n\n"
             "Physics: Γ = (Z_patient − Z_normal) / (Z_patient + Z_normal)\n"
             "C1: Γ² + T = 1 (energy conservation)\n"
-            "C2: ΔW = −η · Γ_error · x_pre · x_post (Hebbian feedback)"
+            "C2: ΔW = −η · Γ_error · x_in · x_out (impedance-remodeling feedback)"
         ),
         version="3.0.0",
     )

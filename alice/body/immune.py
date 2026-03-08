@@ -17,11 +17,11 @@ Core equations:
     T_immune = 1 − Γ_immune²   (★ C1 energy conservation)
     inflammation = ΣΓ²_local / N_regions
     fever_response = Δ_temp ∝ inflammation × fever_gain
-    antibody_production = η × Γ × exposure_count  (★ C2 Hebbian adaptive immunity)
+    antibody_production = η × Γ × exposure_count  (★ C2 impedance-remodeling adaptive immunity)
 
 Immune cascade:
     1. Innate immunity: fixed Z_self boundary detection (fast, coarse)
-    2. Adaptive immunity: Hebbian-tuned antibody Z-matching (slow, precise)
+    2. Adaptive immunity: impedance-remodeling-tuned antibody Z-matching (slow, precise)
     3. Memory cells: previously matched Z patterns stored permanently
     4. Cytokine storm: runaway Γ² feedback → pathological inflammation
 
@@ -65,7 +65,7 @@ INNATE_RESPONSE_RATE = 0.3      # How fast innate immunity activates
 INNATE_SPECIFICITY = 0.4        # Coarse detection (low specificity)
 
 # --- Adaptive immunity ---
-ADAPTIVE_LEARNING_RATE = 0.01   # η for antibody Hebbian tuning
+ADAPTIVE_LEARNING_RATE = 0.01   # η for antibody impedance-remodeling tuning
 ADAPTIVE_SPECIFICITY_MAX = 0.95 # Maximum adaptive specificity
 ANTIBODY_DECAY = 0.999          # Slow decay of antibody levels
 MEMORY_CELL_THRESHOLD = 0.5     # Γ threshold for memory cell formation
@@ -249,7 +249,7 @@ class ImmuneSystem:
                 ab = Antibody(target_z=pathogen.z_pathogen, specificity=0.1, level=0.1)
                 self._antibodies[name] = ab
 
-            # ★ C2 Hebbian update: ΔZ_ab = −η × Γ × exposure × response
+            # ★ C2 impedance remodeling: ΔZ_ab = −η × Γ × exposure × response
             delta_spec = ADAPTIVE_LEARNING_RATE * gamma_p * pathogen.load * immune_efficacy
             ab.specificity = min(ADAPTIVE_SPECIFICITY_MAX, ab.specificity + delta_spec)
             ab.level = min(1.0, ab.level + WBC_PRODUCTION_RATE * immune_efficacy)

@@ -10,8 +10,8 @@ Neural Pruning Engine — Large-Scale Γ Apoptosis
     → System temperature is high → newborns cry easily, collapse easily
 
   Neural pruning = large-scale impedance screening
-    if Γ_ij → 0  ⇒  Hebbian strengthening (+5%)  ⇒  survives
-    if Γ_ij >> 0 ⇒  Hebbian weakening (-5%)  ⇒  apoptosis
+    if Γ_ij → 0  ⇒  impedance-remodeling strengthening (+5%)  ⇒  survives
+    if Γ_ij >> 0 ⇒  impedance-remodeling weakening (-5%)  ⇒  apoptosis
 
   What's pruned isn't "bad" neurons—it's impedance-mismatched connections.
   What survives are pathways that happen to resonate with the frequencies flowing through them.
@@ -158,7 +158,7 @@ class CorticalRegion:
     Physical model:
     - At birth: N connections with randomly distributed impedance
     - Each signal received: compute each connection's Γ and resonance response
-    - Hebbian rule: match → strengthen, mismatch → weaken
+    - impedance-remodeling rule: match → strengthen, mismatch → weaken
     - Weakened below threshold → apoptosis
     - Final surviving connections = the region's "specialization"
     """
@@ -172,8 +172,8 @@ class CorticalRegion:
         z_max: float = 200.0,
         freq_min: float = 0.5,
         freq_max: float = 100.0,
-        hebbian_strengthen: float = 1.05,    # +5%
-        hebbian_weaken: float = 0.97,        # -3%
+        impedance_strengthen: float = 1.05,    # +5%
+        impedance_weaken: float = 0.97,        # -3%
         death_threshold: float = 0.10,       # Apoptosis threshold
         match_threshold: float = 0.25,        # Match score threshold
         Q: float = 2.0,                      # Resonance quality factor
@@ -185,8 +185,8 @@ class CorticalRegion:
         self.z_max = z_max
         self.freq_min = freq_min
         self.freq_max = freq_max
-        self.hebbian_strengthen = hebbian_strengthen
-        self.hebbian_weaken = hebbian_weaken
+        self.impedance_strengthen = impedance_strengthen
+        self.impedance_weaken = impedance_weaken
         self.death_threshold = death_threshold
         self.match_threshold = match_threshold
         self.Q = Q
@@ -252,7 +252,7 @@ class CorticalRegion:
         1. Compute each connection's Γ (impedance match)
         2. Compute each connection's resonance response (frequency match)
         3. Combined match score = (1 - |Γ|) × resonance response
-        4. Hebbian rule:
+        4. impedance-remodeling rule:
            Match score > threshold → synaptic strengthening +5%, impedance adapts toward signal
            Match score < threshold → synaptic weakening -5%
 
@@ -289,11 +289,11 @@ class CorticalRegion:
             total_gamma += gamma
             total_match += match_score
 
-            # 4. Hebbian rule
+            # 4. impedance-remodeling rule
             if match_score > self.match_threshold:
                 # Match → strengthen → survive
                 conn.synaptic_strength = min(
-                    2.0, conn.synaptic_strength * self.hebbian_strengthen
+                    2.0, conn.synaptic_strength * self.impedance_strengthen
                 )
                 # Impedance adaptation: move toward signal impedance (learning)
                 conn.impedance += (
@@ -307,7 +307,7 @@ class CorticalRegion:
             else:
                 # Mismatch → weaken → may undergo apoptosis
                 conn.synaptic_strength = max(
-                    0.0, conn.synaptic_strength * self.hebbian_weaken
+                    0.0, conn.synaptic_strength * self.impedance_weaken
                 )
                 weakened += 1
 
@@ -325,7 +325,7 @@ class CorticalRegion:
         Execute apoptosis — remove connections with synaptic_strength < death_threshold.
 
         Physical meaning:
-          Repeated Hebbian weakening drops synaptic strength below threshold
+          Repeated impedance-remodeling weakening drops synaptic strength below threshold
           → Synapse disappears (apoptosis)
           → Freed resources allocated to surviving connections
           → Survivors become stronger
@@ -347,7 +347,7 @@ class CorticalRegion:
           When a coaxial cable carries high power (synaptic_strength > threshold),
           surrounding EM field induces neighboring axon myelin depolarization → sprouts new connections.
           New connections inherit approximate impedance from parent (±noise) but start with low strength (0.30),
-          must prove their match in subsequent Hebbian selection or be pruned.
+          must prove their match in subsequent impedance-remodeling selection or be pruned.
 
         Biological correspondence:
           - Hippocampal DG generates ~700 new neurons/day (Spalding 2013)
@@ -355,7 +355,7 @@ class CorticalRegion:
           - LTP (Long-Term Potentiation) → synapse splitting → new connections
 
         Args:
-            learning_signal: External learning signal strength (0~1), from Hebbian / curiosity / reward
+            learning_signal: External learning signal strength (0~1), from impedance-remodeling / curiosity / reward
                             Higher → greater sprouting probability
 
         Returns:
@@ -732,7 +732,7 @@ class NeuralPruningEngine:
 
     Simulates the neural pruning described in §3.5.2:
     - Birth: ~2000 billion neural modules, each with random impedance
-    - Experience-driven pruning: sensory stimuli → Hebbian selection → apoptosis
+    - Experience-driven pruning: sensory stimuli → impedance-remodeling selection → apoptosis
     - Result: each cortical region specializes for the signal type it receives
 
     Intelligence = lim(t→∞) Σ Γ_i² → min
@@ -965,7 +965,7 @@ class NeuralPruningEngine:
         Execute one development epoch.
 
         One Epoch represents a period of sensory experience:
-        1. Apply modality-corresponding stimuli to each region (Hebbian selection)
+        1. Apply modality-corresponding stimuli to each region (impedance-remodeling selection)
         2. Synaptogenesis — strong connections sprout new neighbors
         3. Execute apoptosis (remove overly weak connections)
         4. Record metrics
@@ -979,7 +979,7 @@ class NeuralPruningEngine:
             sensory_diet: Sensory allocation {"region_name": "modality_name"}
             motor_feedback_rate: Motor feedback rate (0~1), simulates "requires feedback for calibration"
                                  → Motor cortex only receives effective stimuli when feedback is present
-            learning_signal: Learning signal intensity (0~1), from curiosity / Hebbian / reward
+            learning_signal: Learning signal intensity (0~1), from curiosity / impedance-remodeling / reward
                             Higher → more active synaptogenesis
 
         Returns:
@@ -1009,7 +1009,7 @@ class NeuralPruningEngine:
             if region_name == "frontal_motor":
                 effective_count = max(1, int(self.stimuli_per_epoch * motor_feedback_rate))
 
-            # 1. Generate and apply stimuli (Hebbian selection)
+            # 1. Generate and apply stimuli (impedance-remodeling selection)
             stimuli = self._generate_stimuli(modality, effective_count)
             for z, f in stimuli:
                 region.stimulate(z, f)

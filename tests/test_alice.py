@@ -202,7 +202,7 @@ class TestFusionBrain:
         # Use a strong signal with frequency structure (perception pipeline needs frequency components for effective transmission)
         t = np.linspace(0, 1, 10, endpoint=False)
         strong = 5.0 * np.sin(2 * np.pi * 10 * t)  # Strong α-band signal
-        # Multiple stimulations to accumulate Hebbian plasticity
+        # Multiple stimulations to accumulate impedance-remodeling plasticity
         for _ in range(5):
             fb.process_stimulus(strong, priority=Priority.CRITICAL)
         state = fb.get_brain_state()
@@ -715,6 +715,6 @@ class TestPruningWiring:
         for _ in range(60):
             alice.perceive(np.random.rand(20), Modality.VISUAL)
         g2_after = alice.pruning._compute_global_gamma_squared()
-        # Γ² should at least not surge (Hebbian-matched connections are strengthened)
+        # Γ² should at least not surge (impedance-remodeling-matched connections are strengthened)
         # Note: due to random initialization, strict decrease is not guaranteed, but should not surge
         assert g2_after < g2_before * 1.5  # Allow minor fluctuation

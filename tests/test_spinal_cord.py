@@ -9,7 +9,7 @@ Tests verify:
     4. Pain gate control (Melzack & Wall)
     5. Spinal cord injury simulation
     6. Myelination development
-    7. Hebbian reflex adaptation (C2)
+    7. impedance-remodeling reflex adaptation (C2)
     8. ElectricalSignal generation
     9. Γ² + T = 1 (C1)
 """

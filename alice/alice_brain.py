@@ -192,7 +192,7 @@ class SystemState:
 
         # Cooling: natural dissipation (temperature slowly drops at low load)
         #
-        # Physics (Paper I Eq.4 — Fever Equation):
+        # Physics (Paper 1 Eq.4 — Fever Equation):
         #   dΘ/dt = α·ΣΓ² − β·Θ·(1 − p)
         #   α = heat generation coefficient (impedance mismatch → heat)
         #   β = parasympathetic cooling coefficient
@@ -478,7 +478,7 @@ class AliceBrain:
 
         # ★ Auditory grounding engine — Phase 4.1 Language physicalization
         #   Language = impedance modulation, traveling wave remote control of another brain
-        #   Pavlovian conditioning = cross-modal Hebbian wiring
+        #   Pavlovian conditioning = cross-modal impedance-remodeling wiring
         self.auditory_grounding = AuditoryGroundingEngine()
 
         # ★ Semantic field — Phase 4.2 Concepts as attractors in state space
@@ -620,26 +620,26 @@ class AliceBrain:
         #   MS / PD / epilepsy / depression + drug interactions
         self.pharmacology = ClinicalPharmacologyEngine()
 
-        # ★ Lifecycle equation engine — Paper III Eq.24 + Eq.22
+        # ★ Lifecycle equation engine — Paper 3 Eq.24 + Eq.22
         #   d(ΣΓ²)/dt = −η·ΣΓ² + γ·Γ_env(t) + δ·D(t)
         #   Whole-system developmental trajectory: birth → peak → plateau → decline
         #   Bathtub curve: high Γ at birth, minimum in prime, rising in senescence
         #   "A life is a Γ descent that eventually reverses."
         self.lifecycle = LifecycleEquationEngine()
 
-        # ★ Bone China Engine — Paper III §2.3 Five-phase memory consolidation
+        # ★ Bone China Engine — Paper 3 §2.3 Five-phase memory consolidation
         #   Clay → Greenware → Bisque → Glaze → Porcelain
         #   Working memory → hippocampal replay → N3 consolidation → REM integration → long-term
         #   "Memory is not saved—it is fired like porcelain."
         self.bone_china = BoneChinaEngine()
 
-        # ★ Fontanelle model — Paper III Eq.21
+        # ★ Fontanelle model — Paper 3 Eq.21
         #   Z_fontanelle = Z_membrane ≪ Z_bone → low Γ in infancy → rapid learning
         #   Closure → topological freeze → end of critical period
         #   "The fontanelle is a heat exhaust port that closes when the brain is ready."
         self.fontanelle = FontanelleModel()
 
-        # ★ Gradient optimizer — Paper I Eq.11 explicit variational gradient
+        # ★ Gradient optimizer — Paper 1 Eq.11 explicit variational gradient
         #   ∇W = −∂(ΣΓ²)/∂Z = analytic impedance gradient
         #   Momentum-based gradient descent on impedance landscape
         #   "Intelligence is not magic—it is gradient descent on impedance."
@@ -909,7 +909,7 @@ class AliceBrain:
           AUDITORY  → temporal   (temporal lobe: temporal frequency)
           Other     → parietal   (parietal lobe: somatosensory broadband)
 
-        Each sensory stimulus triggers one round of Hebbian selection in the corresponding region:
+        Each sensory stimulus triggers one round of impedance-remodeling selection in the corresponding region:
           Γ → 0 connections are strengthened, Γ >> 0 connections are weakened.
         After sufficient weakening → automatic apoptosis (prune).
 
@@ -937,7 +937,7 @@ class AliceBrain:
         if region is None:
             return
 
-        # Apply stimulus → Hebbian selection
+        # Apply stimulus → impedance-remodeling selection
         region.stimulate(sig_z, sig_f)
 
         # Every 50 ticks run pruning + synaptogenesis scan (avoid scanning every time)
@@ -1511,7 +1511,7 @@ class AliceBrain:
         dispatch_results = self._dispatch_commands(loop_state.commands)
 
         # 8. ★ Neural pruning — sensory stimuli drive cortical specialization
-        #    Each perception feeds signal to corresponding cortex → Hebbian selection → Γ² → min
+        #    Each perception feeds signal to corresponding cortex → impedance-remodeling selection → Γ² → min
         self._stimulate_pruning(modality, perception_signal)
 
         # 8.5 ★ Cross-modal impedance adaptation — record binding attempts + forgetting decay
@@ -1733,7 +1733,7 @@ class AliceBrain:
             is_sleeping=self.sleep_cycle.is_sleeping(),
         )
 
-        # 13b. ★ Lifecycle equation — Paper III Eq.24
+        # 13b. ★ Lifecycle equation — Paper 3 Eq.24
         #    Global Γ² trajectory: novelty injection + learning decay + aging drift
         _global_gamma_sq = self.pruning._compute_global_gamma_squared() if self.pruning else 0.0
         _novelty_input = curiosity_result.get("novelty", 0.0) if isinstance(curiosity_result, dict) else 0.0
@@ -1912,7 +1912,7 @@ class AliceBrain:
         brain_result["interoception"] = interoception_result
         brain_result["huttenlocher"] = huttenlocher_result
 
-        # ★ Signal Protocol: harvest ElectricalSignal from all 9 modules
+        # ★ Impedance-Tagged Transport: harvest ElectricalSignal from all 9 modules
         #   Body organs → get_signal() → ElectricalSignal
         #   Brain modules → get_signal() → ElectricalSignal
         #   Signals carry impedance, source, modality — ready for CoaxialChannel routing
@@ -2251,7 +2251,7 @@ class AliceBrain:
         """
         self._state = "learning"
 
-        # ★ Physics reward learning (impedance-matching Hebbian learning replaces TD(0))
+        # ★ Physics reward learning (impedance-matching impedance remodeling replaces TD(0))
         dopamine = self.physics_reward.update(state, action, reward, next_state, next_actions)
 
         # Experience replay (offline impedance restructuring)
@@ -2580,7 +2580,7 @@ class AliceBrain:
         # Closed-loop: update auditory signal cache
         self._last_auditory_signal = auditory_signal
 
-        # ★ Auditory grounding: cochlea filter bank decomposition → cross-modal Hebbian binding
+        # ★ Auditory grounding: cochlea filter bank decomposition → cross-modal impedance-remodeling binding
         ag_result = self.auditory_grounding.receive_auditory(sound_wave)
 
         # ★ Semantic field: fingerprint → concept recognition

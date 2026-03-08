@@ -9,7 +9,7 @@ Tests verify:
     4. Bilirubin conjugation (neonatal jaundice)
     5. Liver damage and regeneration
     6. Protein synthesis (albumin)
-    7. Enzyme induction (Hebbian C2)
+    7. Enzyme induction (impedance-remodeling C2)
     8. ElectricalSignal generation
     9. Γ² + T = 1 (C1)
     10. Developmental maturation
@@ -81,7 +81,7 @@ class TestDetoxification:
         assert liver._toxin_load < 0.5
 
     def test_enzyme_induction(self):
-        """Repeated exposure → CYP450 induction (Hebbian)."""
+        """Repeated exposure → CYP450 induction (impedance-remodeling)."""
         liver = LiverSystem()
         liver.expose_toxin("drug_a", amount=0.3)
         for _ in range(20):

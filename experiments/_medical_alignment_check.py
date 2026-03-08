@@ -143,8 +143,8 @@ def main():
     shield_ok = s_risk >= l_risk or s_q >= l_q
     print(f"  System-level shield: {'YES' if shield_ok else 'NO'} (small risk >= large)")
 
-    # ---- 6. Hebbian Learning ----
-    print("\n[6] Hebbian Convergence (Learning = Impedance Matching)")
+    # ---- 6. impedance remodeling ----
+    print("\n[6] impedance-remodeling Convergence (Learning = Impedance Matching)")
     ts = NeurogenesisThermalShield(500, 250)
     gammas = []
     for tick in range(300):
@@ -186,7 +186,7 @@ def main():
         ("Brain temp in physiological range",    temp_ok),
         ("T_BRAIN_MAX in clinical range",        death_ok),
         ("Thermal shield (q: small > large)",  shield_ok),
-        ("Hebbian convergence (Gamma->0)",       converge_ok),
+        ("impedance-remodeling convergence (Gamma->0)",       converge_ok),
         ("Pressure chamber boost > 1",           pc_ok),
     ]
 

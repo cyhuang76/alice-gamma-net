@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Experiment: Paper II Computational Verification
+Experiment: Paper 2 Computational Verification
 ════════════════════════════════════════════════
 
-Generates the quantitative data cited in Paper II
+Generates the quantitative data cited in Paper 2
 "Impedance Debt as the Thermodynamic Origin of Sleep and Brain Evolution".
 
 Three experiments:
@@ -43,7 +43,7 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 def banner():
     print("=" * 72)
     print("╔════════════════════════════════════════════════════════════════════╗")
-    print("║   Paper II Computational Verification                            ║")
+    print("║   Paper 2 Computational Verification                            ║")
     print("║   Impedance Debt as the Thermodynamic Origin of Sleep            ║")
     print("║                                                                  ║")
     print("║   T_wake^max = D_Z* / (N⟨Γ²⟩P̄ − R_rep)                          ║")
@@ -536,7 +536,7 @@ def exp4_sleep_deprivation_rebound():
 # ════════════════════════════════════════════════════════════════════
 
 def generate_figures(exp1_data, exp2_data, exp3_data, exp4_data):
-    """Generate publication-quality figures for Paper II."""
+    """Generate publication-quality figures for Paper 2."""
     try:
         import matplotlib
         matplotlib.use("Agg")
@@ -605,7 +605,7 @@ def generate_figures(exp1_data, exp2_data, exp3_data, exp4_data):
     ax.legend(fontsize=9)
 
     fig.suptitle(
-        r"Paper II Verification: $D_Z = \int |\Gamma|^2 P_{\rm in}\,dt$"
+        r"Paper 2 Verification: $D_Z = \int |\Gamma|^2 P_{\rm in}\,dt$"
         "\n(All data from physics engine — no statistical fitting)",
         fontsize=14, fontweight="bold", y=1.02,
     )
@@ -636,7 +636,7 @@ def main():
     print()
     print("=" * 72)
     print("  ╔════════════════════════════════════════════╗")
-    print("  ║  All Paper II verification experiments     ║")
+    print("  ║  All Paper 2 verification experiments     ║")
     print("  ║  completed successfully.                   ║")
     print("  ╚════════════════════════════════════════════╝")
 

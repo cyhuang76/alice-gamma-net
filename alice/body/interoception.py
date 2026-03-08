@@ -243,7 +243,7 @@ class InteroceptionOrgan:
         # Emotional valence: low Γ → comfort, high Γ → distress
         self._emotional_valence = 1.0 - 2.0 * min(self._gamma_intero / 0.5, 1.0)
 
-        # ★ Hebbian prediction update: Δpred = α × T × (actual − predicted)
+        # ★ impedance-remodeling prediction update: Δpred = α × T × (actual − predicted)
         #   Only transmitted information updates the body budget model
         for i, ch in enumerate(INTERO_CHANNELS):
             T_ch = transmissions[i]

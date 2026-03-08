@@ -17,7 +17,7 @@ Core equations:
     T_renal = 1 − Γ²_renal  (★ C1 energy conservation)
     Γ_renal = (Z_blood − Z_filtrate) / (Z_blood + Z_filtrate)
     electrolyte_balance = Σ(reabsorbed − filtered) per ion species
-    ΔZ_tubule = −η × Γ × ADH × osmolarity  (★ C2 Hebbian adaptation)
+    ΔZ_tubule = −η × Γ × ADH × osmolarity  (★ C2 impedance remodeling)
 
 Electrolyte tracking:
     Na⁺  — primary extracellular cation, BP regulation
@@ -228,7 +228,7 @@ class KidneySystem:
                 reabsorb = filtered * 0.95
 
             net = reabsorb - filtered
-            # ★ C2 Hebbian: ΔZ = −η × Γ × error
+            # ★ C2 impedance-remodeling: ΔZ = −η × Γ × error
             error = current - setpoint
             correction = -0.01 * error * self._gfr * self._maturity
             self._electrolytes[ion] = float(np.clip(current + net + correction, 0, 1))

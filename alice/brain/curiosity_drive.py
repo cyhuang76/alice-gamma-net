@@ -301,7 +301,7 @@ class CuriosityDriveEngine:
         else:
             information_gain = novelty_score * 0.8  # Early stage: everything is new
 
-        # Update internal model (Hebbian learning)
+        # Update internal model (impedance remodeling)
         self._internal_model[modality] += MODEL_LEARNING_RATE * (z_input - z_model)
 
         # Record signal history

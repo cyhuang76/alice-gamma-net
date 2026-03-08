@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-Experiment: Vascular Impedance Network — Paper IV Verification
+Experiment: Vascular Impedance Network — Paper 3 Verification
 ==============================================================
 
-Verifies the core claims of Paper IV:
+Verifies the core claims of Paper 3:
   V1. Murray's Law derives from MRP (Minimum Reflection Principle)
   V2. Atherosclerosis = Z_UP vascular failure (Γ_v → 1)
   V3. Aneurysm = Z_DOWN vascular failure
   V4. Energy conservation Γ² + T = 1 at every junction, every tick
   V5. Dual-network organ health = (1-Γ_n²)(1-Γ_v²)
   V6. Positive feedback cascade: Γ_v↑ → ρ↓ → Γ_n↑ → Γ_v↑↑
-  V7. Vascular Hebbian remodeling reduces Γ_v over time
+  V7. Vascular impedance-remodeling remodeling reduces Γ_v over time
   V8. All 10 organ territories produce valid vascular states
   V9. Signal protocol: ElectricalSignal is emitted (C3)
 """
@@ -276,11 +276,11 @@ def run_all():
         passed += 1
 
     # ==================================================================
-    # V7. Vascular Hebbian remodeling reduces Γ_v over time
+    # V7. Vascular impedance-remodeling remodeling reduces Γ_v over time
     # ==================================================================
     total += 1
     print("\n" + "=" * 70)
-    print("V7. Vascular Hebbian remodeling (slow adaptation)")
+    print("V7. Vascular impedance-remodeling remodeling (slow adaptation)")
     print("=" * 70)
     
     net = VascularImpedanceNetwork("brain")
@@ -302,11 +302,11 @@ def run_all():
     print(f"  After 500 ticks Γ_v²:      {gamma_after:.6f}")
     print(f"  Reduction:                 {(1 - gamma_after / (gamma_initial + 1e-12)) * 100:.1f}%")
     
-    # Hebbian remodeling should reduce Γ_v² (it may be slow)
+    # impedance-remodeling remodeling should reduce Γ_v² (it may be slow)
     ok = gamma_after <= gamma_initial + 0.01  # Allow small tolerance
     status = "PASS" if ok else "FAIL"
-    print(f"  → V7 {status}: Hebbian vascular remodeling {'reduces' if ok else 'failed to reduce'} Γ_v")
-    results["V7_hebbian_remodeling"] = status
+    print(f"  → V7 {status}: impedance-remodeling vascular remodeling {'reduces' if ok else 'failed to reduce'} Γ_v")
+    results["V7_impedance_remodeling"] = status
     if ok:
         passed += 1
 
@@ -372,7 +372,7 @@ def run_all():
     )
     
     status = "PASS" if ok else "FAIL"
-    print(f"  → V9 {status}: C3 signal protocol satisfied")
+    print(f"  → V9 {status}: C3 impedance-tagged transport satisfied")
     results["V9_signal_protocol"] = status
     if ok:
         passed += 1
@@ -388,7 +388,7 @@ def run_all():
         print(f"  {symbol} {k}: {v}")
     
     if passed == total:
-        print("\n  All verifications passed — Paper IV claims supported.")
+        print("\n  All verifications passed — Paper 3 claims supported.")
     else:
         print(f"\n  {total - passed} verification(s) failed.")
     

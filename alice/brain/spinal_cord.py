@@ -19,7 +19,7 @@ Core equations:
     Γ_spinal = (Z_afferent − Z_efferent) / (Z_afferent + Z_efferent)
     T_spinal = 1 − Γ²_spinal  (★ C1)
     reflex_response = sensory_input × reflex_gain × T_spinal  (bypasses brain)
-    ΔZ_reflex = −η × Γ × stimulus × response  (★ C2 Hebbian)
+    ΔZ_reflex = −η × Γ × stimulus × response  (★ C2 impedance-remodeling)
 
 Reflex arcs:
     1. Stretch reflex (monosynaptic) — fastest: ~30ms
@@ -70,7 +70,7 @@ REFLEX_TYPES = ["stretch", "withdrawal", "crossed_extensor", "autonomic"]
 REFLEX_GAIN_BASE = 0.5         # Baseline reflex amplitude
 REFLEX_GAIN_MAX = 1.0
 REFLEX_GAIN_MIN = 0.05
-REFLEX_ADAPTATION_RATE = 0.005 # Hebbian refinement
+REFLEX_ADAPTATION_RATE = 0.005 # impedance-remodeling refinement
 
 # --- Latency ---
 MONOSYNAPTIC_LATENCY = 0.03   # 30 ms (stretch reflex)
@@ -201,7 +201,7 @@ class SpinalCord:
         latency = reflex.latency / (self._myelination + 0.1)
         response = stim * reflex.gain * transmission * seg_health
 
-        # ★ C2 Hebbian: tune reflex gain
+        # ★ C2 impedance-remodeling: tune reflex gain
         delta_gain = REFLEX_ADAPTATION_RATE * gamma * stim * response
         reflex.gain = float(np.clip(reflex.gain - delta_gain,
                                      REFLEX_GAIN_MIN, REFLEX_GAIN_MAX))

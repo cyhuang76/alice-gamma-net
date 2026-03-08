@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Experiment: Auditory Grounding — Pavlovian Cross-Modal Hebbian Conditioning
+Experiment: Auditory Grounding — Pavlovian Cross-Modal impedance-remodeling Conditioning
 Phase 4.1: The Physics of Language — Auditory Grounding
 
 Core experiments:
-  1. Pavlovian conditioning: bell + food → Hebbian connection
+  1. Pavlovian conditioning: bell + food → impedance-remodeling connection
   2. Probing: bell alone → visual cortex phantom activation?
   3. Extinction: bell without food → synaptic decay → phantom disappearance
   4. Differential conditioning: different sounds → different associations
@@ -37,7 +37,7 @@ from alice.body.cochlea import (
 )
 from alice.brain.auditory_grounding import (
     AuditoryGroundingEngine,
-    CrossModalHebbianNetwork,
+    CrossModalImpedanceNetwork,
     CrossModalSynapse,
     SensoryPrototype,
     SYNAPSE_Z0,
@@ -181,11 +181,11 @@ def exp1_cochlear_decomposition():
 
 
 # ============================================================================
-# Exp 2: Pavlovian Conditioning -- Hebbian Wiring
+# Exp 2: Pavlovian Conditioning -- impedance-remodeling Wiring
 # ============================================================================
 
 def exp2_pavlovian_conditioning():
-    separator("Exp 2: Pavlovian Conditioning -- Cross-Modal Hebbian Wiring")
+    separator("Exp 2: Pavlovian Conditioning -- Cross-Modal impedance-remodeling Wiring")
 
     engine = AuditoryGroundingEngine()
 
@@ -566,7 +566,7 @@ def exp7_vowel_grounding():
 
     print(f"\n  OK: Vowel grounding = embryo of language")
     print(f"    Hearing /a/ -> cross-modal cable -> 'seeing' mouth open")
-    print(f"    = Auditory-to-motor Hebbian resonance channel")
+    print(f"    = Auditory-to-motor impedance-remodeling resonance channel")
 
 
 # ============================================================================
@@ -575,7 +575,7 @@ def exp7_vowel_grounding():
 
 def main():
     print("\n" + "*" * 70)
-    print("  Phase 4.1: Auditory Grounding -- Pavlovian Cross-Modal Hebbian")
+    print("  Phase 4.1: Auditory Grounding -- Pavlovian Cross-Modal impedance-remodeling")
     print("  The Physics of Language -- Auditory Grounding")
     print("  Language = Impedance Modulation -- remote control via sound waves")
     print("*" * 70)
@@ -593,7 +593,7 @@ def main():
     print()
     print("  Phase 4.1 Core Findings:")
     print("    1. Cochlea = basilar membrane FFT -> 24-channel tonotopic activation")
-    print("    2. Pavlov = cross-modal Hebbian wiring -> Z DOWN -> Gamma DOWN -> channel opens")
+    print("    2. Pavlov = cross-modal impedance-remodeling wiring -> Z DOWN -> Gamma DOWN -> channel opens")
     print("    3. Extinction = synapse decay -> Z UP -> Gamma UP -> channel closes")
     print("    4. Different spectral fingerprints -> different concepts")
     print("    5. Language = controlling another brain's impedance matching via sound waves")

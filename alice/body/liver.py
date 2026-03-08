@@ -17,7 +17,7 @@ Core equations:
     T_hepatic = 1 − Γ²_hepatic  (★ C1 energy conservation)
     Γ_hepatic = (Z_portal − Z_hepatocyte) / (Z_portal + Z_hepatocyte)
     detox_rate = toxin_load × CYP450_activity × liver_health
-    ΔZ_enzyme = −η × Γ × substrate × product  (★ C2 Hebbian enzyme induction)
+    ΔZ_enzyme = −η × Γ × substrate × product  (★ C2 impedance-remodeling enzyme induction)
 
 Liver functions:
     1. Detoxification — impedance-transform toxins to excretable metabolites
@@ -66,7 +66,7 @@ GLYCOGEN_NEONATAL = 0.2         # Neonates have low glycogen
 # --- Detoxification ---
 CYP450_BASE_ACTIVITY = 0.5     # Baseline CYP450 enzyme activity
 CYP450_MAX = 1.0
-CYP450_INDUCTION_RATE = 0.005  # Enzyme induction (Hebbian) per exposure
+CYP450_INDUCTION_RATE = 0.005  # Enzyme induction (impedance-remodeling) per exposure
 CYP450_DECAY = 0.999           # Slow enzyme decay
 DETOX_RATE_BASE = 0.1          # Toxin clearance per tick
 
@@ -234,7 +234,7 @@ class LiverSystem:
             self._toxin_load -= detoxified
             self._total_detoxified += detoxified
 
-            # ★ C2 Hebbian enzyme induction: repeated exposure → better clearance
+            # ★ C2 impedance-remodeling enzyme induction: repeated exposure → better clearance
             self._cyp450 = min(CYP450_MAX,
                                self._cyp450 + CYP450_INDUCTION_RATE * self._toxin_load)
 

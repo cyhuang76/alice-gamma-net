@@ -471,7 +471,7 @@ class NeuralActivityDisplay:
         return self._last_frame
 
     # ------------------------------------------------------------------
-    # C3 Signal Protocol compliance
+    # C3 Impedance-Tagged Transport compliance
     # ------------------------------------------------------------------
 
     def get_signal(self) -> ElectricalSignal:

@@ -3,7 +3,7 @@
 Experiment: Do Visual & Auditory Signals Enter the Prefrontal Cortex?
 ======================================================================
 
-Hypothesis (Paper V):
+Hypothesis (Paper 4):
   The prefrontal cortex (PFC) is the consciousness bottleneck because
   ALL sensory modalities must pass through it for executive evaluation.
 

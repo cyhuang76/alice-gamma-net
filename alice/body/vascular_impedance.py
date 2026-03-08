@@ -2,12 +2,12 @@
 """
 Vascular Impedance Network — Blood Vessels as Impedance-Matching Transmission Lines
 
-Paper IV Core Module: The Vascular Γ-Net
+Paper 3 Core Module: The Vascular Γ-Net
 =========================================
 
 Every organ is governed by TWO coincident impedance networks:
-  1. Neural network  → Γ_n = signal impedance mismatch  (Paper I)
-  2. Vascular network → Γ_v = flow impedance mismatch   (Paper IV, this module)
+  1. Neural network  → Γ_n = signal impedance mismatch  (Paper 1)
+  2. Vascular network → Γ_v = flow impedance mismatch   (Paper 3, this module)
 
 Physical basis:
   Vascular impedance:  Z_v = ΔP / Q  (pressure / flow)
@@ -38,8 +38,8 @@ Murray's Law derivation from MRP:
   Σ|Γ_v|² at all bifurcation junctions.
 
 References:
-  [Paper I]  MRP on neural networks
-  [Paper IV] MRP on vascular networks (this paper)
+  [Paper 1]  MRP on neural networks
+  [Paper 3] MRP on vascular networks (this paper)
   [Murray1926] C.D. Murray, "The Physiological Principle of Minimum Work"
   [Womersley1955] J.R. Womersley, "Oscillatory Flow in Arteries"
 """
@@ -118,14 +118,14 @@ NEURAL_VASCULAR_COUPLING = 0.3   # Γ_n → Γ_v coupling strength
 VASCULAR_NEURAL_COUPLING = 0.5   # Γ_v → Γ_n coupling (material bottleneck)
 FEEDBACK_GAIN = 0.1              # Positive feedback loop gain
 
-# --- Hebbian update rates ---
+# --- impedance remodeling rates ---
 ETA_VASCULAR = 0.005             # Vascular adaptation rate (slower than neural)
 # Physical basis: vascular remodeling (days-weeks vs. synaptic ms-sec)
-ETA_NEURAL_REPAIR = 0.008        # Neural Hebbian self-repair (linearized C2)
+ETA_NEURAL_REPAIR = 0.008        # Neural impedance-remodeling self-repair (linearized C2)
 # Physical basis: ΔΓ_n = −η_n · Γ_n drives Γ_n toward 0 when no pathology.
 # Without this, cascade coupling injects +ΔΓ_n each tick but nothing removes
 # it, so Γ_n saturates at 0.95.  This term ensures a nontrivial healthy
-# fixed point (Γ_n² ≈ 0.08) and is the neural analogue of _vascular_hebbian_update.
+# fixed point (Γ_n² ≈ 0.08) and is the neural analogue of _vascular_impedance_update.
 DEFICIT_THRESHOLD = 0.05         # Material deficit below this → no cascade
 # Physical basis: physiological reserve — small ρ shortfall is compensated
 # by tissue oxygen extraction before neural mismatch begins to rise.
@@ -205,7 +205,7 @@ class VascularImpedanceNetwork:
     that minimizes Σ|Γ_v|² across all junctions.
     
     The vascular network delivers the material field ρ
-    from Paper II: ρ ∝ T_v = 1 - Γ_v².
+    from Paper 2: ρ ∝ T_v = 1 - Γ_v².
     
     Dual-network coupling:
         Γ_v ↑ → ρ ↓ → Γ_n ↑ (material bottleneck)
@@ -330,8 +330,8 @@ class VascularImpedanceNetwork:
             + NEURAL_VASCULAR_COUPLING * self._gamma_n_sq
         )
         
-        # 7. Hebbian vascular adaptation (slow remodeling)
-        self._vascular_hebbian_update()
+        # 7. impedance-remodeling vascular adaptation (slow remodeling)
+        self._vascular_impedance_update()
         
         # 8. History
         self._gamma_v_history.append(self._gamma_v_sq)
@@ -434,9 +434,9 @@ class VascularImpedanceNetwork:
                 seg.Z = max(0.01, seg.Z * (1.0 - correction))
                 break
     
-    def _vascular_hebbian_update(self) -> None:
+    def _vascular_impedance_update(self) -> None:
         """
-        Vascular remodeling as slow Hebbian adaptation.
+        Vascular remodeling as slow impedance remodeling.
         
         ΔZ_v = -η_v · Γ_v · (wall_shear_stress) · (growth_factor)
         
@@ -448,12 +448,12 @@ class VascularImpedanceNetwork:
             if abs(seg.gamma) < 1e-8:
                 continue
             
-            # Wall shear stress ∝ flow (x_pre analogue)
+            # Wall shear stress ∝ flow (x_in analogue)
             shear = seg.flow_rate
-            # Growth factor availability ∝ rho (x_post analogue)
+            # Growth factor availability ∝ rho (x_out analogue)
             growth = self._rho_delivery
             
-            # Hebbian update: ΔZ = -η · Γ · x_pre · x_post
+            # impedance remodeling: ΔZ = -η · Γ · x_in · x_out
             dZ = -ETA_VASCULAR * seg.gamma * shear * growth
             seg.Z_target = max(0.001, seg.Z_target + dZ)
     
@@ -745,7 +745,7 @@ def simulate_dual_network_cascade(
         if t == stenosis_at:
             net.apply_stenosis("small_artery", stenosis_fraction)
         
-        # Neural Hebbian self-repair (linearized C2)
+        # Neural impedance-remodeling self-repair (linearized C2)
         gamma_n = max(0.001, gamma_n * (1.0 - ETA_NEURAL_REPAIR))
         
         # Tick vascular network

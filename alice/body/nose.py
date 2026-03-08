@@ -169,7 +169,7 @@ class AliceNose:
         # Detection strength = max effective affinity
         self._detection_strength = float(np.max(effective_affinities))
 
-        # ★ Hebbian adaptation: only transmitted signal drives receptor saturation
+        # ★ impedance remodeling: only transmitted signal drives receptor saturation
         #   Δadaptation = RATE × T × raw_affinity  (T-weighted — more transmission → faster adaptation)
         self._adaptation = np.clip(
             self._adaptation + raw_affinities * transmission_per_receptor * ADAPTATION_RATE,

@@ -5,11 +5,11 @@ Tests for Dynamic Γ-Topology Network
 
 Verification matrix:
   C1  Energy conservation:  Γ² + T = 1 at every mode, every edge, every tick
-  C2  Hebbian update:       ΔZ follows −η·Γ·x_pre·x_post exactly
+  C2  impedance remodeling:       ΔZ follows −η·Γ·x_in·x_out exactly
   C3  Signal protocol:      All data carries impedance metadata (numpy arrays)
 
 Topology emergence:
-  - Random initial Z → structured Γ matrix after Hebbian evolution
+  - Random initial Z → structured Γ matrix after impedance-remodeling evolution
   - Entropy decreases (order emerges)
   - Clustering coefficient increases (community structure)
   - Total action A[Γ] = ΣΓ² decreases monotonically
@@ -164,7 +164,7 @@ class TestMulticoreChannel:
 
 
 # ============================================================================
-# GammaTopology — C2 Hebbian & Topology Emergence
+# GammaTopology — C2 impedance-remodeling & Topology Emergence
 # ============================================================================
 
 
@@ -202,8 +202,8 @@ class TestGammaTopologyCreation:
         assert len(topo.active_edges) == 0
 
 
-class TestHebbianUpdate:
-    """C2: ΔZ = −η · Γ · x_pre · x_post"""
+class TestImpedanceRemodeling:
+    """C2: ΔZ = −η · Γ · x_in · x_out"""
 
     def test_c2_direction(self):
         """
@@ -223,7 +223,7 @@ class TestHebbianUpdate:
         z_after = topo.nodes["s"].impedance
 
         # Γ = (100−50)/(100+50) = 1/3 > 0
-        # Gradient descent: ΔZ_src = +η × Γ × x_pre × x_post > 0
+        # Gradient descent: ΔZ_src = +η × Γ × x_in × x_out > 0
         # → source Z increases toward target Z
         assert z_after[0] > z_before[0], \
             "Gradient descent: positive Γ should increase source Z toward target"
@@ -232,12 +232,12 @@ class TestHebbianUpdate:
         """Verify ΔZ direction: gradient descent makes Z converge."""
         eta = 0.05
         z_src, z_tgt = 60.0, 90.0
-        x_pre, x_post = 0.8, 0.6
+        x_in, x_out = 0.8, 0.6
 
         src = GammaNode("s", impedance=np.array([z_src]),
-                        activation=np.array([x_pre]))
+                        activation=np.array([x_in]))
         tgt = GammaNode("t", impedance=np.array([z_tgt]),
-                        activation=np.array([x_post]))
+                        activation=np.array([x_out]))
         topo = GammaTopology(nodes=[src, tgt], eta=eta)
         topo.activate_edge("s", "t")
 
@@ -262,7 +262,7 @@ class TestHebbianUpdate:
             "Gradient descent: impedance gap should shrink"
 
     def test_c2_zero_activation_no_update(self):
-        """If x_pre = 0 or x_post = 0, no Hebbian update occurs."""
+        """If x_in = 0 or x_out = 0, no impedance remodeling occurs."""
         src = GammaNode("s", impedance=np.array([50.0]),
                         activation=np.array([0.0]))  # Zero activation
         tgt = GammaNode("t", impedance=np.array([100.0]),
@@ -278,7 +278,7 @@ class TestHebbianUpdate:
                                    err_msg="C2: zero activation → zero ΔZ")
 
     def test_c2_matched_pair_stable(self):
-        """If Γ ≈ 0 (matched), Hebbian update is negligible."""
+        """If Γ ≈ 0 (matched), impedance remodeling is negligible."""
         src = GammaNode("s", impedance=np.array([75.0]),
                         activation=np.array([1.0]))
         tgt = GammaNode("t", impedance=np.array([75.0]),
@@ -345,7 +345,7 @@ class TestTopologyEmergence:
         """Impedance entropy should not be maximal after evolution."""
         entropy = evolved_topo.impedance_entropy()
         # For 20 nodes × 3 modes uniform on [1, 500], max entropy ≈ log(499) ≈ 6.2
-        # After Hebbian learning, entropy should be lower
+        # After impedance remodeling, entropy should be lower
         assert entropy < 6.5, f"Entropy suspiciously high: {entropy}"
 
     def test_topology_summary(self, evolved_topo):
@@ -418,7 +418,7 @@ class TestMultiModePhysics:
     def test_3d_decision_space(self):
         """
         Demo: 3-mode coaxial as (Time, Risk, Gain) decision dimensions.
-        Two nodes with different "preferences" should converge via Hebbian.
+        Two nodes with different "preferences" should converge via impedance-remodeling.
         """
         # Agent prefers: low time (Z=30), low risk (Z=20), high gain (Z=100)
         agent = GammaNode("agent",

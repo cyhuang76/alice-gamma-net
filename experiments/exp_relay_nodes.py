@@ -23,7 +23,7 @@ This experiment demonstrates:
   3. With relay chain K=4,3,2: A_cut/hop = 1 per hop
   4. Total A_cut is conserved (always = K_src - K_tgt)
   5. Relays enable information routing at each stage
-  6. Hebbian learning optimises A_imp at each relay stage independently
+  6. impedance remodeling optimises A_imp at each relay stage independently
 """
 
 from __future__ import annotations

@@ -3,7 +3,7 @@
 Experiment: Neonatal EEG Delta Power vs Gestational Age
 ═══════════════════════════════════════════════════════
 
-Paper II validation: Delta power as a proxy for impedance debt D_Z.
+Paper 2 validation: Delta power as a proxy for impedance debt D_Z.
 
 Physics hypothesis:
   D_Z ∝ delta power during sleep.
@@ -163,7 +163,7 @@ def analyze_week(week: int, fs: float = FS) -> dict:
 # ============================================================================
 
 def plot_results(results: list[dict]):
-    """產生 Paper II 的 Figure: delta power vs gestational age."""
+    """產生 Paper 2 的 Figure: delta power vs gestational age."""
 
     weeks = [r["week"] for r in results]
     mean_delta = [r["mean_delta"] for r in results]
@@ -214,7 +214,7 @@ def plot_results(results: list[dict]):
         ax.legend(fontsize=10)
 
     fig.suptitle("Neonatal EEG: Delta Power vs Gestational Age\n"
-                 "(Impedance Debt Framework — Paper II)",
+                 "(Impedance Debt Framework — Paper 2)",
                  fontsize=14, fontweight="bold", y=1.02)
     fig.tight_layout()
 
@@ -253,7 +253,7 @@ def print_table(results: list[dict]):
 
 def main():
     print("=" * 60)
-    print("  Paper II — EEG Delta Power Analysis")
+    print("  Paper 2 — EEG Delta Power Analysis")
     print("  Impedance Debt Framework Validation")
     print("=" * 60)
 

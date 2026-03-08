@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Generate Paper IV figures — Lifecycle Equation verification plots.
+Generate Paper 3 figures — Lifecycle Equation verification plots.
 
 Figure 1: Bathtub curve (ΣΓ² vs time, with phase annotations)
 Figure 2: Emotion readouts (dopamine, stress, curiosity, boredom)
@@ -352,7 +352,7 @@ def plot_yerkes_dodson():
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  Paper IV Figure Generation")
+    print("  Paper 3 Figure Generation")
     print("  The Lifecycle Equation")
     print("=" * 60)
 
@@ -361,5 +361,5 @@ if __name__ == "__main__":
     plot_yerkes_dodson()
 
     print("\n" + "=" * 60)
-    print("  All Paper IV figures generated successfully")
+    print("  All Paper 3 figures generated successfully")
     print("=" * 60)

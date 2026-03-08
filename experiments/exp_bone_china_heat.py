@@ -3,7 +3,7 @@
 Experiment: Bone China D_Z Heat Generation
 ══════════════════════════════════════════
 
-Paper II Validation: Memory consolidation as the primary source of D_Z.
+Paper 2 Validation: Memory consolidation as the primary source of D_Z.
 
 Physics hypothesis:
   Bone China Phase 3 (Bisque firing during N3 sleep) generates massive

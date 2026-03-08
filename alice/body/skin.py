@@ -199,7 +199,7 @@ class AliceSkin:
         if pressure > self._nociception_threshold:
             nociception_pain = NOCICEPTION_GAIN * (pressure - self._nociception_threshold)
             self._total_pain_events += 1
-            # ★ Hebbian sensitization: Δθ = -η × Γ² × pressure
+            # ★ impedance-remodeling sensitization: Δθ = -η × Γ² × pressure
             # More reflection (higher mismatch) → more pain → more sensitization
             self._nociception_threshold = max(
                 0.3, self._nociception_threshold - NOCICEPTION_SENSITIZATION * gamma_touch ** 2 * pressure

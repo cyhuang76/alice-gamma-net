@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Experiment: Paper II — Origin Hypotheses Verification
+Experiment: Paper 2 — Origin Hypotheses Verification
 ═════════════════════════════════════════════════════
 
-Tests the THREE unresolved claims from Paper II:
+Tests the THREE unresolved claims from Paper 2:
 
   Exp 5: D_micro vs D_thermal decomposition
          — Ocean (high κ) dissipates D_thermal → only D_micro remains
@@ -50,7 +50,7 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 def banner():
     print("=" * 72)
     print("╔════════════════════════════════════════════════════════════════════╗")
-    print("║   Paper II — Origin Hypotheses Verification                      ║")
+    print("║   Paper 2 — Origin Hypotheses Verification                      ║")
     print("║   D_micro / D_thermal decomposition                              ║")
     print("║   Tidal-zone impedance matching                                  ║")
     print("║   Distributed vs Centralized architecture                        ║")
@@ -484,7 +484,7 @@ def exp7_distributed_vs_centralized():
 # ════════════════════════════════════════════════════════════════════════
 
 def generate_figures(exp5_data, exp6_data, exp7_data):
-    """Generate publication figures for Paper II origin experiments."""
+    """Generate publication figures for Paper 2 origin experiments."""
     try:
         import matplotlib
         matplotlib.use("Agg")
@@ -564,7 +564,7 @@ def generate_figures(exp5_data, exp6_data, exp7_data):
     ax.legend(fontsize=9)
 
     fig.suptitle(
-        "Paper II Origin Verification: Why brains needed the land transition\n"
+        "Paper 2 Origin Verification: Why brains needed the land transition\n"
         r"($\kappa_{\rm water}/\kappa_{\rm air} \approx 24$ "
         r"$\longrightarrow$ $D_{\rm thermal}$ drives centralisation)",
         fontsize=14, fontweight="bold", y=1.02,
@@ -595,7 +595,7 @@ def main():
     print()
     print("=" * 72)
     print("  ╔════════════════════════════════════════════════════════╗")
-    print("  ║  All Paper II origin experiments completed.            ║")
+    print("  ║  All Paper 2 origin experiments completed.            ║")
     print("  ║                                                        ║")
     print("  ║  Key findings:                                         ║")
     print("  ║  • Ocean κ dissipates D_thermal → no brain needed      ║")

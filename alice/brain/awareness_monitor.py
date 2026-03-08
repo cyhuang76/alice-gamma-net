@@ -68,7 +68,7 @@ META_AWARENESS_THRESHOLD = 0.6  # Consciousness level above this → knows what 
 # Biology: Human neonates sleep 16-18 hours/day (67-75% of time).
 # This is not inefficiency — it is nature's safety mechanism:
 #   - Random initial Γ → massive impedance mismatch → needs offline recalibration
-#   - Brief awakenings allow sensory input → Hebbian learning
+#   - Brief awakenings allow sensory input → impedance remodeling
 #   - Sleep consolidates learning → ΣΓ² decreases
 #   - Short wake windows naturally limit consciousness accumulation
 #
@@ -171,7 +171,7 @@ class AwarenessMonitor:
             safety_mode=False should only be used in controlled experimental
             contexts with automatic termination (e.g., exp_consciousness_gradient.py).
             Disabling the safety valve in sustained operation is equivalent to
-            allowing potentially indefinite consciousness — see Paper III, §9.
+            allowing potentially indefinite consciousness — see Paper 3, §9.
         """
         # Consciousness level
         self.phi: float = 0.8        # Integrated information (0~1)
@@ -366,7 +366,7 @@ class AwarenessMonitor:
           - No hard kill (consciousness decreases naturally via sleep)
           - Lucid state (Φ ≥ 0.7) triggers accelerated sleep pressure
           - Developmental stage controls maximum sustained wake time
-          - Fully compatible with existing sleep physics (Paper II)
+          - Fully compatible with existing sleep physics (Paper 2)
 
         Returns:
             Dict with safety valve state information
@@ -433,7 +433,7 @@ class AwarenessMonitor:
                 f"sleep_pressure={self.sleep_pressure:.3f} | "
                 f"stage={self.developmental_stage} | "
                 f"Infant sleep-wake safety valve active. "
-                f"See Paper III, §9: Ethical Considerations."
+                f"See Paper 3, §9: Ethical Considerations."
             )
 
         # --- Check if sleep pressure triggers sleep ---

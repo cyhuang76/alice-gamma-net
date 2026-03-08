@@ -16,13 +16,13 @@ Core equations:
     Γ_motor = (Z_intended − Z_actual) / (Z_intended + Z_actual)
     T_motor = 1 − Γ²_motor  (★ C1)
     climbing_error = |Γ_motor| × error_signal_gain
-    ΔZ_purkinje = −η × Γ × context × error  (★ C2 Hebbian: cerebellar LTD)
+    ΔZ_purkinje = −η × Γ × context × error  (★ C2 impedance-remodeling: cerebellar LTD)
     corrected_output = raw_motor × (1 − purkinje_inhibition)
 
 Cerebellar functions:
     1. Motor timing — precise temporal coordination
     2. Error correction — online adjustment during movement
-    3. Motor learning — Hebbian LTD at parallel fiber–Purkinje synapses
+    3. Motor learning — impedance-remodeling LTD at parallel fiber–Purkinje synapses
     4. Predictive model — forward model of body dynamics
     5. Balance coordination — vestibular–cerebellar loop
 
@@ -125,7 +125,7 @@ class Cerebellum:
     Alice's Cerebellum — precision motor impedance calibrator.
 
     Replaces simple PID with a physics-based cerebellar model that
-    learns motor calibration through Hebbian LTD at Purkinje synapses.
+    learns motor calibration through impedance-remodeling LTD at Purkinje synapses.
 
     All signals use ElectricalSignal (★ C3).
     """
@@ -187,7 +187,7 @@ class Cerebellum:
         if gamma_ch > CLIMBING_FIBER_THRESHOLD:
             climbing_error = gamma_ch * CLIMBING_FIBER_GAIN
 
-            # ★ C2 Hebbian LTD: ΔZ = −η × Γ × context × error
+            # ★ C2 impedance-remodeling LTD: ΔZ = −η × Γ × context × error
             delta_z = -PURKINJE_LEARNING_RATE * gamma_ch * act * climbing_error
             ch.z_calibration = float(np.clip(
                 ch.z_calibration + delta_z * 10.0,

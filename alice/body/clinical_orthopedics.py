@@ -105,7 +105,7 @@ def joint_transmission_no_cartilage() -> dict:
 # AGING PAIN IMMUNITY MODEL
 # ============================================================================
 # Slow Z drift does NOT cause pain because:
-# 1. C2 Hebbian adaptation continuously re-matches: ΔZ = −η·Γ·x_pre·x_post
+# 1. C2 impedance remodeling continuously re-matches: ΔZ = −η·Γ·x_in·x_out
 # 2. Reflection heat = Γ² × gain is tiny for small Γ
 # 3. Cooling rate (0.035/tick) >> heating from slow drift
 # 4. Pain threshold T > 0.7 is never reached
@@ -140,7 +140,7 @@ def aging_pain_model(
         # Aging: Z drifts up
         z_load += z_drift_rate
 
-        # C2 Hebbian adaptation: tries to re-match
+        # C2 impedance remodeling: tries to re-match
         gamma = (z_load - z_source) / (z_load + z_source)
         g2 = gamma * gamma
         delta_z = -eta * gamma  # simplified C2: ΔZ ∝ −η·Γ

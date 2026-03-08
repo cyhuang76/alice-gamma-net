@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Tests for FontanelleModel — Paper III Eq.21
+Tests for FontanelleModel — Paper 3 Eq.21
 
 Tests verify:
     1. Basic construction and initial state

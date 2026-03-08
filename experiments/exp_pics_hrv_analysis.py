@@ -3,7 +3,7 @@
 Experiment: Preterm Infant HRV Analysis (PhysioNet PICS)
 ════════════════════════════════════════════════════════
 
-Paper II validation: Heart Rate Variability as a proxy for κ (thermal
+Paper 2 validation: Heart Rate Variability as a proxy for κ (thermal
 dissipation capacity / autonomic regulation).
 
 Physics hypothesis:
@@ -186,7 +186,7 @@ def analyze_infant(infant_id: int) -> dict:
 # ============================================================================
 
 def plot_results(results: list[dict]):
-    """產生 Paper II 的 Figure: HRV vs PCA + bradycardia。"""
+    """產生 Paper 2 的 Figure: HRV vs PCA + bradycardia。"""
 
     pca = [r["pca_weeks"] for r in results]
     sdnn = [r["SDNN"] for r in results]
@@ -279,7 +279,7 @@ def print_table(results: list[dict]):
 
 def main():
     print("=" * 60)
-    print("  Paper II — PhysioNet PICS HRV Analysis")
+    print("  Paper 2 — PhysioNet PICS HRV Analysis")
     print("  Autonomic Regulation as κ Proxy")
     print("=" * 60)
 

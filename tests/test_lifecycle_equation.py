@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Tests for LifecycleEquationEngine — Paper III Eq.24 + Eq.22
+Tests for LifecycleEquationEngine — Paper 3 Eq.24 + Eq.22
 
 Tests verify:
     1. Basic construction and initial state

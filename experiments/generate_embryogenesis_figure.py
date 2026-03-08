@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Generate 2×2 embryogenesis figure for Paper II Experiment 9.
+Generate 2×2 embryogenesis figure for Paper 2 Experiment 9.
 
 Panels:
   (a) No mother vs With mother: Z/Z₀ over time
@@ -23,7 +23,7 @@ from experiments.exp_embryogenesis import (
 
 
 def main():
-    print("Generating embryogenesis figure for Paper II...")
+    print("Generating embryogenesis figure for Paper 2...")
 
     # ---- V7a: No mother ----
     p_orphan = make_embryo_params(name="No mother", I_blood=0.0, T_total=100.0)

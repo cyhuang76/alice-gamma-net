@@ -221,7 +221,7 @@ class AliceHand:
 
         # Pain-guard protective reflex (motor inhibition after injury)
         self.guard_level: float = 0.0       # 0=no protection, 1=full protection
-        self.injury_memory: float = 0.0     # Injury experience accumulation (Hebbian)
+        self.injury_memory: float = 0.0     # Injury experience accumulation (impedance-remodeling)
 
     # ------------------------------------------------------------------
     # Public interface

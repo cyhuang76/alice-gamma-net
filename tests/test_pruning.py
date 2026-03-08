@@ -4,7 +4,7 @@ Tests: Neural Pruning Engine — §3.5.2 Large-Scale Γ Apoptosis
 
 Verification items:
   1. Birth initialization — random impedance distribution
-  2. Hebbian selection — matched→strengthened, mismatched→weakened
+  2. impedance-remodeling selection — matched→strengthened, mismatched→weakened
   3. Apoptosis mechanism — weak connections removed
   4. Cortical specialization — different regions develop different expertise
   5. Pruning curve — S-shaped pruning curve (fast→slow)
@@ -135,8 +135,8 @@ class TestCorticalRegion:
         assert "weakened" in result
         assert result["strengthened"] + result["weakened"] == result["alive"]
 
-    def test_hebbian_strengthening(self):
-        """Hebbian strengthening: synaptic strength increases for matched connections"""
+    def test_impedance_strengthening(self):
+        """impedance-remodeling strengthening: synaptic strength increases for matched connections"""
         region = CorticalRegion(
             name="test",
             initial_connections=100,
@@ -153,8 +153,8 @@ class TestCorticalRegion:
             # Matched connections should be strengthened
             assert close_conns[0].synaptic_strength >= initial_strength
 
-    def test_hebbian_weakening(self):
-        """Hebbian weakening: synaptic decay for mismatched connections"""
+    def test_impedance_weakening(self):
+        """impedance-remodeling weakening: synaptic decay for mismatched connections"""
         region = CorticalRegion(
             name="test",
             initial_connections=100,
@@ -534,7 +534,7 @@ class TestPhysicsConsistency:
         """With high learning signal, synaptogenesis creates new connections"""
         engine = NeuralPruningEngine(connections_per_region=200)
 
-        # First let some connections strengthen (need Hebbian strengthening above threshold)
+        # First let some connections strengthen (need impedance-remodeling strengthening above threshold)
         for _ in range(20):
             engine.develop_epoch(learning_signal=0.0)
 

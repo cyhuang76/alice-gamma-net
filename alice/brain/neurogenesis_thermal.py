@@ -31,7 +31,7 @@ This heat has three consequences:
      degrading previously learned impedance matches.
   2. **Temperature rise**: Local neural temperature increases proportional to Q.
   3. **Thermal failure**: If T_local > T_critical, the neuron undergoes thermal
-     apoptosis (distinct from Hebbian apoptosis — this is physical destruction).
+     apoptosis (distinct from impedance-remodeling apoptosis — this is physical destruction).
 
 §2 — The Neonatal Thermal Catastrophe
 --------------------------------------
@@ -65,7 +65,7 @@ neuron from reaching thermal failure.
 §3 — The Pruning-Thermal Coupling
 -----------------------------------
 
-As Hebbian learning proceeds (ΔZ = −η × Γ × x_pre × x_post):
+As impedance remodeling proceeds (ΔZ = −η × Γ × x_in × x_out):
   → Γ decreases at active synapses
   → Q_total decreases
   → q_per_neuron decreases
@@ -117,7 +117,7 @@ not from externally defined architecture.
 §6 — The Fontanelle Boundary (Pressure Chamber Principle)
 -----------------------------------------------------------
 
-The fontanelle is the THERMAL BOUNDARY of the Γ² field (Paper III §2.2, §2.5).
+The fontanelle is the THERMAL BOUNDARY of the Γ² field (Paper 3 §2.2, §2.5).
 
   Γ_font = |Z_font − Z_brain| / (Z_font + Z_brain)
   T_font = 1 − Γ²_font     (C1 at the boundary)
@@ -132,7 +132,7 @@ Closing fontanelle (Z_font → Z_bone):
   → T_font drops (boundary becomes more reflective)
   → Thermal exhaust narrows → heat begins to be trapped
   → Q_eff decreases toward Q_CRITICAL
-  → Must have REDUCED Γ² (via Hebbian learning + pruning) by this time
+  → Must have REDUCED Γ² (via impedance remodeling + pruning) by this time
 
 Closed fontanelle (Z_font ≈ Z_bone):
   → Thermal boundary is sealed → PRESSURE CHAMBER
@@ -146,16 +146,16 @@ Closed fontanelle (Z_font ≈ Z_bone):
 
 The developmental sequence is:
   1. Birth: fontanelle open + 2000B neural modules → high Γ² tolerable
-  2. Learning: Hebbian reduces Γ² → total heat drops
+  2. Learning: impedance-remodeling reduces Γ² → total heat drops
   3. Pruning: neurons safely removed (q stays below Q_eff)
   4. Closure: pressure chamber activates → remaining Γ² drives acceleration
 
 Author: Hsi-Yu Huang (黃璽宇)
 References:
-  Paper I  §3.5.2 — Neural pruning as large-scale Γ apoptosis
-  Paper III §2.2  — Fontanelle as thermodynamic necessity
-  Paper III §2.5  — Pressure chamber effect after closure
-  Paper IV  §6    — The thermal shield hypothesis
+  Paper 1  §3.5.2 — Neural pruning as large-scale Γ apoptosis
+  Paper 3 §2.2  — Fontanelle as thermodynamic necessity
+  Paper 3 §2.5  — Pressure chamber effect after closure
+  Paper 3  §6    — The thermal shield hypothesis
 """
 
 from __future__ import annotations
@@ -291,7 +291,7 @@ class ThermalFieldState:
     brain_temperature: float            # °C — derived from q
     gradient_decay_rate: float          # Current gradient decay magnitude
     thermal_deaths: int                 # Neurons lost to thermal failure
-    hebbian_deaths: int                 # Neurons lost to Hebbian pruning
+    impedance_deaths: int                 # Neurons lost to impedance-remodeling pruning
     collapse_risk: float                # 0=safe, 1=imminent collapse
     phase: str                          # "overproduction" / "peak" / "pruning" / "stable"
     safe_to_prune: int                  # How many neurons can safely be removed
@@ -316,12 +316,12 @@ class NeurogenesisThermalShield:
 
     Three Modes of Neuron Death:
         1. Thermal apoptosis: q_local > Q_CRITICAL → destroyed by heat
-        2. Hebbian apoptosis: low match score → pruned by selection
+        2. impedance-remodeling apoptosis: low match score → pruned by selection
         3. Developmental programmed death: Huttenlocher curve reduction
 
     Constraints Satisfied:
         ★ C1: Γ² + T = 1 (reflected energy → heat; transmitted → signal)
-        ★ C2: ΔZ = −η × Γ × x_pre × x_post (Hebbian learning reduces Γ → reduces heat)
+        ★ C2: ΔZ = −η × Γ × x_in × x_out (impedance remodeling reduces Γ → reduces heat)
         ★ C3: All outputs as ElectricalSignal
     """
 
@@ -363,7 +363,7 @@ class NeurogenesisThermalShield:
 
         # --- Death counters ---
         self._thermal_deaths: int = 0
-        self._hebbian_deaths: int = 0
+        self._impedance_deaths: int = 0
 
         # --- Development ---
         self._tick_count: int = 0
@@ -498,8 +498,8 @@ class NeurogenesisThermalShield:
         """
         Kill neurons whose local heat exceeds the thermal death threshold.
 
-        This is DISTINCT from Hebbian pruning:
-        - Hebbian pruning: poorly matched connections removed by selection
+        This is DISTINCT from impedance-remodeling pruning:
+        - impedance-remodeling pruning: poorly matched connections removed by selection
         - Thermal apoptosis: neurons DESTROYED by accumulated Γ² heat
 
         Without 2000B neural modules to distribute the load, thermal
@@ -528,24 +528,24 @@ class NeurogenesisThermalShield:
         return killed
 
     # ------------------------------------------------------------------
-    # Hebbian Pruning — Connection-determined death
+    # impedance-remodeling Pruning — Connection-determined death
     # ------------------------------------------------------------------
 
-    def apply_hebbian_pruning(
+    def apply_impedance_pruning(
         self,
         signal_impedance: float = Z_SIGNAL_TYPICAL,
         learning_rate: float = 0.01,
     ) -> int:
         """
-        Hebbian pruning: neurons with poor impedance matching are weakened.
+        impedance-remodeling pruning: neurons with poor impedance matching are weakened.
 
-        ★ C2: ΔZ = −η × Γ × x_pre × x_post
+        ★ C2: ΔZ = −η × Γ × x_in × x_out
 
         Neurons that consistently produce high Γ with the signal are weakened.
         Neurons with low Γ (good match) are strengthened.
 
         Returns:
-            Number of neurons pruned by Hebbian selection
+            Number of neurons pruned by impedance-remodeling selection
         """
         pruned = 0
 
@@ -566,7 +566,7 @@ class NeurogenesisThermalShield:
                 # Good match → strengthen → adjust Z toward signal
                 n.strength = min(2.0, n.strength * 1.02)
 
-                # ★ C2 Hebbian update: ΔZ = −η × Γ_signed × x_pre × x_post
+                # ★ C2 impedance remodeling: ΔZ = −η × Γ_signed × x_in × x_out
                 # Using SIGNED Γ ensures:
                 #   Z > Z_signal → Γ > 0 → ΔZ < 0 → Z decreases toward signal ✓
                 #   Z < Z_signal → Γ < 0 → ΔZ > 0 → Z increases toward signal ✓
@@ -579,7 +579,7 @@ class NeurogenesisThermalShield:
                 if n.strength < 0.05:
                     n.alive = False
                     pruned += 1
-                    self._hebbian_deaths += 1
+                    self._impedance_deaths += 1
 
         return pruned
 
@@ -778,14 +778,14 @@ class NeurogenesisThermalShield:
         2. Advance fontanelle boundary (pressure chamber dynamics)
         3. Apply fontanelle thermal exhaust (boundary-based dissipation)
         4. Apply gradient decay (Γ² heat → impedance drift)
-        5. Apply Hebbian pruning (with pressure chamber boost)
+        5. Apply impedance-remodeling pruning (with pressure chamber boost)
         6. Apply thermal apoptosis (kill overheated neurons)
         7. Update brain temperature
         8. Age all neurons
 
         Args:
             signal_impedance: The dominant signal impedance this tick
-            learning_rate: Hebbian learning rate (η)
+            learning_rate: impedance remodeling rate (η)
             specialization_index: 0~1 cortical specialization (drives closure)
             fontanelle_dissipation: Legacy parameter (ignored if fontanelle
                                    boundary is active; kept for API compat)
@@ -829,12 +829,12 @@ class NeurogenesisThermalShield:
         # 4. Gradient decay (thermal noise → impedance drift)
         avg_drift = self.apply_gradient_decay()
 
-        # 5. Hebbian pruning (C2: improve impedance matching)
+        # 5. impedance-remodeling pruning (C2: improve impedance matching)
         #    ★ Pressure chamber boost: after fontanelle closure, trapped
-        #    Γ² heat is "constructively consumed" — Hebbian learning
+        #    Γ² heat is "constructively consumed" — impedance remodeling
         #    accelerates because the heat MUST be converted to matching.
         effective_lr = learning_rate * self._cognitive_boost
-        hebbian_pruned = self.apply_hebbian_pruning(signal_impedance, effective_lr)
+        impedance_pruned = self.apply_impedance_pruning(signal_impedance, effective_lr)
 
         # 6. Thermal apoptosis (Γ² heat kills neurons)
         thermal_killed = self.apply_thermal_apoptosis()
@@ -867,7 +867,7 @@ class NeurogenesisThermalShield:
             "heat_per_neuron": round(q, 6) if not math.isinf(q) else float('inf'),
             "brain_temperature": round(self._brain_temperature, 2),
             "gradient_decay": round(avg_drift, 6),
-            "hebbian_pruned": hebbian_pruned,
+            "impedance_pruned": impedance_pruned,
             "thermal_killed": thermal_killed,
             "collapse_risk": round(self.collapse_risk(), 4),
             "safe_to_prune": self.safe_prune_count(),
@@ -1071,7 +1071,7 @@ class NeurogenesisThermalShield:
             "brain_temperature": round(self._brain_temperature, 2),
             "gradient_decay_rate": round(self._gradient_decay_rate, 6),
             "thermal_deaths": self._thermal_deaths,
-            "hebbian_deaths": self._hebbian_deaths,
+            "impedance_deaths": self._impedance_deaths,
             "collapse_risk": round(self.collapse_risk(), 4),
             "safe_to_prune": self.safe_prune_count(),
             "phase": self._phase,
@@ -1103,7 +1103,7 @@ class NeurogenesisThermalShield:
             brain_temperature=self._brain_temperature,
             gradient_decay_rate=self._gradient_decay_rate,
             thermal_deaths=self._thermal_deaths,
-            hebbian_deaths=self._hebbian_deaths,
+            impedance_deaths=self._impedance_deaths,
             collapse_risk=self.collapse_risk(),
             phase=self._phase,
             safe_to_prune=self.safe_prune_count(),

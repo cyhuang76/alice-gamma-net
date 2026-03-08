@@ -52,7 +52,7 @@ def make_embryo_params(name="Embryo", I_blood=0.0, T_total=100.0, **overrides):
         N=100, L=1.0,
         D_Z=1e-4, D_rho=1e-2,       # D_rho/D_Z = 100 (blood >> tissue diffusion)
         Z0=50.0,                      # target impedance (from DNA)
-        eta=0.05,                     # Hebbian adaptation rate
+        eta=0.05,                     # impedance remodeling rate
         J=1.0,                        # signal current
         chi=5.0,                      # material→impedance conversion
         v_cat=0.1,                    # enzyme catalytic rate

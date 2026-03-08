@@ -8,7 +8,7 @@ Experiment: Scaling Analysis — Convergence Rate vs Network Size
 From the Minimum Reflection Principle:
     A[Γ] = ∫₀ᵀ Σᵢ Γᵢ²(t) dt → min
 
-The C2 Hebbian update drives A_imp → 0.  The convergence time τ_conv
+The C2 impedance remodeling drives A_imp → 0.  The convergence time τ_conv
 is the first tick at which A_imp drops below 1% of its initial value.
 
 The scaling exponent α, defined by:
@@ -56,7 +56,7 @@ N_TRIALS = 5           # independent seeds per N (for error bars)
 MAX_TICKS = 500        # upper bound on evolution ticks
 CONVERGENCE_THRESHOLD = 0.01  # A_imp < 1% of A_imp(t=5) → converged
 CONNECTIVITY = 0.15    # initial edge fraction
-ETA = 0.02             # Hebbian learning rate
+ETA = 0.02             # impedance remodeling rate
 MAX_GAP = 2            # max_dimension_gap (cortex↔motor OK, cortex↔C-fiber BLOCKED)
 BASELINE_TICKS = 5     # average first N ticks as initial A_imp baseline
 STABILITY_WINDOW = 20  # run this many extra ticks after convergence to confirm
@@ -207,7 +207,7 @@ def run_single_trial(
     # ── Fractal dimension of the evolved topology ──────────────────
     # Song-Havlin-Makse (2005) network box-counting on the FINAL state.
     # This measures the self-similarity structure induced by
-    # max_dimension_gap constraint + Hebbian evolution.
+    # max_dimension_gap constraint + impedance-remodeling evolution.
     fractal_result = topo.box_counting_dimension()
     D_f = fractal_result["D_f"]
     D_f_R2 = fractal_result["R2"]
@@ -1135,7 +1135,7 @@ def main() -> None:
   Soft cutoff (dimension_gap_decay = γ) creates power-law connectivity:
     p(ΔK) = (ΔK + 1)^{{-γ}}
 
-  This produces fractal topology in K-space with D_K ≈ γ + δ_Hebbian.
+  This produces fractal topology in K-space with D_K ≈ γ + δ_impedance.
 
   Hypothesis: D_K increases monotonically with γ.
 
@@ -1144,7 +1144,7 @@ def main() -> None:
 
     SOFT_N = 64              # fixed network size for this step
     SOFT_TRIALS = 5          # independent seeds
-    SOFT_TICKS = 100         # ticks of Hebbian evolution
+    SOFT_TICKS = 100         # ticks of impedance-remodeling evolution
     SOFT_MAX_GAP = 4         # wide hard cutoff to let soft cutoff dominate
     GAMMA_VALUES: List[Optional[float]] = [None, 0.5, 1.0, 1.26, 2.0]
 
@@ -1180,7 +1180,7 @@ def main() -> None:
                 seed=seed,
             )
 
-            # Hebbian evolution with stimulation
+            # impedance-remodeling evolution with stimulation
             for t in range(SOFT_TICKS):
                 t_rng = np.random.default_rng(t + trial * 10000)
                 stim = {name: t_rng.uniform(0.1, 0.5, size=node.K)
@@ -1217,7 +1217,7 @@ def main() -> None:
               f"  {edges_mean:>8.0f}")
 
     # D_K/γ ratio analysis
-    section("D_K / γ Analysis — Hebbian Reshaping Offset")
+    section("D_K / γ Analysis — impedance-remodeling Reshaping Offset")
 
     print(f"\n    {'γ':>8s}  {'D_K':>8s}  {'D_K/γ':>8s}  {'δ_Hebb':>8s}")
     print(f"    {'─' * 38}")
@@ -1231,16 +1231,16 @@ def main() -> None:
             print(f"    {g:>8.2f}  {dk:>8.3f}  {ratio:>8.3f}  {delta:>+8.3f}")
 
     print(f"""
-    δ_Hebbian = D_K,measured − γ_set
+    δ_impedance = D_K,measured − γ_set
 
     Physical interpretation:
-      Hebbian learning has an intrinsic dimensional preference —
+      impedance remodeling has an intrinsic dimensional preference —
       it naturally favours same-K connections (ΔK=0) because those
       edges have more common modes for gradient descent.
 
       This creates a POSITIVE D_K offset even beyond the set γ,
       especially at low γ (weak initial cutoff → more room for
-      Hebbian reshaping).
+      impedance-remodeling reshaping).
 """)
 
     # Verdict
@@ -1285,8 +1285,8 @@ def main() -> None:
               f" {sr['r10_mean']:>8.4f}  │ {sr['r20_mean']:>8.4f}  │ {sr['edges_mean']:>7.0f}  │")
 
     print(f"  └──────────┴────────────────┴───────────┴───────────┴──────────┘")
-    print(f"\n  Key finding: D_K measured = γ + δ_Hebbian, where δ_Hebbian > 0")
-    print(f"  represents the intrinsic dimensional preference of Hebbian learning.")
+    print(f"\n  Key finding: D_K measured = γ + δ_impedance, where δ_impedance > 0")
+    print(f"  represents the intrinsic dimensional preference of impedance remodeling.")
     print(f"  At γ ≈ 0.8–1.0, D_K matches cortical fractal range [1.3, 1.5].")
 
     print(f"\n{'─' * 78}")

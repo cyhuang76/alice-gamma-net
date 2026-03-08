@@ -6,7 +6,7 @@ Physics verified (v2 — Dimensional Cost Irreducibility Theorem):
   - Mode cutoff: K_src > K_tgt → excess modes have Γ=1, T=0
   - C1 energy conservation holds for ALL modes (including cutoff)
   - Transmitted signal is K_tgt-dimensional (dimensional compression)
-  - Hebbian updates only affect common modes
+  - impedance remodelings only affect common modes
   - Anatomical factory creates mixed-K networks
   - Cross-dimensional Γ matrix is asymmetric (direction matters)
 """
@@ -542,7 +542,7 @@ class TestNetworkActionDecomposition:
                    - metrics["action_cutoff"]) < 1e-10
 
     def test_impedance_action_decreases_with_learning(self):
-        """C2 Hebbian updates should reduce A_impedance over many ticks."""
+        """C2 impedance remodelings should reduce A_impedance over many ticks."""
         topo = GammaTopology.create_anatomical(
             tissue_composition={
                 CORTICAL_PYRAMIDAL: 3,
@@ -976,7 +976,7 @@ class TestRelayNodeInsertion:
                 f"C1 violated at {chain[i]} → {chain[i+1]}"
 
     def test_relay_survives_ticks(self):
-        """Relay chain should survive Hebbian evolution (good impedance match)."""
+        """Relay chain should survive impedance-remodeling evolution (good impedance match)."""
         nodes = [
             GammaNode("cortex", impedance=np.ones(5) * 80,
                       activation=np.ones(5) * 0.5),
@@ -1108,7 +1108,7 @@ class TestFractalDimension:
         assert len(result["N_B_values"]) > 0
 
     def test_box_counting_after_evolution(self):
-        """Fractal dimension should be computable after Hebbian evolution."""
+        """Fractal dimension should be computable after impedance-remodeling evolution."""
         topo = GammaTopology.create_random(
             n_nodes=24, n_modes=3, initial_connectivity=0.2,
             eta=0.02, seed=42)

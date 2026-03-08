@@ -182,7 +182,7 @@ class VestibularSystem:
         self._gamma_conflict = abs(z_pred - z_actual) / (z_pred + z_actual + 1e-12)
         self._transmission = 1.0 - self._gamma_conflict ** 2  # ★ T = 1 − Γ²
 
-        # ★ Hebbian prediction update: Δpred = α × T × (actual − predicted)
+        # ★ impedance-remodeling prediction update: Δpred = α × T × (actual − predicted)
         #   Only transmitted signal informs the predictor
         alpha_pred = 0.2
         self._predicted_motion += alpha_pred * self._transmission * (actual - self._predicted_motion)

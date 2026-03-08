@@ -1,5 +1,5 @@
 """
-Test suite for Paper VIII: Fractal Cost of Dual-Network Life.
+Test suite for Paper 1: Fractal Cost of Dual-Network Life.
 
 Verifies the four core results:
   1. β = n^{1/d} = 2^{1/3} ≈ 1.2599  (Murray bifurcation ratio)

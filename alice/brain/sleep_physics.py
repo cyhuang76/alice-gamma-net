@@ -24,7 +24,7 @@ Physics (three conservation laws):
      During N3, impedance recalibration → D_imp *= (1 - recalibration_rate)
 
   3. Synaptic entropy:
-     Awake learning → Hebbian +5% only enhances locally → strength distribution skews → entropy increases
+     Awake learning → impedance-remodeling +5% only enhances locally → strength distribution skews → entropy increases
      N3 downscaling → all synapses × 0.95 → preserves relative differences → entropy decreases
      REM random activation → tests pathway robustness → prunes weak connections
 
@@ -40,7 +40,7 @@ Slow-Wave Oscillation:
 
   δ waves = "mini-awake" alternations:
   Each UP state is a "micro cognitive cycle"
-  → replay daytime memories → Hebbian consolidation
+  → replay daytime memories → impedance-remodeling consolidation
   → DOWN state → global downscaling (prevents saturation)
 
 Dreams (REM):

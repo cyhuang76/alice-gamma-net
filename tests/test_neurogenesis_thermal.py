@@ -7,7 +7,7 @@ Verifies the three core physics insights:
   2. Neural connections determined by Γ (impedance matching)
   3. 2000B overproduction prevents thermal collapse
 
-All tests verify C1 (Γ² + T = 1), C2 (Hebbian update), C3 (ElectricalSignal).
+All tests verify C1 (Γ² + T = 1), C2 (impedance remodeling), C3 (ElectricalSignal).
 """
 
 import math
@@ -67,7 +67,7 @@ class TestConstruction:
         """No deaths before any ticks."""
         ts = NeurogenesisThermalShield()
         assert ts._thermal_deaths == 0
-        assert ts._hebbian_deaths == 0
+        assert ts._impedance_deaths == 0
 
     def test_initial_phase_overproduction(self):
         """Starting phase should be overproduction."""
@@ -320,30 +320,30 @@ class TestConnectionViability:
 
 
 # ============================================================================
-# 6. Hebbian Pruning (C2)
+# 6. impedance-remodeling Pruning (C2)
 # ============================================================================
 
-class TestHebbianPruning:
-    """★ C2: Hebbian update reduces Γ → reduces thermal load."""
+class TestImpedancePruning:
+    """★ C2: impedance remodeling reduces Γ → reduces thermal load."""
 
-    def test_hebbian_improves_matching(self):
-        """After Hebbian learning, impedances move toward signal."""
+    def test_impedance_improves_matching(self):
+        """After impedance remodeling, impedances move toward signal."""
         np.random.seed(42)
         ts = NeurogenesisThermalShield(initial_neurons=200)
         gamma_sq_before = ts.compute_pairwise_gamma_sq(Z_SIGNAL_TYPICAL)
 
-        # Many rounds of Hebbian pruning with strong learning rate
+        # Many rounds of impedance-remodeling pruning with strong learning rate
         for _ in range(300):
-            ts.apply_hebbian_pruning(Z_SIGNAL_TYPICAL, learning_rate=0.1)
+            ts.apply_impedance_pruning(Z_SIGNAL_TYPICAL, learning_rate=0.1)
 
         gamma_sq_after = ts.compute_pairwise_gamma_sq(Z_SIGNAL_TYPICAL)
 
-        # After Hebbian learning, total Γ² should decrease
+        # After impedance remodeling, total Γ² should decrease
         # (surviving neurons are better matched)
         assert gamma_sq_after < gamma_sq_before
 
-    def test_hebbian_removes_mismatched(self):
-        """Hebbian pruning kills badly-matched neurons."""
+    def test_impedance_removes_mismatched(self):
+        """impedance-remodeling pruning kills badly-matched neurons."""
         np.random.seed(42)
         ts = NeurogenesisThermalShield(
             initial_neurons=200,
@@ -358,13 +358,13 @@ class TestHebbianPruning:
             n.impedance = 480.0  # Very high → Γ ≈ 0.73 > 0.707
             n.strength = 0.2     # Start weak so they die faster
 
-        # Many rounds of Hebbian pruning
+        # Many rounds of impedance-remodeling pruning
         for _ in range(500):
-            ts.apply_hebbian_pruning(Z_SIGNAL_TYPICAL, learning_rate=0.02)
+            ts.apply_impedance_pruning(Z_SIGNAL_TYPICAL, learning_rate=0.02)
 
         final_alive = ts.alive_count
         assert final_alive <= initial_alive
-        assert ts._hebbian_deaths > 0
+        assert ts._impedance_deaths > 0
 
 
 # ============================================================================
@@ -372,7 +372,7 @@ class TestHebbianPruning:
 # ============================================================================
 
 class TestThermalApoptosis:
-    """Neurons die from excessive Γ² heat (not just Hebbian selection)."""
+    """Neurons die from excessive Γ² heat (not just impedance-remodeling selection)."""
 
     def test_overheated_neuron_dies(self):
         """Neuron with heat > THERMAL_DEATH_THRESHOLD is killed."""
@@ -391,20 +391,20 @@ class TestThermalApoptosis:
         killed = ts.apply_thermal_apoptosis()
         assert killed == 0
 
-    def test_thermal_vs_hebbian_distinct(self):
-        """Thermal and Hebbian deaths are tracked separately."""
+    def test_thermal_vs_impedance_distinct(self):
+        """Thermal and impedance-remodeling deaths are tracked separately."""
         ts = NeurogenesisThermalShield(initial_neurons=100)
         # Kill some thermally
         ts._neurons[0].local_heat = 1.0
         ts.apply_thermal_apoptosis()
         thermal = ts._thermal_deaths
 
-        # Kill some by Hebbian (weaken until death)
+        # Kill some by impedance-remodeling (weaken until death)
         for n in ts._neurons[10:15]:
             n.strength = 0.01
-        ts.apply_hebbian_pruning(Z_SIGNAL_TYPICAL)
+        ts.apply_impedance_pruning(Z_SIGNAL_TYPICAL)
 
-        assert ts._thermal_deaths == thermal  # Hebbian didn't add to thermal count
+        assert ts._thermal_deaths == thermal  # impedance-remodeling didn't add to thermal count
 
 
 # ============================================================================
@@ -493,7 +493,7 @@ class TestTickCycle:
         result = ts.tick()
         required_keys = [
             "tick", "alive_neurons", "total_gamma_sq", "heat_per_neuron",
-            "brain_temperature", "gradient_decay", "hebbian_pruned",
+            "brain_temperature", "gradient_decay", "impedance_pruned",
             "thermal_killed", "collapse_risk", "safe_to_prune", "phase",
         ]
         for key in required_keys:
@@ -579,7 +579,7 @@ class TestStats:
         required = [
             "total_neurons", "alive_neurons", "total_gamma_sq",
             "heat_per_neuron", "brain_temperature", "thermal_deaths",
-            "hebbian_deaths", "collapse_risk", "phase",
+            "impedance_deaths", "collapse_risk", "phase",
             "q_effective", "pressure_chamber_active",
             "cognitive_boost", "cumulative_heat_dissipated",
         ]
@@ -727,7 +727,7 @@ class TestPressureChamber:
     Verify the pressure chamber effect after fontanelle closure.
 
     Physics: After closure, trapped Γ² heat is "constructively consumed"
-    → Hebbian learning accelerates → cognitive boost.
+    → impedance remodeling accelerates → cognitive boost.
     """
 
     def test_pressure_chamber_initially_inactive(self):
@@ -764,8 +764,8 @@ class TestPressureChamber:
         report = ts.tick(specialization_index=0.9)
         assert report["cognitive_boost"] == pytest.approx(PRESSURE_CHAMBER_BOOST)
 
-    def test_pressure_chamber_boosts_hebbian_learning(self):
-        """Post-closure: Hebbian learning rate is multiplied by boost.
+    def test_pressure_chamber_boosts_impedance_learning(self):
+        """Post-closure: impedance remodeling rate is multiplied by boost.
 
         After pressure chamber activates, impedance matching should converge
         faster (same ticks, more ΔZ per tick).

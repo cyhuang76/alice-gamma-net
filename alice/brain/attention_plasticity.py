@@ -194,7 +194,7 @@ class AttentionPlasticityEngine:
       Successfully completing the circuit → synaptic strengthening (LTP)
       Failure or disuse → synaptic weakening (LTD)
 
-      This is not a reward function. This is Hebbian learning:
+      This is not a reward function. This is impedance remodeling:
       "Neurons that fire together, wire together."
 
     Training loop:

@@ -42,7 +42,7 @@ EVIDENCE LEVEL
 
 PHYSICS
 ───────
-  H = Π(1 − Γᵢ²)  from Paper II
+  H = Π(1 − Γᵢ²)  from Paper 2
   If H truly measures global impedance matching (health),
   then low H ⟹ high mortality. This is a falsifiable prediction.
 """
@@ -97,7 +97,7 @@ UCOD_NAMES = {
     "010": "All other causes",
 }
 
-# Map UCOD to organ systems (matching Paper VI ORGAN_DISEASE_MAP)
+# Map UCOD to organ systems (matching Paper 5 ORGAN_DISEASE_MAP)
 UCOD_TO_ORGAN = {
     "001": "cardiac",      # Heart disease
     "002": "immune",       # Cancer

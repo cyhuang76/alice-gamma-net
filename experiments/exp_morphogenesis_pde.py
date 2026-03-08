@@ -40,7 +40,7 @@ class TissueParams:
     D_rho: float = 1e-2   # material field diffusion (blood transport)
     # Impedance matching
     Z0: float = 50.0      # target impedance (Ohm)
-    eta: float = 0.05     # Hebbian adaptation rate
+    eta: float = 0.05     # impedance remodeling rate
     J: float = 1.0        # signal current density (normalized)
     # Enzyme kinetics (Hill, adiabatic limit)
     E0: float = 1.0       # max enzyme activity (dimensionless)
@@ -176,8 +176,8 @@ def evolve_one_step(Z, rho, p: TissueParams, dx, I_blood_field=None):
     mat_avail = rho / (rho + K_rho)
 
     # Z field: dZ/dt = D_Z*lap(Z) - eta*G*J*f(rho) + chi*v_cat*E*rho*(-G) - lambda*Z
-    #   BOTH terms (Hebbian + enzyme) require material to execute.
-    #   The Hebbian term is modulated by material availability f(rho).
+    #   BOTH terms (impedance-remodeling + enzyme) require material to execute.
+    #   The impedance-remodeling term is modulated by material availability f(rho).
     #   The enzyme term is proportional to rho directly (substrate).
     #   Degradation -lambda*Z does NOT require material (entropy-driven).
     dZdt = (p.D_Z * lap_Z
@@ -186,7 +186,7 @@ def evolve_one_step(Z, rho, p: TissueParams, dx, I_blood_field=None):
             - p.lambda_Z * Z)
 
     # rho field: drho/dt = D_rho*lap(rho) - v_cat*E*|G|*rho + I_blood
-    #   Material is consumed by BOTH Hebbian and enzyme-mediated remodeling.
+    #   Material is consumed by BOTH impedance-remodeling and enzyme-mediated remodeling.
     #   Simplified: total consumption ~ v_cat * E * |G| * rho + eta*|G|*rho/(rho+K)
     rho_consumption = (p.v_cat * E * np.abs(G) * rho
                        + p.eta * np.abs(G) * mat_avail * 0.1)

@@ -19,7 +19,7 @@ Experimental Design (5 parallel control groups):
      Physics model: acute sympathetic inhibition / enhance parasympathetic / reduce pain sensitivity
      Clinical Correspondence: rapid onset, but has drug tolerance + withdrawal rebound
   D. EMDR — Eye Movement Desensitization and Reprocessing
-     Physics model: safe environment controlled exposure + low impedance bilateral stimulus → Hebbian rewriting
+     Physics model: safe environment controlled exposure + low impedance bilateral stimulus → impedance-remodeling rewriting
      Clinical Correspondence: 8-12 therapy sessions, fundamental improvement
   E. SSRI + EMDR — combined treatment
      Clinical Correspondence: APA guideline recommended first-line treatment combination
@@ -256,7 +256,7 @@ class StimulusFactory:
         Physics:
           Too strong → re-triggers full fight-or-flight → treatment FAILS
           Too weak → doesn't trigger trauma network → cannot rewrite
-          Moderate → activates trauma network without crashing → Hebbian window opens
+          Moderate → activates trauma network without crashing → impedance-remodeling window opens
         """
         t = np.linspace(0, 1, self.dim)
         # Simulate trauma frequency signature (low frequency rumble + sudden high frequency) but low intensity
@@ -522,7 +522,7 @@ class EMDRProtocol(TherapyProtocol):
       1. Mild sedation (allow frozen system to process signals)
       2. Present weakened trauma cues (activate trauma network without crashing)
       3. Simultaneously deliver strong bilateral safe signal (low impedance regular oscillation)
-      4. Hebbian mechanism:
+      4. impedance-remodeling mechanism:
          Trauma cue + safe context simultaneously active
          → calibrator attempts to bind both
          → successful binding → impedance_adaptation records
@@ -540,7 +540,7 @@ class EMDRProtocol(TherapyProtocol):
       If patient is still in frozen state, continue stabilizing until therapy session can begin.
     """
     name = "D: EMDR"
-    description = "Eye Movement Desensitization — acute stabilization + safe exposure + Hebbian rewriting"
+    description = "Eye Movement Desensitization — acute stabilization + safe exposure + impedance-remodeling rewriting"
 
     def __init__(self):
         self._sessions_done = 0
@@ -641,7 +641,7 @@ class CombinedProtocol(TherapyProtocol):
 
     Gamma-Net prediction:
       SSRI first reduces all-domain Gamma (let system escape homeostasis trap boundary)
-      → EMDR performs Hebbian rewriting at lower Gamma baseline
+      → EMDR performs impedance-remodeling rewriting at lower Gamma baseline
       → combined effect > either alone
     """
     name = "E: SSRI+EMDR"

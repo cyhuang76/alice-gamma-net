@@ -36,7 +36,7 @@ Physical Model:
      Input state "rolls downhill" toward the strongest attractor.
      Winner = concept with lowest Gamma.
 
-  5. Contrastive Learning = anti-Hebbian repulsion
+  5. Contrastive Learning = anti-impedance-remodeling repulsion
      When two attractors are too similar, push apart.
      This is how the brain sharpens categorical boundaries.
 
@@ -665,7 +665,7 @@ class SemanticField:
         interfere destructively.  Natural selection pushes one
         to shift its resonance -> sharpens categorical boundaries.
 
-        This is anti-Hebbian learning between competing concepts.
+        This is anti-impedance remodeling between competing concepts.
         """
         labels = list(self.attractors.keys())
         n = len(labels)
@@ -696,7 +696,7 @@ class SemanticField:
                             b.absorb(a.modality_centroids[mod], mod)
                         self.total_merges += 1
                     elif sim > CONTRASTIVE_THRESHOLD:
-                        # Push apart -- anti-Hebbian
+                        # Push apart -- anti-impedance-remodeling
                         diff = a.modality_centroids[mod] - b.modality_centroids[mod]
                         dist = float(np.linalg.norm(diff))
                         if dist < 1e-10:

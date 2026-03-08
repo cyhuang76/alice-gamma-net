@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Tests for Phase 4.1: Auditory Grounding — Cochlear Filter Bank + Cross-Modal Hebbian Conditioning
+Tests for Phase 4.1: Auditory Grounding — Cochlear Filter Bank + Cross-Modal impedance-remodeling Conditioning
 
 Validation:
   1. CochlearFilterBank — ERB-scale frequency decomposition
   2. TonotopicActivation — fingerprint, similarity, hash
-  3. CrossModalSynapse — impedance model, Hebbian learning, decay
-  4. CrossModalHebbianNetwork — conditioning, probing, echo generation, extinction
+  3. CrossModalSynapse — impedance model, impedance remodeling, decay
+  4. CrossModalImpedanceNetwork — conditioning, probing, echo generation, extinction
   5. AuditoryGroundingEngine — complete Pavlov workflow
   6. Sound generators — pure tone, complex tone, noise, vowels
   7. AliceBrain integration
@@ -33,7 +33,7 @@ from alice.body.cochlea import (
 )
 from alice.brain.auditory_grounding import (
     AuditoryGroundingEngine,
-    CrossModalHebbianNetwork,
+    CrossModalImpedanceNetwork,
     CrossModalSynapse,
     SensoryPrototype,
     SYNAPSE_Z0,
@@ -309,7 +309,7 @@ class TestCrossModalSynapse:
         assert et < 0.1
 
     def test_strengthen_increases_weight(self):
-        """Hebbian strengthening → w ↑"""
+        """impedance-remodeling strengthening → w ↑"""
         syn = self._make_synapse(w=0.01)
         w_before = syn.strength
         syn.strengthen(pre_activation=1.0, post_activation=1.0)
@@ -398,13 +398,13 @@ class TestSensoryPrototype:
 
 
 # ============================================================================
-# 6. CrossModalHebbianNetwork
+# 6. CrossModalImpedanceNetwork
 # ============================================================================
 
-class TestCrossModalHebbianNetwork:
+class TestCrossModalImpedanceNetwork:
 
     def test_condition_creates_synapse(self):
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         src = np.random.rand(24)
         tgt = np.random.rand(24)
         syn = net.condition(src, "auditory", tgt, "visual")
@@ -414,7 +414,7 @@ class TestCrossModalHebbianNetwork:
 
     def test_condition_strengthens_existing(self):
         """Same fingerprint repeated conditioning → strengthens same synapse"""
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         src = np.random.rand(24)
         tgt = np.random.rand(24)
         syn1 = net.condition(src, "auditory", tgt, "visual")
@@ -424,13 +424,13 @@ class TestCrossModalHebbianNetwork:
         assert len(net.synapses) == 1  # Same synapse
 
     def test_probe_empty(self):
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         echoes = net.probe(np.random.rand(24), "auditory")
         assert len(echoes) == 0
 
     def test_probe_after_conditioning(self):
         """After conditioning → echo detected"""
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         src = np.random.rand(24)
         src /= np.linalg.norm(src)
         tgt = np.random.rand(24)
@@ -447,7 +447,7 @@ class TestCrossModalHebbianNetwork:
 
     def test_echo_signal_generation(self):
         """Sufficient conditioning → generates echo signal"""
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         src = np.random.rand(24)
         src /= np.linalg.norm(src)
         tgt = np.random.rand(24)
@@ -465,7 +465,7 @@ class TestCrossModalHebbianNetwork:
 
     def test_decay_all(self):
         """Global decay"""
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         src = np.random.rand(24)
         tgt = np.random.rand(24)
 
@@ -481,14 +481,14 @@ class TestCrossModalHebbianNetwork:
         assert net.synapses[0].strength < w_before
 
     def test_register_prototype(self):
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         fp = np.random.rand(24)
         proto = net.register_prototype("bell", "auditory", fp)
         assert proto.label == "bell"
         assert proto.exposure_count == 1
 
     def test_identify_registered(self):
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         fp = np.random.rand(24)
         fp /= np.linalg.norm(fp)
         # Register multiple times to stabilize prototype
@@ -501,14 +501,14 @@ class TestCrossModalHebbianNetwork:
         assert result[1] > SIMILARITY_THRESHOLD
 
     def test_identify_unknown(self):
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         fp = np.random.rand(24)
         result = net.identify(fp, "auditory")
         assert result is None
 
     def test_max_synapses_limit(self):
         """Exceeding limit → removes weakest"""
-        net = CrossModalHebbianNetwork(max_synapses=5)
+        net = CrossModalImpedanceNetwork(max_synapses=5)
         for i in range(10):
             src = np.zeros(24)
             src[i % 24] = 1.0  # Different fingerprints
@@ -518,7 +518,7 @@ class TestCrossModalHebbianNetwork:
         assert len(net.synapses) <= 5
 
     def test_get_state(self):
-        net = CrossModalHebbianNetwork()
+        net = CrossModalImpedanceNetwork()
         state = net.get_state()
         assert "n_synapses" in state
         assert "total_pairings" in state
@@ -655,7 +655,7 @@ class TestAuditoryGroundingEngine:
     def test_auto_conditioning_within_window(self):
         """
         Auto-conditioning within temporal window:
-        receive_auditory + receive_signal within 200ms → auto Hebbian
+        receive_auditory + receive_signal within 200ms → auto impedance-remodeling
         """
         engine = AuditoryGroundingEngine()
         bell = generate_tone(440.0, duration=0.1)
@@ -768,7 +768,7 @@ class TestAliceBrainIntegration:
     def test_full_pavlov_via_alice(self):
         """
         Full Pavlov workflow via AliceBrain:
-        hear + see alternating → auto Hebbian or manual condition_pair
+        hear + see alternating → auto impedance-remodeling or manual condition_pair
         """
         from alice.alice_brain import AliceBrain
         alice = AliceBrain()
@@ -816,7 +816,7 @@ class TestPhysicsConservation:
             z = SYNAPSE_Z0 / w
             assert z > 0
 
-    def test_hebbian_monotonic(self):
+    def test_impedance_monotonic(self):
         """Repeated conditioning → strength monotonically increases"""
         syn = CrossModalSynapse(
             source_modality="a", target_modality="v",

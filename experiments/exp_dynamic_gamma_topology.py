@@ -8,7 +8,7 @@ This experiment demonstrates the core insight:
     Every neuron has a different impedance Z_i.
     Every pair therefore has Γ_ij ≠ 0.
     The pattern of all Γ_ij IS the topology.
-    Topology reshapes itself every tick via Hebbian C2.
+    Topology reshapes itself every tick via impedance-remodeling C2.
 
 We create a network of 30 nodes with 3 modes (inner conductors /
 dimensions), inject stimuli, and watch:
@@ -74,7 +74,7 @@ def step1_birth(seed: int = 42) -> GammaTopology:
 
 
 # ============================================================================
-# Step 2: Development — Let Hebbian C2 reshape the topology
+# Step 2: Development — Let impedance-remodeling C2 reshape the topology
 # ============================================================================
 
 def step2_develop(topo: GammaTopology, n_ticks: int = 300) -> None:
@@ -281,7 +281,7 @@ def step6_verdict(topo: GammaTopology, birth_entropy: float) -> None:
     print(f"  RESULT: {total_pass}/4 criteria passed")
     if total_pass >= 3:
         print(f"  ✓ TOPOLOGY EMERGES FROM MISMATCH")
-        print(f"    Impedance diversity + Hebbian C2 → structured Γ-network")
+        print(f"    Impedance diversity + impedance-remodeling C2 → structured Γ-network")
         print(f"    The reflected energy IS the network.")
     else:
         print(f"  ✗ Topology emergence not conclusive")
@@ -297,7 +297,7 @@ def main() -> None:
     print("\n  Every neuron's Z is different.")
     print("  Every pair's Γ ≠ 0.")
     print("  The collection of all Γ IS the topology.")
-    print("  Topology reshapes itself via Hebbian C2.")
+    print("  Topology reshapes itself via impedance-remodeling C2.")
     print("  Mismatch is not noise — mismatch IS the network.\n")
 
     topo = step1_birth(seed=42)

@@ -88,7 +88,7 @@ def simulate_organ(
 
     gamma_n = gamma_n_init
     for t in range(cascade_ticks):
-        # Neural Hebbian self-repair (linearized C2)
+        # Neural impedance-remodeling self-repair (linearized C2)
         gamma_n = max(0.001, gamma_n * (1.0 - ETA_NEURAL_REPAIR))
         
         state = net.tick(
@@ -510,11 +510,11 @@ def run_all():
     # ==================================================================
     # 10-year post-trial follow-up: early glycemic control benefits
     # PERSIST decades later even after Γ equalizes.
-    # Our hypothesis: Hebbian remodeling locks in lower Γ_v.
+    # Our hypothesis: impedance-remodeling remodeling locks in lower Γ_v.
     total += 1
     print("\n" + "=" * 70)
     print("L10. UKPDS-80 (Holman 2008, NEJM) — Legacy Effect")
-    print("     Early Γ_v reduction → Hebbian remodeling → locked benefit")
+    print("     Early Γ_v reduction → impedance-remodeling remodeling → locked benefit")
     print("=" * 70)
 
     # Intensive treatment for 200 ticks, then both groups same for 200 ticks

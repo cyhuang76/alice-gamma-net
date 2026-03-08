@@ -3,7 +3,7 @@
 Experiment: Clinical Calibration of Vascular Impedance Model
 =============================================================
 
-Validates Paper IV against published clinical data from 10 real cases.
+Validates Paper 3 against published clinical data from 10 real cases.
 
 Physical Insight:
   FFR (Fractional Flow Reserve) = P_distal / P_proximal

@@ -37,7 +37,7 @@ from alice.brain.sleep_physics import (
 
 from alice.brain.auditory_grounding import (
     AuditoryGroundingEngine,
-    CrossModalHebbianNetwork,
+    CrossModalImpedanceNetwork,
     CrossModalSynapse,
 )
 
@@ -232,7 +232,7 @@ __all__ = [
     "SleepQualityReport",
     # Auditory Grounding Engine (Phase 4.1 language physicalization)
     "AuditoryGroundingEngine",
-    "CrossModalHebbianNetwork",
+    "CrossModalImpedanceNetwork",
     "CrossModalSynapse",
     # Semantic Field (Phase 4.2)
     "SemanticFieldEngine",

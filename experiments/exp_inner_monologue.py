@@ -1203,7 +1203,7 @@ def main() -> int:
     if total_passed >= 8:
         print(" * Language hypothesis strongly supported! ")
         print("    Key Findings:")
-        print(" 1. Symbol grounding = concept mass and emotional valence Hebbian resonance")
+        print(" 1. Symbol grounding = concept mass and emotional valence impedance-remodeling resonance")
         print(" 2. Semantic pressure is a physical quantity — measurable, predictable, treatable")
         print(" 3. Language expression = impedance matching → energy_transfer → pressure release")
         print(" 4. Inner monologue = pressure-driven spontaneous resonance sequence in concept space")

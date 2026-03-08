@@ -699,11 +699,11 @@ class GammaTopology:
             gv = ch.gamma_vector()       # K_src-dimensional
             K_common = ch.K_common
 
-            x_pre = src.activation       # K_src-dim
-            x_post = tgt.activation      # K_tgt-dim
+            x_in = src.activation       # K_src-dim
+            x_out = tgt.activation      # K_tgt-dim
 
             # C2 activity gate: only common modes can form activity correlation
-            gate = x_pre[:K_common] * x_post[:K_common]
+            gate = x_in[:K_common] * x_out[:K_common]
 
             # Source: ΔZ_src = +η · Γ · gate  (push toward target)
             # Only common modes update; excess modes have fixed Γ=1 (no gradient)

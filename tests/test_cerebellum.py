@@ -6,7 +6,7 @@ Tests verify:
     1. Basic construction
     2. Motor correction (error detection)
     3. Climbing fiber error signal
-    4. Purkinje cell LTD (Hebbian C2)
+    4. Purkinje cell LTD (impedance-remodeling C2)
     5. Timing precision improvement
     6. Forward model learning
     7. Vestibular integration

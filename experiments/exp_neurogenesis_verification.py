@@ -9,7 +9,7 @@ Verification hierarchy (6 levels):
   Level 2: Thermodynamic Self-Consistency — energy accounting, temperature bounds
   Level 3: Biological Alignment     — pruning ratio ≈ 57%, Huttenlocher timing
   Level 4: Thermal Shield Necessity — critical N threshold, catastrophe prediction
-  Level 5: Hebbian Convergence      — Γ → 0 with learning, Z → Z_signal
+  Level 5: impedance-remodeling Convergence      — Γ → 0 with learning, Z → Z_signal
   Level 6: Gradient Decay Prediction — High Γ² ↔ fast forgetting
 
 Biological reference data:
@@ -218,7 +218,7 @@ def verify_thermodynamic_consistency(
 
     # Check 4: Mortality accounting
     stats = ts.get_stats()
-    total_deaths = stats["thermal_deaths"] + stats["hebbian_deaths"]
+    total_deaths = stats["thermal_deaths"] + stats["impedance_deaths"]
     initial = len(ts._neurons)
     accounting_ok = stats["alive_neurons"] + total_deaths == initial
     print(f"  Alive + Dead = Total: {stats['alive_neurons']} + {total_deaths} = "
@@ -466,23 +466,23 @@ def verify_thermal_shield_necessity(
 
 
 # ============================================================================
-# Level 5: Hebbian Convergence — Γ → 0 with Learning
+# Level 5: impedance-remodeling Convergence — Γ → 0 with Learning
 # ============================================================================
 
-def verify_hebbian_convergence(
+def verify_impedance_convergence(
     n_neurons: int = 500,
     n_ticks: int = 300,
     signal_impedance: float = Z_SIGNAL_TYPICAL,
 ) -> Dict[str, Any]:
     """
-    Verify that Hebbian learning (C2) converges:
+    Verify that impedance remodeling (C2) converges:
     - Average |Γ| decreases over ticks
     - Average Z approaches Z_signal
     - Average Γ² decreases (less thermal waste after learning)
 
     This is the core prediction: learning = impedance matching = thermal cooling.
     """
-    sep("Level 5: Hebbian Convergence — Γ → 0")
+    sep("Level 5: impedance-remodeling Convergence — Γ → 0")
 
     ts = NeurogenesisThermalShield(
         initial_neurons=n_neurons,
@@ -546,7 +546,7 @@ def verify_hebbian_convergence(
     print(f"\n  Initial state:")
     print(f"    Mean Z:     {mean_z_initial:.2f} ± {std_z_initial:.2f} Ω")
     print(f"    Mean |Γ|:   {mean_gamma_initial:.6f}")
-    print(f"\n  After {n_ticks} ticks of Hebbian learning:")
+    print(f"\n  After {n_ticks} ticks of impedance remodeling:")
     print(f"    Mean Z:     {mean_z_final:.2f} ± {std_z_final:.2f} Ω")
     print(f"    Mean |Γ|:   {mean_gamma_final:.6f}")
     print(f"    Mean Γ²:    {gamma_sq_final:.6f}")
@@ -601,7 +601,7 @@ def verify_gradient_decay_prediction(
 
     Physical reasoning:
       During rest, the signal still arrives (the environment doesn't vanish).
-      Γ² still generates heat. Without Hebbian correction (η=0), thermal noise
+      Γ² still generates heat. Without impedance-remodeling correction (η=0), thermal noise
       drifts impedances randomly. The brain with higher residual Γ² (Brain A)
       has more heat → more drift → learned matches degrade faster.
 
@@ -664,7 +664,7 @@ def verify_gradient_decay_prediction(
     print(f"    A has higher gradient decay:  {verdict(a_higher_gd_postlearn)}")
 
     # Phase 2: Rest — SAME signal, but learning_rate = 0
-    # Only gradient decay (thermal noise) is active — no Hebbian correction
+    # Only gradient decay (thermal noise) is active — no impedance-remodeling correction
     history_a = []
     history_b = []
 
@@ -791,7 +791,7 @@ def verify_connection_topology(
     print(f"    Viable connections:     {viable_before}/{pairs_before}"
           f"  ({density_before * 100:.1f}%)")
 
-    print(f"\n  After {ticks} ticks of Hebbian learning:")
+    print(f"\n  After {ticks} ticks of impedance remodeling:")
     print(f"    Alive neurons:          {ts.alive_count}")
     print(f"    Viable connections:     {viable_after}/{pairs_after}"
           f"  ({density_after * 100:.1f}%)")
@@ -934,7 +934,7 @@ def verify_pressure_chamber_boundary(
     2. Closed fontanelle → Q_effective ≈ Q_CRITICAL (strict)
     3. Open fontanelle → lower collapse risk (same neurons)
     4. Pressure chamber activates after closure
-    5. Closure drives cognitive boost (Hebbian acceleration)
+    5. Closure drives cognitive boost (impedance-remodeling acceleration)
     6. C1 holds at the boundary: Γ²_font + T_font = 1
 
     This is the most important boundary condition of the entire model.
@@ -1097,8 +1097,8 @@ def main():
     # Level 4: Thermal shield necessity
     results["shield"] = verify_thermal_shield_necessity()
 
-    # Level 5: Hebbian convergence
-    results["hebbian"] = verify_hebbian_convergence()
+    # Level 5: impedance-remodeling convergence
+    results["impedance-remodeling"] = verify_impedance_convergence()
 
     # Level 6: Gradient decay
     results["gradient"] = verify_gradient_decay_prediction()
@@ -1122,7 +1122,7 @@ def main():
         ("Level 2", "Thermodynamic Self-Consistency", results["thermo"]["passed"]),
         ("Level 3", "Biological Pruning Alignment", results["bio"]["passed"]),
         ("Level 4", "Thermal Shield Necessity", results["shield"]["passed"]),
-        ("Level 5", "Hebbian Convergence (Γ→0)", results["hebbian"]["passed"]),
+        ("Level 5", "impedance-remodeling Convergence (Γ→0)", results["impedance-remodeling"]["passed"]),
         ("Level 6", "Gradient Decay Prediction", results["gradient"]["passed"]),
         ("Level 7", "Emergent Connection Topology", results["topology"]["passed"]),
         ("Level 8", "Theoretical Bounds", results["theory"]["passed"]),

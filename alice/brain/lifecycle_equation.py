@@ -2,7 +2,7 @@
 """
 Lifecycle Equation Engine — The Bathtub Curve of Cognition
 
-Paper I §3.5, Paper III §6: The complete lifecycle is governed by three competing forces:
+Paper 1 §3.5, Paper 3 §6: The complete lifecycle is governed by three competing forces:
 
   d(ΣΓ²)/dt = −η_learn · ΣΓ²  +  γ_novel · Γ_env(t)  +  δ_aging · D(t)
 
@@ -26,9 +26,9 @@ The Bathtub Curve emerges naturally:
 "Three forces compete: learning, novelty, and aging."
 
 References:
-  [Paper I] Eq. 24: The Lifecycle Equation
-  [Paper I] Eq. 22: The Equilibrium Equation
-  [Paper III] §6: The Lifecycle Equation and Thermal Equilibrium
+  [Paper 1] Eq. 24: The Lifecycle Equation
+  [Paper 1] Eq. 22: The Equilibrium Equation
+  [Paper 3] §6: The Lifecycle Equation and Thermal Equilibrium
 """
 
 from __future__ import annotations
@@ -119,7 +119,7 @@ class LifecycleEquationEngine:
     d(ΣΓ²)/dt = −η·ΣΓ² + γ·Γ_env(t) + δ·D(t)
 
     Integrates:
-    - Learning signals from impedance matching (pruning, calibration, Hebbian)
+    - Learning signals from impedance matching (pruning, calibration, impedance-remodeling)
     - Novelty injection from environmental stimuli
     - Aging signals from Coffin-Manson fatigue (pinch_fatigue)
     - Computes thermal equilibrium (Eq. 22)
@@ -351,7 +351,7 @@ class LifecycleEquationEngine:
     # ------------------------------------------------------------------
 
     # ------------------------------------------------------------------
-    # Signal Protocol: produce ElectricalSignal for cross-module communication
+    # Impedance-Tagged Transport: produce ElectricalSignal for cross-module communication
     # ------------------------------------------------------------------
 
     def get_signal(self) -> ElectricalSignal:

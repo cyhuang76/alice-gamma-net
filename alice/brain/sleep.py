@@ -27,7 +27,7 @@ Circuit analogy:
   REM  = diagnostic mode (random activation testing pathways = dreaming)
 
 Memory consolidation:
-  During N3 deep sleep → Hebbian learning enhanced (consolidate_memory)
+  During N3 deep sleep → impedance remodeling enhanced (consolidate_memory)
   During REM → emotional memory processing (pruning unnecessary synapses)
   This is why poor sleep → can't remember things → emotional instability
 
@@ -148,7 +148,7 @@ class SleepCycle:
     1. Sleep pressure (accumulates while awake, released while sleeping)
     2. Sleep stage transitions (WAKE→N1→N2→N3→N2→REM→cycle)
     3. Sensory gating (sleep gating → affects perception sensitivity)
-    4. Memory consolidation rate (affects Hebbian consolidation)
+    4. Memory consolidation rate (affects impedance-remodeling consolidation)
     5. Energy recovery
     """
 
