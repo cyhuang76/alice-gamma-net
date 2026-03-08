@@ -1,0 +1,59 @@
+============================================================================
+  FULL 12-ORGAN Γ CALIBRATION — NHANES POPULATION-BASED
+  N=49,774  Deaths=7,770  NHANES 1999-2018 × NDI 2019
+============================================================================
+
+CALIBRATION METHOD
+  Z_normal_organ = median(Z_patient_organ) of 10+ year survivors
+  Reference population: alive, age 20-79, follow-up >= 120 months
+
+CALIBRATED Z_normal
+  cardiac     :    50.0 →   68.16
+  pulmonary   :    60.0 →   63.86
+  hepatic     :    65.0 →  147.99
+  renal       :    70.0 →  144.23
+  endocrine   :    75.0 →  114.75
+  immune      :    75.0 →   94.26
+  heme        :    55.0 →  114.32
+  GI          :    65.0 →   68.25
+  vascular    :    45.0 →   53.75
+  bone        :   120.0 →  180.75
+  neuro       :    80.0 →  103.67
+  repro       :    95.0 →   95.00
+
+RESULTS
+  ascvd_vs_allcause: AUC=0.6429 [0.6357, 0.6505] n=46593 events=7165
+  ascvd_vs_cardiac: AUC=0.6458 [0.6309, 0.66] n=46593 events=1866
+  ckdepi_vs_allcause: AUC=0.7616 [0.7552, 0.7678] n=44233 events=6307
+  ckdepi_vs_renal: AUC=0.8311 [0.7916, 0.8665] n=44233 events=129
+  fib4_vs_allcause: AUC=0.6893 [0.6834, 0.6952] n=48732 events=7535
+  fram_vs_allcause: AUC=0.8058 [0.8008, 0.8106] n=46593 events=7165
+  fram_vs_cardiac: AUC=0.7941 [0.7856, 0.8021] n=46593 events=1866
+  gc_CV_vs_allcause: AUC=0.5896 [0.5825, 0.597] n=49774 events=7770
+  gc_CV_vs_cardiac: AUC=0.5978 [0.5847, 0.6105] n=49774 events=2024
+  gc_H_vs_allcause: AUC=0.6292 [0.6223, 0.6362] n=49774 events=7770
+  gc_H_vs_cardiac: AUC=0.6270 [0.6144, 0.6403] n=49774 events=2024
+  gc_H_vs_endo: AUC=0.8181 [0.7902, 0.8438] n=49774 events=284
+  gc_H_vs_immune: AUC=0.5732 [0.5582, 0.5878] n=49774 events=1684
+  gc_H_vs_neuro: AUC=0.5787 [0.5585, 0.5995] n=49774 events=734
+  gc_H_vs_pulmo: AUC=0.5900 [0.5673, 0.6128] n=49774 events=586
+  gc_H_vs_renal: AUC=0.7367 [0.694, 0.7753] n=49774 events=172
+  gc_L2_vs_allcause: AUC=0.6293 [0.6224, 0.6363] n=49774 events=7770
+  gc_L2_vs_cardiac: AUC=0.6271 [0.6145, 0.6404] n=49774 events=2024
+  gc_cardiac_vs_cardiac: AUC=0.5075 [0.4944, 0.5205] n=49774 events=2024
+  gc_endo_vs_endo: AUC=0.8141 [0.7855, 0.8437] n=49774 events=284
+  gc_hr_vs_renal: AUC=0.6861 [0.6376, 0.7347] n=49774 events=172
+  gc_immune_vs_immune: AUC=0.5207 [0.5054, 0.5347] n=49774 events=1684
+  gc_met_vs_endo: AUC=0.8161 [0.7878, 0.8428] n=49774 events=284
+  gc_neuro_vs_neuro: AUC=0.5465 [0.5247, 0.5695] n=49774 events=734
+  gc_pulmo_vs_pulmo: AUC=0.5245 [0.5014, 0.5482] n=49774 events=586
+  gc_renal_vs_renal: AUC=0.6767 [0.6258, 0.7264] n=49774 events=172
+  gc_sumg2_vs_allcause: AUC=0.6293 [0.6224, 0.6363] n=49774 events=7770
+  gc_sumg2_vs_cardiac: AUC=0.6271 [0.6145, 0.6404] n=49774 events=2024
+  score2_vs_cardiac: AUC=0.8217 [0.8136, 0.8292] n=46593 events=1866
+
+SUMMARY
+  Cardiac death         Γ best: sum_Γ²             = 0.6271  |  Textbook best: SCORE2       = 0.8217  →  SCORE2  Δ=-0.1946
+  Renal death           Γ best: 1-H_cal            = 0.7367  |  Textbook best: CKD-EPI      = 0.8311  →  CKD-EPI  Δ=-0.0944
+  Endocrine death       Γ best: 1-H_cal            = 0.8181  |  (no textbook)
+  All-cause             Γ best: sum_Γ²             = 0.6293  |  Textbook best: Framingham   = 0.8058  →  Framingham  Δ=-0.1765

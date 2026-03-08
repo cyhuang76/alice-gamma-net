@@ -1,0 +1,33 @@
+========================================================================
+  Γ-SCORE vs TEXTBOOK RISK FORMULAS — HEAD-TO-HEAD
+  NHANES 1999-2018 x NDI 2019  |  N=48,932  |  Deaths=7,576
+========================================================================
+
+  ZERO parameters fitted to outcome data.
+  Γ uses pre-existing Z_normal values.
+  Textbook formulas use their published coefficients.
+
+  gamma_cardiac_vs_cardiac_death: AUC=0.4906 [np.float64(0.4775), np.float64(0.504)] n=48932 events=1962
+  framingham_vs_cardiac_death: AUC=0.7941 [np.float64(0.7857), np.float64(0.802)] n=46593 events=1866
+  ascvd_vs_cardiac_death: AUC=0.6458 [np.float64(0.6307), np.float64(0.6599)] n=46593 events=1866
+  score2_vs_cardiac_death: AUC=0.8217 [np.float64(0.8137), np.float64(0.8288)] n=46593 events=1866
+  gamma_renal_vs_renal_death: AUC=0.6730 [np.float64(0.6204), np.float64(0.7186)] n=48932 events=165
+  ckdepi_vs_renal_death: AUC=0.8311 [np.float64(0.7912), np.float64(0.8646)] n=44233 events=129
+  gamma_endocrine_vs_endocrine_death: AUC=0.8164 [np.float64(0.7851), np.float64(0.8445)] n=48932 events=277
+  homa_ir_vs_endocrine_death: AUC=0.9007 [np.float64(0.849), np.float64(0.9455)] n=7283 events=8
+  gamma_H_vs_allcause_death: AUC=0.6013 [np.float64(0.594), np.float64(0.6084)] n=48932 events=7576
+  framingham_vs_allcause_death: AUC=0.8058 [np.float64(0.8009), np.float64(0.8105)] n=46593 events=7165
+  ascvd_vs_allcause_death: AUC=0.6429 [np.float64(0.6356), np.float64(0.6505)] n=46593 events=7165
+  gamma_hepatic_vs_allcause_death: AUC=0.5022 [np.float64(0.4949), np.float64(0.5096)] n=48932 events=7576
+  fib4_vs_allcause_death: AUC=0.6893 [np.float64(0.6837), np.float64(0.6953)] n=48732 events=7535
+
+
+SUMMARY
+
+  Cardiac death:  Γ AUC = 0.4906  |  Framingham = 0.7941  |  ASCVD PCE = 0.6458  |  SCORE2 = 0.8217  →  SCORE2 WINS (Δ=-0.3311)
+
+  Renal death:  Γ AUC = 0.6730  |  CKD-EPI = 0.8311  →  CKD-EPI WINS (Δ=-0.1581)
+
+  Endocrine death:  Γ AUC = 0.8164  |  HOMA-IR = 0.9007  →  HOMA-IR WINS (Δ=-0.0843)
+
+  All-cause:  Γ AUC = 0.6013  |  Framingham = 0.8058  |  ASCVD PCE = 0.6429  →  Framingham WINS (Δ=-0.2045)

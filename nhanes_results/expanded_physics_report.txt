@@ -1,0 +1,75 @@
+Expanded Physics Input — Network Propagation Proof
+Timestamp: 2026-03-07T04:15:19.944727+00:00
+N = 49,774
+
+
+======================================================================
+PHASE 4: NETWORK PROPAGATION ANALYSIS
+======================================================================
+
+  ALL-CAUSE MORTALITY (sum_G2)
+  -------------------------------------------------------
+    A: Labs only          AUC = 0.6293 [0.6223-0.6358]
+    B: Labs+BP            AUC = 0.7046 [0.6987-0.7110]  D=+0.0753
+    C: Labs+Smoke         AUC = 0.6269 [0.6203-0.6338]  D=-0.0023
+    D: Full physics       AUC = 0.7039 [0.6979-0.7102]  D=+0.0746
+
+  ORGAN-SPECIFIC DEATH (|G_organ|)
+  -------------------------------------------------------
+
+    CARDIAC
+      A: Labs only          |G| 0.5075            sum_G2 0.6271
+      B: Labs+BP            |G| 0.6736 D=+0.1661  sum_G2 0.7084 D=+0.0813
+      C: Labs+Smoke         |G| 0.5075 D=+0.0000  sum_G2 0.6220 D=-0.0051
+      D: Full physics       |G| 0.6736 D=+0.1661  sum_G2 0.7069 D=+0.0799
+
+    PULMONARY
+      A: Labs only          |G| 0.5148            sum_G2 0.6205
+      B: Labs+BP            |G| 0.5148 D=+0.0000  sum_G2 0.6893 D=+0.0688
+      C: Labs+Smoke         |G| 0.4697 D=-0.0451  sum_G2 0.6111 D=-0.0094
+      D: Full physics       |G| 0.4697 D=-0.0451  sum_G2 0.6824 D=+0.0619
+
+    RENAL
+      A: Labs only          |G| 0.6767            sum_G2 0.7368
+      B: Labs+BP            |G| 0.7003 D=+0.0236  sum_G2 0.7848 D=+0.0480
+      C: Labs+Smoke         |G| 0.6767 D=+0.0000  sum_G2 0.7320 D=-0.0048
+      D: Full physics       |G| 0.7003 D=+0.0236  sum_G2 0.7825 D=+0.0457
+
+    ENDOCRINE
+      A: Labs only          |G| 0.8141            sum_G2 0.8184
+      B: Labs+BP            |G| 0.8141 D=+0.0000  sum_G2 0.8249 D=+0.0065
+      C: Labs+Smoke         |G| 0.8141 D=+0.0000  sum_G2 0.8163 D=-0.0020
+      D: Full physics       |G| 0.8141 D=+0.0000  sum_G2 0.8247 D=+0.0063
+
+    IMMUNE
+      A: Labs only          |G| 0.5207            sum_G2 0.5732
+      B: Labs+BP            |G| 0.5207 D=+0.0000  sum_G2 0.6176 D=+0.0444
+      C: Labs+Smoke         |G| 0.5234 D=+0.0027  sum_G2 0.5777 D=+0.0045
+      D: Full physics       |G| 0.5234 D=+0.0027  sum_G2 0.6203 D=+0.0471
+
+    NEURO
+      A: Labs only          |G| 0.5158            sum_G2 0.5316
+      B: Labs+BP            |G| 0.5765 D=+0.0607  sum_G2 0.6471 D=+0.1156
+      C: Labs+Smoke         |G| 0.5158 D=+0.0000  sum_G2 0.5092 D=-0.0223
+      D: Full physics       |G| 0.5765 D=+0.0607  sum_G2 0.6339 D=+0.1023
+
+======================================================================
+  NETWORK PROPAGATION PROOF
+======================================================================
+
+  Adding SBP/DBP/PP (vascular network inputs):
+    cardiac     : 0.5075 -> 0.6736 (D=+0.1661) NETWORK
+    renal       : 0.6767 -> 0.7003 (D=+0.0236) NETWORK
+    neuro       : 0.5158 -> 0.5765 (D=+0.0607) NETWORK
+
+  Adding Smoking (pulmonary network input):
+    pulmonary   : 0.5148 -> 0.4697 (D=-0.0451) DIRECT
+
+  Full physics (BP + Smoking) vs Labs only:
+    All-cause: 0.6293 -> 0.7039 (D=+0.0746)
+    cardiac     : |G| 0.5075->0.6736 (D=+0.1661)  sum_G2 0.6271->0.7069 (D=+0.0799)
+    pulmonary   : |G| 0.5148->0.4697 (D=-0.0451)  sum_G2 0.6205->0.6824 (D=+0.0619)
+    renal       : |G| 0.6767->0.7003 (D=+0.0236)  sum_G2 0.7368->0.7825 (D=+0.0457)
+    endocrine   : |G| 0.8141->0.8141 (D=+0.0000)  sum_G2 0.8184->0.8247 (D=+0.0063)
+    immune      : |G| 0.5207->0.5234 (D=+0.0027)  sum_G2 0.5732->0.6203 (D=+0.0471)
+    neuro       : |G| 0.5158->0.5765 (D=+0.0607)  sum_G2 0.5316->0.6339 (D=+0.1023)

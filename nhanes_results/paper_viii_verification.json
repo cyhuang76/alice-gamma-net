@@ -1,0 +1,118 @@
+{
+  "1_beta": {
+    "beta": 1.2599210498948732,
+    "all_combinations": {
+      "n=2,d=2": 1.414214,
+      "n=2,d=3": 1.259921,
+      "n=2,d=4": 1.189207,
+      "n=3,d=2": 1.732051,
+      "n=3,d=3": 1.44225,
+      "n=3,d=4": 1.316074,
+      "n=4,d=2": 2.0,
+      "n=4,d=3": 1.587401,
+      "n=4,d=4": 1.414214
+    },
+    "status": "PASS"
+  },
+  "2_acut_scaling": {
+    "theory_exponent": 0.6666666666666666,
+    "measured_exponent": 0.671225,
+    "error": 0.004558521355032652,
+    "L_values": [
+      5,
+      10,
+      15,
+      20,
+      25,
+      30
+    ],
+    "status": "PASS"
+  },
+  "3_kleiber": {
+    "formula_verified_d_range": "1..99",
+    "d3_exponent": 0.75,
+    "poiseuille_only_alpha": 0.996912,
+    "direction_correct": "True",
+    "status": "PASS"
+  },
+  "4_omega": {
+    "omega_full": 1.3333,
+    "omega_neural": 1.25,
+    "beta": 1.2599,
+    "relative_error": 0.0079,
+    "status": "PASS"
+  },
+  "5_murray": {
+    "results": [
+      {
+        "n": 2,
+        "r_murray_theory": 3.968503,
+        "r_murray_MRP": 3.968502,
+        "r_impedance_match": 4.204482,
+        "error": 3.5e-07,
+        "gamma_at_murray": 0.115014
+      },
+      {
+        "n": 3,
+        "r_murray_theory": 3.466806,
+        "r_murray_MRP": 3.466806,
+        "r_impedance_match": 3.799178,
+        "error": 9e-08,
+        "gamma_at_murray": 0.181083
+      },
+      {
+        "n": 4,
+        "r_murray_theory": 3.149803,
+        "r_murray_MRP": 3.149803,
+        "r_impedance_match": 3.535534,
+        "error": 9e-08,
+        "gamma_at_murray": 0.227024
+      },
+      {
+        "n": 8,
+        "r_murray_theory": 2.5,
+        "r_murray_MRP": 2.5,
+        "r_impedance_match": 2.973018,
+        "error": 6e-08,
+        "gamma_at_murray": 0.333333
+      }
+    ],
+    "status": "PASS"
+  },
+  "6_allometry": {
+    "n_species": 10,
+    "measured_exponent": 0.6945,
+    "B0": 3.65,
+    "r_squared": 0.9979,
+    "theory_exponent": 0.75,
+    "status": "PASS"
+  },
+  "7_economies_of_scale": {
+    "theory_exponent": -0.3333,
+    "measured_exponent": -0.328775,
+    "monotonic": true,
+    "status": "PASS"
+  },
+  "8_fractal_dim": {
+    "results": {
+      "d=2": 2.0,
+      "d=3": 3.0,
+      "d=4": 4.0
+    },
+    "status": "PASS"
+  },
+  "9_exponent_decomp": {
+    "rubner": "0.6666666666666666",
+    "capillary_correction": "0.08333333333333333",
+    "kleiber": "0.75",
+    "identity_holds": true,
+    "status": "PASS"
+  },
+  "10_beta_vs_koch": {
+    "beta": 1.2599210499,
+    "koch": 1.2618595071,
+    "difference": 0.0019384572,
+    "relative_error": 0.001539,
+    "status": "NOTED (coincidence, not identity)"
+  }
+}

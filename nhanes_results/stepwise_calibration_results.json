@@ -1,0 +1,676 @@
+{
+  "protocol": "Stepwise Organ Calibration v1.0",
+  "timestamp_utc": "2026-03-07T03:24:42.009150+00:00",
+  "cohort_size": 49774,
+  "n_deaths": 7770,
+  "individual_results": {
+    "cardiac": {
+      "z_textbook": 50.0,
+      "z_calibrated": 68.1583,
+      "delta_pct": 36.3,
+      "allcause_auc": {
+        "auc": 0.5091,
+        "ci": [
+          0.502,
+          0.5157
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": {
+        "auc": 0.5075,
+        "ci": [
+          0.4953,
+          0.5207
+        ],
+        "n": 49774,
+        "n_events": 2024
+      }
+    },
+    "pulmonary": {
+      "z_textbook": 60.0,
+      "z_calibrated": 63.8571,
+      "delta_pct": 6.4,
+      "allcause_auc": {
+        "auc": 0.5178,
+        "ci": [
+          0.5114,
+          0.5252
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": {
+        "auc": 0.5245,
+        "ci": [
+          0.5015,
+          0.5472
+        ],
+        "n": 49774,
+        "n_events": 586
+      }
+    },
+    "hepatic": {
+      "z_textbook": 65.0,
+      "z_calibrated": 147.9899,
+      "delta_pct": 127.7,
+      "allcause_auc": {
+        "auc": 0.5535,
+        "ci": [
+          0.5464,
+          0.5615
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": null
+    },
+    "renal": {
+      "z_textbook": 70.0,
+      "z_calibrated": 144.2299,
+      "delta_pct": 106.0,
+      "allcause_auc": {
+        "auc": 0.5722,
+        "ci": [
+          0.5652,
+          0.5796
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": {
+        "auc": 0.6767,
+        "ci": [
+          0.6277,
+          0.7274
+        ],
+        "n": 49774,
+        "n_events": 172
+      }
+    },
+    "endocrine": {
+      "z_textbook": 75.0,
+      "z_calibrated": 114.75,
+      "delta_pct": 53.0,
+      "allcause_auc": {
+        "auc": 0.5914,
+        "ci": [
+          0.5849,
+          0.5985
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": {
+        "auc": 0.8141,
+        "ci": [
+          0.787,
+          0.846
+        ],
+        "n": 49774,
+        "n_events": 284
+      }
+    },
+    "immune": {
+      "z_textbook": 75.0,
+      "z_calibrated": 94.2606,
+      "delta_pct": 25.7,
+      "allcause_auc": {
+        "auc": 0.5138,
+        "ci": [
+          0.5066,
+          0.5214
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": {
+        "auc": 0.5207,
+        "ci": [
+          0.508,
+          0.5343
+        ],
+        "n": 49774,
+        "n_events": 1684
+      }
+    },
+    "heme": {
+      "z_textbook": 55.0,
+      "z_calibrated": 114.3188,
+      "delta_pct": 107.9,
+      "allcause_auc": {
+        "auc": 0.5386,
+        "ci": [
+          0.5312,
+          0.5459
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": null
+    },
+    "GI": {
+      "z_textbook": 65.0,
+      "z_calibrated": 68.25,
+      "delta_pct": 5.0,
+      "allcause_auc": {
+        "auc": 0.5157,
+        "ci": [
+          0.5093,
+          0.5224
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": null
+    },
+    "vascular": {
+      "z_textbook": 45.0,
+      "z_calibrated": 53.7488,
+      "delta_pct": 19.4,
+      "allcause_auc": {
+        "auc": 0.5773,
+        "ci": [
+          0.5713,
+          0.5845
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": null
+    },
+    "bone": {
+      "z_textbook": 120.0,
+      "z_calibrated": 180.7526,
+      "delta_pct": 50.6,
+      "allcause_auc": {
+        "auc": 0.5755,
+        "ci": [
+          0.5683,
+          0.5819
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": null
+    },
+    "neuro": {
+      "z_textbook": 80.0,
+      "z_calibrated": 103.6667,
+      "delta_pct": 29.6,
+      "allcause_auc": {
+        "auc": 0.5851,
+        "ci": [
+          0.5779,
+          0.5912
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": {
+        "auc": 0.5465,
+        "ci": [
+          0.5238,
+          0.5677
+        ],
+        "n": 49774,
+        "n_events": 734
+      }
+    },
+    "repro": {
+      "z_textbook": 95.0,
+      "z_calibrated": 95.0,
+      "delta_pct": 0.0,
+      "allcause_auc": {
+        "auc": 0.5,
+        "ci": [
+          0.5,
+          0.5
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "organ_specific_auc": null
+    }
+  },
+  "stepwise_results": [
+    {
+      "step": 1,
+      "added_organ": "endocrine",
+      "z_calibrated": 114.75,
+      "allcause_auc": {
+        "auc": 0.5914,
+        "ci": [
+          0.5846,
+          0.5987
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": 0.5914,
+      "selected_organs": [
+        "endocrine"
+      ]
+    },
+    {
+      "step": 2,
+      "added_organ": "renal",
+      "z_calibrated": 144.2299,
+      "allcause_auc": {
+        "auc": 0.6206,
+        "ci": [
+          0.6136,
+          0.6276
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": 0.0292,
+      "selected_organs": [
+        "endocrine",
+        "renal"
+      ]
+    },
+    {
+      "step": 3,
+      "added_organ": "bone",
+      "z_calibrated": 180.7526,
+      "allcause_auc": {
+        "auc": 0.6331,
+        "ci": [
+          0.626,
+          0.6398
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": 0.0125,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone"
+      ]
+    },
+    {
+      "step": 4,
+      "added_organ": "neuro",
+      "z_calibrated": 103.6667,
+      "allcause_auc": {
+        "auc": 0.6358,
+        "ci": [
+          0.6288,
+          0.6425
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": 0.0027,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone",
+        "neuro"
+      ]
+    },
+    {
+      "step": 5,
+      "added_organ": "immune",
+      "z_calibrated": 94.2606,
+      "allcause_auc": {
+        "auc": 0.6378,
+        "ci": [
+          0.6307,
+          0.6447
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": 0.002,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone",
+        "neuro",
+        "immune"
+      ]
+    },
+    {
+      "step": 6,
+      "added_organ": "pulmonary",
+      "z_calibrated": 63.8571,
+      "allcause_auc": {
+        "auc": 0.638,
+        "ci": [
+          0.631,
+          0.6448
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": 0.0002,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone",
+        "neuro",
+        "immune",
+        "pulmonary"
+      ]
+    },
+    {
+      "step": 7,
+      "added_organ": "GI",
+      "z_calibrated": 68.25,
+      "allcause_auc": {
+        "auc": 0.6381,
+        "ci": [
+          0.6311,
+          0.645
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": 0.0001,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone",
+        "neuro",
+        "immune",
+        "pulmonary",
+        "GI"
+      ]
+    },
+    {
+      "step": 8,
+      "added_organ": "repro",
+      "z_calibrated": 95.0,
+      "allcause_auc": {
+        "auc": 0.6381,
+        "ci": [
+          0.6311,
+          0.645
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": 0.0,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone",
+        "neuro",
+        "immune",
+        "pulmonary",
+        "GI",
+        "repro"
+      ]
+    },
+    {
+      "step": 9,
+      "added_organ": "hepatic",
+      "z_calibrated": 147.9899,
+      "allcause_auc": {
+        "auc": 0.6376,
+        "ci": [
+          0.6308,
+          0.6445
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": -0.0005,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone",
+        "neuro",
+        "immune",
+        "pulmonary",
+        "GI",
+        "repro",
+        "hepatic"
+      ]
+    },
+    {
+      "step": 10,
+      "added_organ": "vascular",
+      "z_calibrated": 53.7488,
+      "allcause_auc": {
+        "auc": 0.6357,
+        "ci": [
+          0.6289,
+          0.6428
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": -0.0019,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone",
+        "neuro",
+        "immune",
+        "pulmonary",
+        "GI",
+        "repro",
+        "hepatic",
+        "vascular"
+      ]
+    },
+    {
+      "step": 11,
+      "added_organ": "heme",
+      "z_calibrated": 114.3188,
+      "allcause_auc": {
+        "auc": 0.6342,
+        "ci": [
+          0.6273,
+          0.6412
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": -0.0015,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone",
+        "neuro",
+        "immune",
+        "pulmonary",
+        "GI",
+        "repro",
+        "hepatic",
+        "vascular",
+        "heme"
+      ]
+    },
+    {
+      "step": 12,
+      "added_organ": "cardiac",
+      "z_calibrated": 68.1583,
+      "allcause_auc": {
+        "auc": 0.6293,
+        "ci": [
+          0.6224,
+          0.6363
+        ],
+        "n": 49774,
+        "n_events": 7770
+      },
+      "delta_auc": -0.0049,
+      "selected_organs": [
+        "endocrine",
+        "renal",
+        "bone",
+        "neuro",
+        "immune",
+        "pulmonary",
+        "GI",
+        "repro",
+        "hepatic",
+        "vascular",
+        "heme",
+        "cardiac"
+      ]
+    }
+  ],
+  "organ_death_results": {
+    "cardiac": {
+      "n_events": 2024,
+      "single_organ_auc": {
+        "auc": 0.5075,
+        "ci": [
+          0.4953,
+          0.5207
+        ],
+        "n": 49774,
+        "n_events": 2024
+      },
+      "full_model_auc": {
+        "auc": 0.6271,
+        "ci": [
+          0.6145,
+          0.641
+        ],
+        "n": 49774,
+        "n_events": 2024
+      }
+    },
+    "renal": {
+      "n_events": 172,
+      "single_organ_auc": {
+        "auc": 0.6767,
+        "ci": [
+          0.6277,
+          0.7274
+        ],
+        "n": 49774,
+        "n_events": 172
+      },
+      "full_model_auc": {
+        "auc": 0.7368,
+        "ci": [
+          0.6924,
+          0.7712
+        ],
+        "n": 49774,
+        "n_events": 172
+      }
+    },
+    "endocrine": {
+      "n_events": 284,
+      "single_organ_auc": {
+        "auc": 0.8141,
+        "ci": [
+          0.787,
+          0.846
+        ],
+        "n": 49774,
+        "n_events": 284
+      },
+      "full_model_auc": {
+        "auc": 0.8184,
+        "ci": [
+          0.7928,
+          0.8441
+        ],
+        "n": 49774,
+        "n_events": 284
+      }
+    },
+    "neuro": {
+      "n_events": 734,
+      "single_organ_auc": {
+        "auc": 0.5465,
+        "ci": [
+          0.5238,
+          0.5677
+        ],
+        "n": 49774,
+        "n_events": 734
+      },
+      "full_model_auc": {
+        "auc": 0.5786,
+        "ci": [
+          0.5582,
+          0.5979
+        ],
+        "n": 49774,
+        "n_events": 734
+      }
+    },
+    "pulmonary": {
+      "n_events": 586,
+      "single_organ_auc": {
+        "auc": 0.5245,
+        "ci": [
+          0.5015,
+          0.5472
+        ],
+        "n": 49774,
+        "n_events": 586
+      },
+      "full_model_auc": {
+        "auc": 0.5901,
+        "ci": [
+          0.5671,
+          0.6144
+        ],
+        "n": 49774,
+        "n_events": 586
+      }
+    },
+    "immune": {
+      "n_events": 1684,
+      "single_organ_auc": {
+        "auc": 0.5207,
+        "ci": [
+          0.508,
+          0.5343
+        ],
+        "n": 49774,
+        "n_events": 1684
+      },
+      "full_model_auc": {
+        "auc": 0.5732,
+        "ci": [
+          0.5579,
+          0.5882
+        ],
+        "n": 49774,
+        "n_events": 1684
+      }
+    }
+  },
+  "final_z_calibrated": {
+    "endocrine": 114.75,
+    "renal": 144.2299,
+    "bone": 180.7526,
+    "neuro": 103.6667,
+    "immune": 94.2606,
+    "pulmonary": 63.8571,
+    "GI": 68.25,
+    "repro": 95.0,
+    "hepatic": 147.9899,
+    "vascular": 53.7488,
+    "heme": 114.3188,
+    "cardiac": 68.1583
+  },
+  "selection_order": [
+    "endocrine",
+    "renal",
+    "bone",
+    "neuro",
+    "immune",
+    "pulmonary",
+    "GI",
+    "repro",
+    "hepatic",
+    "vascular",
+    "heme",
+    "cardiac"
+  ]
+}

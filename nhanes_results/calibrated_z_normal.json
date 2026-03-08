@@ -1,0 +1,32 @@
+{
+  "description": "Population-calibrated Z_normal from NHANES 10-year survivors",
+  "source": "NHANES 1999-2018, NDI 2019, survivors with >=120 months follow-up, age 20-79",
+  "textbook_z_normal": {
+    "cardiac": 50.0,
+    "pulmonary": 60.0,
+    "hepatic": 65.0,
+    "renal": 70.0,
+    "endocrine": 75.0,
+    "immune": 75.0,
+    "heme": 55.0,
+    "GI": 65.0,
+    "vascular": 45.0,
+    "bone": 120.0,
+    "neuro": 80.0,
+    "repro": 95.0
+  },
+  "calibrated_z_normal": {
+    "cardiac": 68.1583,
+    "pulmonary": 63.8571,
+    "hepatic": 147.9899,
+    "renal": 144.2299,
+    "endocrine": 114.75,
+    "immune": 94.2606,
+    "heme": 114.3188,
+    "GI": 68.25,
+    "vascular": 53.7488,
+    "bone": 180.7526,
+    "neuro": 103.6667,
+    "repro": 95.0
+  }
+}

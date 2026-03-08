@@ -1,0 +1,131 @@
+{
+  "protocol": "Gamma vs Textbook Head-to-Head v1.0",
+  "timestamp_utc": "2026-03-08T04:34:58.027432+00:00",
+  "cohort_size": 48932,
+  "n_deaths": 7576,
+  "results": {
+    "gamma_cardiac_vs_cardiac_death": {
+      "auc": 0.4906,
+      "ci": [
+        0.4775,
+        0.504
+      ],
+      "n": 48932,
+      "n_events": 1962
+    },
+    "framingham_vs_cardiac_death": {
+      "auc": 0.7941,
+      "ci": [
+        0.7857,
+        0.802
+      ],
+      "n": 46593,
+      "n_events": 1866
+    },
+    "ascvd_vs_cardiac_death": {
+      "auc": 0.6458,
+      "ci": [
+        0.6307,
+        0.6599
+      ],
+      "n": 46593,
+      "n_events": 1866
+    },
+    "score2_vs_cardiac_death": {
+      "auc": 0.8217,
+      "ci": [
+        0.8137,
+        0.8288
+      ],
+      "n": 46593,
+      "n_events": 1866
+    },
+    "gamma_renal_vs_renal_death": {
+      "auc": 0.673,
+      "ci": [
+        0.6204,
+        0.7186
+      ],
+      "n": 48932,
+      "n_events": 165
+    },
+    "ckdepi_vs_renal_death": {
+      "auc": 0.8311,
+      "ci": [
+        0.7912,
+        0.8646
+      ],
+      "n": 44233,
+      "n_events": 129
+    },
+    "gamma_endocrine_vs_endocrine_death": {
+      "auc": 0.8164,
+      "ci": [
+        0.7851,
+        0.8445
+      ],
+      "n": 48932,
+      "n_events": 277
+    },
+    "homa_ir_vs_endocrine_death": {
+      "auc": 0.9007,
+      "ci": [
+        0.849,
+        0.9455
+      ],
+      "n": 7283,
+      "n_events": 8
+    },
+    "gamma_H_vs_allcause_death": {
+      "auc": 0.6013,
+      "ci": [
+        0.594,
+        0.6084
+      ],
+      "n": 48932,
+      "n_events": 7576
+    },
+    "framingham_vs_allcause_death": {
+      "auc": 0.8058,
+      "ci": [
+        0.8009,
+        0.8105
+      ],
+      "n": 46593,
+      "n_events": 7165
+    },
+    "ascvd_vs_allcause_death": {
+      "auc": 0.6429,
+      "ci": [
+        0.6356,
+        0.6505
+      ],
+      "n": 46593,
+      "n_events": 7165
+    },
+    "gamma_hepatic_vs_allcause_death": {
+      "auc": 0.5022,
+      "ci": [
+        0.4949,
+        0.5096
+      ],
+      "n": 48932,
+      "n_events": 7576
+    },
+    "fib4_vs_allcause_death": {
+      "auc": 0.6893,
+      "ci": [
+        0.6837,
+        0.6953
+      ],
+      "n": 48732,
+      "n_events": 7535
+    }
+  },
+  "summary": [
+    "\n  Cardiac death:  Γ AUC = 0.4906  |  Framingham = 0.7941  |  ASCVD PCE = 0.6458  |  SCORE2 = 0.8217  →  SCORE2 WINS (Δ=-0.3311)",
+    "\n  Renal death:  Γ AUC = 0.6730  |  CKD-EPI = 0.8311  →  CKD-EPI WINS (Δ=-0.1581)",
+    "\n  Endocrine death:  Γ AUC = 0.8164  |  HOMA-IR = 0.9007  →  HOMA-IR WINS (Δ=-0.0843)",
+    "\n  All-cause:  Γ AUC = 0.6013  |  Framingham = 0.8058  |  ASCVD PCE = 0.6429  →  Framingham WINS (Δ=-0.2045)"
+  ]
+}

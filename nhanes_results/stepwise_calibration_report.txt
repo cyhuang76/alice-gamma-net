@@ -1,0 +1,40 @@
+============================================================================
+  STEPWISE ORGAN CALIBRATION — FORWARD SELECTION
+  N=49,774  Deaths=7,770
+============================================================================
+
+INDIVIDUAL ORGAN RESULTS
+  cardiac     : Z 50.0 → 68.16  (+36.3%)  allcause AUC=0.5091
+  pulmonary   : Z 60.0 → 63.86  (+6.4%)  allcause AUC=0.5178
+  hepatic     : Z 65.0 → 147.99  (+127.7%)  allcause AUC=0.5535
+  renal       : Z 70.0 → 144.23  (+106.0%)  allcause AUC=0.5722
+  endocrine   : Z 75.0 → 114.75  (+53.0%)  allcause AUC=0.5914
+  immune      : Z 75.0 → 94.26  (+25.7%)  allcause AUC=0.5138
+  heme        : Z 55.0 → 114.32  (+107.9%)  allcause AUC=0.5386
+  GI          : Z 65.0 → 68.25  (+5.0%)  allcause AUC=0.5157
+  vascular    : Z 45.0 → 53.75  (+19.4%)  allcause AUC=0.5773
+  bone        : Z 120.0 → 180.75  (+50.6%)  allcause AUC=0.5755
+  neuro       : Z 80.0 → 103.67  (+29.6%)  allcause AUC=0.5851
+  repro       : Z 95.0 → 95.00  (+0.0%)  allcause AUC=0.5
+
+FORWARD STEPWISE ORDER
+  Step  1: +endocrine     AUC=0.5914  ΔAUC=+0.5914
+  Step  2: +renal         AUC=0.6206  ΔAUC=+0.0292
+  Step  3: +bone          AUC=0.6331  ΔAUC=+0.0125
+  Step  4: +neuro         AUC=0.6358  ΔAUC=+0.0027
+  Step  5: +immune        AUC=0.6378  ΔAUC=+0.0020
+  Step  6: +pulmonary     AUC=0.6380  ΔAUC=+0.0002
+  Step  7: +GI            AUC=0.6381  ΔAUC=+0.0001
+  Step  8: +repro         AUC=0.6381  ΔAUC=+0.0000
+  Step  9: +hepatic       AUC=0.6376  ΔAUC=-0.0005
+  Step 10: +vascular      AUC=0.6357  ΔAUC=-0.0019
+  Step 11: +heme          AUC=0.6342  ΔAUC=-0.0015
+  Step 12: +cardiac       AUC=0.6293  ΔAUC=-0.0049
+
+ORGAN-SPECIFIC DEATH AUCs (FULL MODEL)
+  cardiac     : single=0.5075  full=0.6271  events=2024
+  renal       : single=0.6767  full=0.7368  events=172
+  endocrine   : single=0.8141  full=0.8184  events=284
+  neuro       : single=0.5465  full=0.5786  events=734
+  pulmonary   : single=0.5245  full=0.5901  events=586
+  immune      : single=0.5207  full=0.5732  events=1684
