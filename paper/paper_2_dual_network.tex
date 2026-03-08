@@ -15,19 +15,19 @@
 \begin{document}
 
 %--------------------------------------------------------------------
-\title{Twin Impedance Networks:\\
+\title{Paper~2: Dual Impedance Networks:\\
 A Unified Neural--Vascular Organ Model\\
-from the Minimum Reflection Action}
+from the Minimum Reflection Principle}
 
 \author{Hsi-Yu Huang}
-\email{llc.y.huangll@gmail.com}
-\affiliation{Independent Researcher, Taiwan}
+\email{bestian@gmail.com}
+\affiliation{Independent Researcher, Taipei, Taiwan}
 
 \date{\today}
 
 %--------------------------------------------------------------------
 \begin{abstract}
-Paper~I of this series established that the Minimum Reflection
+Paper~1 of this series established that the Minimum Reflection
 Principle~(MRP) on \emph{neural} impedance networks generates
 relay-node hierarchies and fractal topology.
 Here we show that the \emph{same} variational principle governs
@@ -65,7 +65,7 @@ international RCTs (STENO-2, ADVANCE, SPRINT-MIND,
 CHARM, SHARP, UKPDS-80, Framingham, ARIC, DIAD)
 confirm all claims.
 A systematic stability and pass-rate analysis across 10~organs,
-randomized parameter sweeps ($N=50$), and five clinical severity
+randomised parameter sweeps ($N=50$), and five clinical severity
 classes yields a 100\% convergence and viability rate,
 demonstrating that the dual-network attractor is globally stable.  In particular, fractional flow
 reserve (FFR) is identified as \emph{exactly} the
@@ -81,15 +81,15 @@ observed in STENO-2 and the legacy effect of UKPDS-80.
 \section{Introduction}\label{sec:intro}
 %====================================================================
 
-Paper~I~\cite{paper1} established that the Minimum Reflection
+Paper~1~\cite{paper1} established that the Minimum Reflection
 Principle~(MRP),
 \begin{equation}\label{eq:mrp}
   A[\Gamma] = \int_0^T \sum_i \Gamma_i^2(t)\,dt \;\to\;\min,
 \end{equation}
 generates relay-node hierarchies and fractal topology in
 heterogeneous neural impedance networks.
-Papers~III and~IV of this series~\cite{paper3,paper4}
-extend the framework to daily dynamics
+Paper~3 of this series~\cite{paper3}
+extends the framework to daily dynamics
 (impedance debt $D_Z$ and sleep) and lifecycle trajectories
 (cognition, emotion, aging).
 
@@ -235,18 +235,18 @@ the \emph{total} vascular action, not just reflection.
 
 
 %====================================================================
-\section{Vascular Hebbian Remodeling}\label{sec:hebbian}
+\section{Vascular Impedance Remodeling}\label{sec:hebbian}
 %====================================================================
 
-Neural MRP descent uses the Hebbian update rule~(C2):
-$\Delta Z = -\eta \cdot \Gamma \cdot x_{\text{pre}} \cdot
-x_{\text{post}}$.
+Neural MRP descent uses the impedance remodeling rule~(C2):
+$\Delta Z = -\eta \cdot \Gamma \cdot x_{\text{in}} \cdot
+x_{\text{out}}$.
 The vascular analogue is endothelial shear-stress
 remodeling~\cite{langille1986,kamiya1984}:
 \begin{equation}\label{eq:hebb_v}
   \Delta \Zv = -\eta_{\mathrm{v}} \cdot \Gv
-              \cdot \underbrace{\tau_{\text{wall}}}_{\text{shear stress}\,\sim\, x_{\text{pre}}}
-              \cdot \underbrace{\rho}_{\text{growth factor}\,\sim\, x_{\text{post}}}\,,
+              \cdot \underbrace{\tau_{\text{wall}}}_{\text{shear stress}\,\sim\, x_{\text{in}}}
+              \cdot \underbrace{\rho}_{\text{growth factor}\,\sim\, x_{\text{out}}}\,,
 \end{equation}
 where $\tau_{\text{wall}} \propto Q/r^3$ is wall shear
 stress and $\rho$ is the local material resource
@@ -256,7 +256,7 @@ Endothelial cells sense shear stress and release
 vasodilators (NO) or vasoconstrictors (endothelin-1) to
 remodel vessel impedance toward $\Gv = 0$~\cite{chiu2011}.
 
-\emph{Key difference from neural Hebbian:}
+\emph{Key difference from neural C2 remodeling:}
 $\eta_{\mathrm{v}} \ll \eta_{\mathrm{n}}$
 (vascular remodeling operates on days--weeks, not
 milliseconds--seconds), so the vascular network adapts
@@ -370,7 +370,7 @@ $\Gamma$:
   \item \emph{Vascular insult} (e.g.\ atherosclerosis):
     $\Gv$ rises, reducing blood flow $\rho = \Tv \cdot Q$.
   \item \emph{Material starvation}: reduced $\rho$ means less
-    glucose/O$_2$ for neural repair, so neural Hebbian
+    glucose/O$_2$ for neural repair, so neural C2
     adaptation slows and $\Gn$ drifts upward.
   \item \emph{Autonomic dysfunction}: rising $\Gn$ impairs
     sympathetic/parasympathetic vascular regulation,
@@ -432,7 +432,7 @@ through three mechanisms that all increase $\Gv$:
   \item \textbf{Basement membrane thickening} $\to$ reduced
     compliance $\to$ $Z$ mismatch.
   \item \textbf{Endothelial dysfunction} $\to$ impaired
-    Hebbian remodeling ($\eta_v \to 0$).
+    impedance remodeling ($\eta_v \to 0$).
   \item \textbf{Pericyte loss} $\to$ capillary instability
     $\to$ $\Gv$ oscillations ($Z_{\text{OSCILLATE}}$).
 \end{enumerate}
@@ -548,7 +548,7 @@ Nine verification tests:
     Post (tick 499): $\Gv^2=0.998$, $\Gn^2=0.903$.
     Final mode: dual failure. Health: $0.02\%$.
 
-  \item[\textbf{V7.}] \textbf{Vascular Hebbian remodeling.}
+  \item[\textbf{V7.}] \textbf{Vascular impedance remodeling.}
     30\% impedance perturbation; after 500 ticks, $\Gv^2$
     decreases by 0.1\% (slow remodeling confirmed).
 
@@ -735,9 +735,9 @@ yields a super-additive improvement (ratio~1.19$\times$).
 
 Second, the UKPDS-80 legacy effect~\cite{Holman2008}---persisting
 benefit 10 years after trial equalization---is naturally
-explained by vascular Hebbian remodeling: early
+explained by vascular impedance remodeling: early
 $\Gv$ reduction drives vessel wall adaptation
-($\Delta Z_v = -\eta_v \Gv \cdot \tau \cdot \rho$)
+($\Delta Z_v = -\eta_v \Gv \cdot \tau_{\text{in}} \cdot \rho_{\text{out}}$)
 that locks in structural improvement.
 
 Third, the cascade asymmetry observed in the Rochester
@@ -753,9 +753,9 @@ All preceding results were obtained with fixed, ``textbook'' parameters.
 To ensure that the dual-network model is not fine-tuned to a single
 operating point, we performed a systematic stability analysis.
 
-\paragraph{Neural Hebbian self-repair.}
+\paragraph{Neural C2 self-repair.}
 During this analysis we discovered that the bare simulation lacks a
-neural-side analogue of the vascular Hebbian remodeling
+neural-side analogue of the vascular impedance remodeling
 (Section~\ref{sec:hebbian}).
 Without it, $\Gn^2$ monotonically approaches unity whenever
 any vascular deficit exists, because the cascade coupling
@@ -826,7 +826,7 @@ runs converged and remained viable.}
 Three observations deserve comment.
 First, the baseline attractor has $\mathrm{var}(H) < 10^{-4}$
 for 9 of~10 organs and $< 10^{-3}$ for placenta (the most
-compliant vascular bed), confirming that the Hebbian
+compliant vascular bed), confirming that the impedance
 remodeling loop is a genuine stabilizer, not merely a damper.
 Second, the coupling asymmetry test~(S2) is decisive:
 a~50\% vascular insult reduces $H$ by
@@ -859,7 +859,7 @@ tissue, which we have not performed.
 
 \subsection{Unification of neural and vascular physics}
 
-Paper~I treated only the neural $\Gamma$.
+Paper~1 treated only the neural $\Gamma$.
 This paper extends the picture: every organ sits at
 the intersection of two impedance networks, both governed
 by the same MRP physics.
@@ -1046,7 +1046,7 @@ This formulation has two immediate clinical consequences:
     distinguishable impedance signatures.
 \end{enumerate}
 
-The $\Gamma$-Pain Index $\Pi_{\Gamma}$ (Paper~V)
+The $\Gamma$-Pain Index $\Pi_{\Gamma}$ (Paper~4)
 applied to the wound site reduces to:
 \begin{equation}
   \Pi_{\Gamma,\text{wound}}(t) =
@@ -1055,7 +1055,7 @@ applied to the wound site reduces to:
   \label{eq:wound-pain-index}
 \end{equation}
 where $D_{Z,\text{wound}}$ is the cumulative impedance
-debt of the wound (Eq.~(\ref{eq:wound-debt}) in Paper~III).
+debt of the wound (Eq.~(\ref{eq:wound-debt}) in Paper~3).
 This provides a \emph{continuous, objective, real-time}
 pain/damage metric that does not require the patient to
 be conscious or verbal.
@@ -1095,13 +1095,12 @@ and five clinical severity classes, with a linearized C2
 neural self-repair term ensuring a nontrivial healthy
 fixed point.
 
-Together with Paper~I, this establishes the MRP
+Together with Paper~1, this establishes the MRP
 as a universal physics of biological impedance networks:
 \begin{itemize}
-  \item Paper~I: Static architecture (relay nodes, fractal topology)
-  \item Paper~II (this work): Vascular network and dual-organ model
-  \item Paper~III: Daily dynamics (impedance debt, sleep)
-  \item Paper~IV: Lifecycle dynamics (bathtub curve, aging)
+  \item Paper~1: Static architecture (relay nodes, fractal topology)
+  \item Paper~2 (this work): Vascular network and dual-organ model
+  \item Paper~3: Temporal dynamics (impedance debt, sleep, lifecycle, aging)
 \end{itemize}
 
 The same equation, $\Gamma = (Z_L - Z_0)/(Z_L + Z_0)$,
@@ -1144,21 +1143,15 @@ The author thanks the open-source scientific Python community.
 
 \bibitem{paper1}
 H.-Y.~Huang,
-``Irreducible Dimensional Cost in Heterogeneous Impedance Networks:
-  Scaling Laws, Fractal Topology, and the Minimum Reflection Principle,''
-Zenodo (2026). \texttt{doi:10.5281/zenodo.18751831}.
+``Paper~1: Irreducible Dimensional Cost and Fractal Scaling
+  in Heterogeneous Impedance Networks,''
+preprint (2025).
 
 \bibitem{paper3}
 H.-Y.~Huang,
-``The Cost of Life: Impedance Debt as the Thermodynamic Origin
-  of Sleep and Brain Evolution,''
-Zenodo (2026).
-
-\bibitem{paper4}
-H.-Y.~Huang,
-``The Lifecycle Equation: Cognition, Emotion, and Aging as
-  Three-Force Competition on an Impedance Network,''
-Zenodo (2026).
+``Paper~3: Temporal Dynamics---Impedance Debt, Sleep,
+  Lifecycle, and Aging,''
+preprint (2025).
 
 \bibitem{murray1926}
 C.~D.~Murray,
@@ -1343,8 +1336,8 @@ L.~H.~Young \emph{et al.},
 
 \bibitem{zenodo_code}
 H.-Y.~Huang,
-``Alice Gamma-Net: Source Code and Experiments,''
-Zenodo (2026). \texttt{doi:10.5281/zenodo.18751831}.
+ALICE Smart System,
+\url{https://github.com/cyhuang76/alice-gamma-net} (2025).
 
 \bibitem{Gurtner2008}
 G.~C.~Gurtner, S.~Werner, Y.~Barrandon, and

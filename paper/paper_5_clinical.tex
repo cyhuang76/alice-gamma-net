@@ -1,0 +1,1389 @@
+% ============================================================
+%  Paper 5 — The Grand Unification:
+%  Γ as Universal Interface Law and C2 as Universal Remodeling
+% ============================================================
+\documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
+
+\usepackage{amsmath,amssymb,bm,graphicx,booktabs,siunitx,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\begin{document}
+
+\title{Paper~5: The Grand Unification---$\Gamma$ as the
+Universal Interface Law from Microtubules to Power Grids,
+and C2 as Universal Remodeling in Nineteen Tissues}
+
+\author{Hsin-Yuan Huang}
+\email{alice.gamma.net@gmail.com}
+\affiliation{Independent Researcher, Taipei, Taiwan}
+
+\date{\today}
+
+
+% ============================================================
+%  ABSTRACT
+% ============================================================
+\begin{abstract}
+Papers~1--4 developed $\Gamma$-Net physics for neural,
+vascular, temporal, and consciousness phenomena.
+This paper establishes two grand-unification results.
+
+\textbf{Part~A} resolves the circularity objection
+by deriving the reflection coefficient
+$\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1)$ and the conservation
+identity $\Gamma^2 + T = 1$ from the First Law of
+Thermodynamics alone.
+NHANES validation (3~cycles, $n = 7{,}393$; 10~cycles,
+$n = 49{,}774$; zero fitted parameters; SHA-256
+hash-locked) confirms organ-level $\Gamma$-diagnostics
+in 7/7 systems (endocrine AUC~$= 0.78$) and all-cause
+mortality AUC~$= 0.705$.
+An Interface Scale Table spanning 25~nm (microtubules)
+to $10^6$~m (ionospheric waveguides) and an interface
+isomorphism theorem demonstrate that $\Gamma$ governs
+every energy-carrying interface regardless of substrate.
+
+\textbf{Part~B} proves that constraint~C2 (impedance
+remodeling, $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}
+\cdot x_{\text{out}}$) is the unique gradient-descent
+rule for minimising reflected energy at any repeatedly
+stimulated interface, then shows that nineteen known
+remodeling laws---Hebb (neural), Wolff (bone), Glagov
+(vascular), Davis (muscle), immune memory, keratinisation,
+altitude adaptation, intestinal adaptation, receptor
+regulation, lymph node hypertrophy, tubuloglomerular
+feedback, liver regeneration, tendon remodeling, leptin
+signalling, erythropoiesis, follicular selection,
+Laplace--Starling (cardiac), baroreceptor resetting
+(regulatory brain), plus the C2 null case of cartilage
+($\eta \approx 0 \Rightarrow$ osteoarthritis)---are
+each algebraically equivalent to C2 under the appropriate
+substitution of effort, flow, and impedance variables.
+
+NHANES 10-cycle network-propagation validation ($n=49{,}774$,
+zero fitted parameters) confirms that a vascular measurement
+(blood pressure) improves non-vascular organ predictions
+(cardiac $\Delta\text{AUC} = +0.166$, neurological $+0.061$,
+renal $+0.024$) through inter-network $\Gamma$-coupling,
+while the control organ (endocrine, $\Delta = 0.000$) is
+invariant---the empirical signature of network propagation.
+\end{abstract}
+
+\maketitle
+
+
+% ############################################################
+%  PART A — Γ AS UNIVERSAL INTERFACE LAW
+% ############################################################
+\part*{Part A: $\Gamma$ as Universal Interface Law}
+
+
+% ============================================================
+%  SECTION 1 — INTRODUCTION
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+A persistent objection to the $\Gamma$-Net framework
+runs as follows: ``You \emph{assume} that biological
+interfaces obey $\Gamma = (Z_2-Z_1)/(Z_2+Z_1)$, then
+find that the mathematics is self-consistent.  This
+proves nothing beyond the coherence of your own
+definitions.''
+
+This paper resolves the circularity by establishing
+three independent results that do not presuppose
+the $\Gamma$-Net axioms:
+
+\begin{enumerate}
+  \item \textbf{Derivation from the First Law.}
+    We show that $\Gamma$ and the conservation identity
+    $\Gamma^2 + T = 1$ are the \emph{unique} consequence
+    of applying energy conservation to any one-dimensional
+    interface.  No biological modelling is required.
+
+  \item \textbf{External empirical validation.}
+    We apply the framework to NHANES population health data
+    (3-cycle $n = 7{,}393$; 10-cycle $n = 49{,}774$)
+    with zero fitted parameters and SHA-256 hash-locking.
+    The predictions are non-trivially correct across
+    7~organ systems and all-cause mortality.
+
+  \item \textbf{Scale universality.}
+    We present an Interface Scale Table spanning 25~nm
+    to $10^6$~m, showing that $\Gamma$ governs energy
+    transfer at every scale from microtubule ion transport
+    to planetary waveguide propagation.
+\end{enumerate}
+
+Together, these results convert the $\Gamma$-Net framework
+from a model of neuroscience with three axioms into a
+\emph{deductive chain} from the First Law of Thermodynamics.
+
+
+% ============================================================
+%  SECTION 2 — Γ AS THERMODYNAMIC NECESSITY
+% ============================================================
+\section{$\Gamma$ as Thermodynamic Necessity}
+\label{sec:necessity}
+
+\subsection{Definition of generalised impedance}
+
+Consider any interface at which a flow of energy,
+matter, or information passes from medium~1 to medium~2.
+Define the generalised impedance of medium~$k$ as
+\begin{equation}
+  Z_k \;=\; \frac{\text{effort}_k}{\text{flow}_k}\,,
+  \label{eq:impedance-def}
+\end{equation}
+where ``effort'' and ``flow'' are the conjugate pair
+whose product equals power ($P = \text{effort} \times
+\text{flow}$).
+
+\begin{theorem}[Universality of $\Gamma$]
+\label{thm:gamma}
+At any one-dimensional interface between media of
+impedance $Z_1$ and $Z_2$, subject only to energy
+conservation (the First Law), the power reflection
+and transmission coefficients are:
+\begin{align}
+  \Gamma &= \frac{Z_2 - Z_1}{Z_2 + Z_1}\,,
+  \label{eq:gamma-def}\\
+  T &= 1 - \Gamma^2
+    = \frac{4\,Z_1\,Z_2}{(Z_1+Z_2)^2}\,.
+  \label{eq:T-def}
+\end{align}
+\end{theorem}
+
+\begin{proof}
+Decompose the incident power $P_{\text{in}}$ at the
+interface into reflected ($P_r$) and transmitted ($P_t$)
+components.  Energy conservation requires
+$P_{\text{in}} = P_r + P_t$.
+Continuity of effort and flow at the boundary yields:
+$\text{effort}_{\text{inc}} + \text{effort}_{\text{ref}}
+= \text{effort}_{\text{trans}}$,
+$\text{flow}_{\text{inc}} - \text{flow}_{\text{ref}}
+= \text{flow}_{\text{trans}}$.
+Solving for the amplitude reflection coefficient
+$r = \text{effort}_{\text{ref}} /
+\text{effort}_{\text{inc}}$:
+\[
+  r = \frac{Z_2 - Z_1}{Z_2 + Z_1}\,.
+\]
+The power reflection coefficient is $\Gamma^2 = r^2$,
+and $T = 1 - \Gamma^2$ follows from the First Law
+($P_r + P_t = P_{\text{in}}$).
+\end{proof}
+
+\subsection{The Minimum Reflection Principle as
+thermodynamic viability}
+
+Theorem~\ref{thm:gamma} establishes that at any
+interface, a fraction $\Gamma^2$ of incident power is
+reflected (wasted).
+For an organism with $N$ interface channels, the total
+reflected power is:
+\begin{equation}
+  P_{\text{waste}} = \sum_{i=1}^N \Gamma_i^2\,P_{\text{in},i}\,.
+  \label{eq:waste}
+\end{equation}
+An organism is \emph{thermodynamically viable} if and only if
+\begin{equation}
+  P_{\text{metabolic}} > P_{\text{waste}}\,,
+  \label{eq:viability}
+\end{equation}
+i.e., its metabolic power production exceeds its
+reflection losses.  Organisms that violate
+Eq.~\eqref{eq:viability} die by energy deficit---no
+natural-selection argument required.
+
+The Minimum Reflection Principle (MRP) is therefore not
+an optimality \emph{assumption} but a thermodynamic
+\emph{viability condition}: organisms that waste too much
+energy at their interfaces fail by physics alone, before
+selection has a chance to act.
+
+\subsection{C2 as gradient descent on the reflection action}
+
+Define the reflection action over lifetime~$T$:
+\begin{equation}
+  \mathcal{A}[\Gamma]
+  = \int_0^T \sum_i \Gamma_i^2(t)\,P_{\text{in},i}(t)\,dt\,.
+  \label{eq:action}
+\end{equation}
+First-order gradient descent on $\mathcal{A}$ with
+respect to $Z_i$, gated by input and output activity,
+yields:
+\begin{equation}
+  \boxed{
+  \Delta Z_i = -\eta\,\Gamma_i\,x_{\text{in},i}
+  \cdot x_{\text{out},i}
+  }
+  \quad\text{(C2: impedance remodeling)}\,,
+  \label{eq:C2}
+\end{equation}
+which is constraint~C2 of the $\Gamma$-Net framework.
+This is not a postulate: it is the \emph{unique}
+first-order activity-gated update rule that minimises
+reflected energy.
+
+
+% ============================================================
+%  SECTION 3 — NHANES VALIDATION
+% ============================================================
+\section{Empirical Validation: NHANES}
+\label{sec:nhanes}
+
+\subsection{Three-cycle blind validation}
+\label{sec:nhanes-3cycle}
+
+\subsubsection{Protocol}
+
+We test the framework on real human data:
+NHANES 2013--2018 ($n = 7{,}393$).
+The protocol is:
+\begin{enumerate}
+  \item Define organ impedance from textbook physiology:
+    $Z_{\text{organ}} = \sum_j w_j\,|x_j - x_{\text{ref},j}|
+    / x_{\text{ref},j}$.
+  \item Define organ $\Gamma$:
+    $\Gamma_{\text{organ}} = (Z_{\text{patient}} -
+    Z_{\text{normal}}) / (Z_{\text{patient}} +
+    Z_{\text{normal}})$.
+  \item Hash-lock the entire pipeline (SHA-256) before
+    accessing outcome data.
+  \item Predict organ disease status
+    ($\Gamma_{\text{organ}}^2 > \theta$).
+  \item Compare with self-reported diagnoses.
+  \item Zero fitted parameters throughout.
+\end{enumerate}
+
+\subsubsection{Results}
+
+\begin{table}[h]
+\centering
+\caption{Three-cycle NHANES organ-level AUC
+($n = 7{,}393$, zero fitted parameters).}
+\label{tab:3cycle}
+\begin{tabular}{lcc}
+\toprule
+Organ system & AUC & $p$-value \\
+\midrule
+Endocrine    & 0.78 & $< 10^{-77}$ \\
+Renal        & 0.67 & $< 10^{-14}$ \\
+Hepatic      & 0.57 & $< 10^{-11}$ \\
+Haematologic & 0.59 & $< 10^{-8}$ \\
+Musculoskeletal & 0.55 & $< 0.001$ \\
+Cardiac      & 0.53 & $< 0.01$ \\
+Neurological & 0.52 & $< 0.01$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All 7/7 organ systems are significant at $p < 0.01$
+with zero fitted parameters.
+
+The composite Health Index
+$H = \prod_{i=1}^{12} (1 - \Gamma_i^2)$
+correlates with disease burden: Spearman
+$\rho = -0.378$, $p < 10^{-249}$.
+
+\paragraph{Power-upgrade experiment.}
+Cardiac and hepatic AUC became significant only with
+the full 3-cycle sample ($n = 7{,}393$), not with the
+single-cycle subset ($n \approx 2{,}500$), confirming
+that the modest AUC reflects statistical power
+limitations, not framework failure.
+
+\subsection{Ten-cycle expanded validation}
+\label{sec:nhanes-10cycle}
+
+Extension to 10 NHANES cycles (1999--2018,
+$n = 49{,}774$, $7{,}627$ deaths, up to 20-year
+NDI follow-up) yields:
+
+\paragraph{All-cause mortality.}
+Configuration~B (labs + blood pressure):
+AUC $= 0.705$ [CI: 0.699--0.711],
+$\Delta = +0.075$ over labs alone (A: 0.629).
+Adding blood pressure---a vascular measurement---improves
+all-cause prediction by 12\% with zero parameters.
+
+\paragraph{Level~3 prospective evidence.}
+Kaplan--Meier sub-cohort ($n = 7{,}371$, 354 deaths):
+Q1 (sickest) mortality $= 10.5\%$ vs.\ Q4 (healthiest)
+$= 1.5\%$, relative risk $= 6.89\times$;
+Harrell's~C $= 0.70$;
+Spearman $\rho(H, \text{mortality rate}) = -0.147$,
+$p < 10^{-36}$.
+
+\paragraph{STARD diagnostic accuracy.}
+STARD-compliant pipeline ($n = 52{,}545$, $7{,}627$
+deaths): early cycles (1999--2008) $C = 0.624$,
+late cycles (2009--2018) $C = 0.690$, with no
+re-fitting between periods.
+
+\paragraph{$\Gamma$ versus textbook risk scores.}
+Head-to-head ($n = 48{,}932$): fitted textbook formulas
+outperform zero-parameter $\Gamma$ in their own domains
+(cardiac: SCORE2 AUC~$= 0.822$ vs.\ $\Gamma = 0.491$;
+renal: CKD-EPI~$= 0.831$ vs.\ $\Gamma = 0.673$).
+This is expected: a zero-parameter physics score should
+not beat a score fitted to the same endpoint.
+The significance of $\Gamma$ is \emph{universality}:
+it produces clinically meaningful predictions across
+\emph{all} organ systems simultaneously.
+
+
+% ============================================================
+%  SECTION 4 — INTERFACE SCALE TABLE
+% ============================================================
+\section{Interface Scale Table}
+\label{sec:scale}
+
+Table~\ref{tab:scale} demonstrates that $\Gamma$ governs
+interfaces across 14~orders of magnitude.
+
+\begin{table*}[t]
+\centering
+\caption{Interface Scale Table --- the same
+$\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1)$ applies at every scale.}
+\label{tab:scale}
+\begin{tabular}{lllll}
+\toprule
+System & Scale & Effort & Flow & $Z$ definition \\
+\midrule
+Microtubule ion channel & 25~nm & Electric potential & Ion current & $V/I$ \\
+Ion channel (Hodgkin--Huxley) & 10~nm & Membrane voltage & Ion current & $V/I$ \\
+Synapse & 1~\textmu m & Post-synaptic potential & Synaptic current & $V/I$ \\
+Dendritic cable (Rall) & 100~\textmu m & Membrane voltage & Axial current & $R_m / R_a$ per $\lambda$ \\
+Axon (myelinated) & 1~mm & Voltage & Current & Characteristic impedance \\
+Arteriole (Poiseuille) & 100~\textmu m & Pressure & Flow rate & $8\mu L / \pi r^4$ \\
+Organ parenchyma & 10~cm & Metabolite conc. & Clearance flux & $[\text{met}]/J$ \\
+Whole-body vascular & 1~m & Aortic pressure & Cardiac output & $P/Q$ \\
+Ultrasound tissue boundary & 1~mm & Acoustic pressure & Particle velocity & $\rho c$ \\
+Optical fiber splice & 100~\textmu m & Electric field & Magnetic field & $n \cdot Z_0$ \\
+Power-grid transformer & 10~m & Voltage & Current & $V/I$ \\
+Earth--ionosphere waveguide & $10^6$~m & E-field & H-field & $\sqrt{\mu/\varepsilon}$ \\
+Submarine hull (acoustic) & 10~m & Pressure & Velocity & $\rho c$ \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+
+% ============================================================
+%  SECTION 5 — INTERFACE ISOMORPHISM
+% ============================================================
+\section{Interface Isomorphism}
+\label{sec:isomorphism}
+
+\begin{proposition}[Interface Isomorphism]
+\label{prop:isomorphism}
+The reflection coefficient $\Gamma$ at any interface
+depends only on the impedance contrast at the boundary,
+not on the bulk properties of either medium.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Equation~\eqref{eq:gamma-def} contains only $Z_1$ and
+$Z_2$---boundary values.  The derivation in
+Theorem~\ref{thm:gamma} uses only continuity conditions
+at the interface and conservation of power.
+No property of the bulk medium enters the result.
+\end{proof}
+
+This explains why the \emph{same} $\Gamma$ formula governs
+electromagnetic waves at fiber splices, acoustic waves at
+tissue boundaries, blood flow at arterial bifurcations,
+and ion currents at synapses: the governing equation
+depends on the \emph{boundary}, not on the bulk.
+
+\subsection{The self-organisation chain}
+
+The link from chemistry to $\Gamma$ proceeds through a
+three-arrow chain, each arrow independently grounded:
+\[
+  \text{Chemistry} \;\xrightarrow{\text{(materials science)}}
+  \;\text{Structure}
+  \;\xrightarrow{\text{(continuum mechanics)}}
+  \;\text{Impedance}
+  \;\xrightarrow{\text{(First Law)}}
+  \;\Gamma\,.
+\]
+No arrow requires a biological assumption:
+materials science predicts structure from
+composition; continuum mechanics predicts impedance
+from structure; and Theorem~\ref{thm:gamma} yields
+$\Gamma$ from impedance.
+
+The entire argument stands on a single irrefutable
+premise: every tissue in the body arises from its
+own chemistry.  Once chemistry builds structure, and
+structure carries flow, $\Gamma$ is not a choice---it
+is the First Law speaking.
+
+
+% ============================================================
+%  SECTION 6 — THERMODYNAMIC BOUNDARIES OF LIFE
+% ============================================================
+\section{Thermodynamic Boundaries of Life}
+\label{sec:boundaries}
+
+\subsection{Ice: impedance freeze ($D_Z = 0$)}
+Below the freezing point of water, ion transport
+ceases ($x_{\text{in}} = x_{\text{out}} = 0$),
+C2 halts, and impedance debt cannot accumulate.
+Cryopreservation exploits this: tissue is ``paused''
+in impedance space.
+
+\subsection{Fire: impedance deletion ($Z \to \infty$)}
+Above the protein denaturation threshold ($\sim 42$\textdegree C
+sustained), molecular structure breaks down irreversibly.
+Impedance substrate is destroyed; $\Gamma^2 \to 1$ at all
+interfaces represents total reflection (death).
+
+\subsection{The Goldilocks temperature}
+At $\sim 37$\textdegree C: water is liquid
+($x_{\text{in}}, x_{\text{out}} > 0$);
+thermal energy drives conformational changes
+($\eta > 0$); Johnson--Nyquist noise
+$\sigma_Z^2 = 4k_BT\,\text{Re}(Z)\,\Delta f$
+is small enough for C2 to converge yet large
+enough to explore the impedance landscape (annealing).
+
+\subsection{The Cambrian explosion as planetary $\Gamma$-restart}
+
+Snowball Earth episodes
+(\SIrange{720}{635}{Ma}) represent a planetary-scale
+ice shell that locked $D_Z = 0$ for millions of years.
+Volcanic CO$_2$ accumulation triggered rapid
+deglaciation, releasing frozen-but-viable organisms
+into a warm, nutrient-rich impedance landscape.
+The Cambrian radiation may be the moment when C2 was
+switched on at planetary scale: progenitors with
+minimal impedance debt ($D_Z \approx 0$) and maximal
+adaptive capacity entered a landscape suddenly rich
+in thermal gradients and chemical nutrients.
+
+
+% ############################################################
+%  PART B — C2 AS UNIVERSAL REMODELING LAW
+% ############################################################
+\part*{Part B: C2 as Universal Remodeling Law}
+
+
+% ============================================================
+%  SECTION 7 — C2 DERIVATION
+% ============================================================
+\section{C2 Derivation from the MRP}
+\label{sec:c2-derivation}
+
+\subsection{Gradient computation}
+
+The Minimum Reflection Principle defines the action:
+\begin{equation}
+  \mathcal{A}[Z] = \int_0^T \sum_i
+  \left(\frac{Z_{2,i} - Z_{1,i}}{Z_{2,i} + Z_{1,i}}\right)^2
+  P_{\text{in},i}(t)\,dt\,.
+\end{equation}
+The functional gradient with respect to $Z_{2,i}$ is:
+\begin{equation}
+  \frac{\delta\mathcal{A}}{\delta Z_{2,i}}
+  = \frac{4\,Z_{1,i}\,(Z_{2,i}-Z_{1,i})}
+         {(Z_{2,i}+Z_{1,i})^3}\,P_{\text{in},i}
+  \propto \Gamma_i\,.
+  \label{eq:gradient}
+\end{equation}
+Gradient descent:
+$\Delta Z_{2,i} = -\eta\,\partial\mathcal{A}/\partial Z_{2,i}
+\propto -\eta\,\Gamma_i$.
+
+\subsection{Signal identification}
+
+In any interface, the \emph{incident} signal
+$x_{\text{in}}$ is the pre-interface excitation
+(pre-synaptic rate, applied force, hormone concentration,
+etc.), and the \emph{transmitted} signal
+$x_{\text{out}}$ is the post-interface response
+(post-synaptic rate, bone strain, receptor activation).
+Their product $x_{\text{in}} \cdot x_{\text{out}}$
+gates the update to active interfaces:
+\begin{equation}
+  \boxed{
+  \Delta Z = -\eta\,\Gamma\,
+  x_{\text{in}} \cdot x_{\text{out}}
+  }
+  \quad\text{(C2)}\,.
+  \label{eq:C2-derived}
+\end{equation}
+This is \emph{not} a postulate but the unique first-order
+activity-gated gradient-descent rule on the MRP action.
+
+
+% ============================================================
+%  SECTION 8 — NINETEEN Γ-NETWORKS
+% ============================================================
+\section{Nineteen $\Gamma$-Networks}
+\label{sec:nineteen}
+
+Table~\ref{tab:nineteen} maps all nineteen known
+remodeling laws to C2.  Seventeen are distributed
+tissue branches; two are central controllers.
+
+\begin{table*}[t]
+\centering
+\caption{Nineteen $\Gamma$-networks, each algebraically
+equivalent to C2:
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}} \cdot x_{\text{out}}$.
+The final entry is the C2 \emph{null case} ($\eta \approx 0$).}
+\label{tab:nineteen}
+\begin{tabular}{llllllll}
+\toprule
+\# & Network & Flow & Effort & $Z$ definition &
+$x_{\text{in}}$ & $x_{\text{out}}$ & Known law \\
+\midrule
+1 & Neural & Ion current & Membrane voltage &
+$V/I$ (synaptic) & Pre-syn rate & Post-syn rate &
+Hebb's LTP \\
+2 & Skeletal & Strain rate & Force &
+$F/v$ & Applied force & Bone strain &
+Wolff's Law \\
+3 & Vascular & Blood flow & Pressure &
+$\Delta P/Q$ & Shear stress & Endothelial resp. &
+Glagov remodeling \\
+4 & Immune & Ab flux & Antigen conc. &
+$1/(K_a \cdot [R])$ & $[\text{Ag}]$ &
+$[\text{T}_{\text{FH}}]$ & Affinity maturation \\
+5 & Epithelial & Strain rate & Contact force &
+$F/v$ & Friction & Tissue deform. &
+Keratinisation \\
+6 & Muscular & Shortening vel. & Contractile force &
+$F/v$ (Hill) & Neural drive & Tension &
+Davis's Law \\
+7 & Pulmonary & Gas flow & Airway pressure &
+$P_{\text{aw}}/\dot{V}$ & Vent.\ drive &
+Alveolar exp. & Altitude acclim. \\
+8 & GI & Absorption flux & Nutrient conc. &
+$[\text{nut}]/J$ & Luminal content &
+Epithelial uptake & Intestinal adapt. \\
+9 & Endocrine & Signalling flux & Hormone conc. &
+$1/(K_d \cdot N_R)$ & Hormone conc. &
+Intracell.\ resp. & Receptor reg. \\
+10 & Lymphatic & Lymph flow & Interst.\ pressure &
+$P/Q_{\text{lymph}}$ & Antigen load &
+Node response & Reactive hypertrophy \\
+11 & Renal & GFR & Glomerular pressure &
+$P_{\text{glom}}/Q$ & Macula densa &
+Arteriolar resp. & TG feedback \\
+12 & Hepatic & Clearance flux & Metabolite conc. &
+$[\text{met}]/J$ & Portal signal &
+Prolif.\ resp. & Liver regeneration \\
+13 & Connective & Strain rate & Tendon force &
+$E \cdot A/L$ & Mech.\ strain &
+Fibroblast resp. & Tendon remodeling \\
+14 & Adipose & Storage flux & Energy substrate &
+$[\text{sub}]/J$ & Insulin signal &
+Adipocyte resp. & Leptin signalling \\
+15 & Haematopoietic & O$_2$ delivery & O$_2$ demand &
+$P_{O_2}/Q_{O_2}$ & EPO signal &
+Erythroid resp. & Erythropoiesis \\
+16 & Reproductive & Maturation flux & FSH signal &
+$1/(N_R \cdot K_a)$ & FSH conc. &
+Granulosa resp. & Follicular selection \\
+\midrule
+17 & Cardiac (ctrl) & Ejection flow & Vent.\ pressure &
+$P/Q_{\text{ej}}$ & Wall stress &
+Myocardial strain & Laplace--Starling \\
+18 & Reg.\ brain (ctrl) & Set-point signal &
+Error signal & $Z_{\text{setpoint}}$ &
+Sensory input & Autonomic output &
+Baroreceptor reset \\
+\midrule
+19 & Cartilage ($\eta \approx 0$) & Creep & Load &
+$H_A \cdot A/h$ & Load & Deformation &
+\textbf{(OA predicted)} \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Selected tissue proofs}
+
+We present five representative proofs; the remaining
+fourteen follow identical logic with the substitutions
+shown in Table~\ref{tab:nineteen}.
+
+\subsubsection{Neural: Hebb's Law (1949)}
+
+Hebb's postulate~\cite{Hebb1949}: when axon~A repeatedly
+fires cell~B, synaptic efficiency increases.
+Modern rate-based formulation:
+$\Delta w_{AB} = \eta\,r_A\,r_B$.
+Since synaptic weight $w$ is inversely related to
+synaptic impedance ($Z_{\text{syn}} \propto 1/w$):
+\begin{equation}
+  \Delta Z_{\text{syn}}
+  = -\eta\,\Gamma_{\text{syn}}\,
+    x_{\text{in}}\,x_{\text{out}}\,.
+  \quad \checkmark
+  \label{eq:hebb-C2}
+\end{equation}
+STDP (spike-timing-dependent plasticity) arises from
+the causal structure of $x_{\text{in}}$ preceding
+$x_{\text{out}}$: LTP when pre~$\to$~post ($\Gamma > 0$),
+LTD when reversed ($\Gamma < 0$).
+
+\subsubsection{Skeletal: Wolff's Law (1892)}
+
+Wolff's Law~\cite{Wolff1892}: bone internal architecture
+adapts to imposed mechanical demand.
+Bone impedance $Z_{\text{bone}} = F/v$ is proportional
+to density and stiffness.  The strain mismatch maps
+to $\Gamma_{\text{mech}}$:
+\begin{equation}
+  \Delta Z_{\text{bone}}
+  = -\eta\,\Gamma_{\text{mech}}\,
+    F_{\text{applied}}\,\varepsilon_{\text{bone}}
+  \quad \checkmark
+  \label{eq:wolff-C2}
+\end{equation}
+Astronaut bone loss: $F_{\text{applied}} \approx 0
+\Rightarrow x_{\text{in}} \cdot x_{\text{out}} \approx 0
+\Rightarrow \Delta Z = 0$.
+Without the C2 drive, bone impedance drifts
+under metabolic noise at $\sim 1\%$/month~\cite{Lang2004}.
+
+\subsubsection{Vascular: Glagov's Remodeling (1987)}
+
+Arteries enlarge compensatorily as plaque accumulates,
+maintaining lumen until burden exceeds
+$\sim 40\%$~\cite{Glagov1987}.
+Vascular impedance $Z_{\text{vasc}} = 8\mu L / \pi r^4$
+(Poiseuille).  Wall shear stress $\tau_w$ is
+$x_{\text{in}}$; endothelial response is $x_{\text{out}}$:
+\begin{equation}
+  \Delta Z_{\text{vasc}}
+  = -\eta\,\Gamma_{\text{vasc}}\,
+    \tau_w\,(\text{endothelial response})
+  \quad \checkmark
+  \label{eq:glagov-C2}
+\end{equation}
+The 40\% threshold corresponds to the critical $\Gamma$
+beyond which the smooth muscle learning rate $\eta$ cannot
+keep pace with plaque growth.
+
+\subsubsection{Immune: Affinity Maturation}
+
+Receptor--antigen impedance:
+$Z_{\text{receptor}} = 1/(K_a \cdot [\text{R}])$.
+Affinity maturation via somatic hypermutation~\cite{Victora2012}:
+$\Delta K_a \propto K_a \cdot [\text{Ag}] \cdot
+[\text{T}_{\text{FH}}]$.
+Since $\Delta Z \propto -\Delta K_a$:
+\begin{equation}
+  \Delta Z_{\text{receptor}}
+  = -\eta\,\Gamma_{\text{immune}}\,
+    [\text{Ag}]\,[\text{T}_{\text{FH}}]
+  \quad \checkmark
+  \label{eq:immune-C2}
+\end{equation}
+A vaccine is the deliberate injection of $x_{\text{in}}$
+to drive C2 in the absence of disease.
+Booster doses are spaced repetition for $\Gamma$
+reduction~\cite{Cepeda2006}.
+
+\subsubsection{Cartilage: the C2 null case ($\eta \approx 0$)}
+
+Articular cartilage is avascular; chondrocytes are sparse
+and post-mitotic.  Consequently $\eta_{\text{cart}}
+\approx 0$~\cite{Buckwalter2004}.
+When loading changes ($\Gamma_{\text{cart}} > 0$),
+$\Delta Z \approx 0$ regardless---the tissue cannot adapt.
+Osteoarthritis is not a ``disease'' but the
+\emph{predicted consequence} of an interface with
+$\eta \approx 0$.
+
+\paragraph{The healthy joint as impedance transformer.}
+An articular joint couples bone ($Z = 120$) to
+synovial fluid ($Z = 50$) through a cartilage layer
+at $Z_{\text{cart}} = 80 \approx \sqrt{120 \times 50}
+= 77.5$---the geometric mean condition for a
+quarter-wave transformer~\cite{Pozar2011}.
+When cartilage erodes (end-stage OA), the relay node
+is removed: $\Gamma = (120-50)/(120+50) = 0.41$,
+$T$ drops from $>0.80$ to $0.59$, producing
+chronic reflection-driven pain.
+
+
+% ============================================================
+%  SECTION 9 — CENTRAL CONTROLLERS
+% ============================================================
+\section{Central Controllers}
+\label{sec:controllers}
+
+The preceding tissue networks describe \emph{distributed}
+C2---local impedance matching along branches.
+Two systems operate at a higher hierarchical level,
+setting $Z_{\text{source}}$ or $Z_{\text{setpoint}}$
+for entire network trees.
+
+\subsection{Cardiac pump: Laplace--Starling remodeling}
+
+The heart is the voltage source whose output impedance
+determines the pressure waveform for the entire arterial
+tree.  C2 mapping:
+$\Delta Z_{\text{heart}} = -\eta\,\Gamma_{\text{aortic}}
+\,\sigma\,\varepsilon$,
+where $\sigma$ is wall stress (Laplace:
+$\sigma = Pr/2h$) and $\varepsilon$ is myocardial strain.
+
+Two hypertrophy modes:
+\begin{itemize}
+  \item \textbf{Concentric} (pressure overload,
+    $\Gamma > 0$): wall thickness $h$ increases,
+    $Z_{\text{heart}}$ rises toward $Z_{\text{aorta}}$.
+  \item \textbf{Eccentric} (volume overload):
+    chamber dilates, reducing mismatch from a
+    different direction.
+\end{itemize}
+Heart failure is $\Gamma_{\text{aortic}} \to 1$:
+ventricular impedance can no longer match the
+arterial tree.  Controller failure propagates to
+all downstream vascular branches.
+
+\subsection{Regulatory brain: baroreceptor resetting and
+allostatic load}
+
+The brainstem sets $Z_{\text{setpoint}}$ for the
+entire autonomic tree via the baroreflex arc.
+C2 mapping:
+$\Delta Z_{\text{setpoint}} = -\eta\,\Gamma_{\text{reg}}
+\,(\text{sensory input})\,(\text{autonomic output})$.
+
+Baroreceptor resetting in chronic
+hypertension~\cite{Chapleau1991}:
+the brainstem adapts its pressure setpoint upward
+($Z_{\text{setpoint}} \uparrow$), reducing local
+$\Gamma_{\text{reg}}$ but creating downstream mismatch
+in every organ.
+
+Allostatic load~\cite{McEwen1998}:
+\begin{equation}
+  L_{\text{allostatic}} = \int_0^T
+  |\Delta Z_{\text{setpoint}}(t)|\,dt\,,
+\end{equation}
+the cumulative shift in the controller's setpoint.
+Chronic stress causes multi-organ disease because
+the \emph{controller's} $\Gamma$ error propagates
+to all downstream networks.
+
+
+% ============================================================
+%  SECTION 10 — NHANES NETWORK PROPAGATION
+% ============================================================
+\section{Empirical Evidence: Network Propagation}
+\label{sec:propagation}
+
+Paper~VI (Section~\ref{sec:nhanes}) validated $\Gamma$
+within single organ systems.
+Here we test a stronger prediction: adding a physical
+measurement to one $\Gamma$-network should improve
+predictions in \emph{coupled} networks through
+impedance propagation at inter-network interfaces.
+
+\subsection{Experimental design}
+
+Using NHANES 1999--2018 (10~cycles, $n = 49{,}774$,
+$7{,}770$ deaths, up to 20-year follow-up), four
+configurations:
+\begin{itemize}
+  \item[A] Laboratory values only (27 items $\to$ 12 organs)
+  \item[B] Labs + blood pressure (SBP, DBP, pulse pressure
+    $\to$ vascular, cardiac, renal, neurological $Z$)
+  \item[C] Labs + smoking status
+    ($\to$ pulmonary, vascular, immune $Z$)
+  \item[D] Full physics (Labs + BP + smoking)
+\end{itemize}
+All mappings use textbook reference intervals.
+\textbf{Zero parameters are fitted to any outcome data.}
+
+\subsection{Results}
+
+\begin{table}[h]
+\centering
+\caption{All-cause mortality AUC by configuration.}
+\label{tab:allcause}
+\begin{tabular}{lcc}
+\toprule
+Configuration & AUC (95\% CI) & $\Delta$ vs.\ A \\
+\midrule
+A: Labs only    & 0.629 [0.622--0.636] & --- \\
+B: Labs + BP    & 0.705 [0.699--0.711] & $+0.075$ \\
+C: Labs + Smoke & 0.627 [0.620--0.634] & $-0.002$ \\
+D: Full physics & 0.704 [0.698--0.710] & $+0.075$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Organ-specific death AUC: Labs (A) vs.\
+Labs+BP (B).  ``Network'' organs receive no direct BP
+input; improvement comes from inter-network $\Gamma$-coupling.}
+\label{tab:propagation}
+\begin{tabular}{lcccc}
+\toprule
+Organ & Type & AUC (A) & AUC (B) & $\Delta$ \\
+\midrule
+Cardiac   & Network & 0.508 & 0.674 & $+0.166$ \\
+Neuro     & Network & 0.516 & 0.577 & $+0.061$ \\
+Renal     & Network & 0.677 & 0.700 & $+0.024$ \\
+Endocrine & Control & 0.814 & 0.814 & $+0.000$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Cardiac death AUC improves from 0.508 (chance) to
+0.674}---$\Delta = +0.166$---from a vascular measurement,
+not a cardiac measurement.
+SBP physically propagates through the vascular--cardiac
+interface (afterload), so vascular $Z$ directly determines
+cardiac $Z$.
+
+Endocrine serves as a negative control: no significant
+vascular--endocrine pressure interface exists, and
+AUC is unchanged ($\Delta = 0.000$).
+
+\textbf{This cross-organ improvement is the empirical
+signature of network propagation.}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/roc_network_propagation.pdf}
+  \caption{ROC curves for all-cause mortality:
+  Configuration~A (labs only, AUC~$= 0.629$) vs.\
+  Configuration~B (labs + BP, AUC~$= 0.705$).
+  The shaded region represents the AUC gain from
+  inter-network $\Gamma$-coupling through a single
+  vascular measurement.}
+  \label{fig:roc}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/health_index_boxplot.pdf}
+  \caption{Health Index $H = \prod(1-\Gamma_i^2)$ by
+  mortality quartile.  Q1 (sickest): median $H = 0.71$;
+  Q4 (healthiest): median $H = 0.89$.
+  Relative risk Q1/Q4 $= 6.89\times$.}
+  \label{fig:boxplot}
+\end{figure}
+
+
+% ============================================================
+%  SECTION 11 — EVOLUTIONARY CONVERGENCE
+% ============================================================
+\section{Evolutionary Convergence on C2}
+\label{sec:evolution}
+
+The gradient-descent derivation shows that C2 is the
+\emph{unique} first-order update rule minimising reflected
+energy at any repeatedly stimulated interface.
+Evolution ``discovers'' C2 not because organisms
+``know'' calculus, but because organisms that encode
+C2-like chemistry waste less energy, survive longer, and
+reproduce more.
+
+\subsection{The tissue is not the algorithm}
+
+The remodeling machinery differs vastly: NMDA receptors
+(neural), RANKL/OPG (bone), eNOS (vascular),
+AID somatic hypermutation (immune), keratinocyte Ca$^{2+}$
+(skin), HGF (liver), EPO (marrow), FSH receptors
+(reproductive)---ten completely different molecular
+machineries implementing the same equation.
+The substrate determines the material constants
+($\eta$, $Z_0$); the equation is dictated by physics.
+
+\subsection{The $\Gamma$-framework complements evolution}
+
+Classical evolutionary theory specifies \emph{how}
+variation is filtered but rarely specifies \emph{what
+physical functional} selection minimises.
+The $\Gamma$-framework supplies the missing objective
+function:
+\begin{equation}
+  \mathcal{A} = \int_0^T \sum_i \Gamma_i^2(t)\,
+  P_{\text{in},i}(t)\,dt\,.
+\end{equation}
+\emph{Variation} (mutation) generates candidate impedance
+layouts; \emph{thermodynamic viability} eliminates
+those with $\mathcal{A}$ too large; \emph{natural selection}
+further minimises $\mathcal{A}$ within the viable set.
+
+\subsection{Sex as a boundary condition}
+
+Sex does not alter C1--C3.  The hypothalamic--pituitary--gonadal
+(HPG) axis sets sex-specific $Z_{\text{setpoint}}$ values:
+testosterone raises $\eta_{\text{muscle}}$;
+oestrogen modulates $Z_{\text{adipose}}$ and $Z_{\text{bone}}$
+(menopause $\equiv Z_{\text{bone}} \uparrow,
+\Gamma_{\text{bone}} \uparrow$);
+pre-menopausal oestrogen maintains lower
+$\Gamma_{\text{vasc}}$ via enhanced endothelial C2.
+Sex is a parametric shift in initial and boundary
+conditions, not a different dynamical law.
+
+
+% ============================================================
+%  SECTION 12 — FALSIFIABLE PREDICTIONS
+% ============================================================
+\section{Falsifiable Predictions}
+\label{sec:predictions}
+
+\begin{enumerate}
+  \item \textbf{Cross-organ propagation (confirmed).}
+    Adding SBP improves cardiac ($+0.166$), neuro ($+0.061$),
+    renal ($+0.024$) AUC through network coupling.
+    $\checkmark$
+
+  \item \textbf{Control-organ invariance (confirmed).}
+    Endocrine AUC unchanged when SBP added
+    ($\Delta = 0.000$). $\checkmark$
+
+  \item \textbf{Specialised biomarker upgrade.}
+    Adding troponin/BNP (cardiac $Z$), liver elastography
+    (hepatic $Z$), and spirometry (pulmonary $Z$) to
+    the NHANES panel should raise organ-specific AUC
+    substantially above current levels.
+
+  \item \textbf{Microgravity bone loss follows C2 with
+    $x_{\text{in}} = 0$.}
+    Bone density loss rate in microgravity should be
+    predictable from $\eta$ and pre-flight
+    $\Gamma_{\text{mech}}$ without fitted parameters.
+
+  \item \textbf{Vaccine booster spacing optimises
+    $\sum x_{\text{in}} \cdot x_{\text{out}}$.}
+    Optimal booster interval matches the time at which
+    memory B-cell $x_{\text{out}}$ is maximally
+    available but $\Gamma_{\text{immune}}$ has not
+    fully decayed.
+
+  \item \textbf{Adding FEV1/SpO$_2$ (pulmonary $Z$)
+    will improve immune death AUC}
+    through the pulmonary--immune interface.
+
+  \item \textbf{Cross-modal impedance validation.}
+    Organ impedances from blood biochemistry (Lab-$\Gamma$)
+    should correlate with independently measured physical
+    impedances (BIA, shear-wave elastography, pulse-wave
+    velocity), closing every arrow in the
+    chemistry$\to$structure$\to$impedance$\to\Gamma$ chain.
+
+  \item \textbf{Prospective cohort.}
+    Tracking $H = \prod(1-\Gamma_i^2)$ longitudinally
+    should predict incident disease.
+
+  \item \textbf{Comparative thermal $\Gamma$.}
+    Aquatic organisms should have systematically lower
+    $\Gamma_{\text{th}}$ than terrestrial relatives;
+    amphibians should lie between.
+
+  \item \textbf{Fossil order of $\Gamma$-reduction organs.}
+    During the water-to-land transition, organs reducing
+    the largest $\Gamma$ channel should appear first:
+    integument $\prec$ lung $\prec$ kidney.
+\end{enumerate}
+
+
+% ============================================================
+%  SECTION 13 — DISCUSSION
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Corroboration versus proof}
+
+No finite collection of empirical successes can prove a
+universal theory true.
+What we claim is not proof but two logically independent
+results: (1)~uniqueness---given energy conservation at a
+1D interface, $\Gamma = (Z_2-Z_1)/(Z_2+Z_1)$ is forced
+by physics (Theorem~\ref{thm:gamma}); (2)~non-trivial
+prediction---a zero-parameter physics score should produce
+AUC~$\approx 0.50$ if it captures no real structure, yet
+the observed result is significantly above chance across
+all organs.
+
+\subsection{The status of C1, C2, C3}
+
+\begin{itemize}
+  \item \textbf{C1} ($\Gamma^2 + T = 1$): a \emph{theorem}
+    from the First Law.
+  \item \textbf{C2} ($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}
+    \cdot x_{\text{out}}$): the \emph{unique gradient descent}
+    on $\mathcal{A}[\Gamma]$ with activity gating.
+  \item \textbf{C3} (impedance-tagged transport):
+    the \emph{bookkeeping requirement} for computing $\Gamma$.
+\end{itemize}
+None is an assumption.  Papers~1--4 are therefore not a
+model with three axioms but a deductive chain from the
+First Law of Thermodynamics.
+
+\subsection{Implications for medicine}
+
+If tissue remodeling is C2, then disease is
+$|\Gamma| \gg 0$ that C2 cannot correct---either because
+the stimulus is too fast ($\eta$ too small: Glagov's
+threshold), the stimulus has stopped (astronaut bone loss),
+or the molecular machinery is broken (immunodeficiency).
+Chronic disease is impedance mismatch that has exceeded
+the local C2 learning capacity.
+
+\subsection{What is not claimed}
+
+\begin{enumerate}
+  \item C2 is not the only molecular process in remodeling.
+    We claim only that the \emph{net effect} on impedance
+    follows C2 on average.
+  \item We do not claim exact quantitative equivalence.
+    Each tissue has different $\eta$; large perturbations
+    may require higher-order terms.
+  \item NHANES AUC values demonstrate prediction consistent
+    with network propagation, not causation.
+\end{enumerate}
+
+\subsection{From black-box metrics to public falsification}
+
+The zero-parameter property enables a verification protocol
+no regression model can match: (1)~self-computation---the
+user enters health-check data into an offline calculator;
+(2)~textbook side-by-side---Framingham, CKD-EPI, HOMA-IR
+computed alongside $\Gamma$; (3)~falsifiable
+prediction---ranked organ channels ordered by $|\Gamma_i|$,
+prospectively testable.
+
+\subsection{Everyday phenomena as $\Gamma^2$-minimisation}
+
+Wound repair, infant soft tissue buffering, infantile
+amnesia, and percussion restoration of consciousness
+(Papers~2--4) all derive from $\mathcal{A}[\Gamma]
+= \int \Gamma^2\,dt \to \min$ across spatial scales
+from collagen fibres ($\sim\mu$m) to whole-body
+mechanics ($\sim$m) and time scales from milliseconds
+to years---no additional postulates required.
+
+
+% ============================================================
+%  SECTION 14 — CONCLUSION
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We have established five results.
+
+\textbf{First}, the reflection coefficient
+$\Gamma = (Z_2-Z_1)/(Z_2+Z_1)$ and the conservation
+identity $\Gamma^2 + T = 1$ are the unique consequence
+of applying the First Law to any one-dimensional interface.
+
+\textbf{Second}, NHANES validation ($n = 7{,}393$ initial;
+$n = 49{,}774$ expanded; zero fitted parameters;
+hash-locked) confirms organ-level $\Gamma$-diagnostics
+in 7/7 systems, all-cause mortality AUC $= 0.705$,
+Harrell's~C $= 0.70$, and Q1/Q4 mortality ratio
+$= 6.89\times$ (Level~3 evidence).
+
+\textbf{Third}, constraint C2 is the unique
+gradient-descent rule for minimising reflected energy,
+and nineteen known remodeling laws are each algebraically
+equivalent to C2 under the appropriate substitution---plus
+the cartilage null case ($\eta \approx 0$, predicting
+osteoarthritis).
+
+\textbf{Fourth}, network-propagation validation confirms
+cross-organ $\Gamma$-coupling: a vascular measurement
+improves cardiac ($+0.166$), neurological ($+0.061$),
+and renal ($+0.024$) death prediction while leaving
+the control organ (endocrine, $\Delta = 0.000$) invariant.
+
+\textbf{Fifth}, two central controllers---cardiac pump
+and regulatory brain---also obey C2 at a hierarchically
+higher level, adapting $Z_{\text{source}}$ or
+$Z_{\text{setpoint}}$ for entire network trees.
+Controller failure propagates to all downstream networks,
+explaining why heart failure and chronic stress are
+multi-organ diseases.
+
+The question is no longer ``Does C2 apply to tissue~X?''
+The question is: ``What stops C2 from applying to
+tissue~X?''  If nothing stops it, then tissue~X
+remodels via C2.  And nothing stops it.
+
+
+% ============================================================
+\begin{acknowledgments}
+This work used no external funding.
+NHANES data were obtained from the U.S.\ Centers for
+Disease Control and Prevention (CDC) National Center
+for Health Statistics.
+The author thanks Claude (Anthropic) for extended
+discussions that clarified the universality of C2
+across tissue types and the interface isomorphism
+principle.
+\end{acknowledgments}
+
+
+% ============================================================
+\appendix
+
+\section{Experimental Code and Data}
+\label{app:code}
+
+\begin{itemize}
+  \item 3-cycle validation:
+    \texttt{experiments/exp\_nhanes\_multicycle\_validation.py}
+  \item 10-cycle expanded pipeline ($n = 49{,}774$):
+    \texttt{experiments/exp\_expanded\_physics.py}
+  \item Network propagation:
+    \texttt{nhanes\_results/expanded\_physics\_results.json}
+  \item Full calibration:
+    \texttt{experiments/exp\_full\_calibration.py}
+  \item STARD diagnostic accuracy:
+    \texttt{experiments/exp\_full\_calibration.py}
+  \item $\Gamma$ vs.\ textbook:
+    \texttt{experiments/exp\_gamma\_vs\_textbook.py}
+  \item Blind prediction hashes (SHA-256):
+    \begin{itemize}
+      \item Single-cycle:
+        \texttt{be5e8fd00d92860054a20dcc6b7c9cf4820ff19d71ba05af252f2f2a70c2231b}
+      \item Multi-cycle:
+        \texttt{08ac9b53631279e1af27a132e6046da6e021756630ba4f247df9726f7ce52626}
+    \end{itemize}
+  \item Verification suite: 3{,}274 automated tests (pytest,
+    zero failures, 100\% pass rate)
+\end{itemize}
+
+Source code: \url{https://github.com/cyhuang76/alice-gamma-net}
+
+Concept DOI:
+\href{https://doi.org/10.5281/zenodo.18751831}{10.5281/zenodo.18751831}
+
+Code DOI:
+\href{https://doi.org/10.5281/zenodo.18852835}{10.5281/zenodo.18852835}
+
+\section{NHANES Variable Mapping}
+\label{app:mapping}
+
+\begin{table}[h]
+\centering
+\caption{NHANES to Alice Lab-$\Gamma$ variable mapping.}
+\label{tab:nhanes-map}
+\begin{tabular}{ll}
+\toprule
+NHANES code & Alice name \\
+\midrule
+LBXSATSI & AST \\
+LBXSASSI & ALT \\
+LBXSAPSI & ALP \\
+LBXSGB   & GGT \\
+LBXSTB   & Bilirubin (total) \\
+LBXSAL   & Albumin \\
+LBXSTP   & Total Protein \\
+LBXSCR   & Creatinine \\
+LBXSBU   & BUN \\
+LBXSUA   & Uric Acid \\
+LBXSCH   & Total Cholesterol \\
+LBXSC3SI & CO$_2$ \\
+LBXSNA   & Sodium \\
+LBXSK    & Potassium \\
+LBXSCL   & Chloride \\
+LBXSCA   & Calcium \\
+LBXSPH   & Phosphate \\
+LBXSGL   & Glucose \\
+LBXSCK   & CK-MB \\
+LBXWBCSI & WBC \\
+LBXRBCSI & RBC \\
+LBXHGB   & Haemoglobin \\
+LBXHCT   & Haematocrit \\
+LBXMCVSI & MCV \\
+LBXPLTSI & Platelets \\
+LBDHDD   & HDL \\
+LBXTR    & Triglycerides \\
+LBXGH    & HbA1c \\
+LBXGLU   & Glucose (fasting) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ============================================================
+%  BIBLIOGRAPHY
+% ============================================================
+\begin{thebibliography}{99}
+
+\bibitem{Paper0}
+H.-Y.~Huang, ``The $\Gamma$-Net Framework: Axioms, Derived
+Quantities, and Experimental Validation Matrix,''
+Zenodo (2026), Paper~0 of this series.
+
+\bibitem{Paper1}
+H.-Y.~Huang, ``Irreducible Dimensional Cost and Fractal
+Impedance Packing in Heterogeneous Networks,''
+arXiv (2026), Paper~1.
+
+\bibitem{Paper2}
+H.-Y.~Huang, ``Dual Neural--Vascular Networks from Impedance
+Matching: Murray's Law, Organ Health, and the Vascular
+Reflection Coefficient,'' arXiv (2026), Paper~2.
+
+\bibitem{Paper3}
+H.-Y.~Huang, ``The Cost of Life: Impedance Debt, Sleep,
+Lifecycle, and Aging as Thermodynamic Consequences of
+$\Gamma$-Minimisation,'' arXiv (2026), Paper~3.
+
+\bibitem{Paper4}
+H.-Y.~Huang, ``Memory, Consciousness, and Soul as Impedance
+Physics on the $\Gamma$-Net,'' arXiv (2026), Paper~4.
+
+\bibitem{Wolff1892}
+J.~Wolff, \emph{Das Gesetz der Transformation der Knochen}
+(Hirschwald, Berlin, 1892).
+
+\bibitem{Glagov1987}
+S.~Glagov, E.~Weisenberg, C.~K.~Zarins, R.~Stankunavicius,
+and G.~J.~Kolettis, ``Compensatory enlargement of human
+atherosclerotic coronary arteries,''
+\emph{New England J.\ Med.}\ \textbf{316}, 1371 (1987).
+
+\bibitem{Hebb1949}
+D.~O.~Hebb, \emph{The Organization of Behavior}
+(Wiley, New York, 1949).
+
+\bibitem{Lang2004}
+T.~Lang \emph{et al.}, ``Cortical and trabecular bone
+mineral loss from the spine and hip in long-duration
+spaceflight,'' \emph{J.\ Bone Miner.\ Res.}\ \textbf{19},
+1006 (2004).
+
+\bibitem{Victora2012}
+G.~D.~Victora and M.~C.~Nussenzweig, ``Germinal centers,''
+\emph{Annu.\ Rev.\ Immunol.}\ \textbf{30}, 429 (2012).
+
+\bibitem{Cepeda2006}
+N.~J.~Cepeda \emph{et al.}, ``Distributed practice in
+verbal recall tasks,'' \emph{Psychol.\ Bull.}\ \textbf{132},
+354 (2006).
+
+\bibitem{Buckwalter2004}
+J.~A.~Buckwalter, H.~J.~Mankin, and A.~J.~Grodzinsky,
+``Articular cartilage and osteoarthritis,''
+\emph{Instr.\ Course Lect.}\ \textbf{54}, 465 (2005).
+
+\bibitem{Pozar2011}
+D.~M.~Pozar, \emph{Microwave Engineering}, 4th~ed.\
+(Wiley, 2011).
+
+\bibitem{Chapleau1991}
+M.~W.~Chapleau, G.~Hajduczok, and F.~M.~Abboud,
+``Mechanisms of resetting of arterial baroreceptors,''
+\emph{Am.\ J.\ Med.\ Sci.}\ \textbf{301}, 271 (1991).
+
+\bibitem{McEwen1998}
+B.~S.~McEwen, ``Stress, adaptation, and disease:
+Allostasis and allostatic load,''
+\emph{Ann.\ N.Y.\ Acad.\ Sci.}\ \textbf{840}, 33 (1998).
+
+\bibitem{Thomas2010}
+S.~E.~Thomas, K.~Dykes, and B.~A.~Marks,
+``Plantar hyperkeratosis,''
+\emph{J.\ Am.\ Podiatric Med.\ Assoc.}\ \textbf{100},
+251 (2010).
+
+\bibitem{Goldberg1975}
+A.~L.~Goldberg \emph{et al.},
+``Mechanism of work-induced hypertrophy of skeletal muscle,''
+\emph{Med.\ Sci.\ Sports} \textbf{7}, 185 (1975).
+
+\bibitem{Frost2003}
+H.~M.~Frost, ``Bone's mechanostat: a 2003 update,''
+\emph{Anat.\ Record} \textbf{275A}, 1081 (2003).
+
+\bibitem{Hill1938}
+A.~V.~Hill, ``The heat of shortening and the dynamic
+constants of muscle,''
+\emph{Proc.\ R.\ Soc.\ Lond.\ B} \textbf{126}, 136 (1938).
+
+\bibitem{Hackett2001}
+P.~H.~Hackett and R.~C.~Roach, ``High-altitude illness,''
+\emph{New England J.\ Med.}\ \textbf{345}, 107 (2001).
+
+\bibitem{Tappenden2014}
+K.~A.~Tappenden, ``Intestinal adaptation following resection,''
+\emph{J.\ Parenter.\ Ent.\ Nutr.}\ \textbf{38}, 23S (2014).
+
+\bibitem{Kahn2006}
+S.~E.~Kahn, R.~L.~Hull, and K.~M.~Utzschneider,
+``Mechanisms linking obesity to insulin resistance
+and type~2 diabetes,''
+\emph{Nature} \textbf{444}, 840 (2006).
+
+\bibitem{Michalopoulos2007}
+G.~K.~Michalopoulos, ``Liver regeneration,''
+\emph{J.\ Cell.\ Physiol.}\ \textbf{213}, 286 (2007).
+
+\bibitem{Friedman2019}
+J.~M.~Friedman, ``Leptin and the endocrine control of
+energy balance,''
+\emph{Nature Metab.}\ \textbf{1}, 754 (2019).
+
+\bibitem{Brenner1982}
+B.~M.~Brenner, T.~W.~Meyer, and T.~H.~Hostetter,
+``Dietary protein intake and progressive kidney disease,''
+\emph{New England J.\ Med.}\ \textbf{307}, 652 (1982).
+
+\bibitem{Grossman1975}
+W.~Grossman, D.~Jones, and L.~P.~McLaurin,
+``Wall stress and patterns of hypertrophy,''
+\emph{J.\ Clin.\ Invest.}\ \textbf{56}, 56 (1975).
+
+\bibitem{Maron2006}
+B.~J.~Maron and A.~Pelliccia,
+``The heart of trained athletes,''
+\emph{Circulation} \textbf{114}, 1633 (2006).
+
+\bibitem{Erwin2011}
+D.~H.~Erwin \emph{et al.}, ``The Cambrian conundrum,''
+\emph{Science} \textbf{334}, 1091 (2011).
+
+\bibitem{West1997}
+G.~B.~West, J.~H.~Brown, and B.~J.~Enquist,
+``A general model for allometric scaling laws in biology,''
+\emph{Science} \textbf{276}, 122 (1997).
+
+\bibitem{Guyton2020}
+J.~E.~Hall and M.~E.~Hall, \emph{Guyton and Hall Textbook of
+Medical Physiology}, 14th~ed.\ (Elsevier, 2020).
+
+\bibitem{NHANES2018}
+CDC, ``NHANES 2017--2018,''
+\url{https://wwwn.cdc.gov/nchs/nhanes/}.
+
+\bibitem{Nichols2022}
+W.~W.~Nichols \emph{et al.}, \emph{McDonald's Blood Flow in
+Arteries}, 7th~ed.\ (CRC Press, 2022).
+
+\bibitem{Kalra2025}
+A.~P.~Kalra \emph{et al.}, ``Ionic conduction through
+microtubule nanopores,'' \emph{Proc.\ Natl.\ Acad.\ Sci.\
+USA} \textbf{122}, e2413961122 (2025).
+
+\bibitem{ALICE_code}
+H.-Y.~Huang, ALICE Smart System,
+\url{https://github.com/cyhuang76/alice-gamma-net} (2026).
+\href{https://doi.org/10.5281/zenodo.18852835}{doi:10.5281/zenodo.18852835}
+
+\end{thebibliography}
+
+\end{document}

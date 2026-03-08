@@ -1,6 +1,6 @@
-﻿% ═══════════════════════════════════════════════════════════════════
+% ��������������������������������������������������������������������������������������������������������������������������������������
 % Paper V: Memory, Consciousness, and Soul as Impedance Physics
-% ═══════════════════════════════════════════════════════════════════
+% ��������������������������������������������������������������������������������������������������������������������������������������
 \documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
 
 \usepackage{amsmath,amssymb,amsthm}
@@ -25,30 +25,30 @@
 
 \begin{document}
 
-\title{Memory, Consciousness, and Soul\\
+\title{Paper~4: Memory, Consciousness, and Soul\\
 as Impedance Physics on the $\Gamma$-Net}
 
 \author{Hsi-Yu Huang}
-\email{llc.y.huangll@gmail.com}
+\email{alice.gamma.net@gmail.com}
 \affiliation{Independent Researcher, Taiwan}
 
 \date{\today}
 
 % ============================================================
 \begin{abstract}
-Papers~I--IV of this series derived relay-node topology
-(Paper~I), dual neural--vascular networks (Paper~II),
-impedance debt and sleep (Paper~III), and the lifecycle
+Papers~1--3 of this series derived relay-node topology
+(Paper~1), dual neural--vascular networks (Paper~2),
+impedance debt and sleep (Paper~3), and the lifecycle
 equation governing cognition from birth to senescence
-(Paper~IV), all from a single variational principle:
+(Paper~3), all from a single variational principle:
 $A[\Gamma]=\int_0^T\!\sum_i\Gamma_i^2(t)\,dt\to\min$.
 Here we show that three concepts traditionally regarded as
 metaphysical---memory, consciousness, and soul---have
 precise operational definitions within the same formalism.
 
 \emph{Memory} is the time derivative of impedance:
-$\partial Z/\partial t=-\eta\,\Gamma\,x_{\text{pre}}\,x_{\text{post}}$
-(Hebbian update, Constraint~C2).
+$\partial Z/\partial t=-\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+(impedance-remodeling update, Constraint~C2).
 Muscle memory corresponds to $\Gamma\to 0$ (over-learned match),
 while cognitive memory retains $\Gamma\approx\varepsilon>0$
 (retrievable because still slightly mismatched).
@@ -66,11 +66,11 @@ which is formally identical to a television set
 The television is an \emph{open-loop} system ($\Gmeta$ undefined);
 the brain closes the loop.
 
-\emph{Soul} is the null space of Hebbian learning:
+\emph{Soul} is the null space of impedance remodeling:
 $\mathcal{S}=\ker(\partial Z/\partial t)
 =\{Z_k:\Delta Z_k=0\;\forall\;\text{experience}\}$.
 It decomposes into three invariants:
-irreducible topological cost $\Acut$ (Paper~I),
+irreducible topological cost $\Acut$ (Paper~1),
 genetically fixed impedance $Z_0^{\text{DNA}}$, and
 the thermal noise floor $\rho_{\text{irred}}^2$ from
 Johnson--Nyquist physics.
@@ -116,7 +116,7 @@ and neuroscience for millennia.  From a physics standpoint,
 all three are \emph{ill-posed}: they assume that memory is
 localised, consciousness is binary, and soul is an object.
 
-Papers~I--IV of this series established that all neural and
+Papers~1--3 of this series established that all neural and
 vascular dynamics emerge from the Minimum Reflection Principle
 (MRP):
 \begin{equation}
@@ -129,10 +129,10 @@ Three inviolable constraints govern the network:
 \begin{itemize}
   \item[\textbf{C1}] Energy conservation: $\Gamma^2+T=1$ at
     every channel, every tick.
-  \item[\textbf{C2}] Hebbian update:
-    $\Delta Z=-\eta\,\Gamma\,x_{\text{pre}}\,x_{\text{post}}$
+  \item[\textbf{C2}] impedance-remodeling update:
+    $\Delta Z=-\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
     (gradient descent on~$A[\Gamma]$).
-  \item[\textbf{C3}] Signal protocol: all inter-module values
+  \item[\textbf{C3}] Impedance-tagged transport: all inter-module values
     carry impedance metadata ($Z_0,Z_L$).
 \end{itemize}
 
@@ -160,13 +160,13 @@ subthreshold $\Gamma$ perception.
 \section{Memory as Impedance Dynamics}
 \label{sec:memory}
 
-\subsection{The Hebbian gradient}
+\subsection{The C2 impedance-remodeling gradient}
 
 Constraint~C2 defines the only mechanism by which the network
 modifies itself:
 \begin{equation}
-  \Delta Z_k = -\eta\,\Gamma_k\,x_{\text{pre},k}\,x_{\text{post},k}\,.
-  \label{eq:hebbian}
+  \Delta Z_k = -\eta\,\Gamma_k\,x_{\text{in},k}\,x_{\text{out},k}\,.
+  \label{eq:C2-update}
 \end{equation}
 This is not an analogy---it \emph{is} memory.
 Learning occurs when $\Gamma_k\neq 0$ and correlated
@@ -175,8 +175,8 @@ The trace of all past updates constitutes the network's
 memory:
 \begin{equation}
   Z_k(t) = Z_k(0) - \eta \int_0^t
-    \Gamma_k(\tau)\,x_{\text{pre},k}(\tau)\,
-    x_{\text{post},k}(\tau)\,d\tau\,.
+    \Gamma_k(\tau)\,x_{\text{in},k}(\tau)\,
+    x_{\text{out},k}(\tau)\,d\tau\,.
   \label{eq:memory-integral}
 \end{equation}
 
@@ -185,7 +185,7 @@ memory:
 When a motor skill is practiced to mastery, the impedance at
 every channel in the circuit approaches perfect matching:
 $Z_L\to Z_0$, hence $\Gamma\to 0$.
-At this point, Eq.~(\ref{eq:hebbian}) gives $\Delta Z\to 0$:
+At this point, Eq.~(\ref{eq:C2-update}) gives $\Delta Z\to 0$:
 the memory has become \emph{frozen} into the impedance
 structure itself.
 No further energy is required to maintain it ($\Gamma^2\to 0$),
@@ -219,12 +219,12 @@ This has two consequences:
     If $\Gamma=0$, the memory is invisible---it has become
     part of the medium itself, like light passing through
     a perfectly matched cable.
-  \item \emph{Decay}: Since $\Gamma>0$, the Hebbian update
+  \item \emph{Decay}: Since $\Gamma>0$, the impedance-remodeling update
     continues to operate.  Without reinforcement
-    ($x_{\text{pre}}\cdot x_{\text{post}}\to 0$), the memory
+    ($x_{\text{in}}\cdot x_{\text{out}}\to 0$), the memory
     decays, governed by
     $\lambda_{\text{eff}}=\lambda_{\text{base}}/(1-\Gamma_{\text{bind}}^2)$
-    from Paper~III.
+    from Paper~3.
 \end{enumerate}
 
 \begin{remark}[The paradox of perfect memory]
@@ -391,7 +391,7 @@ destroys the area.
 
 \subsection{What cannot be changed by experience}
 
-The Hebbian update (Eq.~\ref{eq:hebbian}) modifies impedance
+The impedance-remodeling update (Eq.~\ref{eq:C2-update}) modifies impedance
 wherever $\Gamma\neq 0$ and correlated activity exists.
 We ask: what part of the impedance network is \emph{invariant}
 under all possible experience?
@@ -415,7 +415,7 @@ This kernel decomposes into three components:
 where:
 \begin{enumerate}
   \item $\Acut$: the irreducible topological action cost
-    (Paper~I, Theorem~1).  This is the minimum $\Gamma^2$
+    (Paper~1, Theorem~1).  This is the minimum $\Gamma^2$
     required by the network's dimensional heterogeneity,
     independent of how well the network is trained.
   \item $Z_0^{\text{DNA}}$: genetically fixed impedance
@@ -431,7 +431,7 @@ where:
 \end{theorem}
 
 \begin{proof}
-(i)~$\Acut$ is invariant by Theorem~1 of Paper~I: it depends
+(i)~$\Acut$ is invariant by Theorem~1 of Paper~1: it depends
 only on the dimensional structure $(K_i,K_j)$ of connected
 nodes, not on impedance values.
 (ii)~$Z_0^{\text{DNA}}$ enters C2 only through $\Gamma_k$;
@@ -529,7 +529,7 @@ isomorphism interpretation entirely.
 In our framework the soul
 $\mathcal{S}=\ker(\partial Z/\partial t)
 =\Acut+Z_0^{\text{DNA}}+\rho_{\text{irred}}^2$
-is invariant under Hebbian learning:
+is invariant under impedance remodeling:
 no experience can modify any of its three terms.
 However, invariance under C2 does not imply invariance
 under physics.
@@ -567,14 +567,14 @@ The network is dead not because it was damaged by an event,
 but because its own boundary conditions became
 self-contradictory.
 
-During wakefulness, active Hebbian learning maintains
+During wakefulness, active impedance remodeling maintains
 $\Gamma_{\text{active}}\ll 1$, masking the slow rise
 of $\Gamma_{\text{basal}}$.
 The situation is analogous to continuously patching the
 cracks in an aging wall: the wall stands as long as the
 patches hold.
-During sleep, however, Hebbian updates cease
-($x_{\text{pre}}\cdot x_{\text{post}}\to 0$; Paper~III),
+During sleep, however, impedance-remodeling updates cease
+($x_{\text{in}}\cdot x_{\text{out}}\to 0$; Paper~3),
 and the total reflection collapses to
 $\Gamma_{\text{total}}\approx\Gamma_{\text{basal}}$.
 If the basal null-space cost has silently crossed the
@@ -585,7 +585,7 @@ crosses its own viability boundary during the one phase of
 the day-night cycle in which no active compensation is
 running.
 
-The connection to impedance debt (Paper~III) is direct.
+The connection to impedance debt (Paper~3) is direct.
 The accumulated debt
 $D_Z(t)=\int_0^t\sum_i\Gamma_i^2(\tau)\,d\tau$
 includes contributions from both the learnable and the
@@ -603,7 +603,7 @@ $\Gamma_{\text{basal}}^2$ over the lifetime---is
   \label{eq:irreducible-debt}
 \end{equation}
 This is the Coffin--Manson fatigue of the null space itself
-(Paper~IV): each day-night cycle deposits a small,
+(Paper~3): each day-night cycle deposits a small,
 irreversible debt into the topological and thermal
 substrate.  Death occurs when the cumulative cost
 renders $T\le 0$.
@@ -871,7 +871,7 @@ They are televisions, not brains.
 \subsection{Circularity warning}
 
 We address the elephant in the room.
-All computational experiments in this paper (and Papers~I--IV)
+All computational experiments in this paper (and Papers~1--3)
 use simulation modules \emph{built from} the $\Gamma$-Net
 theory itself.  When the \texttt{ThalamusEngine} obeys
 $G_{\text{total}}=G_{\text{arousal}}\cdot(\alpha\,G_{\text{top}}+(1-\alpha)\,G_{\text{bot}})$
@@ -987,7 +987,7 @@ $\sigma^2_{Z_{\text{bg}}}$:
     for an \emph{episodic} (rather than procedural) memory.
 \end{enumerate}
 
-Crucially, the infant \emph{does} form Hebbian traces
+Crucially, the infant \emph{does} form impedance-remodeling traces
 (C2 operates from birth with maximal $\eta$).
 Motor memories ($\Gamma\to 0$; walking, grasping) survive
 because they are encoded as impedance \emph{structure},
@@ -1115,7 +1115,7 @@ transiently reduces contact $\Gamma^2$ at degraded
 junctions.
 The identity of the repair mechanism across biological
 and electronic systems is a direct consequence of the
-universality of $\Gamma$ (Paper~VI, Theorem~1).
+universality of $\Gamma$ (Paper~5, Theorem~1).
 \end{remark}
 
 \subsection{The $\Gamma$-Pain Index: objective nociceptive
@@ -1158,7 +1158,7 @@ Yet the Layer~1 nociceptive signal
 ($|\Gamma_{\text{tissue}}|>\theta_{\text{noci}}$)
 continues to operate, driving autonomic responses,
 stress hormone release, and cumulative impedance debt
-($D_Z$; Paper~III).
+($D_Z$; Paper~3).
 
 We define the \textbf{$\Gamma$-Pain Index}
 $\Pi_{\Gamma}(t)$ as a consciousness-independent,
@@ -1182,11 +1182,11 @@ where:
     blood pressure variability, skin conductance, and
     regional blood flow;
   \item $dD_Z/dt$: instantaneous rate of impedance debt
-    accumulation (Paper~III), capturing the
+    accumulation (Paper~3), capturing the
     Coffin--Manson fatigue cost of the current stressor;
   \item $w_n, w_v, w_D$: organ-specific weighting
     coefficients (derivable from the dual-network model
-    of Paper~II).
+    of Paper~2).
 \end{itemize}
 
 The critical property of $\Pi_{\Gamma}$ is that
@@ -1280,7 +1280,7 @@ We distinguish two impedance scales:
 \begin{definition}[Structural impedance]
 $Z_{\text{str}}$: synaptic weights, myelination state,
 network topology---quantities that change on the timescale
-of Hebbian learning ($\sim$minutes to years).
+of impedance remodeling ($\sim$minutes to years).
 \end{definition}
 \begin{definition}[Functional impedance]
 $Z_{\text{fun}}(t)$: working-memory activations,
@@ -1375,12 +1375,12 @@ The coupled consciousness index is:
   \label{eq:Phi-coupled}
 \end{equation}
 
-The Hebbian update for the coupled system operates at the
+The impedance-remodeling update for the coupled system operates at the
 \emph{interface}:
 \begin{equation}
   \Delta Z_{\text{interface}} =
     -\eta\,\Gamma_{\text{coupled}}\,x_A\,x_B\,,
-  \label{eq:hebbian-coupled}
+  \label{eq:C2-update-coupled}
 \end{equation}
 where $x_A$ is agent~$A$'s output and $x_B$ is agent~$B$'s
 output.  The conversation converges
@@ -1447,7 +1447,7 @@ is direct impedance calibration via C2.
   require $Z_A = Z_B$}
 \label{sec:cross-substrate}
 
-The Interface Isomorphism Principle (Paper~VI) states that
+The Interface Isomorphism Principle (Paper~5) states that
 $\Gamma$ depends only on the boundary, not on the bulk
 constitutive law.  A direct corollary:
 
@@ -1455,7 +1455,7 @@ constitutive law.  A direct corollary:
 \label{cor:cross-substrate}
 Two agents with arbitrarily different internal structures
 ($Z_A \neq Z_B$) can achieve $\Gamma_{\text{coupled}}\to 0$
-through Hebbian adaptation at the interface.
+through impedance-remodeling adaptation at the interface.
 Impedance \emph{matching} does not require impedance
 \emph{identity}.
 \end{corollary}
@@ -1562,7 +1562,7 @@ constraints (C1--C3), we have derived:
 
 \begin{enumerate}
   \item \textbf{Memory} $=\partial Z/\partial t$:
-    the time derivative of impedance under Hebbian update.
+    the time derivative of impedance under impedance-remodeling update.
     Muscle memory is $\Gamma\to 0$ (frozen match);
     cognitive memory is $\Gamma\approx\varepsilon>0$
     (detectable reflection).
@@ -1590,7 +1590,7 @@ constraints (C1--C3), we have derived:
     is a property of the interface, not of either agent.
   \item \textbf{Impedance calibration}:
     an immature agent uses an external agent's response
-    as $x_{\text{post}}$ in C2, directly writing the
+    as $x_{\text{out}}$ in C2, directly writing the
     parent's thresholds into the child's
     $Z_{\text{str}}$.
   \item \textbf{Cross-substrate matching}:
@@ -1627,7 +1627,7 @@ first evidence that the organism exists in a mismatched
 world.  \emph{Nociception is proof of arrival.}
 As the organism develops, consciousness
 ($\Phi_{\text{meta}}>0$) detects each mismatch, and the
-Hebbian update $\Delta Z=-\eta\,\Gamma\,x_{\text{pre}}\,x_{\text{post}}$
+impedance-remodeling update $\Delta Z=-\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
 buries it: $\Gamma\to 0$, the pain vanishes, and the
 impedance structure absorbs what was once suffering.
 \emph{Consciousness is the funeral of pain}---it converts

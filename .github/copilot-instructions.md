@@ -12,8 +12,8 @@ where Γᵢ = (Z_load,i − Z_source,i) / (Z_load,i + Z_source,i)
 
 ### Three Mandatory Constraints (never violate):
 - **C1 ENERGY CONSERVATION**: Γ² + T = 1 at every channel, every tick.
-- **C2 HEBBIAN UPDATE**: ΔZ = −η · Γ · x_pre · x_post (gradient descent on A[Γ])
-- **C3 SIGNAL PROTOCOL**: All inter-module values must be ElectricalSignal objects carrying Z metadata.
+- **C2 IMPEDANCE REMODELING**: ΔZ = −η · Γ · x_in · x_out (gradient descent on A[Γ])
+- **C3 IMPEDANCE-TAGGED TRANSPORT**: All inter-module values must be ElectricalSignal objects carrying Z metadata.
 
 ## Architecture Rules
 - All signals between modules: `ElectricalSignal` (carries Z_source, Z_load, value)
@@ -41,9 +41,9 @@ where Γᵢ = (Z_load,i − Z_source,i) / (Z_load,i + Z_source,i)
 ```
 alice-gamma-net/
 ├── alice/          # Core source (modules, signals, physics)
-├── tests/          # pytest suite (2402+ tests)
+├── tests/          # pytest suite (3274+ tests)
 ├── docs/           # Architecture docs, KNOWN_LIMITATIONS.md
-├── papers/         # 4 published papers (LaTeX + PDF)
+├── papers/         # 6 papers (Paper 0–5, LaTeX + PDF)
 ├── benchmarks/     # Performance benchmarks
 └── ethicsdocs/     # Ethics position documents
 ```
@@ -51,11 +51,11 @@ alice-gamma-net/
 ## When Suggesting Code
 1. Always use `ElectricalSignal` for inter-module communication
 2. Always verify Γ² + T = 1 after any impedance change
-3. Apply Hebbian update only via: ΔZ = −η · Γ · x_pre · x_post
+3. Apply impedance remodeling only via: ΔZ = −η · Γ · x_in · x_out
 4. Add corresponding pytest test for every new function
 5. Document any known limitation in docs/KNOWN_LIMITATIONS.md
 
 ## What Copilot Should NOT Do
 - Do NOT suggest raw float passing between modules
 - Do NOT suggest ML/gradient-descent training loops
-- Do NOT bypass the ElectricalSignal protocol
+- Do NOT bypass the ElectricalSignal protocol (impedance-tagged transport)

@@ -10,12 +10,12 @@ Every pair (i, j) therefore has a nonzero reflection coefficient:
 
 The ensemble of all Γ_ij IS the network topology — not a graph drawn
 in advance, but a living structure that emerges from impedance diversity
-and reshapes itself every tick via Hebbian learning (C2).
+and reshapes itself every tick via impedance remodeling (C2).
 
 Key physics:
-  C1  Energy conservation:  Γ_ij² + T_ij = 1   at every edge, every tick
-  C2  Hebbian update:       ΔZ_i  = −η · Γ_ij · x_i · x_j
-  C3  Signal protocol:      All values carry impedance metadata
+  C1  Energy conservation:       Γ_ij² + T_ij = 1   at every edge, every tick
+  C2  Impedance remodeling:      ΔZ_i  = −η · Γ_ij · x_in · x_out
+  C3  Impedance-tagged transport: All values carry impedance metadata
 
 Multi-core coaxial extension:
   Each connection is not a single wire but a bundle of K parallel
@@ -32,7 +32,7 @@ Dimensional Cost Irreducibility Theorem (2026-02-26):
 
       A = A_imp(t) + A_cut
 
-  where A_imp → 0 under C2 Hebbian learning, and
+  where A_imp → 0 under C2 impedance remodeling, and
   A_cut = Σ_{edges} (K_src − K_tgt)⁺ is invariant under all gradients.
 
   Corollary: minimising A requires reducing high-to-low-K edges,
@@ -43,7 +43,7 @@ This module provides:
   - GammaNode       : a node with K-dimensional impedance vector
   - MulticoreChannel: K×K matrix Γ channel between two nodes
   - GammaTopology   : dynamic network of N nodes, full Γ matrix,
-                       Hebbian evolution, topology metrics
+                       impedance remodeling evolution, topology metrics
 
 References:
   - Telegrapher's equation for axonal transmission
@@ -426,8 +426,8 @@ class GammaTopology:
 
     Active edges:
         We track a set of *active* edges — connections through which signal
-        is currently flowing.  Only active edges participate in Hebbian
-        updates.  New edges can spontaneously activate when a node's
+        is currently flowing.  Only active edges participate in impedance
+        remodeling updates.  New edges can spontaneously activate when a node's
         activation spreads and encounters a near-matched neighbour.
 
     Evolution:
@@ -435,7 +435,7 @@ class GammaTopology:
         1. Compute Γ for all active edges
         2. Transmit signals (x_out = √T · x_in)
         3. Accumulate received activation at target nodes
-        4. Hebbian update: ΔZ_i = −η · Γ_ij · x_i · x_j  (C2)
+        4. Impedance remodeling: ΔZ_i = −η · Γ_ij · x_in · x_out  (C2)
         5. Optionally: spontaneous edge activation / pruning
 
     Parameters
@@ -443,7 +443,7 @@ class GammaTopology:
     nodes : list of GammaNode
         Initial population.  Impedances should be diverse (as in biology).
     eta : float
-        Hebbian learning rate (C2).
+        Impedance remodeling rate (C2).
     gamma_threshold : float
         |Γ| below which an edge is considered "effectively connected"
         for topology metrics.
@@ -533,7 +533,7 @@ class GammaTopology:
         initial_connectivity : float
             Fraction of possible edges initially active (0–1).
         eta : float
-            Hebbian learning rate.
+            Impedance remodeling rate.
         seed : int, optional
             Random seed for reproducibility.
         """
@@ -630,7 +630,7 @@ class GammaTopology:
         1. Apply external stimuli to specified nodes
         2. For each active edge: compute Γ, transmit signal
         3. Accumulate received signals at each node
-        4. Hebbian update: ΔZ_i = −η · Γ_ij · x_i · x_j
+        4. Impedance remodeling: ΔZ_i = −η · Γ_ij · x_in · x_out  (C2)
         5. Spontaneous edge activation / pruning
         6. Record metrics
 
@@ -690,7 +690,7 @@ class GammaTopology:
         #    ∂(Γ²)/∂Z_j = +4·Γ·Z_i / (Z_i + Z_j)²   → gradient descent: ΔZ_j ∝ −Γ
         #
         #    Both nodes converge toward each other: Z_i ↑ and Z_j ↓ when Γ > 0.
-        #    Modulated by x_pre · x_post (only active connections adapt — Hebbian gating).
+        #    Modulated by x_in · x_out (only active connections adapt — C2 activity gating).
         #    This is the true minimum-reflection gradient: A[Γ] → min.
         #
         for (src_name, tgt_name), ch in list(self.active_edges.items()):
@@ -702,7 +702,7 @@ class GammaTopology:
             x_pre = src.activation       # K_src-dim
             x_post = tgt.activation      # K_tgt-dim
 
-            # Hebbian gate: only common modes can form activity correlation
+            # C2 activity gate: only common modes can form activity correlation
             gate = x_pre[:K_common] * x_post[:K_common]
 
             # Source: ΔZ_src = +η · Γ · gate  (push toward target)
@@ -1251,7 +1251,7 @@ class GammaTopology:
         Structural analysis of the Γ-topology in K-level (dimensional) space.
 
         Measures how edges distribute across K-level distances |ΔK|
-        after Hebbian evolution.  Self-similarity in K-space manifests
+        after impedance-remodeling evolution.  Self-similarity in K-space manifests
         as invariant density ratios ρ(ΔK)/ρ(0) across network sizes N.
 
         The K-space "fractal exponent" D_K is defined from:
@@ -1371,7 +1371,7 @@ class GammaTopology:
         """
         The action functional A[Γ] = Σ_{active edges} Σ_k Γ_ij,k² · |x_i,k|²
 
-        This is what the system minimises over time via C2 Hebbian learning.
+        This is what the system minimises over time via C2 impedance remodeling.
         """
         action = 0.0
         for (src_name, _), ch in self.active_edges.items():
@@ -1475,7 +1475,7 @@ class GammaTopology:
         initial_connectivity : float
             Fraction of possible edges initially active.
         eta : float
-            Hebbian learning rate.
+            Impedance remodeling rate.
         seed : int, optional
             Random seed.
         """
