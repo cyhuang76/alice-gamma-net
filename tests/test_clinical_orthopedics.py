@@ -6,6 +6,9 @@ from alice.body.clinical_orthopedics import (
     DiscHerniationModel, OsteoarthritisModel, ACLModel,
     TendinitisModel, ScoliosisModel, OsteosarcomaModel,
     GoutModel, OsteomyelitisModel,
+    Z_BONE, Z_CARTILAGE, Z_SYNOVIAL,
+    gamma_sq, joint_transmission, joint_transmission_no_cartilage,
+    aging_pain_model,
 )
 
 class TestFracture(unittest.TestCase):
@@ -103,6 +106,103 @@ class TestOrthoEngine(unittest.TestCase):
         e.add_disease("gout", urate=8.5)
         r = e.tick()
         self.assertIn("total_gamma_sq", r)
+
+
+# ============================================================================
+# JOINT IMPEDANCE TRANSFORMER TESTS
+# ============================================================================
+
+class TestJointImpedanceTransformer(unittest.TestCase):
+    """Multi-layer graded joint transmission: Bone→Cartilage→Synovial→Cartilage→Bone."""
+
+    def test_healthy_joint_high_transmission(self):
+        """Healthy cartilage acts as a quarter-wave transformer → T_total high."""
+        r = joint_transmission(Z_CARTILAGE)
+        self.assertGreater(r["T_total"], 0.80)
+
+    def test_bone_on_bone_lower_transmission(self):
+        """End-stage OA (no cartilage) → T_total much lower."""
+        healthy = joint_transmission(Z_CARTILAGE)
+        bonebone = joint_transmission_no_cartilage()
+        self.assertGreater(healthy["T_total"], bonebone["T_total"])
+
+    def test_degraded_cartilage_worse_than_healthy(self):
+        """Partially worn cartilage (Z=40) → lower T than healthy (Z=80)."""
+        healthy = joint_transmission(Z_CARTILAGE)
+        worn = joint_transmission(Z_CARTILAGE * 0.5)
+        self.assertGreater(healthy["T_total"], worn["T_total"])
+
+    def test_per_interface_gamma_sq_small(self):
+        """Each interface in healthy joint has Γ² < 0.10."""
+        r = joint_transmission(Z_CARTILAGE)
+        for key, val in r.items():
+            if key.startswith(("bone", "cart", "synovial")):
+                self.assertLess(val, 0.10,
+                    f"{key}: Γ²={val:.4f} exceeds 0.10")
+
+    def test_bone_on_bone_interface_gamma_larger(self):
+        """Direct bone→synovial has larger Γ² than bone→cartilage."""
+        bonebone = joint_transmission_no_cartilage()
+        healthy = joint_transmission(Z_CARTILAGE)
+        self.assertGreater(
+            bonebone["bone→synovial"],
+            healthy["bone→cart"],
+        )
+
+    def test_c1_holds_at_every_interface(self):
+        """Γ² + T = 1 at every interface (C1 energy conservation)."""
+        r = joint_transmission(Z_CARTILAGE)
+        for key, g2 in r.items():
+            if "→" in key:
+                self.assertAlmostEqual(g2 + (1 - g2), 1.0, places=12)
+
+    def test_cartilage_z_is_geometric_mean(self):
+        """Optimal transformer Z ≈ √(Z_bone × Z_synovial) ≈ 77.5.
+        Actual Z_cartilage=80 is within 5% of the geometric mean."""
+        import math
+        z_optimal = math.sqrt(Z_BONE * Z_SYNOVIAL)
+        self.assertAlmostEqual(Z_CARTILAGE, z_optimal, delta=5.0)
+
+
+# ============================================================================
+# AGING PAIN IMMUNITY TESTS
+# ============================================================================
+
+class TestAgingPainImmunity(unittest.TestCase):
+    """Slow Z drift + C2 adaptation → no pain."""
+
+    def test_slow_drift_no_pain(self):
+        """Normal aging: drift=0.001, η=0.5 → pain never triggered."""
+        r = aging_pain_model(z_drift_rate=0.001, eta=0.5, n_ticks=5000)
+        self.assertFalse(r["pain_triggered"])
+
+    def test_fast_drift_causes_pain(self):
+        """Acute injury: drift=5.0, η=0.5 → pain IS triggered."""
+        r = aging_pain_model(z_drift_rate=5.0, eta=0.5, n_ticks=200)
+        self.assertTrue(r["pain_triggered"])
+
+    def test_eta_zero_with_drift_causes_pain(self):
+        """Cartilage (η≈0): even slow drift → pain eventually."""
+        r = aging_pain_model(z_drift_rate=0.05, eta=0.0, n_ticks=5000)
+        self.assertTrue(r["pain_triggered"])
+
+    def test_no_drift_no_pain(self):
+        """No aging at all: Z stable → no pain."""
+        r = aging_pain_model(z_drift_rate=0.0, eta=0.5, n_ticks=1000)
+        self.assertFalse(r["pain_triggered"])
+        self.assertAlmostEqual(r["peak_gamma_sq"], 0.0, places=6)
+
+    def test_c2_keeps_gamma_low(self):
+        """With sufficient η, Γ² stays near zero despite slow drift."""
+        r = aging_pain_model(z_drift_rate=0.01, eta=1.0, n_ticks=2000)
+        self.assertLess(r["peak_gamma_sq"], 0.01)
+
+    def test_weak_c2_higher_gamma(self):
+        """Weak η → higher Γ² (but still sub-pain if drift is slow)."""
+        strong = aging_pain_model(z_drift_rate=0.01, eta=1.0, n_ticks=1000)
+        weak = aging_pain_model(z_drift_rate=0.01, eta=0.1, n_ticks=1000)
+        self.assertGreater(weak["peak_gamma_sq"], strong["peak_gamma_sq"])
+
 
 if __name__ == "__main__":
     unittest.main()

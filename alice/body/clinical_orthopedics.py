@@ -35,6 +35,141 @@ def gamma_sq(z_l: float, z_0: float) -> float:
     g = (z_l - z_0) / (z_l + z_0)
     return g * g
 
+
+def transmission(z_l: float, z_0: float) -> float:
+    """T = 1 - Γ² at a single interface (C1)."""
+    return 1.0 - gamma_sq(z_l, z_0)
+
+
+# ============================================================================
+# JOINT IMPEDANCE TRANSFORMER  (multi-layer graded transition)
+# ============================================================================
+# A healthy joint is NOT a single impedance discontinuity.
+# It is a multi-layer transformer:  Bone → Cartilage → Synovial → Cartilage → Bone
+# Each layer steps Z down/up gradually, keeping every per-interface Γ small.
+# Total transmission = product of per-interface transmissions.
+#
+# Physics analogy: quarter-wave transformer in microwave engineering.
+# When cartilage degrades (OA), the graded transition collapses and
+# the bone-to-synovial interface becomes abrupt → Γ² jumps → pain.
+# ============================================================================
+
+def joint_transmission(cartilage_z: float = Z_CARTILAGE) -> dict:
+    """
+    Compute multi-layer transmission through a synovial joint.
+
+    Healthy:  Bone(120) → Cartilage(80) → Synovial(50) → Cartilage(80) → Bone(120)
+    OA:       Bone(120) → thin_cart → Synovial(50) → thin_cart → Bone(120)
+    End-stage (bone-on-bone): Bone(120) → Synovial(50) → Bone(120)
+
+    Returns dict with per-interface Γ², total Γ², and total T.
+    """
+    # 4 interfaces in the healthy layered stack
+    interfaces = [
+        ("bone→cart",     Z_BONE,       cartilage_z),
+        ("cart→synovial", cartilage_z,  Z_SYNOVIAL),
+        ("synovial→cart", Z_SYNOVIAL,   cartilage_z),
+        ("cart→bone",     cartilage_z,  Z_BONE),
+    ]
+
+    T_total = 1.0
+    detail = {}
+    for name, z_source, z_load in interfaces:
+        g2 = gamma_sq(z_load, z_source)
+        T_total *= (1.0 - g2)
+        detail[name] = g2
+
+    detail["T_total"] = T_total
+    detail["gamma_sq_total"] = 1.0 - T_total
+    return detail
+
+
+def joint_transmission_no_cartilage() -> dict:
+    """Bone-on-bone (end-stage OA): only 2 interfaces, no graded transition."""
+    interfaces = [
+        ("bone→synovial", Z_BONE,     Z_SYNOVIAL),
+        ("synovial→bone", Z_SYNOVIAL, Z_BONE),
+    ]
+    T_total = 1.0
+    detail = {}
+    for name, z_source, z_load in interfaces:
+        g2 = gamma_sq(z_load, z_source)
+        T_total *= (1.0 - g2)
+        detail[name] = g2
+    detail["T_total"] = T_total
+    detail["gamma_sq_total"] = 1.0 - T_total
+    return detail
+
+
+# ============================================================================
+# AGING PAIN IMMUNITY MODEL
+# ============================================================================
+# Slow Z drift does NOT cause pain because:
+# 1. C2 Hebbian adaptation continuously re-matches: ΔZ = −η·Γ·x_pre·x_post
+# 2. Reflection heat = Γ² × gain is tiny for small Γ
+# 3. Cooling rate (0.035/tick) >> heating from slow drift
+# 4. Pain threshold T > 0.7 is never reached
+#
+# Pain requires EITHER:
+#   - Sudden Z change (fracture, amputation)    → dΓ/dt >> C2 adaptation rate
+#   - η ≈ 0 (cartilage, avascular tissue)       → C2 cannot compensate
+#   - Late-stage aging: δ·D(t) > η·ΣΓ²          → aging outpaces adaptation
+# ============================================================================
+
+def aging_pain_model(
+    z_drift_rate: float,     # dZ/dt per tick (aging speed)
+    eta: float,              # C2 adaptation rate
+    cooling: float = 0.035,  # passive cooling per tick
+    heat_gain: float = 0.10, # Γ² → temperature coefficient
+    pain_threshold: float = 0.7,
+    n_ticks: int = 1000,
+) -> dict:
+    """
+    Simulate whether slow impedance drift produces pain.
+
+    Returns trajectory of Z, Γ², temperature, and whether pain was triggered.
+    """
+    z_source = 75.0  # reference Z
+    z_load = 75.0    # starts matched
+    temp = 0.3       # resting temperature
+    pain_triggered = False
+    peak_gamma_sq = 0.0
+    peak_temp = 0.0
+
+    for t in range(n_ticks):
+        # Aging: Z drifts up
+        z_load += z_drift_rate
+
+        # C2 Hebbian adaptation: tries to re-match
+        gamma = (z_load - z_source) / (z_load + z_source)
+        g2 = gamma * gamma
+        delta_z = -eta * gamma  # simplified C2: ΔZ ∝ −η·Γ
+        z_load += delta_z
+
+        # Recalculate after adaptation
+        gamma = (z_load - z_source) / (z_load + z_source)
+        g2 = gamma * gamma
+        peak_gamma_sq = max(peak_gamma_sq, g2)
+
+        # Temperature dynamics
+        heat = g2 * heat_gain
+        temp = max(0.0, min(1.0, temp + heat - cooling))
+        peak_temp = max(peak_temp, temp)
+
+        if temp > pain_threshold:
+            pain_triggered = True
+            break
+
+    return {
+        "pain_triggered": pain_triggered,
+        "peak_gamma_sq": peak_gamma_sq,
+        "peak_temp": peak_temp,
+        "final_z_load": z_load,
+        "final_z_mismatch": abs(z_load - z_source),
+        "ticks_run": t + 1 if pain_triggered else n_ticks,
+    }
+
+
 # ============================================================================
 # 1. FRACTURE
 # ============================================================================
