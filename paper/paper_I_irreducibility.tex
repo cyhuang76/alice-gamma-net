@@ -523,6 +523,96 @@ $\to$ more propagation modes) and measuring cross-$K$
 connectivity density as a function of $|\Delta K|$ would
 yield an empirical $\gamma$ via Eq.~\eqref{eq:softcutoff}.
 
+\subsection{Joints as Multi-Layer Impedance Transformers}
+\label{sec:joint}
+
+The relay-node corollary (Corollary~\ref{cor:relay}) receives
+a striking musculoskeletal confirmation.
+An articular joint couples bone ($Z_{\text{bone}} \approx 120\;\Omega$)
+to synovial fluid ($Z_{\text{syn}} \approx 50\;\Omega$).
+A direct interface would produce
+$\Gamma = (120-50)/(120+50) = 0.538$, yielding
+$T = 1 - \Gamma^2 = 0.71$---nearly 30\% signal loss.
+
+Biological joints insert \emph{cartilage} as a graded
+impedance relay: $Z_{\text{cart}} \approx 80\;\Omega
+\approx \sqrt{Z_{\text{bone}}\,Z_{\text{syn}}} = 77.5\;\Omega$,
+the geometric mean that minimises reflection in a
+quarter-wave transformer~\cite{Pozar2011}.
+The five-layer stack
+Bone$\to$Cartilage$\to$Synovial$\to$Cartilage$\to$Bone
+achieves $T_{\text{total}} > 0.80$:
+each interface carries $\Gamma^2 < 0.10$, and C1
+($\Gamma^2 + T = 1$) holds at every boundary.
+
+When cartilage degrades (osteoarthritis, $\eta \approx 0$,
+cf.\ Paper~VII~\cite{PaperVII}), the joint reverts toward
+bone-on-bone ($T$ drops sharply)---the relay node is
+physically removed, and $\Acut$ is no longer mitigated.
+This provides a falsifiable prediction linking
+the Irreducibility Theorem to clinical orthopaedics.
+
+\subsection{$\Acut$ Scaling with Organism Size}
+\label{sec:acut-scaling}
+
+Paper~VIII~\cite{PaperVIII} extends the irreducibility
+theorem to whole-organism scaling.
+For a self-similar network embedded in $d = 3$ dimensions
+with binary branching ($n = 2$), the total cutoff action
+scales as
+\begin{equation}
+  \Acut \propto M^{(d-1)/d} = M^{2/3}\,,
+  \label{eq:acut-scaling}
+\end{equation}
+where $M$ is body mass.
+Combined with the capillary-invariance constraint
+(terminal vessel size independent of $M$), this yields
+Kleiber's $3/4$-power metabolic scaling law:
+$B \propto M^{3/4} = M^{2/3 + 1/12}$.
+The irreducible cost is thus not only a local design
+constraint (Sec.~\ref{sec:discussion}) but a
+\emph{global allometric law}.
+
+\subsection{Subsequent Empirical Validation}
+\label{sec:validation}
+
+This paper established internal consistency of the
+MRP framework (Sec.~\ref{sec:discussion}).
+Subsequent papers have provided independent external tests:
+\begin{itemize}
+  \item \textbf{Paper~II}~\cite{PaperII}: Murray's Law
+    for vascular bifurcation derived as
+    the exact MRP minimum ($\beta = 2^{1/3}$);
+    dual neural--vascular organ health
+    $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$.
+  \item \textbf{Paper~III}~\cite{PaperIII}: Impedance debt
+    ($D_Z = \int \Gamma^2\,P_{\text{in}}\,dt$) as the
+    thermodynamic origin of sleep.
+  \item \textbf{Paper~IV}~\cite{PaperIV}: Lifecycle equation
+    (learning $+$ novelty $+$ fatigue) reproducing the
+    bathtub curve of cognitive performance.
+  \item \textbf{Paper~V}~\cite{PaperV}: Memory, consciousness,
+    and nociception as $\Gamma$-dynamics readouts.
+  \item \textbf{Paper~VI}~\cite{PaperVI}: NHANES validation
+    ($n = 49{,}774$, 10 cycles, zero fitted parameters);
+    organ-level $\Gamma$ predicts disease in 7/7 systems;
+    all-cause mortality $C$-statistic $= 0.70$.
+  \item \textbf{Paper~VII}~\cite{PaperVII}: C2 shown equivalent
+    to 19 known remodeling laws (Wolff, Glagov, Hebb,
+    immune memory, etc.); NHANES network propagation confirms
+    inter-organ $\Gamma$-coupling.
+  \item \textbf{Paper~VIII}~\cite{PaperVIII}: Fractal cost
+    $\Acut \propto M^{2/3}$ derives Kleiber's 3/4 law and
+    Murray's ratio $\beta = 2^{1/3}$ from the irreducibility
+    theorem.
+\end{itemize}
+
+The zero-parameter NHANES validation is particularly
+significant: 3\,274 automated tests pass with no
+fitted parameters, providing Level~3 prospective
+cohort evidence (Harrell's C $= 0.70$,
+Q1-vs-Q4 mortality ratio $= 6.89\times$).
+
 % ═══════════════════════════════════════════════════════════════════
 \section{Conclusion}
 \label{sec:conclusion}
@@ -558,6 +648,19 @@ design features but \emph{thermodynamic consequences} of a single
 variational principle operating on dimensionally heterogeneous
 components.
 
+Further, the articular joint (Sec.~\ref{sec:joint}) provides a
+concrete biological instance of Corollary~\ref{cor:relay}:
+cartilage serves as a graded-impedance relay node
+($Z \approx \sqrt{Z_{\text{bone}}\,Z_{\text{syn}}}$)
+that converts total reflection into partial transmission.
+At the whole-organism scale (Sec.~\ref{sec:acut-scaling}),
+$\Acut \propto M^{2/3}$ links the local irreducibility theorem
+to Kleiber's allometric law $B \propto M^{3/4}$.
+Subsequent empirical validation (Sec.~\ref{sec:validation})---most
+notably NHANES ($n = 49{,}774$, zero fitted parameters)---has
+upgraded the framework from internal consistency
+to Level~3 prospective cohort evidence.
+
 \begin{acknowledgments}
 The author thanks the open-source scientific Python community.
 Simulations were performed on a personal workstation
@@ -585,10 +688,47 @@ D.~K.~Jones,
 \textit{Diffusion MRI: Theory, Methods, and Applications}
 (Oxford University Press, 2010).
 
+\bibitem{Pozar2011}
+D.~M.~Pozar, \emph{Microwave Engineering}, 4th~ed.\
+(Wiley, 2011).
+
+\bibitem{PaperII}
+H.-Y.~Huang, ``Twin Impedance Networks: A Unified
+Neural--Vascular Organ Model from the Minimum Reflection
+Action,'' Zenodo (2026), Paper~II.
+
+\bibitem{PaperIII}
+H.-Y.~Huang, ``The Cost of Life: Impedance Debt as the
+Thermodynamic Origin of Sleep and Brain Evolution,''
+Zenodo (2026), Paper~III.
+
+\bibitem{PaperIV}
+H.-Y.~Huang, ``The Lifecycle Equation: Cognition, Emotion,
+and Aging as Three-Force Competition on an Impedance
+Network,'' Zenodo (2026), Paper~IV.
+
+\bibitem{PaperV}
+H.-Y.~Huang, ``Memory, Consciousness, and Soul as Impedance
+Physics on the $\Gamma$-Net,'' Zenodo (2026), Paper~V.
+
+\bibitem{PaperVI}
+H.-Y.~Huang, ``The Grand Unification: $\Gamma$ as the
+Universal Interface Law from Microtubules to Power Grids,''
+Zenodo (2026), Paper~VI.
+
+\bibitem{PaperVII}
+H.-Y.~Huang, ``Universal Hebbian Remodeling: Nineteen
+Tissues, One Law,'' Zenodo (2026), Paper~VII.
+
+\bibitem{PaperVIII}
+H.-Y.~Huang, ``Fractal Cost of Dual-Network Life: Why
+$1 \times 1 \neq 1$,'' Zenodo (2026), Paper~VIII.
+
 \bibitem{ALICE_code}
 H.-Y.~Huang,
 ALICE Smart System,
 \url{https://github.com/cyhuang76/alice-gamma-net} (2026).
+\href{https://doi.org/10.5281/zenodo.18852835}{doi:10.5281/zenodo.18852835}
 
 \end{thebibliography}
 

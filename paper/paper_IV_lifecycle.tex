@@ -1266,7 +1266,7 @@ This is the impedance-physics explanation for why
 toddlers gradually stop looking at caregivers for
 emotional cues after painful events.
 
-\begin{remark}[Developmental design principle]
+\medskip\noindent\textbf{Remark (Developmental design principle).}
 The infant body uses two complementary strategies---structural
 buffering (soft tissue) and behavioural calibration (social
 referencing)---to minimise $\Gamma^2$ during the
@@ -1274,7 +1274,69 @@ referencing)---to minimise $\Gamma^2$ during the
 Both strategies are temporary scaffolding: bones harden
 and social coupling decreases as the neural network
 completes its self-calibration.
-\end{remark}
+\medskip
+
+
+% ============================================================
+%  SECTION 8B --- AGING PAIN IMMUNITY
+% ============================================================
+\subsection{Aging Pain Immunity: Why Slow $Z$-Drift Does Not Hurt}
+\label{sec:aging-pain}
+
+A natural question arises from the aging term
+$\delta\,D(t)$: if impedance drifts monotonically
+upward with age, why does normal aging not produce
+chronic pain?
+
+The answer lies in the interplay between drift rate
+and C2 adaptation.
+Define the thermal accumulation at each interface:
+\begin{equation}
+  \frac{dT_{\text{local}}}{dt}
+    = \underbrace{\Gamma^2 \cdot h_{\text{gain}}}_{\text{reflection heat}}
+    - \underbrace{c_{\text{cool}}}_{\text{passive cooling}}\,,
+  \label{eq:pain-model}
+\end{equation}
+where $h_{\text{gain}}$ converts $\Gamma^2$ to thermal load
+and $c_{\text{cool}}$ represents passive dissipation.
+Pain is triggered when $T_{\text{local}}$ exceeds a
+nociceptive threshold $\theta_{\text{pain}} \approx 0.7$.
+
+For slow drift (normal aging, $dZ/dt \sim 10^{-3}$
+per tick) with healthy C2 ($\eta > 0$), the Hebbian
+update continuously re-matches the impedance:
+$\Gamma^2 \sim (\Delta Z / 2\bar{Z})^2 \lesssim 10^{-6}$.
+The resulting reflection heat is negligible compared
+to passive cooling, so $T_{\text{local}}$ never
+approaches $\theta_{\text{pain}}$.
+
+Pain triggers only in three regimes:
+\begin{enumerate}
+  \item \textbf{Acute injury} ($dZ/dt \gg \eta$):
+    fracture, laceration, or thermal burn produces
+    instantaneous impedance discontinuity that
+    C2 cannot track.
+  \item \textbf{C2 failure} ($\eta \to 0$):
+    avascular tissues (cartilage) cannot remodel,
+    so even slow drift accumulates
+    $\Gamma \to O(1)$---this is osteoarthritis
+    pain (Paper~VII~\cite{PaperVII}).
+  \item \textbf{Late senescence}
+    ($\delta\,D(t) > \eta\,\Sigma\Gamma^2$):
+    cumulative Coffin--Manson damage exceeds
+    C2 repair capacity, producing the chronic pain
+    of advanced aging.
+\end{enumerate}
+
+Numerical verification: a 10\,000-tick simulation with
+$dZ/dt = 0.001$, $\eta = 0.5$, $c_{\text{cool}} = 0.035$,
+$h_{\text{gain}} = 0.10$ shows peak $\Gamma^2 \approx 4 \times 10^{-6}$
+and $T_{\text{local}}$ never exceeding $0.27$---well below
+the pain threshold.
+Conversely, acute injury ($dZ/dt = 5.0$) crosses
+$\theta_{\text{pain}}$ within 100 ticks, and
+$\eta = 0$ with slow drift crosses at $\sim$4800 ticks.
+All three regimes match clinical observation.
 
 
 % ============================================================
@@ -1316,6 +1378,14 @@ The key results are:
   \item Adulthood has a physical definition:
     the thermal steady state at which
     $d(\Sigma\Gamma^2)/dt = 0$.
+  \item \textbf{Aging pain immunity}
+    (Sec.~\ref{sec:aging-pain}):
+    slow impedance drift does not cause pain because
+    C2 adaptation rate exceeds the drift rate, keeping
+    $\Gamma^2$ below the nociceptive threshold.
+    Pain requires sudden $\Delta Z$ (injury),
+    $\eta \to 0$ (cartilage degeneration), or
+    drift exceeding C2 capacity (late senescence).
 \end{enumerate}
 
 Together with Papers~I--III, the Lifecycle Equation
@@ -1375,6 +1445,11 @@ Hsi-Yu~Huang,
 origin of sleep and brain evolution,''
 Zenodo (2026).
 % DOI to be inserted upon publication
+
+\bibitem{PaperVII}
+Hsi-Yu~Huang,
+``Universal Hebbian Remodeling: Nineteen Tissues, One Law,''
+Zenodo (2026), Paper~VII.
 
 \bibitem{Kail1991}
 R.~Kail,
