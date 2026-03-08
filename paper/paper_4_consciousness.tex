@@ -774,6 +774,19 @@ mechanism should not affect it.
 Both independently reduce $\Phi\to 0$.
 Therefore consciousness is the \emph{product}, not its factors.
 
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/fig_bone_china_heat.pdf}
+\caption{Two independent kill mechanisms on Alice.
+  Left: fever pathway ($Q_{\mathrm{PFC}}$ collapse via thermal noise);
+  right: occipital impact pathway ($Z_{\mathrm{arousal}}$ shutdown
+  via vestibular interrupt).
+  Both reduce $\Phi\to 0$ independently, confirming that
+  consciousness is the product of its factors,
+  not localised to either.
+  Simulated via \texttt{exp\_bone\_china\_heat.py}.}
+\label{fig:two-kills}
+\end{figure}
+
 
 % ============================================================
 \section{Thermal Vulnerability and the K-Dimensional Bottleneck}
@@ -828,6 +841,16 @@ This explains why:
   \item Other brain regions (sensory cortices, $K\sim 4$--$16$)
     can tolerate several degrees of fever.
 \end{itemize}
+
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/fig_brain_gamma_calibration.pdf}
+\caption{Brain $\Gamma$-calibration across cortical regions.
+  Higher-$K$ regions (prefrontal, $K\approx 128$) show steeper
+  thermal vulnerability; lower-$K$ regions (sensory cortices)
+  remain stable under fever conditions.
+  Simulated via \texttt{exp\_brain\_gamma\_calibration.py}.}
+\label{fig:brain-calibration}
+\end{figure}
 
 
 % ============================================================
@@ -1008,6 +1031,18 @@ at age~$\sim$3 corresponds to the epoch when
 $\sigma^2_{Z_{\text{bg}}}$ falls below the retrieval
 threshold.
 \end{corollary}
+
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/fig_eeg_delta_vs_age.pdf}
+\caption{EEG $\delta$-power as a function of age.
+  The $\delta$-power proxy for impedance debt $D_Z$
+  decreases monotonically as myelination and synaptic pruning
+  reduce background impedance variance $\sigma^2_{Z_{\mathrm{bg}}}$.
+  The retrieval threshold (dashed) predicts infantile amnesia
+  onset at age~$\sim$3.
+  Simulated via \texttt{exp\_eeg\_impedance\_debt.py}.}
+\label{fig:eeg-delta-age}
+\end{figure}
 
 \subsection{Nociception without memory: the three-layer
   pain architecture}

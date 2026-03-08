@@ -363,6 +363,17 @@ The material-bottleneck limit ($\rho \to 0$) yields:
 Only entropic degradation survives---no repair is possible
 without material supply.
 
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/paper_iii_morphogenesis.pdf}
+\caption{Dual-field morphogenesis simulation.
+  Spatial impedance field $Z(x,t)$ and material-supply field $\rho(x,t)$
+  evolve under Eqs.~\eqref{eq:Z-field}--\eqref{eq:rho-field}.
+  Turing instability produces periodic spatial patterns
+  when $D_\rho/D_Z$ exceeds a tissue-specific threshold.
+  Simulated via \texttt{exp\_morphogenesis\_pde.py}.}
+\label{fig:morphogenesis}
+\end{figure}
+
 
 % ============================================================
 %  SECTION 4 — EVIDENCE I: CNIDARIAN SLEEP
@@ -466,6 +477,18 @@ with $\sim$85\% of metabolic heat removed via the placenta
 ---thermodynamically a jellyfish whose heat sink is the mother.
 \textbf{Birth is the water-to-land transition replayed
 in ontogeny.}
+
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/paper_iii_embryogenesis.pdf}
+\caption{Embryogenesis timeline: impedance-debt accumulation
+  across developmental stages.
+  Heart (day 22), neural tube (week 3--4), and brain vesicles (week 5--6)
+  follow a thermodynamically mandatory sequence---each stage is a prerequisite
+  for the next.  Premature birth scenario (dashed) shows elevated
+  $\Sigma\Gamma^2$ due to incomplete impedance matching.
+  Simulated via \texttt{generate\_embryogenesis\_figure.py}.}
+\label{fig:embryogenesis}
+\end{figure}
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -607,6 +630,17 @@ predicting that optimal arousal depends on task difficulty
 and current skill level---the Yerkes--Dodson
 observation~\cite{YerkesDodson1908}.
 
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/paper_iv_yerkes_stress.pdf}
+\caption{Yerkes--Dodson curve derived from the Lifecycle Equation.
+  Optimal arousal $\eta^*$ depends on task difficulty ($\Sigma\Gamma^2$)
+  and environmental novelty ($\Gamma_{\mathrm{env}}$).
+  The inverted-U emerges from the balance between learning rate
+  and impedance-driven noise.
+  Simulated via \texttt{generate\_paper\_iv\_figures.py}.}
+\label{fig:yerkes-dodson}
+\end{figure}
+
 \subsection{Curiosity and boredom}
 
 Curiosity is the impedance gradient:
@@ -651,6 +685,29 @@ The Lifecycle Equation predicts six developmental phases:
 This trajectory is formally identical to the engineering
 reliability \emph{bathtub curve}~\cite{Klutke2003}---not
 analogy but derivation from the same physics.
+
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/paper_iv_bathtub.pdf}
+\caption{Bathtub curve of cognition.
+  Six developmental phases (birth, infancy, childhood, adulthood,
+  decline, senescence) emerge from the Lifecycle Equation.
+  Top panel: $\Sigma\Gamma^2(t)$;
+  bottom panel: the three competing forces (Learning, Novelty, Aging).
+  The trajectory mirrors the engineering reliability bathtub curve.
+  Simulated via \texttt{generate\_paper\_iv\_figures.py}.}
+\label{fig:bathtub}
+\end{figure}
+
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/paper_iv_emotions.pdf}
+\caption{Emotion readouts derived from impedance dynamics.
+  Dopamine maps to $-\Delta\Gamma^2$ (reward prediction error),
+  cortisol to the slow $\Gamma^2$ integrator.
+  The four quadrants correspond to distinct emotional states
+  (contentment, excitement, boredom, distress).
+  Simulated via \texttt{generate\_paper\_iv\_figures.py}.}
+\label{fig:emotions}
+\end{figure}
 
 
 % ============================================================
