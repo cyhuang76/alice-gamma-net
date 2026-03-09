@@ -1051,6 +1051,167 @@ accelerated aging.
 
 
 % ============================================================
+%  SECTION 13b — PTSD AND EMPATHIC LOAD
+% ============================================================
+\section{PTSD and Empathic Load as Impedance Physics}
+\label{sec:ptsd}
+
+\subsection{PTSD: anatomy of an undamped spike}
+\label{sec:ptsd-anatomy}
+
+The testable prediction ``PTSD = undamped $\Gamma^2$ spike''
+(Sec.~\ref{sec:predictions}, item~10) can now be decomposed
+into three necessary and jointly sufficient conditions
+using the $\eta(t)$ lifecycle (Eq.~\ref{eq:eta-lifecycle})
+and the fixation mechanisms (Remark~\ref{rem:fixation-mechanisms}).
+
+\begin{enumerate}
+  \item \textbf{Impulsive mismatch.}
+    The traumatic event generates a Dirac-like $\Gamma^2$
+    spike---a sensory/emotional input that is ``completely
+    beyond expectation.''
+    The instantaneous C2 update
+    $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+    is very large because both $\Gamma$ and
+    $x_{\text{in}}\,x_{\text{out}}$ are momentarily extreme.
+  \item \textbf{High effective $\eta$ at time of event.}
+    If the event occurs during a developmental $\eta$-peak
+    (childhood abuse) or during acute hyper-arousal
+    (combat, sudden catastrophe), the effective learning
+    rate is elevated, deepening the $\Delta Z_s$ well
+    beyond what normal experience would produce.
+    This is forced tempering: the impedance pattern is
+    forged in a single stroke.
+  \item \textbf{Absent C2 resolution path.}
+    In the aftermath, no subsequent experience provides
+    a sustained $(x_{\text{in}},\,x_{\text{out}})$
+    trajectory that could guide $\Gamma^2$ back down.
+    The traumatic $Z$-pattern sits at a local minimum
+    of $\mathcal{A}[\Gamma]$ surrounded by a high-energy
+    basin wall; small perturbations return the system
+    to the same attractor.
+    As $\eta(t)$ continues to decline with age, the
+    pattern slides toward
+    $\mathcal{S}_{\text{eff}}$---simultaneously
+    high-$\Gamma^2$ and low-plasticity.
+\end{enumerate}
+
+\noindent
+The two hallmark symptoms follow directly:
+\begin{itemize}
+  \item \emph{Re-experiencing / flashback}:
+    the high-$\Gamma^2$ attractor has a wide basin of
+    attraction; any stimulus near the basin boundary
+    pulls the network into the full traumatic
+    $Z$-configuration.
+  \item \emph{``I know it's irrational but I can't stop it''}:
+    $\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}} \approx 0$
+    on the traumatic sub-network---the same physics as
+    any deep fixation
+    (Remark~\ref{rem:fixation-mechanisms}), but here
+    the attractor carries pathologically high $\Gamma^2$
+    rather than the low $\Gamma^2$ of a well-matched skill.
+\end{itemize}
+
+\subsection{Therapeutic physics}
+\label{sec:ptsd-therapy}
+
+If PTSD is a high-$\Gamma^2$ pattern trapped in a deep
+basin with declining $\eta$, effective therapy must
+manipulate the three factors in C2:
+
+\begin{itemize}
+  \item \textbf{Pharmacotherapy} (SSRIs, propranolol,
+    MDMA-assisted therapy):
+    modulates the effective $\eta$ and noise floor,
+    lowering the instantaneous $\Gamma^2 \times P_{\text{in}}$
+    at each re-activation so that the system does not
+    re-traumatise (i.e., does not deposit additional
+    $D_Z$ on each trigger).
+    In impedance language: drugs widen the basin boundary
+    and reduce the peak reflection per activation.
+  \item \textbf{Exposure therapy / trauma-focused CBT}:
+    provides repeated, safe, titrated
+    $(x_{\text{in}},\,x_{\text{out}})$ pairs that traverse
+    the basin interior under controlled conditions,
+    allowing many small, convergent C2 updates to
+    gradually reshape the local $Z$-landscape.
+    Each session contributes a small $\Delta Z$ in the
+    corrective direction; over months, the accumulated
+    integral (Eq.~\ref{eq:skill-depth} in reverse)
+    can lower the attractor's $\Gamma^2$ floor.
+  \item \textbf{Combined treatment}:
+    pharmacotherapy adjusts parameters ($\eta$, noise,
+    activation threshold) to keep the system in
+    the convergent C2 regime;
+    psychotherapy provides the gradient.
+    Neither alone is sufficient: drugs without new
+    trajectories cannot reshape $Z$; new trajectories
+    without parameter control risk re-traumatisation.
+\end{itemize}
+
+\noindent
+This is not ``suppressing the memory'' but physically
+reshaping the impedance sub-network---cold-working a
+tempered structure, slow and bounded, but real.
+
+\subsection{Empathic load and caregiver burnout}
+\label{sec:empathic-load}
+
+Empathy, in $\Gamma$-Net terms, is the temporary
+imposition of another agent's high-$\Gamma^2$ field
+onto one's own impedance network.
+When a clinician or caregiver engages with a trauma
+survivor, their own network must process the incoming
+$\Gamma^2$ pattern:
+\begin{equation}
+  D_{Z,\text{care}}(t)
+    = \int_0^t \Gamma_{\text{other}}^2(\tau)\;
+      P_{\text{in,care}}(\tau)\,d\tau\,,
+  \label{eq:caregiver-debt}
+\end{equation}
+where $\Gamma_{\text{other}}^2$ is the patient's
+transmitted mismatch and $P_{\text{in,care}}$ is
+the caregiver's coupling strength (empathic sensitivity
+$\propto \eta_{\text{social}}$).
+
+Chronic exposure without adequate discharge
+(sleep, boundaries, peer support) raises the caregiver's
+own $\Sigma\Gamma^2$ time average
+(Eq.~\ref{eq:cortisol}), activating the same cortisol--
+allostatic load pathway as any chronic stressor.
+The lifecycle equation for the caregiver becomes:
+\begin{equation}
+  \frac{d(\Sigma\Gamma^2_{\text{care}})}{dt}
+    = -\eta\,\Sigma\Gamma^2_{\text{care}}
+      + \gamma\,\Gamma_{\text{env}}
+      + \delta\,D(t)
+      + \underbrace{\lambda\,\Gamma_{\text{other}}^2
+        }_{\text{empathic load}}\,,
+  \label{eq:caregiver-lifecycle}
+\end{equation}
+where $\lambda$ parameterises coupling strength.
+High-$\eta$ individuals (high empathic sensitivity)
+absorb more of the patient's $\Gamma^2$ per unit
+time---precisely the trait that makes them effective
+caregivers also makes them vulnerable to burnout.
+
+\begin{remark}[Burnout is not weakness]
+\label{rem:burnout}
+Caregiver burnout---emotional exhaustion, depersonalisation,
+reduced efficacy---is the predictable endpoint of
+Eq.~\eqref{eq:caregiver-lifecycle} when the empathic-load
+term chronically exceeds the combined learning and
+sleep-discharge capacity.
+It is an energy-balance constraint, not a character
+deficiency.
+Institutional policies that ignore $D_{Z,\text{care}}$
+are, in impedance terms, running a network past its
+Coffin--Manson fatigue limit.
+\end{remark}
+
+
+% ============================================================
 %  SECTION 14 — TESTABLE PREDICTIONS
 % ============================================================
 \section{Testable Predictions}
@@ -1089,7 +1250,18 @@ accelerated aging.
     Neural network mismatched but unable to learn.
 
   \item \textbf{PTSD as undamped $\Gamma^2$ spike}:
-    Massive mismatch that learning cannot resolve.
+    Massive mismatch that learning cannot resolve;
+    combined pharmacotherapy + exposure therapy should
+    outperform either alone, because drugs modulate
+    $\eta$/noise while therapy provides the C2 gradient
+    (Sec.~\ref{sec:ptsd-therapy}).
+
+  \item \textbf{Caregiver allostatic load}:
+    Clinicians with high empathic sensitivity
+    ($\eta_{\text{social}}$) and prolonged trauma-patient
+    exposure should show measurably elevated cortisol
+    and impedance-debt markers relative to matched
+    controls, following Eq.~\eqref{eq:caregiver-lifecycle}.
 
   \item \textbf{Dementia as accelerated neural aging}:
     $\delta_n D_n(t)$ overwhelms learning prematurely,
