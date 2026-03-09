@@ -4,6 +4,7 @@
 \usepackage{hyperref}
 
 \newtheorem{remark}{Remark}
+\newtheorem{proposition}{Proposition}
 
 \begin{document}
 
@@ -564,6 +565,85 @@ Combining all three:
 This is a non-autonomous first-order ODE whose coefficients
 are functions of developmental stage, environmental
 statistics, and cumulative damage.
+
+
+\subsection{Developmental modulation of $\eta(t)$}
+\label{sec:eta-lifecycle}
+
+In Eq.~\eqref{eq:lifecycle}, $\eta$ has so far been treated
+as a context-dependent constant.
+Experimentally, synaptic plasticity, myelination rate,
+and tissue remodeling capacity all peak in early life and
+decline with age.
+We model this as:
+\begin{equation}
+  \eta(t) = \eta_0 \; f_{\mathrm{dev}}(t) \;
+    \exp\!\bigl(-E_a / k_B T_{\mathrm{age}}(t)\bigr)\,,
+  \label{eq:eta-lifecycle}
+\end{equation}
+where $f_{\mathrm{dev}}(t)$ is a bell-shaped developmental
+envelope (high in infancy, plateau in adolescence,
+monotone decline thereafter) and the Arrhenius factor
+captures aging-induced loss of remodeling capacity.
+
+The cumulative impedance change for a skill chain $s$
+acquired at time $t_s$ is:
+\begin{equation}
+  \Delta Z_s
+    = \int_{t_s}^{\infty}
+      \eta(\tau)\,\Gamma_s(\tau)\,
+      x_{\mathrm{in}}(\tau)\,x_{\mathrm{out}}(\tau)\;d\tau\,.
+  \label{eq:skill-depth}
+\end{equation}
+Because $\eta(t_s)$ is largest in childhood and because
+early-acquired skills accumulate over a longer integration
+window, childhood-acquired skills (native language, early
+motor sequences) achieve the deepest $\Delta Z_s$ and
+lowest $\Gamma_s$.
+
+\begin{proposition}[Skill-decay anti-chronology]
+\label{prop:skill-decay}
+Under monotone decline of $\eta(t)$ and uniform aging
+damage $D(t)$, the order of functional loss inverts the
+order of acquisition:
+\[
+  t_{s_1} < t_{s_2}
+  \;\Longrightarrow\;
+  t_{\mathrm{fail},s_1} > t_{\mathrm{fail},s_2}\,.
+\]
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+A deeper $\Delta Z_s$ corresponds to a lower $\Gamma_s$.
+Aging drives $\Gamma_s$ back up at a rate independent
+of initial depth.
+The skill with the deepest $\Delta Z_s$
+(earliest $t_s$, highest $\eta$) requires the most damage
+to cross the failure threshold $\Gamma_{\mathrm{crit}}$.
+\end{proof}
+
+\noindent
+Figure~\ref{fig:skill-decay} shows a numerical integration
+of three skills acquired at ages 3, 20, and 35 under
+the same $\eta(t)$ lifecycle and Arrhenius aging.
+The latest-acquired skill fails first; the childhood
+skill survives longest---consistent with the clinical
+observation that dementia erases adult-learned second
+languages before the native tongue, and that elderly
+pianists who ``forgot'' they could play can still perform
+when placed at the keyboard.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{../figures/fig_skill_decay_order.pdf}
+  \caption{Skill-decay anti-chronology.
+    Three skills acquired at ages 3, 20, and 35 under a
+    common $\eta(t)$ lifecycle (Eq.~\ref{eq:eta-lifecycle}).
+    $\Gamma^2$ is driven back up by Arrhenius aging;
+    later-acquired skills cross the failure threshold
+    (dashed) first.}
+  \label{fig:skill-decay}
+\end{figure}
 
 
 \subsection{The Equilibrium Equation}
