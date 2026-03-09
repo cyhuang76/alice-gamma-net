@@ -354,6 +354,40 @@ Each row represents a \emph{different effort--flow pair}
 (i.e.\ a different physics), not merely a different cable
 diameter.
 
+Crucially, every row in the table participates in the
+same four-step closed loop:
+%
+\begin{enumerate}
+\item \textbf{Perception} --- the sensor side measures an
+  input signal $x_{\text{in}}$ (voltage, pressure,
+  temperature, metabolite concentration, \dots).
+\item \textbf{Error} --- the reflection coefficient
+  $\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1)$ quantifies the
+  impedance mismatch at the interface; $\Gamma^{2}$
+  is the fraction of energy reflected back unused.
+\item \textbf{Compensation} --- C2 drives a structural
+  update $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
+  x_{\text{out}}$, reducing the mismatch (Wolff remodels
+  bone, Hebb strengthens a synapse, Starling adjusts
+  stroke volume, etc.).
+\item \textbf{Re-perception} --- the updated $Z$ changes
+  the next $\Gamma$ and the transmitted signal
+  $x_{\text{out}}$; the system re-senses and the loop
+  repeats.
+\end{enumerate}
+%
+\noindent
+In compact notation:
+$x_{\text{in}} \;\xrightarrow{\text{sense}}\;
+ \Gamma \;\xrightarrow{\text{C2}}\;
+ \Delta Z \;\xrightarrow{\text{update}}\;
+ \Gamma' \;\xrightarrow{\text{re-sense}}\;
+ x_{\text{in}}'$.
+This perception--compensation cycle is domain-agnostic:
+it operates identically whether the effort--flow pair is
+voltage--current, pressure--flow, stress--strain rate, or
+temperature--heat flux.
+
 \begin{table*}[t]
 \centering
 \caption{Interface Scale Table --- the same
