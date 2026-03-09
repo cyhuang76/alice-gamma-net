@@ -4,7 +4,7 @@
 % ============================================================
 \documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
 
-\usepackage{amsmath,amssymb,amsthm,bm,graphicx,booktabs,siunitx,hyperref}
+\usepackage{amsmath,amssymb,amsthm,bm,graphicx,booktabs,multirow,siunitx,hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
 
 \newtheorem{theorem}{Theorem}
@@ -348,30 +348,70 @@ it produces clinically meaningful predictions across
 \label{sec:scale}
 
 Table~\ref{tab:scale} demonstrates that $\Gamma$ governs
-interfaces across 14~orders of magnitude.
+interfaces across seven distinct physical domains and
+14~orders of magnitude in spatial scale.
+Each row represents a \emph{different effort--flow pair}
+(i.e.\ a different physics), not merely a different cable
+diameter.
 
 \begin{table*}[t]
 \centering
 \caption{Interface Scale Table --- the same
-$\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1)$ applies at every scale.}
+$\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1)$ applies in every
+physical domain.  Rows are grouped by conjugate
+effort--flow pair; within each domain, one representative
+biological and (where applicable) one engineering example
+are listed.}
 \label{tab:scale}
-\begin{tabular}{lllll}
+\begin{tabular}{llllll}
 \toprule
-System & Scale & Effort & Flow & $Z$ definition \\
+\textbf{Domain} & \textbf{System} & \textbf{Scale}
+  & \textbf{Effort} & \textbf{Flow} & $Z$ \textbf{definition} \\
 \midrule
-Microtubule ion channel & 25~nm & Electric potential & Ion current & $V/I$ \\
-Ion channel (Hodgkin--Huxley) & 10~nm & Membrane voltage & Ion current & $V/I$ \\
-Synapse & 1~\textmu m & Post-synaptic potential & Synaptic current & $V/I$ \\
-Dendritic cable (Rall) & 100~\textmu m & Membrane voltage & Axial current & $R_m / R_a$ per $\lambda$ \\
-Axon (myelinated) & 1~mm & Voltage & Current & Characteristic impedance \\
-Arteriole (Poiseuille) & 100~\textmu m & Pressure & Flow rate & $8\mu L / \pi r^4$ \\
-Organ parenchyma & 10~cm & Metabolite conc. & Clearance flux & $[\text{met}]/J$ \\
-Whole-body vascular & 1~m & Aortic pressure & Cardiac output & $P/Q$ \\
-Ultrasound tissue boundary & 1~mm & Acoustic pressure & Particle velocity & $\rho c$ \\
-Optical fiber splice & 100~\textmu m & Electric field & Magnetic field & $n \cdot Z_0$ \\
-Power-grid transformer & 10~m & Voltage & Current & $V/I$ \\
-Earth--ionosphere waveguide & $10^6$~m & E-field & H-field & $\sqrt{\mu/\varepsilon}$ \\
-Submarine hull (acoustic) & 10~m & Pressure & Velocity & $\rho c$ \\
+\multirow{2}{*}{\textsc{Electrical}}
+  & Synapse / ion channel  & 25~nm--1~\textmu m
+    & Membrane voltage & Ion current & $V/I$~($\Omega$) \\
+  & Power-grid transformer & 10~m
+    & Voltage & Current & $V/I$~($\Omega$) \\
+\midrule
+\multirow{2}{*}{\textsc{Hydraulic}}
+  & Arteriole (Poiseuille)  & 100~\textmu m
+    & Blood pressure & Flow rate & $8\mu L/\pi r^4$ \\
+  & Whole-body vascular     & 1~m
+    & Aortic pressure & Cardiac output & $P/Q$ \\
+\midrule
+\multirow{2}{*}{\textsc{Acoustic}}
+  & Tissue boundary (ultrasound) & 1~mm
+    & Acoustic pressure & Particle velocity & $\rho\, c$ \\
+  & Submarine hull          & 10~m
+    & Acoustic pressure & Particle velocity & $\rho\, c$ \\
+\midrule
+\multirow{2}{*}{\textsc{Electromagnetic}}
+  & Optical fibre splice   & 100~\textmu m
+    & Electric field & Magnetic field & $n\cdot Z_0$ \\
+  & Earth--ionosphere waveguide & $10^6$~m
+    & E-field & H-field & $\sqrt{\mu/\varepsilon}$ \\
+\midrule
+\multirow{2}{*}{\textsc{Mechanical}}
+  & Bone--cartilage joint (Wolff) & 10~cm
+    & Force / stress & Velocity / strain rate
+    & $\sigma/\dot{\varepsilon}$~(Pa$\cdot$s) \\
+  & Tendon--muscle junction (Davis) & 1~cm
+    & Tensile force & Elongation rate
+    & $EA/L$ \\
+\midrule
+\multirow{2}{*}{\textsc{Thermal}}
+  & Brain thermal boundary        & 10~cm
+    & Temperature & Heat flux
+    & $T/\dot{Q}$~(K/W) \\
+  & Skin--air interface           & 1~m
+    & Skin temperature & Convective heat loss
+    & $1/(hA)$ \\
+\midrule
+\textsc{Chemical}
+  & Organ parenchyma (metabolic)  & 10~cm
+    & Metabolite conc.\ & Clearance flux
+    & $[\text{met}]/J$ \\
 \bottomrule
 \end{tabular}
 \end{table*}

@@ -498,29 +498,31 @@ Each prediction is testable with existing technology.}
 \section{The Interface Scale Table}
 \label{sec:scales}
 
-The same equation ($\Gamma$, C1, C2) applies across
-15~orders of magnitude in spatial scale:
+The same equation ($\Gamma$, C1, C2) applies across seven
+distinct physical domains and 14~orders of magnitude in
+spatial scale:
 
 \begin{table}[h]
-\caption{Representative interfaces.
-Full table with impedance values: Paper~5~\cite{Paper5}.}
+\caption{Representative interfaces grouped by physical domain.
+Full table with impedance definitions: Paper~5~\cite{Paper5}.}
 \label{tab:scales}
 \begin{ruledtabular}
 \begin{tabular}{llc}
-\textbf{Scale} & \textbf{Interface} & \textbf{Size} \\
+\textbf{Domain} & \textbf{Interface} & \textbf{Scale} \\
 \hline
-$25$\,nm    & Microtubule junction      & molecular \\
-$1$\,$\mu$m & Ion channel / membrane    & cellular \\
-$10$\,$\mu$m & Synapse                  & cellular \\
-$100$\,$\mu$m & Arteriole bifurcation   & tissue \\
-$1$\,mm     & Cortical column boundary  & organ \\
-$1$\,cm     & Organ capsule             & organ \\
-$10$\,cm    & Joint (bone--cartilage)   & body \\
-$1$\,m      & Whole body (skin--air)    & organism \\
-$10$\,m     & Power line splice         & engineering \\
-$1$\,km     & Optical fibre connector   & engineering \\
-$10^3$\,km  & Submarine cable joint     & infrastructure \\
-$10^6$\,m   & Ionospheric waveguide     & planetary \\
+Electrical   & Synapse / ion channel       & 25\,nm--1\,$\mu$m \\
+Electrical   & Power-grid transformer      & 10\,m \\
+Hydraulic    & Arteriole (Poiseuille)      & 100\,$\mu$m \\
+Hydraulic    & Whole-body vascular         & 1\,m \\
+Acoustic     & Tissue boundary (ultrasound)& 1\,mm \\
+Acoustic     & Submarine hull              & 10\,m \\
+Electromagnetic & Optical fibre splice     & 100\,$\mu$m \\
+Electromagnetic & Ionospheric waveguide    & $10^6$\,m \\
+Mechanical   & Bone--cartilage joint       & 10\,cm \\
+Mechanical   & Tendon--muscle junction     & 1\,cm \\
+Thermal      & Brain thermal boundary      & 10\,cm \\
+Thermal      & Skin--air interface         & 1\,m \\
+Chemical     & Organ parenchyma            & 10\,cm \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
@@ -528,7 +530,8 @@ $10^6$\,m   & Ionospheric waveguide     & planetary \\
 \noindent
 At every scale, the physics is identical: only the
 definition of $Z$ changes (electrical, acoustic,
-mechanical, hydraulic, thermal).
+mechanical, hydraulic, thermal, electromagnetic,
+chemical).
 The universality is not an analogy; it is the same
 theorem applied to different media.
 
