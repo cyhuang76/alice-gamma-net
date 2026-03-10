@@ -998,6 +998,102 @@ chronic diseases rarely appear in isolation.
 \end{remark}
 
 
+\subsection{Caregiver triple-load model}
+\label{sec:triple-load}
+
+Long-term caregivers experience three simultaneous
+$\Gamma^2$-injection channels with no comparable
+discharge path.  Their impedance-debt rate is:
+\begin{equation}
+  \frac{dD_Z}{dt}
+  = \underbrace{\lambda\,\Gamma_{\text{other}}^2}_{\text{empathic load}}
+  + \underbrace{\Gamma_{\text{moral}}^2}_{\text{moral constraint}}
+  + \underbrace{\sigma\,s(t)}_{\text{daily stressor}}
+  - \underbrace{\eta(t)\,\Gamma^2}_{\text{repair}}\,.
+  \label{eq:triple-load}
+\end{equation}
+
+\emph{Channel~1: empathic load.}
+$\Gamma_{\text{other}}^2$ is the care-recipient's
+frozen mismatch (typically PTSD or dementia,
+$\Gamma^2\!\approx\!1$).
+The empathic coupling $\lambda>0$ injects this
+energy into the caregiver's neural channel
+every contact hour; it cannot be ``turned off'' without
+severing the care relationship.
+
+\emph{Channel~2: moral constraint.}
+Social and internalised norms (``you must not give up'')
+target the caregiver's fatigue pattern.
+Because the caregiver's $\eta$ is already depleted,
+this pattern is approaching or inside
+$\mathcal{S}_{\text{eff}}$.
+By the Moral Constraint Theorem
+(Paper~4, Theorem~\ref{thm:moral-constraint}),
+the demand injects $\Gamma_{\text{moral}}^2>0$
+with $\Delta Z_{\text{corrective}}=0$---pure injury.
+
+\emph{Channel~3: moral prohibition on $\lambda$-reduction.}
+The only physically available knob for reducing
+$dD_Z/dt$ is to lower $\lambda$ (set boundaries,
+take breaks, delegate).
+Moral pressure \emph{forbids} this adjustment
+(``abandonment''), locking the intake valve open.
+
+\begin{remark}[Structural inevitability of caregiver
+disease]
+\label{rem:caregiver-inevitable}
+In Eq.~(\ref{eq:triple-load}), the first three terms
+are approximately constant or increasing (the
+care-recipient's $\Gamma^2$ does not spontaneously
+decrease; moral pressure does not spontaneously relent;
+daily stress persists).
+The repair term $\eta(t)\,\Gamma^2$ decreases because
+$\eta(t)$ declines by Arrhenius kinetics
+and is further depressed by cortisol-mediated
+hippocampal atrophy from the chronic load itself.
+Therefore $dD_Z/dt > 0$ for all future time---the deficit
+is \emph{structurally guaranteed} to widen.
+The resulting disease cascade
+(Eq.~\ref{eq:coupled-G2}, Fig.~\ref{fig:disease-progression})
+is not a risk factor but a mathematical inevitability
+unless institutional intervention (shift rotation,
+$\lambda$-reduction protocols) is applied.
+\end{remark}
+
+\begin{remark}[Compassion fatigue, burnout, vicarious
+trauma: one equation, three names]
+\label{rem:fatigue-taxonomy}
+Clinical nomenclature distinguishes compassion fatigue,
+burnout, and vicarious trauma as separate syndromes.
+Within Eq.~(\ref{eq:triple-load}) they are three
+regimes of the same physics:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Syndrome & Dominant term & $\mathcal{S}_{\text{eff}}$ status \\
+\midrule
+Burnout & $\sigma\,s(t)$ (workload) & not yet sealed \\
+Compassion fatigue & $\lambda\,\Gamma_{\text{other}}^2$ &
+  approaching seal \\
+Vicarious trauma &
+  $\lambda\,\Gamma_{\text{other}}^2$ sealed into
+  $\mathcal{S}_{\text{eff}}$ & sealed \\
+\bottomrule
+\end{tabular}
+\end{center}
+The physical distinction is whether the dominant
+$\Gamma^2$ pattern has entered $\mathcal{S}_{\text{eff}}$:
+if not, rest and workload reduction suffice
+(burnout); if sealed, only pharmacological $\eta$-elevation
+plus guided C2 gradient (combined therapy) can rewrite
+the pattern---identical to the PTSD treatment protocol
+(Paper~3, Sec.~13b.2).
+Rest alone cannot unseal the null space
+(Second Law, Paper~4, Theorem~\ref{thm:second-law}).
+\end{remark}
+
+
 % ============================================================
 %  SECTION 10 — NHANES NETWORK PROPAGATION
 % ============================================================
@@ -1273,6 +1369,37 @@ conditions, not a different dynamical law.
     population-registry data
     (Sec.~\ref{sec:disease-progression},
     Fig.~\ref{fig:disease-progression}).
+
+  \item \textbf{Caregiver triple-load acceleration.}
+    Among long-term caregivers of PTSD or dementia
+    patients, those exposed to high moral constraint
+    (measured by internalised obligation scales) should
+    progress through the disease cascade of
+    Eq.~(\ref{eq:coupled-G2}) faster than
+    caregivers with equivalent empathic exposure hours
+    but lower moral load---because the moral channel
+    adds $\Gamma^2_{\text{moral}}$ to
+    Eq.~(\ref{eq:triple-load}) without contributing
+    any $\Delta Z_{\text{corrective}}$
+    (Moral Constraint Theorem, Paper~4).
+    Falsification criterion: if moral-load score does
+    \emph{not} predict time-to-onset of the second
+    cascade disease (cardiovascular or metabolic)
+    after controlling for total $\Gamma^2$ exposure,
+    the triple-load model is refuted.
+
+  \item \textbf{Null-space sealing and end-of-life
+    quality.}
+    Terminal patients with higher pre-morbid
+    $R_{\text{seal}}$ (operationalised as ratio of
+    deeply consolidated skills to total functional
+    repertoire) should exhibit lower terminal agitation,
+    lower analgesic requirements, and higher
+    observer-rated peace-of-death scores.
+    This follows from the null-space sealing ratio
+    (Paper~4, Remark~\ref{rem:sealing-mode}):
+    high $R_{\text{seal}}$ leaves insufficient active
+    substrate for a positive-feedback $\Gamma^2$ cascade.
 \end{enumerate}
 
 

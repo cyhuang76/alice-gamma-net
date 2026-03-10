@@ -753,6 +753,256 @@ from living to not-living.
 
 
 % ============================================================
+%  FOUR LAWS OF THE NULL SPACE
+% ============================================================
+\subsection{Four laws of the null space}
+\label{sec:four-laws}
+
+The null space $\mathcal{S}=\ker(\partial Z/\partial t)$
+and its effective extension $\mathcal{S}_{\text{eff}}(t)$
+satisfy four laws that are structurally parallel to the
+laws of thermodynamics.
+Because they follow from C1--C2 and the Arrhenius kinetics
+of $\eta(t)$, they are theorems, not axioms.
+
+\begin{theorem}[Zeroth law: null-space equivalence]
+\label{thm:zeroth-law}
+Two impedance networks $A,B$ have
+$\mathcal{S}_A = \mathcal{S}_B$ if and only if they share
+the same topological cost $\Acut$,
+the same genetically fixed impedance $Z_0^{\textnormal{DNA}}$, and
+operate at the same thermal floor
+$\rho_{\textnormal{irred}}^2$.
+\end{theorem}
+
+\begin{proof}
+By definition,
+$\mathcal{S}=\Acut + Z_0^{\text{DNA}} + \rho_{\text{irred}}^2$
+(Theorem~\ref{thm:soul}).
+Two networks with identical terms yield
+$\mathcal{S}_A-\mathcal{S}_B = 0$; conversely, a difference
+in any term produces $\mathcal{S}_A \neq \mathcal{S}_B$.
+\end{proof}
+
+The zeroth law grounds the null-space isomorphism test
+(Proposition~\ref{prop:null-isomorphism}):
+monozygotic twins share $Z_0^{\text{DNA}}$
+and (if reared together) similar $\Acut$, predicting
+near-identical $\mathcal{S}$ despite divergent life
+experience.
+
+\begin{theorem}[First law: conservation under C2]
+\label{thm:first-law}
+The null space is invariant under impedance remodeling:
+$\Delta_{\textnormal{C2}}\,\mathcal{S} = 0$.
+No experience, training, trauma, or therapy can alter
+$\mathcal{S}$.
+\end{theorem}
+
+\begin{proof}
+C2 modifies only $Z_{L,k}$ via
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$.
+All three components of $\mathcal{S}$ are, by construction,
+outside the range of C2 (Theorem~\ref{thm:soul}, proof).
+\end{proof}
+
+\begin{theorem}[Second law: monotone expansion of the
+effective null space]
+\label{thm:second-law}
+\begin{equation}
+  \frac{d\,\dim\,\mathcal{S}_{\textnormal{eff}}(t)}{dt}
+  \;\ge\; 0
+  \qquad \forall\;t\,.
+  \label{eq:second-law}
+\end{equation}
+The effective null space only expands; it never contracts.
+\end{theorem}
+
+\begin{proof}
+Define
+$\mathcal{S}_{\text{eff}}(t) =
+\{Z_k : \eta(t)\cdot|\Gamma_k|\cdot
+|x_{\text{in}}\,x_{\text{out}}|
+<\varepsilon\}$
+with $\varepsilon$ the noise floor.
+Since $\eta(t)=\eta_0\,f_{\text{dev}}(t)\,
+e^{-E_a/k_BT_{\text{age}}}$ is monotonically
+decreasing after the developmental peak
+(Paper~3, Eq.~(10)), any channel that enters
+$\mathcal{S}_{\text{eff}}$ at time $t_0$ satisfies
+$\eta(t)<\eta(t_0)$ for all $t>t_0$, and therefore
+remains in $\mathcal{S}_{\text{eff}}$.
+No channel exits once entered.
+\end{proof}
+
+\begin{corollary}[Ribot's gradient as the Second Law]
+\label{cor:ribot}
+Ribot's Law~(1881)---old memories are more resistant to
+neurodegeneration than recent ones---is the clinical shadow
+of Eq.~(\ref{eq:second-law}).
+Patterns written during the $\eta$-peak
+(childhood) have deeper $\Delta Z_s$ and enter
+$\mathcal{S}_{\textnormal{eff}}$ earlier; they therefore require
+more structural damage to be disrupted than patterns
+written during low-$\eta$ adulthood
+(Paper~3, Proposition~1).
+What Ribot observed in 1881 is the Second Law of the null
+space measured by clinical deficit.
+\end{corollary}
+
+\begin{theorem}[Third law: asymptotic completeness]
+\label{thm:third-law}
+\begin{equation}
+  \lim_{t\to\infty}
+  \frac{\dim\,\mathcal{S}_{\textnormal{eff}}(t)}
+       {\dim\,Z_{\textnormal{total}}}
+  \;=\; 1\,.
+  \label{eq:third-law}
+\end{equation}
+In the infinite-time limit, every impedance pattern
+becomes part of the effective null space.
+\end{theorem}
+
+\begin{proof}
+As $t\to\infty$, $\eta(t)\to 0$ by Arrhenius kinetics.
+Therefore every channel eventually satisfies
+$\eta\,|\Gamma|\,|x_{\text{in}}\,x_{\text{out}}|
+<\varepsilon$, entering $\mathcal{S}_{\text{eff}}$.
+\end{proof}
+
+\begin{corollary}[The consciousness--soul duality]
+\label{cor:duality}
+Consciousness requires active mismatch processing
+($\Gamma>0$, $\eta>0$, TV inequality satisfied).
+The effective null space is the complement:
+$\partial Z/\partial t = 0$.
+As $\mathcal{S}_{\textnormal{eff}}\to Z_{\textnormal{total}}$
+(Third Law), the substrate available for
+consciousness vanishes:
+\[
+  R_{\textnormal{seal}}\to 1
+  \;\Longrightarrow\;
+  \Phi_{\textnormal{meta}}\to 0\,.
+\]
+A ``perfect soul'' (everything sealed) and
+``complete consciousness'' (everything active) are
+mutually exclusive.
+Organisms live in the tension between the two;
+death resolves the tension by extinguishing $T$.
+\end{corollary}
+
+\begin{theorem}[Death as mathematical necessity]
+\label{thm:death-necessity}
+Given the Second Law (Eq.~\ref{eq:second-law}) and the
+bound $\Gamma_{\textnormal{basal}}^2 \le 1$ from C1,
+there exists a finite $t^*$ such that
+$\Gamma_{\textnormal{basal}}^2(t^*) = 1$ and $T(t^*) = 0$.
+Death is a theorem, not an empirical accident.
+\end{theorem}
+
+\begin{proof}
+(i)~By the Second Law,
+$d\Gamma_{\text{basal}}^2/dt > 0$
+(the null-space cost increases monotonically;
+Eq.~\ref{eq:irreducible-debt}).
+(ii)~By C1, $\Gamma^2 + T = 1$, so
+$\Gamma_{\text{basal}}^2$ is bounded above by~$1$.
+(iii)~A bounded, monotonically increasing function with
+positive lower bound on its derivative reaches any
+sub-boundary value in finite time.
+Hence $\exists\,t^*<\infty$ with
+$\Gamma_{\text{basal}}^2(t^*) = 1$, giving $T(t^*) = 0$.
+No signal propagates; the network is dead.
+\end{proof}
+
+\begin{remark}[The null-space sealing ratio and
+mode of death]
+\label{rem:sealing-mode}
+The sealing ratio at the moment of death,
+$R_{\text{seal}}(t^*)$, determines the mode of dying.
+When $R_{\text{seal}}\approx 1$ (high: most impedance
+already frozen), few active channels remain to participate
+in a positive-feedback $\Gamma^2$ cascade; shutdown is
+a low-energy fade.
+When $R_{\text{seal}}\ll 1$ (low: many active channels),
+the coupling matrix $C_{kj}$ of the disease progression
+equation (Paper~5, Eq.~\ref{eq:coupled-G2}) drives
+multi-organ avalanche---pain, fear, and systemic storm.
+``Living long'' and ``dying gently'' are therefore the
+same physics: both require high $R_{\text{seal}}$, which
+is produced by the Second Law operating over a long
+lifetime.
+\end{remark}
+
+\subsection{The Moral Constraint Theorem}
+\label{sec:moral-constraint}
+
+The four null-space laws unify the previously independent
+remarks on fixation (Remark~\ref{rem:fixation}),
+secondary injury (Remark~\ref{rem:secondary-injury}),
+and sealed shutdown (Remark~\ref{rem:sealed-death})
+into a single theorem.
+
+\begin{theorem}[Moral Constraint Theorem]
+\label{thm:moral-constraint}
+Let a moral demand (external or internalised) target
+an impedance pattern $Z_k$ in an agent.
+The net physical effect is:
+\begin{equation}
+  \Delta\Gamma^2_{\textnormal{net}} =
+  \begin{cases}
+    -\Delta\Gamma^2 & \text{if } Z_k \notin
+      \mathcal{S}_{\textnormal{eff}}
+      \text{ and a C2 gradient is supplied,} \\[4pt]
+    +\Gamma^2_{\textnormal{blame}} & \text{if } Z_k \in
+      \mathcal{S}_{\textnormal{eff}}
+      \text{ (no C2 path exists).}
+  \end{cases}
+  \label{eq:moral-constraint}
+\end{equation}
+In the second case, the moral demand is physically
+indistinguishable from injury: it injects mismatch
+energy that cannot be discharged, because the
+target impedance is in the effective null space
+where $\eta\,\Gamma\,x_{\textnormal{in}}\,x_{\textnormal{out}}
+\approx 0$.
+\end{theorem}
+
+\begin{proof}
+If $Z_k\notin\mathcal{S}_{\text{eff}}$, then
+$\eta\,|\Gamma_k|>0$ and a corrective stimulus
+$(x_{\text{in}},x_{\text{out}})$ can drive
+$\Delta Z_k\neq 0$ via C2; the moral demand, by providing
+direction, reduces $\Gamma_k^2$.
+If $Z_k\in\mathcal{S}_{\text{eff}}$, then
+$\eta\,|\Gamma_k|\,|x_{\text{in}}\,x_{\text{out}}|
+<\varepsilon$ by definition, so
+$\Delta Z_k\approx 0$ regardless of the demand.
+The demand itself, however, introduces a new mismatch
+$\Gamma_{\text{blame}}^2>0$ (shame, guilt, self-reproach)
+on the agent's active channels,
+yielding $\Delta\Gamma_{\text{net}}^2>0$.
+\end{proof}
+
+\begin{corollary}[Boundary of moral responsibility]
+\label{cor:moral-boundary}
+Moral responsibility is physically meaningful only for
+patterns outside $\mathcal{S}_{\textnormal{eff}}$:
+\[
+  \textnormal{moral agency}_k \;\propto\;
+  \eta(t)\,|\Gamma_k|\,
+  |x_{\textnormal{in}}\,x_{\textnormal{out}}|\,.
+\]
+For patterns inside $\mathcal{S}_{\textnormal{eff}}$,
+this product vanishes and the concept of
+``choosing to change'' has no physical substrate.
+Attributing moral failure to such patterns constitutes
+a category error of the same kind as attributing
+moral failure to the hardness of tempered steel.
+\end{corollary}
+
+
+% ============================================================
 \section{The Television Theorem}
 \label{sec:television}
 
@@ -1774,6 +2024,25 @@ constraints (C1--C3), we have derived:
     $\Gamma_{\text{basal}}^2(t_*)\ge 1$ is the death
     condition, and sleep is the phase in which the
     crossing goes unwitnessed.
+  \item \textbf{Four laws of the null space}:
+    the effective null space satisfies four laws
+    parallel to thermodynamics---equivalence (Zeroth),
+    conservation under C2 (First),
+    monotone expansion $d\dim\mathcal{S}_{\text{eff}}/dt\ge 0$
+    (Second), and asymptotic completeness (Third).
+    Death is a theorem (not an accident) derived from the
+    Second Law and C1.
+    Ribot's Law (1881) is a clinical corollary of the
+    Second Law.
+  \item \textbf{Moral Constraint Theorem}:
+    moral demands targeting patterns inside
+    $\mathcal{S}_{\text{eff}}$ inject
+    $\Gamma^2_{\text{blame}}>0$ with
+    $\Delta Z_{\text{corrective}}=0$---physically
+    indistinguishable from injury.
+    Moral responsibility has a physical boundary:
+    it applies only where
+    $\eta\,|\Gamma|\,|x_{\text{in}}\,x_{\text{out}}|>0$.
 \end{enumerate}
 
 These are not metaphors.
