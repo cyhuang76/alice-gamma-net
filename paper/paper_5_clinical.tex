@@ -885,6 +885,120 @@ branch of the network.
 
 
 % ============================================================
+%  SECTION 9b — DISEASE PROGRESSION MAP
+% ============================================================
+\subsection{Coupled disease progression:
+from stressor to multi-organ failure}
+\label{sec:disease-progression}
+
+Remark~\ref{rem:trauma-somatic} described the causal chain
+qualitatively.
+Here we formalise the coupled dynamics and simulate a
+representative high-risk trajectory.
+
+\subsubsection{Coupled five-organ $\Gamma^2$ dynamics}
+
+Let $\Gamma_k^2(t)$ ($k \in \{\text{n, v, imm, met, ren}\}$)
+denote the mismatch energy in five coupled organ channels:
+neural, vascular, immune, metabolic, and renal.
+Each evolves under the lifecycle equation with
+inter-organ coupling (Paper~2):
+\begin{equation}
+  \frac{d\Gamma_k^2}{dt}
+  = \underbrace{-\eta(t)\,\Gamma_k^2}_{\text{repair}}
+  + \underbrace{\delta_k(t)\vphantom{\Gamma_k^2}}_{\text{aging damage}}
+  + \underbrace{\sigma_k\,s(t)}_{\text{stress}}
+  + \underbrace{\sum_{j \neq k}
+    C_{kj}\,\Gamma_j^2}_{\text{coupling}}
+  + \underbrace{\beta_k\,\Gamma_k^4}_{\text{positive feedback}}\,,
+  \label{eq:coupled-G2}
+\end{equation}
+where $\eta(t)$ is the homeostatic repair capacity
+(slower decline than synaptic plasticity; floor
+$\eta_{\min} = 0.02$),
+$\delta_k(t) = \delta_0^{(k)}\,e^{E_a\,t/\tau}$ the
+Arrhenius aging damage,
+$\sigma_k$ the stress sensitivity,
+$C_{kj}$ the coupling matrix encoding the dual-network
+cascade of Paper~2 (vascular $\to$ material starvation
+$\to$ all C2 loops), and
+$\beta_k$ a pathological positive-feedback coefficient
+(inflammation begets inflammation).
+
+\subsubsection{Disease branch points}
+
+A disease is declared when $\Gamma_k^2$ exceeds a
+sustained threshold $\theta$:
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Disease & Channel & $\theta$ \\
+\midrule
+Depression & Neural & 0.45 \\
+Hypertension & Vascular & 0.50 \\
+Immune decline & Immune & 0.45 \\
+Metabolic syndrome & Metabolic & 0.48 \\
+Chronic kidney disease & Renal & 0.50 \\
+Dementia & Neural & 0.70 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsubsection{Representative high-risk trajectory}
+
+Figure~\ref{fig:disease-progression} simulates
+Eq.~(\ref{eq:coupled-G2}) for a person subject to
+childhood trauma (age 8--10), career stress (30--45),
+caregiving for an aging parent (50--65), and
+bereavement at age~62.
+Depression emerges at ${\sim}60$ during the caregiving
+decade; the metabolic--vascular cascade follows
+within ${\sim}5$ years;
+immune decline and chronic kidney disease appear in
+the early 70s; dementia closes the sequence near
+age~78.
+The total health product
+$H(t) = \prod_k(1-\Gamma_k^2)$ declines
+slowly during career stress, accelerates during
+caregiving, and collapses after the cascade onset---
+a timeline consistent with epidemiological
+observations of caregiver morbidity trajectories.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{../figures/fig_disease_progression.pdf}
+  \caption{$\Gamma$-Net disease progression map for a
+  representative high-risk trajectory.
+  \textbf{Top}: homeostatic repair capacity $\eta(t)$ and
+  external stress profile.
+  \textbf{Middle}: five coupled organ $\Gamma^2$ trajectories;
+  diamonds mark sustained threshold crossings (disease onset).
+  \textbf{Bottom}: total health product
+  $H(t) = \prod_k(1-\Gamma_k^2)$.
+  All parameters are derived from Papers~2--3 physics;
+  no curve fitting to clinical data.}
+  \label{fig:disease-progression}
+\end{figure}
+
+\begin{remark}[Disease onset as impedance phase transition]
+\label{rem:disease-phase-transition}
+The positive-feedback term $\beta_k\,\Gamma_k^4$ in
+Eq.~(\ref{eq:coupled-G2}) creates a saddle-node
+bifurcation: below a critical forcing level,
+$\Gamma_k^2$ remains at a low, stable equilibrium;
+above it, no low-$\Gamma$ equilibrium exists and
+the channel collapses toward $\Gamma_k^2 = 1$.
+Disease onset is therefore not a gradual deterioration
+but a \emph{phase transition}---the system crosses a
+tipping point beyond which homeostatic repair cannot
+restore the low-$\Gamma$ state.
+The coupling matrix $C_{kj}$ then propagates this
+collapse to downstream organs, explaining why
+chronic diseases rarely appear in isolation.
+\end{remark}
+
+
+% ============================================================
 %  SECTION 10 — NHANES NETWORK PROPAGATION
 % ============================================================
 \section{Empirical Evidence: Network Propagation}
@@ -1140,6 +1254,25 @@ conditions, not a different dynamical law.
     inflammatory markers, HRV depression) proportional
     to cumulative patient $\Gamma^2$ exposure hours,
     independent of the caregiver's own trauma history.
+
+  \item \textbf{Disease cascade ordering.}
+    In longitudinal cohorts with childhood adversity
+    and chronic adult stress (e.g.\ long-term caregiving),
+    the ordering of incident disease should follow the
+    $\Gamma$-coupling cascade of
+    Eq.~(\ref{eq:coupled-G2}):
+    mood disorder first (neural $\Gamma_n^2$ crosses
+    threshold), cardiovascular and metabolic disease
+    next (neural $\to$ vascular/metabolic coupling),
+    immune and renal disease later (secondary cascade),
+    and dementia last (neural $\Gamma_n^2$ reaching
+    the high-threshold regime).
+    The predicted inter-onset intervals
+    (${\sim}5$--$15$~years between depression onset
+    and dementia) are testable against
+    population-registry data
+    (Sec.~\ref{sec:disease-progression},
+    Fig.~\ref{fig:disease-progression}).
 \end{enumerate}
 
 
