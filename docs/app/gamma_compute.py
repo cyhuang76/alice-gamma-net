@@ -131,16 +131,16 @@ def framingham_risk(age, sex, tc, hdl, sbp, smoker=False,
         elif age < 75: pts += 7
         else: pts += 8
     else:
-        if age < 35: pts += -9
-        elif age < 40: pts += -4
+        if age < 35: pts += -7
+        elif age < 40: pts += -3
         elif age < 45: pts += 0
         elif age < 50: pts += 3
         elif age < 55: pts += 6
-        elif age < 60: pts += 7
-        elif age < 65: pts += 8
-        elif age < 70: pts += 8
-        elif age < 75: pts += 8
-        else: pts += 8
+        elif age < 60: pts += 8
+        elif age < 65: pts += 10
+        elif age < 70: pts += 12
+        elif age < 75: pts += 14
+        else: pts += 16
 
     # TC
     if tc < 160: pts += (0 if male else -2)
@@ -185,7 +185,7 @@ def framingham_risk(age, sex, tc, hdl, sbp, smoker=False,
     else:
         table = {-2:1,-1:2,0:2,1:2,2:3,3:3,4:4,5:5,6:6,
                  7:7,8:8,9:9,10:11,11:13,12:15,13:17,14:20,
-                 15:24,16:27,17:32}
+                 15:24,16:27,17:32,18:37,19:42,20:47,21:50}
 
     clamped = max(min(pts, max(table.keys())), min(table.keys()))
     risk_pct = table[clamped]
@@ -219,8 +219,9 @@ def ascvd_pooled_cohort(age, sex, tc, hdl, sbp,
         baseline = 0.9144
         mean_c = 61.18
     else:
-        s = (-29.799 * ln_age + 13.540 * ln_tc
-             - 13.578 * ln_hdl
+        s = (-29.799 * ln_age + 4.884 * ln_age * ln_age
+             + 13.540 * ln_tc - 3.114 * ln_age * ln_tc
+             - 13.578 * ln_hdl + 3.149 * ln_age * ln_hdl
              + (2.019 if bp_treated else 1.957) * ln_sbp
              + (7.574 if smoker else 0.0)
              - 1.665 * ln_age * (1.0 if smoker else 0.0)
