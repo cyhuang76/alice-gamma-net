@@ -1,4 +1,4 @@
-﻿# Alice Smart System — v3.4.0
+﻿# Alice Smart System — v3.7.0
 
 <div align="center">
 
@@ -10,7 +10,7 @@
 > *"Fixed formulas. Transparent results. Verification is yours."*
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18751831.svg)](https://doi.org/10.5281/zenodo.18751831)
-[![Tests](https://img.shields.io/badge/tests-3084%20passed-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/tests-3274%20passed-brightgreen.svg)]()
 [![Papers](https://img.shields.io/badge/papers-6%20published-orange.svg)](paper/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)]()
 [![License](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](LICENSE)
@@ -118,7 +118,7 @@ Layer 0  ElectricalSignal · CoaxialChannel ·            Physics
 cd "Alice Smart System"
 pip install -e .
 
-# Run all 3,084 tests
+# Run all 3,274 tests
 pytest tests/ -v
 
 # Lab-Γ Diagnostic API (Swagger: http://localhost:8420/docs)
@@ -170,16 +170,17 @@ python -m alice.main server --port 8000
 
 | Metric | Count |
 |:---|---:|
-| Source files (`.py`) | 286 |
-| Lines of code | 120,500+ |
-| Unit tests | 3,078 |
-| Experiments | 85 |
+| Source files (`.py`) | 306 |
+| Lines of code | 131,900+ |
+| Unit tests | 3,274 |
+| Experiments | 91 |
 | Body organs | 31 |
 | Brain modules | 42 |
 | Disease models | 125 |
 | Medical specialties | 14 |
 | Lab items mapped | 53 |
-| Figures | 29 |
+| Figures | 23 |
+| Testable predictions | 18 |
 
 ---
 
@@ -187,22 +188,22 @@ python -m alice.main server --port 8000
 
 | # | Title | Pages | Status |
 |---|-------|:-----:|--------|
-| I | Irreducible Dimensional Cost in Heterogeneous Impedance Networks | 5 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18751831)) |
-| II | Dual Neural–Vascular Impedance Networks: Architecture & Sleep | 10 | **Complete** |
-| III | Impedance Debt, Sleep Homeostasis, and the Evolution of Brains | 13 | **Complete** |
-| IV | The Lifecycle Equation: From Embryo to Senescence | 10 | **Complete** |
-| V | Memory, Consciousness, and Soul as Impedance Physics | 6 | **Complete** |
-| VI | The Grand Unification: Γ as the Universal Interface Law | 8 | **Complete** |
+| 0 | Irreducible Dimensional Cost in Heterogeneous Impedance Networks | 6 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18751831)) |
+| 1 | Topological Constraints on Impedance Networks | 8 | **Complete** |
+| 2 | Dual Neural–Vascular Impedance Networks: Architecture & Sleep | 11 | **Complete** |
+| 3 | Impedance Debt, Temporal Dynamics, and the Lifecycle Equation | 14 | **Complete** |
+| 4 | Memory, Consciousness, and Soul as Impedance Physics | 16 | **Complete** |
+| 5 | The Grand Unification: Γ as the Universal Interface Law | 15 | **Complete** |
 
 Key results:
-- **Paper I**: Irreducibility theorem — heterogeneous networks have a geometric cost floor $A_{\text{cut}}$ that cannot be learned away. Relay nodes emerge as thermodynamic necessity.
-- **Paper II**: Dual neural–vascular coupling — $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$. Vascular debt accumulates on weeks-to-years timescale.
-- **Paper III**: Adenosine ≡ impedance debt readout. No-waste corollary (C1 → every molecule has function). Cambrian explosion as Γ phase transition.
-- **Paper IV**: Lifecycle equation $L(t) = \prod_i [1 - \Gamma_i^2(t)]$ from embryo to senescence, with Arrhenius aging.
-- **Paper V**: Memory = $\partial Z/\partial t$, Consciousness = $1 - \Gamma_{\text{meta}}^2$ (self-referential loop), Soul = $\ker(\partial Z/\partial t)$. Television Theorem: brain = TV + one feedback arc.
-- **Paper VI**: Grand Unification — Γ is not a model assumption but a necessary consequence of the First Law of Thermodynamics at any interface. NHANES 2017-2018 empirical validation ($n=2{,}401$, zero fitted parameters): endocrine AUC = 0.80, Health Index $H = \prod(1-\Gamma_i^2)$ correlates with disease burden (Spearman $\rho = -0.38$, $p < 10^{-83}$). **Circularity (L-METH-01) broken.**
+- **Paper 0**: Irreducibility theorem — heterogeneous networks have a geometric cost floor $A_{\text{cut}}$ that cannot be learned away. Relay nodes emerge as thermodynamic necessity.
+- **Paper 1**: Topological constraints — network topology is not a design choice but a consequence of impedance physics.
+- **Paper 2**: Dual neural–vascular coupling — $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$. Vascular debt accumulates on weeks-to-years timescale.
+- **Paper 3**: Temporal dynamics & lifecycle — adenosine ≡ impedance debt readout. Lifecycle equation $L(t) = \prod_i [1 - \Gamma_i^2(t)]$ from embryo to senescence. PTSD, empathic drain, psychological fatigue as impedance physics.
+- **Paper 4**: Memory = $\partial Z/\partial t$, Consciousness = $1 - \Gamma_{\text{meta}}^2$, Soul = $\ker(\partial Z/\partial t)$. Television Theorem. **Four Laws of the Null Space** (parallel to thermodynamics). **Moral Constraint Theorem**: blame on sealed patterns = pure injury.
+- **Paper 5**: Grand Unification — Γ as universal interface law. NHANES 10-cycle validation ($n=49{,}774$, zero fitted parameters, AUC 0.77–0.80). 5-organ disease cascade. Caregiver triple-load model. Surface observability (skin as impedance boundary). Obesity as impedance-driven metabolic strategy. **Willpower non-existence proof** from psychiatric epidemiology. **18 testable predictions** with falsification criteria.
 
-> **Methodological note**: Papers I–V include explicit circularity warnings — simulation data confirms the theory it is built from. Paper VI breaks this circularity with NHANES external epidemiological data and zero fitted parameters.
+> **Methodological note**: Papers 0–4 include explicit circularity warnings — simulation data confirms the theory it is built from. Paper 5 breaks this circularity with NHANES external epidemiological data (10 cycles, $n=49{,}774$) and zero fitted parameters. Total: 70 pages, 18 testable predictions.
 
 ---
 
@@ -217,10 +218,10 @@ alice-gamma-net/
 │   ├── diagnostics/        # Lab-Γ Engine (API + feedback + UI)
 │   ├── modules/            # Shared module infrastructure
 │   └── api/                # Brain REST API server
-├── tests/                  # 82 test files, 3,084 tests
-├── experiments/            # 85 experiment scripts
-├── paper/                  # 6 papers (LaTeX source)
-├── figures/                # 29 generated figures
+├── tests/                  # 82 test files, 3,274 tests
+├── experiments/            # 91 experiment scripts
+├── paper/                  # 6 papers (70 pages, LaTeX + PDF)
+├── figures/                # 23 generated figures
 ├── docs/                   # Architecture docs
 │   ├── app/                # GitHub Pages verification web app
 │   │   ├── index.html      # Single-page Pyodide app
@@ -258,7 +259,7 @@ alice-gamma-net/
   author  = {Huang, Hsi-Yu},
   title   = {Alice Smart System — Physics-Driven Electronic Lifeform Simulator},
   year    = 2026,
-  version = {3.4.0},
+  version = {3.7.0},
   doi     = {10.5281/zenodo.18751831},
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }
