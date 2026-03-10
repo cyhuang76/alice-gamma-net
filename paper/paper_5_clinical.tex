@@ -1283,6 +1283,119 @@ workplace stress are visually indistinguishable
 in their surface presentation.
 \end{remark}
 
+\subsection{Obesity as impedance-driven metabolic strategy}
+\label{sec:obesity}
+
+Conventional discourse frames obesity as a failure
+of self-control.
+The $\Gamma$-framework reveals a different causal
+structure: chronic $\Gamma^2$ overload triggers a
+whole-body metabolic reallocation that makes
+overeating a \emph{physically rational} compensatory
+strategy rather than a moral deficiency.
+
+\paragraph{Selfish-brain cascade.}
+Under sustained stress ($\sigma\,s(t)$ large) or
+empathic overload
+($\lambda\,\Gamma^2_{\text{other}}$ large),
+cumulative impedance debt $D_Z$ rises and the neural
+channel reads persistent supply instability.
+The brain's response---well documented as the
+``selfish brain'' hypothesis~\cite{Peters2011}---is
+to up-regulate caloric intake, particularly
+fast-availability substrates (sugar, fat),
+and to down-regulate satiety sensitivity.
+In the $\Gamma$-language:
+%
+\begin{equation}
+  \text{High }\Gamma_n^2
+  \;\xrightarrow{\text{HPA axis}}\;
+  \text{insulin/glucose redistribution}
+  \;\xrightarrow{\text{reward}}\;
+  \text{appetite}\!\uparrow,\;
+  \text{satiety sensitivity}\!\downarrow
+  \label{eq:selfish-brain}
+\end{equation}
+%
+The behavioural output---compulsive eating---is the
+neural channel's attempt to stabilise its own $D_Z$
+at the expense of the metabolic channel.
+
+\paragraph{Leptin resistance as impedance mismatch.}
+In sustained obesity, circulating leptin is high,
+but the hypothalamic leptin-receptor pathway exhibits
+reduced signal transmission~\cite{Moran2019}---a
+textbook impedance mismatch.
+The satiety signal $Z_{\text{leptin}}$ is present
+at the source but cannot couple into the load
+($Z_{\text{hypothalamus}}$), so the brain never
+receives the ``fat stores are sufficient'' message.
+Formally, the leptin channel's reflection coefficient
+%
+\[
+  \Gamma_{\text{leptin}}
+  = \frac{Z_{\text{hypothalamus}}
+          - Z_{\text{leptin}}}
+         {Z_{\text{hypothalamus}}
+          + Z_{\text{leptin}}}
+  \;\to\; 1
+\]
+%
+approaches unity: the signal is almost totally
+reflected, and the transmitted fraction
+$T_{\text{leptin}} = 1 - \Gamma_{\text{leptin}}^2
+\to 0$.
+This is not a character flaw;
+it is a hardware-level C2-pathway failure.
+
+\paragraph{Hedonic eating as short-term
+\texorpdfstring{$\Gamma^2$}{Gamma-squared} reduction.}
+Ghrelin, leptin, and the mesolimbic reward circuit
+jointly modulate both hunger and hedonic
+valuation~\cite{Schellekens2012}.
+High-calorie intake produces a transient subjective
+$\Gamma^2$ reduction (``comfort''), trading a brief
+mismatch relief for a larger long-term $D_Z$
+increment (weight gain, insulin resistance,
+cardiovascular load):
+%
+\[
+  \underbrace{\Delta\Gamma^2_{\text{short}}
+    < 0}_{\text{hedonic relief}}
+  \;,\quad
+  \underbrace{\Delta D_{Z,\text{long}}
+    \gg 0}_{\text{metabolic debt}}
+\]
+%
+This is the metabolic analogue of the PTSD
+flashback--avoidance cycle (Paper~3):
+a locally rational response that is globally
+destructive.
+
+\begin{remark}[Moral blame as secondary metabolic injury]
+\label{rem:obesity-blame}
+Applying the Moral Constraint Theorem
+(Paper~4, Theorem~\ref{thm:moral-constraint})
+to the obese individual:
+the eating pattern is already approaching or inside
+$\mathcal{S}_{\text{eff}}$
+(sealed by years of reinforced reward circuitry),
+so moral condemnation (``lack of self-discipline'')
+injects $\Gamma^2_{\text{blame}}$ without any
+corresponding $\Delta Z_{\text{corrective}}$.
+The result is strictly additional impedance debt:
+the subject now carries the original metabolic
+$\Gamma^2$ \emph{plus} a shame/stigma $\Gamma^2$
+that further activates the stress--appetite
+cascade of Eq.~(\ref{eq:selfish-brain}),
+accelerating the very pathology it purports to
+correct.
+Weight-stigma research confirms precisely this
+paradox: moral pressure to lose weight predicts
+\emph{increased} weight gain over
+time~\cite{Sutin2015}.
+\end{remark}
+
 
 % ============================================================
 %  SECTION 10 — NHANES NETWORK PROPAGATION
@@ -1609,6 +1722,27 @@ conditions, not a different dynamical law.
     cardiovascular or metabolic incidence after
     controlling for age, BMI, and smoking status,
     the surface-readout model is refuted.
+
+  \item \textbf{Weight-stigma acceleration.}
+    In cohorts of obese individuals, those reporting
+    higher perceived weight stigma (moral blame)
+    should exhibit \emph{faster} weight gain and
+    earlier onset of metabolic syndrome components
+    (fasting glucose, triglycerides, blood pressure)
+    compared with BMI-matched controls reporting
+    low stigma, after adjusting for diet and
+    physical activity.
+    This follows from Remark~\ref{rem:obesity-blame}:
+    $\Gamma^2_{\text{blame}}$ adds to the
+    stress--appetite cascade
+    (Eq.~\ref{eq:selfish-brain}) without providing
+    any corrective $\Delta Z$.
+    Falsification criterion: if perceived stigma
+    does \emph{not} independently predict 3-year
+    weight trajectory after controlling for
+    caloric intake and exercise, the
+    moral-secondary-injury model for obesity is
+    refuted.
 \end{enumerate}
 
 
@@ -1998,6 +2132,30 @@ USA} \textbf{122}, e2413961122 (2025).
 H.-Y.~Huang, ALICE Smart System,
 \url{https://github.com/cyhuang76/alice-gamma-net} (2026).
 \href{https://doi.org/10.5281/zenodo.18852835}{doi:10.5281/zenodo.18852835}
+
+\bibitem{Peters2011}
+A.~Peters \emph{et al.}, ``The selfish brain: competition
+for energy resources,''
+\emph{Neurosci.\ Biobehav.\ Rev.} \textbf{28}, 143--180
+(2004).
+
+\bibitem{Schellekens2012}
+H.~Schellekens, T.~G.~Dinan, and J.~F.~Cryan,
+``Lean mean fat reducing `ghrelin' machine: hypothalamic
+ghrelin and ghrelin receptors as therapeutic targets in
+obesity,''
+\emph{Neuropharmacology} \textbf{63}, 3--17 (2012).
+
+\bibitem{Moran2019}
+C.~P.~Moran and F.~Shanahan,
+``Leptin resistance and obesity,''
+in \emph{Textbook of Energy Balance, Neuropeptides and
+Obesity} (Springer, 2019).
+
+\bibitem{Sutin2015}
+A.~R.~Sutin and A.~Terracciano,
+``Perceived weight discrimination and obesity,''
+\emph{PLoS ONE} \textbf{8}, e70048 (2013).
 
 \end{thebibliography}
 
