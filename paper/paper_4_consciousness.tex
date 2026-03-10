@@ -1107,7 +1107,9 @@ reaching the cochlea and vestibular apparatus:
 \begin{itemize}
   \item At impact ($t=5$--$7$): vestibular amplitude spikes
     to~0.95 ($\Gamma=0.90$), triggering the thalamic
-    \emph{startle bypass} (hardware interrupt).
+    \emph{startle bypass}---a direct subcortical pathway
+    whose conduction time ($\sim$5~ms) is shorter than
+    the arousal-shutdown propagation ($\sim$50--200~ms).
   \item Auditory amplitude spikes to~0.85 (tinnitus).
   \item Result: auditory and vestibular gates forced to 1.0
     via startle circuit, \emph{even as arousal crashes}.
@@ -1123,11 +1125,18 @@ This explains the subjective sequence:
     (startle signals are the \emph{last} to pass before shutdown).
 \end{enumerate}
 
-The startle circuit is a \emph{hardware interrupt}---it
-bypasses the normal arousal-modulated gating.
-This is why you hear the buzz and feel the spin
-\emph{before} losing consciousness: the interrupt fires
-faster than the power-down propagates.
+The startle circuit bypasses the normal
+arousal-modulated gating via a direct
+brainstem--thalamic relay ($\tau_{\text{startle}}\approx
+5$~ms $\ll \tau_{\text{arousal shutdown}}\approx
+50$--$200$~ms).
+This is why tinnitus and vertigo are perceived
+\emph{before} loss of consciousness:
+the startle-driven $\Gamma^2$ spike propagates through
+the fast subcortical pathway and forces open auditory
+and vestibular gates, while the slower
+$Z_{\text{arousal}}\to 0$ cascade has not yet
+reached the thalamic gate array.
 
 \subsection{Quantitative comparison}
 
@@ -1139,12 +1148,12 @@ faster than the power-down propagates.
 \toprule
  & Fever & Impact \\
 \midrule
-Kill target & $\QPFC$ (processor) & $\Zarousal$ (power) \\
+Kill target & $\QPFC$ (thermal noise) & $\Zarousal$ (arousal collapse) \\
 Onset & Minutes--hours & Milliseconds \\
 Gate state & Open & Closed \\
 $\Phi_{\min}$ & 0.302 & 0.000 \\
 PFC energy & Intact & Intact \\
-Analogy & CPU overheat & Power cut \\
+Physics & $\rho^2\!\uparrow\!\Rightarrow Q\!\downarrow$ & $Z_{\text{ar}}\!\to\! 0\!\Rightarrow G\!\to\! 0$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1159,7 +1168,7 @@ Therefore consciousness is the \emph{product}, not its factors.
 \caption{Two independent kill mechanisms on Alice.
   Left: fever pathway ($Q_{\mathrm{PFC}}$ collapse via thermal noise);
   right: occipital impact pathway ($Z_{\mathrm{arousal}}$ shutdown
-  via vestibular interrupt).
+  via vestibular startle bypass).
   Both reduce $\Phi\to 0$ independently, confirming that
   consciousness is the product of its factors,
   not localised to either.
