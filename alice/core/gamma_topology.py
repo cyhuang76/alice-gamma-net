@@ -137,9 +137,184 @@ ENTERIC_NEURON = TissueType(
     diameter_um=1.0, myelinated=False,
     description="Enteric nervous system — gut brain, unmyelinated")
 
+# ── Non-neural tissue presets ─────────────────────────────────────────
+
+ALVEOLAR_EPITHELIUM = TissueType(
+    "alveolar_epithelium", n_modes=2, z_mean=55.0, z_std=12.0,
+    diameter_um=8.0, myelinated=False,
+    description="Alveolar type I/II — gas exchange surface")
+
+AIRWAY_SMOOTH_MUSCLE = TissueType(
+    "airway_smooth_muscle", n_modes=1, z_mean=65.0, z_std=15.0,
+    diameter_um=5.0, myelinated=False,
+    description="Bronchial smooth muscle — airway calibre control")
+
+GLOMERULAR = TissueType(
+    "glomerular", n_modes=3, z_mean=45.0, z_std=10.0,
+    diameter_um=0.1, myelinated=False,
+    description="Glomerular capillary — filtration barrier")
+
+TUBULAR_EPITHELIUM = TissueType(
+    "tubular_epithelium", n_modes=2, z_mean=70.0, z_std=15.0,
+    diameter_um=10.0, myelinated=False,
+    description="Renal tubular epithelium — reabsorption/secretion")
+
+HEPATOCYTE = TissueType(
+    "hepatocyte", n_modes=3, z_mean=50.0, z_std=12.0,
+    diameter_um=25.0, myelinated=False,
+    description="Hepatocyte — metabolic clearance, dual blood supply")
+
+SINUSOIDAL = TissueType(
+    "sinusoidal", n_modes=1, z_mean=35.0, z_std=8.0,
+    diameter_um=10.0, myelinated=False,
+    description="Hepatic sinusoid — fenestrated, low-Z exchange")
+
+GI_MUCOSAL = TissueType(
+    "gi_mucosal", n_modes=2, z_mean=60.0, z_std=14.0,
+    diameter_um=12.0, myelinated=False,
+    description="GI mucosal epithelium — absorption interface")
+
+GI_SMOOTH_MUSCLE = TissueType(
+    "gi_smooth_muscle", n_modes=1, z_mean=55.0, z_std=10.0,
+    diameter_um=5.0, myelinated=False,
+    description="GI smooth muscle — peristalsis")
+
+ENDOCRINE_GLAND = TissueType(
+    "endocrine_gland", n_modes=2, z_mean=75.0, z_std=18.0,
+    diameter_um=15.0, myelinated=False,
+    description="Endocrine gland cell — hormone secretion")
+
+HYPOTHALAMIC = TissueType(
+    "hypothalamic", n_modes=3, z_mean=70.0, z_std=16.0,
+    diameter_um=5.0, myelinated=False,
+    description="Hypothalamic neuroendocrine — integrates neural + hormonal")
+
+LYMPHOCYTE = TissueType(
+    "lymphocyte", n_modes=2, z_mean=90.0, z_std=22.0,
+    diameter_um=8.0, myelinated=False,
+    description="T/B lymphocyte — adaptive immune effector")
+
+MAST_INNATE = TissueType(
+    "mast_innate", n_modes=1, z_mean=100.0, z_std=25.0,
+    diameter_um=12.0, myelinated=False,
+    description="Mast cell / innate immune — rapid response")
+
+LYMPHATIC_VESSEL = TissueType(
+    "lymphatic_vessel", n_modes=1, z_mean=40.0, z_std=10.0,
+    diameter_um=20.0, myelinated=False,
+    description="Lymphatic vessel — low-pressure drainage")
+
+SKELETAL_MUSCLE = TissueType(
+    "skeletal_muscle", n_modes=3, z_mean=45.0, z_std=10.0,
+    diameter_um=50.0, myelinated=False,
+    description="Skeletal muscle fiber — motor unit force generation")
+
+TENDON = TissueType(
+    "tendon", n_modes=1, z_mean=150.0, z_std=30.0,
+    diameter_um=1.0, myelinated=False,
+    description="Tendon — high-Z force transmission, low-K")
+
+BONE_CELL = TissueType(
+    "bone_cell", n_modes=2, z_mean=200.0, z_std=40.0,
+    diameter_um=15.0, myelinated=False,
+    description="Osteoblast/osteoclast — bone remodeling (Wolff's law)")
+
+KERATINOCYTE = TissueType(
+    "keratinocyte", n_modes=2, z_mean=85.0, z_std=20.0,
+    diameter_um=30.0, myelinated=False,
+    description="Keratinocyte — epidermal barrier")
+
+DERMAL_FIBROBLAST = TissueType(
+    "dermal_fibroblast", n_modes=1, z_mean=65.0, z_std=15.0,
+    diameter_um=20.0, myelinated=False,
+    description="Dermal fibroblast — collagen/ECM production")
+
+FIBROBLAST_CT = TissueType(
+    "fibroblast_ct", n_modes=1, z_mean=70.0, z_std=18.0,
+    diameter_um=15.0, myelinated=False,
+    description="Connective tissue fibroblast — ECM remodeling")
+
+ADIPOCYTE = TissueType(
+    "adipocyte", n_modes=1, z_mean=30.0, z_std=8.0,
+    diameter_um=100.0, myelinated=False,
+    description="Adipocyte — energy storage, leptin signaling")
+
+HSC = TissueType(
+    "hsc", n_modes=3, z_mean=95.0, z_std=20.0,
+    diameter_um=8.0, myelinated=False,
+    description="Hematopoietic stem cell — multipotent progenitor")
+
+ERYTHROID = TissueType(
+    "erythroid", n_modes=1, z_mean=50.0, z_std=10.0,
+    diameter_um=7.0, myelinated=False,
+    description="Erythroid lineage — O2 transport, EPO responsive")
+
+CHONDROCYTE = TissueType(
+    "chondrocyte", n_modes=1, z_mean=180.0, z_std=35.0,
+    diameter_um=15.0, myelinated=False,
+    description="Chondrocyte — avascular, η≈0 (C2-null)")
+
+GONADAL = TissueType(
+    "gonadal", n_modes=2, z_mean=65.0, z_std=15.0,
+    diameter_um=20.0, myelinated=False,
+    description="Gonadal cell — gamete production, steroidogenesis")
+
+RETINAL = TissueType(
+    "retinal", n_modes=3, z_mean=75.0, z_std=18.0,
+    diameter_um=5.0, myelinated=False,
+    description="Retinal photoreceptor/ganglion — phototransduction")
+
+LENS = TissueType(
+    "lens", n_modes=1, z_mean=120.0, z_std=25.0,
+    diameter_um=50.0, myelinated=False,
+    description="Crystalline lens — avascular, refractive index")
+
+COCHLEAR_HAIR = TissueType(
+    "cochlear_hair", n_modes=2, z_mean=85.0, z_std=20.0,
+    diameter_um=3.0, myelinated=False,
+    description="Cochlear hair cell — mechanotransduction")
+
+VESTIBULAR_CELL = TissueType(
+    "vestibular_cell", n_modes=2, z_mean=80.0, z_std=18.0,
+    diameter_um=5.0, myelinated=False,
+    description="Vestibular hair cell — angular/linear acceleration")
+
+OLFACTORY_RECEPTOR = TissueType(
+    "olfactory_receptor", n_modes=1, z_mean=95.0, z_std=22.0,
+    diameter_um=0.5, myelinated=False,
+    description="Olfactory receptor neuron — chemotransduction")
+
+DENTAL = TissueType(
+    "dental", n_modes=1, z_mean=250.0, z_std=50.0,
+    diameter_um=3.0, myelinated=False,
+    description="Odontoblast/dental pulp — highest Z, mineralized")
+
+BETA_CELL = TissueType(
+    "beta_cell", n_modes=2, z_mean=60.0, z_std=14.0,
+    diameter_um=15.0, myelinated=False,
+    description="Pancreatic β-cell — glucose-insulin coupling")
+
+EPENDYMAL = TissueType(
+    "ependymal", n_modes=1, z_mean=45.0, z_std=10.0,
+    diameter_um=10.0, myelinated=False,
+    description="Ependymal / choroid plexus — CSF production")
+
+BAROREFLEX = TissueType(
+    "baroreflex", n_modes=3, z_mean=70.0, z_std=15.0,
+    diameter_um=5.0, myelinated=True,
+    description="Baroreflex afferent — pressure-to-neural transduction")
+
 ALL_TISSUE_TYPES = [
     CORTICAL_PYRAMIDAL, MOTOR_ALPHA, SENSORY_AB, PAIN_AD_FIBER,
     PAIN_C_FIBER, CARDIAC_PURKINJE, AUTONOMIC_PREGANGLIONIC, ENTERIC_NEURON,
+    ALVEOLAR_EPITHELIUM, AIRWAY_SMOOTH_MUSCLE, GLOMERULAR, TUBULAR_EPITHELIUM,
+    HEPATOCYTE, SINUSOIDAL, GI_MUCOSAL, GI_SMOOTH_MUSCLE,
+    ENDOCRINE_GLAND, HYPOTHALAMIC, LYMPHOCYTE, MAST_INNATE,
+    LYMPHATIC_VESSEL, SKELETAL_MUSCLE, TENDON, BONE_CELL,
+    KERATINOCYTE, DERMAL_FIBROBLAST, FIBROBLAST_CT, ADIPOCYTE,
+    HSC, ERYTHROID, CHONDROCYTE, GONADAL,
+    RETINAL, LENS, COCHLEAR_HAIR, VESTIBULAR_CELL,
+    OLFACTORY_RECEPTOR, DENTAL, BETA_CELL, EPENDYMAL, BAROREFLEX,
 ]
 
 

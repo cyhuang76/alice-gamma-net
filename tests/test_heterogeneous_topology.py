@@ -40,7 +40,7 @@ class TestTissueTypes:
     """Verify biological tissue type definitions."""
 
     def test_all_presets_exist(self):
-        assert len(ALL_TISSUE_TYPES) == 8
+        assert len(ALL_TISSUE_TYPES) == 41
 
     def test_mode_diversity(self):
         """Different tissues must have different K."""
