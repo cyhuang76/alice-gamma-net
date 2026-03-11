@@ -626,6 +626,30 @@ life---no C2~gradient can reduce it.
 connectivity, dimensional cascade, and cross-organ
 signal propagation.
 
+\subsection{Thermoregulation: endothermy as a topological constraint}
+\label{sec:thermoregulation}
+
+Blood is the transmission medium of the vascular bus.
+Its viscosity follows the Arrhenius law
+$\tilde\eta(T) = \exp[\alpha(T^{-1} - T_0^{-1})]$
+with $\alpha = E_a / R \approx 1949\,$K, shifting the bus
+impedance $Z_{\text{bus}}(T) = Z_{\text{ref}}\,\tilde\eta(T)$.
+Simultaneously, C2~repair slows by
+$\tilde\eta_{\text{learn}}(T) = \exp[\beta(T_0^{-1} - T^{-1})]$
+with $\beta \approx 6015\,$K (enzymatic Arrhenius).
+The combined repair time grows doubly exponentially:
+$\tilde\tau(T) = \exp[(\alpha+\beta)(T^{-1} - T_0^{-1})]$.
+Setting $\tilde\tau(T_c) = \tau_{\max}$ yields
+\begin{equation}
+  T_c = \frac{T_0}{1 + T_0\ln\tau_{\max}/(\alpha+\beta)}\,.
+\end{equation}
+For brain complexity $K$, the action scales as $K\,\Gamma^2$,
+increasing $T_c$ with $K$: numerically,
+$T_c(K{=}1) = -10.3\,^\circ$C (ectotherm viable) while
+$T_c(K{=}5) = +4.5\,^\circ$C (endothermy required).
+65~tests verify the full derivation chain
+$\eta(T) \to Z \to \Gamma \to A[\Gamma]$.
+
 
 % ============================================================
 %  PART B — FRACTAL COST
