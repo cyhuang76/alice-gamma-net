@@ -1,21 +1,25 @@
 # -*- coding: utf-8 -*-
-"""Shared impedance physics utilities for all clinical modules.
+"""Shared impedance physics for all clinical modules.
 
-Centralises the Γ and Γ² calculations so every clinical engine uses
-exactly the same formula with the same zero-guard.
+Isomorphic to alice/core/gamma_topology.py:
+  C1: Γ² + T = 1             (algebraic identity)
+  C2: ΔZ = −η · Γ · x_in · x_out  (only legal Z mutation)
+  C3: All values carry impedance     (ImpedanceChannel)
 """
 
 from __future__ import annotations
 
+import warnings
 from dataclasses import dataclass
 from typing import Dict
 
 
-def gamma(z_load: float, z_source: float) -> float:
-    """Reflection coefficient: Γ = (Z_load − Z_source) / (Z_load + Z_source).
+# ============================================================================
+# Standalone helpers (legacy — prefer ImpedanceChannel for new code)
+# ============================================================================
 
-    Returns 0.0 when the denominator is degenerate (both impedances zero).
-    """
+def gamma(z_load: float, z_source: float) -> float:
+    """Reflection coefficient: Γ = (Z_load − Z_source) / (Z_load + Z_source)."""
     denom = z_load + z_source
     if abs(denom) < 1e-12:
         return 0.0
@@ -26,6 +30,74 @@ def gamma_sq(z_load: float, z_source: float) -> float:
     """Squared reflection coefficient Γ²."""
     g = gamma(z_load, z_source)
     return g * g
+
+
+# ============================================================================
+# ImpedanceChannel — the atomic physics unit (isomorphic to GammaEdge)
+# ============================================================================
+
+class ImpedanceChannel:
+    """Single impedance channel with built-in C1/C2 enforcement.
+
+    Isomorphism with gamma_topology.py:
+        GammaNode.impedance   ←→  ImpedanceChannel.z
+        GammaEdge.gamma_vector ←→  ImpedanceChannel.gamma
+        C2 ΔZ = −η·Γ·gate    ←→  ImpedanceChannel.remodel()
+        C1 Γ²+T=1            ←→  ImpedanceChannel.transmission
+
+    Z is read-only — can ONLY change through remodel() (C2).
+    """
+    __slots__ = ('_z', 'z_ref', 'z_min', 'z_max')
+
+    def __init__(self, z_ref: float, z_init: float | None = None,
+                 z_min: float = 1.0, z_max: float = 500.0):
+        self.z_ref = z_ref
+        self._z = z_init if z_init is not None else z_ref
+        self.z_min = z_min
+        self.z_max = z_max
+
+    @property
+    def z(self) -> float:
+        """Current impedance (read-only — mutate via remodel only)."""
+        return self._z
+
+    @property
+    def gamma(self) -> float:
+        """Γ = (Z − Z_ref) / (Z + Z_ref)."""
+        denom = self._z + self.z_ref
+        if abs(denom) < 1e-12:
+            return 0.0
+        return (self._z - self.z_ref) / denom
+
+    @property
+    def gamma_sq(self) -> float:
+        """Γ²."""
+        g = self.gamma
+        return g * g
+
+    @property
+    def transmission(self) -> float:
+        """C1: T = 1 − Γ²."""
+        return 1.0 - self.gamma_sq
+
+    def remodel(self, x_in: float, x_out: float, eta: float,
+                z_target: float | None = None) -> None:
+        """C2: ΔZ = −η · Γ(Z, Z_target) · x_in · x_out.
+
+        z_target: impedance to remodel toward (default: z_ref = healthy).
+        Positive eta drives Z toward z_target (healing / matching).
+        """
+        target = z_target if z_target is not None else self.z_ref
+        denom = self._z + target
+        if abs(denom) < 1e-12:
+            return
+        g = (self._z - target) / denom
+        self._z = max(self.z_min, min(self.z_max,
+                                       self._z - eta * g * x_in * x_out))
+
+    def verify_c1(self, tol: float = 1e-10) -> bool:
+        """Verify Γ² + T = 1."""
+        return abs(self.gamma_sq + self.transmission - 1.0) < tol
 
 
 class ClinicalEngineBase:
@@ -56,8 +128,15 @@ class ClinicalEngineBase:
             r = model.tick()
             results[name] = r
             total_g2 += r.get("gamma_sq", 0.0)
+        # C1 hard constraint: Γ² + T = 1 → total Γ² ≤ 1.0
+        if total_g2 > 1.0:
+            warnings.warn(
+                f"C1 violated: total Γ² = {total_g2:.4f} > 1.0, "
+                f"clamping to 1.0 (tick {self.tick_count})"
+            )
+            total_g2 = 1.0
         results["total_gamma_sq"] = total_g2
-        results[self.RESERVE_KEY] = max(0.0, 1.0 - total_g2)
+        results[self.RESERVE_KEY] = 1.0 - total_g2
         return results
 
 
@@ -86,14 +165,20 @@ def make_template_disease(
     severity_decay: float = 0.0,
     severity_growth: float = 0.0,
     default_extra: dict | None = None,
+    eta: float = 1.0,
 ) -> type:
-    """Factory: severity → Z = z_base × (1 + sev × z_coeff) → Γ² → metrics."""
+    """Factory: severity → Z_target → C2 remodel → Γ² → metrics.
+
+    Z changes ONLY through ImpedanceChannel.remodel() (C2).
+    C1 (Γ²+T=1) guaranteed by ImpedanceChannel.
+    """
     _defaults = default_extra or {}
 
     class _Model:
         def __init__(self, severity: float = default_severity, **extra):
             self.severity = severity
-            self.z_field = z_base
+            z_init = z_base * (1 + severity * z_coeff)
+            self.channel = ImpedanceChannel(z_ref=z_base, z_init=z_init)
             self.on_treatment = False
             self.tick_count = 0
             self._extra = {**_defaults, **extra}
@@ -109,8 +194,11 @@ def make_template_disease(
                 self.severity = min(1.0, self.severity + severity_growth)
             tf = treatment_factor if self.on_treatment else 1.0
             sev = self.severity * tf
-            self.z_field = z_base * (1 + sev * z_coeff)
-            g2 = gamma_sq(self.z_field, z_base)
+            # C2: remodel toward disease target
+            z_target = z_base * (1 + sev * z_coeff)
+            self.channel.remodel(x_in=1.0, x_out=1.0, eta=eta,
+                                 z_target=z_target)
+            g2 = self.channel.gamma_sq
             result = {"disease": disease_name, "gamma_sq": g2}
             for m in metrics:
                 val = m.offset + g2 * m.scale
@@ -172,17 +260,23 @@ def make_tumor_model(
     markers: tuple[MetricSpec, ...] = (),
     bool_markers: tuple[tuple[str, float], ...] = (),
     default_extra: dict | None = None,
+    eta: float = 1.0,
 ) -> type:
-    """Factory: TumorCore.grow() → Z ratio → Γ² → stage + markers."""
+    """Factory: TumorCore.grow() → Z_target → C2 remodel → Γ² → stage.
+
+    Z changes ONLY through ImpedanceChannel.remodel() (C2).
+    """
     _defaults = default_extra or {}
 
     class _Model:
         def __init__(self, size: float = default_size, **extra):
+            z_init = tissue_z * (1 + size / size_denom * z_mult)
             self.core = TumorCore(
-                tumor_z=tissue_z * initial_z_mult,
+                tumor_z=z_init,
                 size_cm=size,
                 growth_rate=growth_rate,
             )
+            self.channel = ImpedanceChannel(z_ref=tissue_z, z_init=z_init)
             self.tick_count = 0
             self._extra = {**_defaults, **extra}
 
@@ -192,9 +286,11 @@ def make_tumor_model(
         def tick(self) -> Dict:
             self.tick_count += 1
             self.core.grow()
-            z_ratio = self.core.size_cm / size_denom
-            self.core.tumor_z = tissue_z * (1 + z_ratio * z_mult)
-            g2 = gamma_sq(self.core.tumor_z, tissue_z)
+            # C2: remodel toward size-derived target
+            z_target = tissue_z * (1 + self.core.size_cm / size_denom * z_mult)
+            self.channel.remodel(x_in=1.0, x_out=1.0, eta=eta,
+                                 z_target=z_target)
+            g2 = self.channel.gamma_sq
             stage = default_stage
             for s in stages:
                 if g2 < s.threshold:
