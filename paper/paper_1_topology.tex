@@ -549,6 +549,51 @@ Full test suite: \texttt{tests/test\_e0\_neural.py}
 Disease emergence results are detailed in Paper~5~\cite{Paper5}.
 
 
+\subsection{Complete Tissue Atlas: 29 Organ-System Topologies}
+\label{sec:tissue-atlas}
+
+The cardiovascular and neural topologies above are detailed
+examples drawn from a comprehensive tissue atlas of
+29~organ-system blueprints
+(Paper~0~\cite{Paper0}, Table~4).
+All 29 are implemented as factory functions in
+\texttt{BLUEPRINT\_REGISTRY}, totalling $\sim\!217$ nodes
+and $\sim\!242$ directed edges.
+
+Each blueprint was verified under identical conditions
+($\eta = 0.01$, 100~ticks):
+\begin{enumerate}
+  \item C1: $\Gamma_k^2 + T_k = 1$ at every edge, every tick.
+  \item C2: $\Aimp$ is non-increasing; $\Acut$ is invariant.
+  \item Structural: node counts, edge counts, and dimensional
+    gaps match biological expectations.
+\end{enumerate}
+
+\noindent
+Key observations across all 29~blueprints:
+\begin{itemize}
+  \item Mode counts range from $K = 1$ (capillaries,
+    olfactory receptors, cartilage) to $K = 5$ (cortical
+    pyramidal neurons).
+  \item $\Acut > 0$ wherever tissue type transitions
+    produce a $K$-level cascade (e.g., aorta $K{=}4 \to$
+    arterioles $K{=}2$, cortex $K{=}5 \to$ subcortex $K{=}3$).
+  \item Cartilage ($\eta \approx 0.001$) shows virtually
+    zero C2 remodeling---the topological prediction of
+    avascular tissue stasis.
+  \item Brain functional topology (12~nodes, 21~edges,
+    $K \in \{3, 5\}$) has the highest $\Acut$ of any
+    blueprint, consistent with the cortex--subcortex
+    dimensional mismatch.
+\end{itemize}
+
+\noindent
+245~parametrised tests
+(\texttt{tests/test\_tissue\_blueprints.py}),
+covering structure, C1, C2, and organ-specific physiology,
+pass at 100\% rate.
+
+
 % ============================================================
 %  PART B — FRACTAL COST
 % ============================================================
@@ -1082,6 +1127,12 @@ Simulations were performed on a personal workstation.
 %  BIBLIOGRAPHY
 % ============================================================
 \begin{thebibliography}{99}
+
+\bibitem{Paper0}
+H.-Y.~Huang,
+``Paper~0: The $\Gamma$-Net Framework---Impedance Physics
+for Electronic Lifeforms,''
+preprint (2025).
 
 \bibitem{Paper2}
 H.-Y.~Huang,

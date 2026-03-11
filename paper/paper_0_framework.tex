@@ -707,6 +707,68 @@ alone.
 Paper~1 verifies the topology-level physics;
 Paper~5 verifies the disease-level emergence.
 
+\subsection{Complete tissue atlas}
+\label{sec:tissue-atlas}
+
+The cardiovascular and neural blueprints above are two of
+29~organ-system blueprints implemented in
+\texttt{BLUEPRINT\_REGISTRY}.
+Table~\ref{tab:atlas} lists all 29, totalling
+$\sim\!217$~nodes and $\sim\!242$~directed edges.
+Every blueprint passes C1 energy conservation at every edge
+and C2 physics verification ($\Aimp$~non-increasing,
+$\Acut$~invariant) under 100~ticks of evolution.
+
+\begin{table}[h]
+\caption{\label{tab:atlas}Complete tissue blueprint atlas.
+Nodes~($N$), edges~($E$), and mode count range are listed
+for each organ system.}
+\begin{ruledtabular}
+\begin{tabular}{llccl}
+\textbf{System} & $N$ & $E$ & $K$-range & \textbf{Key feature} \\
+\hline
+Cardiovascular   & 11 & 13 & 1--4 & Pulsatile cascade \\
+Neural           &  9 & 11 & 1--5 & Cable degradation \\
+Pulmonary        &  7 &  7 & 1--3 & Gas exchange \\
+Renal            &  9 &  9 & 1--3 & TG feedback \\
+Hepatic          &  7 &  7 & 1--3 & Dual blood supply \\
+Gastrointestinal &  8 & 10 & 1--3 & Mucosal barrier \\
+Endocrine        &  8 & 11 & 1--3 & Negative feedback \\
+Immune           &  7 &  9 & 1--3 & Innate/adaptive \\
+Lymphatic        &  7 &  7 & 1--2 & One-way drainage \\
+Musculoskeletal  &  7 &  8 & 1--3 & Motor unit \\
+Skeletal         &  6 &  7 & 1--2 & Wolff's law \\
+Epithelial       &  8 &  8 & 1--2 & Barrier layers \\
+Connective       &  6 &  6 & 1--2 & ECM turnover \\
+Adipose          &  6 &  7 & 1--2 & Metabolic storage \\
+Hematopoietic    &  9 &  9 & 1--3 & EPO feedback \\
+Cartilage        &  4 &  4 & 1   & $\eta \approx 0$ (avascular) \\
+Reproductive     &  6 &  7 & 1--2 & Hormonal axis \\
+Brain regulatory &  7 &  8 & 2--3 & Autonomic control \\
+Vascular         & 11 & 11 & 1--3 & Arterial tree \\
+Ocular           &  9 &  9 & 1--3 & IOP regulation \\
+Auditory         &  7 &  7 & 1--3 & Tonotopic cascade \\
+Vestibular       &  6 &  6 & 1--2 & Balance loops \\
+Olfactory        &  4 &  4 & 1   & Receptor turnover \\
+Dental           &  7 &  7 & 1--2 & Pulp--dentin axis \\
+Enteric          &  7 &  7 & 1--3 & Gut nervous system \\
+Autonomic        &  8 & 10 & 1--3 & Sympathetic/para \\
+Pancreatic       &  7 &  8 & 1--2 & Paracrine islet \\
+CSF              &  8 &  8 & 1--2 & Choroid--ventricle \\
+Brain functional & 12 & 21 & 3--5 & Cortex--subcortex \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\noindent
+Cartilage ($\eta \approx 0.001$) and olfactory receptors ($K = 1$)
+represent the extremes: cartilage barely remodels (avascular),
+while olfactory neurons are among the few that regenerate
+throughout life.
+Brain functional topology has the richest dimensional structure
+($K = 5$ cortex vs.\ $K = 3$ subcortex, 21~edges),
+producing the highest $\Acut$ of any blueprint.
+
 \subsection{Emergence classification}
 \label{sec:emergence}
 
@@ -740,10 +802,15 @@ and the only inputs are the initial $Z$-vectors and
 the perturbation (impedance shift or edge removal).
 
 Source code:
-\texttt{alice/body/tissue\_blueprint.py} (blueprints),
-\texttt{tests/test\_e0\_cardiovascular.py} (13~tests),
+\texttt{alice/body/tissue\_blueprint.py}
+(29~factory functions in \texttt{BLUEPRINT\_REGISTRY}),
+\texttt{tests/test\_tissue\_blueprints.py}
+(245~parametrised tests covering structure, C1, C2, and
+organ-specific physiology for all 29~blueprints),
+plus the original
+\texttt{tests/test\_e0\_cardiovascular.py} (13~tests) and
 \texttt{tests/test\_e0\_neural.py} (17~tests).
-All 30 tests pass with 100\% rate.
+All 275~blueprint tests pass with 100\% rate.
 
 
 % ============================================================
@@ -794,7 +861,7 @@ All source code, simulation scripts, and NHANES pipelines
 are available at
 \url{https://github.com/cyhuang76/alice-gamma-net}
 under AGPL-3.0.
-The full test suite comprises 3{,}313 automated tests
+The full test suite comprises 3{,}558 automated tests
 with 100\% pass rate.
 
 

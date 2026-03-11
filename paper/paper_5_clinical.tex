@@ -1537,9 +1537,14 @@ We define three emergence levels:
 \noindent
 E0 is the gold standard: ``if you need a flag, it didn't
 emerge.''
-We test this with two tissue blueprints (\texttt{GammaTopology}
+We test this with 29~tissue blueprints (\texttt{GammaTopology}
 instances with biologically assigned \texttt{TissueType} and
-mode count~$K$) and pure perturbations of initial conditions.
+mode count~$K$; Paper~0~\cite{Paper0}, Table~4)
+and pure perturbations of initial conditions.
+Detailed disease-emergence experiments are shown below for
+the cardiovascular (11~nodes) and neural (9~nodes) systems;
+all remaining 27~blueprints pass the same C1/C2 physics
+verification (245~parametrised tests, 100\% pass).
 
 \subsection{Cardiovascular E0: hypertension, MI, aortic stenosis}
 
@@ -1624,7 +1629,9 @@ Additional tests verify:
 
 \subsection{Implications}
 
-The 30 E0 tests (13~cardiovascular + 17~neural) prove
+The 275 E0 tests (245~parametrised blueprint tests +
+13~cardiovascular + 17~neural disease tests)
+across all 29~organ-system topologies prove
 that clinical pathology \emph{can} emerge from pure
 impedance physics---C1/C2/C3 plus initial conditions---on
 biologically realistic tissue topologies.
