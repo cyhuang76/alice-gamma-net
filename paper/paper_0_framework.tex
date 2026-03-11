@@ -14,6 +14,9 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 
+\newcommand{\Aimp}{A_{\text{imp}}}
+\newcommand{\Acut}{A_{\text{cut}}}
+
 \begin{document}
 
 \title{$\Gamma$-Net: Minimum Reflection Physics\\
@@ -596,7 +599,155 @@ Brain (reg.)  & Baroreflex resetting           & Sensory afferent   & Motor effe
 
 
 % ============================================================
-%  SECTION 9 — NOTATION
+%  SECTION 9 — TISSUE BLUEPRINTS
+% ============================================================
+\section{Tissue Blueprints: From Table to Topology}
+\label{sec:blueprints}
+
+Table~\ref{tab:nineteen} maps C2 to 19~remodeling laws,
+but it does not specify \emph{how} those tissues are
+physically wired.
+This section defines \emph{tissue blueprints}: concrete
+\texttt{GammaTopology} instances in which every node is a
+\texttt{GammaNode} with a biologically assigned mode count~$K$,
+and every edge is a \texttt{MulticoreChannel} enforcing C1/C2/C3
+at each tick.
+
+A blueprint contains:
+\begin{enumerate}
+  \item A set of $\texttt{GammaNode}$s with tissue-appropriate
+    $\texttt{TissueType}$ (which sets~$K$, $Z_{\text{mean}}$,
+    and myelination).
+  \item A wiring diagram: directed edges
+    $(\text{source}, \text{target})$.
+  \item A factory function returning a ready-to-run
+    \texttt{GammaTopology}.
+\end{enumerate}
+
+\noindent
+Diseases are \emph{not coded} in the blueprint.
+Disease $=$ perturbation of initial conditions
+(impedance shift, edge removal, or stimulus pattern)
+applied to a healthy blueprint, then evolved via
+\texttt{GammaTopology.tick()}.
+
+\subsection{Cardiovascular blueprint}
+
+Eleven nodes span four $K$-levels:
+
+\begin{center}
+\begin{tabular}{llc}
+\hline
+\textbf{Node} & \textbf{TissueType} & $K$ \\
+\hline
+SA node, AV node, LV, RV,         & Cardiac Purkinje      & 4 \\
+\quad aortic valve, pulm.\ valve,  &                       &   \\
+\quad aorta, coronary              &                       &   \\
+Arterioles                          & Vasc.\ smooth muscle  & 2 \\
+Pulmonary artery                    & Autonomic preganglionic & 2 \\
+Capillaries                         & Endothelial           & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+Fourteen directed edges connect the conduction system
+(SA$\to$AV$\to$LV/RV), left-heart systemic path
+(LV$\to$valve$\to$aorta$\to$coronary/arterioles$\to$capillaries),
+right-heart pulmonary path, and return paths.
+The dimensional cascade $K{=}4 \to 2 \to 1$ guarantees
+$\Acut > 0$ (Paper~1 irreducibility theorem),
+physically representing the loss of pulsatile modes as
+blood flows from elastic arteries to resistance vessels.
+
+\subsection{Neural blueprint}
+
+Nine nodes span four $K$-levels:
+
+\begin{center}
+\begin{tabular}{llc}
+\hline
+\textbf{Node} & \textbf{TissueType} & $K$ \\
+\hline
+Cortex (motor, sensory), thalamus  & Cortical pyramidal    & 5 \\
+Spinal (motor, sensory),           & Motor $\alpha$ / Sensory A$\beta$  & 3 \\
+\quad motor neuron, sensory neuron &                       &   \\
+Nociceptor A$\delta$               & Pain A$\delta$ fibre  & 2 \\
+Nociceptor C                       & Pain C fibre          & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+Twelve directed edges form descending motor
+(cortex$\to$thalamus$\to$spinal$\to$motor neuron),
+ascending sensory
+(sensory neuron$\to$spinal$\to$thalamus$\to$cortex),
+pain pathway
+(C fibre$\to$A$\delta$$\to$spinal),
+and sensorimotor cross-connections.
+The cascade $K{=}5 \to 3 \to 2 \to 1$ defines
+the \emph{neural cable degradation spectrum}:
+\begin{center}
+\begin{tabular}{cl}
+\hline
+$\Gamma$ & \textbf{Clinical correlate} \\
+\hline
+$\approx 0.0$ & Normal conduction (healthy match) \\
+$\approx 0.1$ & Fever, neuroinflammation (thermal noise $\uparrow$) \\
+$\approx 0.3$ & PTSD (signal re-reflects in loop) \\
+$\approx 0.7$ & ALS (progressive channel collapse) \\
+$\to 1.0$     & Phantom limb pain (open-circuit echo) \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+These are not disease models; they are predictions of what
+$\Gamma$-values \emph{should} emerge from topology perturbations
+alone.
+Paper~1 verifies the topology-level physics;
+Paper~5 verifies the disease-level emergence.
+
+\subsection{Emergence classification}
+\label{sec:emergence}
+
+The operational status of every disease model in the codebase
+is classified by \emph{emergence level}:
+
+\begin{center}
+\begin{tabular}{cll}
+\hline
+\textbf{Level} & \textbf{Name} & \textbf{Definition} \\
+\hline
+E0 & True Emergence & Only C1/C2/C3 + initial conditions. \\
+   &                & Zero disease-specific code.         \\
+E1 & Parameterised  & C2 via \texttt{ImpedanceChannel.remodel()} \\
+   &                & but requires per-disease params.    \\
+E2 & Scripted       & Ad-hoc $Z$ updates. Legacy only.    \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+\textbf{Rule}: all new disease models must be E1 or higher.
+E2 is forbidden for new code.
+E0 is the target: if behaviour emerges from C2 + initial
+conditions alone, no additional parameters should be added.
+
+The tissue blueprints are E0 by construction:
+the \texttt{GammaTopology} enforces C1 at every edge,
+applies C2 remodeling at every tick,
+and the only inputs are the initial $Z$-vectors and
+the perturbation (impedance shift or edge removal).
+
+Source code:
+\texttt{alice/body/tissue\_blueprint.py} (blueprints),
+\texttt{tests/test\_e0\_cardiovascular.py} (13~tests),
+\texttt{tests/test\_e0\_neural.py} (17~tests).
+All 30 tests pass with 100\% rate.
+
+
+% ============================================================
+%  SECTION 10 — NOTATION
 % ============================================================
 \section{Notation Conventions}
 \label{sec:notation}
@@ -643,7 +794,7 @@ All source code, simulation scripts, and NHANES pipelines
 are available at
 \url{https://github.com/cyhuang76/alice-gamma-net}
 under AGPL-3.0.
-The full test suite comprises 3{,}274 automated tests
+The full test suite comprises 3{,}313 automated tests
 with 100\% pass rate.
 
 

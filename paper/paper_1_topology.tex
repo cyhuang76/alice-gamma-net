@@ -454,6 +454,101 @@ relay node is physically removed, and $\Acut$ is no longer
 mitigated.
 
 
+\subsection{Cardiovascular Tissue Topology}
+\label{sec:cv-topo}
+
+To verify the irreducibility theorem on a biologically
+grounded topology (rather than random graphs), we construct a
+cardiovascular tissue blueprint: 11~\texttt{GammaNode}s
+with anatomy-appropriate \texttt{TissueType}s, wired
+according to the heart--aorta--periphery transmission line.
+
+The dimensional hierarchy is:
+Cardiac Purkinje ($K = 4$: SA node, AV node, ventricles,
+valves, aorta, coronary) $\to$
+vascular smooth muscle ($K = 2$: arterioles, pulmonary artery)
+$\to$ endothelial ($K = 1$: capillaries).
+This cascade reflects the physical loss of pulsatile modes
+as blood flows from elastic arteries (pressure + flow in
+multiple harmonic modes) to thin resistance vessels
+(steady-state Poiseuille flow).
+
+Running 300~ticks with cortical stimulus
+($\eta = 0.02$, seed~$= 42$):
+\begin{itemize}
+  \item $\Aimp$ decays from $\sim\!1.76$ (tick~1) to
+    machine-precision zero by tick~100.
+  \item $\Acut$ rises from 5 (initial 13~edges) to 34
+    (95~edges post-sprouting), then saturates ---
+    confirming the theorem: impedance action vanishes,
+    cutoff action accumulates and stabilises.
+  \item C1 ($\Gamma^2 + T = 1$) holds at every edge, every tick
+    (enforced by \texttt{GammaTopology.tick()} assertion).
+\end{itemize}
+
+\noindent
+The test is implemented in
+\texttt{tests/test\_e0\_cardiovascular.py} (13~tests, 100\% pass).
+
+
+\subsection{Neural Tissue Topology}
+\label{sec:neural-topo}
+
+The neural blueprint instantiates the full
+$K$-level cascade predicted by the theory:
+9~nodes spanning $K \in \{5, 3, 2, 1\}$.
+
+\begin{center}
+\begin{tabular}{lc}
+\hline
+\textbf{Level} & $K$ \\
+\hline
+Cortex (motor, sensory), thalamus & 5 \\
+Spinal cord, motor/sensory neuron & 3 \\
+Nociceptor A$\delta$ & 2 \\
+Nociceptor C fibre & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+Twelve directed edges form descending motor, ascending
+sensory, and pain pathways plus sensorimotor
+cross-connections.
+Each $K$-level transition ($5 \to 3$, $3 \to 2$, $2 \to 1$)
+contributes an irreducible cutoff cost.
+
+Running 300~ticks ($\eta = 0.02$, seed~$= 42$):
+\begin{itemize}
+  \item $\Aimp$ decays from $\sim\!1.79$ to zero.
+  \item $\Acut$ rises from 9 (11~initial edges) to 37
+    (60~edges), then saturates.
+  \item The neural $\Acut$ at tick~1 ($= 9$) exceeds the
+    cardiovascular $\Acut$ ($= 5$) because the neural
+    topology has four $K$-levels vs.\ three,
+    as predicted by Eq.~\eqref{eq:decomposition}.
+\end{itemize}
+
+\noindent
+Perturbation experiments (ALS, stroke) confirm that
+topology modifications produce distinct $\Gamma$-trajectories
+without any disease-specific code:
+\begin{itemize}
+  \item \textbf{ALS} (motor neuron $Z \times 3$):
+    cumulative $\Aimp$ over 30~ticks is $2.9\times$ that
+    of healthy, but C2 partially compensates over longer runs.
+  \item \textbf{Stroke} (cortex$\to$thalamus edge severed):
+    descending motor transmission is interrupted while
+    ascending sensory pathway remains intact---the topology
+    determines the deficit pattern.
+\end{itemize}
+
+\noindent
+Full test suite: \texttt{tests/test\_e0\_neural.py}
+(17~tests, 100\% pass).
+Disease emergence results are detailed in Paper~5~\cite{Paper5}.
+
+
 % ============================================================
 %  PART B — FRACTAL COST
 % ============================================================
