@@ -55,7 +55,26 @@ alice-gamma-net/
 4. Add corresponding pytest test for every new function
 5. Document any known limitation in docs/KNOWN_LIMITATIONS.md
 
+## Emergence Standard (see docs/EMERGENCE_STANDARD.md)
+
+All disease/behaviour models must be classified by emergence level:
+
+| Level | Name | Definition |
+|:---:|:---|:---|
+| **E0** | True Emergence | Only C1/C2/C3 + initial conditions → behaviour appears. Zero disease-specific code. |
+| **E1** | Parameterized | C2 via `ImpedanceChannel.remodel()` but needs per-disease params (`z_coeff`, `severity`). |
+| **E2** | Scripted | Ad-hoc Z updates (`z *= 0.995`, custom formulas). Legacy only — no new E2 allowed. |
+
+### Rules:
+- **E1 is the minimum** — all new disease models must use `ImpedanceChannel.remodel()`
+- **E2 is forbidden** for new code (existing E2 may be kept but must be annotated)
+- **E0 is the goal** — if behaviour can emerge from C2 + initial conditions alone, remove extra params
+- Do NOT add disease-specific flags (`is_ptsd=True`) to make a test pass
+- Every new model's docstring must declare its emergence level
+
 ## What Copilot Should NOT Do
 - Do NOT suggest raw float passing between modules
 - Do NOT suggest ML/gradient-descent training loops
 - Do NOT bypass the ElectricalSignal protocol (impedance-tagged transport)
+- Do NOT create E2 (ad-hoc Z) disease models — use ImpedanceChannel.remodel()
+- Do NOT add disease-specific flags/thresholds to force behaviour that should emerge from C2

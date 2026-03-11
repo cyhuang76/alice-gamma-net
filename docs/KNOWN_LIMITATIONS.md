@@ -149,6 +149,21 @@
 
 ---
 
+## 湧現標準差距（Emergence Gap）
+
+> **詳見 [docs/EMERGENCE_STANDARD.md](EMERGENCE_STANDARD.md)**
+
+| 等級 | 數量 | 意義 |
+|:----:|-----:|:-----|
+| E0 真湧現 | 0 | 僅 C1/C2/C3 + 初始條件 → 行為出現 |
+| E1 參數化 | 15 | 使用 ImpedanceChannel.remodel()，但需疾病專屬參數 |
+| E2 腳本化 | 102 | Ad-hoc Z 更新，未遵循 C2 公式 |
+
+**117 個疾病模型中，87% 使用 ad-hoc Z 更新（E2），
+不符合 C2 阻抗重塑公式。** 這是理論與程式碼之間最大的差距。
+
+---
+
 ## 總結
 
 ```
