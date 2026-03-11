@@ -31,9 +31,7 @@ Z_TENDON: float = 90.0      # Tendon/ligament
 Z_DISC: float = 70.0        # Intervertebral disc
 Z_SYNOVIAL: float = 50.0    # Synovial fluid
 
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = (z_l - z_0) / (z_l + z_0)
-    return g * g
+from alice.body.clinical_common import gamma_sq, ClinicalEngineBase, make_template_disease, MetricSpec
 
 
 def transmission(z_l: float, z_0: float) -> float:
@@ -338,34 +336,16 @@ class ACLModel:
 # ============================================================================
 # 6. TENDINITIS
 # ============================================================================
-@dataclass
-class TendinitisState:
-    tendon_z: float = Z_TENDON
-    pain_vas: float = 0.0
-    dash: float = 0.0          # DASH score 0–100
-    location: str = "achilles"
-
-class TendinitisModel:
-    def __init__(self, severity: float = 0.4, location: str = "achilles"):
-        self.state = TendinitisState(location=location)
-        self.severity = severity
-        self.resting = False
-        self.tick_count = 0
-
-    def rest(self):
-        self.resting = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        if self.resting:
-            self.severity = max(0, self.severity - 0.01)
-        st.tendon_z = Z_TENDON * (1 + self.severity * 2)
-        g2 = gamma_sq(st.tendon_z, Z_TENDON)
-        st.pain_vas = min(10, g2 * 12)
-        st.dash = min(100, g2 * 130)
-        return {"disease": "Tendinitis", "pain": st.pain_vas, "dash": st.dash,
-                "location": st.location, "gamma_sq": g2}
+TendinitisModel = make_template_disease(
+    "Tendinitis", Z_TENDON, z_coeff=2.0, default_severity=0.4,
+    treatment_factor=1.0,
+    severity_decay=0.01,
+    metrics=(
+        MetricSpec("pain", 0, 12, max_val=10),
+        MetricSpec("dash", 0, 130, max_val=100),
+    ),
+    default_extra={"location": "achilles"},
+)
 
 # ============================================================================
 # 7. SCOLIOSIS
@@ -512,7 +492,7 @@ class OsteomyelitisModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalOrthopedicsEngine:
+class ClinicalOrthopedicsEngine(ClinicalEngineBase):
     DISEASE_CLASSES = {
         "fracture": FractureModel, "osteoporosis": OsteoporosisModel,
         "disc_herniation": DiscHerniationModel, "oa": OsteoarthritisModel,
@@ -520,24 +500,4 @@ class ClinicalOrthopedicsEngine:
         "scoliosis": ScoliosisModel, "osteosarcoma": OsteosarcomaModel,
         "gout": GoutModel, "osteomyelitis": OsteomyelitisModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["structural_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "structural_reserve"

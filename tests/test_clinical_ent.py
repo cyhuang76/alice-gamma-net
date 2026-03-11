@@ -41,7 +41,7 @@ class TestTinnitus(unittest.TestCase):
         self.assertIn("thi", r)
     def test_trt(self):
         m = TinnitusModel()
-        m.start_trt()
+        m.start_treatment()
         r = m.tick()
         self.assertIn("gamma_sq", r)
 

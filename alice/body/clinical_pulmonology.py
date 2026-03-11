@@ -44,12 +44,7 @@ FEV1_NORMAL: float = 1.0       # Normalised FEV1
 FVC_NORMAL: float = 1.0        # Normalised FVC
 
 
-def gamma(z_l: float, z_0: float) -> float:
-    return (z_l - z_0) / (z_l + z_0)
-
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = gamma(z_l, z_0)
-    return g * g
+from alice.body.clinical_common import gamma, gamma_sq, ClinicalEngineBase
 
 
 # ============================================================================
@@ -395,46 +390,9 @@ class OSAModel:
 
 
 # ============================================================================
-# 9. LUNG CANCER
+# 9. LUNG CANCER  (canonical model in clinical_oncology)
 # ============================================================================
-@dataclass
-class LungCancerState:
-    tumor_z: float = Z_INTERSTITIAL
-    tumor_size_cm: float = 1.0
-    stage: str = "I"
-    metastasis: bool = False
-
-class LungCancerModel:
-    """Lung Cancer: focal Z infiltration → growing impedance island."""
-
-    def __init__(self, initial_size: float = 1.0, growth_rate: float = 0.005):
-        self.state = LungCancerState(tumor_size_cm=initial_size)
-        self.growth_rate = growth_rate
-        self.on_treatment = False
-        self.tick_count = 0
-
-    def start_treatment(self):
-        self.on_treatment = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        rate = self.growth_rate * (0.3 if self.on_treatment else 1.0)
-        st.tumor_size_cm = min(15, st.tumor_size_cm * (1 + rate))
-        # Tumor Z increases with size (more disorganised tissue)
-        st.tumor_z = Z_INTERSTITIAL * (1 + st.tumor_size_cm)
-        st.metastasis = st.tumor_size_cm > 5
-        return self.get_clinical_score()
-
-    def get_clinical_score(self) -> Dict:
-        st = self.state
-        g2 = gamma_sq(st.tumor_z, Z_INTERSTITIAL)
-        if st.tumor_size_cm <= 3: st.stage = "I"
-        elif st.tumor_size_cm <= 5: st.stage = "II"
-        elif not st.metastasis: st.stage = "III"
-        else: st.stage = "IV"
-        return {"disease": "Lung Cancer", "tumor_cm": st.tumor_size_cm,
-                "stage": st.stage, "metastasis": st.metastasis, "gamma_sq": g2}
+from alice.body.clinical_oncology import LungCancerModel  # noqa: E402
 
 
 # ============================================================================
@@ -484,7 +442,7 @@ class CFModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalPulmonologyEngine:
+class ClinicalPulmonologyEngine(ClinicalEngineBase):
     """Unified engine managing all 10 pulmonary disease models."""
 
     DISEASE_CLASSES = {
@@ -499,24 +457,4 @@ class ClinicalPulmonologyEngine:
         "lung_cancer": LungCancerModel,
         "cf": CFModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["pulmonary_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "pulmonary_reserve"

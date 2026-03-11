@@ -30,9 +30,7 @@ Z_OVARIAN: float = 75.0       # Ovarian follicular
 Z_CERVICAL: float = 65.0      # Cervix
 Z_HPG: float = 70.0           # HPG axis set-point
 
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = (z_l - z_0) / (z_l + z_0)
-    return g * g
+from alice.body.clinical_common import gamma_sq, ClinicalEngineBase, make_template_disease, MetricSpec
 
 # ============================================================================
 # 1. PREECLAMPSIA
@@ -211,34 +209,15 @@ class PretermBirthModel:
 # ============================================================================
 # 6. GESTATIONAL DM
 # ============================================================================
-@dataclass
-class GDMState:
-    receptor_z: float = Z_HPG
-    fasting_glucose: float = 95.0  # mg/dL
-    ogtt_2h: float = 140.0  # mg/dL
-    hba1c: float = 5.5
-
-class GDMModel:
-    def __init__(self, severity: float = 0.4):
-        self.state = GDMState()
-        self.severity = severity
-        self.on_insulin = False
-        self.tick_count = 0
-
-    def start_insulin(self):
-        self.on_insulin = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        sev = self.severity * (0.5 if self.on_insulin else 1.0)
-        st.receptor_z = Z_HPG * (1 + sev * 2)
-        g2 = gamma_sq(st.receptor_z, Z_HPG)
-        st.fasting_glucose = 85 + g2 * 50
-        st.ogtt_2h = 120 + g2 * 80
-        st.hba1c = 5.0 + g2 * 2
-        return {"disease": "GDM", "fasting": st.fasting_glucose,
-                "ogtt_2h": st.ogtt_2h, "hba1c": st.hba1c, "gamma_sq": g2}
+GDMModel = make_template_disease(
+    "GDM", Z_HPG, z_coeff=2.0, default_severity=0.4,
+    treatment_factor=0.5,
+    metrics=(
+        MetricSpec("fasting", 85, 50),
+        MetricSpec("ogtt_2h", 120, 80),
+        MetricSpec("hba1c", 5.0, 2),
+    ),
+)
 
 # ============================================================================
 # 7. OVARIAN CANCER
@@ -390,7 +369,7 @@ class PPHModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalObstetricsEngine:
+class ClinicalObstetricsEngine(ClinicalEngineBase):
     DISEASE_CLASSES = {
         "preeclampsia": PreeclampsiaModel, "pcos": PCOSModel,
         "endometriosis": EndometriosisModel, "fibroids": FibroidModel,
@@ -398,24 +377,4 @@ class ClinicalObstetricsEngine:
         "ovarian_cancer": OvarianCancerModel, "menopause": MenopauseModel,
         "afe": AFEModel, "pph": PPHModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["reproductive_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "reproductive_reserve"

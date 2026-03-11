@@ -28,7 +28,7 @@ class TestPsoriasis(unittest.TestCase):
     def test_biologic(self):
         m = PsoriasisModel(severity=0.5, area=20.0)
         r0 = m.tick()
-        m.start_biologic()
+        m.start_treatment()
         res = [m.tick() for _ in range(20)]
         self.assertLess(res[-1]["gamma_sq"], r0["gamma_sq"])
 

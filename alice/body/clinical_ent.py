@@ -35,9 +35,7 @@ Z_NASAL: float = 35.0        # Nasal passage
 Z_LARYNX: float = 40.0       # Vocal fold
 Z_SINUS: float = 30.0        # Paranasal sinus
 
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = (z_l - z_0) / (z_l + z_0)
-    return g * g
+from alice.body.clinical_common import gamma_sq, ClinicalEngineBase, make_template_disease, MetricSpec
 
 # ============================================================================
 # 1. SNHL (Sensorineural Hearing Loss)
@@ -143,33 +141,15 @@ class MeniereModel:
 # ============================================================================
 # 4. TINNITUS
 # ============================================================================
-@dataclass
-class TinnitusState:
-    phantom_z: float = Z_COCHLEA
-    thi_score: float = 0.0     # Tinnitus Handicap Inventory 0–100
-    loudness_db: float = 0.0   # Matched loudness dB
-    frequency_hz: float = 4000.0
-
-class TinnitusModel:
-    def __init__(self, severity: float = 0.4, frequency: float = 4000.0):
-        self.state = TinnitusState(frequency_hz=frequency)
-        self.severity = severity
-        self.on_trt = False  # Tinnitus Retraining Therapy
-        self.tick_count = 0
-
-    def start_trt(self):
-        self.on_trt = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        sev = self.severity * (0.6 if self.on_trt else 1.0)
-        st.phantom_z = Z_COCHLEA * (1 + sev * 2)
-        g2 = gamma_sq(st.phantom_z, Z_COCHLEA)
-        st.thi_score = min(100, g2 * 130)
-        st.loudness_db = g2 * 20
-        return {"disease": "Tinnitus", "thi": st.thi_score,
-                "loudness_db": st.loudness_db, "freq_hz": st.frequency_hz, "gamma_sq": g2}
+TinnitusModel = make_template_disease(
+    "Tinnitus", Z_COCHLEA, z_coeff=2.0, default_severity=0.4,
+    treatment_factor=0.6,
+    metrics=(
+        MetricSpec("thi", 0, 130, max_val=100),
+        MetricSpec("loudness_db", 0, 20),
+    ),
+    default_extra={"freq_hz": 4000.0},
+)
 
 # ============================================================================
 # 5. OTITIS MEDIA
@@ -241,36 +221,15 @@ class VocalCordParalysisModel:
 # ============================================================================
 # 7. SINUSITIS
 # ============================================================================
-@dataclass
-class SinusitisState:
-    sinus_z: float = Z_SINUS
-    lund_mackay: int = 0     # CT score 0–24
-    nasal_obstruction: float = 0.0
-    facial_pain: float = 0.0
-
-class SinusitisModel:
-    def __init__(self, chronic: bool = False, severity: float = 0.5):
-        self.state = SinusitisState()
-        self.chronic = chronic
-        self.severity = severity
-        self.on_treatment = False
-        self.tick_count = 0
-
-    def start_treatment(self):
-        self.on_treatment = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        sev = self.severity * (0.5 if self.on_treatment else 1.0)
-        st.sinus_z = Z_SINUS * (1 + sev * 4)
-        g2 = gamma_sq(st.sinus_z, Z_SINUS)
-        st.lund_mackay = min(24, int(g2 * 30))
-        st.nasal_obstruction = min(10, g2 * 12)
-        st.facial_pain = min(10, g2 * 10)
-        return {"disease": "Sinusitis", "lund_mackay": st.lund_mackay,
-                "obstruction": st.nasal_obstruction, "pain": st.facial_pain,
-                "gamma_sq": g2}
+SinusitisModel = make_template_disease(
+    "Sinusitis", Z_SINUS, z_coeff=4.0, default_severity=0.5,
+    treatment_factor=0.5,
+    metrics=(
+        MetricSpec("lund_mackay", 0, 30, max_val=24, as_int=True),
+        MetricSpec("obstruction", 0, 12, max_val=10),
+        MetricSpec("pain", 0, 10, max_val=10),
+    ),
+)
 
 # ============================================================================
 # 8. ANOSMIA
@@ -375,7 +334,7 @@ class BPPVModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalENTEngine:
+class ClinicalENTEngine(ClinicalEngineBase):
     DISEASE_CLASSES = {
         "snhl": SNHLModel, "chl": ConductiveHLModel,
         "meniere": MeniereModel, "tinnitus": TinnitusModel,
@@ -383,24 +342,4 @@ class ClinicalENTEngine:
         "sinusitis": SinusitisModel, "anosmia": AnosmiaModel,
         "sshl": SSHLModel, "bppv": BPPVModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["sensory_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "sensory_reserve"

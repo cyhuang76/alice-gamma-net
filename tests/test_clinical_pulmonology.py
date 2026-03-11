@@ -103,10 +103,10 @@ class TestOSA(unittest.TestCase):
 
 class TestLungCancer(unittest.TestCase):
     def test_tick(self):
-        m = LungCancerModel(initial_size=2.0)
+        m = LungCancerModel(size=2.0)
         r = m.tick()
         self.assertIn("gamma_sq", r)
-        self.assertIn("tumor_cm", r)
+        self.assertIn("size", r)
         self.assertIn("stage", r)
 
 class TestCF(unittest.TestCase):

@@ -30,9 +30,7 @@ Z_THYROID: float = 65.0    # Thyroid follicular cell
 Z_ADRENAL: float = 70.0    # Adrenal cortex
 Z_PITUITARY: float = 60.0  # Anterior pituitary
 
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = (z_l - z_0) / (z_l + z_0)
-    return g * g
+from alice.body.clinical_common import gamma_sq, ClinicalEngineBase, make_template_disease, MetricSpec
 
 # ============================================================================
 # 1. TYPE 1 DM
@@ -270,29 +268,14 @@ class PheoModel:
 # ============================================================================
 # 8. ACROMEGALY
 # ============================================================================
-@dataclass
-class AcromegalyState:
-    pituitary_z: float = Z_PITUITARY
-    igf1: float = 200.0     # ng/mL (normal 100–300)
-    gh: float = 2.0          # ng/mL (normal <5)
-    ring_size_increase: float = 0.0
-
-class AcromegalyModel:
-    def __init__(self, severity: float = 0.5):
-        self.state = AcromegalyState()
-        self.severity = severity
-        self.tick_count = 0
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        st.pituitary_z = Z_PITUITARY * (1 - self.severity * 0.4)
-        g2 = gamma_sq(st.pituitary_z, Z_PITUITARY)
-        st.gh = 2 + g2 * 30
-        st.igf1 = 200 + g2 * 600
-        st.ring_size_increase = g2 * 4
-        return {"disease": "Acromegaly", "igf1": st.igf1, "gh": st.gh,
-                "gamma_sq": g2}
+AcromegalyModel = make_template_disease(
+    "Acromegaly", Z_PITUITARY, z_coeff=-0.4, default_severity=0.5,
+    treatment_factor=1.0,
+    metrics=(
+        MetricSpec("gh", 2, 30),
+        MetricSpec("igf1", 200, 600),
+    ),
+)
 
 # ============================================================================
 # 9. DKA
@@ -334,45 +317,22 @@ class DKAModel:
 # ============================================================================
 # 10. THYROID STORM
 # ============================================================================
-@dataclass
-class ThyroidStormState:
-    thyroid_z: float = Z_THYROID
-    ft4: float = 5.0
-    tsh: float = 0.01
-    hr: float = 140.0
-    temp_c: float = 39.5
-    burch_wartofsky: int = 45  # ≥45 = storm
-
-class ThyroidStormModel:
-    def __init__(self, severity: float = 0.8):
-        self.state = ThyroidStormState()
-        self.severity = severity
-        self.on_treatment = False
-        self.tick_count = 0
-
-    def start_treatment(self):
-        self.on_treatment = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        if self.on_treatment:
-            self.severity = max(0, self.severity - 0.03)
-        st.thyroid_z = Z_THYROID * (1 - self.severity * 0.6)
-        g2 = gamma_sq(st.thyroid_z, Z_THYROID)
-        st.ft4 = 1.2 + g2 * 8
-        st.tsh = max(0.001, 2.0 * (1 - g2 * 10))
-        st.hr = 72 + g2 * 120
-        st.temp_c = 37 + g2 * 4
-        bw = int(g2 * 80)
-        st.burch_wartofsky = min(90, bw)
-        return {"disease": "Thyroid Storm", "ft4": st.ft4, "hr": st.hr,
-                "temp": st.temp_c, "BW_score": st.burch_wartofsky, "gamma_sq": g2}
+ThyroidStormModel = make_template_disease(
+    "Thyroid Storm", Z_THYROID, z_coeff=-0.6, default_severity=0.8,
+    treatment_factor=1.0,
+    severity_decay=0.03,
+    metrics=(
+        MetricSpec("ft4", 1.2, 8),
+        MetricSpec("hr", 72, 120),
+        MetricSpec("temp", 37, 4),
+        MetricSpec("BW_score", 0, 80, max_val=90, as_int=True),
+    ),
+)
 
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalEndocrinologyEngine:
+class ClinicalEndocrinologyEngine(ClinicalEngineBase):
     DISEASE_CLASSES = {
         "t1dm": T1DMModel, "t2dm": T2DMModel,
         "hyperthyroid": HyperthyroidModel, "hypothyroid": HypothyroidModel,
@@ -380,24 +340,4 @@ class ClinicalEndocrinologyEngine:
         "pheo": PheoModel, "acromegaly": AcromegalyModel,
         "dka": DKAModel, "thyroid_storm": ThyroidStormModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["endocrine_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "endocrine_reserve"

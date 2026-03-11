@@ -86,7 +86,7 @@ class TestBowelObstruction(unittest.TestCase):
 
 class TestCRC(unittest.TestCase):
     def test_tick(self):
-        m = CRCModel(initial_size=2.0)
+        m = CRCModel(size=2.0)
         r = m.tick()
         self.assertIn("gamma_sq", r)
         self.assertIn("cea", r)

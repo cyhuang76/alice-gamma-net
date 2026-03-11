@@ -41,12 +41,7 @@ Z_PORTAL: float = 35.0         # Normal portal venous Z
 Z_OBSTRUCTED: float = 1e6      # Complete obstruction
 
 
-def gamma(z_l: float, z_0: float) -> float:
-    return (z_l - z_0) / (z_l + z_0)
-
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = gamma(z_l, z_0)
-    return g * g
+from alice.body.clinical_common import gamma, gamma_sq, ClinicalEngineBase
 
 
 # ============================================================================
@@ -382,45 +377,9 @@ class BowelObstructionModel:
 
 
 # ============================================================================
-# 9. COLORECTAL CANCER
+# 9. COLORECTAL CANCER  (canonical model in clinical_oncology)
 # ============================================================================
-@dataclass
-class CRCState:
-    tumor_z: float = Z_COLONIC
-    tumor_size_cm: float = 1.0
-    cea: float = 2.0   # Normal <5 ng/mL
-    stage: str = "I"
-
-class CRCModel:
-    """Colorectal Cancer: mucosal Z transformation → growing Γ island."""
-
-    def __init__(self, initial_size: float = 1.5, growth_rate: float = 0.003):
-        self.state = CRCState(tumor_size_cm=initial_size)
-        self.growth_rate = growth_rate
-        self.on_treatment = False
-        self.tick_count = 0
-
-    def start_treatment(self):
-        self.on_treatment = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        r = self.growth_rate * (0.3 if self.on_treatment else 1.0)
-        st.tumor_size_cm = min(12, st.tumor_size_cm * (1 + r))
-        st.tumor_z = Z_COLONIC * (1 + st.tumor_size_cm * 0.8)
-        st.cea = 2.0 + st.tumor_size_cm * 3
-        return self.get_clinical_score()
-
-    def get_clinical_score(self) -> Dict:
-        st = self.state
-        g2 = gamma_sq(st.tumor_z, Z_COLONIC)
-        if st.tumor_size_cm <= 2: st.stage = "I"
-        elif st.tumor_size_cm <= 4: st.stage = "II"
-        elif st.tumor_size_cm <= 7: st.stage = "III"
-        else: st.stage = "IV"
-        return {"disease": "CRC", "tumor_cm": st.tumor_size_cm,
-                "stage": st.stage, "cea": st.cea, "gamma_sq": g2}
+from alice.body.clinical_oncology import CRCModel  # noqa: E402
 
 
 # ============================================================================
@@ -471,7 +430,7 @@ class HepatitisModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalGastroenterologyEngine:
+class ClinicalGastroenterologyEngine(ClinicalEngineBase):
     """Unified engine for all 10 GI/Hepatobiliary diseases."""
 
     DISEASE_CLASSES = {
@@ -486,24 +445,4 @@ class ClinicalGastroenterologyEngine:
         "crc": CRCModel,
         "hepatitis": HepatitisModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["gi_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "gi_reserve"

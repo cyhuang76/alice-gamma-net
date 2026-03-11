@@ -28,7 +28,7 @@ class TestRA(unittest.TestCase):
         self.assertIn("das28", r)
     def test_dmard(self):
         m = RAModel()
-        m.start_dmard()
+        m.start_treatment()
         r = m.tick()
         self.assertIn("gamma_sq", r)
 

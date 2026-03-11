@@ -31,9 +31,7 @@ Z_DERMIS: float = 65.0        # Dermal layer
 Z_SUBCUTANEOUS: float = 70.0  # Subcutaneous fat
 Z_MELANOCYTE: float = 50.0    # Melanocyte
 
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = (z_l - z_0) / (z_l + z_0)
-    return g * g
+from alice.body.clinical_common import gamma_sq, ClinicalEngineBase, make_template_disease, MetricSpec
 
 # ============================================================================
 # 1. ATOPIC DERMATITIS
@@ -78,64 +76,27 @@ class AtopicDermatitisModel:
 # ============================================================================
 # 2. PSORIASIS
 # ============================================================================
-@dataclass
-class PsoriasisState:
-    keratinocyte_z: float = Z_EPIDERMIS
-    pasi: float = 0.0        # PASI 0–72
-    turnover_days: float = 28.0  # Normal 28, psoriasis 3–5
-    area_percent: float = 0.0
-
-class PsoriasisModel:
-    def __init__(self, severity: float = 0.5, area: float = 15.0):
-        self.state = PsoriasisState(area_percent=area)
-        self.severity = severity
-        self.on_biologic = False
-        self.tick_count = 0
-
-    def start_biologic(self):
-        self.on_biologic = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        sev = self.severity * (0.2 if self.on_biologic else 1.0)
-        st.keratinocyte_z = Z_EPIDERMIS * (1 + sev * 3)
-        g2 = gamma_sq(st.keratinocyte_z, Z_EPIDERMIS)
-        st.pasi = min(72, g2 * 90)
-        st.turnover_days = max(3, 28 * (1 - g2 * 0.9))
-        return {"disease": "Psoriasis", "pasi": st.pasi, "turnover": st.turnover_days,
-                "area": st.area_percent, "gamma_sq": g2}
+PsoriasisModel = make_template_disease(
+    "Psoriasis", Z_EPIDERMIS, z_coeff=3.0, default_severity=0.5,
+    treatment_factor=0.2,
+    metrics=(
+        MetricSpec("pasi", 0, 90, max_val=72),
+        MetricSpec("turnover", 28, -25.2, min_val=3),
+    ),
+    default_extra={"area": 15.0},
+)
 
 # ============================================================================
 # 3. URTICARIA
 # ============================================================================
-@dataclass
-class UrticariaState:
-    mast_cell_z: float = Z_DERMIS
-    uas7: float = 0.0         # UAS-7: 0–42
-    wheal_count: int = 0
-
-class UrticariaModel:
-    def __init__(self, severity: float = 0.5, chronic: bool = False):
-        self.state = UrticariaState()
-        self.severity = severity
-        self.chronic = chronic
-        self.on_antihistamine = False
-        self.tick_count = 0
-
-    def start_antihistamine(self):
-        self.on_antihistamine = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        sev = self.severity * (0.3 if self.on_antihistamine else 1.0)
-        st.mast_cell_z = Z_DERMIS * (1 - sev * 0.3)
-        g2 = gamma_sq(st.mast_cell_z, Z_DERMIS)
-        st.uas7 = min(42, g2 * 55)
-        st.wheal_count = int(g2 * 30)
-        return {"disease": "Urticaria", "uas7": st.uas7, "wheals": st.wheal_count,
-                "gamma_sq": g2}
+UrticariaModel = make_template_disease(
+    "Urticaria", Z_DERMIS, z_coeff=-0.3, default_severity=0.5,
+    treatment_factor=0.3,
+    metrics=(
+        MetricSpec("uas7", 0, 55, max_val=42),
+        MetricSpec("wheals", 0, 30, as_int=True),
+    ),
+)
 
 # ============================================================================
 # 4. HERPES ZOSTER
@@ -244,34 +205,14 @@ class ContactDermatitisModel:
 # ============================================================================
 # 7. ACNE VULGARIS
 # ============================================================================
-@dataclass
-class AcneState:
-    follicular_z: float = Z_EPIDERMIS
-    iga_score: int = 0        # IGA 0–5
-    lesion_count: int = 0
-    inflammatory: bool = False
-
-class AcneModel:
-    def __init__(self, severity: float = 0.4, inflammatory: bool = True):
-        self.state = AcneState(inflammatory=inflammatory)
-        self.severity = severity
-        self.on_treatment = False
-        self.tick_count = 0
-
-    def start_treatment(self):
-        self.on_treatment = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        sev = self.severity * (0.4 if self.on_treatment else 1.0)
-        # Sebaceous obstruction increases follicular Z
-        st.follicular_z = Z_EPIDERMIS * (1 + sev * 2)
-        g2 = gamma_sq(st.follicular_z, Z_EPIDERMIS)
-        st.iga_score = min(5, int(g2 * 7))
-        st.lesion_count = int(g2 * 50)
-        return {"disease": "Acne", "iga": st.iga_score, "lesions": st.lesion_count,
-                "inflammatory": st.inflammatory, "gamma_sq": g2}
+AcneModel = make_template_disease(
+    "Acne", Z_EPIDERMIS, z_coeff=2.0, default_severity=0.4,
+    treatment_factor=0.4,
+    metrics=(
+        MetricSpec("iga", 0, 7, max_val=5, as_int=True),
+        MetricSpec("lesions", 0, 50, as_int=True),
+    ),
+)
 
 # ============================================================================
 # 8. VITILIGO
@@ -380,7 +321,7 @@ class BurnsModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalDermatologyEngine:
+class ClinicalDermatologyEngine(ClinicalEngineBase):
     DISEASE_CLASSES = {
         "atopic_dermatitis": AtopicDermatitisModel, "psoriasis": PsoriasisModel,
         "urticaria": UrticariaModel, "herpes_zoster": HerpesZosterModel,
@@ -388,24 +329,4 @@ class ClinicalDermatologyEngine:
         "acne": AcneModel, "vitiligo": VitiligoModel,
         "cellulitis": CellulitisModel, "burns": BurnsModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["skin_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "skin_reserve"

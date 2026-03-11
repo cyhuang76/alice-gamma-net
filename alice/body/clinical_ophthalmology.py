@@ -33,9 +33,7 @@ Z_VITREOUS: float = 35.0
 Z_RETINA: float = 50.0
 Z_OPTIC_NERVE: float = 55.0
 
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = (z_l - z_0) / (z_l + z_0)
-    return g * g
+from alice.body.clinical_common import gamma_sq, ClinicalEngineBase, make_template_disease, MetricSpec
 
 # ============================================================================
 # 1. GLAUCOMA
@@ -245,35 +243,15 @@ class RefractiveModel:
 # ============================================================================
 # 7. DRY EYE
 # ============================================================================
-@dataclass
-class DryEyeState:
-    tear_z: float = Z_CORNEA
-    osdi: float = 0.0         # OSDI Score 0–100
-    tbut: float = 10.0        # Tear break-up time (s)
-    schirmer: float = 15.0    # mm/5min
-
-class DryEyeModel:
-    def __init__(self, severity: float = 0.4, evaporative: bool = True):
-        self.state = DryEyeState()
-        self.severity = severity
-        self.evaporative = evaporative
-        self.on_artificial_tears = False
-        self.tick_count = 0
-
-    def start_treatment(self):
-        self.on_artificial_tears = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        sev = self.severity * (0.5 if self.on_artificial_tears else 1.0)
-        st.tear_z = Z_CORNEA * (1 + sev * 2)
-        g2 = gamma_sq(st.tear_z, Z_CORNEA)
-        st.osdi = min(100, g2 * 130)
-        st.tbut = max(1, 10 - g2 * 8)
-        st.schirmer = max(1, 15 - g2 * 12)
-        return {"disease": "Dry Eye", "osdi": st.osdi, "tbut": st.tbut,
-                "schirmer": st.schirmer, "gamma_sq": g2}
+DryEyeModel = make_template_disease(
+    "Dry Eye", Z_CORNEA, z_coeff=2.0, default_severity=0.4,
+    treatment_factor=0.5,
+    metrics=(
+        MetricSpec("osdi", 0, 130, max_val=100),
+        MetricSpec("tbut", 10, -8, min_val=1),
+        MetricSpec("schirmer", 15, -12, min_val=1),
+    ),
+)
 
 # ============================================================================
 # 8. CORNEAL ULCER
@@ -382,7 +360,7 @@ class StrabismusModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalOphthalmologyEngine:
+class ClinicalOphthalmologyEngine(ClinicalEngineBase):
     DISEASE_CLASSES = {
         "glaucoma": GlaucomaModel, "cataract": CataractModel,
         "retinal_detachment": RetinalDetachmentModel, "amd": AMDModel,
@@ -391,24 +369,4 @@ class ClinicalOphthalmologyEngine:
         "corneal_ulcer": CornealUlcerModel, "optic_neuritis": OpticNeuritisModel,
         "strabismus": StrabismusModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["visual_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "visual_reserve"

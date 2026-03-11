@@ -32,9 +32,7 @@ Z_COLLECTING: float = 55.0     # Collecting duct
 Z_URETER: float = 40.0         # Ureter
 GFR_NORMAL: float = 100.0      # mL/min/1.73m²
 
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = (z_l - z_0) / (z_l + z_0)
-    return g * g
+from alice.body.clinical_common import gamma_sq, ClinicalEngineBase
 
 # ============================================================================
 # 1. AKI
@@ -325,7 +323,7 @@ class RTAModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalNephrologyEngine:
+class ClinicalNephrologyEngine(ClinicalEngineBase):
     DISEASE_CLASSES = {
         "aki": AKIModel, "ckd": CKDModel, "nephrolithiasis": NephrolithiasisModel,
         "nephrotic": NephroticModel, "nephritic": NephriticModel,
@@ -333,24 +331,4 @@ class ClinicalNephrologyEngine:
         "electrolyte": ElectrolyteModel, "renal_htn": RenalHTNModel,
         "pkd": PKDModel, "rta": RTAModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["renal_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "renal_reserve"

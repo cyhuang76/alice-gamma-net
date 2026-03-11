@@ -30,9 +30,7 @@ Z_PATHOGEN_MIN: float = 200.0  # Weakest pathogen
 Z_SYNOVIUM: float = 70.0       # Joint synovial membrane
 Z_VASCULAR: float = 60.0       # Vascular endothelium
 
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = (z_l - z_0) / (z_l + z_0)
-    return g * g
+from alice.body.clinical_common import gamma_sq, ClinicalEngineBase, make_template_disease, MetricSpec
 
 # ============================================================================
 # 1. SLE
@@ -76,37 +74,16 @@ class SLEModel:
 # ============================================================================
 # 2. RHEUMATOID ARTHRITIS
 # ============================================================================
-@dataclass
-class RAState:
-    synovium_z: float = Z_SYNOVIUM
-    das28: float = 2.0     # Disease Activity Score (<2.6 remission)
-    rf: float = 10.0       # IU/mL
-    crp: float = 0.5       # mg/dL
-
-class RAModel:
-    def __init__(self, severity: float = 0.5, joints: int = 8):
-        self.state = RAState()
-        self.severity = severity
-        self.joints = joints
-        self.on_dmard = False
-        self.tick_count = 0
-
-    def start_dmard(self):
-        self.on_dmard = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        sev = self.severity
-        if self.on_dmard:
-            sev *= 0.6
-        st.synovium_z = Z_SYNOVIUM * (1 + sev * 2)
-        g2 = gamma_sq(st.synovium_z, Z_SYNOVIUM)
-        st.das28 = 1.0 + g2 * 7
-        st.rf = 10 + g2 * 200
-        st.crp = 0.5 + g2 * 15
-        return {"disease": "RA", "das28": st.das28, "rf": st.rf,
-                "crp": st.crp, "joints": self.joints, "gamma_sq": g2}
+RAModel = make_template_disease(
+    "RA", Z_SYNOVIUM, z_coeff=2.0, default_severity=0.5,
+    treatment_factor=0.6,
+    metrics=(
+        MetricSpec("das28", 1.0, 7),
+        MetricSpec("rf", 10, 200),
+        MetricSpec("crp", 0.5, 15),
+    ),
+    default_extra={"joints": 8},
+)
 
 # ============================================================================
 # 3. ANAPHYLAXIS
@@ -150,33 +127,14 @@ class AnaphylaxisModel:
 # ============================================================================
 # 4. ALLERGIC RHINITIS
 # ============================================================================
-@dataclass
-class AllergyState:
-    nasal_z: float = 40.0   # Normal nasal impedance
-    ige: float = 100.0      # IU/mL
-    sneeze_freq: float = 0.0
-
-class AllergicRhinitisModel:
-    def __init__(self, allergen_z: float = 150.0, severity: float = 0.4):
-        self.state = AllergyState()
-        self.allergen_z = allergen_z
-        self.severity = severity
-        self.on_antihistamine = False
-        self.tick_count = 0
-
-    def start_antihistamine(self):
-        self.on_antihistamine = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        sev = self.severity * (0.4 if self.on_antihistamine else 1.0)
-        st.nasal_z = 40 * (1 + sev * 3)
-        g2 = gamma_sq(st.nasal_z, 40.0)
-        st.ige = 100 + g2 * 500
-        st.sneeze_freq = g2 * 20
-        return {"disease": "Allergic Rhinitis", "ige": st.ige,
-                "sneeze_freq": st.sneeze_freq, "gamma_sq": g2}
+AllergicRhinitisModel = make_template_disease(
+    "Allergic Rhinitis", 40.0, z_coeff=3.0, default_severity=0.4,
+    treatment_factor=0.4,
+    metrics=(
+        MetricSpec("ige", 100, 500),
+        MetricSpec("sneeze_freq", 0, 20),
+    ),
+)
 
 # ============================================================================
 # 5. HIV/AIDS
@@ -395,7 +353,7 @@ class ImmunodeficiencyModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalImmunologyEngine:
+class ClinicalImmunologyEngine(ClinicalEngineBase):
     DISEASE_CLASSES = {
         "sle": SLEModel, "ra": RAModel, "anaphylaxis": AnaphylaxisModel,
         "allergic_rhinitis": AllergicRhinitisModel, "hiv": HIVModel,
@@ -403,24 +361,4 @@ class ClinicalImmunologyEngine:
         "sarcoidosis": SarcoidosisModel, "vasculitis": VasculitisModel,
         "immunodeficiency": ImmunodeficiencyModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["immune_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "immune_reserve"

@@ -52,13 +52,7 @@ ALL_CARDIAC_CHANNELS = [
 ]
 
 
-def gamma(z_load: float, z_source: float) -> float:
-    return (z_load - z_source) / (z_load + z_source)
-
-
-def gamma_sq(z_load: float, z_source: float) -> float:
-    g = gamma(z_load, z_source)
-    return g * g
+from alice.body.clinical_common import gamma, gamma_sq, ClinicalEngineBase
 
 
 # ============================================================================
@@ -597,7 +591,7 @@ class AorticDissectionModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalCardiologyEngine:
+class ClinicalCardiologyEngine(ClinicalEngineBase):
     """Unified engine managing all 10 cardiac disease models."""
 
     DISEASE_CLASSES = {
@@ -612,26 +606,13 @@ class ClinicalCardiologyEngine:
         "endocarditis": EndocarditisModel,
         "aortic_dissection": AorticDissectionModel,
     }
+    RESERVE_KEY = "cardiac_reserve"
 
     def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
+        super().__init__()
         self.history: List[Dict] = []
 
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
     def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_gamma_sq = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_gamma_sq += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_gamma_sq
-        results["cardiac_reserve"] = max(0.0, 1.0 - total_gamma_sq)
+        results = super().tick()
         self.history.append(results)
         return results

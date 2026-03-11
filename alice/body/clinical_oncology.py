@@ -41,71 +41,19 @@ Z_MARROW: float = 70.0
 Z_LYMPH: float = 45.0
 Z_RENAL: float = 50.0
 
-def gamma_sq(z_l: float, z_0: float) -> float:
-    g = (z_l - z_0) / (z_l + z_0)
-    return g * g
-
-# ============================================================================
-# UNIVERSAL TUMOR MODEL (shared physics)
-# ============================================================================
-@dataclass
-class TumorCore:
-    """Base tumor state: all cancers share these impedance properties."""
-    tumor_z: float = Z_HOST    # Current tumor impedance
-    camouflage: float = 0.8    # Immune camouflage (0=visible, 1=invisible)
-    size_cm: float = 2.0       # Primary tumor size
-    growth_rate: float = 0.01  # Per-tick fractional growth
-    on_treatment: bool = False
-    metastatic: bool = False
-    sites: int = 0
-
-    def grow(self) -> float:
-        """Grow tumor, return Γ² relative to organ."""
-        if self.on_treatment:
-            self.size_cm = max(0.1, self.size_cm * (1 - self.growth_rate * 0.5))
-        else:
-            self.size_cm = min(20, self.size_cm * (1 + self.growth_rate))
-        return self.size_cm
+from alice.body.clinical_common import gamma_sq, ClinicalEngineBase, TumorCore, make_tumor_model, StageSpec, MetricSpec
 
 # ============================================================================
 # 1. LUNG CANCER
 # ============================================================================
-@dataclass
-class LungCancerState:
-    core: TumorCore = None
-    histology: str = "adenocarcinoma"  # adeno/squamous/small-cell
-    egfr_mutation: bool = False
-    fev1_percent: float = 80.0
-    stage: str = "II"
-
-    def __post_init__(self):
-        if self.core is None:
-            self.core = TumorCore(tumor_z=Z_LUNG_TISSUE * 2)
-
-class LungCancerModel:
-    def __init__(self, size: float = 3.0, histology: str = "adenocarcinoma",
-                 egfr: bool = False):
-        self.state = LungCancerState(histology=histology, egfr_mutation=egfr)
-        self.state.core.size_cm = size
-        self.tick_count = 0
-
-    def start_treatment(self):
-        self.state.core.on_treatment = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        st.core.grow()
-        z_ratio = st.core.size_cm / 3
-        st.core.tumor_z = Z_LUNG_TISSUE * (1 + z_ratio * 2)
-        g2 = gamma_sq(st.core.tumor_z, Z_LUNG_TISSUE)
-        st.fev1_percent = max(20, 80 * (1 - g2))
-        if g2 < 0.1: st.stage = "I"
-        elif g2 < 0.25: st.stage = "II"
-        elif g2 < 0.5: st.stage = "III"
-        else: st.stage = "IV"
-        return {"disease": "Lung Cancer", "stage": st.stage, "size": st.core.size_cm,
-                "fev1": st.fev1_percent, "histology": st.histology, "gamma_sq": g2}
+LungCancerModel = make_tumor_model(
+    "Lung Cancer", Z_LUNG_TISSUE, initial_z_mult=2.0,
+    size_denom=3.0, z_mult=2.0, default_size=3.0,
+    stages=(StageSpec(0.1, "I"), StageSpec(0.25, "II"), StageSpec(0.5, "III")),
+    default_stage="IV",
+    markers=(MetricSpec("fev1", 80, -80, min_val=20),),
+    default_extra={"histology": "adenocarcinoma"},
+)
 
 # ============================================================================
 # 2. BREAST CANCER
@@ -147,41 +95,14 @@ class BreastCancerModel:
 # ============================================================================
 # 3. COLORECTAL CANCER
 # ============================================================================
-@dataclass
-class CRCState:
-    core: TumorCore = None
-    cea: float = 3.0          # ng/mL (normal <5)
-    stage: str = "II"
-    obstruction: bool = False
-
-    def __post_init__(self):
-        if self.core is None:
-            self.core = TumorCore(tumor_z=Z_COLON_TISSUE * 1.8)
-
-class CRCModel:
-    def __init__(self, size: float = 3.0):
-        self.state = CRCState()
-        self.state.core.size_cm = size
-        self.tick_count = 0
-
-    def start_treatment(self):
-        self.state.core.on_treatment = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        st.core.grow()
-        z_ratio = st.core.size_cm / 3
-        st.core.tumor_z = Z_COLON_TISSUE * (1 + z_ratio * 2)
-        g2 = gamma_sq(st.core.tumor_z, Z_COLON_TISSUE)
-        st.cea = 3 + g2 * 100
-        st.obstruction = g2 > 0.4
-        if g2 < 0.1: st.stage = "I"
-        elif g2 < 0.25: st.stage = "II"
-        elif g2 < 0.5: st.stage = "III"
-        else: st.stage = "IV"
-        return {"disease": "CRC", "stage": st.stage, "cea": st.cea,
-                "obstruction": st.obstruction, "gamma_sq": g2}
+CRCModel = make_tumor_model(
+    "CRC", Z_COLON_TISSUE, initial_z_mult=1.8,
+    size_denom=3.0, z_mult=2.0, default_size=3.0,
+    stages=(StageSpec(0.1, "I"), StageSpec(0.25, "II"), StageSpec(0.5, "III")),
+    default_stage="IV",
+    markers=(MetricSpec("cea", 3, 100),),
+    bool_markers=(("obstruction", 0.4),),
+)
 
 # ============================================================================
 # 4. HEPATOCELLULAR CARCINOMA (HCC)
@@ -226,41 +147,15 @@ class HCCModel:
 # ============================================================================
 # 5. PANCREATIC CANCER
 # ============================================================================
-@dataclass
-class PancreaticCancerState:
-    core: TumorCore = None
-    ca19_9: float = 20.0      # U/mL (normal <37)
-    stage: str = "II"
-    biliary_obstruction: bool = False
-
-    def __post_init__(self):
-        if self.core is None:
-            self.core = TumorCore(tumor_z=Z_PANCREAS_TISSUE * 2.5, growth_rate=0.015)
-
-class PancreaticCancerModel:
-    def __init__(self, size: float = 3.0):
-        self.state = PancreaticCancerState()
-        self.state.core.size_cm = size
-        self.tick_count = 0
-
-    def start_treatment(self):
-        self.state.core.on_treatment = True
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        st = self.state
-        st.core.grow()
-        z_ratio = st.core.size_cm / 2
-        st.core.tumor_z = Z_PANCREAS_TISSUE * (1 + z_ratio * 3)
-        g2 = gamma_sq(st.core.tumor_z, Z_PANCREAS_TISSUE)
-        st.ca19_9 = 20 + g2 * 5000
-        st.biliary_obstruction = g2 > 0.3
-        if g2 < 0.15: st.stage = "I"
-        elif g2 < 0.3: st.stage = "II"
-        elif g2 < 0.5: st.stage = "III"
-        else: st.stage = "IV"
-        return {"disease": "Pancreatic Cancer", "stage": st.stage, "ca19_9": st.ca19_9,
-                "biliary": st.biliary_obstruction, "gamma_sq": g2}
+PancreaticCancerModel = make_tumor_model(
+    "Pancreatic Cancer", Z_PANCREAS_TISSUE, initial_z_mult=2.5,
+    size_denom=2.0, z_mult=3.0, default_size=3.0,
+    growth_rate=0.015,
+    stages=(StageSpec(0.15, "I"), StageSpec(0.3, "II"), StageSpec(0.5, "III")),
+    default_stage="IV",
+    markers=(MetricSpec("ca19_9", 20, 5000),),
+    bool_markers=(("biliary", 0.3),),
+)
 
 # ============================================================================
 # 6. BRAIN TUMOR (GBM)
@@ -468,7 +363,7 @@ class MetastasisModel:
 # ============================================================================
 # UNIFIED ENGINE
 # ============================================================================
-class ClinicalOncologyEngine:
+class ClinicalOncologyEngine(ClinicalEngineBase):
     DISEASE_CLASSES = {
         "lung_cancer": LungCancerModel, "breast_cancer": BreastCancerModel,
         "crc": CRCModel, "hcc": HCCModel,
@@ -476,24 +371,4 @@ class ClinicalOncologyEngine:
         "leukemia": LeukemiaModel, "lymphoma": LymphomaModel,
         "rcc": RCCModel, "metastasis": MetastasisModel,
     }
-
-    def __init__(self):
-        self.active_diseases: Dict[str, object] = {}
-        self.tick_count = 0
-
-    def add_disease(self, name: str, **kwargs):
-        cls = self.DISEASE_CLASSES.get(name)
-        if cls:
-            self.active_diseases[name] = cls(**kwargs)
-
-    def tick(self) -> Dict:
-        self.tick_count += 1
-        results = {}
-        total_g2 = 0.0
-        for name, model in self.active_diseases.items():
-            r = model.tick()
-            results[name] = r
-            total_g2 += r.get("gamma_sq", 0.0)
-        results["total_gamma_sq"] = total_g2
-        results["host_reserve"] = max(0.0, 1.0 - total_g2)
-        return results
+    RESERVE_KEY = "host_reserve"
