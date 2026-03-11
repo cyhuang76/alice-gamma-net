@@ -1599,3 +1599,294 @@ BLUEPRINT_REGISTRY = {
     "csf":               build_csf,
     "brain_functional":  build_brain_functional,
 }
+
+
+# ============================================================================
+#                  WHOLE-BODY INTER-ORGAN ARCHITECTURE
+# ============================================================================
+#
+# Three Chains → One Body:
+#
+#   Chain ① — 29 organ GammaTopologies (intra-organ physics)
+#   Chain ② — Dual inter-organ bus:
+#             Vascular bus (K=4→2→1): aorta → arteriolar branches → capillary beds
+#             Neural bus (K=3→2→1): autonomic preganglionic → postganglionic → target
+#   Chain ③ — Brain command center: brain_functional (K=5/3)
+#
+# Connection principle:
+#   Each organ declares two interface nodes:
+#     • vascular_port — the node receiving arterial blood supply
+#     • neural_port  — the node receiving autonomic innervation
+#
+#   The whole-body topology:
+#     1. Instantiate all 29 organ blueprints (nodes prefixed: "cv.", "pulm.", etc.)
+#     2. Create vascular hub nodes (one per organ): "vbus.cv", "vbus.pulm", ...
+#     3. Create neural hub nodes (autonomic branches): "nbus.cv", "nbus.pulm", ...
+#     4. Wire: vbus hub → organ vascular_port (blood supply)
+#     5. Wire: nbus hub → organ neural_port (innervation)
+#     6. Wire: brain.hypothalamus_b → nbus hubs (descending command)
+#     7. Wire: organ → vbus → brain (ascending feedback: interoception)
+#
+# Physics:
+#   • Dimensional cascade: brain (K=5) → autonomic (K=3→2) → organ (K=1~3)
+#     → $A_\text{cut}$ costs emerge naturally at each level transition
+#   • C2 impedance remodeling runs on ALL edges (intra + inter)
+#     → systemic homeostasis emerges from physics alone (E0)
+#   • Disease cascade: Γ↑ at vascular hub → all downstream organs Γ↑
+#     → zero disease-specific code needed
+#
+
+# ── Interface node definitions ────────────────────────────────────────
+#
+# For each organ: (prefix, vascular_port_node, neural_port_node)
+# vascular_port = the node that receives blood supply
+# neural_port   = the node that receives autonomic innervation
+# Some organs share both roles in one node; that's fine.
+
+ORGAN_INTERFACES: Dict[str, Dict[str, str]] = {
+    # Organ           vascular port              neural port
+    "cardiovascular": {"vascular": "coronary",         "neural": "sa_node"},
+    "neural":         {"vascular": "cortex_motor",     "neural": "cortex_motor"},
+    "pulmonary":      {"vascular": "pulm_capillary",   "neural": "trachea"},
+    "renal":          {"vascular": "afferent_arteriole","neural": "afferent_arteriole"},
+    "hepatic":        {"vascular": "portal_vein",      "neural": "hepatocyte"},
+    "gi":             {"vascular": "stomach",          "neural": "enteric_plexus"},
+    "endocrine":      {"vascular": "hypothalamus",     "neural": "hypothalamus"},
+    "immune":         {"vascular": "bone_marrow",      "neural": "spleen"},
+    "lymphatic":      {"vascular": "venous_return",    "neural": "thoracic_duct"},
+    "musculoskeletal":{"vascular": "muscle_fiber",     "neural": "spinal_mn"},
+    "skeletal":       {"vascular": "periosteum",       "neural": "osteocyte"},
+    "epithelial":     {"vascular": "dermis",           "neural": "basal_layer"},
+    "connective":     {"vascular": "fibroblast_c",     "neural": "fibroblast_c"},
+    "adipose":        {"vascular": "adipocyte_a",      "neural": "adipocyte_a"},
+    "hematopoietic":  {"vascular": "hsc_cell",          "neural": "hsc_cell"},
+    "cartilage":      {"vascular": "perichondrium",    "neural": "perichondrium"},
+    "reproductive":   {"vascular": "gonad_r",          "neural": "hypothalamus_r"},
+    "brain_regulatory":{"vascular": "nts",             "neural": "nts"},
+    "vascular":       {"vascular": "aortic_root",      "neural": "aortic_root"},
+    "ocular":         {"vascular": "ciliary_body",     "neural": "optic_nerve"},
+    "auditory":       {"vascular": "cochlea_a",        "neural": "auditory_nerve"},
+    "vestibular":     {"vascular": "vestibular_n",     "neural": "vestibular_nucleus"},
+    "olfactory":      {"vascular": "olfactory_bulb",   "neural": "piriform_cortex"},
+    "dental":         {"vascular": "pulp",             "neural": "pulp"},
+    "enteric":        {"vascular": "myenteric_plexus", "neural": "vagus_input"},
+    "autonomic":      {"vascular": "adrenal_medulla_ans","neural": "hypothalamus_ans"},
+    "pancreatic":     {"vascular": "beta_cell_p",      "neural": "glucose_sensor"},
+    "csf":            {"vascular": "choroid_plexus",   "neural": "choroid_plexus"},
+    "brain_functional":{"vascular": "thalamus_b",      "neural": "hypothalamus_b"},
+}
+
+
+# ── Vascular bus tissue types ─────────────────────────────────────────
+
+VASCULAR_BUS_TRUNK = TissueType(
+    "vascular_bus_trunk", n_modes=4, z_mean=40.0, z_std=8.0,
+    diameter_um=25.0, myelinated=False,
+    description="Aortic trunk — main vascular bus backbone (K=4)")
+
+VASCULAR_BUS_BRANCH = TissueType(
+    "vascular_bus_branch", n_modes=2, z_mean=55.0, z_std=12.0,
+    diameter_um=5.0, myelinated=False,
+    description="Arteriolar branch — organ-specific vascular feed (K=2)")
+
+NEURAL_BUS_TRUNK = TissueType(
+    "neural_bus_trunk", n_modes=3, z_mean=70.0, z_std=15.0,
+    diameter_um=5.0, myelinated=True,
+    description="Autonomic trunk — main neural bus backbone (K=3)")
+
+NEURAL_BUS_BRANCH = TissueType(
+    "neural_bus_branch", n_modes=2, z_mean=90.0, z_std=20.0,
+    diameter_um=3.0, myelinated=True,
+    description="Autonomic branch — organ-specific neural feed (K=2)")
+
+
+def build_whole_body(
+    eta: float = 0.01,
+    max_dimension_gap: int = 3,
+    seed: int = 42,
+) -> GammaTopology:
+    """Build a unified whole-body GammaTopology.
+
+    Architecture (three chains unified):
+      Chain ① — 29 organ sub-topologies, nodes prefixed by organ name
+      Chain ② — Dual bus: vascular (K=4→2) + neural (K=3→2) hubs
+      Chain ③ — Brain (brain_functional) as central command
+
+    Dimensional cascade:
+      Brain K=5 → Neural bus K=3 → Organ K=1~3: A_cut emerges naturally
+      Aorta K=4 → Branch K=2 → Organ capillary K=1: vascular A_cut
+
+    Returns
+    -------
+    GammaTopology with ~260 nodes and ~350 edges,
+    all satisfying C1 (energy conservation) at every edge.
+
+    Emergence level: E0 — zero disease-specific code.
+    """
+    all_nodes: List[GammaNode] = []
+    all_wiring: List[Tuple[str, str]] = []
+
+    # Track organ interface nodes (prefixed names)
+    vascular_ports: Dict[str, str] = {}   # organ → prefixed vascular port name
+    neural_ports: Dict[str, str] = {}     # organ → prefixed neural port name
+
+    rng = np.random.default_rng(seed)
+
+    # ── Step 1: Instantiate all 29 organ sub-topologies ───────────────
+    #
+    # Each organ's nodes get prefixed: "cv.sa_node", "pulm.alveolus", etc.
+    # Each organ's edges are recorded with prefixed names.
+
+    for organ_name, build_fn in BLUEPRINT_REGISTRY.items():
+        prefix = _organ_prefix(organ_name)
+        organ_seed = seed + hash(organ_name) % 10000
+
+        # Build the standalone organ topology
+        organ_topo = build_fn(seed=organ_seed)
+
+        # Extract nodes with prefixed names
+        for node_name, node in organ_topo.nodes.items():
+            prefixed_name = f"{prefix}.{node_name}"
+            prefixed_node = GammaNode(
+                name=prefixed_name,
+                impedance=node.impedance.copy(),
+                activation=node.activation.copy(),
+            )
+            all_nodes.append(prefixed_node)
+
+        # Extract edges with prefixed names
+        for (src, tgt) in organ_topo.active_edges.keys():
+            all_wiring.append((f"{prefix}.{src}", f"{prefix}.{tgt}"))
+
+        # Record interface nodes (prefixed)
+        iface = ORGAN_INTERFACES[organ_name]
+        vascular_ports[organ_name] = f"{prefix}.{iface['vascular']}"
+        neural_ports[organ_name] = f"{prefix}.{iface['neural']}"
+
+    # ── Step 2: Create vascular bus (aorta → branches → organs) ───────
+    #
+    # Trunk: single aortic hub node (K=4)
+    # Branches: one per organ (K=2), connecting trunk → organ vascular port
+
+    vbus_trunk = _make_node("vbus.aorta", VASCULAR_BUS_TRUNK, seed=seed + 9000)
+    all_nodes.append(vbus_trunk)
+
+    for organ_name in BLUEPRINT_REGISTRY:
+        branch_name = f"vbus.{_organ_prefix(organ_name)}"
+        branch_node = _make_node(
+            branch_name, VASCULAR_BUS_BRANCH,
+            seed=seed + 9100 + hash(organ_name) % 1000,
+        )
+        all_nodes.append(branch_node)
+
+        # Trunk → branch (K=4 → K=2: cutoff cost = 2)
+        all_wiring.append(("vbus.aorta", branch_name))
+
+        # Branch → organ vascular port (K=2 → organ K: variable cutoff)
+        all_wiring.append((branch_name, vascular_ports[organ_name]))
+
+        # Return path: organ vascular port → branch (venous return)
+        all_wiring.append((vascular_ports[organ_name], branch_name))
+
+    # ── Step 3: Create neural bus (brain → autonomic → organs) ────────
+    #
+    # Trunk: single autonomic hub (K=3) — connected to brain
+    # Branches: one per organ (K=2), connecting trunk → organ neural port
+
+    nbus_trunk = _make_node("nbus.autonomic", NEURAL_BUS_TRUNK, seed=seed + 9500)
+    all_nodes.append(nbus_trunk)
+
+    for organ_name in BLUEPRINT_REGISTRY:
+        branch_name = f"nbus.{_organ_prefix(organ_name)}"
+        branch_node = _make_node(
+            branch_name, NEURAL_BUS_BRANCH,
+            seed=seed + 9600 + hash(organ_name) % 1000,
+        )
+        all_nodes.append(branch_node)
+
+        # Trunk → branch (K=3 → K=2: cutoff cost = 1)
+        all_wiring.append(("nbus.autonomic", branch_name))
+
+        # Branch → organ neural port (K=2 → organ K: variable cutoff)
+        all_wiring.append((branch_name, neural_ports[organ_name]))
+
+        # Afferent path: organ neural port → branch (ascending signal)
+        all_wiring.append((neural_ports[organ_name], branch_name))
+
+    # ── Step 4: Connect brain to buses ────────────────────────────────
+    #
+    # Brain command hierarchy:
+    #   brain_functional.hypothalamus_b (K=3) → nbus.autonomic (K=3)
+    #   brain_functional.thalamus_b (K=5) ← nbus.autonomic (K=3) (ascending)
+    #   brain_functional.hypothalamus_b (K=3) ← vbus.aorta (K=4) (interoception)
+
+    brain_prefix = _organ_prefix("brain_functional")
+
+    # Descending: brain → neural bus
+    all_wiring.append((f"{brain_prefix}.hypothalamus_b", "nbus.autonomic"))
+    # Ascending: neural bus → brain thalamus (sensory relay)
+    all_wiring.append(("nbus.autonomic", f"{brain_prefix}.thalamus_b"))
+
+    # Vascular interoception: vascular bus → brain
+    all_wiring.append(("vbus.aorta", f"{brain_prefix}.hypothalamus_b"))
+    # Brain → vascular regulation (autonomic tone)
+    all_wiring.append((f"{brain_prefix}.hypothalamus_b", "vbus.aorta"))
+
+    # ── Step 5: Cross-bus link (vascular ↔ neural) ────────────────────
+    #
+    # The two buses are not independent — blood pressure affects neural
+    # function and vice versa. Link the trunks bidirectionally.
+
+    all_wiring.append(("vbus.aorta", "nbus.autonomic"))
+    all_wiring.append(("nbus.autonomic", "vbus.aorta"))
+
+    # ── Step 6: Assemble the whole-body GammaTopology ─────────────────
+
+    topo = GammaTopology(
+        nodes=all_nodes,
+        eta=eta,
+        max_dimension_gap=max_dimension_gap,
+        gamma_threshold=0.3,
+    )
+
+    # Activate all edges
+    for src, tgt in all_wiring:
+        topo.activate_edge(src, tgt)
+
+    return topo
+
+
+def _organ_prefix(organ_name: str) -> str:
+    """Short prefix for organ node names in whole-body topology."""
+    _PREFIX_MAP = {
+        "cardiovascular": "cv",
+        "neural": "neur",
+        "pulmonary": "pulm",
+        "renal": "ren",
+        "hepatic": "hep",
+        "gi": "gi",
+        "endocrine": "endo",
+        "immune": "imm",
+        "lymphatic": "lymp",
+        "musculoskeletal": "msk",
+        "skeletal": "skel",
+        "epithelial": "epi",
+        "connective": "conn",
+        "adipose": "adip",
+        "hematopoietic": "hema",
+        "cartilage": "cart",
+        "reproductive": "repr",
+        "brain_regulatory": "breg",
+        "vascular": "vasc",
+        "ocular": "ocul",
+        "auditory": "aud",
+        "vestibular": "vest",
+        "olfactory": "olfa",
+        "dental": "dent",
+        "enteric": "ent",
+        "autonomic": "auto",
+        "pancreatic": "panc",
+        "csf": "csf",
+        "brain_functional": "bfun",
+    }
+    return _PREFIX_MAP[organ_name]

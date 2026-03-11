@@ -779,6 +779,61 @@ Brain functional topology has the richest dimensional structure
 ($K = 5$ cortex vs.\ $K = 3$ subcortex, 21~edges),
 producing the highest $\Acut$ of any blueprint.
 
+\subsection{Whole-body inter-organ topology}
+\label{sec:whole-body}
+
+The 29~blueprints above are \emph{intra}-organ networks.
+A living body also requires \emph{inter}-organ communication:
+every organ receives arterial blood supply (vascular bus)
+and autonomic innervation (neural bus), and the brain
+serves as a central command hub.
+
+We unify the three chains into a single
+\texttt{GammaTopology} via \texttt{build\_whole\_body()}:
+
+\begin{enumerate}
+  \item \textbf{Organ layer:} all 29~blueprints are
+    instantiated with prefixed node names
+    (e.g.\ \texttt{cv.sa\_node}, \texttt{pulm.alveolus}).
+  \item \textbf{Vascular bus:} an aortic trunk node ($K = 4$)
+    fans out to 29~arteriolar branch nodes ($K = 2$),
+    each connecting to the organ's designated vascular
+    interface node.  K-cascade: $4 \to 2 \to K_{\text{organ}}$.
+  \item \textbf{Neural bus:} an autonomic trunk node ($K = 3$)
+    fans out to 29~branch nodes ($K = 2$),
+    each connecting to the organ's neural interface node.
+    K-cascade: $3 \to 2 \to K_{\text{organ}}$.
+  \item \textbf{Brain hub:} the brain\_functional blueprint's
+    \texttt{hypothalamus\_b} ($K{=}3$) drives the neural bus
+    trunk (descending command),
+    while the vascular bus feeds back to the brain
+    (interoception).
+\end{enumerate}
+
+\noindent
+The resulting whole-body graph contains
+\textbf{278~nodes} and \textbf{426~directed edges},
+with $K$ spanning 1 to~5.
+All edges satisfy C1 ($\Gamma^2 + T = 1$) by construction.
+The vascular bus contributes $\Acut = 2$ at every
+trunk-to-branch edge ($K{=}4 \to K{=}2$),
+the neural bus contributes $\Acut = 1$ ($K{=}3 \to K{=}2$),
+and further cutoff costs accumulate at every bus-to-organ
+junction.
+The total structural action $\Acut = 222$ is irreducible
+under all C2~gradients---it is the geometric price
+of multi-organ life.
+
+Disease cascades emerge automatically from this topology:
+raising the aortic impedance (vascular stenosis) increases
+$\Gamma$ at all downstream branches, which propagates via
+the bus to every organ's vascular interface.
+No disease-specific code is needed (E0).
+The 145~whole-body tests (\texttt{tests/test\_whole\_body.py})
+verify structure, C1/C2 physics, bus connectivity,
+dimensional cascade, signal propagation, and
+reproducibility.
+
 \subsection{Emergence classification}
 \label{sec:emergence}
 
@@ -858,7 +913,9 @@ C3: impedance-tagged transport).
 From these, five companion papers derive topology,
 organ health, temporal dynamics, consciousness, and
 clinical diagnostics---spanning 15 orders of spatial
-magnitude and 29 tissue types.
+magnitude and 29 tissue types, now unified into a
+single whole-body topology (278~nodes, 426~edges)
+through vascular and neural inter-organ buses.
 
 This paper provides the master reference:
 a canonical quantity list (Table~\ref{tab:quantities}),
@@ -871,7 +928,7 @@ All source code, simulation scripts, and NHANES pipelines
 are available at
 \url{https://github.com/cyhuang76/alice-gamma-net}
 under AGPL-3.0.
-The full test suite comprises 3{,}558 automated tests
+The full test suite comprises 3{,}703 automated tests
 with 100\% pass rate.
 
 

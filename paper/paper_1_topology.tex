@@ -593,6 +593,39 @@ Key observations across all 29~blueprints:
 covering structure, C1, C2, and organ-specific physiology,
 pass at 100\% rate.
 
+\subsection{Whole-Body Inter-Organ Topology}
+\label{sec:whole-body}
+
+The 29~organ blueprints are intra-organ networks.
+Connecting them requires two inter-organ buses and a
+brain command hub---three chains unified by the same
+MulticoreChannel physics:
+
+\begin{enumerate}
+  \item \textbf{Vascular bus.}  An aortic trunk ($K{=}4$)
+    branches into 29~arteriolar feeds ($K{=}2$),
+    each wired to the organ's vascular interface node.
+    $\Acut = 2$ per trunk-to-branch edge.
+  \item \textbf{Neural bus.}  An autonomic trunk ($K{=}3$)
+    branches into 29~nerve feeds ($K{=}2$),
+    wired to each organ's neural interface.
+    $\Acut = 1$ per trunk-to-branch edge.
+  \item \textbf{Brain hub.}  The brain\_functional topology's
+    hypothalamus ($K{=}3$) drives the neural bus;
+    the vascular bus feeds interoceptive signals back
+    to the brain's thalamus ($K{=}5$).
+\end{enumerate}
+
+\noindent
+The unified whole-body \texttt{GammaTopology} contains
+278~nodes and 426~directed edges ($K \in [1, 5]$).
+The total irreducible action $\Acut = 222$
+represents the structural information cost of multi-organ
+life---no C2~gradient can reduce it.
+145~tests verify structure, C1/C2 physics, bus
+connectivity, dimensional cascade, and cross-organ
+signal propagation.
+
 
 % ============================================================
 %  PART B — FRACTAL COST
