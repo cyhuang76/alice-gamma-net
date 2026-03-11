@@ -245,6 +245,60 @@ strategies — endothermy, ectothermy, hibernation, brumation — are
 responses to the Arrhenius constraint on blood viscosity and its
 downstream effect on the Γ-topology action functional.
 
+─────────────────────────────────────────────────────────────────────
+§10  EXTERNAL VALIDATION & FALSIFICATION CRITERION
+─────────────────────────────────────────────────────────────────────
+
+The T_c(K) formula makes a sharp falsifiable prediction:
+
+  FALSIFICATION: Find an organism with
+    (i)   closed high-pressure vasculature,
+    (ii)  high modal complexity K ≥ 5,
+    (iii) sustained body temperature T_body ≤ T_c(K),
+    (iv)  maintained high-level cognition (learning, planning)
+  for biologically long durations (not brief arousal from torpor).
+
+  No such organism is currently known.
+
+External evidence consistent with T_c(K):
+
+  (a) Mammalian hibernation / torpor:
+      Body temperature drops to 0–5°C, but brain activity drops to
+      minimal levels (torpor). Cortical responses to stimuli persist
+      at 9–10°C but only as reflexive responses, not sustained
+      cognition. Full function requires return to euthermia.
+      → Consistent with: high K brain cannot operate below T_c(K).
+      Refs: PMC6674705, PMC6629779
+
+  (b) Daily torpor (birds, bats):
+      Short-duration temperature drops, but behavioural activity is
+      extremely low during torpor. All active behaviour occurs near
+      normal body temperature.
+      → Consistent with: high K + low T → activity shutdown.
+
+  (c) Ectotherms with complex behaviour (fish, amphibians, insects):
+      These lack the closed high-pressure vasculature + high K brain
+      combination. They fall on the low-K branch of T_c(K), where
+      ectothermy is viable. Not counterexamples.
+      Ref: PMC11880559
+
+  (d) Cold-adapted invertebrates (alpine crickets, Antarctic isopods):
+      Maintain motor function near 0°C through specialized local
+      neural adaptations, but overall K is far below mammalian brain.
+      → Falls in low-K regime, not a counterexample.
+
+  (e) Cross-vertebrate comparative data:
+      Species with higher and more stable body temperatures evolve
+      larger brains (body-mass corrected), directly consistent with
+      "high K needs high T".
+      Refs: PMC12625846, PMC7907648
+
+  Empirical pattern:
+    High K + high stable T  → viable (birds, mammals)
+    High K + low T          → only in torpor (brain in low-activity mode)
+    Low K  + any T          → viable (reptiles, fish, invertebrates)
+    High K + low T + active → NOT OBSERVED
+
 ═══════════════════════════════════════════════════════════════════════
 
 Author: Hsi-Yu Huang (黃璽宇)
