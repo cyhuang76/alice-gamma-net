@@ -328,6 +328,38 @@ The threshold~$\theta$ accounts for Johnson--Nyquist noise:
 the signal must exceed the thermal floor to be self-detectable.
 \end{proof}
 
+\paragraph{The thermal cost of consciousness.}
+The self-referential loop that defines $\Phimeta$ (Def.~1)
+is not thermodynamically free.  Each pass through the loop
+traverses $n$ interfaces, each dissipating
+$\Gamma_i^2 P_{\mathrm{in}}$ as heat
+(Paper~0, Corollary~1~\cite{Paper0}).
+The \emph{minimum} sustained power for self-awareness is
+\begin{equation}
+  P_{\mathrm{conscious}} \geq
+  \theta \cdot \frac{4 k_B T \cdot R_{\mathrm{eff}} \cdot \Delta f}
+  {\prod_i (1 - \Gamma_i^2)}\,,
+  \label{eq:P-conscious}
+\end{equation}
+where the denominator is the net transmission of the
+entire loop.  Two consequences follow:
+\begin{enumerate}
+  \item \textbf{Higher $\Phimeta$ costs more heat.}
+    Reducing $\Gmeta$ (higher consciousness quality)
+    requires tighter impedance matching across more
+    channels, but each channel still dissipates
+    $\Gamma_i^2 > 0$.  More channels $\Rightarrow$
+    more total heat.
+  \item \textbf{Consciousness depends on the heat it
+    generates.}  The dissipated heat maintains
+    $T_{\mathrm{body}} \approx 310$\,K, which keeps
+    blood viscosity (and therefore $Z_{\mathrm{bus}}$)
+    in the operating range where the loop can close.
+    Consciousness is not merely \emph{tolerant} of
+    waste heat---it is \emph{sustained by it}
+    (Paper~3, \S\,XVII\,C~\cite{Paper3}).
+\end{enumerate}
+
 \subsection{Open loop vs.\ closed loop}
 
 Equation~(\ref{eq:TV-inequality}) is structurally identical

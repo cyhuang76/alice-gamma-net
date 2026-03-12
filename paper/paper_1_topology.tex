@@ -853,6 +853,31 @@ The extra $1/[d(d+1)] = 1/12$ arises because the terminal
 impedance $Z_L$ is fixed (capillaries are size-invariant),
 adding an additional boundary condition ($2/3 + 1/12 = 3/4$).
 
+\paragraph{Volumetric heat density and the $K$-bottleneck.}
+By Corollary~1 of Paper~0~\cite{Paper0}, every active
+interface dissipates $\Gamma_i^2 P_{\mathrm{in},i}$ as
+heat.  A tissue with $K$ modes per node packs $K$ such
+interfaces into a single cross-section; hence the
+\emph{volumetric heat density} scales as
+\begin{equation}
+  q \;\propto\; K \cdot \langle \Gamma^2 \rangle
+  \cdot P_{\mathrm{in}} / V_{\text{node}}\,.
+  \label{eq:vol-heat}
+\end{equation}
+The human brain ($K{=}5$) comprises $\sim$2\% of body mass
+but hosts the highest $K$ tissue in the organism.
+Because $q \propto K$, the brain generates a
+disproportionate share of metabolic heat---the classical
+20\,W out of 80\,W basal ($\sim$25\%)---not despite being
+small, but \emph{because} its per-node mode count is
+largest.  Kleiber's $M^{3/4}$ law sets the whole-body
+envelope; Eq.~(\ref{eq:vol-heat}) sets the
+\emph{intra-body} distribution of that heat, concentrating
+it where $K$ is highest.  This creates a physical necessity
+for a dedicated heat-removal architecture (the cerebral
+vasculature), linking directly to the dual-network
+model of Paper~2~\cite{Paper2}.
+
 
 % ============================================================
 \section{Dual-Network Packing and the Overhead~$\Omega$}

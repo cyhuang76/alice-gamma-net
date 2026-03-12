@@ -13,6 +13,7 @@
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
 
 \newcommand{\Aimp}{A_{\text{imp}}}
 \newcommand{\Acut}{A_{\text{cut}}}
@@ -149,6 +150,32 @@ It is not an approximation; it holds exactly for any
 lossless interface.  Dissipative corrections (Johnson--Nyquist
 noise, Arrhenius aging) modify $Z$ over time but never
 violate power balance at a single interface.
+
+\begin{corollary}[Thermal Dissipation]
+\label{cor:thermal}
+At every interface where $\Gamma_i \neq 0$, the reflected
+fraction $\Gamma_i^2$ of incident power is not
+``lost''---it is re-absorbed by the source impedance and
+ultimately dissipated as Joule heat.
+For an organism with $N$ active interfaces, the total
+thermal dissipation rate is
+\begin{equation}
+  P_{\mathrm{heat}} = \sum_{i=1}^{N} \Gamma_i^2\, P_{\mathrm{in},i}\,,
+  \label{eq:p-heat}
+\end{equation}
+where $P_{\mathrm{in},i}$ is the incident power at
+interface~$i$.
+This heat is not a by-product; it is
+the \emph{thermodynamic cost of computation}.
+The body temperature~$T_{\mathrm{body}}$ in thermal
+steady state satisfies
+$P_{\mathrm{heat}} = h A\,(T_{\mathrm{body}} - T_{\mathrm{env}})$,
+where $hA$ is the effective thermal conductance to the
+environment.  The same impedance mismatches that perform
+neural computation therefore \emph{generate the heat
+that sustains the temperature at which those computations
+remain viable} (Papers~3--4~\cite{Paper3,Paper4}).
+\end{corollary}
 
 \subsection{C2 --- Impedance Remodeling}
 \label{sec:c2}

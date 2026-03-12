@@ -290,6 +290,33 @@ where $\Tn = 1 - \Gn^2$ is neural transmission efficiency
 and $\Tv = 1 - \Gv^2$ is vascular transmission efficiency.
 Both must be high for the organ to function normally.
 
+\paragraph{The vascular network as thermal bus.}
+Paper~0, Corollary~1~\cite{Paper0} shows that every
+neural interface dissipates power $\Gn^2 P_{\mathrm{in}}$
+as heat, and Paper~1~\cite{Paper1} shows that volumetric
+heat density scales with~$K$.  Convective blood flow is
+the \emph{only} mechanism fast enough to remove this
+heat from deep tissue (conduction alone yields a thermal
+time constant $\tau_{\mathrm{cond}} \sim L^2/\alpha
+\approx 10^3$\,s for $L\sim$cm, far too slow for neural
+time scales).  The vascular network is therefore not
+merely a nutrient bus---it is the \emph{primary thermal
+bus}:
+\begin{equation}
+  P_{\mathrm{removed}} = \rho\, c_p\, Q\,
+  (T_{\mathrm{out}} - T_{\mathrm{in}})
+  = (1 - \Gv^2)\,\rho\, c_p\, Q_0\, \Delta T\,,
+  \label{eq:thermal-bus}
+\end{equation}
+where $Q = (1-\Gv^2)Q_0$ is the actual flow (reduced by
+vascular mismatch), $\rho c_p$ is the volumetric heat
+capacity of blood, and $\Delta T$ is the arteriovenous
+temperature difference.  Vascular disease
+($\Gv^2\!\uparrow$) therefore simultaneously starves
+the tissue of nutrients \emph{and} impairs its thermal
+regulation---a dual failure that accelerates neural
+impedance drift.
+
 
 \subsection{Four failure modes}
 

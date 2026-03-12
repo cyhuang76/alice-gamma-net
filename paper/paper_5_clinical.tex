@@ -1703,6 +1703,43 @@ no scoring systems.
 The disease \emph{is} the perturbation; the clinical
 pattern \emph{is} the resulting $\Gamma$-distribution.
 
+\subsection{Thermal loop collapse: hypothermia and hyperthermia}
+\label{sec:thermal-collapse}
+
+Paper~3~\cite{Paper3} derives the $\Gamma^2\!\leftrightarrow\!T$
+self-consistent loop: impedance mismatch produces heat,
+heat maintains temperature, temperature sets viscosity
+and repair rate, which in turn set $\Gamma$.
+The 37$\,^\circ$C operating point is the stable fixed
+point of this loop.  When the loop is driven outside its
+basin of attraction, two E0 pathologies emerge---requiring
+no disease-specific code:
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+& \textbf{Hypothermia} & \textbf{Hyperthermia} \\
+\midrule
+Direction & $T \ll T^*$ & $T \gg T^*$ \\
+Primary driver & $\eta(T)\!\uparrow$\,(viscosity) & $k_BT\!\uparrow$\,(noise) \\
+$\Gamma$ mechanism & $Z_{\mathrm{bus}}\!\uparrow \to \Gamma^2\!\uparrow$ & $\delta\Gamma/\Gamma \propto K^{3/2}\delta T/T$ \\
+First failure & Global $\Gamma^2$ rise & PFC ($K{=}5$) first \\
+Clinical sign & Bradycardia $\to$ coma & Delirium $\to$ seizure \\
+Feedback & Positive (less heat $\to$ colder) & Positive (more noise $\to$ more $\Gamma^2$) \\
+C2 repair & Slowed (Arrhenius $\downarrow$) & Overwhelmed (noise $>$ signal) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Both are \textbf{E0}: they arise from C1/C2/C3 plus the
+Arrhenius temperature dependence of $Z_{\mathrm{bus}}$
+and $\eta_{\mathrm{learn}}$---no pathology-specific
+parameters.  The clinical asymmetry (hypothermia is
+global; hyperthermia hits PFC first) is a direct
+consequence of the $K^{3/2}$ thermal vulnerability
+derived in Paper~4~\cite{Paper4}.
+
 This does not mean all 117~disease models in the codebase
 are E0 today---most remain E1 (15) or legacy E2 (102).
 But the existence proof changes the target:
@@ -2101,6 +2138,34 @@ threshold), the stimulus has stopped (astronaut bone loss),
 or the molecular machinery is broken (immunodeficiency).
 Chronic disease is impedance mismatch that has exceeded
 the local C2 learning capacity.
+
+\subsection{Thermal homeostasis as preventive medicine}
+
+The $\Gamma^2\!\leftrightarrow\!T$ loop
+(Paper~3~\cite{Paper3}) implies that \emph{maintaining
+body temperature within the fixed-point basin} is not
+merely supportive care---it is the single most
+fundamental intervention in $\Gamma$-based medicine.
+Specifically:
+\begin{itemize}
+  \item \textbf{Targeted temperature management} (TTM)
+    after cardiac arrest preserves the loop by preventing
+    the hypothermic positive-feedback spiral
+    (rising $\Gamma^2$ $\to$ falling heat $\to$ falling $T$).
+  \item \textbf{Aggressive antipyresis} in high fever
+    protects the PFC ($K{=}5$) first, because
+    $\delta\Gamma/\Gamma \propto K^{3/2}$
+    (Paper~4~\cite{Paper4}).
+  \item \textbf{Perioperative normothermia} reduces
+    surgical complications because general anaesthesia
+    opens the loop (lowers $P_{\mathrm{heat}}$ by
+    suppressing neural $\Gamma^2$), shifting
+    $T_{\mathrm{body}}$ toward the hypothermic
+    catastrophe boundary.
+\end{itemize}
+In all cases the physics is the same: keeping $T$
+near $T^*$ keeps $\Gamma$ in the regime where C2 can
+function.
 
 \subsection{What is not claimed}
 

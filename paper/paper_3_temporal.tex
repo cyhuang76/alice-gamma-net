@@ -1621,6 +1621,89 @@ thermal management is the brain's primary physical
 function; higher cognition operates on the same
 impedance substrate.
 
+\subsection{$\Gamma^2 \!\leftrightarrow\! T$: the self-consistent loop}
+\label{sec:gamma-T-loop}
+
+The relationship between impedance mismatch and body
+temperature is not a one-way dependency; it forms a
+closed, self-consistent loop.  We now make this explicit.
+
+\paragraph{Step 1: Computation $\to$ heat.}
+C1 (Paper~0, Eq.~1) guarantees that every interface
+with $\Gamma_i \neq 0$ dissipates $\Gamma_i^2
+P_{\mathrm{in},i}$ as heat.  Summed over $N$ active
+interfaces:
+\begin{equation}
+  P_{\mathrm{heat}} = \sum_{i=1}^{N} \Gamma_i^2\, P_{\mathrm{in},i}
+  = \langle \Gamma^2 \rangle \cdot P_{\mathrm{total}}\,.
+  \label{eq:loop-step1}
+\end{equation}
+
+\paragraph{Step 2: Heat $\to$ temperature.}
+In thermal steady state:
+\begin{equation}
+  T_{\mathrm{body}} = T_{\mathrm{env}}
+  + \frac{P_{\mathrm{heat}}}{h_c A}
+  = T_{\mathrm{env}}
+  + \frac{\langle \Gamma^2 \rangle \, P_{\mathrm{total}}}{h_c A}\,,
+  \label{eq:loop-step2}
+\end{equation}
+where $h_c A$ is the effective thermal conductance
+(primarily cerebral blood flow, Paper~2~\cite{Paper2}).
+
+\paragraph{Step 3: Temperature $\to$ impedance.}
+Blood viscosity sets the vascular bus impedance
+$Z_{\mathrm{bus}}(T)$ via the Arrhenius relation
+(Section~\ref{sec:arrhenius}), and C2 repair rate scales as
+$\tilde{\eta}_{\mathrm{learn}}(T)
+= \exp[\beta(T_0^{-1} - T^{-1})]$.
+Therefore:
+\begin{equation}
+  \Gamma_i(T) = \frac{Z_{\mathrm{organ},i} - Z_{\mathrm{bus}}(T)}
+  {Z_{\mathrm{organ},i} + Z_{\mathrm{bus}}(T)}\,.
+  \label{eq:loop-step3}
+\end{equation}
+
+\paragraph{Closure: the self-consistency condition.}
+Substituting Eq.~(\ref{eq:loop-step3}) into
+Eq.~(\ref{eq:loop-step1}) and Eq.~(\ref{eq:loop-step2})
+yields a fixed-point equation:
+\begin{equation}
+  \boxed{T^* = T_{\mathrm{env}}
+  + \frac{P_{\mathrm{total}}}{h_c A}
+  \sum_{i=1}^{N} \Gamma_i^2(T^*)\,.}
+  \label{eq:loop-closure}
+\end{equation}
+The operating point $T^* \approx 310$\,K (37$\,^\circ$C)
+is the unique stable fixed point of this equation
+for terrestrial mammals.
+It is \emph{not} a set-point chosen by evolution---it is
+the self-consistent solution where impedance-driven
+heat production balances convective heat loss.
+
+\paragraph{Stability and failure modes.}
+The loop is \emph{stable} because $\partial P_{\mathrm{heat}}/
+\partial T < h_c A$ at $T^*$:
+a small temperature rise shifts $Z_{\mathrm{bus}}$,
+reducing some $\Gamma_i^2$ (better vascular matching at
+lower viscosity), which reduces heat production.
+The loop \emph{fails} in two directions:
+\begin{itemize}
+  \item \textbf{Hypothermia} ($T \ll T^*$):
+    viscosity rises $\to$ $\Gamma^2\!\uparrow$ globally
+    $\to$ C2 repair slows (Arrhenius)
+    $\to$ impedance debt accumulates
+    $\to$ positive feedback $\to$ coma.
+  \item \textbf{Hyperthermia} ($T \gg T^*$):
+    thermal noise $\propto k_B T$ overwhelms
+    high-$K$ channels (Paper~4~\cite{Paper4})
+    $\to$ $\delta\Gamma/\Gamma \propto K^{3/2}$
+    $\to$ PFC collapses first $\to$ delirium.
+\end{itemize}
+The 37$\,^\circ$C operating point is
+the narrow basin of attraction between these two
+catastrophes.
+
 \subsection{Connection to Papers~1--2}
 
 Paper~1 established the \emph{spatial} structure
