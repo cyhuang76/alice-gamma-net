@@ -542,19 +542,21 @@ $\sigma_Z^2 = 4k_BT\,\text{Re}(Z)\,\Delta f$
 is small enough for C2 to converge yet large
 enough to explore the impedance landscape (annealing).
 
-\subsection{The Cambrian explosion as planetary $\Gamma$-restart}
+\subsection{Post-glacial impedance landscape}
 
 Snowball Earth episodes
-(\SIrange{720}{635}{Ma}) represent a planetary-scale
-ice shell that locked $D_Z = 0$ for millions of years.
-Volcanic CO$_2$ accumulation triggered rapid
-deglaciation, releasing frozen-but-viable organisms
-into a warm, nutrient-rich impedance landscape.
-The Cambrian radiation may be the moment when C2 was
-switched on at planetary scale: progenitors with
-minimal impedance debt ($D_Z \approx 0$) and maximal
-adaptive capacity entered a landscape suddenly rich
-in thermal gradients and chemical nutrients.
+(\SIrange{720}{635}{Ma}) imposed prolonged $D_Z \approx 0$
+conditions.  Post-glacial warming restored thermal
+gradients and nutrient availability, creating an
+impedance landscape in which C2 could operate at high
+throughput.
+The $\Gamma$-framework identifies the \emph{physical
+preconditions}: liquid water ($x_{\text{in}} > 0$),
+sufficient thermal energy ($\eta > 0$), and
+low initial impedance debt.
+Whether and how the Cambrian radiation exploited
+these conditions is a palaeontological question
+beyond the scope of this theory.
 
 
 % ############################################################
@@ -1813,19 +1815,14 @@ signature of network propagation.}
 % ============================================================
 %  SECTION 11 — PHYSICAL UNIQUENESS OF C2
 % ============================================================
-\section{Physical Uniqueness of C2 and Evolutionary Compatibility}
-\label{sec:evolution}
+\section{Mathematical Uniqueness of C2}
+\label{sec:c2-unique}
 
 The gradient-descent derivation shows that C2 is the
 \emph{unique} first-order update rule minimising reflected
 energy at any repeatedly stimulated interface.
-This is a mathematical result, not an evolutionary claim.
-The $\Gamma$-framework predicts \emph{what} the optimal
-update rule must be; natural selection determines
-\emph{whether} a given lineage implements it.
-That ten unrelated molecular machineries converge on the
-same equation is consistent with C2 being a physical
-attractor in the space of possible update rules.
+This is a mathematical theorem about gradient descent
+on $\mathcal{A}[\Gamma]$, not a biological claim.
 
 \subsection{The tissue is not the algorithm}
 
@@ -1837,22 +1834,23 @@ AID somatic hypermutation (immune), keratinocyte Ca$^{2+}$
 machineries implementing the same equation.
 The substrate determines the material constants
 ($\eta$, $Z_0$); the equation is dictated by physics.
+That multiple unrelated machineries converge on the
+same rule is \emph{consistent with} C2 being a
+physical attractor; it is not evidence for any
+particular evolutionary narrative.
 
-\subsection{The $\Gamma$-framework complements evolution}
+\subsection{Objective function for viability}
 
-Classical evolutionary theory specifies \emph{how}
-variation is filtered but rarely specifies \emph{what
-physical functional} selection minimises.
-The $\Gamma$-framework supplies the missing objective
-function:
+The $\Gamma$-framework supplies a \emph{physical}
+objective function:
 \begin{equation}
   \mathcal{A} = \int_0^T \sum_i \Gamma_i^2(t)\,
   P_{\text{in},i}(t)\,dt\,.
 \end{equation}
-\emph{Variation} (mutation) generates candidate impedance
-layouts; \emph{thermodynamic viability} eliminates
-those with $\mathcal{A}$ too large; \emph{natural selection}
-further minimises $\mathcal{A}$ within the viable set.
+Any system whose $\mathcal{A}$ exceeds the
+thermodynamic viability bound is physically excluded.
+This is a constraint on what \emph{can} exist, not
+an explanation of what \emph{does} exist.
 
 \subsection{Sex as a boundary condition}
 
