@@ -39,6 +39,20 @@ from experiments.exp_thermoregulation_physics import (
     simulate_temperature_sweep,
     tau_repair,
     z_bus,
+    # Cave thermal physics
+    thermal_excess_during_sleep,
+    min_ambient_for_survival,
+    thermal_penetration_depth,
+    cave_damping_factor,
+    cave_temperature,
+    sleeping_body_temperature,
+    P_MET_SLEEP,
+    H_CONV,
+    A_BODY,
+    KAPPA_ROCK,
+    RHO_CP_ROCK,
+    T_DIURNAL,
+    T_ANNUAL,
 )
 from alice.body.tissue_blueprint import build_whole_body
 
@@ -411,3 +425,210 @@ class TestPhysicalConstants:
 
     def test_celsius_offset(self):
         assert CELSIUS_TO_KELVIN == pytest.approx(273.15)
+
+
+# ============================================================================
+# §8  Thermal Excess During Sleep
+# ============================================================================
+
+
+class TestThermalExcess:
+    """Verify heat balance model during sleep."""
+
+    def test_positive(self):
+        """ΔT_excess must be positive (body warmer than ambient)."""
+        assert thermal_excess_during_sleep() > 0
+
+    def test_physiological_range(self):
+        """ΔT_excess for a 70 kg human should be 4–8°C."""
+        dT = thermal_excess_during_sleep()
+        assert 4.0 < dT < 8.0
+
+    def test_scales_with_Pmet(self):
+        """Higher metabolic rate → larger thermal excess."""
+        dT_low = thermal_excess_during_sleep(p_met=60.0)
+        dT_high = thermal_excess_during_sleep(p_met=100.0)
+        assert dT_high > dT_low
+
+    def test_scales_inversely_with_surface_area(self):
+        """Larger surface area → more heat loss → lower ΔT."""
+        dT_small = thermal_excess_during_sleep(a_body=1.5)
+        dT_large = thermal_excess_during_sleep(a_body=2.0)
+        assert dT_small > dT_large
+
+    def test_exact_formula(self):
+        """ΔT = P / (h·A), check exact value."""
+        dT = thermal_excess_during_sleep(p_met=80.0, h=10.0, a_body=2.0)
+        assert dT == pytest.approx(4.0)
+
+
+# ============================================================================
+# §9  Minimum Ambient Temperature
+# ============================================================================
+
+
+class TestMinAmbientSurvival:
+    """Verify minimum ambient temperature for sleeping survival."""
+
+    def test_highK_needs_warmer_ambient(self):
+        """K=5 needs warmer ambient than K=1."""
+        T_min_5 = min_ambient_for_survival(K=5)
+        T_min_1 = min_ambient_for_survival(K=1)
+        assert T_min_5 > T_min_1
+
+    def test_K5_min_ambient_reasonable(self):
+        """K=5 minimum ambient should be around −5 to +5°C."""
+        T_min = min_ambient_for_survival(K=5)
+        assert -5.0 < T_min < 5.0
+
+    def test_K1_survives_deep_cold(self):
+        """K=1 minimum ambient should be well below −10°C."""
+        T_min = min_ambient_for_survival(K=1)
+        assert T_min < -10.0
+
+    def test_equals_Tc_minus_excess(self):
+        """T_amb_min = T_c(K) - ΔT_excess (definition check)."""
+        T_c_K5 = critical_temperature_with_K(5) - CELSIUS_TO_KELVIN
+        dT = thermal_excess_during_sleep()
+        T_min = min_ambient_for_survival(K=5)
+        assert T_min == pytest.approx(T_c_K5 - dT, abs=0.01)
+
+
+# ============================================================================
+# §10  Thermal Penetration Depth
+# ============================================================================
+
+
+class TestThermalPenetration:
+    """Verify cave rock thermal physics."""
+
+    def test_diurnal_depth_order_cm(self):
+        """Diurnal penetration depth should be ~10–20 cm."""
+        delta = thermal_penetration_depth(T_DIURNAL)
+        assert 0.05 < delta < 0.5
+
+    def test_annual_depth_order_metres(self):
+        """Annual penetration depth should be ~2–5 m."""
+        delta = thermal_penetration_depth(T_ANNUAL)
+        assert 1.0 < delta < 6.0
+
+    def test_annual_much_larger_than_diurnal(self):
+        """Annual >> diurnal by √(365) ≈ 19× factor."""
+        d_day = thermal_penetration_depth(T_DIURNAL)
+        d_year = thermal_penetration_depth(T_ANNUAL)
+        ratio = d_year / d_day
+        assert 15 < ratio < 25
+
+    def test_scales_with_sqrt_period(self):
+        """δ ∝ √T, so doubling period → √2 × depth."""
+        d1 = thermal_penetration_depth(1000.0)
+        d2 = thermal_penetration_depth(2000.0)
+        assert d2 / d1 == pytest.approx(math.sqrt(2), rel=0.01)
+
+    def test_scales_with_sqrt_kappa(self):
+        """δ ∝ √κ."""
+        d1 = thermal_penetration_depth(T_DIURNAL, kappa=1.0)
+        d2 = thermal_penetration_depth(T_DIURNAL, kappa=4.0)
+        assert d2 / d1 == pytest.approx(2.0, rel=0.01)
+
+
+# ============================================================================
+# §11  Cave Damping Factor
+# ============================================================================
+
+
+class TestCaveDamping:
+    """Verify exponential temperature damping in rock."""
+
+    def test_surface_is_unity(self):
+        """At z=0, damping = 1 (full surface amplitude)."""
+        assert cave_damping_factor(0.0, T_DIURNAL) == pytest.approx(1.0)
+
+    def test_decays_with_depth(self):
+        """Deeper → more damping."""
+        d1 = cave_damping_factor(1.0, T_ANNUAL)
+        d2 = cave_damping_factor(3.0, T_ANNUAL)
+        assert d2 < d1
+
+    def test_diurnal_eliminated_at_5m(self):
+        """Diurnal oscillation at 5m: essentially zero."""
+        d = cave_damping_factor(5.0, T_DIURNAL)
+        assert d < 1e-6
+
+    def test_annual_reduced_at_5m(self):
+        """Annual oscillation at 5m: significantly reduced."""
+        d = cave_damping_factor(5.0, T_ANNUAL)
+        assert 0.05 < d < 0.5
+
+    def test_at_one_delta_is_1_over_e(self):
+        """At z=δ, damping = 1/e."""
+        delta = thermal_penetration_depth(T_ANNUAL)
+        d = cave_damping_factor(delta, T_ANNUAL)
+        assert d == pytest.approx(1.0 / math.e, rel=0.01)
+
+
+# ============================================================================
+# §12  Cave Temperature
+# ============================================================================
+
+
+class TestCaveTemperature:
+    """Verify cave interior temperature model."""
+
+    def test_mean_equals_annual_mean(self):
+        """Cave T ≈ annual mean surface T."""
+        T_cave, _ = cave_temperature(12.0, 15.0, 5.0)
+        assert T_cave == pytest.approx(12.0)
+
+    def test_amplitude_reduced(self):
+        """Cave amplitude much less than surface amplitude."""
+        _, amp = cave_temperature(12.0, 15.0, 5.0)
+        assert amp < 15.0 * 0.5  # must be < 50% of surface
+
+    def test_deeper_is_more_stable(self):
+        """Deeper cave → smaller amplitude."""
+        _, amp_shallow = cave_temperature(12.0, 15.0, 2.0)
+        _, amp_deep = cave_temperature(12.0, 15.0, 10.0)
+        assert amp_deep < amp_shallow
+
+    def test_zero_depth_full_amplitude(self):
+        """At surface: full amplitude."""
+        _, amp = cave_temperature(12.0, 15.0, 0.0)
+        assert amp == pytest.approx(15.0, rel=0.01)
+
+
+# ============================================================================
+# §13  Sleeping Body Temperature
+# ============================================================================
+
+
+class TestSleepingBodyTemperature:
+    """Verify the complete cave shelter theorem."""
+
+    def test_higher_than_ambient(self):
+        """Body temp > ambient (endothermic)."""
+        T_body = sleeping_body_temperature(10.0)
+        assert T_body > 10.0
+
+    def test_winter_exposed_dangerous(self):
+        """K=5 organism sleeping exposed at -10°C: T_body near T_c."""
+        T_body = sleeping_body_temperature(-10.0)
+        T_c = critical_temperature_with_K(5) - CELSIUS_TO_KELVIN
+        assert T_body < T_c + 2.0  # dangerously close or below
+
+    def test_cave_is_safe(self):
+        """In a 12°C cave: T_body safely above T_c(K=5)."""
+        T_body = sleeping_body_temperature(12.0)
+        T_c = critical_temperature_with_K(5) - CELSIUS_TO_KELVIN
+        assert T_body > T_c + 5.0  # safe margin
+
+    def test_low_K_survives_exposed(self):
+        """K=1 organism can survive at -10°C (T_c very low)."""
+        T_c = critical_temperature_with_K(1) - CELSIUS_TO_KELVIN
+        assert -10.0 > T_c  # ambient > T_c, ectotherm viable
+
+    def test_K_dependence_shelter_threshold(self):
+        """Higher K → higher T_amb,min → more shelter-dependent."""
+        T_min_vals = [min_ambient_for_survival(K=k) for k in [1, 2, 3, 5]]
+        for i in range(len(T_min_vals) - 1):
+            assert T_min_vals[i] < T_min_vals[i + 1]

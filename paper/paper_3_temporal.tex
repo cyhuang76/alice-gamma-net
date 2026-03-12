@@ -37,8 +37,9 @@ Decomposing $D_Z$ into microscopic (synaptic drift)
 and thermal (waste heat) components explains why
 jellyfish sleep without a brain
 ($D_{\mathrm{thermal}}$ removed by ocean)
-and why brains evolved convergently upon the water-to-land
-transition ($D_{\mathrm{thermal}}$ must be managed internally).
+and why the water-to-land transition imposes a physical
+constraint favouring centralised neural architecture
+($D_{\mathrm{thermal}}$ must be managed internally).
 A dual-field extension ($Z$-field + material field $\rho$)
 unifies Wolff's law (bone), Davis's law (muscle),
 and impedance-remodeling (neurons) as parameter
@@ -112,9 +113,9 @@ Part~A defines impedance debt $D_Z$---the integral of
 $|\Gamma|^2$ weighted by incident power---and shows that
 sleep is its minimum-action discharge mechanism.
 The decomposition of $D_Z$ into microscopic and thermal
-components explains cnidarian sleep, convergent brain
-evolution, and embryogenesis as a single thermodynamic
-causal chain.
+components provides physical constraints consistent with
+cnidarian sleep, the water-to-land neural transition,
+and embryogenesis as a single thermodynamic causal chain.
 Part~B derives the Lifecycle Equation---the first-order ODE
 governing $\Sigma\Gamma^2$ from birth to death---and shows
 that cognition, emotion, and aging are three forces competing
@@ -405,47 +406,53 @@ Hence: \textbf{no brain is needed, but sleep is still required.}
 
 
 % ============================================================
-%  SECTION 5 — EVIDENCE II: CONVERGENT BRAIN EVOLUTION
+%  SECTION 5 — PHYSICAL CONSTRAINTS ON NEURAL ARCHITECTURE
 % ============================================================
-\section{Evidence II: Convergent Evolution of Brains}
+\section{Physical Constraints on Neural Architecture}
 \label{sec:brains}
 
 Complex nervous systems evolved independently at least
 nine times across Metazoa~\cite{Moroz2012}.
-We argue this reflects a common thermodynamic pressure
-traceable to one event: saturation of the filter-feeding
-niche in the late Ediacaran.
+The $\Gamma$-framework does not explain \emph{why}
+this convergence occurred---natural selection does---but
+it identifies the \emph{physical constraints} that
+any nervous system must satisfy.
 
-\subsection{The Cambrian phase transition}
+\subsection{Impedance constraint on active foraging}
 
-For two billion years, filter-feeding was optimal:
-the impedance to nutrient sources was low
-($Z_{\mathrm{food}} \approx 1/(\rho_{\mathrm{micro}}
-D_{\mathrm{diff}} A_{\mathrm{oral}})$).
-Population overshoot drove $\rho_{\mathrm{micro}}$
-down, sending $Z_{\mathrm{food}} \to \infty$ and
-$\Gamma_{\mathrm{feeding}}^2 \to 1$.
-The minimum-action escape was predation---a new channel
-with lower $\Gamma^2$ but requiring eyes, appendages,
-and coordinated impedance management (i.e., a nervous system).
-The resulting arms race drove the Cambrian explosion:
-each cycle of attack and defense increased both channel
-count and irreducible cut cost $A_{\mathrm{cut}}$ (Paper~1).
+An organism that transitions from passive filter-feeding
+to active predation gains a new signalling channel
+with lower $\Gamma^2$, but this channel requires
+coordinated impedance management across sensors,
+appendages, and a controller (i.e., a nervous system).
+Each additional sensory--motor loop increases the
+irreducible cut cost $A_{\mathrm{cut}}$ (Paper~1).
+The $\Gamma$-framework thus provides a \emph{necessary
+condition}: any organism with $N$ coordinated channels
+must pay at least $A_{\mathrm{cut}}(N)$ in reflected energy.
+Whether evolution actually follows this path is
+determined by natural selection, not by $\Gamma$ alone.
 
-\subsection{Water-to-land transition}
+\subsection{Thermal constraint on the water-to-land transition}
 
-When oceanic niches saturated, displaced lineages colonised
-land---exchanging seawater ($\kappa \ge 1\;\mathrm{W\,m^{-1}K^{-1}}$)
+Organisms on land exchange seawater
+($\kappa \ge 1\;\mathrm{W\,m^{-1}K^{-1}}$)
 for air ($\kappa \le 0.04$).
-$D_{\mathrm{thermal}}$ could no longer be passively removed,
-creating selective pressure for:
+$D_{\mathrm{thermal}}$ can no longer be passively removed.
+The $\Gamma$-framework identifies three \emph{physical
+necessities} for any land-dwelling organism with
+significant neural complexity:
 (i)~a convective heat-transport network (vasculature---Paper~2),
-(ii)~a centralised controller (brain),
-(iii)~structured sleep architecture (NREM/REM).
-Cephalopods remained marine but evolved high metabolic
-rates that \emph{exceeded} oceanic heat-sink capacity,
-solving the problem via distributed brain architecture
-(nine ganglia)---confirmed by Experiment~A7 at
+(ii)~a centralised impedance-debt manager (brain),
+(iii)~structured sleep architecture for $D_{\mathrm{micro}}$
+discharge (NREM/REM).
+These are constraints, not causal explanations;
+natural selection determines \emph{which} lineages
+actually colonise land.
+Cephalopods remained marine but attained high metabolic
+rates that challenge oceanic heat-sink capacity,
+consistent with their distributed brain architecture
+(nine ganglia)---Experiment~A7 at
 $\kappa_{\mathrm{cross}} \approx 0.30$.
 
 The tidal zone acts as a quarter-wave impedance matcher:
@@ -453,9 +460,42 @@ $Z_{\mathrm{match}} = \sqrt{Z_w Z_l}$, with a logarithmic
 $\kappa$ gradient reducing the transition action
 $\mathcal{A}[\Gamma]$ to 6.2\% of a direct jump
 (Experiment~A6).
-This explains why the water-to-land transition occurred
-independently at least five times---it is the
-minimum-action evolutionary path.
+The framework thus predicts that tidal zones offer the
+lowest-action path between aquatic and terrestrial
+impedance regimes---a testable geometric prediction,
+not an evolutionary cause.
+
+\subsection{Nocturnal thermal constraint}
+
+Once on land, high-$K$ organisms face a second constraint.
+During sleep, metabolic heat production drops to
+$P_{\text{met}} \approx 82\,$W, sustaining only
+$\Delta T = P_{\text{met}}/(h\,A) \approx 5.7\,^\circ$C
+above ambient.
+At $K{=}5$: the minimum viable ambient temperature is
+$T_{\text{amb,min}} = T_c(5) - \Delta T \approx -1.2\,^\circ$C.
+Temperate winter nights ($-10\,^\circ$C) push a sleeping
+organism to $T_{\text{body}} \approx -4.3\,^\circ$C---well below
+$T_c(5) = +4.5\,^\circ$C.
+
+A cave at depth~$z$ acts as a thermal low-pass filter.
+The penetration depth
+$\delta = \sqrt{2\kappa/(\rho c_p\,\omega)}$ sets the
+cutoff: at 5\,m, diurnal oscillation vanishes
+($\delta_{\text{day}} \approx 0.13\,$m) and interior
+temperature equals the annual mean
+($\approx 12\,^\circ$C in temperate zones).
+This yields
+$T_{\text{body}}(\text{cave sleep}) \approx 17.7\,^\circ$C,
+safely above $T_c$.
+The constraint chain is:
+high~$K$ $\to$ high~$T_c$ $\to$ nocturnal exposure risks
+$T < T_c$ $\to$ thermal shelter required.
+Low-$K$ organisms ($T_c(1) = -10.3\,^\circ$C) face no such
+constraint and tolerate exposed sleeping sites.
+This is a quantifiable physics prediction, not a narrative:
+93~tests verify the full derivation from Arrhenius $\eta(T)$
+through cave damping to survival margin.
 
 
 % ============================================================
@@ -1683,12 +1723,12 @@ impedance networks in two complementary parts.
 Impedance debt $D_Z = \int |\Gamma|^2 P_{\mathrm{in}}\,dt$
 accumulates during wakefulness and is discharged by sleep.
 Its decomposition into $D_{\mathrm{micro}}$ and
-$D_{\mathrm{thermal}}$ explains:
+$D_{\mathrm{thermal}}$ is consistent with:
 cnidarian sleep without a brain (ocean removes
 $D_{\mathrm{thermal}}$);
-convergent brain evolution (loss of heat sink forces
-centralisation);
-the tidal zone as minimum-action evolutionary path
+the physical necessity of centralised neural architecture
+on land (loss of passive heat sink);
+the tidal zone as the lowest-action impedance transition
 ($\mathcal{A}[\Gamma]$ reduced 93.8\%);
 and embryogenesis as thermodynamic causal chain.
 A dual-field PDE unifies four tissue-remodeling laws.

@@ -496,6 +496,8 @@ Each prediction is testable with existing technology.}
   & Comparative physiology database + torpor EEG & 1 \\
 & Hibernation EEG power scales with $K \cdot \Gamma^2(T)$
   & Cross-species torpor polysomnography & 1 \\
+& Nocturnal shelter-seeking scales with $K$
+  & Comparative ethology $\times$ thermoregulation data & 1 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
@@ -893,7 +895,7 @@ For an organism with brain modal complexity~$K$,
 the action scales as $K\,\Gamma^2$, so the effective
 $\tau_{\max}$ shrinks by~$1/K$, giving
 $T_c(K) > T_c(1)$ for $K > 1$ (dimensional amplification).
-The 65~thermoregulation tests confirm:
+The 93~thermoregulation tests confirm:
 
 \begin{center}
 \begin{tabular}{rl}
@@ -907,6 +909,32 @@ Higher~$K$ brains \emph{must} maintain $T > T_c(K)$,
 rendering endothermy a necessary condition for complex
 neural topology---not a metabolic luxury but a
 $\Gamma$-topological constraint.
+
+\paragraph{Nocturnal thermal constraint.}
+During sleep, metabolic heat production drops to
+$P_{\text{met}} \approx 82\,$W, yielding a thermal excess
+$\Delta T = P_{\text{met}}/(h\,A) \approx 5.7\,^\circ$C
+above ambient.
+For $K{=}5$: the minimum viable ambient temperature is
+$T_{\text{amb,min}} = T_c(5) - \Delta T \approx -1.2\,^\circ$C.
+Temperate winter nights ($-10\,^\circ$C) push
+$T_{\text{body}}$ to $-4.3\,^\circ$C---well below $T_c$.
+Thermal shelter becomes a \emph{physical necessity}.
+A cave at depth~$z$ damps surface oscillations by
+$\exp(-z/\delta)$, where the thermal penetration depth
+$\delta = \sqrt{2\kappa/(\rho c_p\,\omega)}$.
+For limestone at 5\,m: diurnal oscillation is eliminated
+($\delta_{\text{day}} \approx 0.13\,$m), and
+cave temperature equals the annual mean
+($\approx 12\,^\circ$C in temperate zones).
+This yields $T_{\text{body}}(\text{cave sleep}) \approx
+17.7\,^\circ$C, safely above $T_c(5) = 4.5\,^\circ$C.
+Low-$K$ organisms face no such constraint:
+$T_c(1) = -10.3\,^\circ$C permits exposed survival.
+The constraint chain is:
+high~$K$ $\to$ high~$T_c$ $\to$ endothermy $\to$
+sleep reduces $P_{\text{met}}$ $\to$ nocturnal exposure
+risks $T < T_c$ $\to$ thermal shelter required.
 
 \paragraph{Falsification criterion.}
 The $T_c(K)$ formula is falsified by exhibiting an organism with

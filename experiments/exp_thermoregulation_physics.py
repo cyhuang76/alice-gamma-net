@@ -246,6 +246,64 @@ responses to the Arrhenius constraint on blood viscosity and its
 downstream effect on the Γ-topology action functional.
 
 ─────────────────────────────────────────────────────────────────────
+§11  NOCTURNAL THERMAL CONSTRAINT & CAVE SHELTER
+─────────────────────────────────────────────────────────────────────
+
+During sleep, metabolic heat production drops by ~15–20%:
+    P_met(sleep) ≈ 0.82 · P_met(wake)
+
+The organism must still maintain T_body > T_c(K).
+The heat-balance equation during sleep (steady state) gives:
+    T_body = T_amb + P_met(sleep) / (h · A_body)
+
+The "thermal excess" ΔT_excess = P_met / (hA) is the maximum
+degrees above ambient that endothermy can maintain.
+For a 70 kg human:
+    ΔT_excess ≈ 80W / (8.5 W/m²·K × 1.7 m²) ≈ 5.5 °C (during sleep)
+
+Therefore: T_body(sleep) ≈ T_amb + 5.5 °C.
+
+The constraint T_body > T_c(K=5) = 4.5°C requires:
+    T_amb > T_c(K=5) − ΔT_excess ≈ 4.5 − 5.5 = −1.0 °C
+
+This is the bare minimum with zero safety margin.  In practice,
+for sustained brain health we need T_body well above T_c.
+Temperate winter nights (−10 to 0°C) → T_body drops toward T_c!
+
+CAVE AS THERMAL LOW-PASS FILTER:
+  Thermal penetration depth into rock:
+      δ_thermal = √(2κ / (ρc_p · ω))
+  where ω = 2π / T_period.
+
+  For limestone (κ ≈ 1.5 W/m·K, ρc_p ≈ 2.3 MJ/m³·K):
+      Diurnal (T=86400 s): δ ≈ 0.19 m
+      Annual  (T=3.15e7 s): δ ≈ 3.6 m
+
+  At depth z, surface oscillation is damped by exp(−z/δ).
+  A 5 m cave suppresses diurnal ΔT entirely (exp(−26) ≈ 0).
+  Annual oscillation at 5 m: exp(−5/3.6) ≈ 0.25.
+
+  Cave interior T ≈ annual mean surface T.
+  Temperate zones: T_cave ≈ 10–15°C  (>> T_c(K=5) = 4.5°C).
+
+PHYSICAL CONSTRAINT CHAIN:
+  High K brain → high T_c(K) → endothermy required
+    → sleep reduces P_met → T_body approaches T_amb + ΔT_excess
+    → nocturnal T_amb < T_c in cold seasons
+    → PHYSICAL NECESSITY for thermal shelter during sleep
+    → cave = lowest-action option (T ≈ annual mean, no metabolic cost)
+
+This is a physical constraint, not an evolutionary explanation.
+The Γ-framework identifies the minimum conditions for survival;
+natural selection determines which lineages actually exploit caves.
+
+QUANTITATIVE PREDICTION:
+  Obligate shelter-seeking correlates with K:
+    High-K (K≥5): must seek thermal shelter in cold climates
+    Low-K  (K≤2): survive exposed (T_c very low)
+    Testable via comparative ethology + thermoregulation data.
+
+─────────────────────────────────────────────────────────────────────
 §10  EXTERNAL VALIDATION & FALSIFICATION CRITERION
 ─────────────────────────────────────────────────────────────────────
 
@@ -959,6 +1017,239 @@ def test_10_endothermy_necessity():
 
 
 # ============================================================================
+# §4b  Cave Thermal Physics
+# ============================================================================
+
+# ── Human heat balance parameters ──
+P_MET_WAKE = 100.0       # W   basal metabolic heat production (wake)
+P_MET_SLEEP = 82.0       # W   sleep metabolic rate (~82% of wake)
+H_CONV = 8.5             # W/(m²·K)  combined convective + radiative coeff
+A_BODY = 1.7             # m²  body surface area (DuBois, 70 kg human)
+
+# ── Limestone thermal properties ──
+KAPPA_ROCK = 1.5          # W/(m·K)   thermal conductivity (limestone)
+RHO_CP_ROCK = 2.3e6       # J/(m³·K)  volumetric heat capacity
+
+# ── Time periods ──
+T_DIURNAL = 86400.0       # s  (24 hours)
+T_ANNUAL = 3.1536e7       # s  (365.25 days)
+
+
+def thermal_excess_during_sleep(
+    p_met: float = P_MET_SLEEP,
+    h: float = H_CONV,
+    a_body: float = A_BODY,
+) -> float:
+    """
+    ΔT_excess: maximum degrees above ambient that endothermy can maintain
+    during sleep.
+
+    ΔT_excess = P_met(sleep) / (h · A_body)
+
+    For a 70 kg human: ≈ 5.5 °C
+    """
+    return p_met / (h * a_body)
+
+
+def min_ambient_for_survival(
+    K: int = 5,
+    p_met: float = P_MET_SLEEP,
+    h: float = H_CONV,
+    a_body: float = A_BODY,
+    tau_ratio_max: float = TAU_MAX,
+) -> float:
+    """
+    Minimum ambient temperature T_amb,min (°C) for a sleeping organism
+    with brain complexity K to maintain T_body > T_c(K).
+
+    T_amb,min = T_c(K) − ΔT_excess
+
+    Below this, T_body falls below T_c → neural damage risk.
+    """
+    T_c = critical_temperature_with_K(K, tau_ratio_max)
+    dT = thermal_excess_during_sleep(p_met, h, a_body)
+    return (T_c - dT) - CELSIUS_TO_KELVIN  # return in °C
+
+
+def thermal_penetration_depth(
+    period_s: float,
+    kappa: float = KAPPA_ROCK,
+    rho_cp: float = RHO_CP_ROCK,
+) -> float:
+    """
+    Thermal penetration depth δ into rock for oscillation period T.
+
+    δ = √(2κ / (ρc_p · ω))   where ω = 2π / T
+
+    Units: metres.
+    """
+    omega = 2.0 * math.pi / period_s
+    return math.sqrt(2.0 * kappa / (rho_cp * omega))
+
+
+def cave_damping_factor(depth_m: float, period_s: float) -> float:
+    """
+    Temperature oscillation damping at depth z in rock.
+
+    D(z) = exp(−z / δ)
+
+    Returns fraction of surface ΔT that remains at depth z.
+    """
+    delta = thermal_penetration_depth(period_s)
+    return math.exp(-depth_m / delta)
+
+
+def cave_temperature(
+    T_annual_mean_C: float,
+    T_amplitude_C: float,
+    depth_m: float,
+) -> tuple[float, float]:
+    """
+    Cave interior temperature characteristics at depth z.
+
+    Returns (T_cave_C, T_cave_amplitude_C):
+      T_cave = annual mean (constant) ± damped annual amplitude
+    """
+    damp_annual = cave_damping_factor(depth_m, T_ANNUAL)
+    T_cave = T_annual_mean_C
+    T_cave_amp = T_amplitude_C * damp_annual
+    return T_cave, T_cave_amp
+
+
+def sleeping_body_temperature(
+    T_amb_C: float,
+    p_met: float = P_MET_SLEEP,
+    h: float = H_CONV,
+    a_body: float = A_BODY,
+) -> float:
+    """
+    Steady-state body temperature during sleep:
+    T_body = T_amb + ΔT_excess
+    """
+    dT = thermal_excess_during_sleep(p_met, h, a_body)
+    return T_amb_C + dT
+
+
+def test_11_nocturnal_thermal_constraint():
+    """
+    Cave shelter theorem: during sleep, high-K organisms in cold
+    climates cannot maintain T_body > T_c(K) without thermal shelter.
+
+    Derivation chain:
+      1. Sleep reduces P_met → ΔT_excess ≈ 5.5°C
+      2. T_amb,min(K=5) ≈ −1.0°C  (bare minimum survival)
+      3. Temperate winter nights: −10 to −5°C → T_body ≤ T_c!
+      4. Cave at 5m depth: T ≈ annual mean ≈ 12°C → safe
+      5. Low-K organisms (K=1): T_amb,min ≈ −15.8°C → survive exposed
+    """
+    # Step 1: Thermal excess during sleep
+    dT_excess = thermal_excess_during_sleep()
+    print(f"\n=== Test 11: Nocturnal Thermal Constraint & Cave Shelter ===")
+    print(f"  P_met(sleep)  = {P_MET_SLEEP} W")
+    print(f"  h·A_body      = {H_CONV * A_BODY:.1f} W/K")
+    print(f"  ΔT_excess     = {dT_excess:.1f} °C")
+
+    # ΔT_excess should be physiologically reasonable (4–8°C)
+    assert 4.0 < dT_excess < 8.0, f"ΔT_excess = {dT_excess} out of range"
+
+    # Step 2: Minimum ambient temperature for K=5 (human)
+    T_amb_min_human = min_ambient_for_survival(K=5)
+    T_amb_min_low_K = min_ambient_for_survival(K=1)
+    print(f"\n  Minimum ambient T for sleeping survival:")
+    print(f"    K=5 (human):  T_amb > {T_amb_min_human:.1f} °C")
+    print(f"    K=1 (reptile): T_amb > {T_amb_min_low_K:.1f} °C")
+
+    # Human needs warmer ambient than reptile
+    assert T_amb_min_human > T_amb_min_low_K, \
+        "High-K organism must need warmer ambient"
+
+    # Step 3: Temperate winter night (−10°C) vs thresholds
+    T_winter_night = -10.0
+    T_body_winter_human = sleeping_body_temperature(T_winter_night)
+    T_c_human = critical_temperature_with_K(K=5) - CELSIUS_TO_KELVIN
+    print(f"\n  Winter night scenario (T_amb = {T_winter_night}°C):")
+    print(f"    T_body(sleep) = {T_body_winter_human:.1f} °C")
+    print(f"    T_c(K=5)      = {T_c_human:.1f} °C")
+    print(f"    Margin        = {T_body_winter_human - T_c_human:.1f} °C")
+
+    # T_body dangerously close to or below T_c in winter
+    assert T_body_winter_human - T_c_human < 2.0, \
+        "Winter night must put T_body dangerously close to T_c"
+
+    # Step 4: Cave thermal physics
+    delta_diurnal = thermal_penetration_depth(T_DIURNAL)
+    delta_annual = thermal_penetration_depth(T_ANNUAL)
+    print(f"\n  Cave thermal physics (limestone):")
+    print(f"    δ_diurnal = {delta_diurnal:.2f} m")
+    print(f"    δ_annual  = {delta_annual:.1f} m")
+
+    cave_depth = 5.0  # metres
+    damp_day = cave_damping_factor(cave_depth, T_DIURNAL)
+    damp_year = cave_damping_factor(cave_depth, T_ANNUAL)
+    print(f"    At {cave_depth}m depth:")
+    print(f"      Diurnal damping = {damp_day:.2e}  (eliminated)")
+    print(f"      Annual damping  = {damp_year:.2f}")
+
+    # Diurnal oscillation essentially zero at 5m
+    assert damp_day < 1e-6, "Diurnal ΔT must be eliminated at 5m"
+    # Annual oscillation substantially reduced
+    assert damp_year < 0.5, "Annual ΔT must be reduced > 50% at 5m"
+
+    # Step 5: Cave temperature provides safety
+    T_annual_mean = 12.0  # °C (typical temperate)
+    T_annual_amplitude = 15.0  # °C (summer-winter half-range)
+    T_cave, T_cave_amp = cave_temperature(T_annual_mean, T_annual_amplitude, cave_depth)
+    T_body_cave = sleeping_body_temperature(T_cave)
+    print(f"\n  Cave shelter (annual mean = {T_annual_mean}°C):")
+    print(f"    T_cave = {T_cave:.1f} ± {T_cave_amp:.1f} °C")
+    print(f"    T_body(cave sleep) = {T_body_cave:.1f} °C")
+    print(f"    Margin over T_c = {T_body_cave - T_c_human:.1f} °C")
+
+    # Cave body temperature safely above T_c
+    assert T_body_cave > T_c_human + 5.0, \
+        "Cave sleep T_body must be safely above T_c"
+
+    # Step 6: Low-K organism doesn't need shelter
+    T_c_reptile = critical_temperature_with_K(K=1) - CELSIUS_TO_KELVIN
+    T_body_winter_reptile_exposed = sleeping_body_temperature(T_winter_night)
+    # But reptile is ectotherm — T_body ≈ T_amb (no ΔT_excess)
+    # Reptile just shuts down (brumation) — T_c(1) ≈ −10.3°C
+    print(f"\n  Comparative constraint:")
+    print(f"    K=1: T_c = {T_c_reptile:.1f} °C → survive exposed to −10°C")
+    print(f"    K=5: T_c = {T_c_human:.1f} °C → cave shelter REQUIRED")
+
+    # K=1 can survive at -10°C (T_c is lower)
+    assert T_winter_night > T_c_reptile, \
+        "K=1 organism must survive at winter night exposed"
+    # K=5 sleeping exposed is dangerous
+    assert T_body_winter_human < T_c_human + 2.0, \
+        "K=5 sleeping exposed in winter must be marginal"
+    # K=5 in cave is safe
+    assert T_body_cave > T_c_human + 5.0, \
+        "K=5 in cave must be safely above T_c"
+
+    print(f"\n  PHYSICAL CONSTRAINT CHAIN:")
+    print(f"    high K → high T_c → endothermy required")
+    print(f"    → sleep reduces P_met → T_body drops toward T_amb")
+    print(f"    → nocturnal T_amb < T_c in winter → thermal shelter needed")
+    print(f"    → cave provides T ≈ {T_cave:.0f}°C (annual mean) → safe")
+    print(f"  This is a physical necessity, not an evolutionary explanation.")
+
+    return {
+        "dT_excess": dT_excess,
+        "T_amb_min_human_C": T_amb_min_human,
+        "T_amb_min_reptile_C": T_amb_min_low_K,
+        "T_body_winter_C": T_body_winter_human,
+        "T_c_human_C": T_c_human,
+        "delta_diurnal_m": delta_diurnal,
+        "delta_annual_m": delta_annual,
+        "T_cave_C": T_cave,
+        "T_body_cave_C": T_body_cave,
+        "status": "PASS",
+    }
+
+
+# ============================================================================
 # §5  Runner
 # ============================================================================
 
@@ -973,6 +1264,7 @@ ALL_TESTS = [
     ("8_C1_at_all_temperatures", test_8_C1_holds_at_all_temperatures),
     ("9_tau_vs_K_quantitative", test_9_tau_repair_vs_K_quantitative),
     ("10_endothermy_necessity", test_10_endothermy_necessity),
+    ("11_nocturnal_cave_shelter", test_11_nocturnal_thermal_constraint),
 ]
 
 
