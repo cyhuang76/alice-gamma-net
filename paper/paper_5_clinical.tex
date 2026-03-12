@@ -1001,6 +1001,9 @@ sustained threshold $\theta$:
 Disease & Channel & $\theta$ \\
 \midrule
 Depression & Neural & 0.45 \\
+Insomnia & Neural (gate-leak) & $G_i^2\,\Gamma_i^2\,P_{\text{in}} > P_\theta$ \\
+Narcolepsy & Neural ($Z_{\text{anchor}}$) & $Z_{\text{arousal}} < Z_{\min}$ \\
+Hypersomnia & Neural ($\beta_{\text{recal}}$) & $D_Z > D_Z^*$ at wake \\
 Hypertension & Vascular & 0.50 \\
 Immune decline & Immune & 0.45 \\
 Metabolic syndrome & Metabolic & 0.48 \\
@@ -1009,6 +1012,22 @@ Dementia & Neural & 0.70 \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+\noindent
+The three sleep disorders are not separate organ channels
+but \emph{gate-state pathologies} of the neural channel
+(Paper~3, \S\,II\,D--E~\cite{Paper3};
+Section~\ref{sec:sleep-disorders} of this paper):
+insomnia arises when chronic $\Gamma_n^2$ overload
+bleeds through closed thalamic gates;
+narcolepsy when the orexin-mediated arousal anchor is
+destroyed;
+hypersomnia when the NREM recalibration rate is
+structurally low.
+Their thresholds are not scalar $\Gamma^2$ values but
+inequalities on gate-leak power, arousal stability, and
+residual impedance debt---hence the functional-form
+entries in the table.
 
 \subsubsection{Representative high-risk trajectory}
 
@@ -1756,7 +1775,7 @@ Paper~3~\cite{Paper3} derives the gate-leak inequality:
   \;>\;
   4\,k_B T\,R_{\mathrm{eff}}\,\Delta f
   \;\equiv\; P_\theta
-  \tag{P3, Eq.\,\ref*{eq:forced-wake}}
+  \tag{P3, Eq.\,10}
 \end{equation}
 as the physical condition for forced awakening.
 Three clinically distinct sleep disorders map onto
@@ -2311,6 +2330,18 @@ amnesia, and percussion restoration of consciousness
 from collagen fibres ($\sim\mu$m) to whole-body
 mechanics ($\sim$m) and time scales from milliseconds
 to years---no additional postulates required.
+Winter lethargy, ``willpower,'' and slow-motion
+perception during emergencies likewise follow from
+thalamic gate reallocation under C1 conservation
+(Paper~0~\cite{Paper0}; Paper~4~\cite{Paper4}):
+closing $N-1$ gates concentrates PFC bandwidth on a
+single stream, producing an $N$-fold increase in
+temporal resolution.
+The three common sleep disorders---insomnia, narcolepsy,
+and hypersomnia---are gate-state pathologies of the
+neural channel
+(Paper~3~\cite{Paper3};
+Section~\ref{sec:sleep-disorders} of this paper).
 
 
 % ============================================================
