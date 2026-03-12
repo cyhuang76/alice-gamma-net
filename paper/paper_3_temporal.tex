@@ -293,6 +293,81 @@ sleep $\sim$16\,h/day while adults
 lower average mismatch means slower debt accumulation.
 
 
+\subsection{Forced awakening and the gate-leak inequality}
+\label{sec:forced-awakening}
+
+Sleep requires that all thalamic gates satisfy
+$G_i \approx 0$, so the television inequality
+(Paper~4~\cite{Paper4}) falls below threshold:
+$Z_{\mathrm{arousal}}\sum_i G_i \cdot Q_{\text{PFC}} < \theta$.
+However, a gate is an impedance attenuator, not a
+perfect open circuit.  Even at $G_i \ll 1$
+the \emph{leaked power} on channel~$i$ is
+\begin{equation}
+  P_{\mathrm{leak},i}
+  \;=\;
+  G_i^2\;\Gamma_i^2\;P_{\mathrm{in},i}\,.
+  \label{eq:gate-leak}
+\end{equation}
+The organism is forced awake whenever
+\emph{any single channel's leak exceeds the
+Johnson--Nyquist noise floor}:
+\begin{equation}
+  \boxed{\;
+  G_i^2\;\Gamma_i^2\;P_{\mathrm{in},i}
+  \;>\;
+  4\,k_B T\,R_{\mathrm{eff}}\,\Delta f
+  \;\equiv\;
+  P_{\theta}
+  \;}
+  \label{eq:forced-wake}
+\end{equation}
+This is the \textbf{gate-leak inequality}: the
+physical condition for forced awakening.
+Three routes satisfy it:
+\begin{enumerate}
+  \item \textbf{External threat}:
+    $P_{\mathrm{in},i}$ spikes (loud noise, pain,
+    predator vibration).
+    The startle circuit
+    (Paper~4~\cite{Paper4})
+    drives $G_{\text{threat}} \to 1$ within
+    $\sim$5\,ms, far faster than cortical processing.
+    This is the ancestral survival mechanism.
+  \item \textbf{Endogenous alarm}:
+    $\Gamma_i^2$ is chronically elevated on an
+    internal channel (anxiety, rumination,
+    pain).  Even with $G_i$ nominally low
+    and $P_{\mathrm{in},i}$ at resting baseline,
+    the product $\Gamma_i^2 P_{\mathrm{in},i}$
+    exceeds the gate's attenuation capacity.
+    The channel ``bleeds through'' and
+    re-satisfies the television inequality
+    $\to$ \textbf{insomnia}.
+  \item \textbf{Thermal discomfort}:
+    $T_{\mathrm{body}}$ drifts outside the
+    Arrhenius operating range
+    ($T < T_c$ or fever $T > T_{\max}$),
+    hypothalamic thermoreceptors fire at
+    high $P_{\mathrm{in}}$, and the thermal
+    channel leaks through $\to$ awakening.
+\end{enumerate}
+
+\noindent
+Insomnia (route~2) is therefore not a ``failure to relax''
+but a \emph{C1 consequence}: a channel whose
+$\Gamma_i^2$ is structurally forged at high mismatch
+(trauma, chronic stress) radiates enough leaked power
+to keep the consciousness loop above threshold.
+The gate is doing its job---it simply cannot attenuate
+a signal that strong.
+Treatment must reduce $\Gamma_i^2$ itself (C2
+remodelling over long time horizons---Paper~3, Remark~4)
+or reduce $P_{\mathrm{in},i}$ (removing the stressor),
+not ``try harder to sleep'':
+gating~$G_i$ is already at its physical minimum.
+
+
 \subsection{NREM/REM partition}
 \label{sec:NREM-REM}
 
