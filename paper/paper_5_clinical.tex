@@ -1747,6 +1747,118 @@ E0 is achievable, and every E2 model is a candidate for
 elimination via topology-based emergence.
 
 
+\subsection{Sleep disorders as gate-leak pathology}
+\label{sec:sleep-disorders}
+
+Paper~3~\cite{Paper3} derives the gate-leak inequality:
+\begin{equation}
+  G_i^2\;\Gamma_i^2\;P_{\mathrm{in},i}
+  \;>\;
+  4\,k_B T\,R_{\mathrm{eff}}\,\Delta f
+  \;\equiv\; P_\theta
+  \tag{P3, Eq.\,\ref*{eq:forced-wake}}
+\end{equation}
+as the physical condition for forced awakening.
+Three clinically distinct sleep disorders map onto
+three different structural failures within this
+single inequality:
+
+\paragraph{Insomnia: $\Gamma_i^2$ overload.}
+Chronic stress or trauma forges one or more channels
+at high structural mismatch ($\Gamma_i^2 \gg
+\langle\Gamma^2\rangle$).
+The thalamic gate~$G_i$ is at its physical minimum,
+yet the leaked power still exceeds~$P_\theta$.
+Clinical consequence: the patient ``cannot fall asleep''
+despite exhaustion.
+The standard epidemiological correlates---anxiety,
+rumination, chronic pain---are precisely the conditions
+that elevate $\Gamma_i^2$ on specific channels.
+Pharmacological intervention (e.g.\ benzodiazepines)
+temporarily increases gate attenuation (lowers~$G_i$);
+durable resolution requires C2 remodelling of the
+underlying $\Gamma_i^2$
+(cognitive-behavioural therapy for insomnia, CBT-I,
+provides the sustained counter-signal).
+
+\paragraph{Narcolepsy: $Z_{\mathrm{anchor}}$ loss.}
+The orexin (hypocretin) system provides the structural
+anchor $Z_{\mathrm{anchor}}$ that prevents
+$Z_{\mathrm{arousal}}$ from drifting below the
+consciousness threshold.
+Autoimmune destruction of orexin neurons
+(type-1 narcolepsy) eliminates this anchor;
+$Z_{\mathrm{arousal}}$ becomes a random walk
+that crosses threshold at unpredictable intervals
+$\to$ sleep attacks.
+Cataplexy---the sudden loss of muscle tone during
+strong emotion---is the motor-gate analogue:
+a limbic $\Gamma^2$ spike leaks through the
+descending motor gate ($G_{\text{motor}} \to 0$),
+the same gate-leak equation applied to the
+efferent rather than afferent pathway.
+Orexin receptor agonists (suvorexant class, inverse;
+future orexin-2 agonists for narcolepsy) directly
+target~$Z_{\mathrm{anchor}}$.
+
+\paragraph{Hypersomnia: $\beta_{\mathrm{recal}}$ deficit.}
+Idiopathic hypersomnia (IH) preserves the arousal
+anchor but has a structurally low NREM recalibration
+rate~$\beta_{\mathrm{recal}}$.
+Impedance debt~$D_Z$ is never fully discharged
+during sleep;
+the organism requires abnormally long sleep times
+and wakes with ``sleep inertia'' (residual~$D_Z$).
+During the day, elevated baseline~$\langle\Gamma^2\rangle$
+means the gate-leak condition barely holds:
+any small increase in $P_{\mathrm{in}}$
+(warm room, monotonous task) tips a channel past
+$P_\theta$ and the system collapses back into sleep
+$\to$ excessive daytime sleepiness.
+Wake-promoting agents (modafinil, solriamfetol)
+reduce the effective $D_Z$ load by increasing
+$P_{\mathrm{in}}$ uniformly across channels,
+keeping $G_i^2\,\Gamma_i^2\,P_{\mathrm{in}}$
+above the ``awake'' operating regime.
+
+\paragraph{Unified diagnostic map.}
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\hline
+\textbf{Disorder} & \textbf{Broken parameter}
+  & \textbf{Gate-leak status}
+  & \textbf{Treatment target} \\
+\hline
+Insomnia
+  & $\Gamma_i^2$ too high
+  & Cannot close (leak $> P_\theta$)
+  & Lower $\Gamma_i^2$ (CBT-I, C2) \\
+Narcolepsy
+  & $Z_{\text{anchor}} \to 0$
+  & Collapses suddenly
+  & Restore anchor (orexin agonist) \\
+Hypersomnia
+  & $\beta_{\text{recal}}$ low
+  & Barely holding
+  & Raise $\beta_{\text{recal}}$ or $P_{\text{in}}$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+All three disorders are \emph{structural} impedance
+failures---each specifying a different physical
+parameter---unified under a single gate-leak equation.
+The clinical fact that insomnia and hypersomnia
+often coexist (``tired but wired'') maps naturally
+to a system where $\beta_{\text{recal}}$ is low
+(undischarged $D_Z$) \emph{and} one channel has
+high $\Gamma_i^2$ (chronic leak):
+the patient is simultaneously too depleted to stay
+awake and too activated to fall asleep.
+
+
 % ============================================================
 %  SECTION 10 — NHANES NETWORK PROPAGATION
 % ============================================================
