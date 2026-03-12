@@ -367,6 +367,121 @@ or reduce $P_{\mathrm{in},i}$ (removing the stressor),
 not ``try harder to sleep'':
 gating~$G_i$ is already at its physical minimum.
 
+\subsection{Narcolepsy and hypersomnia:
+  the arousal-collapse dual}
+\label{sec:narcolepsy-hypersomnia}
+
+Insomnia is the gate-leak failure mode:
+too much signal penetrates a closed gate.
+Narcolepsy and hypersomnia are the \emph{dual}
+failure: the arousal or gating system itself
+is structurally compromised.
+
+\paragraph{Narcolepsy (arousal anchor loss).}
+The television inequality
+(Paper~4~\cite{Paper4})
+requires $Z_{\mathrm{arousal}} > Z_{\min}$
+for consciousness.
+$Z_{\mathrm{arousal}}$ is held at its operating point
+by the orexin (hypocretin) system,
+which acts as a \emph{structural impedance anchor}:
+\begin{equation}
+  Z_{\mathrm{arousal}}(t)
+  \;=\;
+  Z_{\mathrm{anchor}}
+  + \delta Z(t)\,,
+  \qquad
+  |\delta Z| \ll Z_{\mathrm{anchor}}\,.
+  \label{eq:arousal-anchor}
+\end{equation}
+When the orexin-producing neurons are destroyed
+(autoimmune ablation in type-1 narcolepsy),
+$Z_{\mathrm{anchor}} \to 0$ and
+$Z_{\mathrm{arousal}}$ becomes a random walk:
+\begin{equation}
+  Z_{\mathrm{anchor}} = 0
+  \;\;\Longrightarrow\;\;
+  P(Z_{\mathrm{arousal}} < Z_{\min})
+  \;\propto\; t^{1/2}\,.
+  \label{eq:narcolepsy}
+\end{equation}
+The system crosses threshold at unpredictable intervals
+$\to$ \textbf{sleep attacks}.
+Cataplexy (sudden muscle-tone loss) is the
+motor-gate analogue: an emotional $\Gamma^2$ spike
+in the limbic system leaks through the
+brainstem motor-gate and drives
+$G_{\text{motor}} \to 0$---the same gate-leak
+mechanism as Eq.~\eqref{eq:forced-wake},
+but acting on the descending motor channel
+rather than the ascending sensory channel.
+
+\paragraph{Hypersomnia ($\beta_{\mathrm{recal}}$ deficit).}
+In idiopathic hypersomnia (IH), the arousal anchor
+is intact ($Z_{\mathrm{anchor}} > 0$) and there is
+no gate-leak.
+Instead, the NREM recalibration rate~$\beta_{\mathrm{recal}}$
+in Eq.~\eqref{eq:DZ-decay} is structurally low:
+\begin{equation}
+  \beta_{\mathrm{recal}}^{\text{IH}}
+  \;\ll\;
+  \beta_{\mathrm{recal}}^{\text{normal}}
+  \;\;\Longrightarrow\;\;
+  T_{\mathrm{sleep}}^{\text{IH}}
+  = \frac{1}{\beta_{\mathrm{recal}}^{\text{IH}}}
+    \ln\!\frac{D_Z^{\mathrm{peak}}}{D_Z^*}
+  \;\gg\; T_{\mathrm{sleep}}^{\text{normal}}\,.
+  \label{eq:hypersomnia}
+\end{equation}
+The organism requires far longer sleep to discharge the
+same $D_Z$, and waking before $D_Z < D_Z^*$
+produces ``sleep inertia''---the persistent
+fog of unfinished recalibration.
+Excessive daytime sleepiness follows because
+residual $D_Z$ raises $\langle\Gamma^2\rangle$
+on all channels, so the gate-leak condition
+$G_i^2\,\Gamma_i^2\,P_{\mathrm{in}} < P_\theta$
+\emph{barely holds}: the smallest increase in
+$P_{\mathrm{in}}$ (e.g.\ a warm room, monotonous
+stimuli) tips any channel past threshold and the
+system collapses back into sleep.
+
+\paragraph{Diagnostic table.}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\hline
+Disorder & Broken parameter & Physics
+  & Gate-leak status \\
+\hline
+Insomnia
+  & $\Gamma_i^2$ too high
+  & Leak $> P_\theta$ while gates closed
+  & Cannot close \\
+Narcolepsy
+  & $Z_{\mathrm{anchor}} \to 0$
+  & Arousal random walk
+  & Gates collapse suddenly \\
+Hypersomnia
+  & $\beta_{\mathrm{recal}}$ too low
+  & $D_Z$ never fully discharged
+  & Gates barely holding \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+All three are \emph{structural} impedance failures
+(different $Z_s$ parameters) sharing a common
+C1 framework.
+None is a ``psychological'' disorder;
+each specifies which physical parameter must be
+targeted for treatment: lower~$\Gamma_i^2$
+(insomnia), restore~$Z_{\mathrm{anchor}}$
+(narcolepsy, via orexin agonists),
+or raise~$\beta_{\mathrm{recal}}$
+(hypersomnia, via GABA$_\text{A}$ modulation or
+wake-promoting agents that reduce residual~$D_Z$).
+
 
 \subsection{NREM/REM partition}
 \label{sec:NREM-REM}
