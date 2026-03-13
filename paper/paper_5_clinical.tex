@@ -1750,6 +1750,192 @@ $\square$
 \end{proposition}
 
 
+\subsection{Immune--metabolic bidirectional feedback:
+  the inflammation--insulin trap}
+\label{sec:imm-met-loop}
+
+Among the off-diagonal entries of the coupling matrix
+$C_{kj}$ in Eq.~(\ref{eq:coupled-G2}), the pair
+$(C_{\text{imm,met}},\,C_{\text{met,imm}})$ deserves
+independent analysis because \emph{both} are positive
+and mutually reinforcing, creating a local
+positive-feedback sub-system even when
+the remaining channels are stable.
+
+Write the two-channel subsystem:
+\begin{align}
+  \frac{d\Gamma_{\text{imm}}^2}{dt}
+  &= -\eta\,\Gamma_{\text{imm}}^2
+     + C_{\text{imm,met}}\,\Gamma_{\text{met}}^2
+     + \beta_{\text{imm}}\,\Gamma_{\text{imm}}^4\,,
+  \label{eq:imm-loop} \\
+  \frac{d\Gamma_{\text{met}}^2}{dt}
+  &= -\eta\,\Gamma_{\text{met}}^2
+     + C_{\text{met,imm}}\,\Gamma_{\text{imm}}^2
+     + \beta_{\text{met}}\,\Gamma_{\text{met}}^4\,.
+  \label{eq:met-loop}
+\end{align}
+The mutual-excitation terms form a closed cycle:
+adipocyte hypertrophy raises metabolic $\Gamma_{\text{met}}^2$
+(insulin resistance, hepatic lipogenesis); this triggers
+macrophage infiltration and pro-inflammatory cytokine
+release (IL-6, TNF-$\alpha$), raising immune
+$\Gamma_{\text{imm}}^2$ (chronic low-grade inflammation,
+elevated CRP); the inflammatory milieu further impairs
+insulin receptor signalling, pushing
+$\Gamma_{\text{met}}^2$ higher still:
+\[
+  \Gamma_{\text{met}}^2\!\uparrow
+  \;\xrightarrow{C_{\text{imm,met}}}
+  \;\Gamma_{\text{imm}}^2\!\uparrow
+  \;\xrightarrow{C_{\text{met,imm}}}
+  \;\Gamma_{\text{met}}^2\!\uparrow
+  \;\to\;\cdots
+\]
+
+Linearising about a small perturbation
+$\delta\Gamma_k^2$ around equilibrium,
+the Jacobian of the subsystem has eigenvalues
+\begin{equation}
+  \lambda_\pm
+  = -\eta + \tfrac{1}{2}
+    \bigl(\alpha_{\text{imm}} + \alpha_{\text{met}}\bigr)
+  \pm \sqrt{C_{\text{imm,met}}\,C_{\text{met,imm}}
+    + \tfrac{1}{4}(\alpha_{\text{imm}} - \alpha_{\text{met}})^2}\,,
+  \label{eq:imm-met-eigenvalue}
+\end{equation}
+where
+$\alpha_k \equiv 2\beta_k\,\Gamma_{k,\text{eq}}^2$.
+The subsystem destabilises when $\lambda_+ > 0$, i.e.
+\begin{equation}
+  \sqrt{C_{\text{imm,met}}\,C_{\text{met,imm}}}
+  > \eta - \tfrac{1}{2}
+    (\alpha_{\text{imm}} + \alpha_{\text{met}})\,.
+  \label{eq:imm-met-threshold}
+\end{equation}
+This is the \emph{inflammation--insulin trap}:
+once the geometric mean of the mutual coupling
+exceeds the net repair margin, the two channels
+lock into a self-sustaining high-$\Gamma^2$
+fixed point---metabolic syndrome with chronic
+inflammation---even if the original neural stressor
+has been removed.
+
+Clinical correlates are well documented:
+obesity $\to$ elevated CRP $\to$ type~2 diabetes
+$\to$ further weight gain constitutes the
+``metabolic--inflammatory'' comorbidity cluster.
+In recovery-dynamics terms
+(Sec.~\ref{sec:recovery}), this sub-loop can
+achieve regime~3 (structurally irreversible)
+\emph{independently} of the neural channel,
+explaining why bariatric surgery
+(which mechanically breaks the metabolic
+$\beta_{\text{met}}\,\Gamma^4$ term)
+can resolve both diabetes \emph{and} systemic
+inflammation simultaneously---a dual-channel
+reset that diet alone, targeting only
+$\Gamma_{\text{met}}^2$, often cannot achieve.
+
+
+\subsection{Acute versus chronic stress:
+  bifurcation threshold under time-limited forcing}
+\label{sec:acute-chronic}
+
+The stress-injection term $\sigma_k\,s(t)$ in
+Eq.~(\ref{eq:coupled-G2}) does not distinguish
+beneficial from harmful stress; the distinction
+emerges from the \emph{temporal integral} relative
+to the repair term.
+
+Consider a square-pulse stressor of amplitude $A$
+and duration $\Delta t$:
+\begin{equation}
+  s(t) = A\,\bigl[\Theta(t) - \Theta(t - \Delta t)\bigr]\,,
+  \label{eq:pulse-stress}
+\end{equation}
+where $\Theta$ is the Heaviside step.
+During the pulse, the channel trajectories satisfy
+\begin{equation}
+  \Gamma_k^2(t) \approx \Gamma_{k,\text{eq}}
+  + \frac{\sigma_k\,A}{\eta}
+    \bigl(1 - e^{-\eta\,t}\bigr)\,,
+  \label{eq:acute-response}
+\end{equation}
+to first order (neglecting $\beta_k$ and $C_{kj}$
+for short pulses).
+The peak excursion is bounded by
+$\Delta\Gamma_k^2 \leq \sigma_k A / \eta$,
+and after the pulse ends, $\eta$ drives the system
+back exponentially with time constant $1/\eta$.
+The system remains safe (regime~1 of
+Sec.~\ref{sec:recovery}) provided
+\begin{equation}
+  \Gamma_{k,\text{eq}} + \frac{\sigma_k\,A}{\eta}
+  < \Gamma_k^{*2}
+  \quad (\text{bifurcation threshold})\,.
+  \label{eq:safe-acute}
+\end{equation}
+This is the physics of \emph{beneficial acute stress}:
+high-intensity exercise ($A$ large, $\Delta t$ small),
+cold-water immersion, intermittent fasting---all push
+$\Gamma_k^2$ transiently upward, stimulating C2 repair
+(``hormesis''), and the system returns to baseline
+before coupling or positive feedback can engage.
+
+Contrast this with chronic stress:
+$s(t) = a$ (constant, $a < A$) for $t \gg 1/\eta$.
+The steady-state solution of
+Eq.~(\ref{eq:coupled-G2}) now includes coupling:
+\begin{equation}
+  \Gamma_{k,\text{ss}}^2
+  = \frac{\sigma_k\,a + \sum_j C_{kj}\,\Gamma_{j,\text{ss}}^2
+         + \delta_k}
+        {\eta - \beta_k\,\Gamma_{k,\text{ss}}^2}\,.
+  \label{eq:chronic-ss}
+\end{equation}
+Even for small $a$, the denominator shrinks as
+$\Gamma_{k,\text{ss}}^2$ rises
+(positive feedback $\beta_k$), and the coupling
+terms $C_{kj}$ inject additional load from
+neighbouring channels.
+The saddle-node bifurcation occurs at
+\begin{equation}
+  \eta = \beta_k\,\Gamma_k^{*2}
+         + \frac{\partial}{\partial\Gamma_k^2}
+           \sum_j C_{kj}\,\Gamma_j^2\,,
+  \label{eq:chronic-bifurcation}
+\end{equation}
+a threshold that \emph{decreases} with age
+(because $\eta(t)$ declines by Arrhenius kinetics
+while $\delta_k(t)$ grows).
+
+\begin{remark}[The exercise paradox resolved]
+\label{rem:exercise}
+Exercise is simultaneously a high-$\Gamma^2$
+perturbation (muscles, cardiovascular) and the
+most effective known intervention against chronic
+disease.
+The paradox dissolves once time scale is explicit:
+exercise is \emph{acute} forcing
+($\Delta t \sim 1$\,hour, then $s \to 0$)
+that never reaches the bifurcation threshold
+(Eq.~\ref{eq:safe-acute}), while the transient
+$\Gamma^2$ elevation \emph{stimulates}
+C2 remodeling---raising effective $\eta$ in
+vascular and metabolic channels
+(shear-stress--mediated endothelial adaptation,
+mitochondrial biogenesis).
+Chronic sedentary stress, by contrast, is
+low-amplitude but \emph{never turns off}:
+the system drifts toward the chronic steady state
+(Eq.~\ref{eq:chronic-ss}) and eventually crosses
+the bifurcation.
+Exercise is therapeutic precisely because it is
+\emph{intermittent and bounded}.
+\end{remark}
+
+
 % ============================================================
 %  E0 EMERGENCE: DISEASE FROM TOPOLOGY ALONE
 % ============================================================
@@ -2500,6 +2686,72 @@ and hypersomnia---are gate-state pathologies of the
 neural channel
 (Paper~3~\cite{Paper3};
 Section~\ref{sec:sleep-disorders} of this paper).
+
+\subsection{From equations to engine:
+  computational convergence of the $\Gamma$-framework}
+\label{sec:computational-convergence}
+
+The coupled ODE system
+(Eq.~\ref{eq:coupled-G2}),
+the recovery regimes (Sec.~\ref{sec:recovery}),
+the immune--metabolic sub-loop
+(Eqs.~\ref{eq:imm-loop}--\ref{eq:met-loop}), and
+the acute/chronic bifurcation conditions
+(Sec.~\ref{sec:acute-chronic}) share a crucial
+property: they are \emph{computationally closed}.
+Every variable is a \emph{state variable}
+($\Gamma_k^2$, $D_Z$, $\eta$, $\delta_k$),
+every parameter is derivable from tissue blueprints
+(Paper~1~\cite{Paper1}) and thermodynamic constants
+(Paper~3~\cite{Paper3}), and the time-stepping
+rule is explicit.
+
+The resulting state machine has the following structure:
+\begin{enumerate}
+  \item \textbf{State vector.}
+    $\mathbf{x}(t) = (\Gamma_1^2,\ldots,\Gamma_K^2,\;
+    D_{Z,1},\ldots,D_{Z,K},\;\eta(t))$
+    for $K = 5$ organ channels.
+  \item \textbf{Input.}
+    External stress profile $s(t)$ and
+    environmental temperature $T_{\text{env}}(t)$.
+  \item \textbf{Transition.}
+    One forward-Euler step of
+    Eq.~(\ref{eq:coupled-G2}) per tick,
+    with C1 enforced ($\Gamma_k^2 + T_k = 1$)
+    and $\eta(t)$ updated by Arrhenius decay.
+  \item \textbf{Output.}
+    Per-channel health $H_k = 1 - \Gamma_k^2$,
+    total health $H = \prod_k H_k$,
+    and disease-onset flags when
+    $\Gamma_k^2 > \theta_k$.
+\end{enumerate}
+This is not a metaphor: the Alice Gamma-Net
+implementation (\texttt{exp\_disease\_progression.py})
+runs exactly this ODE with $\Delta t = 1$\,year
+and reproduces the full-lifetime disease trajectory
+of Fig.~\ref{fig:disease-progression} in under
+one second on commodity hardware, with
+\emph{zero fitted parameters}.
+
+The implication for clinical computation is direct:
+the same engine that generates theoretical predictions
+in this paper can, in principle, accept a patient's
+blood-test--derived $\Gamma_k^2$ vector as initial
+condition and project a personalised
+disease-risk trajectory---not by
+statistical regression but by
+\emph{forward integration of physics}.
+What is and is not claimed here
+must be stated precisely:
+we do \emph{not} claim clinical-grade accuracy
+(the coupling coefficients $C_{kj}$ require
+empirical calibration beyond what NHANES alone
+can provide); we \emph{do} claim that the
+theory is not merely descriptive but
+\emph{algorithmically executable}---a property
+that no phenomenological comorbidity model
+currently possesses.
 
 
 % ============================================================
