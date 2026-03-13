@@ -223,11 +223,10 @@ nonzero reflection:
 \end{equation}
 This has two consequences:
 \begin{enumerate}
-  \item \emph{Retrievability}: A nonzero $\Gamma$ means the
-    memory generates a detectable reflection when probed.
-    If $\Gamma=0$, the memory is invisible---it has become
-    part of the medium itself, like light passing through
-    a perfectly matched cable.
+  \item \emph{Potential retrievability}: A nonzero $\Gamma$ means the
+    memory generates a detectable reflection when probed---but
+    only if the reflected signal exceeds the current noise floor
+    (see Sec.~\ref{sec:recall-snr} below).
   \item \emph{Decay}: Since $\Gamma>0$, the impedance-remodeling update
     continues to operate.  Without reinforcement
     ($x_{\text{in}}\cdot x_{\text{out}}\to 0$), the memory
@@ -242,6 +241,11 @@ it has merged with the network substrate.
 Memory requires imperfection.
 This is the impedance analogue of the observer effect:
 you can only detect what reflects.
+Conversely, no imperfect memory ($\Gamma>0$) is
+\emph{guaranteed} to be recallable:
+whether a reflection is detected depends on the
+instantaneous noise floor, not on the memory alone
+(Theorem~\ref{thm:recall-snr}).
 \end{remark}
 
 \subsection{Three memory regimes}
@@ -255,11 +259,147 @@ you can only detect what reflects.
 Regime & $\Gamma$ & $\Delta Z$ & Recallable? \\
 \midrule
 Muscle memory & $\to 0$ & $\to 0$ & No (automatic) \\
-Cognitive memory & $\varepsilon>0$ & small & Yes (effortful) \\
+Cognitive memory & $\varepsilon>0$ & small & Conditional (SNR) \\
 Novel stimulus & $\gg 0$ & large & Vivid (but unstable) \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+
+\subsection{The recall equation: no perfect memory, only
+  submerged memory}
+\label{sec:recall-snr}
+
+The ``three memory regimes'' (Table~\ref{tab:memory-regimes})
+classify memories by their $\Gamma$ value.
+However, $\Gamma > 0$ is \emph{necessary but not sufficient}
+for recall.
+A memory is accessible only when its reflected signal
+exceeds the instantaneous thermal noise floor at the
+readout site (prefrontal cortex):
+
+\begin{theorem}[Recall as SNR threshold crossing]
+\label{thm:recall-snr}
+A memory trace encoded at channel~$k$ with residual
+$\Gamma_k = \varepsilon > 0$ is recallable at time~$t$
+if and only if
+\begin{equation}
+  \mathrm{SNR}_{\text{recall}}(t)
+  = \frac{\varepsilon^2\;P_{\text{probe}}(t)}
+         {P_{\text{noise}}(t)}
+  > \theta_{\text{recall}}\,,
+  \label{eq:recall-snr}
+\end{equation}
+where $P_{\text{probe}}(t)$ is the power of the
+retrieval cue (internal or external) injected into
+channel~$k$, and
+$P_{\text{noise}}(t) = P_{\text{metabolic}} +
+P_{\text{sensory}} + P_{\text{autonomic}} +
+P_{\text{thermal}}$ is the total background power
+at the PFC input.
+\end{theorem}
+
+\noindent
+The consequences are immediate and profound:
+
+\begin{enumerate}
+  \item \textbf{There is no perfect recall.}
+    Even a strongly encoded memory ($\varepsilon$
+    large) becomes inaccessible when
+    $P_{\text{noise}}$ is high: stress, multitasking,
+    concurrent sensory overload, or fever all raise the
+    denominator and drown the reflection.
+    ``I know this but I can't think of it right now''
+    is not a failure of storage---it is an
+    \emph{SNR failure at readout}.
+
+  \item \textbf{There is no perfect forgetting.}
+    Any experience that ever produced
+    $\Delta Z \neq 0$ via C2 leaves a permanent
+    structural trace in the impedance map.
+    C2 can \emph{reduce} $\varepsilon$ toward zero
+    (if contradictory experience overwrites the
+    channel) but cannot erase a trace that receives
+    no further input ($x_{\text{in}} = 0 \Rightarrow
+    \Delta Z = 0$: the trace is frozen, not deleted).
+    A ``forgotten'' memory is not absent---it is
+    \emph{submerged below the noise floor}.
+
+  \item \textbf{Recall is state-dependent.}
+    Since $P_{\text{noise}}(t)$ fluctuates continuously,
+    the set of accessible memories changes from moment
+    to moment.
+    The same memory can be retrievable at 3\,a.m.\
+    in quiet darkness
+    ($P_{\text{noise}} \approx P_{\text{metabolic}}$,
+    minimal sensory input)
+    and completely inaccessible during a crowded
+    commute ($P_{\text{noise}} \gg P_{\text{metabolic}}$).
+\end{enumerate}
+
+\begin{corollary}[No memory is ever erased; every memory
+  can be submerged]
+\label{cor:no-erasure}
+$\Gamma_k = 0$ exactly requires either perfect impedance
+matching (zero probability under thermal noise) or physical
+destruction of the substrate.
+Therefore, every C2 trace satisfies
+$\varepsilon > 0$ for all finite time.
+Whether this trace is ``remembered'' or ``forgotten''
+is entirely determined by the current ratio
+$\varepsilon^2 P_{\text{probe}} / P_{\text{noise}}$,
+not by any property of the memory itself.
+\end{corollary}
+
+This resolves six long-standing puzzles in memory science:
+
+\begin{description}
+\item[Tip-of-the-tongue]
+  $\mathrm{SNR} \approx \theta_{\text{recall}}$:
+  partial features exceed threshold, full pattern
+  does not.
+\item[Proustian involuntary memory]
+  A sensory cue injects high $P_{\text{probe}}$
+  into a specific channel, transiently boosting
+  SNR above threshold for an old trace.
+\item[State-dependent recall]
+  Emotional/physiological state modulates
+  $P_{\text{noise}}$; matching encoding-state
+  to retrieval-state restores the original SNR.
+\item[Meditation and quiet recall]
+  Systematic reduction of $P_{\text{sensory}}$
+  and $P_{\text{autonomic}}$ lowers
+  $P_{\text{noise}}$; old memories surface
+  as their SNR crosses threshold.
+\item[Deathbed lucidity]
+  Terminal shutdown of autonomic and sensory
+  systems collapses $P_{\text{noise}}$ to near
+  $P_{\text{thermal}}$; decades-old traces---long
+  submerged---breach the noise floor simultaneously.
+\item[Hypnotic hypermnesia]
+  Hypnotic induction suppresses sensory gating
+  and reduces PFC noise; retrieval SNR increases
+  for traces near threshold.
+\end{description}
+
+\begin{remark}[The memory is the topology, not
+  the recall]
+\label{rem:memory-topology}
+It is essential to distinguish \emph{memory}
+(the structural impedance trace $\Delta Z \neq 0$,
+which is permanent) from \emph{recall}
+(the detection of $\Gamma > 0$ above the noise
+floor, which is transient and state-dependent).
+Neuroscience's failure to find ``the engram''
+with consistent reliability is not evidence that
+memories are fragile or distributed---it is evidence
+that the measurement (fMRI, EEG, optogenetics)
+is itself subject to the same SNR limit.
+You cannot image a reflection that is currently
+below the noise floor, any more than you can
+photograph a star at noon.
+The star has not gone; the sky is too bright.
+\end{remark}
 
 
 % ============================================================
@@ -1601,6 +1741,10 @@ locked in by structural cochlear damage.
     \emph{change} in impedance, distributed across all
     channels that were active during learning.
     It is not localised to a ``memory bank.''
+    Moreover, a stored trace ($\Gamma>0$) is not the same as
+    a recalled trace: recall requires SNR above threshold
+    (Theorem~\ref{thm:recall-snr}).
+    No memory is ever erased; every memory can be submerged.
   \item \emph{When does consciousness begin?}---It does not
     ``begin'' at a moment.
     $\Phimeta=1-\Gmeta^2$ is a continuous variable.
@@ -1707,8 +1851,10 @@ both physically grounded and empirically invariant.
 Humans reliably fail to recall autobiographical events
 from before age~$\sim$3 (``infantile amnesia'').
 Classical explanations invoke hippocampal immaturity or
-language development.  The impedance framework provides a
-quantitative alternative.
+language development.  The recall equation
+(Theorem~\ref{thm:recall-snr}) provides a
+quantitative alternative: the infant's noise floor
+is so high that no episodic trace can breach it.
 
 The signal-to-noise ratio for memory \emph{retrieval}
 is:
@@ -2595,8 +2741,15 @@ constraints (C1--C3), we have derived:
   \item \textbf{Memory} $=\partial Z/\partial t$:
     the time derivative of impedance under impedance-remodeling update.
     Muscle memory is $\Gamma\to 0$ (frozen match);
-    cognitive memory is $\Gamma\approx\varepsilon>0$
-    (detectable reflection).
+    cognitive memory retains $\Gamma\approx\varepsilon>0$.
+    Crucially, recall is not a property of the memory
+    but of the instantaneous SNR:
+    $\varepsilon^2 P_{\text{probe}} / P_{\text{noise}} >
+    \theta_{\text{recall}}$.
+    There is no perfect memory (noise can always drown it)
+    and no perfect forgetting (the structural trace persists).
+    Every ``forgotten'' memory is merely submerged below
+    the noise floor.
   \item \textbf{Consciousness}:
     $\Phimeta=1-\Gmeta^2$, the self-referential reflection
     quality of a closed-loop impedance network.
