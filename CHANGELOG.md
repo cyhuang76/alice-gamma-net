@@ -58,6 +58,74 @@ All biology terms anchored to impedance-physics definitions at first occurrence:
 
 ---
 
+## [3.7.0] — 2026-03-10
+
+### Added — Paper Content (P3, P4, P5)
+- **P4**: Four Laws of the Null Space (parallel to thermodynamics)
+- **P4**: Moral Constraint Theorem — blame on sealed patterns = pure injury
+- **P4**: Developmental genesis of null space (S_eff grows with age via η lifecycle)
+- **P5**: 5-organ coupled disease cascade (experiment + figure + paper section)
+- **P5**: Surface observability — skin as impedance boundary + Prediction #17
+- **P5**: Caregiver triple-load model (emotional + physical + bureaucratic)
+- **P5**: Obesity as impedance-driven metabolic strategy + leptin Γ mismatch + Prediction #18
+- **P5**: Willpower non-existence proof (proof by contradiction from psychiatric epidemiology)
+- **P5**: Neuroendocrine-behavioural intermediate layer + single-core/dual-core overload remark
+- **P5**: Detection threshold remark — null signal as health certificate
+- **P3+P5**: PTSD as impedance physics — three conditions, therapeutic physics, empathic load equation, two new predictions
+- **P3+P4**: Impedance fixation as category error — three mechanisms + therapeutic implications
+- **P3+P4**: Sealed shutdown vs runaway collapse — R_seal ratio + end-of-life quality remark
+- **P3+P4**: Moral blame as secondary Γ² injection — therapeutic vs iatrogenic criterion
+- **P3+P5**: Psychological load to somatic collapse — full chain PTSD → dual-network → immune+metabolic failure
+- **P3**: Visual health perception as unconscious impedance tomography
+- **P3**: Skill-decay anti-chronology — η(t) lifecycle + simulation
+
+### Changed
+- 8 papers → 6 papers restructure + C2/C3 terminology rename
+- Complete codebase rename to biomedical engineering standard
+- README + CITATION.cff updated (70 pages, 18 predictions, 3,274 tests)
+- Interface Scale Table restructured by physical domain (7 domains)
+- Paper 4: replace hardware-interrupt/CPU analogies with pure Γ-physics
+
+### Fixed
+- CITATION.cff Gamma encoding repair
+- ASCVD female formula and Framingham female age table corrected
+- LaTeX: add `amsthm` package to Papers 2, 3, 5
+
+---
+
+## [3.4.1] — 2026-03-04
+
+### Changed
+- NHANES validation expanded: 1-cycle → 3-cycle (n=7,393)
+- All 7/7 organs statistically significant
+
+---
+
+## [3.4.0] — 2026-03-04
+
+### Added
+- **Paper 5 (P5)**: The Grand Unification — Γ as universal interface law
+- NHANES 10-cycle empirical validation (n=49,774, zero fitted parameters, AUC 0.77–0.80)
+- Level 2b STARD diagnostic accuracy (10-cycle NHANES, N=52,545, 7,627 deaths)
+- MIMIC-IV diagnostic accuracy pipeline (Level 2b, STARD-compliant)
+- Neonatal impedance reference standard (growth charts, centile curves P5–P95)
+- Gamma-Pain Index: theory (Papers 2/4/5) + prototype (PICS data)
+- Public falsification platform: textbook vs Γ-Net side-by-side (Pyodide web app)
+- Papers 2–5: everyday Gamma evidence sections
+
+---
+
+## [3.3.0] — 2026-03-04
+
+### Added
+- **Paper 4 (P4)**: Memory, Consciousness, and Soul as Impedance Physics
+- NHANES mortality survival analysis — Level 3 evidence (N=7,371, Harrell's C=0.6989)
+- Explicit circularity warnings in Papers 0–4
+- Brain Γ-map calibration from EEG + HRV
+- Paper 5 (then Paper VI): Cambrian section, evolutionary theory, testable predictions
+
+---
+
 ## [3.2.0] — 2026-03-04
 
 ### Added — Lab-Γ Diagnostic Engine (3 phases)

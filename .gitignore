@@ -74,8 +74,8 @@ paper/latex/*.out
 paper/latex/*.toc
 paper/latex/*.png
 
-# Paper PDFs (regeneratable from .tex source)
-paper/*.pdf
+# Paper PDFs — TRACKED (readers need direct access without compiling LaTeX)
+# paper/*.pdf    ← intentionally commented out since v3.8.0
 paper/fig*.pdf
 paper/latex/*.pdf
 
