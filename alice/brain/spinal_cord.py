@@ -21,6 +21,14 @@ Core equations:
     reflex_response = sensory_input × reflex_gain × T_spinal  (bypasses brain)
     ΔZ_reflex = −η × Γ × stimulus × response  (★ C2 impedance-remodeling)
 
+Three-layer pain architecture (Paper 4, Sec. 7.8):
+    Layer 1 — Nociception (THIS module): hardware detector of |Γ_tissue| > θ_noci.
+        Requires no PFC, no consciousness. Operational from birth.
+    Layer 2 — Pain perception: requires Φ_meta > 0 (thalamo-cortical loop).
+    Layer 3 — Pain memory: requires SNR_mem > θ_recall (hippocampal-PFC encoding).
+    The spinal reflex arc is Layer 1 — a hardware interrupt that fires
+    BEFORE consciousness even detects the nociceptive event.
+
 Reflex arcs:
     1. Stretch reflex (monosynaptic) — fastest: ~30ms
     2. Withdrawal reflex (polysynaptic) — pain → flexor activation

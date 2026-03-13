@@ -18,6 +18,15 @@ Physics:
   It does not compute, decide, or interpret.
   It measures the aggregate transmission state.
 
+  SNR Limit of Observability (Paper 4, Sec. 7.10):
+    A signal is conscious only when its reflected standing-wave energy
+    exceeds the background noise floor at the PFC input:
+      SNR_obs = Γᵢ² · P_in,i / P_noise(t) > θ_obs
+    Sub-threshold signals (gut peristalsis, hepatic metabolism) are
+    physically invisible to the awareness loop.
+    Consciousness is a FILTER, not a receiver — it is blind to
+    anything below the noise floor.
+
 Clinical analogy:
   Awareness index  = mean neural channel transmission
   Attention        = spatial contrast of channel activity

@@ -9,7 +9,23 @@ Physical foundation:
   → Γ = (Z_load - Z₀) / (Z_load + Z₀) = 1.0
   → 100% signal reflection
   → reflected_energy = signal² × Γ² = signal²
-  → Reflected energy interpreted as pain
+
+  Pain mechanism — Topological Crosstalk (Paper 4, Sec. 7.9):
+  Reflected energy forms a STANDING WAVE on the severed channel.
+  VSWR = (1 + |Γ|) / (1 - |Γ|) → ∞ as Γ → 1.
+  Standing-wave energy leaks into adjacent neural channels
+  via inter-channel coupling κ_ij (crosstalk).
+  When crosstalk power exceeds the PFC noise floor,
+  consciousness bandwidth is HIJACKED by the nociceptive source.
+  This is why pain HURTS — it is not just "blocked signal" but
+  "reflected energy invading the self-referential loop."
+
+  Pain threshold — SNR Limit of Observability (Paper 4, Sec. 7.10):
+  SNR_obs = Γ² · P_in / P_noise(t)
+  Pain is perceived only when SNR_obs > θ_obs.
+  - During high activity: P_noise large → SNR low → pain suppressed
+  - At rest: P_noise drops → standing wave emerges → pain appears
+  - If motor cortex stops driving (P_in → 0): no reflection → pain resolves
 
   This is the extreme case of ALICE's THE PAIN LOOP.
 
@@ -29,10 +45,16 @@ Clinical reference data:
 
 ALICE mapping:
   - Amputation → limb.amputated = True → proprioceptive open circuit
-  - Motor commands continue → 100% reflection → pain
+  - Motor commands continue → 100% reflection → standing wave → crosstalk → pain
   - Cortical reorganization ≈ gradual learning in impedance_adaptation
   - Mirror therapy ≈ providing visual impedance matching signal to lower Γ
-  - Natural resolution ≈ brain stops sending signals to missing channel
+  - Natural resolution ≈ brain stops sending signals (P_in → 0) → SNR → 0
+
+  Surgery as Topological Truncation (Paper 5, Sec. 8.5):
+  When tissue necrosis makes a channel irreversibly Γ = 1 with toxic
+  coupling drag, surgical removal creates a CLEAN Γ = 1 boundary
+  (no toxic noise). Post-truncation phantom pain arises when motor
+  cortex refuses to acknowledge the new boundary.
 
 Author: Phase 24 — Computational Neurology / Phantom Limb Pain
 ══════════════════════════════════════════════════════════════════════
@@ -174,11 +196,13 @@ class PhantomLimbEngine:
     
     Tracks the physical mechanisms of phantom pain for all amputated limbs:
     1. Amputation → open-circuit impedance → Γ = 1.0
-    2. Motor efference residual → reflected energy → pain
-    3. Neuroma spontaneous firing → random pain
-    4. Cortical reorganization → referred pain / pain chronification
-    5. Mirror therapy → provides impedance matching → Γ decreases
-    6. Natural resolution → brain learns not to send commands
+    2. Motor efference residual → reflected energy → standing wave
+    3. Standing wave → topological crosstalk → bandwidth hijacking (pain)
+    4. Pain threshold: SNR_obs = Γ² · P_in / P_noise > θ_obs
+    5. Neuroma spontaneous firing → random pain spikes
+    6. Cortical reorganization → referred pain / pain chronification
+    7. Mirror therapy → provides impedance matching → Γ decreases
+    8. Natural resolution → brain learns not to send commands (P_in → 0)
     """
     
     def __init__(self, rng_seed: int = 42):

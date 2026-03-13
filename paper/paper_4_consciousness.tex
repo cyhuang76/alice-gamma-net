@@ -2035,6 +2035,266 @@ television whether the picture looks good.
 
 
 % ============================================================
+\subsection{Pain as topological crosstalk:
+  global bandwidth hijacking}
+\label{sec:topological-crosstalk}
+
+The three-layer architecture
+(Sec.~\ref{sec:infant-pain}) and the $\Gamma$-Pain Index
+(Sec.~\ref{sec:gamma-pain-index}) describe
+\emph{what} pain is (Layer~1 nociceptive mismatch)
+and \emph{how} to measure it ($\Pi_\Gamma$).
+We now derive \emph{why pain hurts}---the mechanism by
+which a local impedance mismatch becomes a global
+conscious experience.
+
+A single mismatched channel at local reflection
+coefficient $|\Gamma_i|$ reflects power
+$P_{\text{ref},i} = \Gamma_i^2\,P_{\text{in},i}$.
+If this were the end of the story, the mismatched
+channel would simply be ``blocked''---low transmission,
+no downstream effect.
+Pain would be indistinguishable from numbness.
+
+The critical physics is what happens to the reflected
+energy.
+On a finite network, reflected power has nowhere to go:
+it superposes with the incident wave, forming a
+\textbf{standing wave} whose voltage amplitude is
+$(1+|\Gamma_i|)$ times the incident amplitude.
+On a lossless line, the voltage standing-wave ratio
+(VSWR) is:
+\begin{equation}
+  \mathrm{VSWR}_i = \frac{1 + |\Gamma_i|}{1 - |\Gamma_i|}\,.
+  \label{eq:vswr}
+\end{equation}
+As $|\Gamma_i|\to 1$, $\mathrm{VSWR}\to\infty$: the
+voltage peaks grow without bound relative to the incident
+level.
+
+This standing-wave energy does not stay confined to the
+mismatched channel.
+In a multi-channel network (the brain has
+$K \sim 10^{10}$ parallel paths), finite isolation
+between adjacent channels allows leaked energy to
+\textbf{crosstalk} into neighbouring circuits.
+The crosstalk power into channel~$j$ from a standing
+wave on channel~$i$ scales as:
+\begin{equation}
+  P_{\text{xtalk},j}
+  \;\propto\;
+  \kappa_{ij}\;\Gamma_i^2\;P_{\text{in},i}\,,
+  \label{eq:crosstalk}
+\end{equation}
+where $\kappa_{ij}$ is the inter-channel coupling
+coefficient (set by proximity, shared substrates,
+and myelination quality).
+
+When $\Gamma_i^2\,P_{\text{in},i}$ is large enough,
+the crosstalk power invades the prefrontal
+self-referential loop
+(Sec.~\ref{sec:consciousness}), forcing
+$\Phi_{\text{meta}}$ to allocate processing bandwidth
+to the offending channel.
+This is \textbf{global bandwidth hijacking}:
+the consciousness bottleneck (PFC) is commandeered
+by a single high-$\Gamma$ source, displacing all
+other streams.
+
+\begin{definition}[Pain as bandwidth hijacking]
+\label{def:pain-hijack}
+Pain is the subjective correlate of a local
+standing-wave energy exceeding the inter-channel
+isolation threshold, thereby forcing reallocation of
+the global consciousness bandwidth
+($\Phi_{\text{meta}}$) to the mismatched site.
+\end{definition}
+
+This explains three clinical phenomena:
+
+\begin{enumerate}
+  \item \textbf{``I hurt, therefore I am.''}
+    Chronic pain patients report that pain makes
+    them feel ``more alive'' or ``more present.''
+    Physically: the crosstalk signal
+    has forcibly entered the self-referential loop,
+    filling the PFC reflection channel with
+    high-amplitude content.
+    $\Phi_{\text{meta}}$ is high---but monopolised by
+    a single nociceptive source.
+
+  \item \textbf{Attentional narrowing during acute pain.}
+    During severe pain, patients lose awareness of
+    surroundings, time perception, and concurrent
+    tasks.
+    Physically: the standing-wave crosstalk has
+    saturated all available PFC bandwidth;
+    no residual capacity exists for other streams.
+
+  \item \textbf{Pain--consciousness dissociation under
+    anaesthesia.}
+    General anaesthesia disables the self-referential
+    loop ($\Phi_{\text{meta}}\to 0$) but does not
+    eliminate the standing wave.
+    The tissue still has $\Gamma_i^2 \gg 0$
+    and $P_{\text{ref},i} \gg 0$;
+    the nociceptive load ($\Pi_\Gamma$) accumulates
+    even though no bandwidth hijacking occurs.
+    This is why post-operative pain spikes upon
+    awakening: the accumulated standing-wave energy
+    rushes into the newly reopened PFC loop.
+\end{enumerate}
+
+\subsection{The SNR limit of observability}
+\label{sec:snr-observability}
+
+The crosstalk mechanism (Sec.~\ref{sec:topological-crosstalk})
+implies that a signal is \emph{observable} by the
+consciousness loop only when it exceeds the
+background noise:
+\begin{equation}
+  \mathrm{SNR}_{\text{obs}}
+  = \frac{\Gamma_i^2\;P_{\text{in},i}}
+         {P_{\text{noise}}(t)}
+  > \theta_{\text{obs}}\,,
+  \label{eq:snr-obs}
+\end{equation}
+where
+$P_{\text{noise}}(t)$ is the total background power at
+the PFC input (metabolic heat, autonomic cycling,
+concurrent sensory streams, developmental noise),
+and $\theta_{\text{obs}}$ is the detection threshold set
+by the Johnson--Nyquist floor (a component of the
+soul; Sec.~\ref{sec:soul}).
+
+This single equation unifies five otherwise
+disconnected phenomena:
+
+\paragraph{1. Infantile pain insensitivity.}
+Neonatal brains are in a state of explosive
+morphogenesis: myelination, synaptic pruning, and
+dendritic arborisation produce massive background
+impedance fluctuations
+($P_{\text{noise}} \gg P_{\text{adult}}$;
+Sec.~\ref{sec:infantile-amnesia}).
+Even a frank tissue injury produces
+$\Gamma^2\,P_{\text{in}}$ that cannot breach the
+developmental noise floor.
+$\mathrm{SNR}_{\text{obs}} \approx 0$:
+the infant exhibits nociceptive withdrawal (Layer~1
+hardware) but shows minimal cortical pain processing
+(Layer~2--3), consistent with
+Sec.~\ref{sec:infant-pain}.
+
+\paragraph{2. Exercise-induced analgesia
+  (gate control reinterpreted).}
+During intense physical exertion, the PFC drives
+massive $P_{\text{in}}$ across motor, proprioceptive,
+and cardiovascular channels simultaneously.
+The aggregate signal flow constitutes an enormous
+$P_{\text{noise}}$ against which any single channel's
+$\Gamma^2\,P_{\text{in}}$ (a micro-tear in muscle
+fibre, a minor joint mismatch) is invisible.
+Upon cessation of exercise, the baseline power drops;
+the standing waves at damaged channels emerge
+above the now-quiet noise floor
+($\mathrm{SNR}_{\text{obs}} \uparrow$).
+This is the physical mechanism of
+\emph{delayed-onset muscle soreness} (DOMS)
+and reinterprets the Melzack--Wall gate control theory
+as an SNR phenomenon rather than a gate.
+
+\paragraph{3. Muscle memory as perfect camouflage.}
+A fully trained motor pathway has
+$\Gamma \to 0$ (Sec.~\ref{sec:memory}).
+It transmits energy with zero reflection, zero
+standing wave, zero crosstalk.
+In a body whose metabolic noise floor is
+$P_{\text{noise}} > 0$, a zero-reflection pathway
+is \emph{undetectable by any measurement}:
+it contributes nothing to the numerator of
+Eq.~(\ref{eq:snr-obs}).
+This is why neuroscientists cannot localise
+``muscle memory'' to a specific anatomical site---not
+because the engram does not exist, but because a
+perfectly matched transmission line is invisible
+to reflection-based instrumentation.
+The memory \emph{is} the impedance structure;
+its perfection is its camouflage.
+
+\paragraph{4. PTSD as a dormant attractor.}
+Post-traumatic stress disorder forges a
+high-$\Gamma$ ``scar'' on one or more neural
+pathways (Paper~5, Sec.~\ref{sec:disease-progression}).
+When no trigger is present, $P_{\text{in}} = 0$ on
+the scarred path, so $\Gamma^2 \times 0 = 0$:
+the standing wave has zero amplitude.
+The scar is invisible below the noise floor.
+The moment a sensory trigger (a sound, a smell)
+injects even modest $P_{\text{in}}$ into the
+scarred path, $\Gamma^2 \approx 1$ produces
+near-total reflection:
+$\mathrm{SNR}_{\text{obs}}$ jumps from zero to
+effectively infinity.
+The resulting bandwidth hijacking
+(Def.~\ref{def:pain-hijack}) is the \emph{flashback}---a
+sudden, involuntary monopolisation of PFC
+bandwidth by a single pathological channel.
+Between episodes, no fMRI, no EEG, no biomarker
+can detect the scar, because the scar is
+a \emph{structural} $\Gamma$ that produces no
+\emph{signal} without excitation---exactly as a
+dormant fault in a transmission line is invisible
+until power is applied.
+
+\paragraph{5. Consciousness as noise-floor surfing.}
+Normal waking consciousness is not a fixed state
+but a continuous process of
+$\mathrm{SNR}_{\text{obs}}$ triage: the PFC
+allocates bandwidth to whichever channels currently
+exceed $\theta_{\text{obs}}$.
+Routine interoceptive signals (gut peristalsis,
+hepatic metabolism, lymphatic cycling) produce
+$\Gamma^2\,P_{\text{in}}$ well below the noise
+floor and are never experienced.
+Consciousness is therefore a \emph{filter}, not a
+\emph{receiver}: it does not detect everything
+and then select; it is physically blind to
+anything below the noise floor.
+The content of consciousness at any instant is
+the set of channels whose standing-wave
+crosstalk amplitude exceeds $P_{\text{noise}}(t)$.
+
+\begin{remark}[Why reductionist biology cannot
+  find the soul, memory, or trauma]
+\label{rem:reductionism}
+The SNR limit of observability
+(Eq.~\ref{eq:snr-obs}) constitutes a fundamental
+\emph{no-go theorem} for anatomical localisation
+of three categories:
+(i)~perfectly learned skills ($\Gamma = 0$:
+invisible because flawless);
+(ii)~dormant trauma ($P_{\text{in}} = 0$:
+invisible because quiescent);
+(iii)~the soul ($\ker(\partial Z/\partial t)$:
+invisible because invariant).
+All three exist as \emph{network topology}, not as
+\emph{substance}.
+They are dynamic topological contrasts whose
+manifestation depends entirely on whether the
+current $\mathrm{SNR}_{\text{obs}}$ exceeds
+threshold.
+Searching for memory or trauma in dissected tissue
+is physically equivalent to searching for
+yesterday's standing wave on a disconnected
+transmission line: the wave existed, the damage
+it caused is real, but the wave itself was never
+a thing---it was a \emph{relation} between
+incident and reflected fields.
+\end{remark}
+
+
+% ============================================================
 \section{Extended Consciousness: Functional, Coupled,
   and Cross-Substrate}
 \label{sec:extended}
@@ -2399,6 +2659,29 @@ constraints (C1--C3), we have derived:
     Moral responsibility has a physical boundary:
     it applies only where
     $\eta\,|\Gamma|\,|x_{\text{in}}\,x_{\text{out}}|>0$.
+  \item \textbf{Pain as topological crosstalk}:
+    reflected energy forms standing waves
+    ($\mathrm{VSWR} = (1+|\Gamma|)/(1-|\Gamma|)$)
+    that leak into adjacent channels via
+    inter-channel coupling.
+    Pain is the subjective correlate of this
+    crosstalk hijacking the PFC's consciousness
+    bandwidth---not mere signal blockage, but
+    active invasion of the self-referential loop.
+  \item \textbf{SNR limit of observability}:
+    a signal enters consciousness only when
+    $\mathrm{SNR}_{\text{obs}} =
+    \Gamma^2 P_{\text{in}} / P_{\text{noise}} >
+    \theta_{\text{obs}}$.
+    This unifies infantile pain insensitivity
+    (developmental noise floor too high),
+    exercise analgesia (activity raises
+    $P_{\text{noise}}$), invisible muscle memory
+    ($\Gamma = 0$ produces no reflection),
+    dormant PTSD ($P_{\text{in}} = 0$ on scarred
+    path), and the impossibility of anatomically
+    localising memory, trauma, or soul
+    (topology, not substance).
 \end{enumerate}
 
 These are not metaphors.
