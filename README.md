@@ -50,6 +50,32 @@ Every module, every tick, must obey:
 
 ---
 
+## Physics Glossary — Code as Physics
+
+Every biology term in this codebase has a strict impedance-physics definition.
+If you see a familiar word, it is **not** a metaphor — it is the human-readable alias
+for a measurable impedance quantity.
+
+| Biology Term | Physics Definition | Symbol / Equation | Where Defined |
+|:---|:---|:---|:---|
+| **Sleep** | Global decoupled dissipation state (offline impedance renormalization) | $D_Z^{-} = \int_{sleep} R(\tau)\,d\tau$ | Paper 3 / `sleep_physics.py` |
+| **Memory** | Hysteretic topological deformation (no read/write — current flows through shaped Z) | $\partial Z / \partial t \neq 0$ | Paper 4 / `working_memory.py` |
+| **Consciousness** | Mean transmission coefficient across monitored channels | $\Phi = (1/N)\sum(1 - \Gamma_i^2)$ | Paper 4 / `awareness_monitor.py` |
+| **Soul** | Invariant topological core (null space of impedance change) | $\ker(\partial Z / \partial t)$ | Paper 4 |
+| **Emotion** | 8-dimensional Plutchik impedance map (VAD space) | $Z_e = Z_0(1-E_i)$ | Paper 4 / `emotion_granularity.py` |
+| **Willpower** | Top-down prefrontal forcing function (three-factor product) | $\eta_{\text{pfc}}^{\text{eff}} = \eta \cdot Q_{\text{gate}} \cdot (1-\langle\Gamma^2_{\text{mem}}\rangle)$ | Paper 4 / `prefrontal.py` |
+| **Health** | Global power-transfer efficiency (product of all organ transmissions) | $H = \prod_i(1-\Gamma_i^2)$ | Paper 2 / `gamma_engine.py` |
+| **Allostatic load** | Cumulative exogenous set-point forcing | $L_{\text{allo}} = \int f_{\text{ext}}\,dt$ | Paper 5 |
+| **Disease** | Pathological attractor (impedance lock-in at $\Gamma \to 1$) | $dZ/dt \to 0,\;\Gamma \gg 0$ | Paper 5 |
+| **Comorbidity** | Coupled-subsystem divergence (off-diagonal C matrix) | $\lambda_+ > 0$ when $C_{kj}C_{jk} > \eta^2$ | Paper 5 |
+| **Pain** | Protocol collapse (reflected energy at impedance mismatch) | $P_{\text{reflected}} = \Gamma^2 \cdot P_{\text{in}}$ | Paper 0 / `signal.py` |
+| **Dopamine** | Impedance-matching improvement signal (reward prediction error) | $\delta = R - (1-\Gamma^2)P_{\text{in}}$ | `basal_ganglia.py` |
+| **Aging** | Arrhenius-driven irreversible impedance drift | $\delta(t) = \delta_0 e^{E_a \cdot \text{stress}}$ | Paper 3 / `lifecycle_equation.py` |
+
+> *"C" in C1/C2/C3 = **Constraint** (not "condition"). These are physics axioms, not design choices.*
+
+---
+
 ## Gamma-Net Health Check
 
 > Zero-parameter impedance physics &middot; Public verification platform
@@ -199,9 +225,9 @@ Key results:
 - **Paper 0**: Irreducibility theorem — heterogeneous networks have a geometric cost floor $A_{\text{cut}}$ that cannot be learned away. Relay nodes emerge as thermodynamic necessity.
 - **Paper 1**: Topological constraints — network topology is not a design choice but a consequence of impedance physics.
 - **Paper 2**: Dual neural–vascular coupling — $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$. Vascular debt accumulates on weeks-to-years timescale.
-- **Paper 3**: Temporal dynamics & lifecycle — adenosine ≡ impedance debt readout. Lifecycle equation $L(t) = \prod_i [1 - \Gamma_i^2(t)]$ from embryo to senescence. PTSD, empathic drain, psychological fatigue as impedance physics.
-- **Paper 4**: Memory = $\partial Z/\partial t$, Consciousness = $1 - \Gamma_{\text{meta}}^2$, Soul = $\ker(\partial Z/\partial t)$. Television Theorem. **Four Laws of the Null Space** (parallel to thermodynamics). **Moral Constraint Theorem**: blame on sealed patterns = pure injury.
-- **Paper 5**: Grand Unification — Γ as universal interface law. NHANES 10-cycle validation ($n=49{,}774$, zero fitted parameters, AUC 0.77–0.80). 5-organ disease cascade. Caregiver triple-load model. Surface observability (skin as impedance boundary). Obesity as impedance-driven metabolic strategy. **Willpower non-existence proof** from psychiatric epidemiology. **18 testable predictions** with falsification criteria.
+- **Paper 3**: Temporal dynamics & lifecycle — sleep as *global decoupled dissipation state*; adenosine ≡ impedance debt readout. Lifecycle equation $L(t) = \prod_i [1 - \Gamma_i^2(t)]$ from embryo to senescence. PTSD & chronic stress as integral-path equivalence ($D_Z$ threshold). Thermal refugia as C2 boundary condition.
+- **Paper 4**: Memory = *hysteretic topological deformation* ($\partial Z/\partial t$), Consciousness = $1 - \Gamma_{\text{meta}}^2$, Soul = *Invariant Topological Core* ($\ker(\partial Z/\partial t)$). Television Theorem. **Four Laws of the Null Space** (parallel to thermodynamics). Willpower tri-factorization: $\eta_{\text{pfc}}^{\text{eff}} = \eta \cdot Q_{\text{gate}} \cdot (1 - \langle\Gamma^2_{\text{mem}}\rangle)$. Sensory-deprivation collapse & hallucination unification. **Moral Constraint Theorem**: blame on sealed patterns = pure injury.
+- **Paper 5**: Grand Unification — Γ as universal interface law. NHANES 10-cycle validation ($n=49{,}774$, zero fitted parameters, AUC 0.77–0.80). 5-organ disease cascade (pathological attractors & coupled-subsystem divergence). Immune–metabolic feedback loop. Obesity as impedance-driven metabolic strategy. **Willpower non-existence proof** (top-down prefrontal forcing function). **18 testable predictions** with falsification criteria.
 
 > **Methodological note**: Papers 0–4 include explicit circularity warnings — simulation data confirms the theory it is built from. Paper 5 breaks this circularity with NHANES external epidemiological data (10 cycles, $n=49{,}774$) and zero fitted parameters. Total: 70 pages, 18 testable predictions.
 

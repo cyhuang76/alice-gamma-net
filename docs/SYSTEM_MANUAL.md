@@ -1,7 +1,7 @@
 # Alice Gamma-Net 系統說明手冊
 # Alice Gamma-Net System Reference Manual
 
-**版本 Version**: v31.1 — 2026-03-03  
+**版本 Version**: v31.1 — 2026-03-13  
 **作者 Author**: Hsi-Yu Huang · Independent Researcher · Taiwan  
 **授權 License**: AGPL-3.0 (code) / CC BY-NC-SA 4.0 (papers)
 
@@ -136,9 +136,9 @@ alice-gamma-net/
 │   ├── api/            #   REST API + WebSocket (2 files)
 │   ├── alice_brain.py  #   統一控制器 Unified controller (2,951 行)
 │   └── main.py         #   CLI/API 入口 Entry point (240 行)
-├── tests/              # pytest 測試套件 (79 files, 2,959 tests)
+├── tests/              # pytest 測試套件 (92 files, 3,274 tests)
 ├── experiments/        # 實驗腳本 (73 files)
-├── paper/              # 四篇論文 LaTeX source (4 .tex)
+├── paper/              # 六篇論文 LaTeX source (6 .tex, 70 pp)
 ├── figures/            # 論文圖表 (18 figures)
 └── docs/               # 文件 Documentation
 ```
@@ -737,18 +737,21 @@ python -m alice.main --api --port 8000
 
 ## 10. 論文對應 Paper Correspondence
 
-| 論文 Paper | 檔案 | 頁數 | 核心方程 | 對應程式碼 |
-|---|---|---|---|---|
-| **I. Irreducible Dimensional Cost** | `paper_I_irreducibility.tex` | 5 | $A = A_{imp} + A_{cut}$ | `gamma_topology.py` |
-| **II. Twin Impedance Networks** | `paper_II_twin_networks.tex` | 10 | $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$ | `vascular_impedance.py` |
-| **III. Impedance Debt** | `paper_III_impedance_debt.tex` | 11 | $D_{imp}$ debt + N3 recalibration | `sleep_physics.py` |
-| **IV. Lifecycle Equation** | `paper_IV_lifecycle.tex` | 10 | $d(\sum\Gamma^2)/dt$ bathtub | `lifecycle_equation.py` |
+| 論文 Paper | 檔案 File | 頁數 | 核心方程 Key Equation | 物理別名 Physics Alias | 對應程式碼 Code |
+|---|---|---|---|---|---|
+| **P0. Framework** | `paper_0_framework.tex` | 6 | $A = A_{imp} + A_{cut}$ | C = Constraint; Pain = protocol collapse | `gamma_topology.py` |
+| **P1. Topology** | `paper_1_topology.tex` | 8 | $A_{cut} = \sum(K_{src}-K_{tgt})^+$ | Thermal refugia as C2 boundary | `gamma_topology.py` |
+| **P2. Dual Network** | `paper_2_dual_network.tex` | 11 | $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$ | H = global power-transfer efficiency | `vascular_impedance.py` |
+| **P3. Temporal** | `paper_3_temporal.tex` | 14 | $D_{imp}$ debt + N3 recalibration | Sleep = global decoupled dissipation state | `sleep_physics.py` |
+| **P4. Consciousness** | `paper_4_consciousness.tex` | 16 | $\Phi = (1/N)\sum(1-\Gamma_i^2)$ | Memory = hysteretic topological deformation; Soul = invariant topological core; Willpower tri-factor | `awareness_monitor.py`, `prefrontal.py` |
+| **P5. Grand Unification** | `paper_5_clinical.tex` | 15 | $\hat Y = \mathbb{1}[H < \theta]$ | Disease = pathological attractor; Comorbidity = coupled-subsystem divergence | `gamma_engine.py` |
 
 ### 論文間交互引用 Cross-references
 
-- Paper III Eq.(12) = Paper II 級聯方程 cascade equation
-- Paper IV Eq.(9) = Paper II Murray's Law
-- Paper IV Eq.(12) = Paper II 級聯方程
+- P3 chronic stress → P4 hallucination unification (sensory deprivation + stress pathway)
+- P4 willpower tri-factor → P5 willpower non-existence proof
+- P5 immune-metabolic loop → P3 impedance debt + Arrhenius aging
+- P0 thermal refugia → P1 topological necessity → P3 sleep boundary condition
 
 ---
 
@@ -756,16 +759,17 @@ python -m alice.main --api --port 8000
 
 | 項目 Metric | 數值 Value |
 |---|---|
-| Python 檔案 | ~254 |
-| 總程式碼行數 | ~103,907+ |
+| Python 檔案 | ~306 |
+| 總程式碼行數 | ~131,900+ |
 | 大腦引擎 Brain Engines | 42 |
 | 身體模組 Body Modules | 32 (含 12 臨床專科) |
-| 疾病模型 Disease Models | 120 (12 專科 × 10) |
-| 臨床量表 Clinical Scales | 120 |
-| pytest 測試 | 2,959 |
-| 實驗腳本 Experiments | 73 |
-| 論文 Papers | 4 (36 pp total) |
-| 論文圖表 Figures | 18 |
+| 疾病模型 Disease Models | 125 (12 專科 × 10 + Lab-Γ templates) |
+| 臨床量表 Clinical Scales | 125 |
+| pytest 測試 | 3,274 |
+| 實驗腳本 Experiments | 91 |
+| 論文 Papers | 6 (70 pp total) |
+| 論文圖表 Figures | 23 |
+| 可測試預測 Testable Predictions | 18 |
 
 ### 三條不可違反的物理約束貫穿所有模組
 ### Three Inviolable Constraints Across Every Module
@@ -777,5 +781,5 @@ $$\boxed{\Gamma^2 + T = 1 \quad|\quad \Delta Z = -\eta\Gamma x_{pre}x_{post} \qu
 
 ---
 
-*Alice Gamma-Net System Manual v31.1 — 2026-03-03*  
+*Alice Gamma-Net System Manual v31.1 — 2026-03-13*  
 *Author: Hsi-Yu Huang · Independent Researcher · Taiwan*
