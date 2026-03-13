@@ -2655,6 +2655,86 @@ function.
     with network propagation, not causation.
 \end{enumerate}
 
+\begin{remark}[Three epistemic layers---and their
+  very different parameter counts]
+\label{rem:epistemic-layers}
+To forestall the von Neumann objection
+(``with four parameters I can fit an elephant''),
+we explicitly separate the claims made in this
+paper series into three layers with descending
+rigour:
+
+\begin{enumerate}
+  \item \textbf{Theorem layer (zero parameters).}
+    C1 ($\Gamma^2 + T = 1$) is a theorem of the
+    First Law at any 1-D interface.
+    C2 ($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
+    x_{\text{out}}$) is the unique gradient descent
+    on $\mathcal{A}[\Gamma]$ with activity gating
+    (Paper~0, Theorem~1).
+    C3 is bookkeeping.
+    No free parameters exist at this level;
+    the results are mathematical necessities.
+
+  \item \textbf{NHANES validation layer
+    (zero fitted parameters).}
+    The organ-level $\Gamma$ scores used in
+    Sec.~\ref{sec:nhanes} are computed from
+    textbook reference ranges and published
+    physiological formulas.
+    No coefficient was adjusted to improve AUC.
+    The hash-locked analysis protocol
+    (Sec.~\ref{sec:nhanes}) ensures this claim
+    is auditable.
+    Results at this layer (AUC $= 0.705$,
+    cross-organ coupling pattern) are
+    \emph{forward predictions}, not fits.
+
+  \item \textbf{ODE simulation layer
+    (topologically constrained, coefficients
+    pending calibration).}
+    The five-channel coupled dynamics
+    (Eq.~\ref{eq:coupled-G2}), the
+    immune--metabolic sub-loop
+    (Eqs.~\ref{eq:imm-loop}--\ref{eq:met-loop}),
+    and the disease-progression simulation
+    (Fig.~\ref{fig:disease-progression}) involve
+    coupling coefficients $C_{kj}$,
+    positive-feedback strengths $\beta_k$, and
+    stress-injection weights $\sigma_k$.
+    These are \emph{not} free parameters in
+    the curve-fitting sense---they are
+    constrained by anatomical topology
+    (which organs share a vascular bus),
+    by the sign structure of the coupling
+    (vascular $\to$ all is positive;
+    endocrine $\to$ cardiac is absent,
+    confirmed by the $\Delta\text{AUC} = 0.000$
+    null result), and by order-of-magnitude
+    estimates from perfusion physiology.
+    However, their precise numerical values
+    have \emph{not} been independently measured
+    or calibrated against longitudinal cohort data.
+    Claims at this layer are therefore
+    \emph{qualitative predictions}---the
+    cascade ordering, the existence of
+    bifurcation thresholds, the hysteresis
+    gap---not quantitative point estimates.
+\end{enumerate}
+The critical distinction is: Layers~1 and~2
+cannot be made to fit any dataset by parameter
+adjustment, because there are no parameters to
+adjust.
+Layer~3 makes structural predictions
+(cascade order, bifurcation existence,
+recovery regime classification)
+that are falsifiable independent of coefficient
+values.
+The numerical coefficients themselves constitute
+an open empirical programme---not a weakness of
+the theory, but its next testable frontier.
+\end{remark}
+
 \subsection{From black-box metrics to public falsification}
 
 The zero-parameter property enables a verification protocol
