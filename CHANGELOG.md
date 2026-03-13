@@ -6,6 +6,58 @@ Format follows [Keep a Changelog](https://keepachangelog.com/).
 
 ---
 
+## [3.8.0] — 2026-03-13
+
+### Added — Paper Content (P3, P4, P5)
+- **P3**: Chronic stress ≡ PTSD via integral-path equivalence (D_Z threshold)
+- **P3**: Thermal refugia as C2 boundary condition (replaces cave biology)
+- **P4**: Willpower tri-factorization: η_pfc^eff = η × Q_gate × (1 − ⟨Γ²_mem⟩)
+- **P4**: Sensory-deprivation collapse (gain divergence when x_in → 0)
+- **P4**: Hallucination unification theorem (stress + deprivation pathways)
+- **P5**: Recovery dynamics — three regimes (pre-bifurcation / single-channel / multi-channel)
+- **P5**: Immune–metabolic feedback loop (eigenvalue analysis)
+- **P5**: Acute vs chronic bifurcation (pulse vs steady-state)
+- **P5**: Computational convergence section (state machine)
+- **P5**: Epistemic layers remark (theorem / NHANES / ODE)
+- **P5**: AUC 0.705 defense remark (Kepler analogy)
+- **P5**: Substrate-vs-structure remark (29 mechanisms, same math)
+
+### Changed — Terminology Hardening (9 cross-boundary terms)
+All biology terms anchored to impedance-physics definitions at first occurrence:
+
+| Term | Physics Alias | Paper |
+|---|---|---|
+| C (in C1/C2/C3) | Constraint | P0 |
+| Soul | Invariant Topological Core | P4 |
+| Allostatic load | Cumulative exogenous set-point forcing | P5 |
+| Disease | Pathological attractor | P5 |
+| Comorbidity | Coupled-subsystem divergence | P5 |
+| H | Global power-transfer efficiency | P2 |
+| Willpower | Top-down prefrontal forcing function | P5 |
+| Selfish Brain | Asymmetric energy sink / privileged topological hub | P5 |
+| Sleep | Global decoupled dissipation state | P3 |
+| Memory | Hysteretic topological deformation | P4 |
+
+### Changed — Documentation Alignment
+- **README.md**: Physics Glossary table (13 biology → impedance mappings)
+- **README.md**: Paper 3/4/5 descriptions updated with hardened terminology
+- **SYSTEM_MANUAL.md**: Paper table expanded (4 → 6 papers, correct filenames, physics aliases)
+- **SYSTEM_MANUAL.md**: Statistics updated (3,274 tests, 6 papers, 70 pp, 125 diseases)
+- **SYSTEM_MANUAL.md**: Directory layout counts corrected
+
+### Fixed
+- P5: undefined ref `\sec:tissue-C2` → `\sec:twentynine`
+- P2: bibitem case mismatch unified to uppercase Paper0/Paper1/Paper3
+- P5: phantom `fig:recovery-regimes` reference removed
+- P0/P1/P3: cave sections rewritten as thermal-refugia C2 boundary condition
+
+### Verified
+- All 6 papers compile with zero errors
+- 3,771 tests passed (pytest, Python 3.11)
+- Zero anthropomorphic variables found in 88+ source files
+
+---
+
 ## [3.2.0] — 2026-03-04
 
 ### Added — Lab-Γ Diagnostic Engine (3 phases)

@@ -11,8 +11,8 @@ repository-code: "https://github.com/cyhuang76/alice-gamma-net"
 doi: "10.5281/zenodo.18751831"
 url: "https://doi.org/10.5281/zenodo.18751831"
 license: AGPL-3.0-or-later
-version: "3.7.0"
-date-released: "2026-03-10"
+version: "3.8.0"
+date-released: "2026-03-13"
 keywords:
   - gamma-net
   - impedance mismatch
@@ -33,7 +33,7 @@ abstract: >-
   theory. The system implements a complete electronic lifeform (ALICE)
   with 42 brain modules, 31 body organs, and closed-loop consciousness,
   governed by a single variational principle: A[Gamma] = integral of
-  sum Gamma_i^2 dt -> min. v3.7.0 adds the Four Laws of the Null Space
+  sum Gamma_i^2 dt -> min. v3.8.0 adds the Four Laws of the Null Space
   (parallel to thermodynamics), Moral Constraint Theorem, caregiver
   triple-load model, surface observability (skin as impedance boundary),
   obesity as impedance-driven metabolic strategy, willpower non-existence
