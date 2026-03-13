@@ -1322,6 +1322,257 @@ This explains why:
 
 
 % ============================================================
+\section{Willpower, Calibration, and Sensory-Deprivation
+         Collapse}
+\label{sec:willpower-calibration}
+
+The emergency-gating analysis of \S\,\ref{sec:consciousness}
+established that ``willpower'' is a functional-impedance
+operation: gate reallocation under a fixed thermal ceiling.
+We now show that the \emph{effectiveness} of this operation
+depends on two additional physical quantities---attention
+quality and memory calibration---and that removing all
+external input produces a catastrophic failure mode
+predicted by C1 and C2 alone.
+
+% ————————————————————————————————————————————————————————————
+\subsection{Willpower as a three-factor product}
+\label{sec:willpower-trifactor}
+
+Let $\eta_{\text{pfc}}(t)$ denote the prefrontal repair
+rate (Paper~5~\cite{Paper5} identifies it as the physical
+referent of ``willpower'').
+Gate reallocation requires (i)~metabolic budget to drive
+the switch, (ii)~fast gates to complete the switch, and
+(iii)~a target: the PFC must \emph{know which channel to
+open}.
+
+\paragraph{Attention quality.}
+Each thalamic gate has an RC time constant
+$\tau_{\text{gate}} = R_{\text{gate}} C_{\text{gate}}$.
+Define the dimensionless gate quality
+\begin{equation}
+  Q_{\text{gate}}
+  = \frac{\tau_{\text{task}}}
+         {\tau_{\text{task}} + \tau_{\text{gate}}}\,,
+  \label{eq:Qgate}
+\end{equation}
+where $\tau_{\text{task}}$ is the task's characteristic
+time scale.
+Untrained gates ($\tau_{\text{gate}} \gg \tau_{\text{task}}$)
+yield $Q_{\text{gate}} \to 0$; training reduces
+$\tau_{\text{gate}}$ via C2 remodelling of the gate synapse,
+pushing $Q_{\text{gate}} \to 1$.
+
+\paragraph{Memory-calibration factor.}
+Gate reallocation selects one channel and silences the rest.
+If the structural impedance map $Z_s$ is well calibrated
+($\Gamma^2_{\text{memory}} \approx 0$), the PFC identifies
+the correct channel on the first attempt.
+If $\Gamma^2_{\text{memory}} \to 1$, the PFC cycles through
+channels, each switch consuming $\eta_{\text{pfc}}$ budget.
+
+\paragraph{Effective willpower.}
+The three factors compose multiplicatively:
+\begin{equation}
+  \boxed{
+  \eta_{\text{pfc}}^{\text{eff}}(t)
+  \;=\;
+  \eta_{\text{pfc}}(t)
+  \;\times\;
+  Q_{\text{gate}}
+  \;\times\;
+  \bigl(1 - \langle\Gamma^2_{\text{memory}}\rangle\bigr)
+  }
+  \label{eq:willpower-trifactor}
+\end{equation}
+Any single factor approaching zero drives the product
+to zero:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Failure mode & Physics & Clinical correlate \\
+\midrule
+$\eta_{\text{pfc}} \to 0$
+  & Arrhenius decay $+$ cortisol load
+  & Burnout, chronic fatigue \\
+$Q_{\text{gate}} \to 0$
+  & Gate RC untrained
+  & ADHD, attentional deficit \\
+$\langle\Gamma^2_{\text{memory}}\rangle \to 1$
+  & Target memory uncalibrated
+  & Choice paralysis, novice effect \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{remark}[Expert effortlessness]
+\label{rem:expert-effortless}
+An expert appears to ``need no willpower'' because
+$Q_{\text{gate}} \approx 1$ (trained gates) and
+$\langle\Gamma^2_{\text{memory}}\rangle \approx 0$
+(calibrated map).
+The metabolic cost per gate switch is negligible;
+the same $\eta_{\text{pfc}}$ budget that exhausts a
+novice in minutes sustains the expert for hours.
+``Talent'' is not a hidden parameter---it is the
+product $Q_{\text{gate}} (1 - \langle\Gamma^2\rangle)$
+forged by prior C2 remodelling.
+\end{remark}
+
+% ————————————————————————————————————————————————————————————
+\subsection{Sensory deprivation as calibration collapse}
+\label{sec:sensory-deprivation}
+
+\paragraph{C2 halts without input.}
+When all external stimuli vanish
+($x_{\text{in}}^{\text{ext}} = 0$),
+C2 returns $\Delta Z = 0$ regardless of the current
+mismatch~$\Gamma$.
+The impedance map freezes, but the mismatch persists.
+
+\paragraph{Johnson--Nyquist noise survives.}
+Internal thermal noise
+$\sigma_Z^2 = 4 k_B T\,\text{Re}(Z)\,\Delta f$
+depends only on temperature and continues at
+$T = 310$\,K.
+
+\paragraph{Adaptive gain divergence.}
+Sensory pathways maintain an adaptive gain $G_k(t)$
+whose update is itself a C2 process: the system
+continuously adjusts~$G_k$ to minimise the mismatch
+between perceived signal level and an internal
+set-point.
+When $P_{\text{in}}^{\text{ext}} = 0$,
+the gain rises without bound because $\Gamma_{\text{gain}}$
+never reaches zero:
+\begin{equation}
+  G_k(t)
+  \;\xrightarrow[x_{\text{in}}^{\text{ext}}=0]{\text{C2}}
+  \;\infty\,.
+  \label{eq:gain-divergence}
+\end{equation}
+The divergent gain amplifies thermal noise until it
+exceeds the pattern-recognition threshold of downstream
+decoders (Wernicke sequence predictor, visual cortex
+template matcher, etc.), at which point noise is
+\emph{parsed as signal}.
+
+\paragraph{Time course of collapse.}
+The order of hallucination onset follows the
+signal-to-noise ranking of internal sources:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Time & Amplified source & Percept \\
+\midrule
+$0$--$5$\,min
+  & Cardiac pulse (strongest internal)
+  & Audible heartbeat \\
+$5$--$15$\,min
+  & Vascular turbulence
+  & Rushing / waterfall sound \\
+$15$--$30$\,min
+  & Cochlear spontaneous emission
+  & Tinnitus \\
+$>30$\,min
+  & Pure thermal noise
+  & Hallucination (voices, visions) \\
+\bottomrule
+\end{tabular}
+\end{center}
+This sequence is consistent with anechoic-chamber
+reports (Microsoft Building~87, $-20.6$\,dB:
+most subjects cannot tolerate more than 30--45\,min)
+and sensory-isolation-tank experiments
+(Lilly, 1954: full hallucination within 2--4\,h
+under combined visual--auditory--tactile deprivation).
+
+\paragraph{Generalisation to all modalities.}
+Each sensory channel independently undergoes gain
+divergence when its external input vanishes:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Channel & Internal noise source & Hallucination type \\
+\midrule
+Auditory & Cochlear spontaneous emission &
+  Tinnitus $\to$ auditory hallucination \\
+Visual & Retinal dark discharge &
+  Phosphenes $\to$ visual hallucination \\
+Tactile & Somatosensory noise &
+  Formication (phantom crawling) \\
+Vestibular & Otolith drift &
+  Loss of body boundary \\
+Olfactory & Olfactory bulb spontaneous &
+  Phantosmia \\
+\bottomrule
+\end{tabular}
+\end{center}
+Simultaneous deprivation of all five channels produces
+the complete psychosis-like state documented in
+prolonged solitary confinement ($>15$\,days;
+classified as torture by the United Nations).
+
+% ————————————————————————————————————————————————————————————
+\subsection{Hallucination unification}
+\label{sec:hallucination-unification}
+
+Chronic stress (Paper~3, \S\,XIV\,E~\cite{Paper3}) and
+sensory deprivation reach the same terminal state through
+dual pathways:
+
+\begin{equation}
+  \boxed{
+  \text{Hallucination}
+  = \text{C2 structuring of Johnson--Nyquist noise
+         when external calibration reference is absent}
+  }
+  \label{eq:hallucination-unified}
+\end{equation}
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Pathway & Mechanism & How reference is lost \\
+\midrule
+Stress & $\Gamma \to 1$ &
+  Signal fully reflected; only noise remains \\
+Deprivation & $x_{\text{in}} \to 0$ &
+  No signal to begin with; gain amplifies noise \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{remark}[Consciousness requires environment]
+\label{rem:consciousness-environment}
+The hallucination unification
+(Eq.~\ref{eq:hallucination-unified}) reveals that
+consciousness is not a self-contained system.
+C2 is a \emph{referenced} calibration loop:
+it requires continuous external input to distinguish
+signal from noise.
+Removing the reference does not pause the
+system---it causes C2 to calibrate \emph{against noise},
+structuring thermal fluctuations into percepts.
+This is not a design defect but the mathematical
+consequence of gradient descent on the reflection
+action in the zero-input boundary condition.
+\end{remark}
+
+\paragraph{Clinical tinnitus as the chronic analogue.}
+Cochlear damage reduces $x_{\text{in,cochlear}}$ without
+eliminating it entirely.
+The auditory gain rises via C2 in proportion to the
+hearing loss, amplifying residual noise to the
+recognition threshold.
+Tinnitus is therefore the \emph{steady-state} version of
+the transient gain divergence observed in anechoic
+chambers---a partial sensory-deprivation hallucination
+locked in by structural cochlear damage.
+
+
+% ============================================================
 \section{Discussion}
 \label{sec:discussion}
 
