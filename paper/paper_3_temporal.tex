@@ -1566,6 +1566,107 @@ population-calibrated prior on their dual-network health.
 \end{remark}
 
 
+\subsection{Chronic stress as slow-forged PTSD:
+  integral-path equivalence}
+\label{sec:chronic-stress-ptsd}
+
+The three conditions for PTSD identified in
+Sec.~\ref{sec:ptsd-anatomy}---(1)~impulsive mismatch,
+(2)~high $\eta$ at the moment of trauma,
+(3)~absent C2 resolution---define a sufficient but
+not unique route to structural $Z_s$ fixation.
+A second route reaches the same attractor through
+temporal integration rather than instantaneous shock.
+Recall the impedance debt
+(Eq.~\ref{eq:impedance-debt}):
+\begin{equation}
+  D_Z = \int_0^T \Gamma^2(t)\,P_{\text{in}}(t)\,dt
+  \;> D_Z^*
+  \quad\Longrightarrow\quad
+  Z_s \;\text{locked.}
+  \label{eq:chronic-dz}
+\end{equation}
+The integral is indifferent to the shape of its
+integrand: a Dirac-like spike and a months-long
+plateau yield identical $D_Z$ if their areas match.
+When $\Gamma^2(t)$ is chronically elevated at
+sub-traumatic amplitude---interview anxiety,
+occupational uncertainty, prolonged social
+adversity---the integral crosses the irreversibility
+threshold $D_Z^*$ on a timescale of months.
+The accumulated C2 update is
+\begin{equation}
+  \Delta Z_s
+    = \int_0^{T_{\text{chronic}}}
+      \eta(\tau)\,\Gamma(\tau)\,
+      x_{\text{in}}\,x_{\text{out}}\,d\tau\,,
+  \label{eq:chronic-dz-update}
+\end{equation}
+bypassing conditions (1) and (2) while satisfying
+(3): there is no corrective trajectory because the
+stressor is \emph{ambient and unresolvable}
+(e.g.\ awaiting a hiring decision with no feedback,
+sustaining living costs with no income certainty).
+In this regime $Z_{\text{load}}$ is perpetually
+undefined---the brain cannot compute a gradient
+because the target impedance fluctuates between
+mutually exclusive outcomes---and C2 stalls while
+$D_Z$ continues to grow.
+
+The terminal state is identical to classic PTSD:
+$Z_s$ locked in a high-$\Gamma^2$ attractor with
+$\eta\,|\,\Gamma\,x_{\text{in}}\,x_{\text{out}}|\approx 0$
+on the affected sub-network.
+The downstream somatic cascade
+(Eq.~\ref{eq:psych-somatic}) proceeds unchanged:
+\[
+  \Sigma\Gamma^2\!\uparrow
+  \;\to\; \text{Cortisol}\!\uparrow
+  \;\to\; (\Gamma_n,\Gamma_v)\!\uparrow
+  \;\to\; \text{Immune C2 failure}
+  \;\to\; \text{Multi-organ disease.}
+\]
+
+\noindent
+Two further consequences merit emphasis:
+\begin{itemize}
+  \item \textbf{Hallucination from thermal noise.}
+    As $\Gamma_i \to 1$ on sensory channels,
+    $T_i \to 0$ (C1).
+    Johnson--Nyquist noise
+    ($P_\theta = 4k_BT\,R_{\text{eff}}\,\Delta f$)
+    that would normally transmit harmlessly is instead
+    reflected back into the processing loop and
+    amplified---the brain interprets its own thermal
+    noise as external signal.
+    This is the same physics as the
+    flashback mechanism (Sec.~\ref{sec:ptsd-anatomy}),
+    but triggered by noise rather than a stimulus.
+  \item \textbf{Immune collapse and opportunistic infection.}
+    Via the five-channel coupling of Paper~5
+    (Eq.~16 therein),
+    sustained neural $\Gamma_n^2\!\uparrow$ drains
+    input power from the immune channel,
+    raising $\Gamma_{\text{imm}}^2$ and suppressing
+    affinity maturation ($\eta_{\text{imm}}\!\downarrow$).
+    Common infections (upper respiratory, etc.)
+    break through because immune $T_{\text{imm}} \to 0$.
+\end{itemize}
+
+\begin{remark}[Anxiety spectrum as integration time]
+\label{rem:anxiety-spectrum}
+The clinical labels form a continuum
+parameterised by $D_Z$ integration time:
+acute stress ($D_Z$ small, minutes),
+generalised anxiety disorder ($D_Z$ growing, weeks),
+burnout ($D_Z$ moderate, months to years),
+and Complex PTSD ($D_Z > D_Z^*$, structurally locked).
+The impedance physics is a single equation;
+the diagnostic distinctions reflect how far along
+the integral the patient sits when clinically assessed.
+\end{remark}
+
+
 % ============================================================
 %  SECTION 14 --- TESTABLE PREDICTIONS
 % ============================================================
@@ -1617,6 +1718,15 @@ population-calibrated prior on their dual-network health.
     exposure should show measurably elevated cortisol
     and impedance-debt markers relative to matched
     controls, following Eq.~\eqref{eq:caregiver-lifecycle}.
+
+  \item \textbf{Chronic stress $\to$ PTSD-equivalent lock-in}:
+    Individuals under sustained sub-traumatic stress
+    (unemployment $>6$\,months, chronic financial
+    precarity) should exhibit $D_Z$ accumulation,
+    immune biomarker decline, and eventual symptom
+    overlap with classic PTSD---despite absence of a
+    single traumatic event---consistent with integral-path
+    equivalence (Sec.~\ref{sec:chronic-stress-ptsd}).
 
   \item \textbf{Dementia as accelerated neural aging}:
     $\delta_n D_n(t)$ overwhelms learning prematurely,
