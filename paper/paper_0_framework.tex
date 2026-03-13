@@ -937,31 +937,55 @@ rendering endothermy a necessary condition for complex
 neural topology---not a metabolic luxury but a
 $\Gamma$-topological constraint.
 
-\paragraph{Nocturnal thermal constraint.}
-During sleep, metabolic heat production drops to
-$P_{\text{met}} \approx 82\,$W, yielding a thermal excess
-$\Delta T = P_{\text{met}}/(h\,A) \approx 5.7\,^\circ$C
-above ambient.
-For $K{=}5$: the minimum viable ambient temperature is
-$T_{\text{amb,min}} = T_c(5) - \Delta T \approx -1.2\,^\circ$C.
-Temperate winter nights ($-10\,^\circ$C) push
-$T_{\text{body}}$ to $-4.3\,^\circ$C---well below $T_c$.
-Thermal shelter becomes a \emph{physical necessity}.
-A cave at depth~$z$ damps surface oscillations by
-$\exp(-z/\delta)$, where the thermal penetration depth
-$\delta = \sqrt{2\kappa/(\rho c_p\,\omega)}$.
-For limestone at 5\,m: diurnal oscillation is eliminated
-($\delta_{\text{day}} \approx 0.13\,$m), and
-cave temperature equals the annual mean
-($\approx 12\,^\circ$C in temperate zones).
-This yields $T_{\text{body}}(\text{cave sleep}) \approx
-17.7\,^\circ$C, safely above $T_c(5) = 4.5\,^\circ$C.
-Low-$K$ organisms face no such constraint:
-$T_c(1) = -10.3\,^\circ$C permits exposed survival.
-The constraint chain is:
-high~$K$ $\to$ high~$T_c$ $\to$ endothermy $\to$
-sleep reduces $P_{\text{met}}$ $\to$ nocturnal exposure
-risks $T < T_c$ $\to$ thermal shelter required.
+\paragraph{Thermodynamic boundary crisis during
+$D_Z$ clearance.}
+To discharge accumulated impedance debt~$D_Z$
+(Paper~3~\cite{Paper3}), the system must enter a
+low-power state (sleep), reducing metabolic heat
+generation to a basal level~$P_{\text{basal}}$.
+System temperature during sleep obeys
+\begin{equation}
+  T_{\text{sys}}
+  = T_{\text{env}} + P_{\text{basal}}\,R_{\text{th}}\,,
+  \label{eq:T-sleep}
+\end{equation}
+where $R_{\text{th}}$ is the organism's effective thermal
+resistance (integrating fur, blubber, posture, and
+huddling---all abstracted as a single lumped parameter).
+The C2 boundary condition demands
+$T_{\text{sys}} > T_c(K)$ at all times;
+violation halts remodelling and freezes impedance
+mismatch in place.
+
+During nocturnal or seasonal temperature drops,
+$T_{\text{env}}$ may swing by tens of kelvin.
+When $P_{\text{basal}}\,R_{\text{th}}$ alone cannot
+guarantee the inequality, the organism must couple to
+an \emph{environmental thermal low-pass filter}---any
+high-heat-capacity mass (subterranean rock, tree
+hollows, snow caves, or conspecific huddles) whose
+thermal inertia damps the external oscillation:
+\begin{equation}
+  T_{\text{refugium}}(z)
+  \approx \overline{T}_{\text{annual}}\,,
+  \qquad z \gg \delta
+  = \sqrt{2\kappa/(\rho c_p\,\omega)}\,,
+  \label{eq:thermal-LPF}
+\end{equation}
+where $\delta$ is the thermal penetration depth.
+Ecologically, such environments are called
+\emph{thermal refugia}; physically, they are low-pass
+filters that replace the volatile $T_{\text{env}}$ with
+a stable baseline~$\overline{T}_{\text{annual}}$.
+
+The resulting constraint chain is purely physical:
+high~$K$ $\to$ high~$T_c(K)$ $\to$
+sleep reduces $P_{\text{met}}$ $\to$
+$P_{\text{basal}}\,R_{\text{th}}$ may be insufficient
+$\to$ external thermal coupling required.
+Low-$K$ organisms ($T_c \ll 0\,^\circ$C) satisfy the
+inequality with biological insulation alone and need
+no refugium.
 
 \paragraph{Falsification criterion.}
 The $T_c(K)$ formula is falsified by exhibiting an organism with

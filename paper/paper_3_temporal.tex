@@ -654,37 +654,56 @@ lowest-action path between aquatic and terrestrial
 impedance regimes---a testable geometric prediction,
 not an evolutionary cause.
 
-\subsection{Nocturnal thermal constraint}
+\subsection{Thermal refugia: the $D_Z$-clearance
+  boundary crisis}
+\label{sec:thermal-refugia}
 
 Once on land, high-$K$ organisms face a second constraint.
-During sleep, metabolic heat production drops to
-$P_{\text{met}} \approx 82\,$W, sustaining only
-$\Delta T = P_{\text{met}}/(h\,A) \approx 5.7\,^\circ$C
-above ambient.
-At $K{=}5$: the minimum viable ambient temperature is
-$T_{\text{amb,min}} = T_c(5) - \Delta T \approx -1.2\,^\circ$C.
-Temperate winter nights ($-10\,^\circ$C) push a sleeping
-organism to $T_{\text{body}} \approx -4.3\,^\circ$C---well below
-$T_c(5) = +4.5\,^\circ$C.
+To discharge accumulated impedance debt~$D_Z$, the system
+must enter a low-power state (sleep), reducing metabolic
+heat generation to a basal level~$P_{\text{basal}}$.
+System temperature during sleep obeys
+\begin{equation}
+  T_{\text{sys}}
+  = T_{\text{env}}
+  + P_{\text{basal}}\,R_{\text{th}}\,,
+  \label{eq:T-sleep-P3}
+\end{equation}
+where $R_{\text{th}}$ is the organism's effective thermal
+resistance---a single lumped parameter integrating fur,
+blubber, posture, and conspecific huddling.
+The C2 boundary condition demands
+$T_{\text{sys}} > T_c(K)$ at all times;
+violation halts remodelling and freezes the impedance
+mismatch in place.
 
-A cave at depth~$z$ acts as a thermal low-pass filter.
-The penetration depth
-$\delta = \sqrt{2\kappa/(\rho c_p\,\omega)}$ sets the
-cutoff: at 5\,m, diurnal oscillation vanishes
-($\delta_{\text{day}} \approx 0.13\,$m) and interior
-temperature equals the annual mean
-($\approx 12\,^\circ$C in temperate zones).
-This yields
-$T_{\text{body}}(\text{cave sleep}) \approx 17.7\,^\circ$C,
-safely above $T_c$.
-The constraint chain is:
-high~$K$ $\to$ high~$T_c$ $\to$ nocturnal exposure risks
-$T < T_c$ $\to$ thermal shelter required.
-Low-$K$ organisms ($T_c(1) = -10.3\,^\circ$C) face no such
-constraint and tolerate exposed sleeping sites.
-This is a quantifiable physics prediction, not a narrative:
-93~tests verify the full derivation from Arrhenius $\eta(T)$
-through cave damping to survival margin.
+During nocturnal or seasonal temperature drops,
+$T_{\text{env}}$ may swing by tens of kelvin.
+When $P_{\text{basal}}\,R_{\text{th}}$ alone cannot
+guarantee the inequality, the organism must couple to
+an \emph{environmental thermal low-pass filter}---any
+high-heat-capacity mass whose thermal inertia damps
+the external oscillation.
+At depth~$z \gg \delta =
+\sqrt{2\kappa/(\rho c_p\,\omega)}$, the local
+temperature converges to the annual
+mean~$\overline{T}_{\text{annual}}$.
+Ecologically such environments (subterranean caverns,
+tree hollows, snow caves, conspecific huddles) are
+collectively termed \emph{thermal refugia}; physically,
+they are low-pass filters that replace the volatile
+$T_{\text{env}}$ with a stable baseline.
+
+The resulting constraint chain is:
+high~$K$ $\to$ high~$T_c(K)$ $\to$
+sleep reduces $P_{\text{met}}$ $\to$
+$P_{\text{basal}}\,R_{\text{th}}$ may be insufficient
+$\to$ external thermal coupling required.
+Low-$K$ organisms ($T_c \ll 0\,^\circ$C) satisfy the
+inequality with biological insulation alone.
+93~tests verify the full derivation from Arrhenius
+$\eta(T)$ through thermal-refugium damping to
+survival margin.
 
 
 % ============================================================
