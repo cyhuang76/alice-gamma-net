@@ -1100,6 +1100,147 @@ chronic diseases rarely appear in isolation.
 \end{remark}
 
 
+\subsection{Recovery dynamics: what happens when the
+  stressor disappears}
+\label{sec:recovery}
+
+The preceding analysis raises the central clinical
+question: if the external stressor is removed
+($s(t) = 0$ for $t > t_{\text{off}}$),
+does the system return to health?
+Setting $s = 0$ in Eq.~(\ref{eq:coupled-G2}) gives
+\begin{equation}
+  \frac{d\Gamma_k^2}{dt}\bigg|_{s=0}
+  = -\eta(t)\,\Gamma_k^2
+    + \sum_{j \neq k} C_{kj}\,\Gamma_j^2
+    + \beta_k\,\Gamma_k^4
+    + \delta_k(t)\,.
+  \label{eq:recovery}
+\end{equation}
+Recovery requires the repair term
+$\eta\,\Gamma_k^2$ to dominate the sum of
+inter-channel coupling, positive feedback, and
+aging damage.
+Three regimes emerge:
+
+\begin{enumerate}
+  \item \textbf{Pre-bifurcation (reversible).}
+    If every channel satisfies
+    $\Gamma_k^2 < \Gamma_k^{*2}$
+    (below the saddle-node threshold of
+    Remark~\ref{rem:disease-phase-transition}),
+    then $\eta$ exceeds the combined
+    $C_{kj}$ and $\beta_k$ terms, and
+    $\Gamma_k^2 \to \Gamma_{k,\text{eq}}^{\text{low}}$
+    exponentially.
+    Clinically: acute stress, adjustment disorder,
+    early burnout---symptoms resolve within weeks
+    to months after stressor removal.
+
+  \item \textbf{Post-bifurcation, single channel
+    (partially reversible).}
+    If one channel (typically neural) has crossed
+    its bifurcation point
+    $\Gamma_n^2 > \Gamma_n^{*2}$
+    but the downstream channels have not,
+    self-sustained positive feedback
+    ($\beta_n\,\Gamma_n^4$) keeps the neural
+    attractor locked even at $s = 0$.
+    However, the coupling terms
+    $C_{kn}\,\Gamma_n^2$ have not yet pushed
+    other channels past their thresholds.
+    Recovery requires \emph{active intervention}
+    to lower $\Gamma_n^2$ below the
+    bifurcation point---pharmacotherapy
+    (modulate $\eta$, widen basin),
+    psychotherapy (provide corrective C2
+    gradient), or both
+    (Paper~3, Sec.~XIV.B).
+    Once $\Gamma_n^2$ is pulled below
+    $\Gamma_n^{*2}$, the remaining channels
+    self-heal via their intact $\eta$.
+    Clinically: GAD, moderate PTSD, early
+    depression---treatable but not
+    self-resolving.
+
+  \item \textbf{Post-bifurcation, multi-channel
+    (structurally irreversible).}
+    If the cascade has propagated through $C_{kj}$
+    and two or more channels have independently
+    crossed their bifurcation thresholds,
+    each channel sustains the others even after
+    the stressor is removed:
+    \begin{equation}
+      \eta\,\Gamma_k^2
+      < \sum_{j \neq k} C_{kj}\,\Gamma_j^2
+        + \beta_k\,\Gamma_k^4
+      \quad \forall\; k \in \text{locked channels.}
+      \label{eq:irreversible}
+    \end{equation}
+    No single-channel intervention suffices because
+    lowering $\Gamma_k^2$ in one channel is
+    immediately re-driven by the locked neighbours.
+    Clinically: Complex PTSD with metabolic
+    syndrome, chronic pain with depression and
+    immune decline---the ``treatment-resistant''
+    multimorbidity that consumes disproportionate
+    healthcare resources.
+    The only viable strategy is \emph{simultaneous
+    multi-channel intervention}: e.g.\ combined
+    psychotherapy (neural) + exercise
+    (vascular--metabolic) + anti-inflammatory
+    (immune), each targeting a different $\Gamma_k^2$
+    below its respective bifurcation point.
+\end{enumerate}
+
+\begin{remark}[Why ``just removing the stress''
+  is sometimes not enough]
+\label{rem:hysteresis}
+The saddle-node bifurcation in
+Eq.~(\ref{eq:coupled-G2}) exhibits
+\emph{hysteresis}: the stress level required to
+\emph{trigger} the phase transition
+($s_{\text{onset}}$) is lower than the stress
+\emph{reduction} required to reverse it
+($s_{\text{recovery}} < 0$, i.e.\ active repair
+is needed).
+In everyday language: ``the damage is done''
+is not a metaphor but a statement about the
+bifurcation diagram.
+The gap between $s_{\text{onset}}$ and
+$s_{\text{recovery}}$ widens with time spent in
+the high-$\Gamma$ state, because aging damage
+$\delta_k(t)$ continues to accumulate and
+$\eta(t)$ continues to decline.
+Early intervention---before the cascade crosses
+a second channel's threshold---is therefore not
+merely preferable but \emph{physically
+qualitatively different} from late intervention.
+\end{remark}
+
+\noindent
+The recovery hierarchy also predicts a
+\emph{channel ordering} for rehabilitation:
+the channel with the lowest
+$\beta_k / \eta$ ratio recovers first when stress
+is removed, while the channel with the highest
+ratio is the last to unlock.
+In the five-organ model, vascular $\Gamma_v^2$
+typically has the fastest self-repair
+(exercise increases $\eta_v$ directly via
+shear-stress remodeling), while neural
+$\Gamma_n^2$ is slowest
+(structural $Z_s$ changes require months of
+sustained C2 input).
+This predicts a clinically testable
+\emph{recovery sequence}: physical health
+markers (blood pressure, HbA1c) improve before
+psychological symptoms (mood, sleep, cognition)
+---consistent with rehabilitation medicine
+observations that metabolic improvement often
+precedes and enables psychological recovery.
+
+
 \subsection{Caregiver triple-load model}
 \label{sec:triple-load}
 
