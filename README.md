@@ -23,7 +23,7 @@
 
 ## What is Alice?
 
-Alice is a **digital organism** — not an AI model. She has a body (eyes, ears, hands, 31 organs), a brain (42 neural modules), feels pain, sleeps, dreams, ages, and can develop 120+ clinical pathologies across 14 medical specialties.
+Alice is a **digital organism** — not an AI model. She has a body (eyes, ears, hands, 31 organs), a brain (42 neural modules), feels pain, sleeps, dreams, ages, and can develop 125+ clinical pathologies across 13 medical specialties.
 
 **Everything** emerges from one equation:
 
@@ -196,16 +196,16 @@ python -m alice.main server --port 8000
 
 | Metric | Count |
 |:---|---:|
-| Source files (`.py`) | 306 |
-| Lines of code | 131,900+ |
+| Source files (`.py`) | 219 |
+| Lines of code | 91,700+ |
 | Unit tests | 3,274 |
-| Experiments | 91 |
+| Experiments | 24 |
 | Body organs | 31 |
 | Brain modules | 42 |
 | Disease models | 125 |
-| Medical specialties | 14 |
+| Medical specialties | 13 |
 | Lab items mapped | 53 |
-| Figures | 23 |
+| Figures | 32 |
 | Testable predictions | 18 |
 
 ---
@@ -244,10 +244,10 @@ alice-gamma-net/
 │   ├── diagnostics/        # Lab-Γ Engine (API + feedback + UI)
 │   ├── modules/            # Shared module infrastructure
 │   └── api/                # Brain REST API server
-├── tests/                  # 82 test files, 3,274 tests
-├── experiments/            # 91 experiment scripts
+├── tests/                  # 92 test files, 3,274 tests
+├── experiments/            # 24 experiment scripts
 ├── paper/                  # 6 papers (70 pages, LaTeX + PDF)
-├── figures/                # 23 generated figures
+├── figures/                # 32 generated figures
 ├── docs/                   # Architecture docs
 │   ├── app/                # GitHub Pages verification web app
 │   │   ├── index.html      # Single-page Pyodide app

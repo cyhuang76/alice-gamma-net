@@ -137,7 +137,7 @@ alice-gamma-net/
 │   ├── alice_brain.py  #   統一控制器 Unified controller (2,951 行)
 │   └── main.py         #   CLI/API 入口 Entry point (240 行)
 ├── tests/              # pytest 測試套件 (92 files, 3,274 tests)
-├── experiments/        # 實驗腳本 (73 files)
+├── experiments/        # 實驗腳本 (24 files)
 ├── paper/              # 六篇論文 LaTeX source (6 .tex, 70 pp)
 ├── figures/            # 論文圖表 (18 figures)
 └── docs/               # 文件 Documentation
@@ -384,7 +384,7 @@ N 節點 K 維阻抗向量的活拓撲網路 — 1,762 行。
 
 ## 6. 臨床專科 Clinical Specialties
 
-12 個專科，每科 10 個疾病模型，共 120 個。統一架構：  
+13 個專科，每科 10 個疾病模型，共 130 個。統一架構：  
 每個疾病 = 特定的阻抗失配模式 (Γ signature)。  
 
 ### 6.1 心臟科 Cardiology (`clinical_cardiology.py`, 638 行)
@@ -680,7 +680,7 @@ python -m alice.main --api --port 8000
 
 ## 9. 實驗 Experiments
 
-73 個實驗腳本 (`experiments/`)，分類如下：
+24 個實驗腳本 (`experiments/`)，分類如下：，分類如下：
 
 ### 9.1 核心驗證 Core Verification
 
@@ -697,7 +697,7 @@ python -m alice.main --api --port 8000
 | 實驗 | 驗證內容 |
 |---|---|
 | `exp_clinical_neurology.py` | 5 大神經疾病 (中風/ALS/失智/AD/CP) |
-| `exp_clinical_cardiology.py` ~ `exp_clinical_pulmonology.py` | 12 專科各 10 疾病 |
+| `exp_clinical_cardiology.py` ~ `exp_clinical_pulmonology.py` | 13 專科各 10 疾病 |
 | `exp_clinical_calibration.py` | 臨床量表校準 |
 | `exp_pharmacology.py` | MS/PD/Epilepsy/Depression 藥物模擬 |
 
@@ -759,14 +759,14 @@ python -m alice.main --api --port 8000
 
 | 項目 Metric | 數值 Value |
 |---|---|
-| Python 檔案 | ~306 |
-| 總程式碼行數 | ~131,900+ |
+| Python 檔案 | ~219 |
+| 總程式碼行數 | ~91,700+ |
 | 大腦引擎 Brain Engines | 42 |
-| 身體模組 Body Modules | 32 (含 12 臨床專科) |
-| 疾病模型 Disease Models | 125 (12 專科 × 10 + Lab-Γ templates) |
+| 身體模組 Body Modules | 32 (含 13 臨床專科) |
+| 疾病模型 Disease Models | 125 (Lab-Γ templates) + 130 (13 專科 × 10) |
 | 臨床量表 Clinical Scales | 125 |
 | pytest 測試 | 3,274 |
-| 實驗腳本 Experiments | 91 |
+| 實驗腳本 Experiments | 24 |
 | 論文 Papers | 6 (70 pp total) |
 | 論文圖表 Figures | 23 |
 | 可測試預測 Testable Predictions | 18 |
