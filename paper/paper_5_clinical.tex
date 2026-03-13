@@ -955,12 +955,15 @@ the brainstem adapts its pressure setpoint upward
 $\Gamma_{\text{reg}}$ but creating downstream mismatch
 in every organ.
 
-Allostatic load~\cite{McEwen1998}:
+Allostatic load~\cite{McEwen1998},
+mathematically the \emph{cumulative exogenous
+set-point forcing}:
 \begin{equation}
   L_{\text{allostatic}} = \int_0^T
   |\Delta Z_{\text{setpoint}}(t)|\,dt\,,
 \end{equation}
-the cumulative shift in the controller's setpoint.
+i.e.\ the time-integrated drift of the regulatory
+controller's impedance set-point.
 Chronic stress causes multi-organ disease because
 the \emph{controller's} $\Gamma$ error propagates
 to all downstream networks.
@@ -1036,8 +1039,11 @@ $\beta_k$ a pathological positive-feedback coefficient
 
 \subsubsection{Disease branch points}
 
-A disease is declared when $\Gamma_k^2$ exceeds a
-sustained threshold $\theta$:
+A \emph{disease}---in the $\Gamma$ language,
+a \emph{pathological attractor}: a self-sustaining
+high-$\Gamma^2$ fixed point of the coupled ODE
+system---is declared when $\Gamma_k^2$ exceeds a
+sustained threshold~$\theta$:
 \begin{center}
 \begin{tabular}{lcc}
 \toprule
@@ -1878,7 +1884,10 @@ has been removed.
 Clinical correlates are well documented:
 obesity $\to$ elevated CRP $\to$ type~2 diabetes
 $\to$ further weight gain constitutes the
-``metabolic--inflammatory'' comorbidity cluster.
+``metabolic--inflammatory'' comorbidity cluster
+(\emph{coupled-subsystem divergence} in $\Gamma$
+language: two channels simultaneously locked
+above their respective $\theta$).
 In recovery-dynamics terms
 (Sec.~\ref{sec:recovery}), this sub-loop can
 achieve regime~3 (structurally irreversible)
