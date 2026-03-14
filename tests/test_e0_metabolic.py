@@ -300,3 +300,76 @@ class TestStressMetabolicCoupling:
             g2 = float(np.mean(gv ** 2))
             t = 1.0 - g2
             assert abs(g2 + t - 1.0) < 1e-10, f"C1 violated at edge {key}"
+
+
+# ============================================================================
+# ABLATION: disable C2 → tests that rely on C2 MUST FAIL
+# These tests prove the test suite is not trivially self-consistent.
+# If η=0 (no impedance remodeling), then:
+#   - A[Γ] should NOT decrease over time (C2 is off)
+#   - Pathological topology should NOT converge toward healthy
+# ============================================================================
+
+class TestAblationC2Disabled:
+    """Ablation control: with η=0 (C2 off), C2-dependent assertions must fail.
+
+    This class proves that the test suite actually depends on the physics
+    engine doing real C2 impedance remodeling. If these ablation tests
+    PASS, it means our C2-dependent tests above are NOT trivially satisfiable.
+    """
+
+    def test_no_c2_action_does_not_decrease(self):
+        """With η=0, A[Γ] should NOT decrease — C2 is the only learning rule."""
+        topo = build_pancreatic(eta=0.0)  # C2 OFF
+        h = run_topology(topo, n_ticks=100, stim_node="glucose_sensor", stim_amp=0.3)
+        a_early = sum(m["action_impedance"] for m in h[:20])
+        a_late = sum(m["action_impedance"] for m in h[80:])
+        # Without C2, impedances don't change, so per-tick action stays ~constant
+        # (small variation from activation dynamics, but no systematic decrease)
+        assert a_late >= a_early * 0.95, (
+            f"With η=0 (C2 off), action should NOT systematically decrease: "
+            f"early={a_early:.6f}, late={a_late:.6f}"
+        )
+
+    def test_no_c2_perturbation_persists(self):
+        """With η=0, impedance perturbation is permanent — no remodeling recovery."""
+        topo = build_pancreatic(eta=0.0)  # C2 OFF
+        perturb_impedance(topo, "peripheral_tissue", factor=3.0)
+        z_before = float(topo.nodes["peripheral_tissue"].impedance[0])
+        run_topology(topo, n_ticks=200, stim_node="glucose_sensor", stim_amp=0.5)
+        z_after = float(topo.nodes["peripheral_tissue"].impedance[0])
+        assert z_after == pytest.approx(z_before, rel=1e-10), (
+            f"With η=0, Z should not change: before={z_before:.4f}, after={z_after:.4f}"
+        )
+
+    def test_no_c2_t2d_action_stays_elevated(self):
+        """With η=0, T2DM action stays high permanently — no C2 compensation."""
+        topo = build_pancreatic(eta=0.0)  # C2 OFF
+        perturb_impedance(topo, "peripheral_tissue", factor=3.0)
+        h = run_topology(topo, n_ticks=200, stim_node="glucose_sensor", stim_amp=0.5)
+        a_early = sum(m["action_impedance"] for m in h[:20])
+        a_late = sum(m["action_impedance"] for m in h[180:])
+        # Without C2, the perturbation is permanent: late ≈ early
+        ratio = a_late / a_early if a_early > 0 else 1.0
+        assert ratio > 0.9, (
+            f"With η=0, T2DM action should persist: ratio={ratio:.3f}"
+        )
+
+    def test_c2_on_vs_off_produces_different_trajectory(self):
+        """Same topology, same perturbation: η>0 and η=0 must produce different A[Γ] curves."""
+        # With C2
+        topo_on = build_pancreatic(eta=0.01)
+        perturb_impedance(topo_on, "peripheral_tissue", factor=3.0)
+        h_on = run_topology(topo_on, n_ticks=200, stim_node="glucose_sensor", stim_amp=0.5)
+        a_on = sum(m["action_impedance"] for m in h_on)
+
+        # Without C2
+        topo_off = build_pancreatic(eta=0.0)
+        perturb_impedance(topo_off, "peripheral_tissue", factor=3.0)
+        h_off = run_topology(topo_off, n_ticks=200, stim_node="glucose_sensor", stim_amp=0.5)
+        a_off = sum(m["action_impedance"] for m in h_off)
+
+        # C2-on should have LOWER total action (it learns to reduce mismatch)
+        assert a_on < a_off, (
+            f"C2-on action={a_on:.4f} should be less than C2-off={a_off:.4f}"
+        )

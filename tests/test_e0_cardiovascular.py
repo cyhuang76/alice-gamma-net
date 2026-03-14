@@ -293,3 +293,51 @@ class TestIrreducibilityTheorem:
         late = np.mean([m["action_impedance"] for m in history[-10:]])
         assert late < early, (
             f"A_impedance should be reducible: early={early:.4f}, late={late:.4f}")
+
+
+# ============================================================================
+# ABLATION: disable C2 → tests that rely on C2 MUST FAIL
+# These tests prove the test suite is not trivially self-consistent.
+# ============================================================================
+
+class TestAblationC2Disabled:
+    """Ablation control: with η=0 (C2 off), C2-dependent assertions must fail.
+
+    This class proves that the test suite actually depends on the physics
+    engine doing real C2 impedance remodeling.
+    """
+
+    def test_no_c2_action_does_not_decrease(self):
+        """With η=0, A[Γ] should NOT systematically decrease."""
+        topo = build_cardiovascular(eta=0.0, seed=42)
+        h = run_topology(topo, n_ticks=200)
+        a_early = sum(m["action_impedance"] for m in h[:20])
+        a_late = sum(m["action_impedance"] for m in h[180:])
+        assert a_late >= a_early * 0.95, (
+            f"With η=0 (C2 off), action should NOT decrease: "
+            f"early={a_early:.6f}, late={a_late:.6f}")
+
+    def test_no_c2_perturbation_persists(self):
+        """With η=0, impedance perturbation is permanent."""
+        topo = build_cardiovascular(eta=0.0, seed=42)
+        perturb_impedance(topo, "arterioles", factor=2.0)
+        z_before = float(topo.nodes["arterioles"].impedance[0])
+        run_topology(topo, n_ticks=200)
+        z_after = float(topo.nodes["arterioles"].impedance[0])
+        assert z_after == pytest.approx(z_before, rel=1e-10), (
+            f"With η=0, Z should not change: before={z_before:.4f}, after={z_after:.4f}")
+
+    def test_c2_on_vs_off_different_trajectory(self):
+        """Same topology+perturbation: η>0 and η=0 must produce different A[Γ] totals."""
+        topo_on = build_cardiovascular(eta=0.05, seed=42)
+        perturb_impedance(topo_on, "arterioles", factor=2.0)
+        h_on = run_topology(topo_on, n_ticks=200)
+        a_on = sum(m["action_impedance"] for m in h_on)
+
+        topo_off = build_cardiovascular(eta=0.0, seed=42)
+        perturb_impedance(topo_off, "arterioles", factor=2.0)
+        h_off = run_topology(topo_off, n_ticks=200)
+        a_off = sum(m["action_impedance"] for m in h_off)
+
+        assert a_on < a_off, (
+            f"C2-on action={a_on:.4f} should be less than C2-off={a_off:.4f}")
