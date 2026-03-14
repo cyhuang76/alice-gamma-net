@@ -2368,30 +2368,89 @@ to reflection-based instrumentation.
 The memory \emph{is} the impedance structure;
 its perfection is its camouflage.
 
-\paragraph{4. PTSD as a dormant attractor.}
+\paragraph{4. PTSD as a structurally locked recall attractor.}
 Post-traumatic stress disorder forges a
 high-$\Gamma$ ``scar'' on one or more neural
 pathways (Paper~5, Sec.~\ref{sec:disease-progression}).
-When no trigger is present, $P_{\text{in}} = 0$ on
-the scarred path, so $\Gamma^2 \times 0 = 0$:
-the standing wave has zero amplitude.
-The scar is invisible below the noise floor.
+The recall SNR theorem (Theorem~\ref{thm:recall-snr})
+now provides the complete three-layer mechanism.
+
+\emph{Layer~1: sealed impedance trace.}
+Trauma drives massive C2 remodeling, producing
+a trace with $\varepsilon \approx 1$ on the
+affected pathway.
+Under normal circumstances, C2 repair
+($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$)
+would gradually reduce $\varepsilon$ over time.
+In PTSD, the scarred pathway has entered the
+effective sealed null-space $\mathcal{S}_{\text{eff}}$
+(Paper~5, Sec.~8.2):
+the repair rate $\eta$ is insufficient to push
+$\Gamma^2$ below the bifurcation threshold.
+The trace is \emph{structurally locked}---it
+cannot decay by rest alone
+(Second Law, Theorem~\ref{thm:second-law}).
+
+\emph{Layer~2: dormant-to-explosive SNR transition.}
+When no trigger is present, $P_{\text{probe}} = 0$
+on the scarred path, so
+$\mathrm{SNR}_{\text{recall}}
+= \varepsilon^2 \cdot 0 / P_{\text{noise}} = 0$:
+the trace is submerged.
 The moment a sensory trigger (a sound, a smell)
-injects even modest $P_{\text{in}}$ into the
-scarred path, $\Gamma^2 \approx 1$ produces
-near-total reflection:
-$\mathrm{SNR}_{\text{obs}}$ jumps from zero to
-effectively infinity.
+injects even modest $P_{\text{probe}}$ into the
+scarred channel, $\varepsilon^2 \approx 1$ produces
+\begin{equation}
+  \mathrm{SNR}_{\text{recall}}
+  = \frac{\varepsilon^2\,P_{\text{probe}}}{P_{\text{noise}}}
+  \gg \theta_{\text{recall}}
+  \label{eq:ptsd-snr}
+\end{equation}
+---the SNR jumps from zero to effectively infinity.
 The resulting bandwidth hijacking
-(Def.~\ref{def:pain-hijack}) is the \emph{flashback}---a
-sudden, involuntary monopolisation of PFC
+(Def.~\ref{def:pain-hijack}) is the \emph{flashback}:
+a sudden, involuntary monopolisation of PFC
 bandwidth by a single pathological channel.
+
+\emph{Layer~3: rest cannot unseal.}
 Between episodes, no fMRI, no EEG, no biomarker
 can detect the scar, because the scar is
-a \emph{structural} $\Gamma$ that produces no
+a \emph{structural} $\varepsilon$ that produces no
 \emph{signal} without excitation---exactly as a
 dormant fault in a transmission line is invisible
 until power is applied.
+Because the trace is locked in
+$\mathcal{S}_{\text{eff}}$, simply lowering
+$P_{\text{noise}}$ (rest, avoidance, withdrawal)
+does not help: it does not reduce $\varepsilon$.
+In fact, quiet environments may \emph{worsen}
+flashback severity, because lower
+$P_{\text{noise}}$ means any stray
+$P_{\text{probe}}$ more easily exceeds
+$\theta_{\text{recall}}$---the clinical observation
+that PTSD patients often report worse symptoms
+during quiet nights.
+
+\emph{Therapeutic implication.}
+The only viable treatment is simultaneous
+(i)~elevation of $\eta$ (pharmacotherapy:
+raise the repair rate so that C2 can begin to
+erode $\varepsilon$) and
+(ii)~supply of corrective gradient
+$(x_{\text{in}},\,x_{\text{out}})$
+(trauma-focused psychotherapy: provide the
+specific impedance-gradient vectors that
+target the scarred pathway).
+Monotherapy fails in both directions: drugs
+without therapy raise $\eta$ but provide no
+gradient direction---the scar is reduced
+isotropically and inefficiently; therapy without
+drugs supplies the gradient but cannot overcome
+the locked $\eta$-deficit.
+Drug withdrawal without completed C2 reshaping
+predicts symptom recurrence: the $Z$-landscape
+was never restructured
+(Paper~5, Sec.~\ref{sec:disease-progression}).
 
 \paragraph{5. Consciousness as noise-floor surfing.}
 Normal waking consciousness is not a fixed state
@@ -2831,8 +2890,11 @@ constraints (C1--C3), we have derived:
     exercise analgesia (activity raises
     $P_{\text{noise}}$), invisible muscle memory
     ($\Gamma = 0$ produces no reflection),
-    dormant PTSD ($P_{\text{in}} = 0$ on scarred
-    path), and the impossibility of anatomically
+    dormant PTSD ($\varepsilon \approx 1$ but
+    $P_{\text{probe}} = 0$: structurally locked
+    yet submerged until triggered,
+    Eq.~\ref{eq:ptsd-snr}),
+    and the impossibility of anatomically
     localising memory, trauma, or soul
     (topology, not substance).
 \end{enumerate}
