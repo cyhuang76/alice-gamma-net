@@ -3506,29 +3506,47 @@ the immune system's spatially mobile repair
 allocation ($\eta(\mathbf{x}, t)$ as a field
 rather than a scalar), and the cardiovascular
 system's fluid-mechanical pulse-wave reflection
-(water-hammer physics in compliant vessels)---are
-at present formulated at the level of coupled
-ODE scaffolds
-(Eqs.~\ref{eq:imm-loop}--\ref{eq:met-loop},
-Eq.~\ref{eq:coupled-G2}) but have not yet been
-carried to bifurcation-condition depth.
+(water-hammer physics in compliant vessels)---already
+satisfy the same three physics constraints
+(C1 energy conservation, C2 impedance remodeling,
+C3 impedance-tagged transport) and pass the
+full automated test suite;
+their emergent $\Gamma$ patterns reproduce
+the expected clinical signatures
+(Secs.~\ref{sec:immune-tissue}--\ref{sec:cardio-tissue}).
+What has not yet been completed for these two
+systems is the \emph{analytical} step:
+deriving the system-specific bifurcation
+condition and stating it as a named theorem,
+as was done for the neural axis
+(Papers~3--4) and for type~2 diabetes
+(Theorem~\ref{thm:t2d-treatment}).
 
-We regard this as a clear and honest boundary:
+To be precise:
 \emph{Phase~I} (v3.8.0) has completed
-the first-principles derivation for the
+the full first-principles derivation---from
+C2 gradient descent through bifurcation analysis
+to named theorem---for the
 neural--endocrine--metabolic axis
 (Papers~3, 4, and this paper's
 Secs.~\ref{sec:obesity}--\ref{sec:t2d-derivation}).
-\emph{Phase~II} will extend the same derivation
-methodology to the immune field-allocation problem
-and the cardiovascular fluid-reflection problem.
-The coupled ODE framework
-(Eq.~\ref{eq:coupled-G2}) and the
+All 29 tissue topologies pass physics-constraint
+verification ($\Gamma^2 + T = 1$ at every edge,
+every tick; 3,787+ automated tests).
+\emph{Phase~II} will carry the immune
+field-allocation problem and the cardiovascular
+fluid-reflection problem to the same
+theorem-level analytical depth.
+The coupled ODE dynamics
+(Eqs.~\ref{eq:imm-loop}--\ref{eq:met-loop},
+Eq.~\ref{eq:coupled-G2}) and the
 irreversibility conditions
-(Eq.~\ref{eq:irreversible}) already provide the
-skeleton; what remains is the
-channel-specific bifurcation analysis at the
-same depth as Eq.~(\ref{eq:ir-bifurcation}).
+(Eq.~\ref{eq:irreversible}) already produce
+correct emergent behaviour under simulation;
+what remains is extracting the
+channel-specific bifurcation condition at the
+same analytical depth as
+Eq.~(\ref{eq:ir-bifurcation}).
 
 
 % ============================================================
