@@ -1106,10 +1106,68 @@ Source code:
 \texttt{tests/test\_tissue\_blueprints.py}
 (245~parametrised tests covering structure, C1, C2, and
 organ-specific physiology for all 29~blueprints),
-plus the original
-\texttt{tests/test\_e0\_cardiovascular.py} (13~tests) and
-\texttt{tests/test\_e0\_neural.py} (17~tests).
-All 275~blueprint tests pass with 100\% rate.
+plus the E0 emergence suites
+\texttt{tests/test\_e0\_cardiovascular.py},
+\texttt{tests/test\_e0\_neural.py}, and
+\texttt{tests/test\_e0\_metabolic.py}
+(56~tests total).
+All pass with 100\% rate.
+
+\subsubsection{Ablation structure and epistemic credibility}
+\label{sec:ablation}
+
+A test suite written alongside the code it tests
+is vulnerable to circular validation:
+the same author who writes
+\texttt{simulate\_diabetes()} also writes
+\texttt{assert result == 0.42},
+creating a self-confirming closed loop
+whose pass count carries no epistemic weight.
+
+We address this by imposing a \emph{structural ablation
+constraint} on every E0 test file.
+Each file contains two mutually contradictory
+test classes that must pass simultaneously:
+
+\begin{description}
+  \item[C2-on class] ($\eta > 0$, impedance remodeling active):
+    asserts that (i)~the action functional $A[\Gamma]$ decreases
+    over time, (ii)~pathological perturbations are partially
+    compensated, and (iii)~different initial conditions produce
+    distinguishable $\Gamma$-trajectories.
+  \item[C2-off class] ($\eta = 0$, remodeling disabled):
+    asserts that (i)~$A[\Gamma]$ does \emph{not} systematically
+    decrease, (ii)~impedance perturbations persist
+    permanently ($Z_{\text{after}} = Z_{\text{before}}$
+    to machine precision), and (iii)~the total action
+    exceeds the C2-on case.
+\end{description}
+
+\noindent
+The logical structure is a pincer:
+a hardcoded implementation that fakes
+``action always decreases'' will pass the C2-on class
+but fail the C2-off class (which requires action to persist).
+A hardcoded implementation that fakes
+``action stays constant'' will pass
+the C2-off class but fail the C2-on class.
+The \emph{only} implementation that simultaneously satisfies
+both classes is one that actually computes
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+and propagates its consequences through the topology.
+
+This does not replace external validation
+(Table~\ref{tab:vv} distinguishes IC from LIT and EXT),
+but it raises the internal-consistency evidence
+above the level of trivially satisfiable assertions.
+Among the full test suite of 3{,}797 automated tests,
+approximately 65--75\% verify hardcoded values,
+boundary clamping, or algebraic identities
+that any implementation could trivially pass.
+The ablation-structured E0 tests constitute a smaller
+fraction (${\sim}\,56$ tests across three topologies),
+but they carry disproportionate epistemic weight
+because they are non-trivially satisfiable.
 
 
 % ============================================================
@@ -1214,8 +1272,10 @@ All source code, simulation scripts, and NHANES pipelines
 are available at
 \url{https://github.com/cyhuang76/alice-gamma-net}
 under AGPL-3.0.
-The full test suite comprises 3{,}796 automated tests
-with 100\% pass rate.
+The full test suite comprises 3{,}797 automated tests
+with 100\% pass rate, of which 56 are
+ablation-structured E0 emergence tests
+(Sec.~\ref{sec:ablation}).
 
 
 % ============================================================
