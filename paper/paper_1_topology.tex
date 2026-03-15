@@ -683,8 +683,7 @@ the low-$K$ branch.  Cross-vertebrate data confirm
 that higher stable $T$ correlates with larger brain
 size at given body mass.
 
-\paragraph{Surface insulation trade-off: why high-$K$ organisms
-lose fur.}
+\paragraph{Surface insulation trade-off.}
 The steady-state thermal balance reads
 $\dot{Q}(K) = (T_{\text{body}} - T_{\text{env}}) / R_{\text{th}}$,
 where $\dot{Q}(K) \propto K\,\Gamma^2$ is the heat produced by
@@ -695,57 +694,30 @@ Rearranging,
   = \frac{T_{\text{body}} - T_{\text{env}}}{\dot{Q}(K)}\,.
   \label{eq:Rth-K}
 \end{equation}
-For low-$K$ organisms (ectotherms, small mammals),
+For low-$K$ organisms,
 $\dot{Q}$ is small and survival requires
 \emph{high}~$R_{\text{th}}$---hence dense fur, blubber, or
 behavioural huddling.
-For high-$K$ organisms ($K_{\text{PFC}} \approx 128$ in humans),
-$\dot{Q}$ is large and the brain's narrow thermal margin
+For high-$K$ organisms,
+$\dot{Q}$ is large and the narrow thermal margin
 ($T_{\text{body}} - T_c \ll 1\,$K) demands
 \emph{low}~$R_{\text{th}}$ to shed excess heat.
-Fur creates a stagnant-air boundary layer that raises
-$R_{\text{th}}$ and blocks evaporative cooling; selection
-therefore drives fur reduction once $K$ exceeds a
-threshold $K^*$ where
-$\dot{Q}(K^*)\,R_{\text{th,fur}} > T_{\text{body}} - T_c$.
-
-In parallel, eccrine sweat glands proliferate:
-evaporative heat flux
-$\dot{Q}_{\text{evap}} = \dot{m}\,L_v$
-($L_v \approx 2430\,$kJ\,kg$^{-1}$) is the only
-surface mechanism whose capacity scales independently
-of $R_{\text{th}}$.
-Humans possess $\sim 2$--$4 \times 10^6$ eccrine glands,
-the highest density among primates.
-The same logic predicts fur loss in other large
-high-$K$ mammals (elephants, cetaceans, rhinoceroses),
-a prediction consistent with the comparative record.
-
-Skin tissue itself co-adapts: with the fur shield removed,
-the epidermis thickens, melanin migrates from hair
-follicles to basal keratinocytes (UV protection now borne
-by the exposed surface), dermal vasculature density
-increases (enabling dynamic $R_{\text{th}}$ modulation---the
-visible correlate is flushing, i.e.\
-$\Gamma_v^2 \downarrow \Rightarrow$ vasodilation), and
-subcutaneous adipose redistributes into a tuneable
-insulation layer.
-All four changes follow from Eq.~\eqref{eq:Rth-K}:
-once fur is lost, the skin boundary must simultaneously
-minimise mean~$R_{\text{th}}$ (heat shedding) and maximise
-its \emph{dynamic range} (cold tolerance without fur).
-
-In summary:
+A fur layer raises $R_{\text{th}}$ by creating a
+stagnant-air boundary; selection therefore drives
+fur reduction once $K$ exceeds a threshold $K^*$
+where $\dot{Q}(K^*)\,R_{\text{th,fur}} >
+T_{\text{body}} - T_c$.  In summary:
 \begin{equation}
   K\!\uparrow
   \;\Rightarrow\;\dot{Q}\!\uparrow
-  \;\Rightarrow\;R_{\text{th}}\text{ must }\downarrow
-  \;\Rightarrow\;\text{fur loss} + \text{eccrine proliferation}\,.
+  \;\Rightarrow\;R_{\text{th}}\text{ must }\downarrow\,.
   \label{eq:fur-loss-chain}
 \end{equation}
-This is a direct consequence of C1~(energy conservation) and
-the Arrhenius thermal physics of C2; no additional biological
-assumption is required.
+The specific adaptations that follow (evaporative
+cooling, epidermal thickening, vascular density
+changes) are biological details outside the scope
+of this derivation; the thermodynamic constraint
+Eq.~\eqref{eq:Rth-K} is the result.
 
 
 % ============================================================
@@ -1161,8 +1133,8 @@ $D_K$ from $\sim 0.66$ to $\sim 2.3$.
 
 The dimensional preference derived above has a direct
 anatomical corollary.
-Consider a homogeneous network of neurons with randomly
-assigned $K$ values.
+Consider a network of neurons with heterogeneous
+$K$ values.
 C2 gradient descent on the reflection action
 $\mathcal{A}$ selectively strengthens same-$K$ edges
 (more shared modes $\Rightarrow$ faster $\Gamma$ reduction
@@ -1173,40 +1145,22 @@ Under sustained activity plus edge pruning
 (developmental apoptosis), the surviving connectivity
 partitions the network into \emph{same-$K$ clusters}:
 neurons sharing a common modal dimension self-segregate
-into spatially contiguous aggregates---precisely the
-\emph{functional regions} observed in cortical anatomy.
+into spatially contiguous aggregates.
 
 The argument is a thermodynamic phase-separation:
 MRP drives the system toward the lowest attainable
 $\mathcal{A}$; same-$K$ clustering minimises
 $A_{\text{cut}}$ at every internal edge.
-The result is a hierarchy of clusters:
-\begin{itemize}
-  \item \textbf{Sensory cortices} ($K \approx 4$--$8$):
-    neurons tuned to specific modalities (visual, auditory,
-    somatosensory) cluster because their shared modal
-    dimension enables maximal C2 convergence.
-  \item \textbf{Motor cortex} ($K \approx 5$):
-    output neurons with matched dimensionality aggregate
-    into topographic motor maps.
-  \item \textbf{Prefrontal cortex} ($K \approx 128$):
-    the convergence point of all modalities; its extreme
-    $K$ forces it into a separate cluster because no
-    lower-$K$ region can absorb its modes without
-    $A_{\text{cut}}$ penalty.
-  \item \textbf{Subcortical nuclei} ($K \approx 1$--$3$):
-    relay stations (thalamus $K{\approx}3$, brainstem
-    $K{\approx}2$) self-organise as intermediate clusters
-    that bridge the $K$-gap between periphery and cortex.
-\end{itemize}
-Functional brain regions are therefore not a biological
-design choice but a \emph{theorem consequence}: any
-impedance network under MRP with heterogeneous $K$
-\emph{must} phase-separate into same-$K$ domains to
-minimise total reflected action.
-Cortical columns---within which same-$K$ connectivity is
-strongly favoured (point~2 above)---are the
-mesoscopic realisation of this thermodynamic phase.
+The theorem is general: \emph{any} impedance network
+under MRP with heterogeneous $K$ must phase-separate
+into same-$K$ domains to minimise total reflected action.
+The mapping of specific $K$ ranges to specific
+anatomical regions (sensory cortices, motor cortex,
+prefrontal cortex, subcortical nuclei) is a
+\emph{prediction} of this theorem, not an input;
+its verification requires independent measurement
+of neuronal modal complexity, which remains an
+open experimental problem.
 
 \subsection{Negative scaling exponent and brain-scale feasibility}
 

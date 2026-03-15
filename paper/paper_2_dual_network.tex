@@ -954,6 +954,82 @@ material delivery depends on vascular $\Tv$,
 and vascular regulation depends on neural $\Tn$.
 Neither network is self-sufficient.
 
+\subsection{Four irreducible tissue types}
+\label{sec:four-tissues}
+
+The dual-network coupling above can be derived from
+a more fundamental question: what does C2 require
+to operate at any spatial location?
+The update rule
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+imposes four physical prerequisites:
+\begin{enumerate}
+  \item $\Gamma$ \textbf{must be defined}---an impedance
+    boundary must exist at the interface.
+  \item $x_{\text{in}},\,x_{\text{out}}$ \textbf{must
+    propagate}---a transmission medium and structural
+    support must carry signals between interfaces.
+  \item $\Delta Z$ \textbf{must be computed}---a
+    signal-processing element must evaluate the
+    gradient and update $Z$.
+  \item $\rho$ \textbf{must flow}---the substrate
+    consumed by (1)--(3) must be actively pumped;
+    diffusion alone is too slow for organisms
+    above $\sim$1\,mm.
+\end{enumerate}
+These four prerequisites map one-to-one onto the
+four fundamental tissue types of histology:
+\begin{center}
+\begin{tabular}{lll}
+\hline
+C2 prerequisite & Tissue type & Examples \\
+\hline
+Impedance boundary & Epithelial & Skin, gut lining, alveoli \\
+Medium $+$ support  & Connective & Blood, bone, ECM, fat \\
+Gradient computation & Nervous   & Neurons, glia \\
+Active pump          & Muscle    & Cardiac, smooth, skeletal \\
+\hline
+\end{tabular}
+\end{center}
+Removing any one type breaks the C2 cycle:
+without epithelium, $\Gamma$ is undefined;
+without connective tissue, $x_{\text{in}} = 0$
+(no medium);
+without nervous tissue, $\Delta Z = 0$
+(no computation);
+without muscle, $\rho$ is static
+($x_{\text{in}} = 0$ within one diffusion length).
+
+Moreover the four tissues form a \textbf{dependency
+cycle}:
+\[
+  \text{Nervous}
+  \xrightarrow{\;\text{needs }\rho\;}
+  \text{Connective}
+  \xrightarrow{\;\text{needs pump}\;}
+  \text{Muscle}
+  \xrightarrow{\;\text{needs boundary}\;}
+  \text{Epithelial}
+  \xrightarrow{\;\text{needs control}\;}
+  \text{Nervous}
+\]
+Because the cycle is closed, no subset of three
+can sustain itself: four is both necessary and
+sufficient for C2 viability.
+All organs are spatial arrangements of these four
+tissues; the 29~C2 channels catalogued in Paper~5
+are instances of the \emph{same} update rule
+operating at 29~distinct $(Z,\,x_{\text{in}},\,
+x_{\text{out}})$ loci within the same four-tissue
+substrate.
+
+The dual-network model $H = \Tn\,\Tv$
+(Eq.~\ref{eq:dual_health}) is the special case
+that resolves only the nervous and connective
+(vascular) components of the cycle at each organ;
+the epithelial and muscular prerequisites are
+implicitly satisfied whenever the organ exists.
+
 
 \subsection{Murray's Law as physics, not optimization}
 

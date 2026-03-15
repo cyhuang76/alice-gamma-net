@@ -1480,25 +1480,22 @@ $K$ & $\kappa(\mathbf{Z})$ & $\delta\Gamma/\Gamma$ (39$^\circ$C)
 \end{tabular}
 \end{table}
 
-\paragraph{Why PFC performs matrix computation.}
-The prefrontal cortex receives convergent projections from
-every sensory modality: visual ($K \approx 8$), auditory
-($K \approx 6$), somatosensory ($K \approx 7$), limbic
-($K \approx 3$), and interoceptive ($K \approx 2$).
+\paragraph{Why the convergence region performs matrix computation.}
 By the irreducibility theorem (Paper~1),
 a receiver must have $K \ge K_{\text{source}}$ on every
 input edge to avoid total reflection of excess modes.
-The PFC is therefore \emph{forced} by topology to maintain
-$K_{\text{PFC}} \ge \max_j K_j \approx 128$, making its
-impedance $\mathbf{Z}_{\text{PFC}} \in \mathbb{R}^{128
-\times 128}$ the highest-dimensional matrix in the brain.
+Any region receiving convergent projections from
+multiple sensory modalities is therefore \emph{forced}
+by topology to maintain
+$K_{\text{conv}} \ge \max_j K_j$, making its
+impedance the highest-dimensional matrix in the network.
 C2 gradient descent on this matrix---minimising
 $\mathcal{A} = \int\!\sum_k \gamma_k^2\,dt$ across
-128~modes simultaneously---is the physical operation that
-neuroscience calls ``executive function'' and
-``decision-making''.
-It is not that PFC ``chooses'' to do matrix computation;
-it is that multi-modal convergence leaves no alternative.
+all modes simultaneously---is the physical operation that
+neuroscience calls ``executive function''.
+It is not that the convergence region ``chooses'' to do
+matrix computation; it is that multi-modal convergence
+leaves no alternative.
 
 \noindent
 The prefrontal cortex, with cortical pyramidal neurons at
