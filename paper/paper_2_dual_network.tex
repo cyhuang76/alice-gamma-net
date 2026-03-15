@@ -954,6 +954,78 @@ material delivery depends on vascular $\Tv$,
 and vascular regulation depends on neural $\Tn$.
 Neither network is self-sufficient.
 
+\subsection{From dual to quintuple: five irreducible subsystems}
+\label{sec:quintuple}
+
+The dual-network result generalises.
+C2~remodelling is a \emph{dissipative} process:
+every update $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+consumes material substrate---glucose, O$_2$,
+amino acids, iron, folate---that cannot be synthesised
+\emph{de novo} by either network.
+These substrates originate outside the organism at
+an environmental impedance $Z_{\text{env}}$ (chemical
+bond energy, macromolecular structure) severely
+mismatched to intracellular impedance $Z_{\text{bio}}$:
+$\Gamma_{\text{raw}} = (Z_{\text{bio}} - Z_{\text{env}})
+/ (Z_{\text{bio}} + Z_{\text{env}}) \approx 1$.
+Without a \emph{multi-stage impedance transformer}
+that progressively lowers $\Gamma$ from ${\approx}\,1$
+to ${\approx}\,0$, no substrate enters the blood.
+
+The gastrointestinal tract is exactly this transformer:
+oral cavity (mechanical fragmentation, amylase),
+stomach (acid denaturation, pepsin),
+small intestine (bile emulsification, pancreatic hydrolysis),
+and hepatic portal clearance each reduce the
+environment-to-blood impedance mismatch by one stage---
+functionally identical to the relay hierarchy of
+Paper~1, Sec.~5.
+Similarly, the skin boundary defines the thermal
+resistance $R_{\text{th}}$ that determines whether the
+organism can shed C2~waste heat
+(Paper~1, Eq.~\ref*{eq:Rth-K});
+removing it leaves $R_{\text{th}}$ undefined and
+thermal run-away inevitable.
+
+We therefore identify \textbf{five mutually irreducible
+subsystems}, each of which, if removed, drives
+$\Gamma \to 1$ in finite time:
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Subsystem & Irreducible role & Failure time-scale \\
+\hline
+Neural      & C2 executor ($\Delta Z$ computation)
+            & Immediate \\
+Vascular    & $\rho$-transport $+$ thermal bus
+            & Minutes \\
+Blood       & Transmission medium ($Z_{\text{bus}}$)
+            & Minutes \\
+Skin        & Thermal boundary ($R_{\text{th}}$)
+            & Hours \\
+Digestive   & Environment $\to$ blood impedance matching
+            & Days--weeks \\
+\hline
+\end{tabular}
+\end{center}
+The descending time-scale reflects the body's
+substrate reserves: glycogen $\sim$24\,h, lipid
+$\sim$weeks, protein $\sim$months.
+The organ-level health metric therefore generalises from
+the dual product $H = \Tn\,\Tv$ (Eq.~\ref{eq:dual_health})
+to
+\begin{equation}
+  H_{\text{org}} = \prod_{s=1}^{5}(1-\Gamma_s^2)\,,
+  \label{eq:quintuple_health}
+\end{equation}
+where $s$ indexes the five subsystems.
+Any single $\Gamma_s \to 1$ collapses the product to zero,
+formalising the clinical observation that
+multi-system failure is universally lethal regardless
+of which subsystem fails first.
+
 
 \subsection{Murray's Law as physics, not optimization}
 
