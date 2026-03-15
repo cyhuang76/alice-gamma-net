@@ -14,6 +14,7 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
 \newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
 
 \newcommand{\Aimp}{A_{\text{imp}}}
 \newcommand{\Acut}{A_{\text{cut}}}
@@ -153,6 +154,24 @@ It is not an approximation; it holds exactly for any
 lossless interface.  Dissipative corrections (Johnson--Nyquist
 noise, Arrhenius aging) modify $Z$ over time but never
 violate power balance at a single interface.
+
+\begin{remark}[Signal power vs.\ metabolic work]
+\label{rem:signal-vs-metabolic}
+C1 governs the instantaneous \emph{signal power} budget
+at each interface: incident $= $ reflected $+$ transmitted.
+The metabolic energy that fuels C2 remodeling
+($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$)
+enters as a separate thermodynamic work term that
+modifies $Z$ itself, not the $\Gamma^2 + T = 1$ identity.
+Biological processes that actively consume ATP---receptor
+phosphorylation, immune affinity maturation, synaptic
+long-term potentiation---change the impedance landscape
+(and hence future values of $\Gamma$) but do not violate
+C1 at any instant.  The analogy is an electronic
+amplifier: the DC power supply changes the gain
+(modifies $Z$), yet Kirchhoff's power law holds at
+every RF port.
+\end{remark}
 
 \begin{corollary}[Thermal Dissipation]
 \label{cor:thermal}

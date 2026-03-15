@@ -273,7 +273,18 @@ The protocol is:
   \item Predict organ disease status
     ($\Gamma_{\text{organ}}^2 > \theta$).
   \item Compare with self-reported diagnoses.
-  \item Zero fitted parameters throughout.
+  \item Zero fitted parameters throughout.%
+    \footnote{``Zero fitted parameters'' means that no
+    coefficient in the pipeline was optimised against
+    the NHANES outcome labels.
+    The reference intervals ($x_{\text{ref},j}$) and
+    anatomical weights ($w_j$) are external physiological
+    constants drawn from textbook consensus values
+    (e.g.\ fasting glucose $<100$\,mg/dL,
+    SBP $<120$\,mmHg), analogous to using
+    $g = 9.81$\,m/s$^2$ in a ballistics prediction.
+    They constitute prior knowledge, not regression
+    coefficients fitted to the validation cohort.}
 \end{enumerate}
 
 \subsubsection{Results}

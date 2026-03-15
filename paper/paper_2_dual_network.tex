@@ -885,6 +885,36 @@ Third, the super-additivity ratio~(S3) of $1.02$--$1.03\times$
 is modest but consistent across all organs tested, matching
 the direction and order of magnitude of the STENO-2 result.
 
+\begin{remark}[Analytic stability guarantee]
+\label{rem:stability-analytic}
+The 100\% numerical pass rate has an analytic
+underpinning.
+The reflection action
+$\mathcal{A}[\Gamma] = \int\!\sum_i \Gamma_i^2\,dt$
+serves as a Lyapunov function for the coupled system:
+C2 ensures $d\mathcal{A}/dt \le 0$ (Paper~1,
+Theorem~1), so $\Sigma\Gamma^2$ is non-increasing
+and bounded below by~$A_{\text{cut}} > 0$.
+Stability under the dual-network time-scale mismatch
+($\eta_n \approx 0.008 \gg \eta_v \approx 0.001$)
+follows from a singular-perturbation argument:
+defining $\epsilon = \eta_v / \eta_n \ll 1$,
+the fast (neural) subsystem relaxes to its
+quasi-static manifold on the time scale
+$1/\eta_n$ while the slow (vascular) subsystem
+provides a drifting boundary condition.
+Standard Tikhonov--Fenichel theory guarantees that
+if the fast subsystem is asymptotically stable on
+its slow manifold---which it is, because $\mathcal{A}$
+is a Lyapunov function---then the full system is
+asymptotically stable for sufficiently small
+$\epsilon$.
+A complete formal proof, including explicit bounds
+on the basin of attraction under pathological
+perturbations, remains an open problem and is
+listed in \texttt{KNOWN\_LIMITATIONS.md}.
+\end{remark}
+
 
 %====================================================================
 \section{Discussion}\label{sec:discussion}

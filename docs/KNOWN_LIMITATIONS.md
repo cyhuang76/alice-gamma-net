@@ -504,3 +504,14 @@ Status : open / resolved in <commit-sha>
 | 所需的真正驗證 | (1) fMRI + 受控升溫量測 K-dependent degradation (2) 腦幹損傷病人的多模態感覺數據 (3) 昏厥前主觀報告臨床統計 (4) TMS 阻斷 efference copy 的 Φ_meta 量測 |
 | 等級 | **L4**（設計邊界：模擬器固有限制，需外部實驗突破） |
 
+## L-MATH-01 · 雙網路耦合的解析穩定性證明尚缺（Dual-Network Analytic Stability Proof）
+
+| 項目 | 值 |
+|:-----|:---|
+| 建立日期 | 2026-03-15 |
+| 影響範圍 | Paper 2（Dual-Network Organ Health）Sec. 6.3 |
+| 問題 | 神經與血管網路的時間尺度差異（$\eta_n \approx 0.008 \gg \eta_v \approx 0.001$）構成奇異攝動（singular perturbation）系統。目前穩定性保證僅為數值驗證（7 項測試、100 次隨機運行、100% 通過），尚缺完整的 Tikhonov–Fenichel 解析證明。 |
+| 現有保證 | 反射作用量 $\mathcal{A}[\Gamma]$ 是 Lyapunov 函數（Paper 1 Theorem 1），C2 確保 $d\mathcal{A}/dt \le 0$。快系統（神經）在慢流形上漸近穩定。 |
+| 缺少的部分 | (1) 病理擾動下吸引盆的明確邊界估計 (2) 急性血管阻塞導致神經過度補償振盪的衰減時間尺度上界 (3) 嚴格排除混沌吸引子的解析條件 |
+| 等級 | **L4**（設計邊界：數學分析深度不足，需未來工作解決） |
+
