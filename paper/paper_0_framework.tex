@@ -607,6 +607,29 @@ This perception--compensation cycle is the operational
 meaning of C1--C2 at every interface; Paper~5
 elaborates it across all seven domains.
 
+\paragraph{C2 as automatic impedance matching.}
+The physical purpose of C2 is not ``learning'' or
+``optimisation'' in the machine-learning sense.
+It is \emph{automatic impedance matching}: the unique
+first-order rule that maximises the transmission
+coefficient $T_i = 1 - \Gamma_i^2$ at each interface,
+thereby maximising usable power delivery to downstream
+tissue.
+The engineering analogue is an automatic impedance tuner
+in an RF transmitter: the tuner adjusts $Z$ continuously
+to minimise reflected power, not because it has a goal,
+but because the circuit dissipates less energy when
+$\Gamma \to 0$.
+The biological stakes are existential:
+uncompensated reflection accumulates as impedance debt
+$D_Z = \int\!\Gamma^2 P_{\text{in}}\,dt$
+(Paper~3), which degrades tissue, drives aging, and
+terminates in $\Gamma^2_{\text{basal}} = 1$ (death,
+Paper~4).
+C2 is therefore not a luxury; it is the minimum
+mechanism required to delay the thermodynamically
+inevitable approach to $T = 0$.
+
 
 % ============================================================
 %  SECTION 8 — TWENTY-NINE TISSUES (SUMMARY TABLE)
