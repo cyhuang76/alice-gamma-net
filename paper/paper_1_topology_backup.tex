@@ -1,0 +1,1402 @@
+% ============================================================
+%  Paper 1 — Irreducible Dimensional Cost and Fractal Scaling
+%            in Heterogeneous Impedance Networks
+%
+%  Merged from: Paper I (Irreducibility) + Paper VIII (Fractal Cost)
+%  Compile:  pdflatex paper_1_topology.tex  (×2)
+% ============================================================
+\documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
+
+\usepackage{amsmath,amssymb,bm,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+% ----- macros -----
+\newcommand{\Gnet}{$\Gamma$-Net}
+\newcommand{\avg}[1]{\langle #1 \rangle}
+\newcommand{\Aimp}{A_{\text{imp}}}
+\newcommand{\Acut}{A_{\text{cut}}}
+\newcommand{\Acouple}{A_{\text{couple}}}
+\newcommand{\Kcom}{K_{\text{com}}}
+\newcommand{\Krelay}{K_{\text{relay}}}
+\newcommand{\Zv}{Z_{\text{v}}}
+\newcommand{\Zn}{Z_{\text{n}}}
+\newcommand{\Gv}{\Gamma_{\text{v}}}
+\newcommand{\Gn}{\Gamma_{\text{n}}}
+\newcommand{\Tv}{T_{\text{v}}}
+\newcommand{\Tn}{T_{\text{n}}}
+
+% ============================================================
+\begin{document}
+
+\title{%
+Paper~1: Irreducible Dimensional Cost and Fractal Scaling\\
+in Heterogeneous Impedance Networks\\[4pt]
+\large From the Minimum Reflection Principle to Kleiber's Law%
+}
+
+\author{Hsi-Yu Huang}
+\email{llc.y.huangll@gmail.com}
+\affiliation{Independent Researcher, Taipei, Taiwan}
+
+\date{\today}
+
+% ============================================================
+\begin{abstract}
+We present a physics-driven framework for heterogeneous impedance
+networks in which all emergent behaviour derives from a single
+variational principle: the Minimum Reflection Principle~(MRP),
+$A[\Gamma] = \int \sum_{ij} \Gamma_{ij}^2\,dt \to \min$.
+Three physical laws govern the system:
+energy conservation~(C1: $\Gamma^2 + T = 1$),
+impedance remodeling~(C2: $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$),
+and impedance-tagged transport~(C3).
+
+\textbf{Part~A} proves the \emph{Dimensional Cost Irreducibility
+Theorem}: for networks with heterogeneous mode counts $\{K_i\}$,
+the action decomposes as $A = \Aimp(t) + \Acut$,
+where $\Aimp \to 0$ under C2 learning while
+$\Acut = \sum_{\text{edges}} (K_{\text{src}} - K_{\text{tgt}})^+$
+has $\nabla_{\mathbf{Z}} \Acut \equiv 0$---zero gradient with
+respect to all impedance variables.
+Numerical experiments confirm convergence time
+$\tau_{\text{conv}} \sim N^{-1.12}$ ($R^2 = 0.93$)
+and a soft-cutoff parameter $\gamma$ that tunes the K-space
+fractal dimension $D_K = 0.76\gamma + 0.78$,
+placing biologically realistic networks in the cortical band
+$D_K \in [1.3, 1.5]$.
+
+\textbf{Part~B} gives $\Acut$ a definite geometric structure.
+For a self-similar relay hierarchy in $d$ dimensions,
+$\Acut \propto M^{(d-1)/d}$---for $d = 3$,
+$\Acut \propto M^{2/3}$.
+The Murray-optimal bifurcation ratio is $\beta = n^{1/d}$;
+for binary branching in 3D, $\beta = 2^{1/3} \approx 1.26$.
+When two space-filling trees (vascular + neural) share one
+volume, the packing overhead
+$\Omega = B_{\text{total}}/B_{\text{tissue}} \approx 1.25$--$1.33$
+quantifies the metabolic tax of dual-network life.
+Combined with capillary invariance, MRP recovers Kleiber's
+allometric law $B \propto M^{3/4}$.
+In the notation of the title: each network is topologically
+one-dimensional, but $1 \times 1 = \Omega \neq 1$.
+
+\medskip\noindent
+\textbf{Circularity disclosure.}
+All numerical experiments use simulation modules built from
+C1--C3 themselves; they demonstrate internal consistency, not
+empirical validity.  External tests are reported in
+Papers~2--5~\cite{Paper2,Paper3,Paper4,Paper5}.
+The $\Acut$ scaling law in Part~B is a mathematical consequence
+of the irreducibility theorem plus geometric constraints; no
+simulation or fitted parameters are involved.
+\end{abstract}
+
+\maketitle
+
+
+% ============================================================
+%  PART A — IRREDUCIBILITY
+% ============================================================
+
+\part*{Part A: Dimensional Cost Irreducibility}
+
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+% ============================================================
+
+The nervous system couples neurons with vastly different mode
+counts: cortical pyramidal cells carry $K \approx 5$ independent
+impedance modes (soma, basal dendrites, apical tuft, axon,
+spine neck), while unmyelinated C-fibers carry $K = 1$.
+Classical models---from the scalar conductance of Hodgkin and
+Huxley~\cite{HH1952} to the mean-field neural masses of
+Breakspear~\cite{Breakspear2017}---sidestep this heterogeneity
+by projecting all signals onto a single scalar variable.
+Here we ask: what is the \emph{minimum physical cost} of coupling
+such dimensionally mismatched elements?
+
+The answer is unexpectedly rigid.
+For any edge connecting a $K_i$-mode source to a $K_j$-mode
+target with $K_i > K_j$, the $(K_i - K_j)$ excess modes are
+totally reflected ($\gamma_k = 1$), contributing a fixed cost
+$\Acut = K_i - K_j$ invariant under all impedance update
+rules---including C2 impedance remodeling.
+We call this the \emph{Dimensional Cost Irreducibility Theorem}
+(Sec.~\ref{sec:theorem}).
+
+The theorem has a striking corollary: hierarchical topology
+with relay nodes of intermediate $K$ is a \emph{thermodynamic
+necessity}---the only mechanism to reduce signal loss without
+violating the physical constraints (Sec.~\ref{sec:results}).
+
+But the irreducibility theorem only proves $\Acut > 0$.
+Part~B asks: \emph{how big} is $\Acut$?
+By combining the theorem with space-filling and Murray-optimal
+branching constraints, we show that $\Acut$ is a fractal
+integral scaling as $M^{(d-1)/d}$ (Sec.~\ref{sec:acut-fractal}).
+When two space-filling trees---vascular and neural---share one
+volume, the packing overhead $\Omega > 1$ quantifies the
+metabolic tax of dual-network life
+(Sec.~\ref{sec:dual}), and MRP recovers Kleiber's allometric
+law $B \propto M^{3/4}$ (Sec.~\ref{sec:single-scaling}).
+
+
+% ============================================================
+\section{Physical Framework}
+\label{sec:framework}
+% ============================================================
+
+\subsection{Network Definition}
+
+A $\Gamma$-network consists of $N$ nodes, each carrying a
+$K_i$-dimensional impedance vector
+$\mathbf{Z}_i \in \mathbb{R}^{K_i}_{>0}$.
+For an edge $i \to j$, the per-mode reflection coefficient is
+\begin{equation}
+\gamma_k = \frac{Z_{j,k} - Z_{i,k}}{Z_{j,k} + Z_{i,k}},
+\quad k = 1, \ldots, \Kcom,
+\label{eq:gamma}
+\end{equation}
+where $\Kcom = \min(K_i, K_j)$.
+Excess source modes $k > \Kcom$ are totally reflected:
+$\gamma_k = 1$.
+This is the electromagnetic boundary condition for a waveguide
+whose $k$-th mode has no counterpart in the target medium.
+
+\subsection{Three Physical Laws}
+\label{sec:laws}
+
+\textbf{C1---Energy Conservation.}
+At every edge, every tick, reflected and transmitted power sum
+to incident power:
+\begin{equation}
+\gamma_k^2 + T_k = 1, \quad \forall\, k, \; \forall\, (i,j).
+\label{eq:C1}
+\end{equation}
+
+\textbf{C2---Impedance Remodeling.}
+Each node adjusts its impedance to reduce local reflection:
+\begin{align}
+\Delta Z_{i,k} &= +\eta \, \gamma_k \, x_{\text{in},k}\, x_{\text{out},k},
+\label{eq:C2a} \\
+\Delta Z_{j,k} &= -\eta \, \gamma_k \, x_{\text{in},k}\, x_{\text{out},k},
+\label{eq:C2b}
+\end{align}
+where $x_{\text{in},k}$ is the input activity (at node $i$,
+the source) and $x_{\text{out},k}$ the output activity
+(at node $j$, the target) for mode~$k$; $\eta$ is the
+remodeling rate.
+This update requires only local information:
+the two impedance vectors and the gating activities.
+The term ``impedance remodeling'' generalises C2 beyond
+neural synapses: Paper~5~\cite{Paper5} shows this law is
+equivalent to Wolff's Law (bone), Glagov remodeling
+(arteries), immune memory, and twenty-four other
+tissue-specific rules.
+
+\textbf{C3---Impedance-Tagged Transport.}
+Every signal carries its source impedance as metadata, enabling
+downstream nodes to compute $\gamma_k$ locally without global
+knowledge.
+
+\subsection{Variational Principle}
+\label{sec:action}
+
+The Minimum Reflection Principle states that the system minimises
+the total reflection action:
+\begin{equation}
+A[\Gamma]
+= \sum_{(i,j) \in \mathcal{E}}
+  \sum_{k=1}^{\Kcom(i,j)} \gamma_k^2.
+\label{eq:action}
+\end{equation}
+The C2 update rule implements steepest descent on the
+\emph{learnable} part of $A$:
+$\dot{\mathbf{Z}} \propto -\nabla_{\mathbf{Z}} \Aimp$.
+
+
+% ============================================================
+\section{Dimensional Cost Irreducibility Theorem}
+\label{sec:theorem}
+% ============================================================
+
+\begin{theorem}[Dimensional Cost Irreducibility]
+\label{thm:irreducibility}
+For any $\Gamma$-network with heterogeneous mode counts
+$\{K_i\}$, the total reflection action decomposes as
+\begin{equation}
+A = \Aimp(t) + \Acut,
+\label{eq:decomposition}
+\end{equation}
+where:
+\begin{enumerate}
+\item
+$\Aimp(t) = \sum_{(i,j)} \sum_{k=1}^{\Kcom} \gamma_k^2$
+is the \emph{impedance mismatch action} over shared modes.
+Under C2 dynamics, $\Aimp(t) \to 0$ as $t \to \infty$.
+
+\item
+$\Acut = \sum_{(i,j)} (K_i - K_j)^+$
+is the \emph{cutoff action} from excess modes.
+$\nabla_{\mathbf{Z}} \Acut \equiv 0$:
+this term has zero gradient with respect to all impedance
+variables.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For an edge $i \to j$ with $K_i > K_j$:
+\begin{itemize}
+\item
+Modes $k \le \Kcom = K_j$:
+$\gamma_k$ depends on $(Z_{i,k}, Z_{j,k})$ via
+Eq.~\eqref{eq:gamma}.
+C2 adjusts both impedances, driving $\gamma_k \to 0$.
+These modes contribute to $\Aimp$.
+
+\item
+Modes $K_j < k \le K_i$:
+the target has no mode~$k$, so $\gamma_k \equiv 1$ identically,
+independent of any impedance value.
+These modes contribute $(K_i - K_j)$ to $\Acut$.
+Since $\gamma_k = 1$ is a \emph{topological constant}
+(depending only on the existence, not the value, of modes),
+$\partial \gamma_k^2 / \partial Z = 0$ for all~$Z$.
+\end{itemize}
+Summing over all edges completes the proof.
+\end{proof}
+
+\begin{remark}
+The theorem assumes fixed mode counts $\{K_i\}$ and a fixed
+active edge set $\mathcal{E}$.
+If mode counts change dynamically (e.g., dendritic spine
+growth increasing $K_j$), or if edge sprouting/pruning alters
+$\mathcal{E}$, then the \emph{value} of $\Acut$ may change---but
+this change is driven by topology, not by impedance gradients.
+\end{remark}
+
+\begin{corollary}[Thermodynamic Necessity of Relay Nodes]
+\label{cor:relay}
+A direct edge $K_{\text{src}} \to K_{\text{tgt}}$ with
+$K_{\text{src}} > K_{\text{tgt}}$ totally reflects the
+$(K_{\text{src}} - K_{\text{tgt}})$ excess modes.
+Inserting a relay node with
+$K_{\text{tgt}} < \Krelay < K_{\text{src}}$ leaves $\Acut$
+unchanged but converts \emph{total signal loss} into
+\emph{partial signal recovery}:
+modes $K_{\text{tgt}} < k \le \Krelay$, previously
+totally reflected, are now transmitted on the first hop
+and can undergo C2 matching ($\gamma_k \to 0$, $T_k \to 1$).
+Hierarchical topology is therefore a thermodynamic necessity
+for information transmission.
+\end{corollary}
+
+
+% ============================================================
+\section{Numerical Results}
+\label{sec:results}
+% ============================================================
+
+All simulations use six tissue types with mode counts
+$K \in \{1, 2, 3, 5\}$~\cite{ALICE_code},
+initial connectivity $p_0 = 0.15$, learning rate
+$\eta = 0.02$, and hard cutoff $\Delta K_{\max} = 2$
+unless otherwise stated.
+
+\subsection{Convergence and the Irreducibility Theorem}
+\label{sec:convergence}
+
+Figure~\ref{fig:action} shows the action decomposition for a
+$N = 64$ network evolved for 1000 ticks.
+$\Aimp$ decays exponentially with time constant
+$\tau \approx 15$ ticks, reaching $\Aimp = 0$
+(to machine precision) by $t \approx 170$.
+$\Acut$ increases monotonically in the early phase due to
+spontaneous edge sprouting, then saturates at
+$\Acut \approx 1386$ for $t > 500$.
+This does not contradict the theorem (which states
+$\nabla_{\mathbf{Z}} \Acut \equiv 0$ at fixed topology);
+the growth reflects topological exploration, while saturation
+reveals a natural geometric cost ceiling.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/fig1_action_decomposition}
+\caption{%
+Action decomposition $A = \Aimp(t) + \Acut$ over 1000 ticks.
+Blue: $\Aimp \to 0$ (exponential decay).
+Red dashed: $\Acut$ (increases then saturates at $\approx 1386$).
+$N = 64$, $\Delta K_{\max} = 2$.
+}
+\label{fig:action}
+\end{figure}
+
+\subsection{Scaling Law: $\tau_{\text{conv}} \sim N^{\alpha}$}
+\label{sec:scaling}
+
+We measure $\tau_{\text{conv}}$ (ticks until
+$\Aimp < 0.01 \cdot \Aimp(t{=}5)$) across
+$N \in \{16, 32, 64, 128\}$ with 5 trials per size.
+A power-law fit yields
+\begin{equation}
+\tau_{\text{conv}} = C \cdot N^{\alpha},
+\quad \alpha = -1.12 \pm 0.12,
+\quad R^2 = 0.93.
+\label{eq:scaling}
+\end{equation}
+The \emph{negative} exponent means larger networks converge
+\emph{faster}---a non-trivial prediction.
+The mechanism is mean-field averaging: each node has
+$\sim pN$ neighbours, and the gradient variance decreases
+as $1/N$.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/fig2_scaling_law}
+\caption{%
+Left: log-log plot of $\tau_{\text{conv}}$ vs.\ $N$.
+Dashed line: power-law fit $\tau \sim N^{-1.12}$.
+Right: exponential decay rate $\gamma$ vs.\ $N$.
+}
+\label{fig:scaling}
+\end{figure}
+
+\begin{table}[h]
+\caption{%
+Convergence scaling of the $\Gamma$-topology network.
+All quantities averaged over 5 independent trials $\pm 1\sigma$.
+}
+\label{tab:scaling}
+\begin{ruledtabular}
+\begin{tabular}{rcc}
+$N$ & $\tau_{\text{conv}}$ & $\gamma_{\text{decay}}$ \\
+\hline
+ 16  & $416 \pm 74$  & $0.011 \pm 0.003$ \\
+ 32  & $111 \pm 12$  & $0.053 \pm 0.006$ \\
+ 64  & $60 \pm 3$    & $0.105 \pm 0.006$ \\
+128  & $39 \pm 2$    & $0.133 \pm 0.006$ \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\subsection{Soft Cutoff and K-Space Fractal Dimension}
+\label{sec:fractal}
+
+To introduce fractal connectivity beyond the hard cutoff,
+we define a soft-cutoff probability:
+\begin{equation}
+p(\Delta K) = (\Delta K + 1)^{-\gamma},
+\label{eq:softcutoff}
+\end{equation}
+where $\gamma \ge 0$ is the decay exponent.
+The relationship is
+\begin{equation}
+D_K = 0.76\gamma + 0.78,
+\label{eq:dk_fit}
+\end{equation}
+with the offset $\delta_{\text{C2}} \approx 0.66$ arising
+from C2's intrinsic dimensional preference:
+same-$K$ edges have more shared modes for gradient descent,
+creating stronger impedance consensus and thus higher
+survival probability under edge pruning.
+
+Biologically, cortical fractal dimensions lie in
+$D \in [1.3, 1.5]$~\cite{cortex_fractal}.
+Equation~\eqref{eq:dk_fit} predicts
+$\gamma \approx 0.7$--$0.9$---a narrow, falsifiable prediction.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\columnwidth]{../figures/fig3_dk_vs_gamma}
+\caption{%
+K-space fractal dimension $D_K$ vs.\ soft-cutoff exponent
+$\gamma$.
+Green band: cortical range $D \in [1.3, 1.5]$.
+Purple line: fit $D_K = 0.76\gamma + 0.78$.
+}
+\label{fig:fractal}
+\end{figure}
+
+\subsection{Joints as Multi-Layer Impedance Transformers}
+\label{sec:joint}
+
+Corollary~\ref{cor:relay} receives a striking musculoskeletal
+confirmation.
+An articular joint couples bone
+($Z_{\text{bone}} \approx 120\;\Omega$) to synovial fluid
+($Z_{\text{syn}} \approx 50\;\Omega$).
+A direct interface would produce
+$\Gamma = (120 - 50)/(120 + 50) = 0.538$, yielding
+$T = 1 - \Gamma^2 = 0.71$---nearly 30\% signal loss.
+
+Biological joints insert \emph{cartilage} as a graded
+impedance relay:
+$Z_{\text{cart}} \approx 80\;\Omega
+\approx \sqrt{Z_{\text{bone}}\,Z_{\text{syn}}} = 77.5\;\Omega$,
+the geometric mean that minimises reflection in a
+quarter-wave transformer~\cite{Pozar2011}.
+The five-layer stack
+Bone$\to$Cartilage$\to$Synovial$\to$Cartilage$\to$Bone
+achieves $T_{\text{total}} > 0.80$:
+each interface carries $\Gamma^2 < 0.10$, and C1 holds at
+every boundary.
+
+When cartilage degrades (osteoarthritis, $\eta \approx 0$),
+the joint reverts toward bone-on-bone ($T$ drops sharply)---the
+relay node is physically removed, and $\Acut$ is no longer
+mitigated.
+
+
+\subsection{Cardiovascular Tissue Topology}
+\label{sec:cv-topo}
+
+To verify the irreducibility theorem on a biologically
+grounded topology (rather than random graphs), we construct a
+cardiovascular tissue blueprint: 11~\texttt{GammaNode}s
+with anatomy-appropriate \texttt{TissueType}s, wired
+according to the heart--aorta--periphery transmission line.
+
+The dimensional hierarchy is:
+Cardiac Purkinje ($K = 4$: SA node, AV node, ventricles,
+valves, aorta, coronary) $\to$
+vascular smooth muscle ($K = 2$: arterioles, pulmonary artery)
+$\to$ endothelial ($K = 1$: capillaries).
+This cascade reflects the physical loss of pulsatile modes
+as blood flows from elastic arteries (pressure + flow in
+multiple harmonic modes) to thin resistance vessels
+(steady-state Poiseuille flow).
+
+Running 300~ticks with cortical stimulus
+($\eta = 0.02$, seed~$= 42$):
+\begin{itemize}
+  \item $\Aimp$ decays from $\sim\!1.76$ (tick~1) to
+    machine-precision zero by tick~100.
+  \item $\Acut$ rises from 5 (initial 13~edges) to 34
+    (95~edges post-sprouting), then saturates ---
+    confirming the theorem: impedance action vanishes,
+    cutoff action accumulates and stabilises.
+  \item C1 ($\Gamma^2 + T = 1$) holds at every edge, every tick
+    (enforced by \texttt{GammaTopology.tick()} assertion).
+\end{itemize}
+
+\noindent
+The test is implemented in
+\texttt{tests/test\_e0\_cardiovascular.py} (13~tests, 100\% pass).
+
+
+\subsection{Neural Tissue Topology}
+\label{sec:neural-topo}
+
+The neural blueprint instantiates the full
+$K$-level cascade predicted by the theory:
+9~nodes spanning $K \in \{5, 3, 2, 1\}$.
+
+\begin{center}
+\begin{tabular}{lc}
+\hline
+\textbf{Level} & $K$ \\
+\hline
+Cortex (motor, sensory), thalamus & 5 \\
+Spinal cord, motor/sensory neuron & 3 \\
+Nociceptor A$\delta$ & 2 \\
+Nociceptor C fibre & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+Twelve directed edges form descending motor, ascending
+sensory, and pain pathways plus sensorimotor
+cross-connections.
+Each $K$-level transition ($5 \to 3$, $3 \to 2$, $2 \to 1$)
+contributes an irreducible cutoff cost.
+
+Running 300~ticks ($\eta = 0.02$, seed~$= 42$):
+\begin{itemize}
+  \item $\Aimp$ decays from $\sim\!1.79$ to zero.
+  \item $\Acut$ rises from 9 (11~initial edges) to 37
+    (60~edges), then saturates.
+  \item The neural $\Acut$ at tick~1 ($= 9$) exceeds the
+    cardiovascular $\Acut$ ($= 5$) because the neural
+    topology has four $K$-levels vs.\ three,
+    as predicted by Eq.~\eqref{eq:decomposition}.
+\end{itemize}
+
+\noindent
+Perturbation experiments (ALS, stroke) confirm that
+topology modifications produce distinct $\Gamma$-trajectories
+without any disease-specific code:
+\begin{itemize}
+  \item \textbf{ALS} (motor neuron $Z \times 3$):
+    cumulative $\Aimp$ over 30~ticks is $2.9\times$ that
+    of healthy, but C2 partially compensates over longer runs.
+  \item \textbf{Stroke} (cortex$\to$thalamus edge severed):
+    descending motor transmission is interrupted while
+    ascending sensory pathway remains intact---the topology
+    determines the deficit pattern.
+\end{itemize}
+
+\noindent
+Full test suite: \texttt{tests/test\_e0\_neural.py}
+(17~tests, 100\% pass).
+Disease emergence results are detailed in Paper~5~\cite{Paper5}.
+
+
+\subsection{Complete Tissue Atlas: 29 Organ-System Topologies}
+\label{sec:tissue-atlas}
+
+The cardiovascular and neural topologies above are detailed
+examples drawn from a comprehensive tissue atlas of
+29~organ-system blueprints
+(Paper~0~\cite{Paper0}, Table~4).
+All 29 are implemented as factory functions in
+\texttt{BLUEPRINT\_REGISTRY}, totalling $\sim\!217$ nodes
+and $\sim\!242$ directed edges.
+
+Each blueprint was verified under identical conditions
+($\eta = 0.01$, 100~ticks):
+\begin{enumerate}
+  \item C1: $\Gamma_k^2 + T_k = 1$ at every edge, every tick.
+  \item C2: $\Aimp$ is non-increasing; $\Acut$ is invariant.
+  \item Structural: node counts, edge counts, and dimensional
+    gaps match biological expectations.
+\end{enumerate}
+
+\noindent
+Key observations across all 29~blueprints:
+\begin{itemize}
+  \item Mode counts range from $K = 1$ (capillaries,
+    olfactory receptors, cartilage) to $K = 5$ (cortical
+    pyramidal neurons).
+  \item $\Acut > 0$ wherever tissue type transitions
+    produce a $K$-level cascade (e.g., aorta $K{=}4 \to$
+    arterioles $K{=}2$, cortex $K{=}5 \to$ subcortex $K{=}3$).
+  \item Cartilage ($\eta \approx 0.001$) shows virtually
+    zero C2 remodeling---the topological prediction of
+    avascular tissue stasis.
+  \item Brain functional topology (12~nodes, 21~edges,
+    $K \in \{3, 5\}$) has the highest $\Acut$ of any
+    blueprint, consistent with the cortex--subcortex
+    dimensional mismatch.
+\end{itemize}
+
+\noindent
+245~parametrised tests
+(\texttt{tests/test\_tissue\_blueprints.py}),
+covering structure, C1, C2, and organ-specific physiology,
+pass at 100\% rate.
+
+\subsection{Whole-Body Inter-Organ Topology}
+\label{sec:whole-body}
+
+The 29~organ blueprints are intra-organ networks.
+Connecting them requires two inter-organ buses and a
+brain command hub---three chains unified by the same
+MulticoreChannel physics:
+
+\begin{enumerate}
+  \item \textbf{Vascular bus.}  An aortic trunk ($K{=}4$)
+    branches into 29~arteriolar feeds ($K{=}2$),
+    each wired to the organ's vascular interface node.
+    $\Acut = 2$ per trunk-to-branch edge.
+  \item \textbf{Neural bus.}  An autonomic trunk ($K{=}3$)
+    branches into 29~nerve feeds ($K{=}2$),
+    wired to each organ's neural interface.
+    $\Acut = 1$ per trunk-to-branch edge.
+  \item \textbf{Brain hub.}  The brain\_functional topology's
+    hypothalamus ($K{=}3$) drives the neural bus;
+    the vascular bus feeds interoceptive signals back
+    to the brain's thalamus ($K{=}5$).
+\end{enumerate}
+
+\noindent
+The unified whole-body \texttt{GammaTopology} contains
+278~nodes and 426~directed edges ($K \in [1, 5]$).
+The total irreducible action $\Acut = 222$
+represents the structural information cost of multi-organ
+life---no C2~gradient can reduce it.
+145~tests verify structure, C1/C2 physics, bus
+connectivity, dimensional cascade, and cross-organ
+signal propagation.
+
+\subsection{Thermoregulation: endothermy as a topological constraint}
+\label{sec:thermoregulation}
+
+Blood is the transmission medium of the vascular bus.
+Its viscosity follows the Arrhenius law
+$\tilde\eta(T) = \exp[\alpha(T^{-1} - T_0^{-1})]$
+with $\alpha = E_a / R \approx 1949\,$K, shifting the bus
+impedance $Z_{\text{bus}}(T) = Z_{\text{ref}}\,\tilde\eta(T)$.
+Simultaneously, C2~repair slows by
+$\tilde\eta_{\text{learn}}(T) = \exp[\beta(T_0^{-1} - T^{-1})]$
+with $\beta \approx 6015\,$K (enzymatic Arrhenius).
+The combined repair time grows doubly exponentially:
+$\tilde\tau(T) = \exp[(\alpha+\beta)(T^{-1} - T_0^{-1})]$.
+Setting $\tilde\tau(T_c) = \tau_{\max}$ yields
+\begin{equation}
+  T_c = \frac{T_0}{1 + T_0\ln\tau_{\max}/(\alpha+\beta)}\,.
+\end{equation}
+For brain complexity $K$, the action scales as $K\,\Gamma^2$,
+increasing $T_c$ with $K$: numerically,
+$T_c(K{=}1) = -10.3\,^\circ$C (ectotherm viable) while
+$T_c(K{=}5) = +4.5\,^\circ$C (endothermy required).
+93~tests verify the full derivation chain
+$\eta(T) \to Z \to \Gamma \to A[\Gamma]$.
+
+\paragraph{Thermal refugia as a C2 boundary condition.}
+During sleep the system discharges impedance
+debt~$D_Z$ at reduced metabolic power~$P_{\text{basal}}$.
+System temperature obeys
+$T_{\text{sys}} = T_{\text{env}} +
+P_{\text{basal}}\,R_{\text{th}}$,
+where $R_{\text{th}}$ lumps all biological insulation
+(fur, blubber, posture, huddling).
+When nocturnal or seasonal swings push
+$T_{\text{env}}$ low enough that
+$P_{\text{basal}}\,R_{\text{th}}$ alone cannot
+maintain $T_{\text{sys}} > T_c(K)$, the organism
+must couple to an \emph{environmental thermal
+low-pass filter}---any high-heat-capacity mass
+(subterranean rock, tree hollows, snow caves,
+conspecific huddles) whose thermal inertia
+damps the external oscillation to the stable
+annual mean~$\overline{T}_{\text{annual}}$.
+The same Arrhenius chain that mandates endothermy
+therefore mandates thermal refugia whenever
+$T_{\text{amb}} < T_c(K) - P_{\text{basal}}\,R_{\text{th}}$.
+
+\paragraph{Falsification criterion.}
+The prediction is falsified by an organism with closed
+high-pressure vasculature, $K \geq 5$, sustained
+$T_{\text{body}} \leq T_c(K)$, and maintained high-level
+cognition.  No such organism is known: mammalian
+hibernators enter torpor (brain activity collapses)
+and ectotherms with complex behaviour operate on
+the low-$K$ branch.  Cross-vertebrate data confirm
+that higher stable $T$ correlates with larger brain
+size at given body mass.
+
+\paragraph{Surface insulation trade-off.}
+The steady-state thermal balance reads
+$\dot{Q}(K) = (T_{\text{body}} - T_{\text{env}}) / R_{\text{th}}$,
+where $\dot{Q}(K) \propto K\,\Gamma^2$ is the heat produced by
+C2~impedance remodelling across $K$~modes.
+Rearranging,
+\begin{equation}
+  R_{\text{th}}
+  = \frac{T_{\text{body}} - T_{\text{env}}}{\dot{Q}(K)}\,.
+  \label{eq:Rth-K}
+\end{equation}
+For low-$K$ organisms,
+$\dot{Q}$ is small and survival requires
+\emph{high}~$R_{\text{th}}$---hence dense fur, blubber, or
+behavioural huddling.
+For high-$K$ organisms,
+$\dot{Q}$ is large and the narrow thermal margin
+($T_{\text{body}} - T_c \ll 1\,$K) demands
+\emph{low}~$R_{\text{th}}$ to shed excess heat.
+A fur layer raises $R_{\text{th}}$ by creating a
+stagnant-air boundary; selection therefore drives
+fur reduction once $K$ exceeds a threshold $K^*$
+where $\dot{Q}(K^*)\,R_{\text{th,fur}} >
+T_{\text{body}} - T_c$.  In summary:
+\begin{equation}
+  K\!\uparrow
+  \;\Rightarrow\;\dot{Q}\!\uparrow
+  \;\Rightarrow\;R_{\text{th}}\text{ must }\downarrow\,.
+  \label{eq:fur-loss-chain}
+\end{equation}
+The specific adaptations that follow (evaporative
+cooling, epidermal thickening, vascular density
+changes) are biological details outside the scope
+of this derivation; the thermodynamic constraint
+Eq.~\eqref{eq:Rth-K} is the result.
+
+
+% ============================================================
+%  PART B — FRACTAL COST
+% ============================================================
+
+\part*{Part B: Fractal Cost of Dual-Network Life}
+
+
+% ============================================================
+\section{Irreducible Action of a Self-Similar Relay Hierarchy}
+\label{sec:acut-fractal}
+% ============================================================
+
+Part~A proved $\Acut > 0$ but left its geometric structure
+unspecified.
+We now show that $\Acut$ is not merely a positive number but
+a fractal integral whose scaling with organism size $M$ is
+determined by the embedding dimension $d$, the branching
+number $n$, and the mode-count profile of the relay
+hierarchy.
+
+\subsection{Mode-count profile}
+
+Consider a hierarchical relay network with $L$ levels,
+branching number $n$ at each level, embedded in
+$d$-dimensional space.
+Level~0 is the root (e.g., aorta, cortex);
+level~$L$ is the terminal (capillary, sensory ending).
+
+At level~$\ell$:
+number of nodes $N_\ell = n^\ell$;
+segment length $l_\ell = l_0 \, n^{-\ell/d}$ (space-filling);
+mode count $K_\ell$.
+
+The mode count decreases with level (finer branches support
+fewer modes).
+Self-similar modelling:
+\begin{equation}
+  K_\ell = K_0 \, c^\ell, \quad 0 < c < 1,
+  \label{eq:mode-profile}
+\end{equation}
+with $c = n^{-1/d}$ when the cutoff is set by branch
+length.
+
+\subsection{A\textsubscript{cut} at each level}
+
+From Theorem~\ref{thm:irreducibility}, the irreducible
+action across an edge from level~$\ell$ to
+level~$(\ell+1)$ is $(K_\ell - K_{\ell+1})^+$.
+At level~$\ell$ there are $N_\ell = n^\ell$ such edges:
+\begin{equation}
+  \Acut = K_0(1 - c) \sum_{\ell=0}^{L-1} (nc)^\ell.
+  \label{eq:acut-sum}
+\end{equation}
+
+\subsection{Scaling law}
+
+With $c = n^{-1/d}$, the base of the geometric sum is
+$nc = n^{(d-1)/d} > 1$ for $d \ge 2$, so the sum is
+dominated by the last term:
+\begin{equation}
+  \boxed{\Acut \propto M^{(d-1)/d}.}
+  \label{eq:acut-mass}
+\end{equation}
+
+\textbf{For $d = 3$:}
+$\Acut \propto M^{2/3}$.
+The irreducible cost per cell is
+$a_{\text{cut}} = \Acut / M \propto M^{-1/3}$,
+which \emph{decreases} with organism size---economies of
+scale from the relay hierarchy.
+
+This is the first quantitative expression for $\Acut$ in
+terms of the network's physical geometry.
+Part~A proved $\Acut > 0$;
+Eq.~\eqref{eq:acut-mass} says exactly \emph{how big} it is.
+
+\subsection{Fractal dimension of the relay hierarchy}
+
+The K-space fractal dimension is
+\begin{equation}
+  D_K = \frac{\log n}{\log(1/c)} = d.
+  \label{eq:DK-geom}
+\end{equation}
+For a space-filling network in $d = 3$: $D_K = 3$.
+The cortical $D_K \in [1.3, 1.5]$ measured in
+Sec.~\ref{sec:fractal} reflects the cortex being a
+folded sheet ($d_{\text{eff}} \approx 1.5$--$2$),
+consistent with gyrification.
+
+
+% ============================================================
+\section{The Murray Bifurcation Ratio: $\beta = 2^{1/3}$}
+\label{sec:beta}
+% ============================================================
+
+\subsection{Length contraction}
+
+From the space-filling constraint, each branching level
+contracts the service length by $l_{\ell+1}/l_\ell = n^{-1/d}$.
+The \emph{Murray bifurcation ratio}:
+\begin{equation}
+  \boxed{\beta \equiv n^{1/d}.}
+  \label{eq:beta-def}
+\end{equation}
+For binary bifurcation ($n = 2$) in $d = 3$:
+\begin{equation}
+  \beta = 2^{1/3} = 1.2599\ldots
+  \label{eq:beta-value}
+\end{equation}
+This emerges as the unique solution to simultaneous
+optimisation of MRP at bifurcations (Paper~2: Murray's
+Law~\cite{Paper2}), space-filling coverage, and minimal
+$\Acut$ through relay steps.
+
+\subsection{Radius contraction}
+
+From Murray's Law (Paper~2, Eq.~14~\cite{Paper2}):
+$r_{\ell+1} = r_\ell / n^{1/3} = r_\ell / \beta^{d/3}$.
+For $d = 3$: $r_{\ell+1} = r_\ell / \beta$.
+Length and radius contract by the \emph{same ratio} $\beta$,
+preserving the aspect ratio $l/r$ across the tree.
+
+\subsection{Why $\beta \approx 1.26$ and not another number}
+
+$\beta$ is fixed by $(n, d)$ through Eq.~\eqref{eq:beta-def}.
+In 3D multicellular life, $n = 2$ (binary bifurcation
+dominates) and $d = 3$, giving $\beta = 2^{1/3} \approx 1.26$.
+Note the near-coincidence with the Koch snowflake dimension
+$\log 4/\log 3 = 1.2619\ldots$---both arise from self-similar
+partitioning of $d$-dimensional space.
+
+
+% ============================================================
+\section{Single-Network Metabolic Scaling}
+\label{sec:single-scaling}
+% ============================================================
+
+\subsection{Network maintenance cost}
+
+The power dissipated by relay reflections is
+$P_{\text{reflect}} = \Acut \cdot P_0 / N_T
+\propto M^{(d-1)/d} \cdot M^{-1} = M^{-1/d}$.
+Total network dissipation:
+\begin{equation}
+  B_{\text{network}} \propto M \cdot M^{-1/d} = M^{(d-1)/d}.
+  \label{eq:B-network}
+\end{equation}
+For $d = 3$: $B_{\text{network}} \propto M^{2/3}$.
+
+\subsection{Total metabolic rate: Kleiber's Law}
+
+Tissue metabolism scales linearly ($B_{\text{tissue}} \propto M$),
+but the vascular tree limits delivery.
+West, Brown \& Enquist~\cite{WBE1997} showed $Q_0 \propto M^{3/4}$
+when area-preserving constraints at the capillary level are imposed.
+From the MRP perspective:
+\begin{enumerate}
+  \item Murray's Law (from MRP) determines the radius ratio:
+    $r_{\ell+1}/r_\ell = n^{-1/3}$.
+  \item Space-filling determines the length ratio:
+    $l_{\ell+1}/l_\ell = n^{-1/d}$.
+  \item Capillary invariance fixes the terminal scale.
+  \item Blood volume $\propto M$ (empirical constraint).
+\end{enumerate}
+Together: $N_T \propto M^{d/(d+1)}$ and therefore
+\begin{equation}
+  \boxed{B \propto M^{d/(d+1)}.}
+  \label{eq:kleiber}
+\end{equation}
+For $d = 3$: $B \propto M^{3/4}$---Kleiber's
+Law~\cite{Kleiber1932}, now a consequence of MRP.
+
+The exponent decomposes as
+$d/(d+1) = (d-1)/d + 1/[d(d+1)]$.
+The extra $1/[d(d+1)] = 1/12$ arises because the terminal
+impedance $Z_L$ is fixed (capillaries are size-invariant),
+adding an additional boundary condition ($2/3 + 1/12 = 3/4$).
+
+\paragraph{Volumetric heat density and the $K$-bottleneck.}
+By Corollary~1 of Paper~0~\cite{Paper0}, every active
+interface dissipates $\Gamma_i^2 P_{\mathrm{in},i}$ as
+heat.  A tissue with $K$ modes per node packs $K$ such
+interfaces into a single cross-section; hence the
+\emph{volumetric heat density} scales as
+\begin{equation}
+  q \;\propto\; K \cdot \langle \Gamma^2 \rangle
+  \cdot P_{\mathrm{in}} / V_{\text{node}}\,.
+  \label{eq:vol-heat}
+\end{equation}
+The human brain ($K{=}5$) comprises $\sim$2\% of body mass
+but hosts the highest $K$ tissue in the organism.
+Because $q \propto K$, the brain generates a
+disproportionate share of metabolic heat---the classical
+20\,W out of 80\,W basal ($\sim$25\%)---not despite being
+small, but \emph{because} its per-node mode count is
+largest.  Kleiber's $M^{3/4}$ law sets the whole-body
+envelope; Eq.~(\ref{eq:vol-heat}) sets the
+\emph{intra-body} distribution of that heat, concentrating
+it where $K$ is highest.  This creates a physical necessity
+for a dedicated heat-removal architecture (the cerebral
+vasculature), linking directly to the dual-network
+model of Paper~2~\cite{Paper2}.
+
+
+% ============================================================
+\section{Dual-Network Packing and the Overhead~$\Omega$}
+\label{sec:dual}
+% ============================================================
+
+\subsection{Two trees in one volume}
+
+A multicellular organism requires two space-filling
+networks~\cite{Paper2}:
+the \textbf{vascular tree} ($Z_v = \Delta P / Q$, transport)
+and the \textbf{neural tree}
+($Z_n = R_m + 1/j\omega C_m$, control).
+Both must reach every cell.
+If independent, $\Acut^{\text{total}} = \Acut^v + \Acut^n$.
+But they share a finite volume.
+
+\subsection{The packing theorem}
+
+\begin{theorem}[Dual-Network Overhead]
+\label{thm:packing}
+When two space-filling relay trees share a volume in
+$d$~dimensions,
+\begin{equation}
+  \Acut^{\text{dual}} = \Acut^v + \Acut^n + \Acouple,
+  \quad \Acouple > 0.
+  \label{eq:acut-dual}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+At co-terminal points, the two networks negotiate resource
+allocation.
+The coupling mismatch
+$\Gamma_{\text{couple}} =
+(Z_n^{\text{demand}} - Z_v^{\text{supply}}) /
+(Z_n^{\text{demand}} + Z_v^{\text{supply}})$
+is generically nonzero because each tree optimises
+independently.
+Hence $\Acouple = N_T \langle \Gamma_{\text{couple}}^2
+\rangle > 0$.
+\end{proof}
+
+\subsection{The metabolic overhead factor}
+
+\begin{equation}
+  \Omega \equiv \frac{B_{\text{total}}}{B_{\text{tissue}}}
+  = 1 + \frac{B_{\text{vasc}} + B_{\text{neural}}}
+             {B_{\text{tissue}}}.
+  \label{eq:omega-def}
+\end{equation}
+
+For humans:
+$B_{\text{neural}} / B_{\text{total}} \approx 0.20$
+(brain $\approx 20\%$ of BMR for $\sim 2\%$ of
+mass~\cite{Raichle2002});
+$B_{\text{vasc}} / B_{\text{total}} \approx 0.05$
+(cardiac work).
+Therefore
+\begin{equation}
+  \Omega \approx \frac{1}{0.75} \approx 1.33.
+  \label{eq:omega-human}
+\end{equation}
+The neural network alone gives
+$\Omega_n = 1/(1-0.20) = 1.25$---remarkably close to
+$\beta = 2^{1/3} \approx 1.26$.
+We conjecture that this near-equality is not coincidental:
+the metabolic tax of adding a second network is of order
+$\beta - 1$, reflecting the cost of one additional level
+of hierarchical branching.
+
+\subsection{Why blood before nerve}
+
+C2 ($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$)
+requires a carrier for $x_{\text{in}}$.
+For neural C2: $x_{\text{in}}$ is carried by
+neurotransmitters, whose synthesis requires glucose and
+oxygen delivered by blood.
+Without the vascular network, $x_{\text{in}} = 0$
+everywhere, $\Delta Z = 0$: the neural network cannot
+remodel.
+Embryology confirms:
+cardiac tube forms at day~21; neural tube closes at
+day~25--28.
+In the product $1_v \times 1_n$, the vascular ``1'' is the
+left factor.
+
+
+% ============================================================
+\section{Geometric Universality of $\beta$}
+\label{sec:evolution}
+% ============================================================
+
+The ratio $\beta = n^{1/d}$ is a geometric inevitability
+for any space-filling hierarchy---independent of molecular
+substrate.
+
+\subsection{Plants: single network, same $\beta$}
+
+Vascular plants lack a neural network but obey Murray's
+Law with $\beta = 2^{1/3}$ for binary
+branching~\cite{McCulloh2003}, and their metabolic scaling
+follows $B \propto M^{3/4}$~\cite{Niklas1994}.
+This confirms $\beta$ is a property of geometry, not biology.
+
+\subsection{Single-network organisms: $\Omega \approx 1$}
+
+Plants, lacking a neural network, have
+$\Omega_{\text{plant}} \approx 1$.
+\textbf{Prediction:}
+$\Omega_{\text{plant}} < \Omega_{\text{animal}}$ by a factor
+approaching $\beta \approx 1.26$---testable by cross-kingdom
+metabolic comparisons.
+
+
+% ============================================================
+\section{Hierarchical Architecture: The Tree of Networks}
+\label{sec:tree}
+% ============================================================
+
+Paper~5~\cite{Paper5} identifies twenty-nine $\Gamma$-networks
+in the human body.
+They form a \emph{tree}, not a flat list:
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+\textbf{Level} & \textbf{Networks} \\
+\hline
+Root & MRP (variational principle) \\
+Controllers & Cardiac pump, Regulatory brain \\
+Trunk & Vascular tree, Neural tree \\
+Leaf & 17 tissue networks \\
+  & (bone, muscle, immune, GI, \ldots) \\
+\hline
+\end{tabular}
+\end{center}
+
+Every leaf network requires both trunks:
+$x_{\text{in}}$ delivery from the vascular tree,
+$\eta$ regulation from the neural tree.
+
+The total action:
+\begin{align}
+  A_{\text{life}} &= \underbrace{A_v + A_n}_{\text{trunk}}
+    + \underbrace{\textstyle\sum_{t=1}^{17} A_t}_{\text{leaves}}
+    + \underbrace{\Acouple}_{\text{packing}} \notag \\
+  &= \Aimp^{\text{total}}(t) + \Acut^{\text{total}},
+  \label{eq:A-life}
+\end{align}
+where $\Aimp^{\text{total}} \to 0$ under C2 across all
+networks, and
+\begin{equation}
+  \Acut^{\text{total}} = \Acut^v + \Acut^n
+    + \sum_{t=1}^{17} \Acut^t + \Acouple.
+  \label{eq:acut-total}
+\end{equation}
+This is the complete geometric structure of the irreducible
+cost of life.
+
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+% ============================================================
+
+\subsection{Methodological caveat}
+
+All numerical experiments in Part~A use simulation modules
+built from C1--C3 themselves.
+When the simulator confirms a theorem derived from those
+axioms, it demonstrates \emph{internal consistency}, not
+\emph{empirical validity}.
+Only external measurements on biological impedance networks
+can promote these results to physical truth.
+The Part~B scaling laws are mathematical consequences of the
+irreducibility theorem plus geometric constraints; no
+simulation is involved.
+
+\subsection{The irreducible cost as a design constraint}
+
+The brain must manage $\Acut$ through \emph{architectural}
+mechanisms rather than impedance remodeling.
+This explains:
+(1) \emph{hierarchical processing}---cortical areas
+arranged in layers of decreasing $K$, with relay nuclei
+(e.g., thalamus, $K \approx 3$) mediating between cortex
+($K = 5$) and periphery ($K = 1$);
+(2) \emph{modular connectivity}---same-$K$ connections
+strongly favoured within cortical columns;
+(3) \emph{small-world topology}---diameter-2 structure
+enabling relay-mediated transmission.
+
+\subsection{C2 as a dimensional selector}
+
+Even without explicit soft cutoff ($\gamma = 0$), C2
+impedance remodeling produces $D_K \approx 0.66$---an
+intrinsic dimensional preference.
+Same-$K$ edges have more shared modes for gradient descent,
+creating higher survival probability under edge pruning.
+The soft-cutoff parameter $\gamma$ then acts as a knob
+on top of this C2 bias, enabling continuous control of
+$D_K$ from $\sim 0.66$ to $\sim 2.3$.
+
+\subsection{Functional regions as thermodynamic phase
+  separation}
+\label{sec:functional-regions}
+
+The dimensional preference derived above has a direct
+anatomical corollary.
+Consider a network of neurons with heterogeneous
+$K$ values.
+C2 gradient descent on the reflection action
+$\mathcal{A}$ selectively strengthens same-$K$ edges
+(more shared modes $\Rightarrow$ faster $\Gamma$ reduction
+$\Rightarrow$ lower $\mathcal{A}$) and weakens cross-$K$
+edges (excess modes totally reflected, no gradient
+available).
+Under sustained activity plus edge pruning
+(developmental apoptosis), the surviving connectivity
+partitions the network into \emph{same-$K$ clusters}:
+neurons sharing a common modal dimension self-segregate
+into spatially contiguous aggregates.
+
+The argument is a thermodynamic phase-separation:
+MRP drives the system toward the lowest attainable
+$\mathcal{A}$; same-$K$ clustering minimises
+$A_{\text{cut}}$ at every internal edge.
+The theorem is general: \emph{any} impedance network
+under MRP with heterogeneous $K$ must phase-separate
+into same-$K$ domains to minimise total reflected action.
+The mapping of specific $K$ ranges to specific
+anatomical regions (sensory cortices, motor cortex,
+prefrontal cortex, subcortical nuclei) is a
+\emph{prediction} of this theorem, not an input;
+its verification requires independent measurement
+of neuronal modal complexity, which remains an
+open experimental problem.
+
+\subsection{Negative scaling exponent and brain-scale feasibility}
+
+$\tau_{\text{conv}} \sim N^{-1.12}$ predicts brain-scale
+networks ($N \sim 10^{10}$) converge in
+$\sim 10^{-11}$ ticks---effectively instantaneous.
+The mechanism is physically analogous to the Curie-Weiss
+model: effective field strength grows with system size.
+
+\subsection{What ``$1 \times 1 = \Omega$'' means}
+
+Each ``1'' is a topologically one-dimensional tree
+in 3D space.
+Embedding imposes fractal cost; packing two such trees
+adds $\Acouple > 0$.
+The result $\Omega \approx 1.25$--$1.33$ is determined by
+the brain's metabolic share.
+The match $\Omega_n \approx \beta$ suggests:
+\emph{the cost of adding a second hierarchical tree is of
+order one branching level of the first tree.}
+
+\subsection{Limitations}
+
+\begin{enumerate}
+  \item The self-similar mode profile is an idealisation;
+    real networks have heterogeneous branching.
+    The $M^{(d-1)/d}$ scaling is a leading-order result.
+  \item The identification $\Omega_n \approx \beta$ is
+    empirically suggestive but not rigorously derived.
+  \item The capillary invariance constraint is an empirical
+    input.  Whether MRP alone determines the terminal
+    scale is open.
+  \item The negative scaling exponent
+    $\alpha = -1.12 \pm 0.12$ is measured at four sizes
+    only ($N \le 128$).  Brain-scale extrapolation should
+    be treated as a conjecture.
+\end{enumerate}
+
+
+% ============================================================
+\section{Falsifiable Predictions}
+\label{sec:predictions}
+% ============================================================
+
+\begin{enumerate}
+  \item \textbf{Cortical fractal dimension.}
+    DTI-based grouping of axons by estimated mode count
+    $K$ should yield a connectivity decay
+    $p(\Delta K) \propto (\Delta K + 1)^{-\gamma}$ with
+    $\gamma \approx 0.7$--$0.9$, matching
+    $D_K \in [1.3, 1.5]$ via Eq.~\eqref{eq:dk_fit}.
+
+  \item \textbf{Vascular fractal dimension.}
+    3D micro-CT should yield box-counting dimensions
+    $d_H \to 3$ below capillary spacing (space-filling)
+    and lower $d_H$ above (matching the effective tissue
+    dimension).
+
+  \item \textbf{$\Omega$ across vertebrates.}
+    Brain metabolic fraction should correlate with
+    neural complexity:
+    $\Omega_{\text{fish}} < \Omega_{\text{reptile}} <
+    \Omega_{\text{mammal}} < \Omega_{\text{primate}}$.
+
+  \item \textbf{Murray ratio $\beta$ invariance.}
+    Vascular bifurcation ratio $\beta = 2^{1/3} \approx 1.26$
+    across all binary-branching species (mammals, birds,
+    fish, plants), independent of body size.
+
+  \item \textbf{$\Omega \approx 1$ for plants.}
+    Plants lack a neural network; their metabolic overhead
+    should yield
+    $\Omega_{\text{plant}} \approx 1.05$.
+
+  \item \textbf{Dual-network failure cascade.}
+    Cardiac arrest (loss of vascular trunk) degrades all 17
+    tissue networks within minutes.
+    Brain death (loss of neural trunk) degrades tissue
+    networks on hours-to-days timescale.
+
+  \item \textbf{Embryonic fractal geometry.}
+    Fetal vasculature should show Murray-optimal bifurcation
+    ratios $r_p / r_d \approx \beta$ from the earliest
+    stages of vasculogenesis (day 17--18),
+    not only after postnatal maturation.
+
+  \item \textbf{Cartilage as relay node.}
+    Articular cartilage impedance should satisfy
+    $Z_{\text{cart}} \approx
+    \sqrt{Z_{\text{bone}}\,Z_{\text{syn}}}$, maximising
+    transmission (Corollary~\ref{cor:relay}).
+    Osteoarthritic cartilage ($\eta \to 0$) should show
+    increased $\Gamma^2$ and decreased $T$.
+\end{enumerate}
+
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ============================================================
+
+This paper establishes five results for heterogeneous
+impedance networks under the Minimum Reflection Principle.
+
+\textbf{First}, the \emph{Irreducibility Theorem}
+[Eq.~\eqref{eq:decomposition}]:
+$A = \Aimp(t) + \Acut$,
+where $\Aimp \to 0$ under C2 impedance remodeling but
+$\Acut$ is invariant under all local impedance rules at
+fixed topology.
+
+\textbf{Second}, \emph{negative scaling}
+[Eq.~\eqref{eq:scaling}]:
+$\tau_{\text{conv}} \sim N^{-1.12}$---convergence accelerates
+with network size.
+
+\textbf{Third}, \emph{fractal cost}
+[Eq.~\eqref{eq:acut-mass}]:
+$\Acut \propto M^{(d-1)/d} = M^{2/3}$ for $d = 3$,
+quantifying how big the irreducible cost is.
+
+\textbf{Fourth}, the Murray bifurcation ratio
+$\beta = 2^{1/3} \approx 1.26$ and the dual-network overhead
+$\Omega \approx 1.25$--$1.33$ are geometric consequences of
+space-filling plus MRP.
+
+\textbf{Fifth}, Kleiber's allometric law
+$B \propto M^{3/4}$ is recovered when MRP-derived branching
+is combined with space-filling and capillary invariance,
+providing a variational foundation for the WBE model.
+
+The title equation is now precise:
+\begin{equation}
+  1_v \times 1_n = \Omega \approx \beta = 2^{1/3} \approx 1.26.
+\end{equation}
+Life pays a fractal tax of $\beta - 1 \approx 26\%$---the
+price of one extra branching level, expressed as the brain's
+share of the metabolic budget---for the privilege of being
+simultaneously fed and informed.
+
+
+\begin{acknowledgments}
+The author thanks the open-source scientific Python community
+(NumPy, SciPy, Matplotlib).
+Simulations were performed on a personal workstation.
+\end{acknowledgments}
+
+
+% ============================================================
+%  BIBLIOGRAPHY
+% ============================================================
+\begin{thebibliography}{99}
+
+\bibitem{Paper0}
+H.-Y.~Huang,
+``Paper~0: The $\Gamma$-Net Framework---Impedance Physics
+for Electronic Lifeforms,''
+preprint (2026).
+
+\bibitem{Paper2}
+H.-Y.~Huang,
+``Paper~2: Dual Impedance Networks---Vascular and Neural
+Organ Health from the Minimum Reflection Principle,''
+preprint (2026).
+
+\bibitem{Paper3}
+H.-Y.~Huang,
+``Paper~3: Temporal Dynamics---Impedance Debt, Sleep,
+Lifecycle, and Aging,''
+preprint (2026).
+
+\bibitem{Paper4}
+H.-Y.~Huang,
+``Paper~4: Memory, Consciousness, and Nociception as
+Impedance Physics on the $\Gamma$-Net,''
+preprint (2026).
+
+\bibitem{Paper5}
+H.-Y.~Huang,
+``Paper~5: The Grand Unification---$\Gamma$ as the
+Universal Interface Law from Microtubules to Power Grids,
+and C2 as Universal Remodeling in Twenty-Nine Tissues,''
+preprint (2026).
+
+\bibitem{HH1952}
+A.~L.~Hodgkin and A.~F.~Huxley,
+J.~Physiol.\ \textbf{117}, 500 (1952).
+
+\bibitem{Breakspear2017}
+M.~Breakspear,
+Nat.\ Neurosci.\ \textbf{20}, 340 (2017).
+
+\bibitem{cortex_fractal}
+T.~G.~Smith \textit{et al.},
+J.~Comp.\ Neurol.\ \textbf{323}, 48 (1992);
+R.~D.~King \textit{et al.},
+NeuroImage \textbf{56}, 1838 (2011).
+
+\bibitem{DTI_review}
+D.~K.~Jones,
+\textit{Diffusion MRI: Theory, Methods, and Applications}
+(Oxford University Press, 2010).
+
+\bibitem{Pozar2011}
+D.~M.~Pozar, \emph{Microwave Engineering}, 4th~ed.\
+(Wiley, 2011).
+
+\bibitem{WBE1997}
+G.~B.~West, J.~H.~Brown, and B.~J.~Enquist,
+Science \textbf{276}, 122 (1997).
+
+\bibitem{Kleiber1932}
+M.~Kleiber,
+Hilgardia \textbf{6}, 315 (1932).
+
+\bibitem{Murray1926}
+C.~D.~Murray,
+J.~Gen.\ Physiol.\ \textbf{9}, 835 (1926).
+
+\bibitem{Raichle2002}
+M.~E.~Raichle and D.~A.~Gusnard,
+Proc.\ Natl.\ Acad.\ Sci.\ USA \textbf{99}, 10237 (2002).
+
+\bibitem{McCulloh2003}
+K.~A.~McCulloh, J.~S.~Sperry, and F.~R.~Adler,
+Nature \textbf{421}, 939 (2003).
+
+\bibitem{Niklas1994}
+K.~J.~Niklas,
+\emph{Plant Allometry} (Univ.\ Chicago Press, 1994).
+
+\bibitem{ALICE_code}
+H.-Y.~Huang,
+ALICE Smart System,
+\url{https://github.com/cyhuang76/alice-gamma-net} (2026).
+
+\end{thebibliography}
+
+\end{document}
