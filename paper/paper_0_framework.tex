@@ -1225,20 +1225,40 @@ because of~$Y$\,''.
 \section{Notation Conventions}
 \label{sec:notation}
 
-\begin{itemize}
-  \item $Z$: impedance (effort/flow ratio). Units depend on
-    medium: $\Omega$ (electrical), Pa$\cdot$s/m$^3$ (vascular),
-    N$\cdot$s/m (mechanical).
-  \item $\Gamma$: dimensionless, $\in [-1, +1]$.
-  \item $\eta$: remodeling rate, $> 0$. Tissue-dependent;
-    $\eta \approx 0$ for cartilage (C2 null case).
-  \item $(x_{\text{in}}, x_{\text{out}})$: generic input and
-    output signals at an interface.  Replaces the earlier
-    $(x_{\text{pre}}, x_{\text{post}})$ notation.
-  \item $D_Z$: impedance debt, units of energy $\times$ time
-    (J$\cdot$s).
-  \item $H$: dimensionless, $\in [0, 1]$. Higher is healthier.
-\end{itemize}
+Table~\ref{tab:notation} collects notation conventions
+used across Papers~0--5.
+For complete definitions including derivations, see
+the quantity inventory (Table~\ref{tab:quantities}).
+
+\begin{table}[h]
+\caption{Notation conventions used across all six papers.}
+\label{tab:notation}
+\begin{ruledtabular}
+\begin{tabular}{lllc}
+\textbf{Symbol} & \textbf{Meaning} & \textbf{Units / Range} & \textbf{Paper} \\
+\hline
+$Z$ & Impedance (effort/flow) & $\Omega$; Pa$\cdot$s/m$^3$; N$\cdot$s/m & 0 \\
+$\Gamma$ & Reflection coefficient & dimensionless, $[-1,+1]$ & 0 \\
+$T$ & Transmission coefficient ($1-\Gamma^2$) & dimensionless, $[0,1]$ & 0 \\
+$\eta$ & Remodeling rate & $>0$; $\approx 0$ for cartilage & 0 \\
+$(x_{\text{in}},\,x_{\text{out}})$ & Interface signals & signal units & 0 \\
+$\mathcal{A}$ & Reflection action & J$\cdot$s & 0 \\
+$\Aimp$ & Improvable action & J$\cdot$s & 1 \\
+$\Acut$ & Cutoff (irreducible) action & J$\cdot$s & 1 \\
+$K$ & Modal complexity & integer $\ge 1$ & 1 \\
+$K_{\text{com}}$ & Common modes $\min(K_i,K_j)$ & integer & 1 \\
+$Z_v,\;Z_n$ & Vascular / neural impedance & Pa$\cdot$s/m$^3$; $\Omega$ & 2 \\
+$D_Z$ & Impedance debt & J$\cdot$s & 3 \\
+$T_c(K)$ & Critical temperature & $^\circ$C & 3 \\
+$\beta_{\text{recal}}$ & N3 recalibration rate & s$^{-1}$ & 3 \\
+$\Phi_{\text{meta}}$ & Meta-reflection coefficient & dimensionless, $[-1,+1]$ & 4 \\
+$\varepsilon$ & Memory seal factor & dimensionless, $>0$ & 4 \\
+$\theta_{\text{recall}}$ & Recall SNR threshold & dimensionless & 4 \\
+$\mathcal{S}$ & Null space (``soul'') & --- & 4 \\
+$H$ & Health index $\prod_i(1-\Gamma_i^2)$ & dimensionless, $[0,1]$ & 5 \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
 
 
 % ============================================================
