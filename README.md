@@ -59,15 +59,15 @@ for a measurable impedance quantity.
 | Biology Term | Physics Definition | Symbol / Equation | Where Defined |
 |:---|:---|:---|:---|
 | **Sleep** | Global decoupled dissipation state (offline impedance renormalization) | $D_Z^{-} = \int_{sleep} R(\tau)\,d\tau$ | Paper 3 / `sleep_physics.py` |
-| **Memory** | Hysteretic topological deformation (no read/write — current flows through shaped Z) | $\partial Z / \partial t \neq 0$ | Paper 4 / `working_memory.py` |
-| **Consciousness** | Mean transmission coefficient across monitored channels | $\Phi = (1/N)\sum(1 - \Gamma_i^2)$ | Paper 4 / `awareness_monitor.py` |
-| **Soul** | Invariant topological core (null space of impedance change) | $\ker(\partial Z / \partial t)$ | Paper 4 |
-| **Emotion** | 8-dimensional Plutchik impedance map (VAD space) | $Z_e = Z_0(1-E_i)$ | Paper 4 / `emotion_granularity.py` |
+| **Memory** | Hysteretic topological deformation (no read/write — current flows through shaped Z) | $\partial Z / \partial t \neq 0$ | Paper 1 / `working_memory.py` |
+| **Consciousness** | Mean transmission coefficient across monitored channels | $\Phi = (1/N)\sum(1 - \Gamma_i^2)$ | Paper 1 / `awareness_monitor.py` |
+| **Soul** | Invariant topological core (null space of impedance change) | $\ker(\partial Z / \partial t)$ | Paper 1 |
+| **Emotion** | 8-dimensional Plutchik impedance map (VAD space) | $Z_e = Z_0(1-E_i)$ | Paper 3 / `emotion_granularity.py` |
 | **Willpower** | Top-down prefrontal forcing function (three-factor product) | $\eta_{\text{pfc}}^{\text{eff}} = \eta \cdot Q_{\text{gate}} \cdot (1-\langle\Gamma^2_{\text{mem}}\rangle)$ | Paper 4 / `prefrontal.py` |
 | **Health** | Global power-transfer efficiency (product of all organ transmissions) | $H = \prod_i(1-\Gamma_i^2)$ | Paper 2 / `gamma_engine.py` |
 | **Allostatic load** | Cumulative exogenous set-point forcing | $L_{\text{allo}} = \int f_{\text{ext}}\,dt$ | Paper 5 |
-| **Disease** | Pathological attractor (impedance lock-in at $\Gamma \to 1$) | $dZ/dt \to 0,\;\Gamma \gg 0$ | Paper 5 |
-| **Comorbidity** | Coupled-subsystem divergence (off-diagonal C matrix) | $\lambda_+ > 0$ when $C_{kj}C_{jk} > \eta^2$ | Paper 5 |
+| **Disease** | Pathological attractor (impedance lock-in at $\Gamma \to 1$) | $dZ/dt \to 0,\;\Gamma \gg 0$ | Paper 4 |
+| **Comorbidity** | Coupled-subsystem divergence (off-diagonal C matrix) | $\lambda_+ > 0$ when $C_{kj}C_{jk} > \eta^2$ | Paper 4 |
 | **Pain** | Protocol collapse (reflected energy at impedance mismatch) | $P_{\text{reflected}} = \Gamma^2 \cdot P_{\text{in}}$ | Paper 0 / `signal.py` |
 | **Dopamine** | Impedance-matching improvement signal (reward prediction error) | $\delta = R - (1-\Gamma^2)P_{\text{in}}$ | `basal_ganglia.py` |
 | **Aging** | Arrhenius-driven irreversible impedance drift | $\delta(t) = \delta_0 e^{E_a \cdot \text{stress}}$ | Paper 3 / `lifecycle_equation.py` |
@@ -214,22 +214,22 @@ python -m alice.main server --port 8000
 
 | # | Title | Pages | Status |
 |---|-------|:-----:|--------|
-| 0 | Irreducible Dimensional Cost in Heterogeneous Impedance Networks | 6 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18751831)) |
-| 1 | Topological Constraints on Impedance Networks | 8 | **Complete** |
-| 2 | Dual Neural–Vascular Impedance Networks: Architecture & Sleep | 11 | **Complete** |
-| 3 | Impedance Debt, Temporal Dynamics, and the Lifecycle Equation | 14 | **Complete** |
-| 4 | Memory, Consciousness, and Soul as Impedance Physics | 16 | **Complete** |
-| 5 | The Grand Unification: Γ as the Universal Interface Law | 15 | **Complete** |
+| 0 | From the First Law of Thermodynamics to Three Inviolable Constraints — Framework Definition | 6 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18751831)) |
+| 1 | From Neuron to Mind — Irreducible Topology, Neural Architecture, Memory, Consciousness, and Soul | 14 | **Complete** |
+| 2 | Dual Impedance Networks and Metabolic Scaling — Vascular Architecture, Organ Health, and Kleiber's Law | 8 | **Complete** |
+| 3 | Temporal Dynamics and Universal Remodeling — Impedance Debt, Sleep, Lifecycle, Aging, and 29 C2 Networks | 20 | **Complete** |
+| 4 | Topological Pathology — Disease as Impedance Failure on the Γ-Network | 16 | **Complete** |
+| 5 | The Grand Unification — Γ as the Universal Interface Law from Microtubules to Power Grids | 12 | **Complete** |
 
 Key results:
-- **Paper 0**: Irreducibility theorem — heterogeneous networks have a geometric cost floor $A_{\text{cut}}$ that cannot be learned away. Relay nodes emerge as thermodynamic necessity.
-- **Paper 1**: Topological constraints — network topology is not a design choice but a consequence of impedance physics.
-- **Paper 2**: Dual neural–vascular coupling — $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$. Vascular debt accumulates on weeks-to-years timescale.
-- **Paper 3**: Temporal dynamics & lifecycle — sleep as *global decoupled dissipation state*; adenosine ≡ impedance debt readout. Lifecycle equation $L(t) = \prod_i [1 - \Gamma_i^2(t)]$ from embryo to senescence. PTSD & chronic stress as integral-path equivalence ($D_Z$ threshold). Thermal refugia as C2 boundary condition.
-- **Paper 4**: Memory = *hysteretic topological deformation* ($\partial Z/\partial t$), Consciousness = $1 - \Gamma_{\text{meta}}^2$, Soul = *Invariant Topological Core* ($\ker(\partial Z/\partial t)$). Television Theorem. **Four Laws of the Null Space** (parallel to thermodynamics). Willpower tri-factorization: $\eta_{\text{pfc}}^{\text{eff}} = \eta \cdot Q_{\text{gate}} \cdot (1 - \langle\Gamma^2_{\text{mem}}\rangle)$. Sensory-deprivation collapse & hallucination unification. **Moral Constraint Theorem**: blame on sealed patterns = pure injury.
-- **Paper 5**: Grand Unification — Γ as universal interface law. NHANES 10-cycle validation ($n=49{,}774$, zero fitted parameters, AUC 0.77–0.80). 5-organ disease cascade (pathological attractors & coupled-subsystem divergence). Immune–metabolic feedback loop. Obesity as impedance-driven metabolic strategy. **Willpower non-existence proof** (top-down prefrontal forcing function). **18 testable predictions** with falsification criteria.
+- **Paper 0**: Derives the complete axiomatic framework from the First Law of Thermodynamics. C1/C2/C3 emerge as *theorems*, not postulates. C2 proven as the *unique* first-order activity-gated update rule minimising reflected energy.
+- **Paper 1**: **Irreducibility theorem** — heterogeneous networks have a geometric cost floor $A_{\text{cut}}$ that cannot be learned away. Relay nodes emerge as thermodynamic necessity. **Memory** = hysteretic topological deformation ($\partial Z/\partial t$). **Consciousness** = $1 - \Gamma_{\text{meta}}^2$ (self-referential loop). **Soul** = Invariant Topological Core ($\ker(\partial Z/\partial t)$). **Television Theorem**: brain = TV + one feedback arc.
+- **Paper 2**: **Dual neural–vascular coupling** — $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$. **Murray's Law** derived as variational minimum. **Kleiber's Law** ($B \propto M^{3/4}$) from fractal impedance cost. Vascular–organ impedance landscape across 10 organs.
+- **Paper 3**: **Impedance debt** ($D_Z$) and **sleep** as global decoupled dissipation state; adenosine ≡ $D_Z$ readout. **Lifecycle equation** from embryo to senescence. **29 C2 networks** (Hebb, Wolff, Glagov, Davis, immune memory, …) unified as parameter instances of one gradient-descent rule. PTSD & chronic stress as integral-path equivalence. Morphogenesis PDE, embryogenesis timeline, skill-decay anti-chronology.
+- **Paper 4**: **Disease** — from single-organ pathology to multi-organ failure — emerges from impedance physics alone. 5-step dual-network cascade ($\Gamma_v\!\uparrow \to \rho\!\downarrow \to \Gamma_n\!\uparrow \to \text{autonomic}\!\downarrow \to \Gamma_v\!\uparrow\!\uparrow$). Coupled multi-organ dynamics with bifurcation analysis. **Willpower tri-factorization**: $\eta_{\text{pfc}}^{\text{eff}} = \eta \cdot Q_{\text{gate}} \cdot (1 - \langle\Gamma^2_{\text{mem}}\rangle)$. **Four Laws of the Null Space** (parallel to thermodynamics). **Moral Constraint Theorem**: blame on sealed patterns = pure injury.
+- **Paper 5**: **Grand Unification** — Γ as universal interface law. Interface Scale Table (25 nm microtubules → 10⁶ m power grids). NHANES 10-cycle validation ($n=49{,}774$, zero fitted parameters, AUC 0.705). Immune–metabolic feedback loop. Recovery dynamics (three regimes). **18 testable predictions** with falsification criteria.
 
-> **Methodological note**: Papers 0–4 include explicit circularity warnings — simulation data confirms the theory it is built from. Paper 5 breaks this circularity with NHANES external epidemiological data (10 cycles, $n=49{,}774$) and zero fitted parameters. Total: 70 pages, 18 testable predictions.
+> **Methodological note**: Papers 0–4 include explicit circularity warnings — simulation data confirms the theory it is built from. Paper 5 breaks this circularity with NHANES external epidemiological data (10 cycles, $n=49{,}774$) and zero fitted parameters. Total: 76 pages, 18 testable predictions.
 
 ---
 
