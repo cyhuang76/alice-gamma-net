@@ -1,4 +1,4 @@
-﻿# Alice Smart System — v3.8.0
+# Alice Smart System — v3.9.0
 
 <div align="center">
 
@@ -196,16 +196,16 @@ python -m alice.main server --port 8000
 
 | Metric | Count |
 |:---|---:|
-| Source files (`.py`) | 219 |
-| Lines of code | 91,700+ |
+| Source files (`.py`) | 220+ |
+| Lines of code | 93,000+ |
 | Unit tests | 3,274 |
-| Experiments | 24 |
+| Experiments | 27 |
 | Body organs | 31 |
 | Brain modules | 42 |
 | Disease models | 125 |
 | Medical specialties | 13 |
 | Lab items mapped | 53 |
-| Figures | 32 |
+| Paper figures | 27 |
 | Testable predictions | 18 |
 
 ---
@@ -244,19 +244,21 @@ alice-gamma-net/
 │   ├── diagnostics/        # Lab-Γ Engine (API + feedback + UI)
 │   ├── modules/            # Shared module infrastructure
 │   └── api/                # Brain REST API server
-├── tests/                  # 92 test files, 3,274 tests
-├── experiments/            # 24 experiment scripts
-├── paper/                  # 6 papers (70 pages, LaTeX + PDF)
-├── figures/                # 32 generated figures
+├── tests/                  # 93 test files, 3,274 tests
+├── experiments/            # Organized experiment scripts
+│   ├── figgen/             # 9 figure generators
+│   ├── validation/         # 5 validation experiments
+│   └── simulation/         # 13 simulation experiments
+├── paper/                  # 6 papers (70+ pages, LaTeX)
+│   └── gammanet.sty        # Shared LaTeX macros
+├── figures/                # 27 generated figures (fig_p{N}_*)
+├── build_figures.py        # Unified figure generation API
 ├── docs/                   # Architecture docs
 │   ├── app/                # GitHub Pages verification web app
-│   │   ├── index.html      # Single-page Pyodide app
-│   │   ├── gamma_compute.py # Pure-Python calculator (browser)
-│   │   └── style.css       # Responsive UI
 │   ├── KNOWN_LIMITATIONS.md
 │   ├── SYSTEM_MANUAL.md
 │   ├── LAB_GAMMA_ENGINE.md
-│   └── ...
+│   └── README.md           # Documentation index
 ├── pyproject.toml          # Project metadata & dependencies
 ├── CITATION.cff            # Citation metadata
 └── LICENSE                 # AGPL-3.0-or-later
@@ -285,7 +287,7 @@ alice-gamma-net/
   author  = {Huang, Hsi-Yu},
   title   = {Alice Smart System — Physics-Driven Electronic Lifeform Simulator},
   year    = 2026,
-  version = {3.8.0},
+  version = {3.9.0},
   doi     = {10.5281/zenodo.18751831},
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }
