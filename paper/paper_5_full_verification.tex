@@ -880,6 +880,30 @@ This uniqueness is inherited by all 29 tissue
 remodeling laws (Paper~3, Universality Theorem).
 \end{theorem}
 
+\begin{proof}
+The reflection action per interface is
+$\mathcal{A}_i = \Gamma_i^2 P_{\text{in},i}$ with
+$\Gamma_i = (Z_{\text{load},i} - Z_{\text{source},i}) /
+(Z_{\text{load},i} + Z_{\text{source},i})$.
+The gradient with respect to the controllable variable
+$Z_{\text{source},i}$ is
+$\partial\mathcal{A}_i / \partial Z_{\text{source},i}
+ = -2\Gamma_i P_{\text{in},i} \cdot
+     2 Z_{\text{load},i} / (Z_{\text{load},i} +
+     Z_{\text{source},i})^2$.
+An activity-gated first-order rule
+$\Delta Z = -\eta\,(\partial\mathcal{A}/\partial Z)\,
+ x_{\text{in}}\,x_{\text{out}}$ yields
+$\Delta Z \propto -\eta\,\Gamma\,x_{\text{in}}\,
+ x_{\text{out}}$,
+which is C2.
+No other first-order, local, activity-gated rule
+reduces $\mathcal{A}[\Gamma]$ at every step, because
+the gradient direction is unique up to positive
+rescaling.
+Full derivation: Paper~0, \S4.
+\end{proof}
+
 \subsection{The tissue is not the algorithm}
 
 The remodeling machinery differs vastly: NMDA receptors

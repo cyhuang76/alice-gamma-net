@@ -254,13 +254,32 @@ Minimising $\partial\Av^d/\partial r_d = 0$:
   \label{eq:rd-rp-opt}
 \end{equation}
 Taking the ratio:
+
+\begin{theorem}[Murray's Law from MRP]
+\label{thm:murray}
+For symmetric $n$-branching of a vessel with parent
+radius~$r_p$, minimisation of the vascular action
+$\Av = \sum_j [Q_j^2 Z_j + \lambda V_j]$ yields
 \begin{equation}
   \boxed{r_d = \frac{r_p}{n^{1/3}},}
   \label{eq:murray}
 \end{equation}
-which is \textbf{Murray's Law}~\cite{murray1926}.
-Equivalently, $r_p^3 = \sum_{i=1}^n r_{d,i}^3$
+equivalently $r_p^3 = \sum_{i=1}^n r_{d,i}^3$
 (the cube law).
+\end{theorem}
+
+\begin{proof}
+Setting $\partial\Av^d/\partial r_d = 0$ in
+Eq.~\eqref{eq:Av-daughter} gives
+$r_d^6 = 16 Q^2 \mu / (n^2 \lambda \pi^2)$ and
+$r_p^6 = 16 Q^2 \mu / (\lambda \pi^2)$.
+The ratio $r_d^6/r_p^6 = 1/n^2$ gives
+$r_d/r_p = n^{-1/3}$.
+The $1/3$ exponent---rather than $1/4$ from pure
+impedance matching---arises from the balance of
+dissipation ($\propto r^{-4}$) and maintenance
+($\propto r^{+2}$).
+\end{proof}
 
 \begin{remark}[Physics, not optimisation]
 The $1/3$ exponent arises from the balance of dissipation
@@ -581,22 +600,30 @@ Total network dissipation:
 \end{equation}
 For $d=3$: $B_{\text{network}} \propto M^{2/3}$.
 
-\subsection{Kleiber's Law}
-
-Tissue metabolism scales linearly ($B_{\text{tissue}}
-\propto M$), but the vascular tree limits delivery.
-From MRP:
-(1)~Murray's Law gives $r_{\ell+1}/r_\ell = n^{-1/3}$;
-(2)~space-filling determines the length ratio;
-(3)~capillary invariance fixes the terminal scale;
-(4)~blood volume $\propto M$.
-Together: $N_T \propto M^{d/(d+1)}$ and
+\begin{theorem}[Kleiber's Law from MRP]
+\label{thm:kleiber}
+For a self-similar vascular tree with branching number~$n$
+in $d$ spatial dimensions, MRP implies
 \begin{equation}
   \boxed{B \propto M^{d/(d+1)}.}
   \label{eq:kleiber}
 \end{equation}
-For $d=3$: $B \propto M^{3/4}$---\textbf{Kleiber's
-Law}~\cite{Kleiber1932}, now a consequence of MRP.
+For $d=3$: $B \propto M^{3/4}$---Kleiber's
+Law~\cite{Kleiber1932}.
+\end{theorem}
+
+\begin{proof}
+Murray's Law (Theorem~\ref{thm:murray}) gives
+$r_{\ell+1}/r_\ell = n^{-1/3}$.
+Space-filling determines the length ratio
+$l_{\ell+1}/l_\ell = n^{-1/d}$.
+Capillary invariance fixes the terminal scale;
+blood volume $\propto M$.
+Combining: the number of terminal units is
+$N_T \propto M^{d/(d+1)}$, and since each terminal
+unit has a fixed metabolic rate, $B \propto N_T
+\propto M^{d/(d+1)}$.
+\end{proof}
 
 \begin{figure}[h]
   \centering

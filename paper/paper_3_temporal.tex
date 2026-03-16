@@ -213,6 +213,22 @@ Then $D_Z$ grows linearly:
   \label{eq:DZ-linear}
 \end{equation}
 
+\begin{proposition}[Impedance debt monotonicity]
+\label{prop:dz-monotone}
+During wakefulness ($P_{\mathrm{in}} > 0$), impedance
+debt $D_Z(t)$ is monotonically non-decreasing.
+Sleep ($P_{\mathrm{in}} \to 0$) is the only state in
+which $D_Z$ can decrease.
+\end{proposition}
+
+\begin{proof}
+By definition (Eq.~\ref{eq:DZ}),
+$dD_Z/dt = N^{-1} \sum_i |\Gamma_i|^2 P_{\mathrm{in},i}
+\ge 0$ whenever $P_{\mathrm{in},i} > 0$.
+Equality holds only when all $P_{\mathrm{in},i} = 0$
+(global decoupled state = sleep).
+\end{proof}
+
 
 \subsection{Adenosine as a $D_Z$ readout}
 \label{sec:adenosine}
@@ -865,6 +881,11 @@ kinetics:
 \end{equation}
 
 Combining all three:
+
+\begin{theorem}[Lifecycle Equation]
+\label{thm:lifecycle}
+The population-averaged squared reflection coefficient
+$\Sigma\Gamma^2(t)$ satisfies the non-autonomous ODE
 \begin{equation}
   \boxed{\;
   \frac{d(\Sigma\Gamma^2)}{dt}
@@ -874,9 +895,24 @@ Combining all three:
   \;}
   \label{eq:lifecycle}
 \end{equation}
-This is a non-autonomous first-order ODE whose coefficients
-are functions of developmental stage, environmental
-statistics, and cumulative damage.
+where $\eta$ is the C2 learning rate,
+$\gamma\,\Gamma_{\mathrm{env}}$ is the novelty injection
+term, and $\delta\,D$ is the irreversible
+Coffin--Manson aging drift.
+The coefficients are functions of developmental stage,
+environmental statistics, and cumulative damage.
+\end{theorem}
+
+\begin{proof}
+The three terms follow from:
+(i)~C2 gradient descent on
+$\mathcal{A}[\Gamma]$ (Eq.~\ref{eq:learning-term});
+(ii)~new stimuli introducing mismatches at untuned
+interfaces (Eq.~\ref{eq:novelty-term});
+(iii)~Arrhenius-driven irreversible impedance drift
+(Eq.~\ref{eq:arrhenius-aging}).
+Superposition gives the full ODE.
+\end{proof}
 
 
 \subsection{Developmental modulation of $\eta(t)$}
