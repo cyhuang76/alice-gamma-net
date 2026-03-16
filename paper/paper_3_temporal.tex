@@ -2,18 +2,19 @@
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
 \usepackage{hyperref}
-
-\newtheorem{remark}{Remark}
-\newtheorem{proposition}{Proposition}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{gammanet}
 
 \begin{document}
 
-\title{Paper~3: Temporal Dynamics of Impedance Networks\\
---- Impedance Debt, Sleep, Lifecycle, and Aging}
+\title{Paper~3: Temporal Dynamics and Universal Remodeling\\
+--- Impedance Debt, Sleep, Lifecycle, Aging,\\
+and Twenty-Nine C2 Networks}
 
 \author{Hsi-Yu Huang}
 \email{llc.y.huangll@gmail.com}
-\affiliation{Independent Researcher, Taiwan}
+\affiliation{Independent Researcher, Taipei, Taiwan}
 
 \date{\today}
 
@@ -71,7 +72,19 @@ atherosclerosis as vascular fatigue and the cascade
 $\Gamma_v\!\uparrow \to \rho\!\downarrow \to \Gamma_n\!\uparrow$
 explaining why cardiovascular disease precedes
 neurodegeneration.
-Eighteen computational experiments verify these predictions.
+
+\textbf{Part~C} proves that C2 is the \emph{universal}
+remodeling law: we map all twenty-nine known
+tissue-remodeling mechanisms to the single rule
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$,
+identify the thermodynamic boundaries of life
+(ice, fire, Goldilocks 37\textdegree C), and derive the
+two central controllers (cardiac pump, regulatory brain)
+whose failure propagates $\Gamma$ error to every
+downstream organ.
+Together, Parts~A--C establish that temporal dynamics,
+lifecycle, and tissue adaptation are all consequences of
+$\mathcal{A}[\Gamma] \to \min$.
 \end{abstract}
 
 \maketitle
@@ -80,8 +93,9 @@ Eighteen computational experiments verify these predictions.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  PART A — IMPEDANCE DEBT AND SLEEP
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part*{Part A: Impedance Debt and Sleep}
+\bigskip\noindent\textbf{\large Part A: Impedance Debt and Sleep}
 \label{part:A}
+\bigskip
 
 
 % ============================================================
@@ -325,6 +339,21 @@ knockout~\cite{Nedergaard2013})
 should prolong the time required for $D_Z < D_Z^*$,
 i.e.\ increase sleep need---consistent with
 observation.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{../figures/fig_p3_sleep_dz_discharge.pdf}
+  \caption{Impedance debt $D_Z$ accumulation and NREM discharge
+  over 48~hours.
+  Adult (blue, $\langle\Gamma^2\rangle = 0.15$, monophasic):
+  $D_Z$ rises during wake and drops exponentially during
+  NREM.
+  Infant (red, $\langle\Gamma^2\rangle = 0.50$, polyphasic):
+  higher $\Gamma^2$ drives faster accumulation,
+  necessitating frequent naps.
+  Bottom: wake/sleep state timeline for both profiles.}
+  \label{fig:sleep-dz}
+\end{figure}
 
 
 \subsection{Forced awakening and the gate-leak inequality}
@@ -592,7 +621,7 @@ Only entropic degradation survives---no repair is possible
 without material supply.
 
 \begin{figure}[t]
-\includegraphics[width=\columnwidth]{../figures/paper_iii_morphogenesis.pdf}
+\includegraphics[width=\columnwidth]{../figures/fig_p3_morphogenesis.pdf}
 \caption{Dual-field morphogenesis simulation.
   Spatial impedance field $Z(x,t)$ and material-supply field $\rho(x,t)$
   evolve under Eqs.~\eqref{eq:Z-field}--\eqref{eq:rho-field}.
@@ -764,7 +793,7 @@ with $\sim$85\% of metabolic heat removed via the placenta
 in ontogeny.}
 
 \begin{figure}[t]
-\includegraphics[width=\columnwidth]{../figures/paper_iii_embryogenesis.pdf}
+\includegraphics[width=\columnwidth]{../figures/fig_p3_embryogenesis.pdf}
 \caption{Embryogenesis timeline: impedance-debt accumulation
   across developmental stages.
   Heart (day 22), neural tube (week 3--4), and brain vesicles (week 5--6)
@@ -779,7 +808,8 @@ in ontogeny.}
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  PART B — LIFECYCLE EQUATION AND AGING
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part*{Part B: Lifecycle Equation and Aging}
+\bigskip\noindent\textbf{\large Part B: Lifecycle Equation and Aging}
+\bigskip
 \label{part:B}
 
 
@@ -917,7 +947,7 @@ when placed at the keyboard.
 
 \begin{figure}[h]
   \centering
-  \includegraphics[width=\columnwidth]{../figures/fig_skill_decay_order.pdf}
+  \includegraphics[width=\columnwidth]{../figures/fig_p3_skill_decay_order.pdf}
   \caption{Skill-decay anti-chronology.
     Three skills acquired at ages 3, 20, and 35 under a
     common $\eta(t)$ lifecycle (Eq.~\ref{eq:eta-lifecycle}).
@@ -1042,7 +1072,7 @@ and current skill level---the Yerkes--Dodson
 observation~\cite{YerkesDodson1908}.
 
 \begin{figure}[t]
-\includegraphics[width=\columnwidth]{../figures/paper_iii_yerkes_stress.pdf}
+\includegraphics[width=\columnwidth]{../figures/fig_p3_yerkes_stress.pdf}
 \caption{Yerkes--Dodson curve derived from the Lifecycle Equation.
   Optimal arousal $\eta^*$ depends on task difficulty ($\Sigma\Gamma^2$)
   and environmental novelty ($\Gamma_{\mathrm{env}}$).
@@ -1098,7 +1128,7 @@ reliability \emph{bathtub curve}~\cite{Klutke2003}---not
 analogy but derivation from the same physics.
 
 \begin{figure}[t]
-\includegraphics[width=\columnwidth]{../figures/paper_iii_bathtub.pdf}
+\includegraphics[width=\columnwidth]{../figures/fig_p3_bathtub.pdf}
 \caption{Bathtub curve of cognition.
   Six developmental phases (birth, infancy, childhood, adulthood,
   decline, senescence) emerge from the Lifecycle Equation.
@@ -1110,7 +1140,7 @@ analogy but derivation from the same physics.
 \end{figure}
 
 \begin{figure}[t]
-\includegraphics[width=\columnwidth]{../figures/paper_iii_emotions.pdf}
+\includegraphics[width=\columnwidth]{../figures/fig_p3_emotions.pdf}
 \caption{Emotion readouts derived from impedance dynamics.
   Dopamine maps to $-\Delta\Gamma^2$ (reward prediction error),
   cortisol to the slow $\Gamma^2$ integrator.
@@ -1341,8 +1371,8 @@ accelerated aging.
 \subsection{PTSD: anatomy of an undamped spike}
 \label{sec:ptsd-anatomy}
 
-The testable prediction ``PTSD = undamped $\Gamma^2$ spike''
-(Sec.~\ref{sec:predictions}, item~10) can now be decomposed
+The prediction ``PTSD = undamped $\Gamma^2$ spike''
+can now be decomposed
 into three necessary and jointly sufficient conditions
 using the $\eta(t)$ lifecycle (Eq.~\ref{eq:eta-lifecycle})
 and the fixation mechanisms (Remark~\ref{rem:fixation-mechanisms}).
@@ -1631,7 +1661,7 @@ not unique route to structural $Z_s$ fixation.
 A second route reaches the same attractor through
 temporal integration rather than instantaneous shock.
 Recall the impedance debt
-(Eq.~\ref{eq:impedance-debt}):
+(Eq.~\ref{eq:DZ}):
 \begin{equation}
   D_Z = \int_0^T \Gamma^2(t)\,P_{\text{in}}(t)\,dt
   \;> D_Z^*
@@ -1727,244 +1757,544 @@ the integral the patient sits when clinically assessed.
 \end{remark}
 
 
-% ============================================================
-%  SECTION 14 --- TESTABLE PREDICTIONS
-% ============================================================
-\section{Testable Predictions}
-\label{sec:predictions}
-
-\begin{enumerate}
-  \item \textbf{Universality}: Every organism possessing
-    neurons must exhibit sleep-like quiescence (sponges excepted).
-
-  \item \textbf{Terrestrial $>$ aquatic sleep complexity}:
-    Terrestrial species display more structured sleep
-    architecture than aquatic ectotherms of comparable
-    neural complexity.
-
-  \item \textbf{Preterm fragility}: Preterm neonates show
-    more fragile sleep--thermoregulation coupling.
-
-  \item \textbf{REM as $Z$-map reorganisation}:
-    During REM, thermoregulation is suspended for
-    unconstrained impedance exploration.
-
-  \item \textbf{Cooling reduces $D_Z$ rate}:
-    Lower brain temperature extends tolerable wake duration.
-
-  \item \textbf{Chronic vascular disease as undischarged $D_{Z,v}$}:
-    Dual-network cascade predicts that chronic vascular
-    debt amplifies neural sleep need.
-
-  \item \textbf{Bathtub curve}: Cognitive performance follows
-    the six-phase trajectory without fitted functions.
-
-  \item \textbf{Optimal arousal depends on task difficulty}:
-    Yerkes--Dodson optimum shifts with $\Gamma_{\mathrm{env}}$.
-
-  \item \textbf{Depression as high-$\Gamma$, low-$d\Gamma/dt$}:
-    Neural network mismatched but unable to learn.
-
-  \item \textbf{PTSD as undamped $\Gamma^2$ spike}:
-    Massive mismatch that learning cannot resolve;
-    combined pharmacotherapy + exposure therapy should
-    outperform either alone, because drugs modulate
-    $\eta$/noise while therapy provides the C2 gradient
-    (Sec.~\ref{sec:ptsd-therapy}).
-
-  \item \textbf{Caregiver allostatic load}:
-    Clinicians with high empathic sensitivity
-    ($\eta_{\text{social}}$) and prolonged trauma-patient
-    exposure should show measurably elevated cortisol
-    and impedance-debt markers relative to matched
-    controls, following Eq.~\eqref{eq:caregiver-lifecycle}.
-
-  \item \textbf{Chronic stress $\to$ PTSD-equivalent lock-in}:
-    Individuals under sustained sub-traumatic stress
-    (unemployment $>6$\,months, chronic financial
-    precarity) should exhibit $D_Z$ accumulation,
-    immune biomarker decline, and eventual symptom
-    overlap with classic PTSD---despite absence of a
-    single traumatic event---consistent with integral-path
-    equivalence (Sec.~\ref{sec:chronic-stress-ptsd}).
-
-  \item \textbf{Dementia as accelerated neural aging}:
-    $\delta_n D_n(t)$ overwhelms learning prematurely,
-    often preceded by vascular aging cascade.
-\end{enumerate}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  PART C — C2 AS UNIVERSAL REMODELING LAW
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bigskip\noindent\textbf{\large Part C: C2 as Universal Remodeling Law}
+\bigskip
 
 
 % ============================================================
-%  SECTION 15 — COMPUTATIONAL VERIFICATION
+%  SECTION 14 — THERMODYNAMIC BOUNDARIES OF LIFE
 % ============================================================
-\section{Computational Verification}
-\label{sec:computation}
+\section{Thermodynamic Boundaries of Life}
+\label{sec:boundaries}
 
-All simulations use the Alice Gamma-Net framework
-with C1--C3 enforced at every time step.
+Before cataloguing the twenty-nine tissue networks,
+we establish the thermodynamic envelope within which
+C2 can operate.
 
-\subsection*{Part~A experiments}
+\subsection{Ice: impedance freeze ($D_Z = 0$)}
 
-\subsubsection{Experiment~A1: $D_Z$ accumulation and
-exponential discharge}
+Below the freezing point of water, ion transport
+ceases ($x_{\text{in}} = x_{\text{out}} = 0$),
+C2 halts, and impedance debt cannot accumulate.
+Cryopreservation exploits this: tissue is ``paused''
+in impedance space.
 
-100 wake ticks ($\langle\Gamma^2\rangle \approx 0.05$)
-followed by 110 sleep ticks
-($\beta_{\mathrm{recal}} = 0.08$).
-$D_Z$ rises linearly during wake and decays exponentially
-during sleep.
-Measured $\beta_{\mathrm{eff}} = 0.078$ matches input
-to within 2\%.
+\subsection{Fire: impedance deletion ($Z \to \infty$)}
 
-\subsubsection{Experiment~A2: Temperature modulation of
-$T_{\mathrm{wake}}^{\max}$}
+Above the protein denaturation threshold
+($\sim 42$\textdegree C sustained), molecular structure
+breaks down irreversibly.
+Impedance substrate is destroyed;
+$\Gamma^2 \to 1$ at all interfaces represents total
+reflection (death).
 
-Three simulations with $\tau \in \{0.5, 1.0, 1.5\}$.
-Sleep-onset tick ratios: $2.00 : 1.00 : 0.67$---matching
-the $1/\tau$ prediction to within 0.2\%.
+\subsection{The Goldilocks temperature}
 
-\subsubsection{Experiment~A3: Infant versus adult profiles}
+At $\sim 37$\textdegree C: water is liquid
+($x_{\text{in}}, x_{\text{out}} > 0$);
+thermal energy drives conformational changes
+($\eta > 0$); Johnson--Nyquist noise
+$\sigma_Z^2 = 4k_BT\,\text{Re}(Z)\,\Delta f$
+is small enough for C2 to converge yet large
+enough to explore the impedance landscape (annealing).
 
-Infant ($\langle\Gamma^2\rangle = 0.12$, 60/120 wake/sleep)
-versus adult ($\langle\Gamma^2\rangle = 0.04$, 120/60).
-Infant requires $2.0\times$ more sleep ticks;
-the 16\,h/8\,h partition matches neonatal
-epidemiology~\cite{Porkka2011}.
+\subsection{Post-glacial impedance landscape}
 
-\subsubsection{Experiment~A4: Sleep deprivation rebound}
-
-Five deprivation durations (50--250 ticks).
-Recovery scales linearly (slope 0.09, $R^2 = 0.93$);
-N3 fraction rises from 4.8\% to 17.4\%---consistent with
-Process~S dynamics~\cite{Borbely1982}.
-
-\subsubsection{Experiment~A5: $D_{\mathrm{micro}}/D_{\mathrm{thermal}}$
-decomposition}
-
-Four environments ($\kappa \in \{1.0, 0.5, 0.2, 0.04\}$).
-At $\kappa = 1.0$ (ocean): $D_{\mathrm{thermal}} = 0$.
-At $\kappa = 0.04$ (land): $D_{\mathrm{thermal}}/D_{\mathrm{total}} = 49\%$.
-Centralisation threshold crossed at $\kappa \approx 0.50$.
-
-\subsubsection{Experiment~A6: Tidal-zone impedance matching}
-
-Three strategies (direct, linear, logarithmic gradient):
-$\mathcal{A}[\Gamma] = 0.852, 0.115, 0.053$.
-Logarithmic gradient (tidal-zone profile) reduces action
-to 6.2\% of direct jump; transmission rises from 14.8\%
-to 94.9\%.
-
-\subsubsection{Experiment~A7: Distributed vs.\ centralised
-architecture}
-
-$N = 200$ nodes, varied $\kappa$.
-Distributed self-cooling suffices at $\kappa \ge 0.50$
-(octopus zone); centralised hub wins below
-$\kappa_{\mathrm{cross}} \approx 0.30$.
-All terrestrial organisms ($\kappa \approx 0.04$) sit
-deep in the centralised-required zone.
-
-\subsubsection{Experiment~A8: Dual-field morphogenesis}
-
-1-D PDE simulation:
-(a)~Turing patterns in bone ($D_\rho/D_Z = 500$):
-$16.4\times$ variance ratio;
-(b)~Four-tissue unification: bone, neuron, muscle, liver
-all converge under the same PDE with different parameters;
-(c)~Ischemia ($I_{\mathrm{blood}} = 0$):
-$4.77\times$ $\Gamma^2$ ratio vs.\ healthy tissue.
-C1 holds to $< 10^{-15}$ at every grid point.
-
-\subsubsection{Experiment~A9: Embryogenesis verification}
-
-Four scenarios from $Z \approx 0$, $\rho = 0$:
-no mother ($\Gamma^2 = 0.937$, failed),
-with mother ($\Gamma^2 = 0.037$, developed),
-full-term birth ($\Gamma^2 = 0.029$, viable),
-premature birth ($\Gamma^2 = 0.038$, permanent deficit).
-Confirms material-bottleneck theorem \emph{ab initio}.
-
-
-\subsection*{Part~B experiments}
-
-\subsubsection{Experiment~B1: Bathtub curve emergence}
-
-Lifecycle Equation integrated for 5000 ticks.
-$\Sigma\Gamma^2$ drops from 0.8 to $< 0.2$ by tick 600,
-plateaus at 0.1--0.2 for ticks 1000--3000,
-rises above 0.3 after tick 4000.
-All six developmental phases detected in sequence.
-
-\subsubsection{Experiment~B2: Yerkes--Dodson inverted-U}
-
-Arousal swept from 0 to 1 at fixed $\Gamma_{\mathrm{env}} = 0.5$.
-Performance peaks at intermediate arousal ($\sim$0.3--0.5);
-degrades at both extremes.
-
-\subsubsection{Experiment~B3: Repeated exposure adaptation}
-
-Fixed stimulus presented 200 times.
-$\Gamma$ drops from $\sim$0.7 to $< 0.3$;
-learning curve shows exponential decay.
-
-\subsubsection{Experiment~B4: Chronic stress impairs learning}
-
-Relaxed ($\sigma = 0$) versus stressed ($\sigma = 0.7$) agents.
-Stressed agent: higher $\Sigma\Gamma^2$, $> 2\times$
-aging rate, lower learning efficiency.
-
-\subsubsection{Experiment~B5: Sleep--aging decomposition}
-
-2000-tick simulation with periodic sleep (96 wake / 32 sleep).
-Sleep reduces $\Sigma\Gamma^2$ each night;
-baseline drifts upward (irreversible plastic accumulation).
-
-\subsubsection{Experiment~B6: Curiosity-driven exploration}
-
-Agent in boring environment.
-Boredom accumulates; spontaneous exploration triggers
-above threshold; post-exploration $\Gamma^2$ lower than
-pre-exploration.
-
-\subsubsection{Experiment~B7: Metacognition System~1/2 switching}
-
-Tasks of varying difficulty.
-Easy ($\Gamma_{\mathrm{think}} < 0.3$): System~1;
-Hard ($\Gamma_{\mathrm{think}} > 0.6$): System~2;
-hysteresis in switching thresholds confirmed.
-
-\subsubsection{Experiment~B8: Novel stimulus shock and recovery}
-
-Well-adapted agent exposed to drastically novel environment.
-$\Sigma\Gamma^2$ spikes, recovers exponentially;
-post-recovery level slightly lower (net learning).
-
-\subsubsection{Experiment~B9: Full lifecycle simulation}
-
-Complete lifecycle with all three forces, sleep cycles,
-stress episodes, and novelty variation.
-Six phases emerge; $\Sigma T$ peaks in adulthood;
-$T_{\mathrm{steady}}$ stabilises during adult phase.
+Snowball Earth episodes
+(\mbox{720--635\,Ma}) imposed prolonged $D_Z \approx 0$
+conditions.  Post-glacial warming restored thermal
+gradients and nutrient availability, creating an
+impedance landscape in which C2 could operate at high
+throughput.
+The $\Gamma$-framework identifies the \emph{physical
+preconditions}: liquid water ($x_{\text{in}} > 0$),
+sufficient thermal energy ($\eta > 0$), and
+low initial impedance debt.
+Whether and how the Cambrian radiation exploited
+these conditions is a palaeontological question
+beyond the scope of this theory.
 
 
 % ============================================================
-%  SECTION 16 — DISCUSSION
+%  SECTION 15 — TWENTY-NINE Γ-NETWORKS
+% ============================================================
+\section{Twenty-Nine $\Gamma$-Networks}
+\label{sec:twentynine}
+
+Table~\ref{tab:twentynine} maps all twenty-nine known
+remodeling laws to C2.  Seventeen are distributed
+tissue branches; ten are organ-specific or sensory
+controllers; two are central controllers
+(Sec.~\ref{sec:controllers}).
+
+\textbf{Whole-body integration.}  Beyond individual organ
+networks, all 29~blueprints are unified into a single
+\texttt{GammaTopology} (278~nodes, 426~edges) via dual
+inter-organ buses: a vascular bus (aortic trunk $K{=}4$
+$\to$ arteriolar branches $K{=}2$) and a neural bus
+(autonomic trunk $K{=}3$ $\to$ branches $K{=}2$), with
+the brain\_functional topology as central command hub.
+Disease cascades across organs emerge from the bus
+topology without disease-specific code (E0).
+The total structural action
+$\mathcal{A}_{\text{cut}} = 222$ is the
+irreducible price of multi-organ life.
+A thermoregulation derivation (Paper~1, Sec.~7.4)
+shows that blood viscosity $\tilde\eta(T)$ drives
+$Z_{\text{bus}}(T)$ via Arrhenius kinetics;
+the repair time diverges doubly exponentially,
+$\tilde\tau \propto \exp[(\alpha+\beta)/T]$,
+establishing a critical temperature $T_c$
+that rises with brain complexity~$K$.
+Endothermy is therefore a $\Gamma$-topological
+necessity for $K \geq 5$ brains.
+
+\begin{table*}[t]
+\centering
+\caption{Twenty-nine $\Gamma$-networks, each algebraically
+equivalent to C2:
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}} \cdot x_{\text{out}}$.
+The final entry is the C2 \emph{null case} ($\eta \approx 0$).}
+\label{tab:twentynine}
+\begin{tabular}{llllllll}
+\toprule
+\# & Network & Flow & Effort & $Z$ definition &
+$x_{\text{in}}$ & $x_{\text{out}}$ & Known law \\
+\midrule
+1 & Neural & Ion current & Membrane voltage &
+$V/I$ (synaptic) & Pre-syn rate & Post-syn rate &
+Hebb's LTP \\
+2 & Skeletal & Strain rate & Force &
+$F/v$ & Applied force & Bone strain &
+Wolff's Law \\
+3 & Vascular & Blood flow & Pressure &
+$\Delta P/Q$ & Shear stress & Endothelial resp. &
+Glagov remodeling \\
+4 & Immune & Ab flux & Antigen conc. &
+$1/(K_a \cdot [R])$ & $[\text{Ag}]$ &
+$[\text{T}_{\text{FH}}]$ & Affinity maturation \\
+5 & Epithelial & Strain rate & Contact force &
+$F/v$ & Friction & Tissue deform. &
+Keratinisation \\
+6 & Muscular & Shortening vel. & Contractile force &
+$F/v$ (Hill) & Neural drive & Tension &
+Davis's Law \\
+7 & Pulmonary & Gas flow & Airway pressure &
+$P_{\text{aw}}/\dot{V}$ & Vent.\ drive &
+Alveolar exp. & Altitude acclim. \\
+8 & GI & Absorption flux & Nutrient conc. &
+$[\text{nut}]/J$ & Luminal content &
+Epithelial uptake & Intestinal adapt. \\
+9 & Endocrine & Signalling flux & Hormone conc. &
+$1/(K_d \cdot N_R)$ & Hormone conc. &
+Intracell.\ resp. & Receptor reg. \\
+10 & Lymphatic & Lymph flow & Interst.\ pressure &
+$P/Q_{\text{lymph}}$ & Antigen load &
+Node response & Reactive hypertrophy \\
+11 & Renal & GFR & Glomerular pressure &
+$P_{\text{glom}}/Q$ & Macula densa &
+Arteriolar resp. & TG feedback \\
+12 & Hepatic & Clearance flux & Metabolite conc. &
+$[\text{met}]/J$ & Portal signal &
+Prolif.\ resp. & Liver regeneration \\
+13 & Connective & Strain rate & Tendon force &
+$E \cdot A/L$ & Mech.\ strain &
+Fibroblast resp. & Tendon remodeling \\
+14 & Adipose & Storage flux & Energy substrate &
+$[\text{sub}]/J$ & Insulin signal &
+Adipocyte resp. & Leptin signalling \\
+15 & Haematopoietic & O$_2$ delivery & O$_2$ demand &
+$P_{O_2}/Q_{O_2}$ & EPO signal &
+Erythroid resp. & Erythropoiesis \\
+16 & Reproductive & Maturation flux & FSH signal &
+$1/(N_R \cdot K_a)$ & FSH conc. &
+Granulosa resp. & Follicular selection \\
+\midrule
+17 & Cardiac (ctrl) & Ejection flow & Vent.\ pressure &
+$P/Q_{\text{ej}}$ & Wall stress &
+Myocardial strain & Laplace--Starling \\
+18 & Reg.\ brain (ctrl) & Set-point signal &
+Error signal & $Z_{\text{setpoint}}$ &
+Sensory input & Autonomic output &
+Baroreceptor reset \\
+\midrule
+19 & Ocular & Aqueous flow & IOP &
+$P_{\text{IOP}}/Q_{\text{aq}}$ & Aq.\ pressure &
+Trabecular drainage & IOP homeostasis \\
+20 & Auditory & Acoustic flow & Sound pressure &
+Cochlear $Z$ & Sound press. &
+Hair cell resp. & Tonotopic plasticity \\
+21 & Vestibular & Angular flow & Accel.\ signal &
+Vestibular gain & Ang.\ velocity &
+Oculomotor resp. & VOR adaptation \\
+22 & Olfactory & Ligand flux & Odorant conc. &
+Receptor $1/K_d$ & Odorant conc. &
+ORN response & Receptor turnover \\
+23 & Dental & Stress flux & Thermal/mech. &
+Dentin $Z$ & Insult &
+Odontoblast resp. & Tert.\ dentinogenesis \\
+24 & Enteric & Strain rate & Luminal press. &
+Gut compliance & Distension &
+ENS firing & Enteric plasticity \\
+25 & Autonomic & Neural flux & Set-point error &
+Sympathovagal $Z$ & Baroreceptor &
+Effector output & Sympathovagal remod. \\
+26 & Pancreatic & Insulin flux & Glucose conc. &
+$1/(N_\beta \cdot k_{\text{sec}})$ & Glucose &
+Insulin secr. & $\beta$-cell compensation \\
+27 & CSF & CSF flow & ICP &
+$P_{\text{CSF}}/Q_{\text{CSF}}$ & CSF pressure &
+Production rate & Choroid regulation \\
+28 & Brain (func.) & Spike rate & Field potential &
+Synaptic $Z$ matrix & Afferent freq. &
+Cortical area & Cortical map plasticity \\
+\midrule
+29 & Cartilage ($\eta \approx 0$) & Creep & Load &
+$H_A \cdot A/h$ & Load & Deformation &
+\textbf{(OA predicted)} \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\begin{remark}[Material substrate vs.\ mathematical structure]
+\label{rem:substrate-vs-structure}
+The molecular transduction pathways implementing C2 in each
+tissue are well characterised in the respective
+literature; our contribution is the recognition that
+these twenty-nine mechanisms share \emph{identical
+mathematical structure}---gradient descent on the
+reflection action---regardless of their material substrate.
+\end{remark}
+
+\subsection{Unification Theorem}
+
+\begin{theorem}[C2 Universality across all 29 tissues]
+\label{thm:c2-universal}
+Let $\mathcal{T} = \{1, 2, \ldots, 29\}$ be the index set
+of all known tissue-remodeling systems listed in
+Table~\ref{tab:twentynine}.
+For each tissue $i \in \mathcal{T}$, let $\mathcal{L}_i$
+denote the empirically established tissue-specific
+remodeling law.
+Then there exists a unique physiological mapping
+\begin{equation}
+  \varphi_i : \text{(tissue-specific physiological quantities)}
+  \;\longrightarrow\;
+  \bigl(Z_i,\; x_{\text{in},i},\; x_{\text{out},i}\bigr)
+  \label{eq:phi-map}
+\end{equation}
+such that $\mathcal{L}_i$ is algebraically equivalent to
+Constraint~C2 under $\varphi_i$:
+\begin{equation}
+  \boxed{
+  \mathcal{L}_i \;\equiv\;
+  \Delta Z_i = -\eta_i\,\Gamma_i\,
+  x_{\text{in},i}\,x_{\text{out},i}
+  \quad \forall\, i \in \mathcal{T}
+  }
+  \label{eq:c2-universal}
+\end{equation}
+where $\Gamma_i = (Z_{\text{load},i} - Z_{\text{source},i})
+/(Z_{\text{load},i} + Z_{\text{source},i})$.
+The only tissue-specific free parameters are the material
+constants $(\eta_i, Z_{0,i})$; the mathematical structure
+is uniquely determined by the First Law
+(Paper~0, Theorem~3).
+\end{theorem}
+
+\begin{proof}
+The proof proceeds in three steps.
+
+\textbf{Step 1: Existence of $\varphi_i$.}
+For every tissue $i$, the remodeling literature reports
+an update rule of the form
+$\Delta Q_i = f_i(\text{input}_i,\, \text{output}_i)$,
+where $Q_i$ is a tissue-specific quantity (synaptic
+weight, bone density, vessel radius, receptor affinity,
+etc.).
+In each case, impedance is definable as the ratio of an
+effort variable to a flow variable
+(Eq.~\ref{eq:Z-def} of Paper~0),
+and the update $\Delta Q_i$ maps to $\Delta Z_i$ via
+a sign-preserving linear relation
+($\Delta Z \propto -\Delta w$ for synapses;
+$\Delta Z \propto +\Delta\rho$ for bone; etc.).
+The mapping $\varphi_i$ is therefore constructible
+explicitly for every row of Table~\ref{tab:twentynine};
+five representative constructions are given in
+Section~\ref{sec:tissue-proofs}.
+
+\textbf{Step 2: Algebraic equivalence.}
+Under $\varphi_i$, each $\mathcal{L}_i$ reduces to
+gradient descent on the reflection action
+$\mathcal{A} = \int \Gamma_i^2 P_{\text{in},i}\,dt$
+(Eq.~\ref{eq:action} of Paper~0).
+By the uniqueness theorem for C2
+(Paper~0, Theorem~5), gradient descent on
+$\mathcal{A}$ with activity gating yields
+$\Delta Z_i = -\eta_i\,\Gamma_i\,
+x_{\text{in},i}\,x_{\text{out},i}$
+as the \emph{unique} first-order descent direction.
+Hence $\mathcal{L}_i \equiv$ C2 under $\varphi_i$.
+
+\textbf{Step 3: Uniqueness of $\varphi_i$.}
+Suppose two mappings $\varphi_i$ and $\varphi_i'$ both
+reduce $\mathcal{L}_i$ to C2.
+Then $\varphi_i' \circ \varphi_i^{-1}$ is an
+automorphism of C2 that preserves the gradient
+structure.
+The only such automorphisms are rescalings
+$\eta_i \to \lambda\eta_i$, $Z_{0,i} \to \mu Z_{0,i}$,
+which correspond to different choices of material
+units---not different physical content.
+Therefore $\varphi_i$ is unique up to unit rescaling.
+\end{proof}
+
+\begin{corollary}[Plasticity as $\eta_i > 0$]
+\label{cor:plasticity}
+Tissue $i$ is remodeling-capable if and only if
+$\eta_i > 0$.
+For $\eta_i \approx 0$ (cartilage, scar tissue),
+C2 predicts $\Delta Z_i \approx 0$ regardless of
+mismatch, making pathology under sustained load
+a thermodynamic necessity rather than a disease.
+\end{corollary}
+
+\begin{corollary}[Substrate independence]
+\label{cor:substrate}
+The molecular machinery implementing C2 in each
+tissue (NMDA receptors, RANKL/OPG, eNOS, AID
+hypermutation, EPO, FSH receptors, etc.)
+determines only the material constants
+$(\eta_i, Z_{0,i})$.
+The update equation is dictated by physics
+and is substrate-independent.
+\end{corollary}
+
+\subsection{Selected tissue proofs}
+\label{sec:tissue-proofs}
+
+We present five representative proofs; the remaining
+twenty-four follow identical logic with the substitutions
+shown in Table~\ref{tab:twentynine}.
+
+\subsubsection{Neural: Hebb's Law (1949)}
+
+Hebb's postulate~\cite{Hebb1949}: when axon~A repeatedly
+fires cell~B, synaptic efficiency increases.
+Modern rate-based formulation:
+$\Delta w_{AB} = \eta\,r_A\,r_B$.
+Since synaptic weight $w$ is inversely related to
+synaptic impedance ($Z_{\text{syn}} \propto 1/w$):
+\begin{equation}
+  \Delta Z_{\text{syn}}
+  = -\eta\,\Gamma_{\text{syn}}\,
+    x_{\text{in}}\,x_{\text{out}}\,.
+  \quad \checkmark
+  \label{eq:hebb-C2}
+\end{equation}
+STDP (spike-timing-dependent plasticity) arises from
+the causal structure of $x_{\text{in}}$ preceding
+$x_{\text{out}}$: LTP when pre~$\to$~post ($\Gamma > 0$),
+LTD when reversed ($\Gamma < 0$).
+
+\subsubsection{Skeletal: Wolff's Law (1892)}
+
+Wolff's Law~\cite{Wolff1892}: bone internal architecture
+adapts to imposed mechanical demand.
+Bone impedance $Z_{\text{bone}} = F/v$ is proportional
+to density and stiffness.  The strain mismatch maps
+to $\Gamma_{\text{mech}}$:
+\begin{equation}
+  \Delta Z_{\text{bone}}
+  = -\eta\,\Gamma_{\text{mech}}\,
+    F_{\text{applied}}\,\varepsilon_{\text{bone}}
+  \quad \checkmark
+  \label{eq:wolff-C2}
+\end{equation}
+Astronaut bone loss: $F_{\text{applied}} \approx 0
+\Rightarrow x_{\text{in}} \cdot x_{\text{out}} \approx 0
+\Rightarrow \Delta Z = 0$.
+Without the C2 drive, bone impedance drifts
+under metabolic noise at $\sim 1\%$/month~\cite{Lang2004}.
+
+\subsubsection{Vascular: Glagov's Remodeling (1987)}
+
+Arteries enlarge compensatorily as plaque accumulates,
+maintaining lumen until burden exceeds
+$\sim 40\%$~\cite{Glagov1987}.
+Vascular impedance $Z_{\text{vasc}} = 8\mu L / \pi r^4$
+(Poiseuille).  Wall shear stress $\tau_w$ is
+$x_{\text{in}}$; endothelial response is $x_{\text{out}}$:
+\begin{equation}
+  \Delta Z_{\text{vasc}}
+  = -\eta\,\Gamma_{\text{vasc}}\,
+    \tau_w\,(\text{endothelial response})
+  \quad \checkmark
+  \label{eq:glagov-C2}
+\end{equation}
+The 40\% threshold corresponds to the critical $\Gamma$
+beyond which the smooth muscle learning rate $\eta$ cannot
+keep pace with plaque growth.
+
+\subsubsection{Immune: Affinity Maturation}
+
+Receptor--antigen impedance:
+$Z_{\text{receptor}} = 1/(K_a \cdot [\text{R}])$.
+Affinity maturation via somatic
+hypermutation~\cite{Victora2012}:
+$\Delta K_a \propto K_a \cdot [\text{Ag}] \cdot
+[\text{T}_{\text{FH}}]$.
+Since $\Delta Z \propto -\Delta K_a$:
+\begin{equation}
+  \Delta Z_{\text{receptor}}
+  = -\eta\,\Gamma_{\text{immune}}\,
+    [\text{Ag}]\,[\text{T}_{\text{FH}}]
+  \quad \checkmark
+  \label{eq:immune-C2}
+\end{equation}
+A vaccine is the deliberate injection of $x_{\text{in}}$
+to drive C2 in the absence of disease.
+Booster doses are spaced repetition for $\Gamma$
+reduction~\cite{Cepeda2006}.
+
+\subsubsection{Cartilage: the C2 null case ($\eta \approx 0$)}
+
+Articular cartilage is avascular; chondrocytes are sparse
+and post-mitotic.  Consequently $\eta_{\text{cart}}
+\approx 0$~\cite{Buckwalter2004}.
+When loading changes ($\Gamma_{\text{cart}} > 0$),
+$\Delta Z \approx 0$ regardless---the tissue cannot adapt.
+Osteoarthritis is not a ``disease'' but the
+\emph{predicted consequence} of an interface with
+$\eta \approx 0$.
+
+\paragraph{The healthy joint as impedance transformer.}
+An articular joint couples bone ($Z = 120$) to
+synovial fluid ($Z = 50$) through a cartilage layer
+at $Z_{\text{cart}} = 80 \approx \sqrt{120 \times 50}
+= 77.5$---the geometric mean condition for a
+quarter-wave transformer~\cite{Pozar2011}.
+When cartilage erodes (end-stage OA), the relay node
+is removed: $\Gamma = (120-50)/(120+50) = 0.41$,
+$T$ drops from $>0.80$ to $0.59$, producing
+chronic reflection-driven pain.
+
+
+% ============================================================
+%  SECTION 16 — CENTRAL CONTROLLERS
+% ============================================================
+\section{Central Controllers}
+\label{sec:controllers}
+
+The preceding tissue networks describe \emph{distributed}
+C2---local impedance matching along branches.
+Two systems operate at a higher hierarchical level,
+setting $Z_{\text{source}}$ or $Z_{\text{setpoint}}$
+for entire network trees.
+
+\subsection{Cardiac pump: Laplace--Starling remodeling}
+
+The heart is the voltage source whose output impedance
+determines the pressure waveform for the entire arterial
+tree.  C2 mapping:
+$\Delta Z_{\text{heart}} = -\eta\,\Gamma_{\text{aortic}}
+\,\sigma\,\varepsilon$,
+where $\sigma$ is wall stress (Laplace:
+$\sigma = Pr/2h$) and $\varepsilon$ is myocardial strain.
+
+Two hypertrophy modes:
+\begin{itemize}
+  \item \textbf{Concentric} (pressure overload,
+    $\Gamma > 0$): wall thickness $h$ increases,
+    $Z_{\text{heart}}$ rises toward $Z_{\text{aorta}}$.
+  \item \textbf{Eccentric} (volume overload):
+    chamber dilates, reducing mismatch from a
+    different direction.
+\end{itemize}
+Heart failure is $\Gamma_{\text{aortic}} \to 1$:
+ventricular impedance can no longer match the
+arterial tree.  Controller failure propagates to
+all downstream vascular branches.
+
+\subsection{Regulatory brain: baroreceptor resetting and
+allostatic load}
+
+The brainstem sets $Z_{\text{setpoint}}$ for the
+entire autonomic tree via the baroreflex arc.
+C2 mapping:
+$\Delta Z_{\text{setpoint}} = -\eta\,\Gamma_{\text{reg}}
+\,(\text{sensory input})\,(\text{autonomic output})$.
+
+Baroreceptor resetting in chronic
+hypertension~\cite{Chapleau1991}:
+the brainstem adapts its pressure setpoint upward
+($Z_{\text{setpoint}} \uparrow$), reducing local
+$\Gamma_{\text{reg}}$ but creating downstream mismatch
+in every organ.
+
+Allostatic load~\cite{McEwen1998},
+mathematically the \emph{cumulative exogenous
+set-point forcing}:
+\begin{equation}
+  L_{\text{allostatic}} = \int_0^T
+  |\Delta Z_{\text{setpoint}}(t)|\,dt\,,
+  \label{eq:allostatic}
+\end{equation}
+i.e.\ the time-integrated drift of the regulatory
+controller's impedance set-point.
+Chronic stress causes multi-organ disease because
+the \emph{controller's} $\Gamma$ error propagates
+to all downstream networks.
+
+\begin{remark}[The full chain: trauma $\to$ multi-organ disease]
+\label{rem:trauma-somatic-ctrl}
+Part~B (Sec.~\ref{sec:empathic-load}) derives a caregiver
+lifecycle equation
+with an explicit empathic-load term
+$+\lambda\,\Gamma_{\text{other}}^2$.
+When this term is chronically elevated (unresolved PTSD,
+long-term caregiving), the brainstem controller
+accumulates allostatic load, drifting
+$Z_{\text{setpoint}}$ upward and raising
+$\Gamma_v$ across every downstream organ.
+Because immune memory and metabolic homeostasis are
+themselves C2 networks
+(Table~\ref{tab:twentynine}),
+the resulting $\rho\!\downarrow$ starves their
+repair loops:
+immune affinity maturation stalls
+($\eta_{\text{immune}}\!\downarrow$),
+insulin and hepatic regulation lose their corrective
+gradient, and erythropoiesis underperforms.
+The outward signs---lowered immunity, metabolic syndrome,
+accelerated skin and hair aging---are not metaphors for
+``stress''; they are quantitative consequences of
+$H = (1-\Gamma_n^2)(1-\Gamma_v^2)\!\downarrow$
+propagating from the controller through every C2
+branch of the network.
+\end{remark}
+
+
+% ============================================================
+%  SECTION 17 — DISCUSSION
 % ============================================================
 \section{Discussion}
 \label{sec:discussion}
 
 \subsection{Methodological caveat}
 
-All 18 experiments use modules built from the $\Gamma$-Net
-axioms.
+All computational experiments (Paper~5) use modules
+built from the $\Gamma$-Net axioms.
 When the simulators reproduce the theory's predictions,
 this confirms code--equation consistency, not empirical
 truth.
 True validation requires longitudinal impedance measurements
 (EEG coherence from birth to senescence), comparative
 polysomnography across phyla, and prospective clinical tests.
-We flag this explicitly so readers assess computational
-results as \emph{consistency checks}, not empirical evidence.
 
 \subsection{The brain as thermal manager}
 
@@ -2013,8 +2343,8 @@ where $h_c A$ is the effective thermal conductance
 
 \paragraph{Step 3: Temperature $\to$ impedance.}
 Blood viscosity sets the vascular bus impedance
-$Z_{\mathrm{bus}}(T)$ via the Arrhenius relation
-(Section~\ref{sec:arrhenius}), and C2 repair rate scales as
+$Z_{\mathrm{bus}}(T)$ via the Arrhenius relation,
+and C2 repair rate scales as
 $\tilde{\eta}_{\mathrm{learn}}(T)
 = \exp[\beta(T_0^{-1} - T^{-1})]$.
 Therefore:
@@ -2072,16 +2402,23 @@ irreducibility).
 Paper~2 established the \emph{vascular} extension
 (Murray's Law, dual-network organ health,
 positive-feedback cascade).
-This paper extends both to \emph{time}:
+This paper extends both in two directions:
+\emph{time} (Parts~A--B) and \emph{breadth}
+(Part~C).
 Part~A derives daily dynamics (impedance debt, sleep,
 morphogenesis, evolution);
 Part~B derives lifecycle dynamics (learning--novelty--aging
-competition, emotion, bathtub curve, death).
+competition, emotion, bathtub curve, death);
+Part~C proves that all twenty-nine known tissue-remodeling
+laws are algebraically equivalent to C2
+and identifies the two central controllers
+(cardiac pump, regulatory brain) whose impedance
+errors propagate to every downstream organ.
 Together: the static architecture (Paper~1) sets channel
 structure $\{Z_i\}$; the vascular model (Paper~2) provides
 material coupling $I_{\mathrm{blood}} = (1-\Gamma_v^2)Q_0$;
-Part~A determines daily sleep--wake regulation;
-Part~B determines the developmental arc of both networks.
+Parts~A--B determine daily and lifecycle regulation;
+Part~C completes the tissue catalogue.
 All layers derive from a single principle:
 $\mathcal{A}[\Gamma] = \int \Sigma|\Gamma|^2\,dt \to \min$.
 
@@ -2160,8 +2497,9 @@ simultaneously.
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have developed the complete temporal theory of
-impedance networks in two complementary parts.
+We have developed the temporal theory of impedance networks
+and proved the universality of the C2 remodeling law
+in three complementary parts.
 
 \textbf{Part~A:}
 Impedance debt $D_Z = \int |\Gamma|^2 P_{\mathrm{in}}\,dt$
@@ -2189,15 +2527,37 @@ atherosclerosis is vascular fatigue;
 death is positive-feedback collapse.
 Adulthood has a physical definition via the
 Equilibrium Equation~\eqref{eq:equilibrium}.
+PTSD, empathic load, and chronic stress are derived as
+instances of a single impedance-debt integral with
+different time-scale parameters.
 
-Together with Papers~1--2, this paper completes a four-layer
-description of biological intelligence: spatial architecture,
-vascular topology, daily maintenance, and the full arc of a life
+\textbf{Part~C:}
+The C2 remodeling rule
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+is algebraically equivalent to all twenty-nine known
+tissue-remodeling laws
+(Table~\ref{tab:twentynine}).
+Life is thermodynamically bounded between
+ice ($D_Z = 0$, C2 halted) and fire ($Z \to \infty$,
+substrate destroyed), with 37\textdegree C as the
+self-consistent fixed point
+(Eq.~\eqref{eq:loop-closure}).
+The cardiac pump and regulatory brain are central
+controllers whose impedance errors propagate to every
+downstream organ; allostatic load
+(Eq.~\eqref{eq:allostatic})
+is the time-integrated drift of the controller set-point.
+Cartilage ($\eta \approx 0$) predicts
+osteoarthritis as the null case of remodeling.
+
+Together with Papers~1--2, this paper completes a
+multi-layer description of biological intelligence:
+spatial architecture, vascular topology,
+daily maintenance, the full arc of a life,
+and the universal tissue catalogue
 ---all from $\mathcal{A}[\Gamma] \to \min$.
-Eighteen computational experiments confirm internal
-consistency; empirical falsification via longitudinal
-impedance measurements and comparative polysomnography
-remains the essential next step.
+Testable predictions and computational verification
+are consolidated in Paper~5~\cite{Paper5}.
 
 
 % ============================================================
@@ -2247,6 +2607,12 @@ Hsi-Yu~Huang,
 law from microtubules to power grids, and C2 as universal
 remodeling in twenty-nine tissues,''
 Paper~5 of this series, Zenodo (2026).
+
+\bibitem{Paper4}
+Hsi-Yu~Huang,
+``Topological pathology: Disease cascades, coupled failure,
+and recovery on $\Gamma$-networks,''
+Paper~4 of this series, Zenodo (2026).
 
 \bibitem{Appelbaum2026}
 L.~Appelbaum \emph{et al.},
@@ -2437,6 +2803,46 @@ cerebrospinal fluid oscillations in human sleep,''
 M.~Nedergaard,
 ``Garbage truck of the brain,''
 \emph{Science}\ \textbf{340}, 1529 (2013).
+
+\bibitem{Lang2004}
+T.~Lang \emph{et al.},
+``Cortical and trabecular bone mineral loss from
+the spine and hip in long-duration spaceflight,''
+\emph{J.\ Bone Miner.\ Res.}\ \textbf{19}, 1006 (2004).
+
+\bibitem{Glagov1987}
+S.~Glagov \emph{et al.},
+``Compensatory enlargement of human atherosclerotic
+coronary arteries,''
+\emph{N.\ Engl.\ J.\ Med.}\ \textbf{316}, 1371 (1987).
+
+\bibitem{Victora2012}
+G.~D.~Victora and M.~C.~Nussenzweig,
+``Germinal centers,''
+\emph{Annu.\ Rev.\ Immunol.}\ \textbf{30}, 429 (2012).
+
+\bibitem{Cepeda2006}
+N.~J.~Cepeda \emph{et al.},
+``Distributed practice in verbal recall tasks,''
+\emph{Rev.\ Educ.\ Res.}\ \textbf{76}, 354 (2006).
+
+\bibitem{Buckwalter2004}
+J.~A.~Buckwalter and H.~J.~Mankin,
+``Articular cartilage: tissue design and
+chondrocyte--matrix interactions,''
+\emph{Instr.\ Course Lect.}\ \textbf{47}, 477 (1998).
+
+\bibitem{Pozar2011}
+D.~M.~Pozar,
+\emph{Microwave Engineering}, 4th ed.\
+(Wiley, 2011).
+
+\bibitem{Chapleau1991}
+M.~W.~Chapleau, J.~T.~Cunningham, M.~J.~Sullivan,
+R.~E.~Wachtel, and F.~M.~Abboud,
+``Structural versus functional modulation of the
+baroreflex,''
+\emph{Hypertension}\ \textbf{18}, 667 (1991).
 
 \end{thebibliography}
 

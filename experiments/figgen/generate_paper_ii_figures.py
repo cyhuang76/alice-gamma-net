@@ -24,7 +24,7 @@ from alice.body.vascular_impedance import (
 )
 
 
-def figure_murray(save_prefix="figures/paper_ii_murray"):
+def figure_murray(save_prefix="figures/fig_p2_murray"):
     """
     Figure 1: Murray's Law from Vascular Action Principle.
     Left: Action A_v(r_d) vs daughter radius, showing Murray minimum.
@@ -132,7 +132,7 @@ def figure_murray(save_prefix="figures/paper_ii_murray"):
     print(f"  Saved {save_prefix}.png/.pdf")
 
 
-def figure_cascade(save_prefix="figures/paper_ii_cascade"):
+def figure_cascade(save_prefix="figures/fig_p2_cascade"):
     """
     Figure 2: Positive-feedback cascade after vascular insult.
     """
@@ -178,7 +178,7 @@ def figure_cascade(save_prefix="figures/paper_ii_cascade"):
     print(f"  Saved {save_prefix}.png/.pdf")
 
 
-def figure_organs(save_prefix="figures/paper_ii_organs"):
+def figure_organs(save_prefix="figures/fig_p2_organs"):
     """
     Figure 3: Vascular impedance landscape across 10 organs.
     """
@@ -231,9 +231,120 @@ def figure_organs(save_prefix="figures/paper_ii_organs"):
     print(f"  Saved {save_prefix}.png/.pdf")
 
 
+def figure_kleiber_scatter(save_prefix="figures/fig_p2_kleiber_scatter"):
+    """
+    Figure 4: Kleiber's Law — mammalian metabolic rate vs body mass.
+
+    Classic data from West, Brown & Enquist (1997) / Kleiber (1932),
+    overlaid with the Gamma-Net prediction B = B0 * M^(3/4).
+    Murray's Law radius ratio also shown for comparison.
+    """
+    # Classic mammalian data: (species, mass_kg, BMR_watts)
+    # Sources: Kleiber 1932, West et al 1997, McNab 2008
+    mammals = [
+        ("Mouse",          0.025,    0.45),
+        ("Rat",            0.28,     1.45),
+        ("Rabbit",         2.5,      5.8),
+        ("Cat",            3.5,      7.5),
+        ("Dog",           15.0,     25.0),
+        ("Sheep",         50.0,     55.0),
+        ("Human",         70.0,     80.0),
+        ("Pig",          120.0,    115.0),
+        ("Cow",          400.0,    265.0),
+        ("Horse",        500.0,    310.0),
+        ("Elephant",    4000.0,   1700.0),
+        ("Whale (blue)", 100000.0, 28000.0),
+    ]
+
+    names = [m[0] for m in mammals]
+    masses = np.array([m[1] for m in mammals])
+    bmrs = np.array([m[2] for m in mammals])
+
+    # Gamma-Net prediction: B = B0 * M^(d/(d+1)) = B0 * M^(3/4)
+    # Fit B0 from data
+    log_M = np.log10(masses)
+    log_B = np.log10(bmrs)
+    # Linear fit in log space: log(B) = log(B0) + alpha * log(M)
+    from numpy.polynomial import polynomial as P
+    coeffs = np.polyfit(log_M, log_B, 1)
+    alpha_fit = coeffs[0]
+    B0_fit = 10 ** coeffs[1]
+
+    # Theoretical line
+    M_theory = np.logspace(np.log10(0.01), np.log10(200000), 500)
+    B_theory_34 = B0_fit * M_theory ** 0.75    # Gamma-Net: 3/4
+    B_theory_23 = B0_fit * M_theory ** 0.667   # Naive: 2/3
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 5), dpi=300)
+
+    # --- Left: log-log scatter ---
+    ax1.scatter(masses, bmrs, c="#1565C0", s=80, zorder=5,
+                edgecolors="black", linewidth=0.8, label="Observed (mammals)")
+    ax1.plot(M_theory, B_theory_34, "r-", linewidth=2.5,
+             label=r"$\Gamma$-Net: $B \propto M^{3/4}$ (Kleiber)")
+    ax1.plot(M_theory, B_theory_23, "g--", linewidth=1.5, alpha=0.6,
+             label=r"Surface law: $B \propto M^{2/3}$")
+
+    # Label species
+    for name, m, b in mammals:
+        offset_x = 1.3
+        offset_y = 0.85
+        if name == "Human":
+            offset_y = 1.3
+        elif name == "Mouse":
+            offset_y = 0.65
+        ax1.annotate(name, (m, b), fontsize=7,
+                     xytext=(m * offset_x, b * offset_y),
+                     color="gray")
+
+    ax1.set_xscale("log")
+    ax1.set_yscale("log")
+    ax1.set_xlabel("Body mass $M$ (kg)", fontsize=11)
+    ax1.set_ylabel("Basal metabolic rate $B$ (W)", fontsize=11)
+    ax1.set_title(
+        f"Kleiber's Law: Fitted slope = {alpha_fit:.3f}\n"
+        r"$\Gamma$-Net prediction: $d/(d+1) = 3/4 = 0.750$",
+        fontsize=10
+    )
+    ax1.legend(loc="upper left", fontsize=8)
+    ax1.grid(True, alpha=0.3, which="both")
+
+    # --- Right: Residual plot ---
+    residuals = log_B - (np.log10(B0_fit) + 0.75 * log_M)
+
+    colors_res = ["#388e3c" if abs(r) < 0.05 else
+                  "#FF9800" if abs(r) < 0.1 else "#d32f2f"
+                  for r in residuals]
+    ax2.barh(range(len(names)), residuals, color=colors_res,
+             edgecolor="black", linewidth=0.5, height=0.7)
+    ax2.set_yticks(range(len(names)))
+    ax2.set_yticklabels(names, fontsize=9)
+    ax2.set_xlabel(r"$\log_{10}$ residual from $M^{3/4}$", fontsize=11)
+    ax2.set_title("Residuals from Kleiber fit", fontsize=10)
+    ax2.axvline(0, color="black", linewidth=1)
+    ax2.set_xlim(-0.2, 0.2)
+    ax2.grid(True, alpha=0.3, axis="x")
+
+    # RMS annotation
+    rms = np.sqrt(np.mean(residuals**2))
+    ax2.annotate(f"RMS = {rms:.4f} dex",
+                 xy=(0.95, 0.05), xycoords="axes fraction",
+                 ha="right", fontsize=9, fontweight="bold",
+                 bbox=dict(boxstyle="round,pad=0.3", facecolor="lightyellow",
+                           edgecolor="gray"))
+
+    plt.tight_layout()
+    for ext in ['png', 'pdf']:
+        fig.savefig(f"{save_prefix}.{ext}", dpi=300, bbox_inches='tight')
+    plt.close()
+    print(f"  Saved {save_prefix}.png/.pdf")
+
+
 if __name__ == "__main__":
     print("Generating Paper 2 figures...")
     figure_murray()
     figure_cascade()
     figure_organs()
+    figure_kleiber_scatter()
     print("Done.")
+

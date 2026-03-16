@@ -201,8 +201,8 @@ def plot_bathtub_curve():
     ax3.set_title("(c) Equilibrium Temperature", fontsize=11, fontweight="bold")
 
     plt.tight_layout()
-    fig.savefig("figures/paper_iii_bathtub.png", dpi=200, bbox_inches="tight")
-    fig.savefig("figures/paper_iii_bathtub.pdf", bbox_inches="tight")
+    fig.savefig("figures/fig_p3_bathtub.png", dpi=200, bbox_inches="tight")
+    fig.savefig("figures/fig_p3_bathtub.pdf", bbox_inches="tight")
     plt.close(fig)
     print("[OK] Figure 1: Bathtub curve saved")
 
@@ -270,8 +270,8 @@ def plot_emotion_readouts():
                  fontsize=11, fontweight="bold")
 
     plt.tight_layout()
-    fig.savefig("figures/paper_iii_emotions.png", dpi=200, bbox_inches="tight")
-    fig.savefig("figures/paper_iii_emotions.pdf", bbox_inches="tight")
+    fig.savefig("figures/fig_p3_emotions.png", dpi=200, bbox_inches="tight")
+    fig.savefig("figures/fig_p3_emotions.pdf", bbox_inches="tight")
     plt.close(fig)
     print("[OK] Figure 2: Emotion readouts saved")
 
@@ -340,10 +340,109 @@ def plot_yerkes_dodson():
     ax2.set_ylim(0, 1)
 
     plt.tight_layout()
-    fig.savefig("figures/paper_iii_yerkes_stress.png", dpi=200, bbox_inches="tight")
-    fig.savefig("figures/paper_iii_yerkes_stress.pdf", bbox_inches="tight")
+    fig.savefig("figures/fig_p3_yerkes_stress.png", dpi=200, bbox_inches="tight")
+    fig.savefig("figures/fig_p3_yerkes_stress.pdf", bbox_inches="tight")
     plt.close(fig)
     print("[OK] Figure 3: Yerkes-Dodson & stress-aging saved")
+
+
+# ==============================================================
+# Figure 4: Sleep DZ discharge time series
+# ==============================================================
+
+def plot_sleep_dz_discharge():
+    """
+    Simulate 48h of D_Z(t) — impedance debt accumulation and NREM discharge.
+
+    Physics:
+      Wake:  dD_Z/dt = +<Gamma^2> * P_in   (C1: reflected energy accumulates)
+      NREM:  dD_Z/dt = -eta_sleep * D_Z     (C2: repair during low-input state)
+
+    Compare infant (high <Gamma^2>, polyphasic) vs adult (lower <Gamma^2>, monophasic).
+    """
+    dt = 0.05  # hours
+    T_total = 48.0  # hours
+    t = np.arange(0, T_total, dt)
+    N = len(t)
+
+    def simulate_dz(gamma2_wake, eta_sleep, sleep_schedule, label):
+        """Simulate DZ accumulation."""
+        DZ = np.zeros(N)
+        DZ[0] = 0.05
+
+        for i in range(1, N):
+            hour_of_day = t[i] % 24
+            is_sleeping = sleep_schedule(hour_of_day)
+
+            if is_sleeping:
+                # NREM discharge: C2 repair
+                dDZ = -eta_sleep * DZ[i - 1]
+            else:
+                # Wake accumulation: C1 reflected energy
+                P_in = 1.0
+                dDZ = gamma2_wake * P_in * 0.1
+            DZ[i] = max(0, DZ[i - 1] + dDZ * dt)
+        return DZ
+
+    # Adult: monophasic sleep 23:00-07:00 (hour 23-31 i.e. 23-7)
+    def adult_sleep(h):
+        return h >= 23 or h < 7
+
+    # Infant: polyphasic — sleeps ~16h/day in 3-4h blocks
+    def infant_sleep(h):
+        # Short wake bouts: 7-10, 12-14, 16-18, 20-22
+        wake_blocks = [(7, 10), (12, 14), (16, 18), (20, 22)]
+        for ws, we in wake_blocks:
+            if ws <= h < we:
+                return False
+        return True
+
+    DZ_adult = simulate_dz(gamma2_wake=0.15, eta_sleep=0.08,
+                           sleep_schedule=adult_sleep, label="Adult")
+    DZ_infant = simulate_dz(gamma2_wake=0.50, eta_sleep=0.15,
+                            sleep_schedule=infant_sleep, label="Infant")
+
+    fig, axes = plt.subplots(2, 1, figsize=(10, 6), sharex=True,
+                             gridspec_kw={"height_ratios": [2, 1]})
+
+    # Top: DZ trajectories
+    ax = axes[0]
+    ax.plot(t, DZ_adult, color="#1565C0", linewidth=2, label=r"Adult ($\langle\Gamma^2\rangle = 0.15$)")
+    ax.plot(t, DZ_infant, color="#F44336", linewidth=2, label=r"Infant ($\langle\Gamma^2\rangle = 0.50$)")
+
+    # Shade sleep periods (adult)
+    for day in range(3):
+        offset = day * 24
+        ax.axvspan(offset + 23, min(offset + 31, T_total), alpha=0.08,
+                   color="navy", label="Adult sleep" if day == 0 else None)
+
+    ax.set_ylabel(r"Impedance Debt $D_Z$", fontsize=11)
+    ax.set_title(
+        r"Impedance Debt Accumulation and NREM Discharge"
+        "\n" + r"$dD_Z/dt = +\langle\Gamma^2\rangle P_{\rm in}$ (wake) "
+        r"vs $-\eta_{\rm sleep}\,D_Z$ (NREM)",
+        fontsize=10
+    )
+    ax.legend(loc="upper left", fontsize=9)
+    ax.grid(True, alpha=0.3)
+
+    # Bottom: awake/asleep state (adult)
+    ax2 = axes[1]
+    awake_adult = np.array([0 if adult_sleep(h % 24) else 1 for h in t])
+    awake_infant = np.array([0 if infant_sleep(h % 24) else 1 for h in t])
+    ax2.fill_between(t, 0, awake_adult, alpha=0.4, color="#1565C0", label="Adult (awake)")
+    ax2.fill_between(t, 1.2, 1.2 + awake_infant, alpha=0.4, color="#F44336", label="Infant (awake)")
+    ax2.set_yticks([0.5, 1.7])
+    ax2.set_yticklabels(["Adult", "Infant"], fontsize=9)
+    ax2.set_xlabel("Time (hours)", fontsize=11)
+    ax2.set_xlim(0, T_total)
+    ax2.legend(loc="upper right", fontsize=8)
+
+    plt.tight_layout()
+    fig.savefig("figures/fig_p3_sleep_dz_discharge.png", dpi=200, bbox_inches="tight")
+    fig.savefig("figures/fig_p3_sleep_dz_discharge.pdf", bbox_inches="tight")
+    plt.close(fig)
+    print("[OK] Figure 4: Sleep DZ discharge saved")
 
 
 # ==============================================================
@@ -359,7 +458,9 @@ if __name__ == "__main__":
     plot_bathtub_curve()
     plot_emotion_readouts()
     plot_yerkes_dodson()
+    plot_sleep_dz_discharge()
 
     print("\n" + "=" * 60)
     print("  All Paper 3 figures generated successfully")
     print("=" * 60)
+

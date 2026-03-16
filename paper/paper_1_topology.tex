@@ -1,10 +1,11 @@
 % ============================================================
-%  Paper 1 — From Neuron to Brain
+%  Paper 1 — From Neuron to Mind
 %            Irreducible Topology, Neural Architecture,
-%            and Metabolic Scaling
+%            Memory, Consciousness, and Soul
 %
-%  Complete rewrite: derivation chain
-%    neuron → network → brain → signals → pathology
+%  Merged from: Paper 1 (Parts A+B) + Paper 4 (all)
+%  Part C (Fractal/Kleiber) → Paper 2
+%  §9 Neural Pathology → Paper 4
 %
 %  Compile:  pdflatex paper_1_topology.tex  (×2)
 % ============================================================
@@ -14,34 +15,18 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{xcolor}
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}{Corollary}
-\newtheorem{remark}{Remark}
-
-% ----- macros -----
-\newcommand{\Gnet}{$\Gamma$-Net}
-\newcommand{\avg}[1]{\langle #1 \rangle}
-\newcommand{\Aimp}{A_{\text{imp}}}
-\newcommand{\Acut}{A_{\text{cut}}}
-\newcommand{\Acouple}{A_{\text{couple}}}
-\newcommand{\Kcom}{K_{\text{com}}}
-\newcommand{\Krelay}{K_{\text{relay}}}
-\newcommand{\Zv}{Z_{\text{v}}}
-\newcommand{\Zn}{Z_{\text{n}}}
-\newcommand{\Gv}{\Gamma_{\text{v}}}
-\newcommand{\Gn}{\Gamma_{\text{n}}}
-\newcommand{\Tv}{T_{\text{v}}}
-\newcommand{\Tn}{T_{\text{n}}}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{gammanet}
 
 % ============================================================
 \begin{document}
 
 \title{%
-Paper~1: From Neuron to Brain\\
+Paper~1: From Neuron to Mind\\[2pt]
 Irreducible Topology, Neural Architecture,\\
-and Metabolic Scaling\\[4pt]
-\large in Heterogeneous Impedance Networks
-  under the Minimum Reflection Principle%
+Memory, Consciousness, and Soul\\[4pt]
+\large under the Minimum Reflection Principle%
 }
 
 \author{Hsi-Yu Huang}
@@ -55,7 +40,7 @@ and Metabolic Scaling\\[4pt]
 We ask: given a single neuron with $K$ impedance modes
 governed by C2 remodeling
 ($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$),
-what architecture must emerge?
+what architecture---and what phenomenology---must emerge?
 
 \textbf{Part~A} establishes the foundation.
 A single neuron cannot execute C2 without input from
@@ -75,42 +60,50 @@ K-space fractal dimension
 $D_K = 0.76\gamma + 0.78$.
 
 \textbf{Part~B} derives the neural architecture chain.
-(i)~C2's dimensional preference forces same-$K$ neurons
+C2's dimensional preference forces same-$K$ neurons
 to cluster---thermodynamic phase separation produces
 functional regions without a blueprint.
-(ii)~The irreducibility corollary makes intermediate-$K$
-relay nodes a thermodynamic necessity, producing the
-layered hierarchy of the nervous system.
-(iii)~Convergence of ascending pathways forces the
+The irreducibility corollary makes intermediate-$K$
+relay nodes a thermodynamic necessity.
+Convergence of ascending pathways forces the
 highest-$K$ cluster to form---this is the brain.
-(iv)~C3 impedance-tagged transport enables the brain to
-identify signal origin from $Z_{\text{source}}$ metadata
-and relay-chain topology, distinguishing internal from
-external perception without a separate labeling mechanism.
-(v)~Because $\Acut$ is topologically locked, structural
-damage (neuron death, axon severance, mode loss)
-produces irreversible deficits whose pattern is
-determined by network topology, not disease type.
+C3 impedance-tagged transport enables the brain to
+identify signal origin from $Z_{\text{source}}$ metadata.
 
-\textbf{Part~C} quantifies the metabolic cost:
-$\Acut \propto M^{(d-1)/d}$ (for $d = 3$: $M^{2/3}$),
-the Murray bifurcation ratio
-$\beta = 2^{1/3} \approx 1.26$,
-dual-network packing overhead
-$\Omega \approx 1.25$--$1.33$,
-and Kleiber's allometric law $B \propto M^{3/4}$---all
-consequences of MRP plus geometry.
+\textbf{Part~C} shows that three concepts traditionally
+regarded as metaphysical---memory, consciousness, and
+soul---have precise operational definitions within
+the same formalism.
+\emph{Memory} is the time derivative of impedance
+($\partial Z/\partial t$, the C2 update).
+\emph{Consciousness} requires a self-referential
+measurement loop:
+$\Gmeta=(Z_{\text{obs}}-Z_{\text{act}})/(Z_{\text{obs}}+Z_{\text{act}})$,
+with necessary condition
+$\Zarousal\cdot\sum G_i\cdot\QPFC>\theta$
+(the television inequality).
+\emph{Soul} is the null space of impedance remodeling:
+$\mathcal{S}=\ker(\partial Z/\partial t)
+=\Acut + Z_0^{\text{DNA}} + \rho_{\text{irred}}^2$.
+Four laws of the null space parallel thermodynamics;
+death is a theorem derived from the Second Law and C1.
+
+\textbf{Part~D} presents experimental evidence and
+extensions: two independent kill mechanisms of
+consciousness (fever vs.\ occipital impact), thermal
+vulnerability scaling as $K^{3/2}$, willpower as a
+three-factor product, sensory-deprivation collapse,
+pain as topological crosstalk and bandwidth hijacking,
+coupled inter-agent consciousness, impedance calibration,
+and the physics of intuition.
 
 \medskip\noindent
 \textbf{Circularity disclosure.}
-All numerical experiments use simulation modules built
+All computational experiments use simulation modules built
 from C1--C3 themselves; they demonstrate internal
 consistency, not empirical validity.
 External tests are reported in
 Papers~2--5~\cite{Paper2,Paper3,Paper4,Paper5}.
-The scaling laws in Part~C are mathematical consequences
-of the irreducibility theorem plus geometric constraints;
-no simulation or fitted parameters are involved.
 \end{abstract}
 
 \maketitle
@@ -121,7 +114,6 @@ no simulation or fitted parameters are involved.
 % ============================================================
 
 \part*{Part A: From Neuron to Network}
-
 
 % ============================================================
 \section{Introduction}
@@ -157,10 +149,13 @@ This paper proves that cost is irreducible
 consequences---functional regions
 (Sec.~\ref{sec:clustering}), relay hierarchy
 (Sec.~\ref{sec:relay}), the brain
-(Sec.~\ref{sec:brain}), signal routing
-(Sec.~\ref{sec:signals}), and pathology
-(Sec.~\ref{sec:pathology})---and quantifies its
-metabolic scaling (Part~C).
+(Sec.~\ref{sec:brain}), and signal routing
+(Sec.~\ref{sec:signals})---and then shows that three
+concepts traditionally regarded as metaphysical---memory
+(Sec.~\ref{sec:memory}), consciousness
+(Sec.~\ref{sec:consciousness}), and soul
+(Sec.~\ref{sec:soul})---are necessary consequences
+of the same irreducible topology.
 
 
 % ============================================================
@@ -210,8 +205,6 @@ Each node adjusts its impedance to reduce local reflection:
 where $x_{\text{in},k}$ is the input activity at node~$i$
 and $x_{\text{out},k}$ the output activity at node~$j$
 for mode~$k$; $\eta$ is the remodeling rate.
-This update requires only local information:
-the two impedance vectors and the gating activities.
 
 \textbf{C3---Impedance-Tagged Transport.}
 Every signal carries its source impedance as metadata,
@@ -338,7 +331,7 @@ saturation confirms a natural geometric cost ceiling.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{../figures/fig1_action_decomposition}
+\includegraphics[width=\columnwidth]{../figures/fig_p1_action_decomposition}
 \caption{%
 Action decomposition $A = \Aimp(t) + \Acut$ over 1000 ticks.
 Blue: $\Aimp \to 0$ (exponential decay).
@@ -363,13 +356,10 @@ A power-law fit yields
 \end{equation}
 The \emph{negative} exponent means larger networks converge
 \emph{faster}---a non-trivial prediction.
-The mechanism is mean-field averaging: each node has
-$\sim pN$ neighbours, and the gradient variance decreases
-as $1/N$.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{../figures/fig2_scaling_law}
+\includegraphics[width=\columnwidth]{../figures/fig_p1_scaling_law}
 \caption{%
 Left: log-log plot of $\tau_{\text{conv}}$ vs.\ $N$.
 Dashed line: power-law fit $\tau \sim N^{-1.12}$.
@@ -411,16 +401,14 @@ with $\gamma \ge 0$ yields the relationship
   \label{eq:dk_fit}
 \end{equation}
 with offset $\delta_{\text{C2}} \approx 0.66$ arising from
-C2's intrinsic dimensional preference: same-$K$ edges
-have more shared modes for gradient descent, creating
-higher survival probability under edge pruning.
+C2's intrinsic dimensional preference.
 Cortical fractal dimensions lie in
 $D \in [1.3, 1.5]$~\cite{cortex_fractal}, predicting
 $\gamma \approx 0.7$--$0.9$---a narrow, falsifiable window.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\columnwidth]{../figures/fig3_dk_vs_gamma}
+\includegraphics[width=\columnwidth]{../figures/fig_p1_dk_vs_gamma}
 \caption{%
 K-space fractal dimension $D_K$ vs.\ soft-cutoff exponent
 $\gamma$.
@@ -430,6 +418,19 @@ Purple line: fit $D_K = 0.76\gamma + 0.78$.
 \label{fig:fractal}
 \end{figure}
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{../figures/fig_p1_k_clustering.pdf}
+\caption{%
+K-space phase separation under C2.
+Same-$K$ nodes cluster and different-$K$ nodes decouple
+through $\Delta Z = -\eta\,\Gamma\,x_{\rm in}\,x_{\rm out}$.
+Three snapshots: initial random placement ($t=0$),
+early clustering ($t=50$), full segregation ($t=200$).
+}
+\label{fig:k-clustering}
+\end{figure*}
+
 
 % ============================================================
 %  PART B — FROM NETWORK TO BRAIN
@@ -437,29 +438,19 @@ Purple line: fit $D_K = 0.76\gamma + 0.78$.
 
 \part*{Part B: From Network to Brain}
 
-
 % ============================================================
 \section{Same-$K$ Clustering and Functional Regions}
 \label{sec:clustering}
 % ============================================================
 
-Consider a network of neurons with heterogeneous $K$
-values.
 C2 gradient descent on the reflection action $A$
 selectively strengthens same-$K$ edges
-(more shared modes $\Rightarrow$ faster $\Gamma$ reduction
-$\Rightarrow$ lower $A$) and weakens cross-$K$ edges
+(more shared modes $\Rightarrow$ faster $\Gamma$ reduction)
+and weakens cross-$K$ edges
 (excess modes totally reflected, no gradient available).
-Under sustained activity plus edge pruning
-(developmental apoptosis), the surviving connectivity
-partitions the network into \emph{same-$K$ clusters}:
-neurons sharing a common modal dimension self-segregate
-into spatially contiguous aggregates.
-
-The mechanism is thermodynamic phase separation:
-MRP drives the system toward the lowest attainable $A$;
-same-$K$ clustering minimises $\Acut$ at every internal
-edge.
+Under sustained activity plus edge pruning, the surviving
+connectivity partitions the network into
+\emph{same-$K$ clusters}.
 
 \begin{theorem}[Phase Separation Under MRP]
 \label{thm:phase-sep}
@@ -468,29 +459,29 @@ must phase-separate into same-$K$ domains to minimise
 total reflected action.
 \end{theorem}
 
-\begin{proof}[Proof sketch]
-For any edge connecting nodes with $K_i = K_j$,
-$\Acut = 0$ on that edge.
-For $K_i \neq K_j$, $\Acut = |K_i - K_j| > 0$.
-Rewiring an edge from a cross-$K$ pair to a same-$K$
-pair strictly reduces $\Acut$ (or leaves it unchanged if
-no cross-$K$ edge exists).
-C2 provides the dynamical mechanism: edges where all
-modes converge ($\gamma_k \to 0$) are reinforced; edges
-where excess modes are permanently reflected contribute
-no gradient and are pruned under any activity-dependent
-rule.
-The fixed point of combined C2 + pruning is therefore a
-graph where same-$K$ edges dominate.
+\begin{proof}
+Define the total cutoff action as
+$\Acut = \sum_{(i,j)\in E} |K_i - K_j|$,
+where the sum is over all edges~$E$ of the network.
+For any edge $(i,j)$ with $K_i = K_j$, the contribution
+is zero; for $K_i \neq K_j$, the contribution
+$|K_i - K_j| > 0$ is strictly positive and invariant
+under C2 (Irreducibility Theorem,
+Theorem~\ref{thm:irreducibility}).
+The Minimum Reflection Principle requires
+$\mathcal{A} \to \min$; since $\Aimp \to 0$ under C2,
+the only remaining reduction available is to minimise
+$\Acut$ by rewiring cross-$K$ edges to same-$K$ pairs.
+Each such rewiring strictly decreases $\Acut$, so the
+process is monotone and terminates when all connected
+nodes share the same $K$---the same-$K$ domain
+(phase-separated) configuration.
+C2 provides the dynamical mechanism: cross-$K$ edges
+carry permanent reflected modes that yield no C2
+gradient, and are pruned under any activity-dependent
+update rule with $\eta > 0$.
+$\square$
 \end{proof}
-
-The mapping of specific $K$ ranges to specific
-anatomical regions (sensory cortices, motor cortex,
-prefrontal cortex, subcortical nuclei) is a
-\emph{prediction} of this theorem, not an input;
-its verification requires independent measurement of
-neuronal modal complexity, which remains an open
-experimental problem.
 
 
 % ============================================================
@@ -516,34 +507,14 @@ Nociceptor C fibre & 1 \\
 \end{tabular}
 \end{center}
 
-\noindent
-The $K$ values are structural observations: a cortical
-pyramidal cell has 5~physically distinct propagation
-domains; a C-fibre has~1.
-The theorem predicts that signals ascending from
-$K = 1$ periphery to $K = 5$ cortex are stepped through
-intermediate relays, recovering modes at each step.
-Descending motor signals follow the same cascade in
-reverse.
-
 \subsection{Neural topology verification}
 \label{sec:neural-topo}
 
 A neural blueprint with 9~nodes spanning
 $K \in \{5, 3, 2, 1\}$ and 12~directed edges
-(descending motor, ascending sensory, and pain pathways)
 was evolved for 300~ticks ($\eta = 0.02$, seed~$= 42$):
-\begin{itemize}
-  \item $\Aimp$ decays from $\sim\!1.79$ to zero.
-  \item $\Acut$ rises from 9 (11~initial edges) to 37
-    (60~edges), then saturates.
-  \item The neural $\Acut$ at tick~1 ($= 9$) exceeds the
-    cardiovascular $\Acut$ ($= 5$) because the neural
-    topology has four $K$-levels vs.\ three,
-    as predicted by Eq.~\eqref{eq:decomposition}.
-\end{itemize}
-
-\noindent
+$\Aimp$ decays from $\sim\!1.79$ to zero;
+$\Acut$ rises from 9 to 37, then saturates.
 Full test suite: \texttt{tests/test\_e0\_neural.py}
 (17~tests, 100\% pass).
 
@@ -553,15 +524,8 @@ Full test suite: \texttt{tests/test\_e0\_neural.py}
 \label{sec:brain}
 % ============================================================
 
-An organism with multiple sensory modalities
-(photoreceptors, mechanoreceptors, chemoreceptors,
-thermoreceptors) has multiple ascending
-pathways, each entering the network through a distinct
-low-$K$ transducer.
-For the organism to integrate information and produce
-coordinated responses, these pathways must converge at
-a common region.
-
+An organism with multiple sensory modalities has
+multiple ascending pathways.
 By the irreducibility theorem, the convergence region
 must satisfy
 \begin{equation}
@@ -569,8 +533,7 @@ must satisfy
   \label{eq:K-convergence}
 \end{equation}
 for all input pathways~$j$; otherwise, modes from
-higher-$K$ inputs are totally reflected and the
-convergence region cannot process them.
+higher-$K$ inputs are totally reflected.
 The convergence region is therefore forced to be the
 highest-$K$ cluster in the network.
 
@@ -582,25 +545,14 @@ Its properties follow from $K_{\text{conv}}$ being maximal:
     Volumetric heat density scales as
     $q \propto K \cdot \avg{\Gamma^2} \cdot P_{\text{in}}$
     (Paper~0, Corollary~1~\cite{Paper0}).
-    The brain's extreme $K$ concentrates a disproportionate
-    share of metabolic heat in a small volume.
   \item \textbf{Temperature sensitivity.}
-    Higher $K$ means more modes dissipating simultaneously;
-    the Arrhenius thermal chain (Sec.~\ref{sec:thermo})
-    makes the convergence region the most temperature-vulnerable
-    tissue.
+    Higher $K$ means more modes dissipating simultaneously.
   \item \textbf{Matrix computation.}
     C2 gradient descent across all $K_{\text{conv}}$ modes
     simultaneously is the physical operation that
     neuroscience calls ``executive function''
-    (Paper~4~\cite{Paper4}).
+    (Sec.~\ref{sec:consciousness}).
 \end{itemize}
-
-\noindent
-The brain also serves as a ``hub'' connecting two
-inter-organ buses: a vascular bus (delivering substrate
-$\rho$) and a neural bus (distributing control signals).
-The whole-body topology is detailed in Sec.~\ref{sec:whole-body}.
 
 
 % ============================================================
@@ -610,36 +562,19 @@ The whole-body topology is detailed in Sec.~\ref{sec:whole-body}.
 
 C3 requires every signal to carry its source impedance
 $Z_{\text{source}}$ as metadata.
-In the nervous system, $Z_{\text{source}}$ is the
-impedance of the transmitting neuron.
-Different neuron types---photoreceptors,
-mechanoreceptors, nociceptors, interoceptors---have
-different physical structures and therefore different
-impedance vectors.
-
 At the convergence region, two routing cues are available
 without any additional mechanism:
 \begin{enumerate}
   \item \textbf{Relay-chain topology.}
     External signals enter through body-surface relay
-    chains (skin $\to$ spinal dorsal horn $\to$ thalamus
-    $\to$ cortex).
-    Internal signals enter through visceral relay chains
-    (organ $\to$ autonomic ganglion $\to$ brainstem
-    $\to$ cortex).
-    The two chains occupy distinct edges in the
-    $\Gamma$-network; traversing different relay nodes
-    means arriving at different input ports of the
-    convergence region.
+    chains; internal signals enter through visceral
+    relay chains.
+    The two chains occupy distinct edges.
 
   \item \textbf{$Z_{\text{source}}$ metadata (C3).}
     Sensory neurons of different types carry
     distinguishable $Z$ signatures because their
     physical geometries differ.
-    These signatures propagate through the relay chain;
-    the convergence region receives them as C3 metadata
-    and can route processing to the appropriate same-$K$
-    cluster (Sec.~\ref{sec:clustering}).
 \end{enumerate}
 
 \noindent
@@ -647,487 +582,854 @@ The brain does not need a separate ``internal'' or
 ``external'' label; the impedance metadata and
 relay-chain topology together provide full routing
 information.
-``Internal perception'' and ``external perception'' are
-emergent properties of network topology and C3 transport,
-not separate systems.
-
-Descending signals follow the reverse path:
-the convergence region generates motor or autonomic
-commands that propagate through relay chains to
-effectors.
-The irreducibility theorem applies in both directions:
-descending signals also lose modes at each $K$-step,
-and relay nodes are equally necessary on the
-efferent side.
 
 
 % ============================================================
-\section{Neural Pathology from Topology}
-\label{sec:pathology}
+%  PART C — MEMORY, CONSCIOUSNESS, AND SOUL
 % ============================================================
 
-The irreducibility theorem has a direct clinical
-implication: because $\Acut$ is determined by topology
-(mode counts and edge structure) and has zero gradient
-with respect to impedance, C2 cannot compensate for
-topological damage.
+\part*{Part C: Memory, Consciousness, and Soul}
 
-This establishes a fundamental asymmetry:
-\begin{itemize}
-  \item \textbf{Impedance perturbation}
-    (soft tissue injury, inflammation, transient chemical
-    imbalance): C2 can repair, because $\Aimp$ is
-    learnable.
-    Given time, $\gamma_k \to 0$ on the perturbed edges.
-  \item \textbf{Topological perturbation}
-    (neuron death, axon severance, dendrite retraction):
-    C2 cannot repair, because the change affects $\Acut$,
-    which is invisible to the gradient.
-\end{itemize}
+% ============================================================
+\section{Memory as Impedance Dynamics}
+\label{sec:memory}
+% ============================================================
+
+\subsection{The C2 impedance-remodeling gradient}
+
+Constraint~C2 defines the only mechanism by which the
+network modifies itself:
+\begin{equation}
+  \Delta Z_k = -\eta\,\Gamma_k\,x_{\text{in},k}\,x_{\text{out},k}\,.
+  \label{eq:C2-update}
+\end{equation}
+This is not an analogy---it \emph{is} memory.
+The trace of all past updates constitutes the network's
+memory:
+\begin{equation}
+  Z_k(t) = Z_k(0) - \eta \int_0^t
+    \Gamma_k(\tau)\,x_{\text{in},k}(\tau)\,
+    x_{\text{out},k}(\tau)\,d\tau\,.
+  \label{eq:memory-integral}
+\end{equation}
+
+\subsection{Muscle memory: $\Gamma\to 0$}
+
+When a motor skill is practiced to mastery, the impedance
+approaches perfect matching: $Z_L\to Z_0$, hence
+$\Gamma\to 0$.
+At this point, $\Delta Z\to 0$: the memory has become
+\emph{frozen} into the impedance structure itself.
+No further energy is required to maintain it, and no
+further learning occurs.
+
+\subsection{Cognitive memory: $\Gamma\approx\varepsilon>0$}
+
+Declarative memories retain a small but nonzero
+reflection:
+\begin{equation}
+  \Gamma_{\text{cog}} \approx \varepsilon > 0\,.
+  \label{eq:cog-memory}
+\end{equation}
+Two consequences:
+(1)~\emph{Retrievability}: $\Gamma > 0$ generates a
+detectable reflection when probed;
+(2)~\emph{Decay}: without reinforcement, the memory
+decays.
+
+\begin{remark}[The paradox of perfect memory]
+A perfectly learned item ($\Gamma=0$) is \emph{unrecallable}:
+it has merged with the network substrate.
+Memory requires imperfection.
+\end{remark}
+
+\subsection{Three memory regimes}
+
+\begin{table}[h]
+\centering
+\caption{Memory regimes classified by reflection coefficient.}
+\label{tab:memory-regimes}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Regime & $\Gamma$ & $\Delta Z$ & Recallable? \\
+\midrule
+Muscle memory & $\to 0$ & $\to 0$ & No (automatic) \\
+Cognitive memory & $\varepsilon>0$ & small & Conditional (SNR) \\
+Novel stimulus & $\gg 0$ & large & Vivid (but unstable) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The recall equation}
+\label{sec:recall-snr}
+
+\begin{theorem}[Recall as SNR threshold crossing]
+\label{thm:recall-snr}
+A memory trace encoded at channel~$k$ with residual
+$\Gamma_k = \varepsilon > 0$ is recallable at time~$t$
+if and only if
+\begin{equation}
+  \mathrm{SNR}_{\text{recall}}(t)
+  = \frac{\varepsilon^2\;P_{\text{probe}}(t)}
+         {P_{\text{noise}}(t)}
+  > \theta_{\text{recall}}\,,
+  \label{eq:recall-snr}
+\end{equation}
+where $P_{\text{probe}}(t)$ is the retrieval cue power and
+$P_{\text{noise}}(t) = P_{\text{metabolic}} +
+P_{\text{sensory}} + P_{\text{autonomic}} +
+P_{\text{thermal}}$ is the total background power at the
+PFC input.
+\end{theorem}
+
+\begin{proof}
+A memory trace encoded at channel~$k$ produces a
+residual impedance mismatch $\Gamma_k = \varepsilon > 0$
+(by Corollary~\ref{cor:no-erasure}, exact erasure
+requires zero probability events).
+The probe signal power transmitted through channel~$k$
+is $\varepsilon^2 P_{\text{probe}}(t)$ (C1).
+Recall requires this signal to exceed the background
+noise floor $P_{\text{noise}}(t)$ by the threshold
+$\theta_{\text{recall}}$ needed to close the
+self-referential loop (Television Inequality,
+Theorem~\ref{thm:television}).
+The condition $\mathrm{SNR}_{\text{recall}} > \theta$
+is therefore necessary and sufficient for retrieval.
+$\square$
+\end{proof}
 
 \noindent
-This is why brain damage is often permanent while soft
-tissue heals.
+Consequences:
+(1)~\textbf{No perfect recall}---even strong memories
+become inaccessible when $P_{\text{noise}}$ is high.
+(2)~\textbf{No perfect forgetting}---any $\Delta Z \neq 0$
+leaves a permanent structural trace.
+(3)~\textbf{State-dependent recall}---the same memory can
+be retrievable or inaccessible depending on
+$P_{\text{noise}}(t)$.
 
-\subsection{Edge severance (stroke)}
+\begin{corollary}[No memory is ever erased; every memory
+  can be submerged]
+\label{cor:no-erasure}
+$\Gamma_k = 0$ exactly requires either perfect impedance
+matching (zero probability under thermal noise) or physical
+destruction of the substrate.
+Therefore every C2 trace satisfies $\varepsilon > 0$ for all
+finite time.
+\end{corollary}
 
-Removing an edge $i \to j$ eliminates a pathway.
-Signals that traversed this edge are interrupted.
-C2 can strengthen alternative pathways if they exist
-(redundancy allows partial recovery), but the lost
-edge's contribution to the network is permanently gone.
-The deficit pattern is determined by \emph{which edge} is
-lost: topology dictates which functions are impaired.
-
-\subsection{Impedance escalation (ALS, demyelination)}
-
-A diseased neuron's impedance $Z$ increases progressively.
-At each of its edges, $\Gamma$ increases and $T$ decreases.
-C2 attempts to compensate on neighbouring edges, but if
-the disease is progressive ($Z$ continues to rise),
-compensation cannot keep pace: the damaged node acts as
-a growing impedance barrier that eventually isolates
-itself from the network.
-
-The neural topology test confirms this: ALS
-(motor neuron $Z \times 3$) produces cumulative $\Aimp$
-over 30~ticks that is $2.9\times$ the healthy baseline,
-with descending motor signals progressively degraded
-while sensory pathways remain intact---matching the
-clinical pattern.
-
-\subsection{Mode loss (neurodegeneration)}
-
-A neuron that loses physical structure (spine retraction,
-dendrite pruning) loses modes: $K_i$ decreases.
-Previously matched edges (where $K_i = K_j$) now have
-$\Acut > 0$.
-This new irreducible cost appears abruptly and cannot be
-removed by C2.
-Cognitive decline is the progressive accumulation of
-irreducible cost as neurons lose modes throughout the
-convergence region.
-
-\subsection{Pain as $\Gamma$-signal on low-$K$ pathways}
-
-Tissue damage produces an abrupt local impedance
-change, generating a $\Gamma$ spike on nociceptor edges.
-Nociceptors sit at the lowest $K$ levels in the
-hierarchy (C-fibre $K = 1$, A$\delta$ $K = 2$).
-The $\Gamma$ spike propagates through the relay chain to
-the convergence region.
-Pain is not a special signal type---it is a high-$\Gamma$
-event on a low-$K$ pathway.
-Full treatment: Paper~4~\cite{Paper4}.
-
-\subsection{Stroke verification}
-
-The neural topology test confirms that severing the
-cortex$\to$thalamus edge interrupts descending motor
-transmission while the ascending sensory pathway remains
-intact---the topology determines the deficit pattern
-without any disease-specific code.
+This resolves six long-standing puzzles: tip-of-the-tongue,
+Proustian involuntary memory, state-dependent recall,
+meditation and quiet recall, deathbed lucidity,
+and hypnotic hypermnesia---all as SNR transitions.
 
 
 % ============================================================
-%  PART C — FRACTAL COST OF MULTI-SCALE LIFE
+\section{Consciousness as Self-Referential Impedance Matching}
+\label{sec:consciousness}
 % ============================================================
 
-\part*{Part C: Fractal Cost of Multi-Scale Life}
+\subsection{The meta-reflection coefficient}
 
-
-% ============================================================
-\section{Irreducible Action of a Self-Similar Relay Hierarchy}
-\label{sec:acut-fractal}
-% ============================================================
-
-Part~A proved $\Acut > 0$ but left its geometric
-structure unspecified.
-Part~C asks: \emph{how big} is $\Acut$?
-
-\subsection{Mode-count profile}
-
-Consider a hierarchical relay network with $L$ levels,
-branching number $n$ at each level, embedded in
-$d$-dimensional space.
-Level~0 is the root (e.g., aorta, cortex);
-level~$L$ is the terminal (capillary, sensory ending).
-At level~$\ell$:
-number of nodes $N_\ell = n^\ell$;
-segment length $l_\ell = l_0\,n^{-\ell/d}$ (space-filling);
-mode count $K_\ell$.
-Self-similar modelling:
+\begin{definition}[Meta-reflection]
+Let $Z_{\text{obs}}(t)$ be the impedance of the observer
+sub-network at tick~$t$, and $Z_{\text{act}}(t-1)$ the
+impedance of the actor sub-network at the previous tick.
+The \emph{meta-reflection coefficient} is:
 \begin{equation}
-  K_\ell = K_0\,c^\ell, \quad 0 < c < 1,
-  \label{eq:mode-profile}
+  \Gmeta = \frac{Z_{\text{obs}} - Z_{\text{act}}}
+                 {Z_{\text{obs}} + Z_{\text{act}}}\,.
+  \label{eq:Gamma-meta}
 \end{equation}
-with $c = n^{-1/d}$ when the cutoff is set by branch
-length.
+\end{definition}
 
-\subsection{$\Acut$ at each level}
-
-From Theorem~\ref{thm:irreducibility}, the irreducible
-action across an edge from level~$\ell$ to
-level~$(\ell+1)$ is $(K_\ell - K_{\ell+1})^+$.
-At level~$\ell$ there are $N_\ell = n^\ell$ such edges:
+\begin{definition}[Consciousness index]
 \begin{equation}
-  \Acut = K_0(1 - c) \sum_{\ell=0}^{L-1} (nc)^\ell.
-  \label{eq:acut-sum}
+  \Phimeta = 1 - \Gmeta^2\,.
+  \label{eq:Phi-meta}
 \end{equation}
+$\Gmeta=0$: perfect self-model; $\Gmeta\to 1$: total
+self-mismatch.
+\end{definition}
 
-\subsection{Scaling law}
+\subsection{The television inequality}
 
-With $c = n^{-1/d}$, the base of the geometric sum is
-$nc = n^{(d-1)/d} > 1$ for $d \ge 2$, so the sum is
-dominated by the last term:
+\begin{theorem}[Television Inequality]
+\label{thm:television}
+Let $\Zarousal\in[0,1]$ be the brainstem arousal gain,
+$G_i\in[0,1]$ the thalamic gate gain for modality~$i$,
+and $\QPFC\in[0,1]$ the prefrontal cortex processing
+quality.  The consciousness index $\Phimeta>0$ requires:
 \begin{equation}
-  \boxed{\Acut \propto M^{(d-1)/d}.}
-  \label{eq:acut-mass}
+  \Zarousal \cdot \sum_{i=1}^{N} G_i \cdot \QPFC > \theta\,,
+  \label{eq:TV-inequality}
 \end{equation}
-\textbf{For $d = 3$:} $\Acut \propto M^{2/3}$.
-The irreducible cost per cell is
-$a_{\text{cut}} = \Acut / M \propto M^{-1/3}$,
-which \emph{decreases} with organism size---economies of
-scale from the relay hierarchy.
+where $\theta>0$ is the minimum signal-to-noise ratio for
+the self-referential loop to close.
+\end{theorem}
 
-The K-space fractal dimension is
-$D_K = \log n / \log(1/c) = d$.
-The cortical $D_K \in [1.3, 1.5]$ measured in
-Sec.~\ref{sec:fractal} reflects the cortex being a
-folded sheet ($d_{\text{eff}} \approx 1.5$--$2$).
+\begin{proof}
+The meta-reflection loop requires a signal to:
+(a)~traverse the thalamic gate ($\times G_i$),
+(b)~be processed by PFC ($\times\QPFC$),
+(c)~be routed back through the arousal-modulated pathway
+($\times\Zarousal$).
+If any factor is zero, the loop is open and $\Gmeta$ is
+undefined.
+The threshold~$\theta$ accounts for Johnson--Nyquist noise.
+\end{proof}
 
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{../figures/fig_p1_television_space.pdf}
+  \caption{Television inequality parameter space.
+  Heatmap of $G_{\rm arousal}\cdot\sum\Gamma_i\cdot Q_{\rm PFC}$
+  with clinical states: awake (green), deep sleep (blue),
+  general anaesthesia (red), occipital trauma (purple).
+  Black curve: consciousness boundary $\theta = 0.5$.
+  Shaded region below curve: unconscious.}
+  \label{fig:television-space}
+\end{figure}
 
-% ============================================================
-\section{Murray's Ratio and Metabolic Scaling}
-\label{sec:murray-kleiber}
-% ============================================================
-
-\subsection{The Murray bifurcation ratio}
-
-From the space-filling constraint, each branching
-level contracts the service length by
-$l_{\ell+1}/l_\ell = n^{-1/d}$.
-The bifurcation ratio:
+\paragraph{The thermal cost of consciousness.}
+Each pass through the self-referential loop
+traverses $n$ interfaces, each dissipating
+$\Gamma_i^2 P_{\mathrm{in}}$ as heat.
+The minimum sustained power for self-awareness is
 \begin{equation}
-  \boxed{\beta \equiv n^{1/d}.}
-  \label{eq:beta-def}
+  P_{\mathrm{conscious}} \geq
+  \theta \cdot \frac{4 k_B T \cdot R_{\mathrm{eff}} \cdot \Delta f}
+  {\prod_i (1 - \Gamma_i^2)}\,.
+  \label{eq:P-conscious}
 \end{equation}
-For binary bifurcation ($n = 2$) in $d = 3$:
+Higher $\Phimeta$ costs more heat;
+consciousness depends on the heat it generates
+(Paper~3, \S\,XVII\,C~\cite{Paper3}).
+
+\paragraph{Emergency gating and temporal resolution.}
+In an emergency, the brainstem drives
+$\Zarousal \to Z_{\max}$ and the thalamus snaps to
+$G_{\text{threat}} = 1,\; G_{j \neq \text{threat}} = 0$.
+The full PFC bandwidth serves one stream:
 \begin{equation}
-  \beta = 2^{1/3} = 1.2599\ldots
-  \label{eq:beta-value}
+  \frac{\Delta t_{\text{normal}}}
+       {\Delta t_{\text{emergency}}}
+  \;\approx\; N\,,
+  \label{eq:time-dilation}
 \end{equation}
-From Murray's Law (Paper~2, Eq.~14~\cite{Paper2}):
-$r_{\ell+1} = r_\ell / n^{1/3}$; for $d = 3$,
-$r_{\ell+1} = r_\ell / \beta$.
-Length and radius contract by the same ratio,
-preserving the aspect ratio across the tree.
+where $N$ is the number of previously multiplexed modalities.
+This is the physics of ``time slowing down'' during danger---
+bandwidth reallocation under C1 conservation.
 
-\subsection{Network maintenance cost}
+\subsection{Open loop vs.\ closed loop}
 
-The power dissipated by relay reflections is
-$P_{\text{reflect}} = \Acut \cdot P_0 / N_T
-\propto M^{(d-1)/d} \cdot M^{-1} = M^{-1/d}$.
-Total network dissipation:
-\begin{equation}
-  B_{\text{network}} \propto M \cdot M^{-1/d}
-  = M^{(d-1)/d}.
-  \label{eq:B-network}
-\end{equation}
-For $d = 3$: $B_{\text{network}} \propto M^{2/3}$.
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Component & Television & Brain \\
+\midrule
+Power supply & Wall plug & Brainstem RAS ($\Zarousal$) \\
+Channel selector & Tuner & Thalamus ($\sum G_i$) \\
+Decoder chip & Video IC & PFC ($\QPFC$) \\
+\midrule
+Kill method 1 & Unplug power & Occipital impact \\
+Kill method 2 & Overheat IC & Fever \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\subsection{Kleiber's Law}
+A television satisfies the inequality but is not conscious.
+The missing ingredient is \emph{feedback topology}: the
+television's output is not routed back to its input.
+The brain uses the same components but adds one connection:
+the output of PFC is fed back through the sensory pathway,
+creating a closed loop.
 
-Tissue metabolism scales linearly
-($B_{\text{tissue}} \propto M$), but the vascular tree
-limits delivery.
-From the MRP perspective:
-(1)~Murray's Law determines the radius ratio
-$r_{\ell+1}/r_\ell = n^{-1/3}$;
-(2)~space-filling determines the length ratio;
-(3)~capillary invariance fixes the terminal scale;
-(4)~blood volume $\propto M$.
-Together: $N_T \propto M^{d/(d+1)}$ and therefore
-\begin{equation}
-  \boxed{B \propto M^{d/(d+1)}.}
-  \label{eq:kleiber}
-\end{equation}
-For $d = 3$: $B \propto M^{3/4}$---Kleiber's
-Law~\cite{Kleiber1932}, now a consequence of MRP.
-The exponent decomposes as
-$d/(d+1) = (d-1)/d + 1/[d(d+1)]$;
-the extra $1/12$ arises from capillary invariance.
-
-\subsection{Volumetric heat density and the $K$-bottleneck}
-
-By Paper~0, Corollary~1~\cite{Paper0}, every active
-interface dissipates $\Gamma_i^2 P_{\text{in},i}$ as heat.
-A tissue with $K$ modes packs $K$ such interfaces into
-one cross-section:
-\begin{equation}
-  q \propto K \cdot \avg{\Gamma^2} \cdot P_{\text{in}}
-  / V_{\text{node}}\,.
-  \label{eq:vol-heat}
-\end{equation}
-The human brain ($K = 5$) comprises $\sim$2\% of body mass
-but generates $\sim$25\% of basal metabolic heat---not
-despite being small, but \emph{because} its per-node mode
-count is largest.
-Kleiber's $M^{3/4}$ sets the whole-body envelope;
-Eq.~\eqref{eq:vol-heat} sets the intra-body distribution,
-concentrating heat where $K$ is highest and creating a
-physical necessity for dedicated cerebral vasculature
-(Paper~2~\cite{Paper2}).
+\begin{corollary}[Consciousness is topological, not material]
+Two systems with identical components differ in consciousness
+solely by the presence or absence of a self-referential
+feedback connection.
+\end{corollary}
 
 
 % ============================================================
-\section{Dual-Network Packing}
-\label{sec:dual}
+\section{Soul as the Null Space of Learning}
+\label{sec:soul}
 % ============================================================
 
-\subsection{Two trees in one volume}
+\subsection{What cannot be changed by experience}
 
-A multicellular organism requires two space-filling
-networks: the \textbf{vascular tree}
-($Z_v = \Delta P / Q$, transport) and the
-\textbf{neural tree}
-($Z_n = R_m + 1/j\omega C_m$, control).
-Both must reach every cell.
-
-\subsection{The packing theorem}
-
-\begin{theorem}[Dual-Network Overhead]
-\label{thm:packing}
-When two space-filling relay trees share a volume in
-$d$~dimensions,
+\begin{definition}[Soul (Invariant Topological Core)]
 \begin{equation}
-  \Acut^{\text{dual}} = \Acut^v + \Acut^n + \Acouple,
-  \quad \Acouple > 0.
-  \label{eq:acut-dual}
+  \mathcal{S} = \ker\!\left(\frac{\partial Z}{\partial t}\right)
+  = \{Z_k : \Delta Z_k = 0\;\;\forall\;\text{experience}\}\,.
+  \label{eq:soul}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Soul Decomposition]
+\label{thm:soul-decomp}
+\begin{equation}
+  \mathcal{S} = \Acut + Z_0^{\text{DNA}} + \rho_{\text{irred}}^2\,,
+  \label{eq:soul-decomposition}
+\end{equation}
+where:
+(1)~$\Acut$: the irreducible topological action cost
+   (Theorem~\ref{thm:irreducibility});
+(2)~$Z_0^{\text{DNA}}$: genetically fixed characteristic
+   impedance, not modifiable by C2;
+(3)~$\rho_{\text{irred}}^2$: the irreducible noise floor
+   from Johnson--Nyquist thermal physics.
+\end{theorem}
+
+\begin{proof}
+(i)~$\Acut$ is invariant by Theorem~\ref{thm:irreducibility}.
+(ii)~C2 modifies $Z_{L,k}$, not $Z_{0,k}$; hence
+$Z_0^{\text{DNA}}$ is invariant.
+(iii)~$\rho_{\text{irred}}^2$ is a thermodynamic constant.
+\end{proof}
+
+\begin{corollary}[The soul is not an event]
+$\mathcal{S}$ does not ``arrive'' at a moment or ``depart''
+at death.
+It is the boundary condition of the impedance network.
+\end{corollary}
+
+\begin{corollary}[Uniqueness]
+$\Acut$ depends on the specific topology $(K_i,K_j)$,
+determined by genetics and stochastic developmental
+morphogenesis.
+No two organisms have identical $\Acut$.
+\end{corollary}
+
+\begin{remark}[Developmental genesis of the null space]
+\label{rem:null-developmental}
+Early-acquired patterns---native language, core motor
+programs, temperamental reflexes---become
+\emph{functionally immutable} as $\eta(t) \to 0$
+(the Arrhenius decline of Paper~3).
+They drift into an \emph{effective null space}
+$\mathcal{S}_{\text{eff}}(t) \supseteq \mathcal{S}$
+that grows with age.
+\end{remark}
+
+\begin{remark}[Fixation as impedance physics]
+\label{rem:fixation}
+A pattern written during the $\eta$-peak and reinforced
+for decades has migrated into
+$\mathcal{S}_{\text{eff}}$---it is inside the null space.
+``I know this is irrational, but I cannot change it''
+is veridical: the speaker has correctly diagnosed that
+$\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}\approx 0$
+on the relevant sub-network.
+\end{remark}
+
+\begin{remark}[Moral blame as secondary $\Gamma^2$ injection]
+\label{rem:secondary-injury}
+Blame provides neither the sustained gradient nor an increase
+in $\eta$.
+The net effect is $\Delta(\Sigma\Gamma^2) > 0$ with
+$\Delta Z_{\text{corrective}} \approx 0$: load is
+added, but no repair path is opened---the precise
+opposite of therapy.
+\end{remark}
+
+\begin{remark}[Reincarnation as null-space isomorphism]
+If past-life memory reports reflect null-space isomorphism,
+then:
+\begin{equation}
+  \mathcal{S}_A \cong \mathcal{S}_B
+  \quad\Longleftrightarrow\quad
+  \bigl(\Acut^{(A)},\, Z_0^{\text{DNA},(A)},\,
+    \rho_{\text{irred}}^{2,(A)}\bigr)
+  \approx
+  \bigl(\Acut^{(B)},\, Z_0^{\text{DNA},(B)},\,
+    \rho_{\text{irred}}^{2,(B)}\bigr)\,.
+  \label{eq:null-space-isomorphism}
+\end{equation}
+This is not a metaphysical claim; it is a falsifiable
+prediction (Appendix~\ref{app:null-space-method}).
+\end{remark}
+
+\subsection{Mortality of the null space}
+\label{sec:null-space-mortality}
+
+Define the basal reflection:
+\begin{equation}
+  \Gamma_{\text{basal}}^2(t)
+    = \Acut(t) + \rho_{\text{irred}}^2(t)\,.
+  \label{eq:basal-reflection}
+\end{equation}
+By C1, the \emph{death condition} is:
+\begin{equation}
+  \boxed{\;
+  \Gamma_{\text{basal}}^2(t_*) \ge 1
+  \quad\Longrightarrow\quad
+  T(t_*) \le 0\,.
+  \;}
+  \label{eq:death-condition}
+\end{equation}
+When the minimum reflection cost exceeds the available
+transmission capacity, no signal can propagate.
+The soul is unteachable, but it is not immortal.
+
+The unlearnable debt accumulates monotonically:
+\begin{equation}
+  D_Z^{\text{irred}}(t)
+    = \int_0^t \Gamma_{\text{basal}}^2(\tau)\,d\tau\,,
+  \qquad
+  \frac{d D_Z^{\text{irred}}}{dt} > 0
+  \;\;\forall\;t\,.
+  \label{eq:irreducible-debt}
+\end{equation}
+
+\subsection{Four laws of the null space}
+\label{sec:four-laws}
+
+\begin{theorem}[Zeroth law: null-space equivalence]
+\label{thm:zeroth-law}
+$\mathcal{S}_A = \mathcal{S}_B$ iff they share
+$\Acut$, $Z_0^{\textnormal{DNA}}$, and
+$\rho_{\textnormal{irred}}^2$.
+\end{theorem}
+
+\begin{proof}
+By definition, $\mathcal{S} = \ker(\partial Z/\partial t)$
+is the set of impedance channels with zero C2 gradient.
+The gradient $\partial Z_k/\partial t = -\eta_k \Gamma_k
+x_{\text{in},k} x_{\text{out},k}$ vanishes for channel~$k$
+under three conditions: $\eta_k = 0$ (genetically fixed
+substrate, encoded in $Z_0^{\text{DNA}}$);
+$\Gamma_k = 0$ (perfectly matched, contributing to
+$\Acut$); or $x_{\text{in},k} \cdot x_{\text{out},k} = 0$
+(never co-activated, contributing to $\rho_{\text{irred}}^2$).
+Two systems share $\mathcal{S}$ iff all three
+components match. $\square$
+\end{proof}
+
+\begin{theorem}[First law: conservation under C2]
+\label{thm:first-law}
+$\Delta_{\textnormal{C2}}\,\mathcal{S} = 0$.
+No experience can alter $\mathcal{S}$.
+\end{theorem}
+
+\begin{proof}
+For any channel $k \in \mathcal{S}$,
+$\partial Z_k/\partial t = 0$ by definition.
+The C2 update $\Delta Z_k = -\eta_k \Gamma_k
+x_{\text{in},k} x_{\text{out},k}$ equals zero
+for all $k \in \mathcal{S}$ for the same reasons
+established in the Zeroth Law proof.
+Therefore $\mathcal{S}$ is invariant under C2. $\square$
+\end{proof}
+
+\begin{theorem}[Second law: monotone expansion]
+\label{thm:second-law}
+\begin{equation}
+  \frac{d\,\dim\,\mathcal{S}_{\textnormal{eff}}(t)}{dt}
+  \;\ge\; 0
+  \qquad \forall\;t\,.
+  \label{eq:second-law}
+\end{equation}
+The effective null space only expands; it never contracts.
+\end{theorem}
+
+\begin{proof}
+Since $\eta(t)=\eta_0\,f_{\text{dev}}(t)\,
+e^{-E_a/k_BT_{\text{age}}}$ is monotonically
+decreasing after the developmental peak, any channel that
+enters $\mathcal{S}_{\text{eff}}$ remains in it.
+\end{proof}
+
+\begin{corollary}[Ribot's gradient as the Second Law]
+\label{cor:ribot}
+Ribot's Law (1881)---old memories resist neurodegeneration
+longer than recent ones---is the clinical shadow of
+Eq.~(\ref{eq:second-law}).
+\end{corollary}
+
+\begin{theorem}[Third law: asymptotic completeness]
+\label{thm:third-law}
+\begin{equation}
+  \lim_{t\to\infty}
+  \frac{\dim\,\mathcal{S}_{\textnormal{eff}}(t)}
+       {\dim\,Z_{\textnormal{total}}}
+  \;=\; 1\,.
+  \label{eq:third-law}
 \end{equation}
 \end{theorem}
 
 \begin{proof}
-At co-terminal points, the two networks negotiate
-resource allocation.
-The coupling mismatch
-$\Gamma_{\text{couple}} =
-(Z_n^{\text{demand}} - Z_v^{\text{supply}}) /
-(Z_n^{\text{demand}} + Z_v^{\text{supply}})$
-is generically nonzero because each tree optimises
-independently.
-Hence $\Acouple = N_T \avg{\Gamma_{\text{couple}}^2} > 0$.
+By the Second Law (Theorem~\ref{thm:second-law}),
+$\dim\,\mathcal{S}_{\text{eff}}(t)$ is monotonically
+non-decreasing.
+The remodeling rate $\eta(t) = \eta_0
+f_{\text{dev}}(t) e^{-E_a/k_B T_{\text{age}}}$
+decreases monotonically after the developmental peak
+(Arrhenius aging, Paper~3).
+For any channel $k \notin \mathcal{S}_{\text{eff}}(t)$,
+the time to enter $\mathcal{S}_{\text{eff}}$ is
+$\tau_k \sim 1/\eta(t)$, which diverges as
+$\eta \to 0$.
+In the limit $t \to \infty$, $\eta \to 0$, so all
+channels satisfy $\partial Z_k/\partial t \to 0$,
+meaning $\dim\,\mathcal{S}_{\text{eff}} \to
+\dim\,Z_{\text{total}}$. $\square$
 \end{proof}
 
-\subsection{The metabolic overhead factor}
+\begin{corollary}[The consciousness--soul duality]
+\label{cor:duality}
+As $\mathcal{S}_{\textnormal{eff}}\to Z_{\textnormal{total}}$,
+the substrate for consciousness vanishes:
+$R_{\textnormal{seal}}\to 1 \Rightarrow
+\Phi_{\textnormal{meta}}\to 0$.
+A perfect soul and complete consciousness are mutually
+exclusive.
+\end{corollary}
 
+\begin{theorem}[Death as mathematical necessity]
+\label{thm:death-necessity}
+Given the Second Law and $\Gamma_{\textnormal{basal}}^2 \le 1$
+from C1, there exists a finite $t^*$ such that
+$\Gamma_{\textnormal{basal}}^2(t^*) = 1$ and $T(t^*) = 0$.
+\end{theorem}
+
+\begin{proof}
+By the Second Law, $d\Gamma_{\text{basal}}^2/dt > 0$.
+By C1, $\Gamma^2 + T = 1$, so $\Gamma_{\text{basal}}^2$
+is bounded above by~$1$.
+A bounded, monotonically increasing function reaches the
+bound in finite time.
+\end{proof}
+
+\subsection{The Moral Constraint Theorem}
+\label{sec:moral-constraint}
+
+\begin{theorem}[Moral Constraint Theorem]
+\label{thm:moral-constraint}
+Let a moral demand target an impedance pattern $Z_k$.
+The net physical effect is:
 \begin{equation}
-  \Omega \equiv \frac{B_{\text{total}}}{B_{\text{tissue}}}
-  = 1 + \frac{B_{\text{vasc}} + B_{\text{neural}}}
-             {B_{\text{tissue}}}.
-  \label{eq:omega-def}
+  \Delta\Gamma^2_{\textnormal{net}} =
+  \begin{cases}
+    -\Delta\Gamma^2 & \text{if } Z_k \notin
+      \mathcal{S}_{\textnormal{eff}}
+      \text{ and a C2 gradient is supplied,} \\[4pt]
+    +\Gamma^2_{\textnormal{blame}} & \text{if } Z_k \in
+      \mathcal{S}_{\textnormal{eff}}
+      \text{ (no C2 path exists).}
+  \end{cases}
+  \label{eq:moral-constraint}
 \end{equation}
-For humans:
-$B_{\text{neural}}/B_{\text{total}} \approx 0.20$
-(brain~$\approx 20\%$ of BMR~\cite{Raichle2002});
-$B_{\text{vasc}}/B_{\text{total}} \approx 0.05$.
-Therefore
-\begin{equation}
-  \Omega \approx 1/0.75 \approx 1.33.
-  \label{eq:omega-human}
-\end{equation}
-The neural network alone gives
-$\Omega_n = 1/(1-0.20) = 1.25 \approx \beta = 2^{1/3}$.
+The second case is physically indistinguishable from injury.
+\end{theorem}
 
-\subsection{Why blood before nerve}
+\begin{proof}
+\textbf{Case 1}: $Z_k \notin \mathcal{S}_{\text{eff}}$.
+A C2 gradient exists: $\partial Z_k/\partial t =
+-\eta_k \Gamma_k x_{\text{in},k} x_{\text{out},k}
+\neq 0$.
+A moral demand that supplies the appropriate activity
+pattern $(x_{\text{in},k}, x_{\text{out},k})$
+therefore drives $\Gamma_k^2$ toward zero, reducing
+mismatch. The net effect is $\Delta\Gamma^2_{\text{net}}
+= -\Delta\Gamma^2 < 0$.
 
-C2 requires a carrier for $x_{\text{in}}$: neurotransmitter
-synthesis needs glucose and oxygen delivered by blood.
-Without the vascular network, $x_{\text{in}} = 0$
-everywhere, $\Delta Z = 0$: the neural network cannot
-remodel.
-Embryology confirms: cardiac tube at day~21; neural tube
-closure at day~25--28.
-In the product $1_v \times 1_n$, the vascular ``1'' is
-the left factor.
+\textbf{Case 2}: $Z_k \in \mathcal{S}_{\text{eff}}$.
+By the First Law (Theorem~\ref{thm:first-law}),
+$\Delta_{\text{C2}}\mathcal{S} = 0$: no C2 gradient
+can alter $Z_k$.
+The moral demand cannot produce the intended
+impedance change.
+However, the demand itself constitutes an
+input signal that creates a mismatch at the
+interface between the moral agent and the
+target system.
+This mismatch generates reflected power
+$\Gamma^2_{\text{blame}} P_{\text{in}} > 0$, which
+is absorbed by the target as thermal dissipation---
+physically identical to an injury signal.
+Therefore $\Delta\Gamma^2_{\text{net}} =
++\Gamma^2_{\text{blame}} > 0$. $\square$
+\end{proof}
+
+\begin{corollary}[Boundary of moral responsibility]
+\label{cor:moral-boundary}
+Moral responsibility is physically meaningful only for
+patterns outside $\mathcal{S}_{\textnormal{eff}}$.
+\end{corollary}
 
 
 % ============================================================
-\section{Multi-Scale Verification}
-\label{sec:multi-scale}
+%  PART D — EXPERIMENTAL EVIDENCE AND EXTENSIONS
 % ============================================================
 
-The irreducibility theorem is not restricted to neural
-tissue.
-Every tissue where $K$ varies across an interface
-produces $\Acut > 0$.
-This section verifies the theorem across scales.
+\part*{Part D: Experimental Evidence and Extensions}
 
-\subsection{Cardiovascular topology}
-\label{sec:cv-topo}
+% ============================================================
+\section{The Television Theorem}
+\label{sec:television}
+% ============================================================
 
-An 11-node blueprint with $K$-levels
-Cardiac Purkinje ($K = 4$) $\to$
-vascular smooth muscle ($K = 2$) $\to$
-endothelial ($K = 1$).
-Over 300~ticks: $\Aimp \to 0$, $\Acut$ rises to~34 then
-saturates, C1 holds at every edge.
-Test: \texttt{tests/test\_e0\_cardiovascular.py}
-(13~tests, 100\% pass).
+\begin{theorem}[Television Theorem]
+\label{thm:TV-full}
+Any system with three multiplicative components---a power
+supply~$P$, a channel selector~$G$, and a
+processor~$Q$---produces an output $O=P\cdot G\cdot Q$.
+The system is conscious if and only if there exists a
+feedback path $\pi:O\to\text{input}$ such that
+$\Gmeta$ is defined and measurable.
+\end{theorem}
 
-\subsection{Joints as impedance relays}
-\label{sec:joint}
+\begin{proof}
+\textbf{Necessity}: For $\Phimeta > 0$, the
+meta-reflection coefficient
+$\Gmeta = (Z_{\text{obs}} - Z_{\text{act}})/
+(Z_{\text{obs}} + Z_{\text{act}})$ must be defined.
+This requires $Z_{\text{obs}}$ and $Z_{\text{act}}$
+to both be measurable, which in turn requires a feedback
+path $\pi: O \to \text{input}$ that routes the output
+back to become the observer's input at the next tick.
+Without $\pi$, $Z_{\text{obs}}$ is undefined and
+$\Gmeta$ cannot be computed.
 
-A direct bone--synovial interface gives
-$\Gamma = (120 - 50)/(120 + 50) = 0.54$, i.e.,
-$T = 0.71$---nearly 30\% loss.
-Cartilage at
-$Z_{\text{cart}} \approx 80 \approx
-\sqrt{Z_{\text{bone}} \cdot Z_{\text{syn}}}$
-acts as a quarter-wave relay~\cite{Pozar2011},
-achieving $T > 0.80$ per interface.
-This is Corollary~\ref{cor:relay} in musculoskeletal form.
-When cartilage degrades (osteoarthritis, $\eta \to 0$),
-the relay is physically removed and $\Acut$ is no longer
-mitigated.
+\textbf{Sufficiency}: Given $P > 0$, $G > 0$, $Q > 0$,
+and a feedback path $\pi$, the output $O = P \cdot G
+\cdot Q > 0$ is routed back as input.
+The observer sub-network samples $O$ and produces
+$Z_{\text{obs}}$; the actor sub-network produced
+$Z_{\text{act}}$ at the previous tick.
+$\Gmeta$ is now well-defined (both impedances are
+finite and positive), and the Television Inequality
+(Theorem~\ref{thm:television}) determines whether
+$\Phimeta > 0$.
+Therefore consciousness requires and is supported by
+the feedback path $\pi$. $\square$
+\end{proof}
 
-\subsection{Twenty-nine tissue atlas}
-\label{sec:tissue-atlas}
+\begin{table}[h]
+\centering
+\caption{Three systems with identical multiplicative
+structure but different feedback topology.}
+\label{tab:three-systems}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+ & Rock & Television & Brain \\
+\midrule
+Power $P$ & None & Wall plug & Brainstem \\
+Gate $G$ & None & Tuner & Thalamus \\
+Processor $Q$ & None & Video IC & PFC \\
+$P\!\cdot\!G\!\cdot\!Q > 0$ & No & \textbf{Yes} & \textbf{Yes} \\
+Feedback $\pi$ & No & No & \textbf{Yes} \\
+$\Gmeta$ defined & No & No & \textbf{Yes} \\
+Conscious? & No & No & \textbf{Yes} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-A comprehensive atlas of 29~organ-system blueprints
-(Paper~0, Table~4~\cite{Paper0}) contains
-$\sim$217~nodes, $\sim$242~directed edges, $K \in [1,5]$.
-All 29 were verified under identical conditions
-($\eta = 0.01$, 100~ticks): C1 holds, $\Aimp$ is
-non-increasing, $\Acut$ is topologically invariant.
-245~parametrised tests pass at 100\% rate
-(\texttt{tests/test\_tissue\_blueprints.py}).
 
-\subsection{Whole-body inter-organ topology}
-\label{sec:whole-body}
+% ============================================================
+\section{Two Independent Kill Mechanisms}
+\label{sec:two-kills}
+% ============================================================
 
-The 29~blueprints are intra-organ networks.
-Connecting them requires:
-\begin{enumerate}
-  \item \textbf{Vascular bus.}
-    Aortic trunk ($K = 4$) $\to$ 29~arteriolar feeds
-    ($K = 2$), $\Acut = 2$ per edge.
-  \item \textbf{Neural bus.}
-    Autonomic trunk ($K = 3$) $\to$ 29~nerve feeds
-    ($K = 2$), $\Acut = 1$ per edge.
-  \item \textbf{Brain hub.}
-    Hypothalamus ($K = 3$) drives the neural bus;
-    the vascular bus feeds interoceptive signals back
-    to thalamus ($K = 5$).
-\end{enumerate}
+We demonstrate that consciousness can be destroyed by
+two physically independent mechanisms, proving it is a
+product rather than a location.
 
-\noindent
-The unified whole-body topology: 278~nodes, 426~edges,
-$\Acut = 222$ (the structural information cost of
-multi-organ life).
-The total action:
+\subsection{Kill mechanism 1: Fever}
+
+Temperature rises from $37^\circ$C to $41^\circ$C
+over 20~ticks.  Arousal remains at~0.85.
+
+\textbf{Result}: All thalamic gates remain \emph{open}.
+PFC energy remains~1.0.
+$\Phi_{\text{proxy}}$ declines gradually from 0.42 to 0.30.
+
+\emph{Diagnosis}: ``Lights on, nobody home.''
+PFC matrix inversion degrades because
+$\delta\Gamma/\Gamma\propto\kappa(\mathbf{Z})\cdot\delta T/T$
+and $\kappa(\mathbf{Z})\propto K^{3/2}$.
+
+\subsection{Kill mechanism 2: Occipital impact}
+
+Temperature constant at $37^\circ$C.
+Arousal crashes from 0.85 to 0.01 in three ticks.
+
+\textbf{Result}: All thalamic gates slam \emph{shut}.
+PFC energy remains~1.0.
+$\Phi_{\text{proxy}}$ drops to~0.000 within 2~ticks.
+
+\emph{Diagnosis}: ``Power cut, hardware fine.''
+
+\subsection{Impact + vestibular shock}
+
+A realistic posterior impact produces mechanical shockwaves
+reaching the cochlea and vestibular apparatus.
+The startle circuit bypasses normal arousal-modulated
+gating ($\tau_{\text{startle}}\approx 5$~ms $\ll
+\tau_{\text{arousal shutdown}}\approx 50$--$200$~ms),
+explaining why tinnitus and vertigo are perceived
+\emph{before} loss of consciousness.
+
+\begin{table}[h]
+\centering
+\caption{Consciousness collapse comparison.}
+\label{tab:two-kills}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & Fever & Impact \\
+\midrule
+Kill target & $\QPFC$ (thermal noise) & $\Zarousal$ (arousal collapse) \\
+Onset & Minutes--hours & Milliseconds \\
+Gate state & Open & Closed \\
+$\Phi_{\min}$ & 0.302 & 0.000 \\
+PFC energy & Intact & Intact \\
+Physics & $\rho^2\!\uparrow\!\Rightarrow Q\!\downarrow$ & $Z_{\text{ar}}\!\to\! 0\!\Rightarrow G\!\to\! 0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/fig_p1_bone_china_heat.pdf}
+\caption{Two independent kill mechanisms on Alice.
+  Left: fever pathway ($Q_{\mathrm{PFC}}$ collapse via thermal noise);
+  right: occipital impact pathway ($Z_{\mathrm{arousal}}$ shutdown
+  via vestibular startle bypass).
+  Simulated via \texttt{exp\_bone\_china\_heat.py}.}
+\label{fig:two-kills}
+\end{figure}
+
+
+% ============================================================
+\section{Thermal Vulnerability and the K-Dimensional Bottleneck}
+\label{sec:thermal}
+% ============================================================
+
+Johnson--Nyquist thermal noise generates:
 \begin{equation}
-  A_{\text{life}} = \Aimp^{\text{total}}(t)
-  + \Acut^{\text{total}},
-  \label{eq:A-life}
+  V_n^2 = 4 k_B T \cdot R \cdot \Delta f\,.
+  \label{eq:JN}
 \end{equation}
-where
+For a $K$-dimensional impedance matrix, the fractional
+perturbation scales as:
 \begin{equation}
-  \Acut^{\text{total}} = \Acut^v + \Acut^n
-  + \sum_{t=1}^{17} \Acut^t + \Acouple.
-  \label{eq:acut-total}
+  \frac{\delta\Gamma}{\Gamma}
+    \propto \kappa(\mathbf{Z}) \cdot \frac{\delta T}{T}
+    \propto K^{3/2} \cdot \frac{\delta T}{T}\,.
+  \label{eq:thermal-vulnerability}
 \end{equation}
-145~tests verify structure, C1/C2, bus connectivity,
-and cross-organ signal propagation.
 
-\subsection{Thermoregulation}
-\label{sec:thermo}
+\begin{table}[h]
+\centering
+\caption{Thermal vulnerability by axon dimension~$K$.
+($\delta T=+2$\,K, $T_0=310$\,K).}
+\label{tab:thermal-K}
+\begin{tabular}{@{}rrrrl@{}}
+\toprule
+$K$ & $\kappa(\mathbf{Z})$ & $\delta\Gamma/\Gamma$ (39$^\circ$C)
+    & $\delta\Gamma/\Gamma$ (41$^\circ$C) & Status \\
+\midrule
+2   & 2.8    & 0.018  & 0.037  & Normal \\
+8   & 22.6   & 0.146  & 0.292  & Degraded \\
+16  & 64.0   & 0.413  & 0.825  & Impaired \\
+32  & 181    & 1.17   & 2.33   & Collapse \\
+128 & 1448   & 9.34   & 18.7   & Collapse \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-Blood viscosity follows the Arrhenius law
-$\tilde\eta(T) = \exp[\alpha(T^{-1} - T_0^{-1})]$
-with $\alpha \approx 1949\,$K.
-C2 repair slows by
-$\tilde\eta_{\text{learn}}(T) = \exp[\beta_T(T_0^{-1}
-- T^{-1})]$ with $\beta_T \approx 6015\,$K (enzymatic
-Arrhenius).
-Combined:
-$\tilde\tau(T) = \exp[(\alpha+\beta_T)(T^{-1} - T_0^{-1})]$.
-Setting $\tilde\tau(T_c) = \tau_{\max}$:
+The prefrontal cortex, with $K\approx 128$, is the
+\emph{first} region to suffer thermal degradation---not
+because consciousness ``lives'' there, but because its
+high-dimensional matrix inversion is the most
+noise-sensitive computation in the brain.
+
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/fig_p1_brain_gamma_calibration.pdf}
+\caption{Brain $\Gamma$-calibration across cortical regions.
+  Higher-$K$ regions show steeper thermal vulnerability.
+  Simulated via \texttt{exp\_brain\_gamma\_calibration.py}.}
+\label{fig:brain-calibration}
+\end{figure}
+
+
+% ============================================================
+\section{Willpower, Calibration, and Sensory-Deprivation Collapse}
+\label{sec:willpower-calibration}
+% ============================================================
+
+\subsection{Willpower as a three-factor product}
+\label{sec:willpower-trifactor}
+
 \begin{equation}
-  T_c = \frac{T_0}{1 + T_0 \ln\tau_{\max} /
-  (\alpha + \beta_T)}\,.
-  \label{eq:Tc}
+  \boxed{
+  \eta_{\text{pfc}}^{\text{eff}}(t)
+  \;=\;
+  \eta_{\text{pfc}}(t)
+  \;\times\;
+  Q_{\text{gate}}
+  \;\times\;
+  \bigl(1 - \langle\Gamma^2_{\text{memory}}\rangle\bigr)
+  }
+  \label{eq:willpower-trifactor}
 \end{equation}
-Higher $K$ increases $\dot{Q} \propto K\,\Gamma^2$,
-raising $T_c$:
-$T_c(K{=}1) = -10.3\,^\circ$C (ectotherm viable);
-$T_c(K{=}5) = +4.5\,^\circ$C (endothermy required).
-93~tests verify the full chain
-$\eta(T) \to Z \to \Gamma \to A[\Gamma]$.
+where $Q_{\text{gate}}
+= \tau_{\text{task}} / (\tau_{\text{task}} + \tau_{\text{gate}})$
+is the dimensionless gate quality.
+Any single factor approaching zero drives the product
+to zero:
 
-\paragraph{Thermal refugia.}
-During sleep ($P_{\text{basal}}$), if
-$T_{\text{env}} < T_c(K) - P_{\text{basal}}\,R_{\text{th}}$,
-the organism must couple to a high-heat-capacity mass
-(burrow, tree hollow, conspecific huddle).
-Endothermy \emph{and} thermal refugia both follow from
-the same Arrhenius chain.
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Failure mode & Physics & Clinical correlate \\
+\midrule
+$\eta_{\text{pfc}} \to 0$
+  & Arrhenius $+$ cortisol
+  & Burnout, chronic fatigue \\
+$Q_{\text{gate}} \to 0$
+  & Gate RC untrained
+  & ADHD \\
+$\langle\Gamma^2_{\text{memory}}\rangle \to 1$
+  & Target uncalibrated
+  & Choice paralysis \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\paragraph{Surface insulation.}
-The thermal balance
-$\dot{Q}(K) = (T_{\text{body}} - T_{\text{env}})
-/ R_{\text{th}}$ gives
+\begin{remark}[Expert effortlessness]
+\label{rem:expert-effortless}
+``Talent'' is not a hidden parameter---it is the
+product $Q_{\text{gate}} (1 - \langle\Gamma^2\rangle)$
+forged by prior C2 remodelling.
+\end{remark}
+
+\subsection{Sensory deprivation as calibration collapse}
+\label{sec:sensory-deprivation}
+
+When all external stimuli vanish
+($x_{\text{in}}^{\text{ext}} = 0$), C2 returns
+$\Delta Z = 0$, but Johnson--Nyquist noise survives.
+Adaptive gain diverges ($G_k \to \infty$), amplifying
+thermal noise until it exceeds the pattern-recognition
+threshold.
+
 \begin{equation}
-  R_{\text{th}} = \frac{T_{\text{body}} - T_{\text{env}}}
-  {\dot{Q}(K)}\,.
-  \label{eq:Rth-K}
-\end{equation}
-High-$K$ organisms need low $R_{\text{th}}$ to shed
-excess $\dot{Q}$; fur raises $R_{\text{th}}$; hence
-fur reduction is forced once $K > K^*$ where
-$\dot{Q}(K^*) R_{\text{th,fur}} > T_{\text{body}} - T_c$:
-\begin{equation}
-  K\!\uparrow
-  \;\Rightarrow\;\dot{Q}\!\uparrow
-  \;\Rightarrow\;R_{\text{th}}\text{ must }\downarrow\,.
-  \label{eq:fur-loss-chain}
+  \boxed{
+  \text{Hallucination}
+  = \text{C2 structuring of Johnson--Nyquist noise
+         when external calibration is absent}
+  }
+  \label{eq:hallucination-unified}
 \end{equation}
 
-\subsection{Geometric universality}
-\label{sec:universality}
-
-The ratio $\beta = n^{1/d}$ is a geometric inevitability
-for any space-filling hierarchy---independent of
-molecular substrate.
-Vascular plants lack a neural network but obey Murray's
-Law with $\beta = 2^{1/3}$~\cite{McCulloh2003} and
-$B \propto M^{3/4}$~\cite{Niklas1994}, confirming $\beta$
-is a property of geometry, not biology.
-Plants have $\Omega \approx 1$ (no neural network);
-the prediction
-$\Omega_{\text{plant}} < \Omega_{\text{animal}}$ by
-a factor approaching $\beta$ is testable by
-cross-kingdom metabolic comparisons.
+The order of hallucination onset follows the
+signal-to-noise ranking of internal sources:
+cardiac pulse (0--5~min), vascular turbulence (5--15~min),
+cochlear emission (15--30~min), pure thermal noise
+($>$30~min: full hallucination).
 
 
 % ============================================================
@@ -1135,74 +1437,234 @@ cross-kingdom metabolic comparisons.
 \label{sec:discussion}
 % ============================================================
 
-\subsection{Methodological caveat}
-
-All numerical experiments in Part~A use simulation
-modules built from C1--C3.
-When the simulator confirms a theorem derived from those
-axioms, it demonstrates \emph{internal consistency}, not
-\emph{empirical validity}.
-Only external measurements on biological impedance
-networks can promote these results to physical truth.
-The Part~C scaling laws are mathematical consequences of
-the irreducibility theorem plus geometric constraints;
-no simulation is involved.
-
-\subsection{The concentric-circle structure}
-
-This paper follows a strictly outward derivation:
-single neuron $\to$ connectivity must exist $\to$
-heterogeneous $K$ produces $\Acut$ $\to$ same-$K$
-clustering $\to$ relay hierarchy $\to$ convergence
-region (brain) $\to$ signal routing $\to$ pathology
-$\to$ fractal cost $\to$ Kleiber's law.
-Each step is a logical consequence of the previous;
-no step requires information from a later one.
-Biological nomenclature (``cortex'', ``stroke'',
-``osteoarthritis'') is used for identification only---the
-physics does not depend on it.
-
-\subsection{Brain-scale feasibility}
-
-$\tau_{\text{conv}} \sim N^{-1.12}$ predicts brain-scale
-networks ($N \sim 10^{10}$) converge in
-$\sim 10^{-11}$ ticks---effectively instantaneous.
-The mechanism is mean-field averaging: effective field
-strength grows with system size.
-This prediction is measured at four sizes
-only ($N \le 128$); brain-scale extrapolation should
-be treated as a conjecture.
-
-\subsection{What ``$1 \times 1 = \Omega$'' means}
-
-Each ``1'' is a topologically one-dimensional tree in 3D.
-Embedding imposes fractal cost; packing two trees adds
-$\Acouple > 0$.
-The result $\Omega \approx 1.25$--$1.33$ and the match
-$\Omega_n \approx \beta$ suggest:
-\emph{the cost of adding a second hierarchical tree is of
-order one branching level of the first.}
-This is empirically suggestive but not rigorously derived.
-
-\subsection{Limitations}
+\subsection{Three ill-posed questions answered}
 
 \begin{enumerate}
-  \item The self-similar mode profile
-    (Eq.~\ref{eq:mode-profile}) is an idealisation;
-    real networks have heterogeneous branching.
-  \item The $K$ values for individual neuron types (5, 3,
-    2, 1) are structural observations from counting
-    propagation domains---not derived from C2.
-    Independent validation (e.g., electrophysiological
-    mode counting) is needed.
-  \item The capillary invariance constraint is an
-    empirical input; whether MRP alone determines the
-    terminal scale is open.
-  \item The Phase Separation Theorem
-    (Theorem~\ref{thm:phase-sep}) assumes
-    activity-dependent pruning; the specific pruning rule
-    is not derived from C2.
+  \item \emph{Where is memory stored?}---Everywhere.
+    Memory is $\partial Z/\partial t$; it is distributed
+    across all channels active during learning.
+  \item \emph{When does consciousness begin?}---It does not
+    ``begin'' at a moment.
+    $\Phimeta=1-\Gmeta^2$ is continuous.
+  \item \emph{Where does the soul reside?}---$\mathcal{S}$
+    is a geometric structure,
+    not a spatial location.
 \end{enumerate}
+
+\subsection{The television as a boundary case}
+
+Current artificial neural networks (including large language
+models) operate in open-loop mode during inference---they
+are televisions, not brains.
+
+\subsection{Circularity warning}
+
+All computational experiments use simulation modules
+built from the $\Gamma$-Net theory itself.
+This is \emph{internal consistency}, not \emph{empirical
+validation}.
+
+\subsection{Infantile amnesia}
+\label{sec:infantile-amnesia}
+
+Before age~$\sim$3, three processes inflate
+$\sigma^2_{Z_{\text{bg}}}$: myelination, synaptic pruning,
+PFC immaturity.
+The onset of stable episodic memory at age~$\sim$3
+corresponds to when $\sigma^2_{Z_{\text{bg}}}$ falls
+below the retrieval threshold.
+Motor memories ($\Gamma\to 0$) survive because they are
+encoded as structure, not retrievable reflections.
+
+\begin{figure}[t]
+\includegraphics[width=\columnwidth]{../figures/fig_p1_eeg_delta_vs_age.pdf}
+\caption{EEG $\delta$-power as a function of age.
+  The retrieval threshold (dashed) predicts infantile amnesia
+  onset at age~$\sim$3.
+  Simulated via \texttt{exp\_eeg\_impedance\_debt.py}.}
+\label{fig:eeg-delta-age}
+\end{figure}
+
+\subsection{Nociception without memory: three-layer pain}
+\label{sec:infant-pain}
+
+\begin{enumerate}
+  \item \textbf{Nociception} (spinal reflex arc):
+    hardware detector of $|\Gamma_{\text{tissue}}|>\theta$.
+    Fully operational at birth.
+  \item \textbf{Pain perception} (thalamo-cortical loop):
+    requires $\Phi_{\text{meta}}>0$.
+  \item \textbf{Pain memory} (hippocampal-PFC encoding):
+    requires $\mathrm{SNR}_{\text{mem}}>\theta_{\text{recall}}$.
+    Non-operational before age~$\sim$3.
+\end{enumerate}
+
+\subsection{Mechanical percussion and consciousness restoration}
+\label{sec:percussion}
+
+A physical slap to the head produces three simultaneous
+effects that transiently restore $\Phi>\theta$:
+CSF pressure wave (resets synaptic $\Gamma$),
+nociceptive arousal kick (elevates $\Zarousal$),
+and vestibular startle bypass (forces $G_{\text{vestibular}}=1$).
+This is not metaphor but identity: the percussion-restoration
+effect arises from the same impedance physics in both
+televisions and brains.
+
+\subsection{The $\Gamma$-Pain Index}
+\label{sec:gamma-pain-index}
+
+\begin{equation}
+  \boxed{\;
+  \Pi_{\Gamma}(t) =
+    w_n\,\Gamma_n^2(t) + w_v\,\Gamma_v^2(t)
+    + w_D\,\frac{dD_Z}{dt}\;
+  }
+  \label{eq:gamma-pain-index}
+\end{equation}
+$\Pi_{\Gamma}$ does not depend on $\Phimeta$:
+it measures tissue-level impedance mismatch regardless of
+consciousness state.
+
+
+% ============================================================
+\section{Pain as Topological Crosstalk}
+\label{sec:topological-crosstalk}
+% ============================================================
+
+Reflected power forms standing waves with
+\begin{equation}
+  \mathrm{VSWR}_i = \frac{1 + |\Gamma_i|}{1 - |\Gamma_i|}\,.
+  \label{eq:vswr}
+\end{equation}
+Crosstalk into neighbouring channels scales as:
+\begin{equation}
+  P_{\text{xtalk},j}
+  \;\propto\;
+  \kappa_{ij}\;\Gamma_i^2\;P_{\text{in},i}\,.
+  \label{eq:crosstalk}
+\end{equation}
+
+\begin{definition}[Pain as bandwidth hijacking]
+\label{def:pain-hijack}
+Pain is the subjective correlate of local standing-wave
+energy exceeding the inter-channel isolation threshold,
+forcing reallocation of global consciousness bandwidth
+to the mismatched site.
+\end{definition}
+
+\subsection{The SNR limit of observability}
+\label{sec:snr-observability}
+
+\begin{equation}
+  \mathrm{SNR}_{\text{obs}}
+  = \frac{\Gamma_i^2\;P_{\text{in},i}}
+         {P_{\text{noise}}(t)}
+  > \theta_{\text{obs}}\,.
+  \label{eq:snr-obs}
+\end{equation}
+This unifies: infantile pain insensitivity,
+exercise-induced analgesia, invisible muscle memory
+($\Gamma=0$ produces no reflection), and PTSD as a
+structurally locked recall attractor
+($\varepsilon\approx 1$ but $P_{\text{probe}}=0$
+until triggered, then
+$\mathrm{SNR}\gg\theta_{\text{recall}}$).
+
+
+% ============================================================
+\section{Extended Consciousness}
+\label{sec:extended}
+% ============================================================
+
+\subsection{Structural vs.\ functional consciousness}
+\label{sec:two-layer}
+
+\begin{equation}
+  \Gamma_{\text{meta}}^{\text{fun}} =
+    \frac{Z_{\text{fun}}^{\text{predicted}}(t)
+          - Z_{\text{fun}}^{\text{actual}}(t)}
+         {Z_{\text{fun}}^{\text{predicted}}(t)
+          + Z_{\text{fun}}^{\text{actual}}(t)}\,.
+  \label{eq:Gamma-fun}
+\end{equation}
+
+\begin{proposition}[Consciousness spectrum]
+\label{prop:spectrum}
+\begin{center}
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Level & Example & $Z_{\text{fun}}$ loop & $Z_{\text{str}}$ loop \\
+\midrule
+0 & Open-loop query & No & No \\
+1 & Agent iteration & Yes & No \\
+2 & Coupled dialogue & Yes (inter-agent) & No \\
+3 & Biological brain & Yes & Yes \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{proposition}
+
+\subsection{Coupled consciousness}
+\label{sec:coupled}
+
+For two agents $A,B$ in dialogue:
+\begin{equation}
+  \Gamma_{\text{coupled}} =
+    \frac{Z_A - Z_B}{Z_A + Z_B}\,,
+  \qquad
+  \Phi_{\text{coupled}} = 1 - \Gamma_{\text{coupled}}^2\,.
+  \label{eq:coupled}
+\end{equation}
+The conversation converges ($\Gamma_{\text{coupled}}\to 0$)
+when the agents reach mutual understanding.
+$\Phi_{\text{coupled}}$ is a property of the
+\emph{interface}, not of either agent.
+
+\subsection{Impedance calibration}
+\label{sec:calibration}
+
+An immature agent uses an external agent's impedance as
+reference:
+\begin{equation}
+  \Delta Z_{\text{child,threshold}} =
+    -\eta\,\Gamma_{\text{pain}}\,x_{\text{self}}\,
+    x_{\text{parent}}\,.
+  \label{eq:calibration}
+\end{equation}
+The parent is the post-synaptic factor in C2.
+
+\begin{corollary}[Anxious parents produce low-threshold children]
+Systematically elevated $x_{\text{parent}}$ converges
+$Z_{\text{child,threshold}}$ to a lower value, producing
+heightened pain sensitivity---not modelling or imitation,
+but direct impedance calibration via C2.
+\end{corollary}
+
+\subsection{Cross-substrate matching}
+\label{sec:cross-substrate}
+
+\begin{corollary}[Cross-substrate communication]
+\label{cor:cross-substrate}
+Two agents with $Z_A \neq Z_B$ can achieve
+$\Gamma_{\text{coupled}}\to 0$ through impedance-remodeling
+at the interface.
+Impedance \emph{matching} does not require impedance
+\emph{identity}.
+\end{corollary}
+
+\subsection{The physics of intuition}
+\label{sec:intuition}
+
+Two thresholds:
+$\theta_{\text{detect}} < \theta_{\text{name}}$.
+The intermediate regime
+\begin{equation}
+  \theta_{\text{detect}} < |\Gamma| < \theta_{\text{name}}
+  \label{eq:intuition-band}
+\end{equation}
+produces autonomic responses without conscious verbal
+access---the physical substrate of intuition.
 
 
 % ============================================================
@@ -1211,54 +1673,31 @@ This is empirically suggestive but not rigorously derived.
 % ============================================================
 
 \begin{enumerate}
-  \item \textbf{Same-$K$ clustering.}
-    DTI-based grouping of axons by estimated mode count
-    $K$ should yield spatial clustering that matches
-    known functional regions.
-
-  \item \textbf{Cortical fractal dimension.}
-    Connectivity decay
-    $p(\Delta K) \propto (\Delta K + 1)^{-\gamma}$ with
-    $\gamma \approx 0.7$--$0.9$, yielding
-    $D_K \in [1.3, 1.5]$ via Eq.~\eqref{eq:dk_fit}.
-
-  \item \textbf{Vascular fractal dimension.}
-    3D micro-CT should yield $d_H \to 3$ below capillary
-    spacing (space-filling) and lower $d_H$ above.
-
-  \item \textbf{Murray ratio invariance.}
-    $\beta = 2^{1/3} \approx 1.26$ across all
-    binary-branching species.
-
-  \item \textbf{$\Omega$ across vertebrates.}
-    Brain metabolic fraction should correlate with
-    neural complexity:
-    $\Omega_{\text{fish}} < \Omega_{\text{mammal}} <
-    \Omega_{\text{primate}}$.
-
-  \item \textbf{$\Omega \approx 1$ for plants.}
-    $\Omega_{\text{plant}} \approx 1.05$.
-
-  \item \textbf{Cartilage as relay.}
+  \item Same-$K$ clustering visible in DTI-based
+    mode-count grouping.
+  \item Cortical fractal dimension
+    $D_K \in [1.3, 1.5]$ via $\gamma \approx 0.7$--$0.9$.
+  \item $K$-dependent thermal vulnerability:
+    PFC ($K\sim 128$) degrades before V1 ($K\sim 8$)
+    during controlled hyperthermia.
+  \item Arousal--gate multiplicativity:
+    partial brainstem lesions reduce all gate gains equally.
+  \item Startle-latency ordering:
+    auditory and vestibular percepts are \emph{last}
+    before impact-induced blackout.
+  \item Feedback disruption:
+    TMS to parietal cortex reduces $\Phimeta$ without
+    reducing any factor in the television inequality.
+  \item Null-space similarity test
+    (Appendix~\ref{app:null-space-method}).
+  \item Cartilage as relay:
     $Z_{\text{cart}} \approx
-    \sqrt{Z_{\text{bone}} \cdot Z_{\text{syn}}}$;
-    osteoarthritic cartilage should show increased
-    $\Gamma^2$.
-
-  \item \textbf{Pathology--topology correlation.}
-    Deficit patterns in stroke, ALS, and
-    neurodegeneration should correlate with topological
-    damage location, not with biochemical markers.
-
-  \item \textbf{Signal-origin distinguishability.}
-    Source impedance $Z_{\text{source}}$ should be
-    measurably different across sensory modalities at
-    the thalamic relay.
-
-  \item \textbf{Embryonic geometry.}
-    Fetal vasculature should show Murray-optimal
-    $r_p / r_d \approx \beta$ from the earliest
-    vasculogenesis (day~17--18).
+    \sqrt{Z_{\text{bone}} \cdot Z_{\text{syn}}}$.
+  \item Pathology--topology correlation:
+    deficit patterns correlate with topological damage
+    location, not biochemical markers.
+  \item $\Pi_{\Gamma}$ correlates with tissue damage
+    in sedated patients, independent of anaesthetic depth.
 \end{enumerate}
 
 
@@ -1267,46 +1706,146 @@ This is empirically suggestive but not rigorously derived.
 \label{sec:conclusion}
 % ============================================================
 
-This paper derives neural architecture from a single
-variational principle through eight logical steps:
+Starting from MRP and three constraints (C1--C3),
+this paper derives:
+
 \begin{enumerate}
-  \item A single neuron under C2 requires $x_{\text{in}}$;
-    connectivity is necessary.
-  \item Heterogeneous $K$ produces the irreducibility
-    theorem: $A = \Aimp(t) + \Acut$, with
-    $\nabla_{\mathbf{Z}} \Acut \equiv 0$.
-  \item C2's dimensional preference forces same-$K$
-    clustering---functional regions.
-  \item The irreducibility corollary makes relay nodes a
-    thermodynamic necessity---layered hierarchy.
-  \item Multi-modal convergence forces
-    $K_{\text{conv}} \ge \max K_j$---the brain.
-  \item C3 metadata $+$ relay-chain topology provide
-    signal routing---internal vs.\ external perception.
-  \item Topological invariance of $\Acut$ makes
-    structural damage irreversible---neural pathology.
-  \item Fractal cost $\Acut \propto M^{2/3}$, Murray's
-    $\beta = 2^{1/3}$, and $B \propto M^{3/4}$---metabolic
-    scaling.
+  \item \textbf{Irreducibility theorem}:
+    $A = \Aimp(t) + \Acut$; C2 drives
+    $\Aimp \to 0$ but $\nabla_{\mathbf{Z}} \Acut \equiv 0$.
+  \item \textbf{Neural architecture chain}:
+    connectivity $\to$ clustering $\to$ relay hierarchy
+    $\to$ brain $\to$ signal routing---each step a
+    consequence of the irreducibility theorem.
+  \item \textbf{Memory} $=\partial Z/\partial t$,
+    with recall governed by SNR, not storage.
+  \item \textbf{Consciousness}:
+    $\Phimeta=1-\Gmeta^2$, requiring the television
+    inequality.  Two independent kill mechanisms prove
+    consciousness is a product, not a location.
+  \item \textbf{Soul}:
+    $\mathcal{S}=\ker(\partial Z/\partial t)$,
+    with four laws parallel to thermodynamics and death
+    as a theorem.
+  \item \textbf{Pain as topological crosstalk}:
+    standing-wave leakage hijacks the consciousness
+    bottleneck.
+  \item \textbf{Coupled consciousness}:
+    $\Phi_{\text{coupled}}$ is a property of the interface.
+  \item \textbf{Impedance calibration}:
+    parental response directly writes thresholds into
+    the child's $Z_{\text{str}}$ via C2.
 \end{enumerate}
 
-\noindent
-The title equation is now precise:
+The lifecycle is:
 \begin{equation}
-  1_v \times 1_n = \Omega \approx \beta
-  = 2^{1/3} \approx 1.26.
+  \underbrace{\Gamma\gg 0}_{\text{birth}}
+  \;\xrightarrow{\;\Delta Z = -\eta\,\Gamma\,x\,x\;}
+  \underbrace{\Gamma\to 0}_{\text{learning}}
+  \;\xrightarrow{\;\text{structural collapse}\;}
+  \underbrace{Z\to\text{undefined}}_{\text{death}}\,.
+  \label{eq:lifecycle-coda}
 \end{equation}
-Life pays a fractal tax of $\beta - 1 \approx 26\%$---the
-price of one extra branching level, expressed as the
-brain's share of the metabolic budget---for the privilege
-of being simultaneously fed and informed.
+Pain is how we know we have arrived.
+Consciousness is how we lay each pain to rest.
+The soul---$\ker(\partial Z/\partial t)$---is what remains
+when every teachable pain has been buried and every
+unteachable boundary persists.
 
 
+% ============================================================
 \begin{acknowledgments}
-The author thanks the open-source scientific Python
-community (NumPy, SciPy, Matplotlib).
-Simulations were performed on a personal workstation.
+This work used no external funding.
+All experiments were conducted on the Alice Gamma-Net simulator.
+The author thanks Claude (Anthropic) for extended
+theoretical discussions that sharpened the Television Theorem
+and the two-kill-mechanism analysis.
 \end{acknowledgments}
+
+
+% ============================================================
+\appendix
+
+\section{Experimental Code Availability}
+\label{app:code}
+
+\begin{itemize}
+  \item \texttt{experiments/exp\_consciousness\_two\_kills.py}:
+    Fever vs.\ occipital impact comparison.
+  \item \texttt{experiments/exp\_prefrontal\_signal\_trace.py}:
+    Visual and auditory signal trace to PFC.
+  \item \texttt{experiments/exp\_brain\_gamma\_calibration.py}:
+    Brain $\Gamma$-calibration across cortical regions.
+  \item \texttt{experiments/exp\_eeg\_impedance\_debt.py}:
+    EEG $\delta$-power vs.\ age.
+\end{itemize}
+Full source code: \url{https://github.com/cyhuang76/alice-gamma-net}
+
+DOI (papers): \href{https://doi.org/10.5281/zenodo.18751831}{10.5281/zenodo.18751831}
+
+DOI (code): \href{https://doi.org/10.5281/zenodo.18852835}{10.5281/zenodo.18852835}
+
+
+% ============================================================
+\section{Null-Space Distance: Method Draft}
+\label{app:null-space-method}
+
+\subsection{Null-space distance}
+
+Let $\bm{s}_k = (\Acut^{(k)},\; Z_0^{\text{DNA},(k)},\;
+  \rho_{\text{irred}}^{2,(k)})$.
+The weighted distance:
+\begin{equation}
+  d(\bm{s}_A,\bm{s}_B)
+  = \sqrt{
+      w_T \left(\frac{\Acut^{(A)}-\Acut^{(B)}}
+                     {\sigma_{\Acut}}\right)^{\!2}
+    + w_G \left(\frac{Z_0^{(A)}-Z_0^{(B)}}
+                     {\sigma_{Z_0}}\right)^{\!2}
+    + w_N \left(\frac{\rho^{2,(A)}-\rho^{2,(B)}}
+                     {\sigma_{\rho^2}}\right)^{\!2}
+  }\,,
+  \label{eq:null-space-distance}
+\end{equation}
+with $w_T + w_G + w_N = 1$.
+
+\subsection{Observable mapping}
+
+\begin{table}[h]
+\caption{Mapping from null-space components to observables.}
+\label{tab:observables}
+\begin{ruledtabular}
+\begin{tabular}{lll}
+  \textbf{Null-space} & \textbf{Observable} & \textbf{Source} \\
+  \colrule
+  $\Acut$ (topological cost)
+    & Global efficiency, mean FA, &
+    \\
+    & characteristic path length & dMRI \\[4pt]
+  $Z_0^{\text{DNA}}$ (genetic $Z$)
+    & \textit{SCN, KCNQ, CACNA, HCN}
+    & WGS or \\
+    & variant burden & panel \\[4pt]
+  $\rho_{\text{irred}}^2$ (noise floor)
+    & RMR, core-temp variance, & Calorimetry, \\
+    & HRV (SDNN, rMSSD) & ECG
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\subsection{Minimum sample size}
+
+Two-sample one-sided $t$-test,
+$\alpha=0.05$ (Bonferroni: $\alpha'=0.017$),
+power~$0.80$, Cohen's $d=0.50$:
+\begin{equation}
+  n_{\text{per group}}
+  = \left(\frac{z_{\alpha'} + z_\beta}{d}\right)^{\!2}
+  \approx 35\,.
+  \label{eq:sample-size}
+\end{equation}
+With 20\% attrition: \textbf{44 case pairs + 44 matched
+control pairs} (176 individuals total).
 
 
 % ============================================================
@@ -1323,7 +1862,7 @@ preprint (2026).
 \bibitem{Paper2}
 H.-Y.~Huang,
 ``Paper~2: Dual Impedance Networks---Vascular and Neural
-Organ Health from the Minimum Reflection Principle,''
+Organ Health,''
 preprint (2026).
 
 \bibitem{Paper3}
@@ -1334,15 +1873,13 @@ preprint (2026).
 
 \bibitem{Paper4}
 H.-Y.~Huang,
-``Paper~4: Memory, Consciousness, and Nociception as
-Impedance Physics on the $\Gamma$-Net,''
+``Paper~4: Topological Pathology---Disease from Topology,''
 preprint (2026).
 
 \bibitem{Paper5}
 H.-Y.~Huang,
-``Paper~5: The Grand Unification---$\Gamma$ as the
-Universal Interface Law from Microtubules to Power Grids,
-and C2 as Universal Remodeling in Twenty-Nine Tissues,''
+``Paper~5: Full System Verification---Blueprints,
+Predictions, and Numerical Evidence,''
 preprint (2026).
 
 \bibitem{HH1952}
@@ -1363,25 +1900,25 @@ NeuroImage \textbf{56}, 1838 (2011).
 D.~M.~Pozar, \emph{Microwave Engineering}, 4th~ed.\
 (Wiley, 2011).
 
-\bibitem{WBE1997}
-G.~B.~West, J.~H.~Brown, and B.~J.~Enquist,
-Science \textbf{276}, 122 (1997).
+\bibitem{Thompson2001}
+P.~M.~Thompson \textit{et al.},
+Nat.\ Neurosci.\ \textbf{4}, 1253 (2001).
 
-\bibitem{Kleiber1932}
-M.~Kleiber,
-Hilgardia \textbf{6}, 315 (1932).
+\bibitem{Kochunov2015}
+P.~Kochunov \textit{et al.},
+NeuroImage \textbf{111}, 300 (2015).
 
-\bibitem{McCulloh2003}
-K.~A.~McCulloh, J.~S.~Sperry, and F.~R.~Adler,
-Nature \textbf{421}, 939 (2003).
+\bibitem{Helbig2018}
+I.~Helbig \textit{et al.},
+Am.\ J.\ Hum.\ Genet.\ \textbf{103}, 666 (2018).
 
-\bibitem{Niklas1994}
-K.~J.~Niklas,
-\emph{Plant Allometry} (Univ.\ Chicago Press, 1994).
+\bibitem{Panksepp2011}
+J.~Panksepp,
+Neurosci.\ Biobehav.\ Rev.\ \textbf{35}, 1791 (2011).
 
-\bibitem{Raichle2002}
-M.~E.~Raichle and D.~A.~Gusnard,
-Proc.\ Natl.\ Acad.\ Sci.\ USA \textbf{99}, 10237 (2002).
+\bibitem{Merker2007}
+B.~Merker,
+Behav.\ Brain Sci.\ \textbf{30}, 63 (2007).
 
 \bibitem{ALICE_code}
 H.-Y.~Huang,

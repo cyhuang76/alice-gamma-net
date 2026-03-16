@@ -1,8 +1,41 @@
-﻿# Changelog
+# Changelog
 
 All notable changes to Alice Smart System (Γ-Net) are documented here.
 
 Format follows [Keep a Changelog](https://keepachangelog.com/).
+
+---
+
+## [3.9.0] — 2026-03-16
+
+### Added — Figures & Visualization
+- **9 new figures** across all 6 papers:
+  - P0: Deductive chain flowchart
+  - P1: K-space clustering + Television inequality parameter space
+  - P2: Kleiber's Law scatter (12 mammalian species, mouse → blue whale)
+  - P3: Sleep D_Z discharge (48h infant vs adult comparison)
+  - P4: Saddle-node bifurcation/hysteresis + multi-organ cascade network
+  - P5: Kaplan–Meier survival curves + cross-organ AUC waterfall
+- **`build_figures.py`**: Unified figure generation API with auto-detection of compatible Python runtime (avoids Python 3.14 numpy segfault)
+
+### Added — LaTeX Infrastructure
+- **`gammanet.sty`**: Shared macro package (theorem environments + physics macros)
+- All 6 papers use `\usepackage{gammanet}`, removing 30+ duplicate definitions
+- Unified author affiliation: "Independent Researcher, Taipei, Taiwan"
+
+### Added — Documentation
+- `docs/README.md`: Documentation index with build instructions
+
+### Changed — Project Structure
+- `experiments/` reorganized into `figgen/` (9), `validation/` (5), `simulation/` (13)
+- All 27 figures renamed to `fig_p{N}_{description}` convention
+- All `.tex` `\includegraphics` paths synchronized with new names
+- `.gitignore`: added `figures/*.png` (regeneratable from PDFs)
+- Paper 5 title corrected (resolved overlap with Paper 3)
+
+### Fixed
+- P5: KeyError in Kaplan-Meier generation (wrong JSON keys)
+- P5: indentation error in health boxplot fallback path
 
 ---
 

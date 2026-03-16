@@ -48,6 +48,12 @@ nhanes_results/run_output.txt
 nhanes_results/multicycle_blind_predictions.json
 nhanes_results/nhanes_multicycle_gamma_vectors.csv
 nhanes_results/multicycle_run_output.txt
+nhanes_results/nhanes_10cycle_gamma_vectors.csv
+nhanes_results/stard_blind_predictions.json
+
+# Generated figures — PNGs are regeneratable from PDFs
+figures/test_output.*
+figures/*.png
 
 # ── Paper: what to EXCLUDE ──────────────────────────────────
 # Pandoc intermediate / temp files

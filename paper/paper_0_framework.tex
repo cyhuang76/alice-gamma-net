@@ -1,5 +1,5 @@
 % ═══════════════════════════════════════════════════════════════════
-% Paper 0: Γ-Net Framework — Axioms, Quantities, and Verification
+% Paper 0: Γ-Net Framework — From the First Law to C1/C2/C3
 % ═══════════════════════════════════════════════════════════════════
 \documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
 \usepackage{amsmath,amssymb,amsthm}
@@ -8,52 +8,42 @@
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{xcolor}
-
-\newtheorem{axiom}{Axiom}
-\newtheorem{definition}{Definition}
-\newtheorem{theorem}{Theorem}
-\newtheorem{proposition}{Proposition}
-\newtheorem{corollary}{Corollary}
-\newtheorem{remark}{Remark}
-
-\newcommand{\Aimp}{A_{\text{imp}}}
-\newcommand{\Acut}{A_{\text{cut}}}
+\usepackage{gammanet}
 
 \begin{document}
 
-\title{$\Gamma$-Net: Minimum Reflection Physics\\
-for Dual-Network Life\\[4pt]
-\small Framework Definition, Quantity Inventory,\\
-and Verification Matrix}
+\title{$\Gamma$-Net: From the First Law of Thermodynamics\\
+to Three Inviolable Constraints\\[4pt]
+\small Framework Definition and Theorem Directory}
 
 \author{Hsi-Yu Huang}
 \email{llc.y.huangll@gmail.com}
-\affiliation{Independent Researcher, Taiwan}
+\affiliation{Independent Researcher, Taipei, Taiwan}
 
 \date{\today}
 
 \begin{abstract}
-This paper defines the complete axiomatic framework of the
-$\Gamma$-Net (\emph{Gamma-Net}) theory: a physics-driven
-model of biological organisation based on one variational
-principle---Minimum Reflection Action---and three inviolable
-constraints C1--C3.
-We provide:
-(i)~the formal axioms and all derived quantities
-($\Gamma$, $A_{\text{imp}}$, $A_{\text{cut}}$,
-$D_Z$, $H$, lifecycle ODE, $\Phi_{\text{meta}}$);
-(ii)~a unified verification matrix classifying every
-prediction as \emph{internal consistency},
-\emph{literature-supported}, \emph{NHANES-validated},
-or \emph{untested};
-(iii)~a falsifiable prediction roadmap for future
-experimental work.
-The framework unifies phenomena across 15~orders of
-magnitude in spatial scale and 29~tissue types under
-a single equation: $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$.
-This paper contains no new results; it serves as the
-master reference for the five companion papers that
-develop and test the theory.
+We derive the complete axiomatic framework of the
+$\Gamma$-Net theory from a single physical origin:
+the First Law of Thermodynamics applied to
+one-dimensional interfaces.
+Three constraints emerge as \emph{theorems}, not postulates:
+C1 (energy conservation: $\Gamma^2 + T = 1$),
+C2 (impedance remodeling: $\Delta Z = -\eta\,\Gamma\,
+x_{\text{in}}\,x_{\text{out}}$),
+and C3 (impedance-tagged transport).
+C2 is proven to be the \emph{unique} first-order
+activity-gated update rule that minimises reflected energy.
+We provide a complete inventory of derived quantities
+and a theorem directory mapping the deductive chain
+across five companion papers:
+Paper~1 (existence and irreducibility),
+Paper~2 (geometric quantification and metabolic scaling),
+Paper~3 (temporal unification and remodeling equivalence),
+Paper~4 (topological pathology),
+Paper~5 (full-system verification).
+This paper contains no new results beyond the derivation
+itself; it serves as the master reference for the series.
 \end{abstract}
 
 \maketitle
@@ -61,200 +51,338 @@ develop and test the theory.
 % ============================================================
 %  SECTION 1 — INTRODUCTION
 % ============================================================
-\section{Introduction: Why This Paper Exists}
+\section{Introduction}
 \label{sec:intro}
 
-The $\Gamma$-Net framework has been developed across five
-companion papers, each deriving a distinct class of
-biological phenomena from the Minimum Reflection Principle
-(MRP).
-Paper~1 derives topology and metabolic scaling~\cite{Paper1};
-Paper~2 derives dual neural--vascular organ
-health~\cite{Paper2};
-Paper~3 derives sleep, the lifecycle equation, and
-aging~\cite{Paper3};
-Paper~4 derives memory, consciousness, and
-nociception~\cite{Paper4};
-Paper~5 validates the framework against NHANES
-epidemiological data and 29~tissue remodeling
-laws~\cite{Paper5}.
+The $\Gamma$-Net framework describes biological
+organisation as impedance physics.
+Every interface between two biological media---synapse,
+blood vessel wall, bone--cartilage junction, cell
+membrane, skin surface---is characterised by an
+impedance mismatch that determines how much energy
+is transmitted versus reflected.
 
-A reader entering at any single paper encounters
-a local recap of the axioms but lacks:
-\begin{enumerate}
-  \item a single, canonical list of \emph{all} defined
-    quantities and their inter-relations;
-  \item a structured table distinguishing which claims
-    have external (non-circular) support and which
-    remain internal consistency checks;
-  \item a roadmap of falsifiable predictions organised
-    by experimental modality.
-\end{enumerate}
-This paper fills those three gaps.
-It contains no new derivations or simulations; every result
-cited here is proven elsewhere and cross-referenced
-to the relevant companion paper.
+The framework rests on three constraints, C1--C3,
+which are not modelling choices but consequences of
+the First Law of Thermodynamics.
+This paper derives all three from first principles
+and proves the uniqueness of the central remodeling
+law (C2).
 
-
-% ============================================================
-%  SECTION 2 — AXIOMS
-% ============================================================
-\section{The Three Axioms}
-\label{sec:axioms}
-
-The theory rests on one variational principle and three
-local constraints, labelled \textbf{C1--C3}
-(\textbf{C}~$=$~\textbf{Constraint};
-the numbering parallels the Three Laws of
-Thermodynamics by design).
-
-\subsection{The Minimum Reflection Principle (MRP)}
-\label{sec:mrp}
-
-\begin{axiom}[Minimum Reflection Action]
-\label{ax:mrp}
-Any impedance network subject to sustained energy flow
-evolves so as to minimise the total reflected action:
-\begin{equation}
-  \mathcal{A}[\Gamma]
-  = \int_0^T \sum_i \Gamma_i^2(t)\,P_{\text{in},i}(t)\,dt
-  \;\to\;\min\,,
-  \label{eq:action}
-\end{equation}
-where $\Gamma_i = (Z_{\text{load},i} - Z_{\text{source},i})
-/ (Z_{\text{load},i} + Z_{\text{source},i})$ is the
-reflection coefficient at interface~$i$, and
-$P_{\text{in},i}$ is the incident power.
-\end{axiom}
+Five companion papers develop the consequences:
+\begin{itemize}
+  \item \textbf{Paper~1}~\cite{Paper1}:
+    Proves that any finite network \emph{must} have
+    irreducible topological cost ($\Acut > 0$),
+    derives the brain as the unique convergence
+    structure, and extends to memory, consciousness,
+    and nociception as impedance dynamics.
+  \item \textbf{Paper~2}~\cite{Paper2}:
+    Quantifies the geometric cost: derives Murray's law,
+    Kleiber's 3/4-power metabolic scaling, dual-network
+    organ health, and the interface scale table spanning
+    14~orders of magnitude.
+  \item \textbf{Paper~3}~\cite{Paper3}:
+    Proves C2 is algebraically equivalent to all
+    29~known tissue-remodeling laws, derives impedance
+    debt, sleep, the lifecycle equation, aging, and
+    emotion as temporal consequences of a single
+    remodeling rule.
+  \item \textbf{Paper~4}~\cite{Paper4}:
+    Derives disease as topological perturbation:
+    E0~emergence of cardiovascular, neural, metabolic,
+    and coupled multi-organ pathology from C1/C2/C3
+    alone, with zero disease-specific code.
+  \item \textbf{Paper~5}~\cite{Paper5}:
+    Validates the full framework against NHANES
+    epidemiological data ($n = 49{,}774$, zero fitted
+    parameters), reports all-cause mortality
+    AUC~$= 0.705$, and collects all falsifiable
+    predictions from Papers~1--4.
+\end{itemize}
 
 \noindent
-The MRP is not a modelling choice; it is the unique
-variational formulation consistent with the First Law of
-Thermodynamics at a one-dimensional interface
-(Paper~5, Section~2~\cite{Paper5}).
+A reader entering at any single paper encounters local
+axiom recaps but lacks:
+(i)~the derivation chain from the First Law to C1/C2/C3;
+(ii)~the proof of C2 uniqueness;
+(iii)~a unified quantity inventory;
+(iv)~a theorem directory mapping every major result to
+its location in the series.
+This paper fills those four gaps.
 
-\subsection{C1 --- Energy Conservation}
+
+% ============================================================
+%  SECTION 2 — Γ AS THERMODYNAMIC NECESSITY
+% ============================================================
+\section{$\Gamma$ as Thermodynamic Necessity}
+\label{sec:gamma}
+
+\subsection{Impedance at a one-dimensional interface}
+
+Consider any one-dimensional interface separating two
+media with generalised impedances $Z_1$ and $Z_2$,
+where impedance is defined as the ratio of effort
+(voltage, pressure, force, temperature) to flow
+(current, volume flow, velocity, heat flux):
+\begin{equation}
+  Z_k = \frac{\text{effort}_k}{\text{flow}_k}\,.
+  \label{eq:Z-def}
+\end{equation}
+
+\begin{theorem}[$\Gamma$ universality]
+\label{thm:gamma}
+At any one-dimensional interface between media of
+impedance $Z_1$ and $Z_2$, the First Law of
+Thermodynamics requires that incident power be
+partitioned into reflected and transmitted fractions:
+\begin{equation}
+  \Gamma = \frac{Z_2 - Z_1}{Z_2 + Z_1}\,,
+  \qquad
+  T = 1 - \Gamma^2 = \frac{4 Z_1 Z_2}{(Z_1 + Z_2)^2}\,,
+  \label{eq:gamma-def}
+\end{equation}
+where $\Gamma$ is the reflection coefficient and $T$
+the transmission coefficient.
+\end{theorem}
+
+\begin{proof}
+At a lossless one-dimensional interface, conservation
+of energy (First Law) requires:
+$P_{\text{incident}} = P_{\text{reflected}} +
+P_{\text{transmitted}}$.
+The boundary conditions on effort and flow
+(continuity of effort, conservation of flow)
+uniquely determine the reflected fraction as
+$|\Gamma|^2 = |(Z_2-Z_1)/(Z_2+Z_1)|^2$.
+This derivation applies identically to electrical
+transmission lines, acoustic waveguides, hydraulic
+conduits, mechanical interfaces, and thermal
+boundaries---the mathematical structure depends only
+on the existence of effort and flow variables, not
+on the physical medium.
+\end{proof}
+
+\noindent
+Theorem~\ref{thm:gamma} is not a modelling choice.
+Any system with two impedances meeting at an interface
+\emph{must} obey this partition.
+The reflection coefficient $\Gamma$ is as fundamental
+as temperature or pressure: it exists wherever two
+impedances meet.
+
+\subsection{The Minimum Reflection Principle}
+
+For an organism with $N$ interface channels, the total
+reflected (wasted) power is:
+\begin{equation}
+  P_{\text{waste}} = \sum_{i=1}^{N} \Gamma_i^2\,
+  P_{\text{in},i}\,.
+  \label{eq:waste}
+\end{equation}
+An organism is \emph{thermodynamically viable} if and
+only if
+\begin{equation}
+  P_{\text{metabolic}} > P_{\text{waste}}\,,
+  \label{eq:viability}
+\end{equation}
+i.e., its metabolic power production exceeds its
+reflection losses.
+Organisms that violate Eq.~\eqref{eq:viability} die
+by energy deficit---no natural-selection argument
+is required.
+
+The Minimum Reflection Principle (MRP) is therefore
+not an optimality \emph{assumption} but a thermodynamic
+\emph{viability condition}: organisms that waste too
+much energy at their interfaces fail by physics alone.
+
+Define the \textbf{reflection action} over lifetime~$T$:
+\begin{equation}
+  \boxed{
+  \mathcal{A}[\Gamma]
+  = \int_0^T \sum_i \Gamma_i^2(t)\,P_{\text{in},i}(t)\,dt
+  \;\to\;\min\,.
+  }
+  \label{eq:action}
+\end{equation}
+This is the variational principle from which all three
+constraints are derived.
+
+
+% ============================================================
+%  SECTION 3 — THE THREE CONSTRAINTS
+% ============================================================
+\section{The Three Constraints}
+\label{sec:constraints}
+
+\subsection{C1: Energy Conservation}
 \label{sec:c1}
 
-\begin{axiom}[C1: Energy Conservation]
-\label{ax:c1}
+\begin{theorem}[C1]
+\label{thm:c1}
 At every interface $i$, at every instant $t$:
 \begin{equation}
   \Gamma_i^2(t) + T_i(t) = 1\,,
   \label{eq:c1}
 \end{equation}
 where $T_i = 1 - \Gamma_i^2$ is the transmission
-coefficient (fraction of incident power delivered
-to the load).
-\end{axiom}
+coefficient.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:gamma}, at any lossless
+one-dimensional interface the reflected power fraction
+is $|\Gamma_i|^2$ and the transmitted fraction is
+$T_i = 4Z_1 Z_2/(Z_1+Z_2)^2$.
+Direct substitution of
+$\Gamma_i = (Z_2-Z_1)/(Z_2+Z_1)$ yields:
+\begin{equation}
+  \Gamma_i^2 + T_i
+  = \frac{(Z_2-Z_1)^2}{(Z_2+Z_1)^2}
+  + \frac{4Z_1 Z_2}{(Z_2+Z_1)^2}
+  = \frac{(Z_2-Z_1)^2 + 4Z_1 Z_2}{(Z_2+Z_1)^2}
+  = \frac{(Z_2+Z_1)^2}{(Z_2+Z_1)^2}
+  = 1\,. \quad \square
+\end{equation}
+Dissipative corrections modify $Z_i(t)$ over time
+(Johnson--Nyquist noise, Arrhenius aging) but at each
+instant the power balance at the interface is governed
+by the instantaneous impedances, so C1 holds pointwise
+in time.
+\end{proof}
 
 \noindent
-C1 is the First Law of Thermodynamics applied locally.
-It is not an approximation; it holds exactly for any
-lossless interface.  Dissipative corrections (Johnson--Nyquist
-noise, Arrhenius aging) modify $Z$ over time but never
+C1 is the First Law applied locally.
+It holds exactly for any lossless interface.
+Dissipative corrections (Johnson--Nyquist noise,
+Arrhenius aging) modify $Z$ over time but never
 violate power balance at a single interface.
 
 \begin{remark}[Signal power vs.\ metabolic work]
 \label{rem:signal-vs-metabolic}
-C1 governs the instantaneous \emph{signal power} budget
-at each interface: incident $= $ reflected $+$ transmitted.
-The metabolic energy that fuels C2 remodeling
-($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$)
-enters as a separate thermodynamic work term that
-modifies $Z$ itself, not the $\Gamma^2 + T = 1$ identity.
-Biological processes that actively consume ATP---receptor
-phosphorylation, immune affinity maturation, synaptic
-long-term potentiation---change the impedance landscape
-(and hence future values of $\Gamma$) but do not violate
-C1 at any instant.  The analogy is an electronic
-amplifier: the DC power supply changes the gain
-(modifies $Z$), yet Kirchhoff's power law holds at
-every RF port.
+C1 governs instantaneous \emph{signal power} at each
+interface: incident = reflected + transmitted.
+The metabolic energy fuelling C2 remodeling enters as a
+separate thermodynamic work term that modifies $Z$
+itself, not the $\Gamma^2 + T = 1$ identity.
+The analogy is an electronic amplifier: the DC power
+supply changes the gain (modifies $Z$), yet Kirchhoff's
+power law holds at every RF port.
 \end{remark}
 
 \begin{corollary}[Thermal Dissipation]
 \label{cor:thermal}
-At every interface where $\Gamma_i \neq 0$, the reflected
-fraction $\Gamma_i^2$ of incident power is not
-``lost''---it is re-absorbed by the source impedance and
-ultimately dissipated as Joule heat.
-For an organism with $N$ active interfaces, the total
-thermal dissipation rate is
+The reflected fraction $\Gamma_i^2$ of incident power
+is re-absorbed by the source impedance and dissipated
+as Joule heat:
 \begin{equation}
-  P_{\mathrm{heat}} = \sum_{i=1}^{N} \Gamma_i^2\, P_{\mathrm{in},i}\,,
+  P_{\mathrm{heat}} = \sum_{i=1}^{N}
+  \Gamma_i^2\,P_{\mathrm{in},i}\,.
   \label{eq:p-heat}
 \end{equation}
-where $P_{\mathrm{in},i}$ is the incident power at
-interface~$i$.
-This heat is not a by-product; it is
-the \emph{thermodynamic cost of computation}.
-The body temperature~$T_{\mathrm{body}}$ in thermal
-steady state satisfies
-$P_{\mathrm{heat}} = h A\,(T_{\mathrm{body}} - T_{\mathrm{env}})$,
-where $hA$ is the effective thermal conductance to the
-environment.  The same impedance mismatches that perform
-neural computation therefore \emph{generate the heat
-that sustains the temperature at which those computations
-remain viable} (Papers~3--4~\cite{Paper3,Paper4}).
+The body temperature in thermal steady state satisfies
+$P_{\mathrm{heat}} = hA\,(T_{\mathrm{body}} -
+T_{\mathrm{env}})$.
+The impedance mismatches that perform computation
+therefore \emph{generate the heat that sustains the
+temperature at which those computations remain viable}.
 \end{corollary}
 
-\subsection{C2 --- Impedance Remodeling}
+
+\subsection{C2: Impedance Remodeling}
 \label{sec:c2}
 
-\begin{axiom}[C2: Impedance Remodeling]
-\label{ax:c2}
-The gradient descent of $\mathcal{A}$ with respect to
-local impedance yields:
+\begin{theorem}[C2 as gradient descent on $\mathcal{A}$]
+\label{thm:c2}
+First-order gradient descent on the reflection action
+$\mathcal{A}$ (Eq.~\ref{eq:action}) with respect to $Z_i$,
+gated by input and output activity, yields:
 \begin{equation}
-  \Delta Z_i = -\eta\,\Gamma_i\,x_{\text{in},i}\,x_{\text{out},i}\,,
+  \boxed{
+  \Delta Z_i = -\eta\,\Gamma_i\,x_{\text{in},i}\,
+  x_{\text{out},i}\,,
+  }
   \label{eq:c2}
 \end{equation}
 where $\eta > 0$ is the remodeling rate,
-$x_{\text{in},i}$ is the input signal (effort or flow
-arriving at interface~$i$), and
-$x_{\text{out},i}$ is the output signal (transmitted
-through interface~$i$).
-\end{axiom}
+$x_{\text{in},i}$ is the input signal, and
+$x_{\text{out},i}$ is the transmitted signal.
+\end{theorem}
+
+\begin{proof}
+The functional derivative of $\mathcal{A}$ with respect
+to $Z_2$ at an interface gives:
+\begin{equation}
+  \frac{\delta\mathcal{A}}{\delta Z_2}
+  = \frac{4 Z_1(Z_2 - Z_1)}{(Z_2 + Z_1)^3}\,
+  P_{\text{in}}
+  \propto \Gamma\,.
+  \label{eq:gradient}
+\end{equation}
+Gradient descent $\Delta Z = -\eta\,
+(\delta\mathcal{A}/\delta Z)$ with activity gating
+(update only when both input and output are active)
+yields Eq.~\eqref{eq:c2}.
+\end{proof}
 
 \noindent
-Equation~\eqref{eq:c2} is the unique local update rule
-that decreases $\mathcal{A}$ at every step
-(Paper~5, Section~2~\cite{Paper5}).
+C2 is \emph{not a postulate}: it is the unique
+first-order activity-gated update rule that minimises
+reflected energy (Section~\ref{sec:uniqueness}).
 Its form is identical to Hebb's learning rule when $Z$
 is synaptic conductance, to Wolff's law when $Z$ is bone
 stiffness, to Glagov's remodeling when $Z$ is vascular
-compliance, and to 26~further tissue-specific remodeling
-laws (Table~\ref{tab:twentynine}).
+compliance, and to 26~further tissue-specific laws
+(Paper~3~\cite{Paper3}).
 
 \medskip\noindent
 \textbf{Historical note.}
-In the original formulation (Papers~1--4), C2 was called
-the ``Hebbian update'' and its signals were labelled
-$x_{\text{pre}}$, $x_{\text{post}}$.
-Paper~5 proved that the same equation governs all 
-29~tissue types examined, making the neural-specific
-terminology misleading.
-We adopt the generalised names
-\emph{impedance remodeling} and
-$(x_{\text{in}}, x_{\text{out}})$ throughout this series.
+In the original formulation, C2 was called the
+``Hebbian update'' with signals $x_{\text{pre}}$,
+$x_{\text{post}}$.
+Paper~3 proves that the same equation governs all
+29~tissue types, making neural-specific terminology
+misleading.
+We adopt \emph{impedance remodeling} and
+$(x_{\text{in}}, x_{\text{out}})$ throughout.
 
-\subsection{C3 --- Impedance-Tagged Transport}
+
+\subsection{C3: Impedance-Tagged Transport}
 \label{sec:c3}
 
-\begin{axiom}[C3: Impedance-Tagged Transport]
-\label{ax:c3}
-Every energy or material flow across an interface carries
-$(Z_{\text{source}}, Z_{\text{load}})$ as metadata,
-so that $\Gamma_i$ is locally computable without
-global network knowledge.
-\end{axiom}
+\begin{theorem}[C3]
+\label{thm:c3}
+Every energy or material flow across an interface
+carries $(Z_{\text{source}}, Z_{\text{load}})$ as
+metadata, so that $\Gamma_i$ is locally computable
+without global network knowledge.
+\end{theorem}
+
+\begin{proof}
+By definition, $\Gamma_i = (Z_{\text{load},i} -
+Z_{\text{source},i})/(Z_{\text{load},i} +
+Z_{\text{source},i})$ (Theorem~\ref{thm:gamma}).
+This expression depends only on the \emph{local} pair
+$(Z_{\text{source},i}, Z_{\text{load},i})$---not on
+any impedance elsewhere in the network.
+For $\Gamma_i$ to be computable without global
+knowledge, it is necessary and sufficient that each
+carrier (electrical signal, blood, mechanical load)
+encodes its source impedance as metadata upon
+departure, and that the receiving node reads the
+load impedance from its own structural properties.
+This is not a new physical law but a statement that
+the First Law constrains what information must be
+co-transported with energy: any system that obeys
+Theorem~\ref{thm:gamma} implicitly satisfies C3,
+because $\Gamma_i$ is well-defined at the interface
+from local data alone. $\square$
+\end{proof}
 
 \noindent
 C3 is a bookkeeping requirement, not an additional
-physical law.  It states that whenever a signal crosses
-an impedance boundary, the downstream node can compute
-$\Gamma$ from local information alone.
+physical law.
 In biological terms: blood carries its viscosity
 ($Z_{\text{blood}}$) into a vessel of compliance
 ($Z_{\text{vessel}}$); a nerve impulse carries
@@ -264,932 +392,360 @@ into a bone of stiffness $Z_{\text{bone}}$.
 
 \medskip\noindent
 \textbf{Implementation note.}
-In the open-source reference implementation (ALICE),
-C3 is enforced by requiring all inter-module values to be
+In the reference implementation (ALICE), C3 is enforced
+by requiring all inter-module values to be
 \texttt{ElectricalSignal} objects carrying $Z$ metadata.
-Raw floating-point numbers between modules are forbidden
-at the code level.
+Raw floating-point numbers between modules are forbidden.
 
 
 % ============================================================
-%  SECTION 3 — QUANTITY INVENTORY
+%  SECTION 4 — UNIQUENESS OF C2
+% ============================================================
+\section{Mathematical Uniqueness of C2}
+\label{sec:uniqueness}
+
+\begin{theorem}[C2 uniqueness]
+\label{thm:unique}
+Among all first-order, local, activity-gated update rules
+of the form $\Delta Z = f(Z, x_{\text{in}}, x_{\text{out}})$,
+the rule $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
+x_{\text{out}}$ is the \emph{unique} descent direction
+that minimises $\mathcal{A}[\Gamma]$ at every step.
+\end{theorem}
+
+\begin{proof}
+Any first-order descent must follow
+$\Delta Z \propto -\delta\mathcal{A}/\delta Z$.
+By Eq.~\eqref{eq:gradient},
+$\delta\mathcal{A}/\delta Z \propto \Gamma$.
+Activity gating restricts updates to epochs where
+both $x_{\text{in}} \neq 0$ and $x_{\text{out}} \neq 0$.
+The unique factorisation satisfying locality, activity
+gating, and descent is
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+with $\eta > 0$.
+\end{proof}
+
+\subsection{The tissue is not the algorithm}
+
+The molecular machineries implementing C2 differ vastly
+across tissues: NMDA receptors (neural), RANKL/OPG (bone),
+eNOS (vascular), AID somatic hypermutation (immune),
+keratinocyte Ca$^{2+}$ (skin), HGF (liver), EPO (marrow),
+FSH receptors (reproductive)---completely different
+molecular pathways implementing the same equation.
+The substrate determines the material constants
+($\eta$, $Z_0$); the equation is dictated by physics.
+
+\subsection{Objective function for viability}
+
+The $\Gamma$-framework supplies a \emph{physical}
+objective function:
+$\mathcal{A} = \int_0^T \sum_i \Gamma_i^2\,
+P_{\text{in},i}\,dt$.
+Any system whose $\mathcal{A}$ exceeds the viability
+bound is physically excluded.
+This is a constraint on what \emph{can} exist, not
+an explanation of what \emph{does} exist.
+
+\subsection{Sex as a boundary condition}
+
+Sex does not alter C1--C3.
+The hypothalamic--pituitary--gonadal (HPG) axis sets
+sex-specific $Z_{\text{setpoint}}$ values:
+testosterone raises $\eta_{\text{muscle}}$;
+oestrogen modulates $Z_{\text{adipose}}$ and
+$Z_{\text{bone}}$ (menopause $\equiv Z_{\text{bone}}
+\!\uparrow$, $\Gamma_{\text{bone}}\!\uparrow$);
+pre-menopausal oestrogen maintains lower
+$\Gamma_{\text{vasc}}$ via enhanced endothelial C2.
+Sex is a parametric shift in boundary conditions,
+not a different dynamical law.
+
+
+% ============================================================
+%  SECTION 5 — QUANTITY INVENTORY
 % ============================================================
 \section{Derived Quantities}
 \label{sec:quantities}
 
 Table~\ref{tab:quantities} lists every named quantity
-in the $\Gamma$-Net framework, its defining equation,
-physical interpretation, and the companion paper where
-it first appears.
+in the $\Gamma$-Net framework, ordered by the paper
+where it first appears.
 
 \begin{table*}[t]
-\caption{Complete quantity inventory of the $\Gamma$-Net framework.}
+\caption{Complete quantity inventory of the $\Gamma$-Net
+framework.}
 \label{tab:quantities}
 \begin{ruledtabular}
 \begin{tabular}{llllc}
-\textbf{Symbol} & \textbf{Name} & \textbf{Definition} & \textbf{Interpretation} & \textbf{Paper} \\
+\textbf{Symbol} & \textbf{Name} & \textbf{Definition}
+  & \textbf{Interpretation} & \textbf{Paper} \\
 \hline
 $\Gamma_i$ & Reflection coefficient
-  & $\frac{Z_{\text{load},i}-Z_{\text{source},i}}{Z_{\text{load},i}+Z_{\text{source},i}}$
+  & $\frac{Z_{\text{load},i}-Z_{\text{source},i}}
+    {Z_{\text{load},i}+Z_{\text{source},i}}$
   & Mismatch at interface $i$ & 0 \\[4pt]
-%
 $T_i$ & Transmission coefficient
   & $1 - \Gamma_i^2$
   & Fraction of power delivered & 0 \\[4pt]
-%
 $\mathcal{A}$ & Reflection action
   & $\int_0^T\!\sum_i \Gamma_i^2 P_{\text{in},i}\,dt$
   & Total wasted energy & 0 \\[4pt]
-%
 $A_{\text{imp}}$ & Improvable action
   & $\mathcal{A} - A_{\text{cut}}$
   & Reducible by C2 remodeling & 1 \\[4pt]
-%
-$A_{\text{cut}}$ & Irreducible (cutoff) action
-  & $A_{\text{cut}} = \sum_{k>K^*}\!\Gamma_k^2$
+$A_{\text{cut}}$ & Irreducible action
+  & $\sum_{k>K^*}\!\Gamma_k^2$
   & Topological cost immune to C2 & 1 \\[4pt]
-%
-$D_Z$ & Impedance debt
-  & $\int_0^{T_{\text{wake}}}\!|\Gamma|^2 P_{\text{in}}\,dt$
-  & Cumulative mismatch; cleared by sleep & 3 \\[4pt]
-%
-$D_n,\,D_v$ & Neural / vascular debt
-  & $D_Z = D_n + D_v$
-  & Dual-network decomposition & 3 \\[4pt]
-%
-$H$ & Health index
-  & $\prod_i(1-\Gamma_i^2)$
-  & Whole-body transmission efficiency & 5 \\[4pt]
-%
-$\Sigma\Gamma^2$ & Total mismatch energy
-  & $\sum_i \Gamma_i^2(t)$
-  & Instantaneous network mismatch & 3 \\[4pt]
-%
-\multirow{2}{*}{Lifecycle ODE} & \multirow{2}{*}{Lifecycle equation}
-  & $\frac{d(\Sigma\Gamma^2)}{dt} = -\eta\,\Sigma\Gamma^2$
-  & \multirow{2}{*}{Cognition bathtub curve} & \multirow{2}{*}{3} \\
-  & & $\;+\gamma\,\Gamma_{\text{env}} + \delta\,D(t)$  & & \\[4pt]
-%
-$\Phi_{\text{meta}}$ & Meta-reflection coefficient
-  & $\frac{Z_{\text{obs}}-Z_{\text{act}}}{Z_{\text{obs}}+Z_{\text{act}}}$
-  & Self-monitoring; consciousness marker & 4 \\[4pt]
-%
+$\Phi_{\text{meta}}$ & Consciousness index
+  & $1 - \Gamma_{\text{meta}}^2$
+  & Self-referential matching & 1 \\[4pt]
 $\mathcal{S}$ & Null space (``soul'')
   & $\ker(\partial Z / \partial t)$
-  & Impedances immune to all experience & 4 \\[4pt]
-%
+  & Impedances immune to experience & 1 \\[4pt]
 $\beta$ & Murray bifurcation ratio
   & $2^{1/3} \approx 1.26$
-  & Optimal branch radius ratio & 1 \\[4pt]
-%
+  & Optimal branch radius ratio & 2 \\[4pt]
 $\Omega$ & Dual-network overhead
   & $\ge 1$
-  & Packing cost of two trees in one volume & 1 \\
+  & Packing cost of two trees & 2 \\[4pt]
+$H$ & Health index
+  & $\prod_i(1-\Gamma_i^2)$
+  & Whole-body transmission & 2 \\[4pt]
+$D_Z$ & Impedance debt
+  & $\int_0^{T_{\text{wake}}}\!|\Gamma|^2
+    P_{\text{in}}\,dt$
+  & Cumulative mismatch; cleared by sleep & 3 \\[4pt]
+\multirow{2}{*}{Lifecycle} & \multirow{2}{*}{Lifecycle ODE}
+  & $\frac{d(\Sigma\Gamma^2)}{dt}
+    = -\eta\,\Sigma\Gamma^2$
+  & \multirow{2}{*}{Cognition bathtub curve}
+  & \multirow{2}{*}{3} \\
+  & & $\;+\gamma\,\Gamma_{\text{env}}
+    + \delta\,D(t)$  & & \\[4pt]
+$\Pi_\Gamma$ & Gamma-Pain Index
+  & $w_n\Gamma_n^2 + w_v\Gamma_v^2
+    + w_D\frac{dD_Z}{dt}$
+  & Consciousness-independent pain & 4 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
 
 
 % ============================================================
-%  SECTION 4 — SERIES MAP
+%  SECTION 6 — THEOREM DIRECTORY
 % ============================================================
-\section{Series Architecture}
-\label{sec:series}
+\section{Theorem Directory}
+\label{sec:directory}
 
-The five companion papers form a logical chain:
-
-\begin{enumerate}
-  \item \textbf{Paper~1: Topology and Fractal Cost}~\cite{Paper1}.
-    Proves the irreducibility theorem
-    ($\mathcal{A} = A_{\text{imp}} + A_{\text{cut}}$,
-    $A_{\text{cut}} > 0$), derives relay-node hierarchies,
-    the Murray bifurcation ratio $\beta = 2^{1/3}$,
-    Kleiber's 3/4-power metabolic scaling, joint impedance
-    transformers, and dual-network packing overhead~$\Omega$.
-
-  \item \textbf{Paper~2: Dual-Network Organ Health}~\cite{Paper2}.
-    Applies MRP to vascular networks; derives Murray's law
-    from $\Gamma$-minimisation; defines the dual-network
-    health index $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$;
-    models five vascular diseases as impedance failure modes.
-    Validated against 12/12 published clinical benchmarks with
-    100\% pass rate.
-
-  \item \textbf{Paper~3: Temporal Dynamics}~\cite{Paper3}.
-    Introduces impedance debt $D_Z$; derives sleep as
-    $D_Z$-discharge; derives the lifecycle equation governing
-    cognition from birth to death; models emotion as
-    $\Gamma$-dynamics readout; derives aging as Arrhenius
-    fatigue; explains aging pain immunity via slow $Z$-drift.
-
-  \item \textbf{Paper~4: Memory, Consciousness, Nociception}~\cite{Paper4}.
-    Defines memory as $dZ/dt$, consciousness as closed-loop
-    $\Phi_{\text{meta}}$, and the null space $\mathcal{S}$
-    (``soul'') as $\ker(\partial Z/\partial t)$.
-    Proves the Television Theorem distinguishing open-loop
-    from closed-loop systems.
-
-  \item \textbf{Paper~5: Clinical Validation}~\cite{Paper5}.
-    Proves C2 governs all 29~tissue types (not just neurons);
-    validates against NHANES ($n = 49{,}774$, zero fitted
-    parameters, 7/7~organs significant);
-    reports all-cause mortality $C = 0.70$,
-    Q1-vs-Q4 risk ratio $= 6.89\times$;
-    provides sex-as-boundary-condition analysis.
-\end{enumerate}
-
-\noindent
-Papers~1--4 are primarily theoretical with internal
-computational verification.
-Paper~5 breaks the circularity with external epidemiological
-data.
-
-
-% ============================================================
-%  SECTION 5 — VERIFICATION MATRIX
-% ============================================================
-\section{Verification and Validation Matrix}
-\label{sec:vv}
-
-Table~\ref{tab:vv} classifies every major claim by its
-current evidence status.
-Four levels are used:
-
-\begin{description}
-  \item[IC] \textbf{Internal consistency.}
-    Verified within the ALICE simulation engine.
-    Self-confirming; does not constitute independent evidence.
-  \item[LIT] \textbf{Literature-supported.}
-    Prediction matches published experimental or clinical
-    data not used in model construction.
-  \item[EXT] \textbf{Externally validated.}
-    Tested against independent dataset (NHANES) with
-    zero fitted parameters and hash-locked predictions.
-  \item[UT] \textbf{Untested.}
-    Falsifiable prediction not yet confronted with data.
-\end{description}
+The five companion papers form a deductive chain
+radiating outward from C1/C2/C3.
+Each paper occupies a unique mathematical role.
+Table~\ref{tab:directory} provides the complete map.
 
 \begin{table*}[t]
-\caption{Verification and validation matrix.
-IC = internal consistency;
-LIT = literature-supported;
-EXT = externally validated (NHANES);
-UT = untested prediction.}
-\label{tab:vv}
-\begin{ruledtabular}
-\begin{tabular}{llcccc}
-\textbf{Claim} & \textbf{Paper} & \textbf{IC} & \textbf{LIT} & \textbf{EXT} & \textbf{UT} \\
-\hline
-\multicolumn{6}{l}{\textit{Topology and scaling (Paper~1)}} \\
-Relay nodes emerge from MRP & 1 & $\checkmark$ & & & \\
-$\tau_{\text{conv}} \propto N^{-0.46}$ & 1 & $\checkmark$ & & & \\
-$A_{\text{cut}} > 0$ (irreducibility) & 1 & $\checkmark$ & & & \\
-Murray ratio $\beta = 2^{1/3}$ & 1 & $\checkmark$ & $\checkmark$ & & \\
-Kleiber's law $B \propto M^{3/4}$ & 1 & $\checkmark$ & $\checkmark$ & & \\
-Joint = quarter-wave transformer & 1 & $\checkmark$ & & & $\checkmark$ \\
-$A_{\text{cut}} \propto M^{2/3}$ & 1 & $\checkmark$ & $\checkmark$ & & \\
-\hline
-\multicolumn{6}{l}{\textit{Dual-network organ health (Paper~2)}} \\
-Murray's law from $\Gamma$-minimisation & 2 & $\checkmark$ & $\checkmark$ & & \\
-Dual-network health $H=(1{-}\Gamma_n^2)(1{-}\Gamma_v^2)$ & 2 & $\checkmark$ & & $\checkmark$ & \\
-Vascular disease as $Z$-mismatch & 2 & $\checkmark$ & $\checkmark$ & & \\
-12/12 clinical calibration tests & 2 & & $\checkmark$ & & \\
-\hline
-\multicolumn{6}{l}{\textit{Temporal dynamics (Paper~3)}} \\
-Sleep = $D_Z$ discharge & 3 & $\checkmark$ & $\checkmark$ & & \\
-Jellyfish sleep without brain & 3 & & $\checkmark$ & & \\
-Brain required for thermal management & 3 & $\checkmark$ & $\checkmark$ & & \\
-Lifecycle bathtub curve & 3 & $\checkmark$ & $\checkmark$ & & \\
-Yerkes--Dodson as impedance optimum & 3 & $\checkmark$ & $\checkmark$ & & \\
-Aging = Arrhenius fatigue on $Z$ & 3 & $\checkmark$ & & & \\
-Aging pain immunity (slow drift) & 3 & $\checkmark$ & & & $\checkmark$ \\
-Infant sleep duration vs $D_Z$ & 3 & $\checkmark$ & $\checkmark$ & & \\
-\hline
-\multicolumn{6}{l}{\textit{Memory, consciousness, nociception (Paper~4)}} \\
-Memory = $dZ/dt$ & 4 & $\checkmark$ & & & \\
-$\Phi_{\text{meta}}$ as consciousness marker & 4 & $\checkmark$ & & & $\checkmark$ \\
-Null space $\mathcal{S} = \ker(\partial Z/\partial t)$ & 4 & $\checkmark$ & & & \\
-Television Theorem (open/closed loop) & 4 & $\checkmark$ & & & $\checkmark$ \\
-Thermal hierarchy: PFC fails before V1 & 4 & $\checkmark$ & $\checkmark$ & & $\checkmark$ \\
-\hline
-\multicolumn{6}{l}{\textit{Clinical validation (Paper~5)}} \\
-C2 = 29 tissue remodeling laws & 5 & & $\checkmark$ & & \\
-NHANES 7/7 organ AUC significant & 5 & & & $\checkmark$ & \\
-Endocrine AUC = 0.823 & 5 & & & $\checkmark$ & \\
-All-cause mortality $C = 0.70$ & 5 & & & $\checkmark$ & \\
-Q1 vs Q4 mortality ratio = $6.89\times$ & 5 & & & $\checkmark$ & \\
-Sex as boundary condition on $Z_{\text{setpoint}}$ & 5 & & $\checkmark$ & $\checkmark$ & \\
-Cardiac AUC gain $+0.166$ from vascular input & 5 & & & $\checkmark$ & \\
-$H$ decreases with disease burden ($\rho = -0.378$) & 5 & & & $\checkmark$ & \\
-\end{tabular}
-\end{ruledtabular}
-\end{table*}
-
-
-% ============================================================
-%  SECTION 6 — PREDICTION ROADMAP
-% ============================================================
-\section{Prediction Roadmap}
-\label{sec:roadmap}
-
-Table~\ref{tab:predictions} organises the falsifiable
-predictions of the $\Gamma$-Net framework by experimental
-modality, enabling independent groups to test specific
-claims without needing the full simulation engine.
-
-\begin{table*}[t]
-\caption{Falsifiable prediction roadmap.
-Each prediction is testable with existing technology.}
-\label{tab:predictions}
-\begin{ruledtabular}
-\begin{tabular}{lllc}
-\textbf{Domain} & \textbf{Prediction} & \textbf{Method} & \textbf{Paper} \\
-\hline
-\multicolumn{4}{l}{\textit{Physiological}} \\
-& PFC fails before V1 under hyperthermia
-  & Controlled heating + fMRI/EEG & 4 \\
-& Vascular $\Gamma$ correlates with PWV / elastography
-  & BIS + arterial tonometry & 2 \\
-& Joint cartilage $\approx$ quarter-wave transformer
-  & Ultrasound impedance spectroscopy & 1 \\
-& Bone-on-bone OA raises local $\Gamma^2$ measurably
-  & Intra-articular force sensors & 1 \\
-\hline
-\multicolumn{4}{l}{\textit{Sleep \& circadian}} \\
-& Cross-species $D_{\text{thermal}}/D_{\text{micro}}$ ratio
-  predicts NREM/REM partition
-  & Polysomnography + metabolic calorimetry & 3 \\
-& Sleep rebound magnitude $\propto$ wake-duration $D_Z$
-  & EEG slow-wave power after controlled deprivation & 3 \\
-& Jellyfish sleep duration scales with $\kappa_{\text{eff}}$
-  & Temperature-controlled aquarium experiments & 3 \\
-\hline
-\multicolumn{4}{l}{\textit{Cognitive / developmental}} \\
-& Infantile amnesia offset tracks myelination Z-change
-  & Retrospective longitudinal EEG + structural MRI & 3 \\
-& Yerkes--Dodson peak shifts with $\eta$ (skill level)
-  & Psychophysics + cortisol monitoring & 3 \\
-& Aging pain immunity: slow $Z$-drift below pain threshold
-  & Quantitative sensory testing, longitudinal & 3 \\
-\hline
-\multicolumn{4}{l}{\textit{Clinical / epidemiological}} \\
-& $\Gamma$-vector predicts disease in non-US populations
-  & NHANES-equivalent cohorts (UK Biobank, Taiwan MJ) & 5 \\
-& $H$ predicts surgical outcome / length of stay
-  & Prospective peri-operative cohort & 5 \\
-& Network propagation: renal $\Gamma$ predicts cardiac events
-  & Longitudinal cardiorenal registry & 5 \\
-\hline
-\multicolumn{4}{l}{\textit{Thermoregulation / comparative}} \\
-& $T_c(K)$: no high-$K$ organism sustained below $T_c$ with cognition
-  & Comparative physiology database + torpor EEG & 1 \\
-& Hibernation EEG power scales with $K \cdot \Gamma^2(T)$
-  & Cross-species torpor polysomnography & 1 \\
-& Nocturnal shelter-seeking scales with $K$
-  & Comparative ethology $\times$ thermoregulation data & 1 \\
-\end{tabular}
-\end{ruledtabular}
-\end{table*}
-
-
-% ============================================================
-%  SECTION 7 — INTERFACE SCALE TABLE (SUMMARY)
-% ============================================================
-\section{The Interface Scale Table}
-\label{sec:scales}
-
-The same equation ($\Gamma$, C1, C2) applies across seven
-distinct physical domains and 14~orders of magnitude in
-spatial scale:
-
-\begin{table}[h]
-\caption{Representative interfaces grouped by physical domain.
-Full table with impedance definitions: Paper~5~\cite{Paper5}.}
-\label{tab:scales}
-\begin{ruledtabular}
-\begin{tabular}{llc}
-\textbf{Domain} & \textbf{Interface} & \textbf{Scale} \\
-\hline
-Electrical   & Synapse / ion channel       & 25\,nm--1\,$\mu$m \\
-Electrical   & Power-grid transformer      & 10\,m \\
-Hydraulic    & Arteriole (Poiseuille)      & 100\,$\mu$m \\
-Hydraulic    & Whole-body vascular         & 1\,m \\
-Acoustic     & Tissue boundary (ultrasound)& 1\,mm \\
-Acoustic     & Submarine hull              & 10\,m \\
-Electromagnetic & Optical fibre splice     & 100\,$\mu$m \\
-Electromagnetic & Ionospheric waveguide    & $10^6$\,m \\
-Mechanical   & Bone--cartilage joint       & 10\,cm \\
-Mechanical   & Tendon--muscle junction     & 1\,cm \\
-Thermal      & Brain thermal boundary      & 10\,cm \\
-Thermal      & Skin--air interface         & 1\,m \\
-Chemical     & Organ parenchyma            & 10\,cm \\
-\end{tabular}
-\end{ruledtabular}
-\end{table}
-
-\noindent
-At every scale, the physics is identical: only the
-definition of $Z$ changes (electrical, acoustic,
-mechanical, hydraulic, thermal, electromagnetic,
-chemical).
-The universality is not an analogy; it is the same
-theorem applied to different media.
-
-Moreover, every row in the table participates in the same
-closed loop: \textbf{perception}
-($x_{\text{in}}$ measurement) $\to$
-\textbf{error} ($\Gamma$ mismatch) $\to$
-\textbf{compensation} (C2: $\Delta Z =
--\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$) $\to$
-\textbf{re-perception} (updated $\Gamma'$ and
-$x_{\text{in}}'$).
-This perception--compensation cycle is the operational
-meaning of C1--C2 at every interface; Paper~5
-elaborates it across all seven domains.
-
-% ============================================================
-%  SECTION 8 — TWENTY-NINE TISSUES (SUMMARY TABLE)
-% ============================================================
-\section{The Twenty-Nine C2 Networks}
-\label{sec:twentynine}
-
-Paper~5 proves that C2 (Eq.~\ref{eq:c2}) recovers 29
-independently discovered tissue-remodeling laws when the
-generic signals $(x_{\text{in}}, x_{\text{out}})$ are
-identified with tissue-specific physical quantities.
-Table~\ref{tab:twentynine} provides the mapping.
-
-\begin{table*}[t]
-\caption{The 29 $\Gamma$-networks.
-Each row maps C2 to a known remodeling law by identifying
-$x_{\text{in}}$, $x_{\text{out}}$, and $Z$.
-Full derivations: Paper~5~\cite{Paper5}.}
-\label{tab:twentynine}
+\caption{Theorem directory: the deductive chain from
+C1/C2/C3 to all major results.
+Each row is a theorem or major result, with its paper
+of origin and the constraints required for its derivation.
+Theorems are grouped by paper and by mathematical role.}
+\label{tab:directory}
 \begin{ruledtabular}
 \begin{tabular}{lllll}
-\textbf{Tissue} & \textbf{Known law}
-  & $x_{\text{in}}$ & $x_{\text{out}}$ & $Z$ \textbf{definition} \\
+\textbf{Paper} & \textbf{Role} & \textbf{Theorem / Result}
+  & \textbf{Requires} & \textbf{Section} \\
 \hline
-Neural        & Hebb's law (1949)              & Pre-synaptic spike & Post-synaptic EPSP & $R_m + 1/j\omega C_m$ \\
-Vascular      & Glagov remodeling (1987)       & Wall shear stress  & Endothelial response & $P/Q$ (Poiseuille) \\
-Skeletal      & Wolff's law (1892)             & Applied load       & Bone strain        & Force/velocity \\
-Muscular      & Davis's law (1867)             & Neural drive       & Muscle tension     & Stiffness \\
-Immune        & Clonal selection               & Antigen (APC)      & T/B cell activation & Receptor affinity \\
-Epithelial    & Keratinisation                 & External friction  & Tissue deformation & Thermal+mechanical $Z$ \\
-Pulmonary     & Altitude acclimatisation       & Ventilation demand & Alveolar expansion & $P_{\text{aw}}/\dot{V}$ \\
-GI tract      & Intestinal adaptation          & Luminal content    & Epithelial uptake  & Absorption $Z$ \\
-Endocrine     & Receptor regulation            & Hormone conc.      & Intracellular resp.& $1/K_d$ \\
-Lymphatic     & Reactive hypertrophy           & Tissue load        & Lymph node response& Drainage $Z$ \\
-Renal         & TG feedback                    & Macula densa signal& Arteriolar response& $P_{\text{glom}}/Q_{\text{filt}}$ \\
-Hepatic       & Liver regeneration             & Portal HGF         & Hepatocyte prolif. & Clearance $Z$ \\
-Connective    & Tendon remodeling              & Mechanical strain  & Fibroblast response& $EA/L$ \\
-Adipose       & Leptin signaling               & Insulin signal     & Adipocyte response & Storage $Z$ \\
-Hematopoietic & Erythropoiesis                 & EPO signal         & Erythroid response & $P_{O_2}/Q_{O_2}$ \\
-Reproductive  & Follicular selection           & Gonadotropin       & Granulosa/germ cell& $1/(N_R K_a)$ \\
-Cardiac       & Laplace--Starling              & Wall stress $\sigma$ & Myocardial strain $\varepsilon$ & Chamber compliance \\
-Brain (reg.)  & Baroreflex resetting           & Sensory afferent   & Motor efferent     & Controller gain \\
-Ocular        & IOP homeostasis                & Aqueous pressure   & Trabecular drainage& $P_{\text{IOP}}/Q_{\text{aq}}$ \\
-Auditory      & Tonotopic plasticity           & Sound pressure     & Hair cell response & Cochlear $Z$ \\
-Vestibular    & VOR adaptation                 & Angular velocity   & Oculomotor response& Vestibular gain \\
-Olfactory     & Receptor turnover              & Odorant conc.      & ORN response       & Receptor $1/K_d$ \\
-Dental        & Tertiary dentinogenesis        & Thermal/mech.\ insult & Odontoblast resp.& Dentin $Z$ \\
-Enteric       & Enteric plasticity             & Luminal distension & ENS firing         & Gut wall compliance \\
-Autonomic     & Sympathovagal remod.           & Baroreceptor input & Effector output    & Sympathovagal $Z$ \\
-Pancreatic    & $\beta$-cell compensation      & Glucose load       & Insulin secretion  & $1/(N_\beta \cdot k_{\text{sec}})$ \\
-CSF           & Choroid regulation             & CSF pressure       & Production rate    & $P_{\text{CSF}}/Q_{\text{CSF}}$ \\
-Brain (func.) & Cortical map plasticity        & Afferent frequency & Cortical area      & Synaptic $Z$ matrix \\
-Cartilage     & \textit{C2 null} ($\eta\approx 0$) & Mechanical load & (negligible)       & $H_A A/h$ \\
+\multicolumn{5}{l}{\textit{Paper~1: Existence and
+Irreducibility}} \\
+& Existence &
+  $\mathcal{A} = \Aimp + \Acut$,\;$\Acut > 0$
+  & C1, C2, $K$-dim cascade
+  & P1 \S2--3 \\
+& Topology &
+  Same-$K$ clustering, relay hierarchy
+  & $\Acut > 0$, C2
+  & P1 \S4--5 \\
+& Convergence &
+  Brain as unique convergence structure
+  & Relay hierarchy
+  & P1 \S6 \\
+& Memory &
+  Memory $\equiv dZ/dt$ (three regimes)
+  & C2
+  & P1 \S8 \\
+& Consciousness &
+  $\Phi_{\text{meta}} = 1 - \Gamma_{\text{meta}}^2$;
+  Television Theorem
+  & C1, C2, feedback
+  & P1 \S9--10 \\
+& Soul &
+  $\mathcal{S} = \ker(\partial Z/\partial t)$;
+  four laws of null space
+  & C2 uniqueness
+  & P1 \S11 \\
+& Nociception &
+  Three-layer pain; $\Pi_\Gamma$ index
+  & C1, C2, SNR
+  & P1 \S13--14 \\
+\hline
+\multicolumn{5}{l}{\textit{Paper~2: Geometric
+Quantification}} \\
+& Vascular &
+  Murray's law from $\Gamma$-minimisation;
+  $\beta = 2^{1/3}$
+  & C2, Poiseuille $Z$
+  & P2 \S2--4 \\
+& Scaling &
+  $\Acut \propto M^{2/3}$;\;Kleiber
+  $B \propto M^{3/4}$
+  & $\Acut$, Murray, $\Omega$
+  & P2 \S7--8 \\
+& Dual-network &
+  $H = (1{-}\Gamma_n^2)(1{-}\Gamma_v^2)$;\;
+  four failure modes
+  & C1, C2, two buses
+  & P2 \S5--6 \\
+& Universality &
+  Interface scale table (14 orders of magnitude)
+  & $\Gamma$ universality (Thm~\ref{thm:gamma})
+  & P2 \S9 \\
+\hline
+\multicolumn{5}{l}{\textit{Paper~3: Temporal
+Unification}} \\
+& Equivalence &
+  C2 $\equiv$ 29 tissue-remodeling laws
+  & C2, tissue substitutions
+  & P3 \S2 \\
+& Sleep &
+  Sleep $=$ $D_Z$ discharge;\;gate-leak inequality
+  & C2, $D_Z$, Johnson--Nyquist
+  & P3 \S3--5 \\
+& Lifecycle &
+  $\frac{d(\Sigma\Gamma^2)}{dt}
+  = -\eta\Sigma\Gamma^2 + \gamma\Gamma_{\text{env}}
+  + \delta D$
+  & C2, $D_Z$, Arrhenius
+  & P3 \S6 \\
+& Aging &
+  Coffin--Manson fatigue;\;death as
+  $\Gamma^2_{\text{basal}} \ge 1$
+  & C2, null space, $D_Z$
+  & P3 \S7 \\
+& Emotion &
+  Dopamine $=$ RPE;\;Yerkes--Dodson;\;curiosity
+  & C2, $D_Z$
+  & P3 \S8 \\
+& Morphogenesis &
+  Dual-field PDE
+  ($\partial Z/\partial t$, $\partial\rho/\partial t$)
+  & C2, reaction--diffusion
+  & P3 \S9 \\
+\hline
+\multicolumn{5}{l}{\textit{Paper~4: Topological
+Pathology}} \\
+& E0 cardio &
+  HTN, MI, aortic stenosis from topology
+  & C1/C2/C3, GammaTopology
+  & P4 \S2 \\
+& E0 neural &
+  ALS, stroke, PTSD, phantom limb from topology
+  & C1/C2/C3, GammaTopology
+  & P4 \S3 \\
+& Coupled &
+  Five-organ cascade;\;three recovery regimes
+  & C2, coupling matrix
+  & P4 \S4--5 \\
+& Metabolic &
+  T2DM six-channel hexagonal deadlock
+  & C2, bifurcation
+  & P4 \S6 \\
+& Necrosis &
+  Tissue necrosis as substrate collapse
+  & $D_Z > D_{\text{repair}}^{\max}$
+  & P4 \S7 \\
+& Sleep path. &
+  Insomnia / narcolepsy / hypersomnia
+  & Gate-leak inequality
+  & P4 \S8 \\
+\hline
+\multicolumn{5}{l}{\textit{Paper~5: Full-System
+Verification}} \\
+& NHANES &
+  7/7 organs AUC significant;\;$C = 0.70$;\;
+  $6.89\times$ risk ratio
+  & $\Gamma$ universality, $H$
+  & P5 \S2 \\
+& Propagation &
+  Cross-organ AUC gain (cardiac $+0.166$)
+  & Network coupling
+  & P5 \S3 \\
+& Blueprints &
+  29 tissue blueprints;\;278 nodes, 426 edges
+  & C1/C2/C3, $K$-cascade
+  & P5 \S4 \\
+& Ablation &
+  C2-on/C2-off pincer tests
+  & E0 emergence
+  & P5 \S5 \\
+& Predictions &
+  19+ falsifiable predictions (unified list)
+  & Papers 1--4
+  & P5 \S6 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
 
+\subsection{The deductive chain}
 
-% ============================================================
-%  SECTION 9 — TISSUE BLUEPRINTS
-% ============================================================
-\section{Tissue Blueprints: From Table to Topology}
-\label{sec:blueprints}
+The logical structure is a concentric expansion:
 
-Table~\ref{tab:twentynine} maps C2 to 29~remodeling laws,
-but it does not specify \emph{how} those tissues are
-physically wired.
-This section defines \emph{tissue blueprints}: concrete
-\texttt{GammaTopology} instances in which every node is a
-\texttt{GammaNode} with a biologically assigned mode count~$K$,
-and every edge is a \texttt{MulticoreChannel} enforcing C1/C2/C3
-at each tick.
-
-A blueprint contains:
-\begin{enumerate}
-  \item A set of $\texttt{GammaNode}$s with tissue-appropriate
-    $\texttt{TissueType}$ (which sets~$K$, $Z_{\text{mean}}$,
-    and myelination).
-  \item A wiring diagram: directed edges
-    $(\text{source}, \text{target})$.
-  \item A factory function returning a ready-to-run
-    \texttt{GammaTopology}.
-\end{enumerate}
-
-\noindent
-Diseases are \emph{not coded} in the blueprint.
-Disease $=$ perturbation of initial conditions
-(impedance shift, edge removal, or stimulus pattern)
-applied to a healthy blueprint, then evolved via
-\texttt{GammaTopology.tick()}.
-
-\subsection{Cardiovascular blueprint}
-
-Eleven nodes span four $K$-levels:
-
-\begin{center}
-\begin{tabular}{llc}
-\hline
-\textbf{Node} & \textbf{TissueType} & $K$ \\
-\hline
-SA node, AV node, LV, RV,         & Cardiac Purkinje      & 4 \\
-\quad aortic valve, pulm.\ valve,  &                       &   \\
-\quad aorta, coronary              &                       &   \\
-Arterioles                          & Vasc.\ smooth muscle  & 2 \\
-Pulmonary artery                    & Autonomic preganglionic & 2 \\
-Capillaries                         & Endothelial           & 1 \\
-\hline
-\end{tabular}
-\end{center}
-
-Fourteen directed edges connect the conduction system
-(SA$\to$AV$\to$LV/RV), left-heart systemic path
-(LV$\to$valve$\to$aorta$\to$coronary/arterioles$\to$capillaries),
-right-heart pulmonary path, and return paths.
-The dimensional cascade $K{=}4 \to 2 \to 1$ guarantees
-$\Acut > 0$ (Paper~1 irreducibility theorem),
-physically representing the loss of pulsatile modes as
-blood flows from elastic arteries to resistance vessels.
-
-\subsection{Neural blueprint}
-
-Nine nodes span four $K$-levels:
-
-\begin{center}
-\begin{tabular}{llc}
-\hline
-\textbf{Node} & \textbf{TissueType} & $K$ \\
-\hline
-Cortex (motor, sensory), thalamus  & Cortical pyramidal    & 5 \\
-Spinal (motor, sensory),           & Motor $\alpha$ / Sensory A$\beta$  & 3 \\
-\quad motor neuron, sensory neuron &                       &   \\
-Nociceptor A$\delta$               & Pain A$\delta$ fibre  & 2 \\
-Nociceptor C                       & Pain C fibre          & 1 \\
-\hline
-\end{tabular}
-\end{center}
-
-Twelve directed edges form descending motor
-(cortex$\to$thalamus$\to$spinal$\to$motor neuron),
-ascending sensory
-(sensory neuron$\to$spinal$\to$thalamus$\to$cortex),
-pain pathway
-(C fibre$\to$A$\delta$$\to$spinal),
-and sensorimotor cross-connections.
-The cascade $K{=}5 \to 3 \to 2 \to 1$ defines
-the \emph{neural cable degradation spectrum}:
 \begin{center}
 \begin{tabular}{cl}
+\textbf{Layer} & \textbf{Content} \\
 \hline
-$\Gamma$ & \textbf{Clinical correlate} \\
-\hline
-$\approx 0.0$ & Normal conduction (healthy match) \\
-$\approx 0.1$ & Fever, neuroinflammation (thermal noise $\uparrow$) \\
-$\approx 0.3$ & PTSD (structurally locked $\varepsilon$; dormant until triggered, Paper~4, Sec.~7.10) \\
-$\approx 0.7$ & ALS (progressive channel collapse) \\
-$\to 1.0$     & Phantom limb pain (open-circuit echo) \\
-\hline
+0 & First Law $\to$ $\Gamma$, C1, MRP, C2, C3
+  \quad(this paper) \\
+1 & C2 on finite network $\to$ $\Acut > 0$
+  $\to$ topology, brain, mind
+  \quad(Paper~1) \\
+2 & C2 on branching geometry $\to$ Murray,
+  Kleiber, $H$
+  \quad(Paper~2) \\
+3 & C2 $\equiv$ 29 laws $\to$ $D_Z$, sleep,
+  lifecycle, aging
+  \quad(Paper~3) \\
+4 & Topology + perturbation $\to$ disease
+  emergence (E0)
+  \quad(Paper~4) \\
+5 & $\Gamma$-vector + NHANES $\to$ validation,
+  blueprints, predictions
+  \quad(Paper~5) \\
 \end{tabular}
 \end{center}
 
 \noindent
-These are not disease models; they are predictions of what
-$\Gamma$-values \emph{should} emerge from topology perturbations
-alone.
-Paper~1 verifies the topology-level physics;
-Paper~5 verifies the disease-level emergence.
+Each layer uses only C1/C2/C3 plus the results of
+inner layers.
+No layer imports concepts from an outer layer.
+This unidirectional dependency is the structural
+guarantee against circularity.
 
-\subsection{Complete tissue atlas}
-\label{sec:tissue-atlas}
-
-The cardiovascular and neural blueprints above are two of
-29~organ-system blueprints implemented in
-\texttt{BLUEPRINT\_REGISTRY}.
-Table~\ref{tab:atlas} lists all 29, totalling
-$\sim\!217$~nodes and $\sim\!242$~directed edges.
-Every blueprint passes C1 energy conservation at every edge
-and C2 physics verification ($\Aimp$~non-increasing,
-$\Acut$~invariant) under 100~ticks of evolution.
-
-\begin{table}[h]
-\caption{\label{tab:atlas}Complete tissue blueprint atlas.
-Nodes~($N$), edges~($E$), and mode count range are listed
-for each organ system.}
-\begin{ruledtabular}
-\begin{tabular}{llccl}
-\textbf{System} & $N$ & $E$ & $K$-range & \textbf{Key feature} \\
-\hline
-Cardiovascular   & 11 & 13 & 1--4 & Pulsatile cascade \\
-Neural           &  9 & 11 & 1--5 & Cable degradation \\
-Pulmonary        &  7 &  7 & 1--3 & Gas exchange \\
-Renal            &  9 &  9 & 1--3 & TG feedback \\
-Hepatic          &  7 &  7 & 1--3 & Dual blood supply \\
-Gastrointestinal &  8 & 10 & 1--3 & Mucosal barrier \\
-Endocrine        &  8 & 11 & 1--3 & Negative feedback \\
-Immune           &  7 &  9 & 1--3 & Innate/adaptive \\
-Lymphatic        &  7 &  7 & 1--2 & One-way drainage \\
-Musculoskeletal  &  7 &  8 & 1--3 & Motor unit \\
-Skeletal         &  6 &  7 & 1--2 & Wolff's law \\
-Epithelial       &  8 &  8 & 1--2 & Barrier layers \\
-Connective       &  6 &  6 & 1--2 & ECM turnover \\
-Adipose          &  6 &  7 & 1--2 & Metabolic storage \\
-Hematopoietic    &  9 &  9 & 1--3 & EPO feedback \\
-Cartilage        &  4 &  4 & 1   & $\eta \approx 0$ (avascular) \\
-Reproductive     &  6 &  7 & 1--2 & Hormonal axis \\
-Brain regulatory &  7 &  8 & 2--3 & Autonomic control \\
-Vascular         & 11 & 11 & 1--3 & Arterial tree \\
-Ocular           &  9 &  9 & 1--3 & IOP regulation \\
-Auditory         &  7 &  7 & 1--3 & Tonotopic cascade \\
-Vestibular       &  6 &  6 & 1--2 & Balance loops \\
-Olfactory        &  4 &  4 & 1   & Receptor turnover \\
-Dental           &  7 &  7 & 1--2 & Pulp--dentin axis \\
-Enteric          &  7 &  7 & 1--3 & Gut nervous system \\
-Autonomic        &  8 & 10 & 1--3 & Sympathetic/para \\
-Pancreatic       &  7 &  8 & 1--2 & Paracrine islet \\
-CSF              &  8 &  8 & 1--2 & Choroid--ventricle \\
-Brain functional & 12 & 21 & 3--5 & Cortex--subcortex \\
-\end{tabular}
-\end{ruledtabular}
-\end{table}
-
-\noindent
-Cartilage ($\eta \approx 0.001$) and olfactory receptors ($K = 1$)
-represent the extremes: cartilage barely remodels (avascular),
-while olfactory neurons are among the few that regenerate
-throughout life.
-Brain functional topology has the richest dimensional structure
-($K = 5$ cortex vs.\ $K = 3$ subcortex, 21~edges),
-producing the highest $\Acut$ of any blueprint.
-
-\subsection{Whole-body inter-organ topology}
-\label{sec:whole-body}
-
-The 29~blueprints above are \emph{intra}-organ networks.
-A living body also requires \emph{inter}-organ communication:
-every organ receives arterial blood supply (vascular bus)
-and autonomic innervation (neural bus), and the brain
-serves as a central command hub.
-
-We unify the three chains into a single
-\texttt{GammaTopology} via \texttt{build\_whole\_body()}:
-
-\begin{enumerate}
-  \item \textbf{Organ layer:} all 29~blueprints are
-    instantiated with prefixed node names
-    (e.g.\ \texttt{cv.sa\_node}, \texttt{pulm.alveolus}).
-  \item \textbf{Vascular bus:} an aortic trunk node ($K = 4$)
-    fans out to 29~arteriolar branch nodes ($K = 2$),
-    each connecting to the organ's designated vascular
-    interface node.  K-cascade: $4 \to 2 \to K_{\text{organ}}$.
-  \item \textbf{Neural bus:} an autonomic trunk node ($K = 3$)
-    fans out to 29~branch nodes ($K = 2$),
-    each connecting to the organ's neural interface node.
-    K-cascade: $3 \to 2 \to K_{\text{organ}}$.
-  \item \textbf{Brain hub:} the brain\_functional blueprint's
-    \texttt{hypothalamus\_b} ($K{=}3$) drives the neural bus
-    trunk (descending command),
-    while the vascular bus feeds back to the brain
-    (interoception).
-\end{enumerate}
-
-\noindent
-The resulting whole-body graph contains
-\textbf{278~nodes} and \textbf{426~directed edges},
-with $K$ spanning 1 to~5.
-All edges satisfy C1 ($\Gamma^2 + T = 1$) by construction.
-The vascular bus contributes $\Acut = 2$ at every
-trunk-to-branch edge ($K{=}4 \to K{=}2$),
-the neural bus contributes $\Acut = 1$ ($K{=}3 \to K{=}2$),
-and further cutoff costs accumulate at every bus-to-organ
-junction.
-The total structural action $\Acut = 222$ is irreducible
-under all C2~gradients---it is the geometric price
-of multi-organ life.
-
-Disease cascades emerge automatically from this topology:
-raising the aortic impedance (vascular stenosis) increases
-$\Gamma$ at all downstream branches, which propagates via
-the bus to every organ's vascular interface.
-No disease-specific code is needed (E0).
-The 145~whole-body tests (\texttt{tests/test\_whole\_body.py})
-verify structure, C1/C2 physics, bus connectivity,
-dimensional cascade, signal propagation, and
-reproducibility.
-
-\subsection{Thermoregulation as a \texorpdfstring{$\Gamma$}{Gamma}-Net necessity}
-\label{sec:thermoregulation}
-
-Blood is the transmission medium of the vascular bus.
-Its viscosity $\eta$ depends on body temperature $T$ via
-the Arrhenius relation:
-\begin{equation}\label{eq:arrhenius-eta}
-  \tilde\eta(T)
-  \;=\;
-  \exp\!\Bigl[\alpha\Bigl(\frac{1}{T}-\frac{1}{T_0}\Bigr)\Bigr],
-  \qquad
-  \alpha \equiv \frac{E_a}{R} \approx 1949\;\text{K},
-\end{equation}
-where $E_a \approx 16.2$~kJ\,mol$^{-1}$ is the activation energy
-for viscous flow in plasma and $T_0 = 310$~K ($37\,^\circ$C).
-In the Poiseuille limit, the vascular bus impedance
-$Z_{\text{bus}}(T) = Z_{\text{ref}}\,\tilde\eta(T)$.
-At every organ--bus junction the reflection coefficient becomes
-\begin{equation}
-  \Gamma_i(T)
-  \;=\;
-  \frac{Z_{\text{organ},i} - Z_{\text{bus}}(T)}
-       {Z_{\text{organ},i} + Z_{\text{bus}}(T)}\,,
-\end{equation}
-and the vascular contribution to the whole-body action is
-$A_{\text{vasc}}(T) = \sum_i K_{\text{common},i}\,\Gamma_i^2(T)$.
-
-C2 repair runs at a rate that is itself temperature-dependent
-(enzymatic Arrhenius,
-$\tilde\eta_{\text{learn}}(T) = \exp[\beta(T_0^{-1}-T^{-1})]$
-with $\beta = E_{\text{learn}}/R \approx 6015$~K).
-The repair time therefore scales as
-\begin{equation}\label{eq:tau-doubly}
-  \tilde\tau(T)
-  \;=\;
-  \frac{\tilde\eta(T)}{\tilde\eta_{\text{learn}}(T)}
-  \;=\;
-  \exp\!\Bigl[(\alpha+\beta)\Bigl(\frac{1}{T}-\frac{1}{T_0}\Bigr)\Bigr],
-\end{equation}
-which is \emph{doubly exponential} in $1/T$:
-viscosity rises while repair rate falls.
-
-Setting $\tilde\tau(T_c) = \tau_{\max}$ yields the
-\textbf{critical temperature}
-\begin{equation}\label{eq:Tc}
-  T_c
-  \;=\;
-  \frac{T_0}{1 + \dfrac{T_0\,\ln\tau_{\max}}{\alpha+\beta}}\,.
-\end{equation}
-For an organism with brain modal complexity~$K$,
-the action scales as $K\,\Gamma^2$, so the effective
-$\tau_{\max}$ shrinks by~$1/K$, giving
-$T_c(K) > T_c(1)$ for $K > 1$ (dimensional amplification).
-The 93~thermoregulation tests confirm:
-
-\begin{center}
-\begin{tabular}{rl}
-  $T_c(K{=}1)$ & $= -10.3\,^\circ$C  (ectotherm viable) \\
-  $T_c(K{=}5)$ & $= +4.5\,^\circ$C   (endothermy required) \\
-\end{tabular}
-\end{center}
-
-\noindent
-Higher~$K$ brains \emph{must} maintain $T > T_c(K)$,
-rendering endothermy a necessary condition for complex
-neural topology---not a metabolic luxury but a
-$\Gamma$-topological constraint.
-
-\paragraph{Thermodynamic boundary crisis during
-$D_Z$ clearance.}
-To discharge accumulated impedance debt~$D_Z$
-(Paper~3~\cite{Paper3}), the system must enter a
-low-power state (sleep), reducing metabolic heat
-generation to a basal level~$P_{\text{basal}}$.
-System temperature during sleep obeys
-\begin{equation}
-  T_{\text{sys}}
-  = T_{\text{env}} + P_{\text{basal}}\,R_{\text{th}}\,,
-  \label{eq:T-sleep}
-\end{equation}
-where $R_{\text{th}}$ is the organism's effective thermal
-resistance (integrating fur, blubber, posture, and
-huddling---all abstracted as a single lumped parameter).
-The C2 boundary condition demands
-$T_{\text{sys}} > T_c(K)$ at all times;
-violation halts remodelling and freezes impedance
-mismatch in place.
-
-During nocturnal or seasonal temperature drops,
-$T_{\text{env}}$ may swing by tens of kelvin.
-When $P_{\text{basal}}\,R_{\text{th}}$ alone cannot
-guarantee the inequality, the organism must couple to
-an \emph{environmental thermal low-pass filter}---any
-high-heat-capacity mass (subterranean rock, tree
-hollows, snow caves, or conspecific huddles) whose
-thermal inertia damps the external oscillation:
-\begin{equation}
-  T_{\text{refugium}}(z)
-  \approx \overline{T}_{\text{annual}}\,,
-  \qquad z \gg \delta
-  = \sqrt{2\kappa/(\rho c_p\,\omega)}\,,
-  \label{eq:thermal-LPF}
-\end{equation}
-where $\delta$ is the thermal penetration depth.
-Ecologically, such environments are called
-\emph{thermal refugia}; physically, they are low-pass
-filters that replace the volatile $T_{\text{env}}$ with
-a stable baseline~$\overline{T}_{\text{annual}}$.
-
-The resulting constraint chain is purely physical:
-high~$K$ $\to$ high~$T_c(K)$ $\to$
-sleep reduces $P_{\text{met}}$ $\to$
-$P_{\text{basal}}\,R_{\text{th}}$ may be insufficient
-$\to$ external thermal coupling required.
-Low-$K$ organisms ($T_c \ll 0\,^\circ$C) satisfy the
-inequality with biological insulation alone and need
-no refugium.
-
-\paragraph{Falsification criterion.}
-The $T_c(K)$ formula is falsified by exhibiting an organism with
-(i)~closed high-pressure vasculature,
-(ii)~$K \geq 5$,
-(iii)~sustained $T_{\text{body}} \leq T_c(K)$, and
-(iv)~maintained high-level cognition.
-No such organism is currently known.
-Mammalian hibernators drop $T$ below $T_c$ but simultaneously
-reduce brain activity to torpor~\cite{PMC6674705,PMC6629779};
-ectotherms with complex behaviour operate on the low-$K$ branch
-where $T_c$ is low~\cite{PMC11880559};
-cross-vertebrate data confirm that species with higher, more
-stable body temperatures develop larger brains at given body
-mass~\cite{PMC12625846,PMC7907648}.
-
-\paragraph{Gating, ``willpower,'' and time perception.}
-The preceding analysis explains winter lethargy
-as a minimum-action consequence: at low~$T$,
-$\Gamma^2$ rises on every channel, and the cheapest
-response is quiescence---close thalamic gates
-($G_i \to 0$; see the television inequality,
-Paper~4~\cite{Paper4}) and reduce the summation
-$A = \sum_i K_i\,\Gamma_i^2\,P_{\mathrm{in},i}$.
-This is the physics behind ``not wanting to move in winter.''
-
-Yet organisms override it.  The mechanism is
-\emph{bandwidth reallocation under a fixed thermal
-ceiling}~$P_{\max}$.
-By closing $N-1$ thalamic gates the prefrontal cortex
-receives only one stream; its full processing quality
-$Q_{\text{PFC}}$ and bandwidth~$B_{\text{PFC}}$
-are devoted to a single task.
-The temporal resolution of the attended channel
-improves from
-$\Delta t \sim N/B_{\text{PFC}}$
-(multiplexing $N$ streams) to
-$\Delta t \sim 1/B_{\text{PFC}}$ (single stream).
-What folk psychology calls ``willpower'' is this
-gating reallocation: a change in the
-\emph{functional impedance}~$Z_{\text{fun}}$
-(gate gains~$G_i$, arousal~$Z_{\text{arousal}}$),
-not in the structural impedance~$Z_s$ that encodes
-long-term patterns.
-The subjective effort is real---the active
-channel's $\Gamma^2 P_{\text{in}}$ at low~$T$
-exceeds its cost at~$T_0$, and the $N-1$ silenced
-channels surrender all fidelity---but the
-\emph{structural} network is unchanged.
-This is why ``willpower'' cannot rewrite deeply
-forged patterns: gating redistributes bandwidth;
-only C2 remodelling
-($\Delta Z_s = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$)
-can reshape the impedance itself
-(Paper~3, Remark~4~\cite{Paper3};
-Paper~4, Remark~3~\cite{Paper4}).
-Paper~4 further decomposes effective willpower into
-three multiplicative factors---metabolic budget
-$\eta_{\text{pfc}}$, gate quality~$Q_{\text{gate}}$,
-and memory calibration
-$(1-\langle\Gamma^2_{\text{memory}}\rangle)$---so
-that a single zero factor extinguishes volitional
-capacity regardless of the other two~\cite{Paper4}.
-
-The extreme case is emergency arousal.
-In a car crash, the brainstem drives
-$Z_{\text{arousal}}$ to its ceiling and the thalamus
-gates every non-threat modality to zero.
-The PFC processes a single high-$K$ stream
-at maximum bandwidth; temporal resolution increases
-by a factor~$\sim\!N$
-and the event is perceived in \emph{slow motion}---not
-an illusion, but a real $N$-fold increase in sampling
-rate (Paper~4, Theorem~1~\cite{Paper4}).
-Conversely, fatigue and cold \emph{reduce}~$B_{\text{PFC}}$
-(higher~$\Gamma^2$), so fewer ``frames'' are processed
-per second and time feels faster---the well-known
-subjective acceleration of uneventful cold afternoons.
-
-\subsection{Emergence classification}
-\label{sec:emergence}
-
-The operational status of every disease model in the codebase
-is classified by \emph{emergence level}:
-
-\begin{center}
-\begin{tabular}{cll}
-\hline
-\textbf{Level} & \textbf{Name} & \textbf{Definition} \\
-\hline
-E0 & True Emergence & Only C1/C2/C3 + initial conditions. \\
-   &                & Zero disease-specific code.         \\
-E1 & Parameterised  & C2 via \texttt{ImpedanceChannel.remodel()} \\
-   &                & but requires per-disease params.    \\
-E2 & Scripted       & Ad-hoc $Z$ updates. Legacy only.    \\
-\hline
-\end{tabular}
-\end{center}
-
-\noindent
-\textbf{Rule}: all new disease models must be E1 or higher.
-E2 is forbidden for new code.
-E0 is the target: if behaviour emerges from C2 + initial
-conditions alone, no additional parameters should be added.
-
-The tissue blueprints are E0 by construction:
-the \texttt{GammaTopology} enforces C1 at every edge,
-applies C2 remodeling at every tick,
-and the only inputs are the initial $Z$-vectors and
-the perturbation (impedance shift or edge removal).
-
-Source code:
-\texttt{alice/body/tissue\_blueprint.py}
-(29~factory functions in \texttt{BLUEPRINT\_REGISTRY}),
-\texttt{tests/test\_tissue\_blueprints.py}
-(245~parametrised tests covering structure, C1, C2, and
-organ-specific physiology for all 29~blueprints),
-plus the E0 emergence suites
-\texttt{tests/test\_e0\_cardiovascular.py},
-\texttt{tests/test\_e0\_neural.py}, and
-\texttt{tests/test\_e0\_metabolic.py}
-(56~tests total).
-All pass with 100\% rate.
-
-\subsubsection{Ablation structure and epistemic credibility}
-\label{sec:ablation}
-
-A test suite written alongside the code it tests
-is vulnerable to circular validation:
-the same author who writes
-\texttt{simulate\_diabetes()} also writes
-\texttt{assert result == 0.42},
-creating a self-confirming closed loop
-whose pass count carries no epistemic weight.
-
-We address this by imposing a \emph{structural ablation
-constraint} on every E0 test file.
-Each file contains two mutually contradictory
-test classes that must pass simultaneously:
-
-\begin{description}
-  \item[C2-on class] ($\eta > 0$, impedance remodeling active):
-    asserts that (i)~the action functional $A[\Gamma]$ decreases
-    over time, (ii)~pathological perturbations are partially
-    compensated, and (iii)~different initial conditions produce
-    distinguishable $\Gamma$-trajectories.
-  \item[C2-off class] ($\eta = 0$, remodeling disabled):
-    asserts that (i)~$A[\Gamma]$ does \emph{not} systematically
-    decrease, (ii)~impedance perturbations persist
-    permanently ($Z_{\text{after}} = Z_{\text{before}}$
-    to machine precision), and (iii)~the total action
-    exceeds the C2-on case.
-\end{description}
-
-\noindent
-The logical structure is a pincer:
-a hardcoded implementation that fakes
-``action always decreases'' will pass the C2-on class
-but fail the C2-off class (which requires action to persist).
-A hardcoded implementation that fakes
-``action stays constant'' will pass
-the C2-off class but fail the C2-on class.
-The \emph{only} implementation that simultaneously satisfies
-both classes is one that actually computes
-$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
-and propagates its consequences through the topology.
-
-This does not replace external validation
-(Table~\ref{tab:vv} distinguishes IC from LIT and EXT),
-but it raises the internal-consistency evidence
-above the level of trivially satisfiable assertions.
-Among the full test suite of 3{,}797 automated tests,
-approximately 65--75\% verify hardcoded values,
-boundary clamping, or algebraic identities
-that any implementation could trivially pass.
-The ablation-structured E0 tests constitute a smaller
-fraction (${\sim}\,56$ tests across three topologies),
-but they carry disproportionate epistemic weight
-because they are non-trivially satisfiable.
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\columnwidth]{../figures/fig_p0_deductive_chain.pdf}
+  \caption{The deductive chain of the $\Gamma$-Net framework.
+  From the First Law of Thermodynamics, $\Gamma$ emerges as
+  thermodynamic necessity; the Minimum Reflection Principle
+  yields C1/C2/C3; each subsequent paper applies these
+  constraints to a specific domain.
+  No layer imports from an outer layer.}
+  \label{fig:deductive-chain}
+\end{figure}
 
 
 % ============================================================
-%  SECTION 10 — SCOPE EXCLUSION
+%  SECTION 7 — SCOPE EXCLUSION
 % ============================================================
 \section{What This Theory Does Not Claim}
 \label{sec:scope}
@@ -1197,123 +753,128 @@ because they are non-trivially satisfiable.
 The $\Gamma$-framework derives \emph{physical constraints}
 that any living system must satisfy.
 It does \emph{not} reconstruct evolutionary history.
-Specifically:
 
 \begin{enumerate}
   \item \textbf{Necessary conditions, not sufficient causes.}
     The framework shows that a $K{=}5$ brain \emph{must}
-    maintain $T > T_c(5)$, \emph{must} have vasculature,
-    and \emph{must} seek thermal shelter during sleep.
+    maintain $T > T_c(5)$ and \emph{must} have vasculature.
     It does not explain \emph{why} such brains appeared
     or \emph{which} lineages developed them.
+
   \item \textbf{No evolutionary trajectory.}
     Statements such as ``the tidal zone offers the
     lowest-action path'' identify geometric optima
     in impedance space.
     Whether any lineage actually traversed that path
-    is a question for palaeontology and phylogenetics,
-    not for this framework.
-  \item \textbf{C2 uniqueness is mathematical, not biological.}
+    is a question for palaeontology, not for this
+    framework.
+
+  \item \textbf{C2 uniqueness is mathematical, not
+    biological.}
     The proof that C2 is the unique first-order
-    $\mathcal{A}$-minimising rule (Paper~5) is a theorem
-    about gradient descent.
+    $\mathcal{A}$-minimising rule is a theorem about
+    gradient descent.
     That multiple molecular machineries converge on the
     same equation is \emph{consistent with} C2 being a
     physical attractor; it is not evidence that evolution
     ``discovered'' C2.
+
   \item \textbf{Compatibility, not replacement.}
     Natural selection determines which lineages survive;
-    the $\Gamma$-framework supplies the physical objective
-    function that selection operates on.
-    The two are complementary, not competing.
+    the $\Gamma$-framework supplies the physical
+    objective function that selection operates on.
 \end{enumerate}
 
 \noindent
 Throughout the six papers, any sentence referencing
-evolution, convergence, or the Cambrian radiation
-should be read as \emph{physical constraint language}:
-``$X$ is required'' means ``any system with property~$Y$
-must satisfy~$X$\,''; it does not mean ``$X$ evolved
-because of~$Y$\,''.
+evolution should be read as \emph{physical constraint
+language}: ``$X$ is required'' means ``any system with
+property~$Y$ must satisfy~$X$\,''.
 
 
 % ============================================================
-%  SECTION 11 — NOTATION
+%  SECTION 8 — NOTATION
 % ============================================================
 \section{Notation Conventions}
 \label{sec:notation}
 
-Table~\ref{tab:notation} collects notation conventions
-used across Papers~0--5.
-For complete definitions including derivations, see
-the quantity inventory (Table~\ref{tab:quantities}).
+Table~\ref{tab:notation} collects notation used across
+Papers~0--5.
 
 \begin{table}[h]
 \caption{Notation conventions used across all six papers.}
 \label{tab:notation}
 \begin{ruledtabular}
 \begin{tabular}{lllc}
-\textbf{Symbol} & \textbf{Meaning} & \textbf{Units / Range} & \textbf{Paper} \\
+\textbf{Symbol} & \textbf{Meaning}
+  & \textbf{Units / Range} & \textbf{Paper} \\
 \hline
-$Z$ & Impedance (effort/flow) & $\Omega$; Pa$\cdot$s/m$^3$; N$\cdot$s/m & 0 \\
-$\Gamma$ & Reflection coefficient & dimensionless, $[-1,+1]$ & 0 \\
-$T$ & Transmission coefficient ($1-\Gamma^2$) & dimensionless, $[0,1]$ & 0 \\
-$\eta$ & Remodeling rate & $>0$; $\approx 0$ for cartilage & 0 \\
-$(x_{\text{in}},\,x_{\text{out}})$ & Interface signals & signal units & 0 \\
+$Z$ & Impedance & $\Omega$ etc.\ & 0 \\
+$\Gamma$ & Reflection coefficient
+  & $[-1,+1]$ & 0 \\
+$T$ & Transmission ($1{-}\Gamma^2$)
+  & $[0,1]$ & 0 \\
+$\eta$ & Remodeling rate & $>0$ & 0 \\
+$(x_{\text{in}},x_{\text{out}})$ & Interface signals
+  & signal units & 0 \\
 $\mathcal{A}$ & Reflection action & J$\cdot$s & 0 \\
-$\Aimp$ & Improvable action & J$\cdot$s & 1 \\
-$\Acut$ & Cutoff (irreducible) action & J$\cdot$s & 1 \\
 $K$ & Modal complexity & integer $\ge 1$ & 1 \\
-$K_{\text{com}}$ & Common modes $\min(K_i,K_j)$ & integer & 1 \\
-$Z_v,\;Z_n$ & Vascular / neural impedance & Pa$\cdot$s/m$^3$; $\Omega$ & 2 \\
+$\Aimp$ & Improvable action & J$\cdot$s & 1 \\
+$\Acut$ & Cutoff action & J$\cdot$s & 1 \\
+$\Phi_{\text{meta}}$ & Consciousness index
+  & $[0,1]$ & 1 \\
+$\mathcal{S}$ & Null space & --- & 1 \\
+$\beta$ & Murray ratio ($2^{1/3}$)
+  & dimensionless & 2 \\
+$\Omega$ & Dual-network overhead
+  & $\ge 1$ & 2 \\
+$H$ & Health index & $[0,1]$ & 2 \\
+$Z_v,Z_n$ & Vascular / neural $Z$
+  & domain-specific & 2 \\
 $D_Z$ & Impedance debt & J$\cdot$s & 3 \\
-$T_c(K)$ & Critical temperature & $^\circ$C & 3 \\
-$\beta_{\text{recal}}$ & N3 recalibration rate & s$^{-1}$ & 3 \\
-$\Phi_{\text{meta}}$ & Meta-reflection coefficient & dimensionless, $[-1,+1]$ & 4 \\
-$\varepsilon$ & Memory seal factor & dimensionless, $>0$ & 4 \\
-$\theta_{\text{recall}}$ & Recall SNR threshold & dimensionless & 4 \\
-$\mathcal{S}$ & Null space (``soul'') & --- & 4 \\
-$H$ & Health index $\prod_i(1-\Gamma_i^2)$ & dimensionless, $[0,1]$ & 5 \\
+$T_c(K)$ & Critical temperature
+  & $^\circ$C & 3 \\
+$\Pi_\Gamma$ & $\Gamma$-Pain Index
+  & dimensionless & 4 \\
 \end{tabular}
 \end{ruledtabular}
 \end{table}
 
 
 % ============================================================
-%  SECTION 12 — CONCLUSION
+%  SECTION 9 — CONCLUSION
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-The $\Gamma$-Net framework rests on one variational
-principle (MRP) and three local constraints
-(C1: energy conservation; C2: impedance remodeling;
-C3: impedance-tagged transport).
-From these, five companion papers derive topology,
-organ health, temporal dynamics, consciousness, and
-clinical diagnostics---spanning 15 orders of spatial
-magnitude and 29 tissue types, now unified into a
-single whole-body topology (278~nodes, 426~edges)
-through vascular and neural inter-organ buses,
-with a rigorous thermoregulation derivation
-showing that endothermy is a $\Gamma$-topological necessity
-for brains above a critical modal complexity~$K$.
+The $\Gamma$-Net framework is derived, not postulated.
+The First Law of Thermodynamics at a one-dimensional
+interface yields the reflection coefficient~$\Gamma$.
+Energy conservation gives C1 ($\Gamma^2 + T = 1$).
+Gradient descent on the reflection action gives C2
+($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
+x_{\text{out}}$), proven unique among first-order
+activity-gated rules.
+Local computability gives C3.
+
+From these three constraints, five companion papers
+derive, in a strictly outward deductive chain:
+topology and the mind (Paper~1),
+geometric quantification and metabolic scaling (Paper~2),
+temporal unification across 29~tissues (Paper~3),
+disease as topological pathology (Paper~4),
+and full-system verification against epidemiological
+data (Paper~5).
 
 This paper provides the master reference:
-a canonical quantity list (Table~\ref{tab:quantities}),
-a verification matrix distinguishing internal from
-external evidence (Table~\ref{tab:vv}),
-and a falsifiable prediction roadmap
-(Table~\ref{tab:predictions}).
+a derivation chain (Sections~\ref{sec:gamma}--\ref{sec:uniqueness}),
+a quantity inventory (Table~\ref{tab:quantities}),
+and a theorem directory (Table~\ref{tab:directory}).
 
 All source code, simulation scripts, and NHANES pipelines
 are available at
 \url{https://github.com/cyhuang76/alice-gamma-net}
 under AGPL-3.0.
-The full test suite comprises 3{,}797 automated tests
-with 100\% pass rate, of which 56 are
-ablation-structured E0 emergence tests
-(Sec.~\ref{sec:ablation}).
 
 
 % ============================================================
@@ -1323,74 +884,39 @@ ablation-structured E0 emergence tests
 
 \bibitem{Paper1}
 H.-Y.~Huang,
-``Topology and fractal cost of $\Gamma$-networks:
-relay nodes, metabolic scaling, and the irreducibility
-theorem,''
+``The irreducibility theorem and the physics of mind:
+topology, memory, consciousness, and nociception
+from impedance constraints,''
 companion Paper~1 (2026).
 
 \bibitem{Paper2}
 H.-Y.~Huang,
-``Dual-network organ health: vascular $\Gamma$-physics
-and the five failure modes,''
+``Geometric quantification: Murray's law, Kleiber scaling,
+and dual-network organ health from $\Gamma$-minimisation,''
 companion Paper~2 (2026).
 
 \bibitem{Paper3}
 H.-Y.~Huang,
-``Temporal dynamics of impedance debt: sleep, the lifecycle
-equation, and the physics of aging,''
+``Temporal unification: C2 as twenty-nine tissue laws,
+impedance debt, sleep, and the lifecycle equation,''
 companion Paper~3 (2026).
 
 \bibitem{Paper4}
 H.-Y.~Huang,
-``Memory, consciousness, and nociception as impedance
-dynamics,''
+``Topological pathology: disease emergence from
+C1/C2/C3 without disease-specific code,''
 companion Paper~4 (2026).
 
 \bibitem{Paper5}
 H.-Y.~Huang,
-``The grand unification: $\Gamma$ as the universal interface
-law from microtubules to power grids, and C2 as universal
-remodeling in twenty-nine tissues,''
+``Full-system verification: NHANES validation,
+tissue blueprints, and falsifiable predictions,''
 companion Paper~5 (2026).
 
 \bibitem{ALICE_code}
 H.-Y.~Huang,
 \emph{ALICE: A physics-driven electronic lifeform},
 \url{https://github.com/cyhuang76/alice-gamma-net} (2026).
-
-\bibitem{PMC6674705}
-H.~Carey, M.~Andrews, and S.~Martin,
-``Mammalian hibernation: cellular and molecular responses to
-depressed metabolism and low temperature,''
-\emph{Physiol.\ Rev.} \textbf{83}, 1153 (2003);
-see also PMC6674705.
-
-\bibitem{PMC6629779}
-S.~Giroud \emph{et~al.},
-``The torpid state: recent advances in metabolic adaptations
-and protective mechanisms,''
-\emph{Front.\ Physiol.} \textbf{11}, 623 (2020);
-PMC6629779.
-
-\bibitem{PMC11880559}
-F.~Seebacher,
-``The evolution of metabolic regulation in animals,''
-\emph{Comp.\ Biochem.\ Physiol.\ B} \textbf{224}, 207 (2024);
-PMC11880559.
-
-\bibitem{PMC12625846}
-J.~K.~O'Brien \emph{et~al.},
-``Body temperature, brain size, and the scaling of neural
-complexity across vertebrates,''
-\emph{Proc.\ R.\ Soc.\ B} (2025);
-PMC12625846.
-
-\bibitem{PMC7907648}
-A.~Yu \emph{et~al.},
-``Brain size is predicted by the intensity of intrasexual
-competition in birds,''
-\emph{Ecol.\ Evol.} \textbf{11}, 2652 (2021);
-PMC7907648.
 
 \end{thebibliography}
 

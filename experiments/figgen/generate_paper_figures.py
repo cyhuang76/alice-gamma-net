@@ -162,8 +162,8 @@ def figure_1():
     axins.grid(True, alpha=0.2)
 
     fig.tight_layout()
-    fig.savefig(os.path.join(OUTDIR, "fig1_action_decomposition.png"))
-    fig.savefig(os.path.join(OUTDIR, "fig1_action_decomposition.pdf"))
+    fig.savefig(os.path.join(OUTDIR, "fig_p1_action_decomposition.png"))
+    fig.savefig(os.path.join(OUTDIR, "fig_p1_action_decomposition.pdf"))
     plt.close(fig)
     print("    → fig1_action_decomposition.png/.pdf saved")
 
@@ -310,8 +310,8 @@ def figure_2():
         fontsize=13, y=1.02
     )
     fig.tight_layout()
-    fig.savefig(os.path.join(OUTDIR, "fig2_scaling_law.png"))
-    fig.savefig(os.path.join(OUTDIR, "fig2_scaling_law.pdf"))
+    fig.savefig(os.path.join(OUTDIR, "fig_p1_scaling_law.png"))
+    fig.savefig(os.path.join(OUTDIR, "fig_p1_scaling_law.pdf"))
     plt.close(fig)
     print("    → fig2_scaling_law.png/.pdf saved")
 
@@ -448,8 +448,8 @@ def figure_3():
                       edgecolor=C_SOFT, alpha=0.8))
 
     fig.tight_layout()
-    fig.savefig(os.path.join(OUTDIR, "fig3_dk_vs_gamma.png"))
-    fig.savefig(os.path.join(OUTDIR, "fig3_dk_vs_gamma.pdf"))
+    fig.savefig(os.path.join(OUTDIR, "fig_p1_dk_vs_gamma.png"))
+    fig.savefig(os.path.join(OUTDIR, "fig_p1_dk_vs_gamma.pdf"))
     plt.close(fig)
     print("    → fig3_dk_vs_gamma.png/.pdf saved")
 

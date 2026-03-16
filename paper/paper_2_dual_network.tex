@@ -1,11 +1,13 @@
 % ============================================================
-%  Paper 2 — From Blood Vessel to Organ Health
-%            Vascular Impedance, Murray's Law,
-%            and the Dual-Network Organ Model
+%  Paper 2 — Dual Impedance Networks and Metabolic Scaling
+%            Vascular Architecture, Murray's Law,
+%            Organ Health, Fractal Cost, and Kleiber's Law
 %
-%  Complete rewrite: derivation chain
-%    vessel → vascular network → dual coupling →
-%    organ health → disease cascade → pathology
+%  Merged from: Paper 2 (Parts A+B §1-8) +
+%               Paper 1 old Part C (fractal/Kleiber/packing) +
+%               Paper 5 §4-5 (interface scale/isomorphism)
+%  §9-11 (cascade/disease/wound) → Paper 4
+%  Part C (clinical validation) → Paper 5
 %
 %  Compile:  pdflatex paper_2_dual_network.tex  (×2)
 % ============================================================
@@ -15,27 +17,18 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{xcolor}
-\newtheorem{theorem}{Theorem}
-\newtheorem{corollary}{Corollary}
-\newtheorem{remark}{Remark}
-
-% ----- macros -----
-\newcommand{\Gv}{\Gamma_{\mathrm{v}}}
-\newcommand{\Gn}{\Gamma_{\mathrm{n}}}
-\newcommand{\Tv}{T_{\mathrm{v}}}
-\newcommand{\Tn}{T_{\mathrm{n}}}
-\newcommand{\Av}{A_{\mathrm{v}}}
-\newcommand{\Zv}{Z_{\mathrm{v}}}
-\newcommand{\Zn}{Z_{\mathrm{n}}}
-\newcommand{\avg}[1]{\langle #1 \rangle}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{gammanet}
 
 % ============================================================
 \begin{document}
 
 \title{%
-Paper~2: From Blood Vessel to Organ Health\\
-Vascular Impedance, Murray's Law, and\\
-the Dual-Network Organ Model\\[4pt]
+Paper~2: Dual Impedance Networks and Metabolic Scaling\\[2pt]
+Vascular Architecture, Organ Health,\\
+Fractal Cost, and Kleiber's Law\\[4pt]
 \large under the Minimum Reflection Principle%
 }
 
@@ -47,65 +40,61 @@ the Dual-Network Organ Model\\[4pt]
 
 % ============================================================
 \begin{abstract}
-We ask: given a single blood vessel with impedance
-$\Zv = \Delta P / Q$ governed by C2 vascular remodeling,
-what architecture must emerge?
+We ask: given a blood vessel with impedance
+$\Zv = 8\mu L/\pi r^4$ governed by vascular C2 remodeling,
+what architecture---and what metabolic scaling laws---must
+emerge?
 
-\textbf{Part~A} establishes the foundation.
-A blood vessel is a hydraulic transmission line whose
-impedance is set by the Poiseuille law:
-$\Zv = 8\mu L / \pi r^4$.
-At every bifurcation the daughter-to-parent impedance
-mismatch produces a reflection coefficient
-$\Gv = (\Zv^{\text{down}} - \Zv^{\text{up}}) /
-       (\Zv^{\text{down}} + \Zv^{\text{up}})$,
-and C1 gives $\Gv^2 + \Tv = 1$.
-We derive Murray's Law of optimal vessel branching
-($r_{\text{parent}}^3 = \sum r_i^3$) as the exact
-minimum of the \emph{vascular action}
-$\Av = \sum_j [Q_j^2 Z_j + \lambda V_j]$,
-with 100\% numerical agreement for $n = 2, 3, 4$.
-Vascular C2 remodeling
-$\Delta\Zv = -\eta_v\,\Gv\,\tau_{\text{wall}}\,\rho$
-is the same gradient descent rule as neural C2, but
-with $\eta_v \ll \eta_n$ (vessel walls remodel over
-weeks, not milliseconds).
+\textbf{Part~A} derives vascular architecture from the
+Minimum Reflection Principle (MRP).
+A blood vessel is a hydraulic transmission line.
+At every bifurcation, impedance mismatch produces a
+reflection $\Gv$; C1 gives $\Gv^2 + \Tv = 1$.
+We derive Murray's Law ($r_p^3 = \sum r_i^3$) as the
+exact minimum of the vascular action
+$\Av = \sum_j[Q_j^2 Z_j + \lambda V_j]$, with 100\%
+numerical agreement for $n=2,3,4$.
+Vascular C2 remodeling ($\Delta\Zv=-\eta_v\Gv\tau_{\text{wall}}\rho$)
+operates on the same principle as neural C2 but with
+$\eta_v \ll \eta_n$.
 
-\textbf{Part~B} derives the organ architecture.
-(i)~Every organ is served by two coincident networks:
+\textbf{Part~B} derives the dual-network organ model.
+Every organ is served by two coincident networks:
 vascular ($\Gv$) and neural ($\Gn$).
-Organ health $H = \Tn \cdot \Tv = (1-\Gn^2)(1-\Gv^2)$
+Organ health $H = \Tn\cdot\Tv = (1-\Gn^2)(1-\Gv^2)$
 follows from multiplicative transmission.
-(ii)~Four failure modes are classified by which network
-fails.
-(iii)~A positive-feedback cascade
-$\Gv\!\uparrow \to \rho\!\downarrow \to
-\Gn\!\uparrow \to \text{autonomic}\!\downarrow
-\to \Gv\!\uparrow\!\uparrow$ links vascular insult
-to neural collapse.
-(iv)~Disease models (atherosclerosis, aneurysm,
-diabetic microvascular, vascular dementia,
-pre-eclampsia) are instances of the cascade at
-different anatomical loci.
-(v)~Wound repair is spatial impedance matching:
-the healing sequence maps to a time-ordered
-$\Gv^2$ minimisation.
+Four failure modes are classified by which network fails.
+The organ impedance hierarchy ranks ten organs by their
+resting $\Gv^2$.
 
-\textbf{Part~C} validates clinically.
-Nine numerical experiments (9/9), ten clinical
-calibrations (10/10) against FAME/NASCET/UKPDS trials,
-twelve literature validations (12/12) against STENO-2,
-ADVANCE, SPRINT-MIND, and other major RCTs; systematic
-stability analysis (100/100 randomised runs).
-Fractional flow reserve (FFR) is identified as
-\emph{exactly} $\Tv$, and four irreducible tissue
-types are derived from C2 prerequisites.
+\textbf{Part~C} derives metabolic scaling.
+A self-similar relay hierarchy with branching number~$n$
+in $d$ dimensions produces an irreducible action
+$\Acut \propto M^{(d-1)/d}$ (for $d=3$: $M^{2/3}$).
+The Murray bifurcation ratio $\beta = n^{1/d} = 2^{1/3}$
+sets length and radius contraction across levels.
+Kleiber's Law ($B \propto M^{3/4}$) follows from
+capillary invariance.
+Dual-network packing yields a metabolic overhead
+$\Omega \approx 1.33$, with $\Omega_n \approx \beta$.
+Multi-scale verification confirms the irreducibility
+theorem across cardiovascular, musculoskeletal, and
+29-tissue-atlas scales.
+
+\textbf{Part~D} demonstrates interface universality.
+The same $\Gamma=(Z_2-Z_1)/(Z_2+Z_1)$ governs seven
+physical domains across 14 orders of magnitude---from
+synapses to power grids.
+The Interface Isomorphism Proposition proves that $\Gamma$
+depends only on boundary impedance, not bulk properties.
 
 \medskip\noindent
 \textbf{Circularity disclosure.}
-Internal experiments (V1--V9) demonstrate self-consistency.
-Clinical calibrations (C1--C10) and literature validations
-(L1--L12) confront the model with published external data.
+Internal experiments use simulation modules built from
+C1--C3; they demonstrate self-consistency, not empirical
+validity.
+External tests are reported in
+Papers~3--5~\cite{Paper3,Paper4,Paper5}.
 \end{abstract}
 
 \maketitle
@@ -115,7 +104,7 @@ Clinical calibrations (C1--C10) and literature validations
 %  PART A — FROM BLOOD VESSEL TO VASCULAR NETWORK
 % ============================================================
 
-\part*{Part A: From Blood Vessel to Vascular Network}
+\bigskip\noindent\textbf{\large Part A: From Blood Vessel to Vascular Network}\medskip
 
 
 % ============================================================
@@ -127,38 +116,31 @@ A blood vessel is a tube carrying fluid under pressure.
 Its impedance---the ratio of pressure drop to volume
 flow---is a physical fact set by geometry and fluid
 properties.
-No biology is needed to define it; only the Poiseuille
-equation and the boundary condition at each junction.
 
-Paper~1~\cite{Paper1} established that the Minimum
-Reflection Principle (MRP) generates relay hierarchies
-and fractal topology in neural impedance networks.
-Paper~3~\cite{Paper3} extends the framework to temporal
-dynamics (impedance debt, sleep, aging).
-All other papers in this series treat the neural
-network exclusively.
-Yet every organ in the body is governed by a
-\emph{second} impedance network: the vasculature.
+Paper~1~\cite{Paper1} derives neural architecture and
+the mind from the Minimum Reflection Principle (MRP).
+Yet every organ is governed by a \emph{second} impedance
+network: the vasculature.
 The pressure wave in an artery reflects at every
 bifurcation, stricture, or compliance mismatch,
 precisely as an electromagnetic wave reflects at a
 transmission-line discontinuity~\cite{nichols2011,
 womersley1955}.
 
-This paper derives the vascular architecture
-from the same MRP that governs neural networks.
+This paper derives the vascular architecture from the
+same MRP, then combines both networks into the
+dual-network organ model, and finally shows that
+metabolic scaling laws (Murray, Kleiber) are necessary
+consequences of the same irreducible topology.
+
 The derivation follows a strictly outward chain:
 single vessel (Sec.~\ref{sec:framework}) $\to$
-bifurcation impedance and Murray's Law
-(Secs.~\ref{sec:murray}--\ref{sec:murray-numerics}) $\to$
-vascular C2 remodeling (Sec.~\ref{sec:vascular-C2}) $\to$
-dual-network organ model
-(Sec.~\ref{sec:organ-model}) $\to$
-positive-feedback cascade (Sec.~\ref{sec:cascade}) $\to$
-disease models (Sec.~\ref{sec:disease}) $\to$
-wound repair (Sec.~\ref{sec:wound}).
-Each step is a logical consequence of the previous;
-no step requires information from a later one.
+Murray's Law (Sec.~\ref{sec:murray}) $\to$
+vascular C2 (Sec.~\ref{sec:vascular-C2}) $\to$
+dual-network organ model (Sec.~\ref{sec:organ-model})
+$\to$ fractal cost (Sec.~\ref{sec:fractal-cost}) $\to$
+Kleiber's Law (Sec.~\ref{sec:murray-kleiber}) $\to$
+interface universality (Sec.~\ref{sec:scale}).
 
 
 % ============================================================
@@ -175,31 +157,21 @@ steady-state impedance given by the Poiseuille law:
   \Zv = \frac{\Delta P}{Q} = \frac{8\mu L}{\pi r^4}.
   \label{eq:poiseuille}
 \end{equation}
-This is the hydraulic analogue of the electrical
-resistance of a wire; diameter maps to conductor
-cross-section, viscosity to resistivity.
 
 In the pulsatile regime, Womersley theory adds
-a frequency-dependent component via the Womersley
-number $\alpha = r\sqrt{\omega\rho_f/\mu}$, where
-$\rho_f$ is the fluid density and $\omega$ the angular
-frequency of the pressure wave~\cite{womersley1955}.
-The full impedance becomes complex:
+a frequency-dependent component:
 \begin{equation}
   \Zv(\omega) = \frac{8\mu L}{\pi r^4}
     \cdot F(\alpha),
   \label{eq:womersley}
 \end{equation}
-where $F(\alpha) \to 1$ for $\alpha \ll 1$ (Poiseuille
-limit) and $F(\alpha) \to j\alpha^2/8$ for
-$\alpha \gg 1$ (inertial limit).
-For arterial flow in the human body,
-$\alpha \in [3, 15]$~\cite{nichols2011}.
+where $\alpha = r\sqrt{\omega\rho_f/\mu}$ is the
+Womersley number, $F(\alpha) \to 1$ for
+$\alpha \ll 1$ (Poiseuille limit) and
+$F(\alpha) \to j\alpha^2/8$ for $\alpha \gg 1$
+(inertial limit)~\cite{womersley1955}.
 
-Table~\ref{tab:TL} summarises the mapping between
-electromagnetic and vascular quantities.
-
-\begin{table}[h]
+\begin{table}[H]
 \caption{Electromagnetic--vascular transmission-line
 analogy.}
 \label{tab:TL}
@@ -220,55 +192,35 @@ $T = 1-\Gamma^2$ & $\Tv$       & dimensionless \\
 \label{sec:vascular-laws}
 
 \textbf{C1---Energy Conservation.}
-At every vascular junction, reflected and transmitted
-power sum to incident power:
-\begin{equation}
-  \Gv^2 + \Tv = 1.
-  \label{eq:C1v}
-\end{equation}
+$\Gv^2 + \Tv = 1$ at every vascular junction.
 
 \textbf{C2---Vascular Remodeling.}
-Vessel walls adjust their impedance to reduce local
-reflection:
 \begin{equation}
   \Delta\Zv = -\eta_v\,\Gv\,\tau_{\text{wall}}\,\rho,
   \label{eq:C2v}
 \end{equation}
 where $\tau_{\text{wall}}$ is wall shear stress
-(the vascular analogue of $x_{\text{in}}$),
-$\rho$ is the material supply from blood
-(the vascular analogue of $x_{\text{out}}$),
-and $\eta_v$ is the vascular remodeling rate.
+($x_{\text{in}}$), $\rho$ is material supply
+($x_{\text{out}}$), and $\eta_v$ is the vascular
+remodeling rate.
 
 \textbf{C3---Impedance-Tagged Transport.}
-Blood pressure waves carry the source impedance as
-metadata, enabling downstream junctions to compute
-$\Gv$ locally.
+Blood pressure waves carry source impedance as metadata.
 
 \subsection{Bifurcation reflection}
 \label{sec:bifurcation}
 
 At a symmetric bifurcation ($n$ identical daughters),
-the downstream impedance as seen from the parent trunk
-is $\Zv^{\text{down}} = \Zv^d / n$ (parallel impedances).
-The reflection coefficient:
+$\Zv^{\text{down}} = \Zv^d / n$:
 \begin{equation}
   \Gv = \frac{\Zv^d/n - \Zv^p}{\Zv^d/n + \Zv^p}.
   \label{eq:bif-gamma}
 \end{equation}
-If $\Gv = 0$ (impedance matched), then
-$\Zv^d = n\,\Zv^p$.
-Substituting Eq.~\eqref{eq:poiseuille}:
-\begin{equation}
-  \frac{r_d^4}{L_d} = \frac{r_p^4}{n L_p}.
-  \label{eq:match-only}
-\end{equation}
-This is the \emph{pure impedance-matching} solution.
-It yields $r_d = r_p / n^{1/4}$, which \emph{disagrees}
-with Murray's Law ($r_d = r_p / n^{1/3}$).
-The resolution is that MRP minimises not just $\Gv^2$
-but the \emph{total vascular action} including
-metabolic maintenance cost (Sec.~\ref{sec:murray}).
+Pure impedance matching ($\Gv = 0$) gives
+$r_d = r_p / n^{1/4}$, which \emph{disagrees} with
+Murray's Law.
+The resolution: MRP minimises the \emph{total vascular
+action} including metabolic maintenance cost.
 
 
 % ============================================================
@@ -278,53 +230,28 @@ metabolic maintenance cost (Sec.~\ref{sec:murray}).
 
 \subsection{Vascular action functional}
 
-The total cost of a vascular tree is the sum of
-impedance-mediated flow dissipation and metabolic vessel
-maintenance:
 \begin{equation}
   \Av = \sum_j \bigl[Q_j^2\,Z_j + \lambda\,V_j\bigr],
   \label{eq:vascular-action}
 \end{equation}
-where $Q_j$ is the flow through segment~$j$,
-$Z_j = 8\mu L_j / \pi r_j^4$ is its impedance,
-$V_j = \pi r_j^2 L_j$ is its volume, and
-$\lambda$ is the metabolic cost per unit volume of
-maintained vessel.
-The first term is the vascular analogue of $\Gamma^2$
-minimisation; the second is the metabolic penalty for
-supporting the vessel.
+where $Q_j$ is flow, $Z_j = 8\mu L_j/\pi r_j^4$
+is impedance, $V_j = \pi r_j^2 L_j$ is volume, and
+$\lambda$ is the metabolic cost per unit volume.
 
 \subsection{Derivation for symmetric $n$-branching}
 
-Consider a parent vessel (radius $r_p$, length $L_p$,
-flow $Q$) that bifurcates into $n$ identical daughters
-(radius $r_d$, length $L_d$, flow $Q/n$ each).
-The daughter contribution to the action:
+Daughter contribution:
 \begin{equation}
-  \Av^d = n\left[\left(\frac{Q}{n}\right)^{\!2}
-    \frac{8\mu L_d}{\pi r_d^4}
-    + \lambda\,\pi r_d^2 L_d\right]
-  = \frac{Q^2\,8\mu L_d}{n\,\pi\,r_d^4}
+  \Av^d = \frac{Q^2\,8\mu L_d}{n\,\pi\,r_d^4}
     + n\lambda\pi r_d^2 L_d.
   \label{eq:Av-daughter}
 \end{equation}
-Minimising with respect to $r_d$:
+Minimising $\partial\Av^d/\partial r_d = 0$:
 \begin{equation}
-  \frac{\partial \Av^d}{\partial r_d}
-  = -\frac{4\,Q^2\,8\mu L_d}{n\,\pi\,r_d^5}
-    + 2n\lambda\pi r_d L_d = 0.
-  \label{eq:dA-dr}
-\end{equation}
-Solving:
-\begin{equation}
-  r_d^6 = \frac{4\,Q^2\,8\mu}{2n^2\lambda\pi^2}
-  = \frac{16\,Q^2\,\mu}{n^2\,\lambda\,\pi^2}.
-  \label{eq:rd-opt}
-\end{equation}
-By the same procedure at the parent level:
-\begin{equation}
+  r_d^6 = \frac{16\,Q^2\,\mu}{n^2\,\lambda\,\pi^2},
+  \qquad
   r_p^6 = \frac{16\,Q^2\,\mu}{\lambda\,\pi^2}.
-  \label{eq:rp-opt}
+  \label{eq:rd-rp-opt}
 \end{equation}
 Taking the ratio:
 \begin{equation}
@@ -332,32 +259,14 @@ Taking the ratio:
   \label{eq:murray}
 \end{equation}
 which is \textbf{Murray's Law}~\cite{murray1926}.
-
-\subsection{The cube law}
-
-Equivalently, conservation of flow
-$Q = n\,Q_d$ combined with
-$Q_j \propto r_j^3$ gives
-\begin{equation}
-  r_p^3 = \sum_{i=1}^n r_{d,i}^3,
-  \label{eq:cube-law}
-\end{equation}
-the classical cube law of vessel
-branching~\cite{murray1926}.
+Equivalently, $r_p^3 = \sum_{i=1}^n r_{d,i}^3$
+(the cube law).
 
 \begin{remark}[Physics, not optimisation]
-Murray derived Eq.~\eqref{eq:murray} by minimising
-a cost function; our derivation reframes this as a
-consequence of the \emph{same} MRP that governs neural
-networks.
-The $1/3$ exponent arises from the balance of two
-impedance-related costs (dissipation $\propto r^{-4}$,
-maintenance $\propto r^{+2}$), resolving the observation
-that pure impedance matching gives $1/4$ while nature
-uses $1/3$.
-Murray's Law is a \emph{physical law} of impedance
-networks---no different in kind from Snell's law for
-electromagnetic reflection at dielectric boundaries.
+The $1/3$ exponent arises from the balance of dissipation
+($\propto r^{-4}$) and maintenance ($\propto r^{+2}$).
+Pure impedance matching gives $1/4$; MRP gives $1/3$.
+Murray's Law is a physical law of impedance networks.
 \end{remark}
 
 
@@ -366,16 +275,11 @@ electromagnetic reflection at dielectric boundaries.
 \label{sec:murray-numerics}
 % ============================================================
 
-\subsection{Analytical verification}
+For each branching number $n \in \{2, 3, 4\}$,
+the minimum of $\Av^d(r_d)$ is located numerically and
+compared with Murray's prediction:
 
-For each branching number $n \in \{2, 3, 4\}$, we
-compute the vascular action $\Av^d(r_d)$ over a
-range of daughter radii.
-The minimum of $\Av^d$ is located numerically and
-compared with Murray's prediction
-$r_d^{\text{Murray}} = r_p / n^{1/3}$:
-
-\begin{table}[h]
+\begin{table}[H]
 \caption{Murray's Law verification.}
 \label{tab:murray}
 \begin{ruledtabular}
@@ -391,57 +295,35 @@ $n$ & $r_d^{\text{MRP}}$ & $r_d^{\text{Murray}}$ &
 \end{table}
 
 \noindent
-Agreement is \emph{exact} (algebraic identity):
-both expressions minimise the same functional.
-The $\Gamma = 0$ (pure impedance-matching) solution
-gives $r_d = r_p / n^{1/4}$, which overestimates the
-optimal radius by $n^{1/12}$.
-
+Agreement is exact (algebraic identity).
+The $\Gamma=0$ solution gives $r_d = r_p/n^{1/4}$,
+overestimating by $n^{1/12}$.
 Full test: \texttt{tests/test\_paper2\_murray.py}
 (15~tests, 100\% pass).
-
-\begin{figure*}[t]
-  \includegraphics[width=\textwidth]{../figures/paper_ii_murray.pdf}
-  \caption{Murray's Law from the Vascular Action Principle.
-  \textbf{Left}: Action $\Av(r_d)$ versus daughter radius for
-  $n=2$ branching. The minimum (star) coincides with Murray's
-  prediction ($r_p/n^{1/3}$, dashed line).
-  Pure impedance matching ($\Gamma=0$, dotted) overestimates
-  the optimal radius.
-  \textbf{Right}: Agreement between MRP-derived and
-  Murray-predicted daughter radius for $n=2,3,4$.}
-  \label{fig:murray}
-\end{figure*}
-
 
 % ============================================================
 \section{Vascular C2 Remodeling}
 \label{sec:vascular-C2}
+
+\begin{figure}[t]
+  \includegraphics[width=\columnwidth]{../figures/fig_p2_murray.pdf}
+  \caption{Murray's Law from the Vascular Action Principle.
+  \textbf{Left}: Action $\Av(r_d)$ vs.\ daughter radius
+  for $n=2$; minimum (star) at Murray prediction (dashed);
+  pure impedance matching (dotted) overestimates.
+  \textbf{Right}: Agreement for $n=2,3,4$.}
+  \label{fig:murray}
+\end{figure}
 % ============================================================
 
-Neural C2 adjusts $Z_n$ with rate $\eta_n$ on the
-timescale of synaptic plasticity (milliseconds to
-hours).
-Vascular C2 adjusts $\Zv$ with rate $\eta_v$ on the
-timescale of vascular remodeling (days to weeks):
+Neural C2 operates with rate $\eta_n$ (ms--hours);
+vascular C2 with $\eta_v$ (days--weeks):
 \begin{equation}
   \Delta\Zv = -\eta_v\,\Gv\,\tau_{\text{wall}}\,\rho,
   \label{eq:C2v-detail}
 \end{equation}
-where:
-\begin{itemize}
-  \item $\Gv$ is the local vascular reflection coefficient,
-  \item $\tau_{\text{wall}}$ is wall shear stress
-    (the mechanical signal indicating flow):
-    $\tau_{\text{wall}} = 4\mu Q / \pi r^3$,
-  \item $\rho$ is the material substrate
-    (oxygen, glucose, growth factors) delivered by blood,
-  \item $\eta_v$ is the endothelial remodeling rate.
-\end{itemize}
+where $\tau_{\text{wall}} = 4\mu Q/\pi r^3$.
 
-The mapping to neural C2
-($\Delta Z_n = -\eta_n\,\Gamma_n\,x_{\text{in}}\,
-x_{\text{out}}$) is exact:
 \begin{center}
 \begin{tabular}{lll}
 \hline
@@ -459,84 +341,81 @@ $\eta$   & $\eta_n$ (fast)
 \end{center}
 
 \noindent
-The key physical difference: $\eta_v \ll \eta_n$.
-Arteries remodel on timescales of
-weeks~\cite{langille1986, kamiya1984};
-neurons remodel on timescales of milliseconds to hours.
-This separation of timescales has two consequences:
-\begin{enumerate}
-  \item Vascular damage accumulates slowly---diseases
-    like atherosclerosis progress over decades.
-  \item Once vascular $\Gv$ is high (stenosis), recovery
-    is slow even with optimal conditions ($\rho$ restored).
-\end{enumerate}
+Key consequence: $\eta_v \ll \eta_n$ means
+vascular damage accumulates slowly (atherosclerosis
+over decades) and recovery is slow even with
+optimal conditions.
 
 
 % ============================================================
-%  PART B — FROM VASCULAR NETWORK TO ORGAN HEALTH
+%  PART B — DUAL-NETWORK ORGAN MODEL
 % ============================================================
 
-\part*{Part B: From Vascular Network to Organ Health}
+\bigskip\noindent\textbf{\large Part B: The Dual-Network Organ Model}\medskip
 
 
 % ============================================================
-\section{The Dual-Network Organ Model}
+\section{Organ Health from Multiplicative Transmission}
 \label{sec:organ-model}
 % ============================================================
 
-Paper~1 established the neural network; Part~A of this
-paper established the vascular network.
-Every organ is served by \emph{both} simultaneously.
-This section derives the organ health model from
-multiplicative transmission.
-
 \subsection{Why two networks}
 
-Neural C2 requires material substrate:
-$x_{\text{out}} = \rho$ (neurotransmitter synthesis
-needs glucose and oxygen from blood).
-Without vascular delivery, $\rho \to 0$, hence
-$\Delta Z_n = 0$: the neural network cannot remodel.
-Vascular C2 requires neural control:
-autonomic signals regulate vascular tone
-($\tau_{\text{wall}}$ depends on smooth-muscle
-contraction, which is neurally mediated).
-Without neural input, C2 vascular is blind.
-The two networks are therefore \emph{mutually
-prerequisite}: neither can execute C2 without the other.
+Neural C2 requires material substrate ($\rho$) from
+vascular delivery.
+Vascular C2 requires neural control (autonomic signals
+regulate vascular tone).
+The two networks are \emph{mutually prerequisite}.
 
-\subsection{Multiplicative organ health}
+\subsection{Organ health}
 
-At each organ, the neural network transmits fraction
-$\Tn = 1 - \Gn^2$ and the vascular network transmits
-fraction $\Tv = 1 - \Gv^2$.
-An organ functions only if it receives \emph{both}
-neural control and vascular supply.
-The organ health:
+At each organ, the neural network transmits $\Tn = 1-\Gn^2$
+and the vascular network transmits $\Tv = 1-\Gv^2$.
+Series connection:
 \begin{equation}
   \boxed{H = \Tn \cdot \Tv = (1-\Gn^2)(1-\Gv^2).}
-  \label{eq:dual_health}
+  \label{eq:dual-health}
 \end{equation}
-$H = 1$ means perfect transmission on both networks;
-$H = 0$ means at least one network is totally blocked.
-The multiplicative form follows from series connection:
-a signal must pass through both networks to reach the
-target tissue.
+$H=1$: perfect transmission; $H=0$: at least one
+network totally blocked.
 
-\subsection{Thermal bus interpretation}
+\subsection{Thermal bus}
 
-The vascular network also carries heat:
+The vascular network carries heat:
 \begin{equation}
   \dot{Q}_{\text{organ}} = c_p\,\rho_f\,Q
-    \,(T_{\text{art}} - T_{\text{ven}}),
+    \,(T_{\text{art}} - T_{\text{ven}}).
   \label{eq:thermal-bus}
 \end{equation}
-where $c_p$ is specific heat, $\rho_f$ is blood density,
-$Q$ is flow, and $\Delta T$ is the arteriovenous
-temperature gradient.
-When $\Gv^2$ increases, $Q$ decreases proportionally
-(since $\Tv = 1 - \Gv^2$ determines flow transmission),
-and thermal exchange is compromised.
+When $\Gv^2$ increases, $Q$ decreases and thermal
+exchange is compromised.
+
+\subsection{Four irreducible tissue types}
+\label{sec:four-tissues}
+
+C2 has four prerequisites:
+\begin{enumerate}
+  \item \textbf{Signal} ($x_{\text{in}}$) to detect
+    mismatch $\Gamma$ $\to$ \textbf{Nervous tissue}.
+  \item \textbf{Material substrate} ($x_{\text{out}}$)
+    delivered by pipe network $\to$
+    \textbf{Connective (vascular) tissue}.
+  \item \textbf{Mechanical actuator} to apply force
+    for structural update $\to$ \textbf{Muscle tissue}.
+  \item \textbf{Boundary} defining spatial domain of $Z$
+    measurement $\to$ \textbf{Epithelial tissue}.
+\end{enumerate}
+The dependency cycle is closed:
+\[
+  \text{Nervous} \xrightarrow{\text{needs }\rho}
+  \text{Connective} \xrightarrow{\text{needs pump}}
+  \text{Muscle} \xrightarrow{\text{needs boundary}}
+  \text{Epithelial} \xrightarrow{\text{needs control}}
+  \text{Nervous}.
+\]
+Removing any one tissue collapses C2.
+\textbf{Four is both necessary and sufficient for C2
+viability.}
 
 
 % ============================================================
@@ -544,10 +423,7 @@ and thermal exchange is compromised.
 \label{sec:failure-modes}
 % ============================================================
 
-From Eq.~\eqref{eq:dual_health}, four distinct
-failure classes emerge:
-
-\begin{table}[h]
+\begin{table}[H]
 \caption{Four failure modes of the dual-network model.}
 \label{tab:failure}
 \begin{ruledtabular}
@@ -563,22 +439,12 @@ high & high & Dual failure  & diabetic complications \\
 \end{table}
 
 \noindent
-Pure neural failure ($\Gn^2$ high, $\Gv^2$ low):
-blood supply is adequate but neural control is lost.
-Examples: isolated neuropathy, denervation atrophy.
-
-Pure vascular failure ($\Gv^2$ high, $\Gn^2$ low):
-neural control is intact but material delivery is
-blocked.
-Examples: acute ischaemia, ischaemic stroke.
-
-Dual failure ($\Gn^2$ and $\Gv^2$ both high):
-both networks compromised simultaneously.
-This is the most dangerous mode because the
-positive-feedback cascade
-(Sec.~\ref{sec:cascade}) locks the organ into
-a death spiral.
-Examples: diabetic nephropathy, vascular dementia.
+The positive-feedback cascade linking these modes
+($\Gv\!\uparrow \to \rho\!\downarrow \to
+\Gn\!\uparrow \to \text{autonomic}\!\downarrow
+\to \Gv\!\uparrow\!\uparrow$)
+and its disease instances are derived in
+Paper~4~\cite{Paper4}.
 
 
 % ============================================================
@@ -586,12 +452,7 @@ Examples: diabetic nephropathy, vascular dementia.
 \label{sec:organ-hierarchy}
 % ============================================================
 
-Each organ has a distinctive resting $\Gv^2$
-reflecting its perfusion architecture.
-Table~\ref{tab:organs} catalogues ten representative
-organs.
-
-\begin{table}[h]
+\begin{table}[H]
 \caption{Vascular impedance landscape across 10~organs.}
 \label{tab:organs}
 \begin{ruledtabular}
@@ -614,701 +475,438 @@ Bone     & 0.80 & 0.300 & 0.979 \\
 \end{table}
 
 \noindent
-The hierarchy reflects perfusion priority:
-placenta (lowest $\Gv^2$, maximal flow for maternal--fetal
-exchange) and brain (next lowest, constant high-flow
-demand) at the top; skin and bone (highest $\Gv^2$,
-most dispensable perfusion targets) at the bottom.
+The hierarchy reflects perfusion priority: placenta
+(lowest $\Gv^2$, maximal flow) at top; skin and bone
+(highest $\Gv^2$, dispensable) at bottom.
+
+
+% ============================================================
+%  PART C — FRACTAL COST AND METABOLIC SCALING
+% ============================================================
+
+\bigskip\noindent\textbf{\large Part C: Fractal Cost and Metabolic Scaling}\medskip
 
 \begin{figure}[t]
-  \includegraphics[width=\columnwidth]{../figures/paper_ii_organs.pdf}
+  \includegraphics[width=\columnwidth]{../figures/fig_p2_organs.pdf}
   \caption{Vascular impedance landscape across 10 organs.
-  Each organ has a distinctive $\Gv^2$ reflecting its
-  perfusion architecture.
-  Placenta (lowest $\Gv^2$) is optimized for maximal flow;
-  skin and bone (highest $\Gv^2$) are the most dispensable
-  perfusion targets.}
+  Placenta: lowest $\Gv^2$ (maximal flow);
+  skin/bone: highest $\Gv^2$ (dispensable).}
   \label{fig:organs}
 \end{figure}
 
 
 % ============================================================
-\section{Positive-Feedback Cascade}
-\label{sec:cascade}
+\section{Irreducible Action of a Self-Similar Relay Hierarchy}
+\label{sec:fractal-cost}
 % ============================================================
 
-The dual-network model predicts a positive-feedback
-loop between vascular and neural failure:
+Paper~1~\cite{Paper1} proved $\Acut > 0$ (the
+Dimensional Cost Irreducibility Theorem) but left its
+geometric structure unspecified.
+This section asks: \emph{how big} is $\Acut$?
 
+\subsection{Mode-count profile}
+
+Consider a hierarchical relay network with $L$ levels,
+branching number $n$ at each level, embedded in
+$d$-dimensional space.
+Level~0 is the root (aorta, cortex); level~$L$ the
+terminal (capillary, sensory ending).
+At level~$\ell$: $N_\ell = n^\ell$ nodes,
+$l_\ell = l_0\,n^{-\ell/d}$ (space-filling), and
+mode count:
+\begin{equation}
+  K_\ell = K_0\,c^\ell, \quad 0 < c < 1,
+  \label{eq:mode-profile}
+\end{equation}
+with $c = n^{-1/d}$ when the cutoff is set by branch
+length.
+
+\subsection{$\Acut$ at each level}
+
+From the Irreducibility Theorem (Paper~1,
+Theorem~1~\cite{Paper1}), at level~$\ell$ there are
+$N_\ell = n^\ell$ edges, each contributing
+$(K_\ell - K_{\ell+1})^+$:
+\begin{equation}
+  \Acut = K_0(1 - c) \sum_{\ell=0}^{L-1} (nc)^\ell.
+  \label{eq:acut-sum}
+\end{equation}
+
+\subsection{Scaling law}
+
+With $c = n^{-1/d}$, the base $nc = n^{(d-1)/d} > 1$
+for $d \ge 2$, so the sum is dominated by the last
+term:
+\begin{equation}
+  \boxed{\Acut \propto M^{(d-1)/d}.}
+  \label{eq:acut-mass}
+\end{equation}
+\textbf{For $d = 3$}: $\Acut \propto M^{2/3}$.
+The per-cell cost $a_{\text{cut}} = \Acut/M \propto
+M^{-1/3}$ \emph{decreases} with organism size---economies
+of scale from the relay hierarchy.
+
+
+% ============================================================
+\section{Murray's Ratio and Metabolic Scaling}
+\label{sec:murray-kleiber}
+% ============================================================
+
+\subsection{The Murray bifurcation ratio}
+
+Each branching level contracts the service length by
+$l_{\ell+1}/l_\ell = n^{-1/d}$.
+The bifurcation ratio:
+\begin{equation}
+  \boxed{\beta \equiv n^{1/d}.}
+  \label{eq:beta-def}
+\end{equation}
+For binary bifurcation ($n=2$) in $d=3$:
+$\beta = 2^{1/3} = 1.2599\ldots$
+From Murray's Law (Eq.~\ref{eq:murray}):
+$r_{\ell+1} = r_\ell/n^{1/3}$; for $d=3$,
+$r_{\ell+1} = r_\ell/\beta$.
+
+\subsection{Network maintenance cost}
+
+Relay reflection power:
+$P_{\text{reflect}} = \Acut \cdot P_0/N_T
+\propto M^{(d-1)/d} \cdot M^{-1} = M^{-1/d}$.
+Total network dissipation:
+\begin{equation}
+  B_{\text{network}} \propto M \cdot M^{-1/d}
+  = M^{(d-1)/d}.
+  \label{eq:B-network}
+\end{equation}
+For $d=3$: $B_{\text{network}} \propto M^{2/3}$.
+
+\subsection{Kleiber's Law}
+
+Tissue metabolism scales linearly ($B_{\text{tissue}}
+\propto M$), but the vascular tree limits delivery.
+From MRP:
+(1)~Murray's Law gives $r_{\ell+1}/r_\ell = n^{-1/3}$;
+(2)~space-filling determines the length ratio;
+(3)~capillary invariance fixes the terminal scale;
+(4)~blood volume $\propto M$.
+Together: $N_T \propto M^{d/(d+1)}$ and
+\begin{equation}
+  \boxed{B \propto M^{d/(d+1)}.}
+  \label{eq:kleiber}
+\end{equation}
+For $d=3$: $B \propto M^{3/4}$---\textbf{Kleiber's
+Law}~\cite{Kleiber1932}, now a consequence of MRP.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\columnwidth]{../figures/fig_p2_kleiber_scatter.pdf}
+  \caption{Kleiber's Law verification.
+  Left: log--log scatter of basal metabolic rate $B$ vs.\
+  body mass $M$ for 12 mammalian species (mouse to blue whale),
+  overlaid with the $\Gamma$-Net prediction
+  $B \propto M^{3/4}$ (red) and
+  the surface-law prediction $B \propto M^{2/3}$ (green dashed).
+  Right: residuals from the $3/4$ fit.}
+  \label{fig:kleiber}
+\end{figure}
+
+\subsection{Volumetric heat density}
+
+Every active interface dissipates $\Gamma_i^2 P_{\text{in},i}$
+as heat (Paper~0, Corollary~1~\cite{Paper0}).
+A tissue with $K$ modes:
+\begin{equation}
+  q \propto K \cdot \avg{\Gamma^2} \cdot P_{\text{in}}
+  / V_{\text{node}}.
+  \label{eq:vol-heat}
+\end{equation}
+The human brain ($K=5$) is $\sim$2\% of body mass but
+$\sim$25\% of basal metabolic heat---because its
+per-node mode count is largest.
+
+
+% ============================================================
+\section{Dual-Network Packing}
+\label{sec:dual-packing}
+% ============================================================
+
+\subsection{Two trees in one volume}
+
+A multicellular organism requires two space-filling
+networks: the \textbf{vascular tree}
+($Z_v = \Delta P/Q$, transport) and the
+\textbf{neural tree}
+($Z_n = R_m + 1/j\omega C_m$, control).
+
+\begin{theorem}[Dual-Network Overhead]
+\label{thm:packing}
+When two space-filling relay trees share a volume in
+$d$~dimensions,
+\begin{equation}
+  \Acut^{\text{dual}} = \Acut^v + \Acut^n + \Acouple,
+  \quad \Acouple > 0.
+  \label{eq:acut-dual}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+At co-terminal points, the two networks negotiate
+resource allocation.
+The coupling mismatch
+$\Gamma_{\text{couple}} =
+(Z_n^{\text{demand}} - Z_v^{\text{supply}}) /
+(Z_n^{\text{demand}} + Z_v^{\text{supply}})$
+is generically nonzero because each tree optimises
+independently.
+Hence $\Acouple = N_T \avg{\Gamma_{\text{couple}}^2} > 0$.
+\end{proof}
+
+\subsection{The metabolic overhead factor}
+
+\begin{equation}
+  \Omega \equiv \frac{B_{\text{total}}}{B_{\text{tissue}}}
+  = 1 + \frac{B_{\text{vasc}} + B_{\text{neural}}}
+             {B_{\text{tissue}}}.
+  \label{eq:omega-def}
+\end{equation}
+For humans:
+$B_{\text{neural}}/B_{\text{total}} \approx 0.20$;
+$B_{\text{vasc}}/B_{\text{total}} \approx 0.05$.
+Therefore $\Omega \approx 1/0.75 \approx 1.33$.
+The neural network alone gives
+$\Omega_n = 1/(1-0.20) = 1.25 \approx \beta = 2^{1/3}$.
+
+\subsection{Why blood before nerve}
+
+C2 requires a carrier for $x_{\text{in}}$:
+neurotransmitter synthesis needs glucose and oxygen from
+blood.
+Without the vascular network, $x_{\text{in}} = 0$,
+$\Delta Z = 0$: the neural network cannot remodel.
+Embryology confirms: cardiac tube at day~21; neural tube
+closure at day~25--28.
+In the product $1_v \times 1_n$, the vascular ``1'' is
+the left factor.
+
+
+% ============================================================
+\section{Multi-Scale Verification}
+\label{sec:multi-scale}
+% ============================================================
+
+The irreducibility theorem is not restricted to neural
+tissue.
+Every tissue where $K$ varies across an interface
+produces $\Acut > 0$.
+
+\subsection{Cardiovascular topology}
+
+An 11-node blueprint with $K$-levels
+Cardiac Purkinje ($K=4$) $\to$ vascular smooth muscle
+($K=2$) $\to$ endothelial ($K=1$).
+Over 300~ticks: $\Aimp \to 0$, $\Acut$ rises to~34
+then saturates, C1 holds.
+Test: \texttt{tests/test\_e0\_cardiovascular.py}
+(13~tests, 100\% pass).
+
+\subsection{Joints as impedance relays}
+
+Direct bone--synovial interface:
+$\Gamma = (120-50)/(120+50) = 0.54$, $T = 0.71$.
+Cartilage at
+$Z_{\text{cart}} \approx 80 \approx
+\sqrt{Z_{\text{bone}}\cdot Z_{\text{syn}}}$
+acts as a quarter-wave relay~\cite{Pozar2011},
+achieving $T > 0.80$.
+When cartilage degrades (osteoarthritis), the relay is
+removed and $\Acut$ is no longer mitigated.
+
+\subsection{Twenty-nine tissue atlas}
+
+A comprehensive atlas of 29~organ-system blueprints
+(Paper~0, Table~4~\cite{Paper0}) contains $\sim$217
+nodes, $\sim$242 directed edges, $K \in [1,5]$.
+All 29 verified:  C1 holds, $\Aimp$ non-increasing,
+$\Acut$ topologically invariant.
+245~tests pass at 100\% rate
+(\texttt{tests/test\_tissue\_blueprints.py}).
+
+\subsection{Whole-body inter-organ topology}
+
+Connecting the 29~blueprints requires:
 \begin{enumerate}
-  \item \textbf{Vascular insult:}
-    $\Gv\!\uparrow$ (e.g., stenosis, microvascular damage).
-  \item \textbf{Material starvation:}
-    $\Tv = 1 - \Gv^2$ drops $\Rightarrow$
-    $\rho\!\downarrow$ (less glucose, oxygen to neurons).
-  \item \textbf{Neural failure:}
-    With $\rho\!\downarrow$, neural C2 cannot execute:
-    $\Delta Z_n \to 0$ $\Rightarrow$
-    $\Gn\!\uparrow$ (neural impedance mismatch grows).
-  \item \textbf{Autonomic loss:}
-    Impaired $\Gn$ reduces autonomic control of vascular
-    tone $\Rightarrow$ $\tau_{\text{wall}}$ regulation
-    fails.
-  \item \textbf{Cascade:}
-    Without autonomic feedback, vascular C2 also fails:
-    $\Gv\!\uparrow\!\uparrow$.
+  \item \textbf{Vascular bus}: aortic trunk ($K=4$)
+    $\to$ 29 arteriolar feeds ($K=2$),
+    $\Acut = 2$ per edge.
+  \item \textbf{Neural bus}: autonomic trunk ($K=3$)
+    $\to$ 29 nerve feeds ($K=2$),
+    $\Acut = 1$ per edge.
+  \item \textbf{Brain hub}: hypothalamus ($K=3$)
+    drives the neural bus; the vascular bus feeds
+    signals back to thalamus ($K=5$).
 \end{enumerate}
+Unified whole-body: 278~nodes, 426~edges,
+$\Acut = 222$ (the structural information cost of
+multi-organ life).
 
-The loop closes: step~5 amplifies step~1.
-The system enters a positive-feedback spiral:
+\subsection{Thermoregulation}
+
+Blood viscosity: $\tilde\eta(T) = \exp[\alpha(T^{-1}
+- T_0^{-1})]$ with $\alpha \approx 1949$~K.
+C2 repair:
+$\tilde\eta_{\text{learn}}(T) = \exp[\beta_T(T_0^{-1}
+- T^{-1})]$ with $\beta_T \approx 6015$~K.
+Setting $\tilde\tau(T_c) = \tau_{\max}$:
 \begin{equation}
-  \Gv\!\uparrow \;\to\; \rho\!\downarrow \;\to\;
-  \Gn\!\uparrow \;\to\;
-  \text{autonomic}\!\downarrow \;\to\;
-  \Gv\!\uparrow\!\uparrow.
-  \label{eq:cascade}
+  T_c = \frac{T_0}{1 + T_0\ln\tau_{\max}/
+  (\alpha + \beta_T)}.
+  \label{eq:Tc}
 \end{equation}
+Higher $K$ raises $T_c$:
+$T_c(K{=}1) = -10.3\,^\circ$C (ectotherm viable);
+$T_c(K{=}5) = +4.5\,^\circ$C (endothermy required).
 
-\subsection{Simulation: 60\% stenosis cascade}
+\subsection{Geometric universality}
 
-A simulation with initial 60\% stenosis ($\Gv^2 = 0.60$)
-in a single organ shows the cascade:
-\begin{itemize}
-  \item $t = 0$: insult ($\Gv^2 = 0.60$).
-  \item $t = 50$ ticks: neural begins to fail
-    ($\Gn^2 = 0.15$, $H = 0.34$).
-  \item $t = 200$ ticks: dual failure
-    ($\Gn^2 = 0.55$, $\Gv^2 = 0.82$, $H = 0.08$).
-\end{itemize}
-The cascade is captured by the linearized C2
-self-repair model: even with a neural self-repair term
-$-\alpha\,\Gn$ added to the neural C2, the vascular
-death-spiral overcomes the repair if the initial insult
-exceeds $\Gv^2 > 0.5$.
-
-
-% ============================================================
-\section{Disease Models}
-\label{sec:disease}
-% ============================================================
-
-Each disease below is an instance of the dual-network
-cascade at a specific anatomical locus.
-No disease-specific code is used; only the initial
-conditions (which organ, which network, how severe)
-differ.
-
-\subsection{Atherosclerosis}
-\label{sec:athero}
-
-Plaque formation increases local $\Zv$ (luminal
-narrowing $\Rightarrow$ $r\!\downarrow$
-$\Rightarrow$ $\Zv \propto r^{-4}\!\uparrow$).
-$\Gv\!\uparrow$ at the stenosis site.
-The cascade proceeds: material starvation downstream
-$\to$ neural failure in end-organ $\to$ autonomic loss
-$\to$ further vascular degradation.
-Clinical presentation depends on the artery affected:
-coronary (angina/MI), carotid (stroke), peripheral
-(claudication).
-
-\subsection{Aneurysm}
-\label{sec:aneurysm}
-
-Vessel wall weakening ($r\!\uparrow$ locally) produces
-$\Zv\!\downarrow$ at the aneurysm site.
-The impedance mismatch with upstream and downstream
-segments generates
-$\Gv\!\uparrow$ at \emph{both} boundaries.
-The cascade is bidirectional: upstream boundary reflects
-the forward wave; downstream boundary reflects the
-returning wave.
-Rupture $= |\Gv| \to 1$ (total reflection, complete
-impedance discontinuity).
-
-\subsection{Diabetic microvascular disease}
-\label{sec:diabetic}
-
-Chronic hyperglycaemia increases blood viscosity
-$\mu\!\uparrow$ and damages capillary endothelium,
-producing diffuse microvascular $\Gv\!\uparrow$.
-The dual-network model explains why diabetic
-complications are multi-organ~\cite{brownlee2001}:
-retinopathy (retinal $\Gv\!\uparrow$),
-nephropathy (renal $\Gv\!\uparrow$),
-neuropathy (vasa nervorum $\Gv\!\uparrow$ $\to$
-neural $\Gn\!\uparrow$ via the cascade).
-All three are instances of the \emph{same} cascade
-at different anatomical sites.
-
-\subsection{Vascular dementia}
-\label{sec:vasc-dementia}
-
-Cerebral small-vessel disease
-($\Gv\!\uparrow$ in brain microvasculature) leads to
-cognitive decline ($\Gn\!\uparrow$ in cortex) via
-material starvation~\cite{mok2012}.
-The dual-network model predicts that vascular dementia
-and Alzheimer's disease (primarily neural $\Gn\!\uparrow$)
-should show different impedance signatures:
-vascular dementia has $\Gv$ leading $\Gn$;
-Alzheimer's has $\Gn$ increasing independently of $\Gv$.
-
-\subsection{Pre-eclampsia}
-\label{sec:preeclampsia}
-
-Defective placental vascularisation produces
-$\Gv\!\uparrow$ at the uteroplacental interface.
-Because the placenta has the \emph{lowest} resting
-$\Gv^2$ of any organ (Table~\ref{tab:organs}), it is
-the most sensitive to vascular degradation.
-The cascade extends systemically: placental
-$\Gv\!\uparrow$ $\to$ fetal material starvation $\to$
-maternal hypertensive compensation $\to$ multi-organ
-damage~\cite{steegers2010}.
+$\beta = n^{1/d}$ is a geometric inevitability for any
+space-filling hierarchy---independent of molecular
+substrate.
+Vascular plants lack a neural network but obey Murray's
+Law with $\beta = 2^{1/3}$~\cite{McCulloh2003} and
+$B \propto M^{3/4}$~\cite{Niklas1994}, confirming
+$\beta$ is a property of geometry, not biology.
+Plants have $\Omega \approx 1$ (no neural network);
+the prediction
+$\Omega_{\text{plant}} < \Omega_{\text{animal}}$
+is testable by cross-kingdom metabolic comparisons.
 
 
 % ============================================================
-\section{Wound Repair as Spatial Impedance Matching}
-\label{sec:wound}
+%  PART D — INTERFACE UNIVERSALITY
 % ============================================================
 
-A skin laceration severs the local transmission-line
-continuity, creating an impedance discontinuity where
-$|\Gv| \to 1$.
-MRP demands that the system reduce this local $\Gv^2$
-as rapidly as possible.
+\bigskip\noindent\textbf{\large Part D: Interface Universality}\medskip
 
-\subsection{The healing sequence}
 
-The well-known clinical sequence---haemostasis,
-inflammation, proliferation, remodelling---maps directly
-onto a time-ordered $\Gv^2$ minimisation cascade:
+% ============================================================
+\section{Interface Scale Table}
+\label{sec:scale}
+% ============================================================
+
+Table~\ref{tab:scale} demonstrates that $\Gamma$ governs
+interfaces across seven physical domains and 14~orders
+of magnitude in spatial scale.
+Each row represents a \emph{different effort--flow pair}
+(different physics), not merely a different cable size.
+
+Every row participates in the same four-step closed loop:
 \begin{enumerate}
-  \item \textbf{Haemostasis}: emergency clot seals the
-    open boundary ($|\Gv| = 1 \to |\Gv| < 1$).
-  \item \textbf{Inflammation}: immune response clears
-    debris that would maintain high $\Gv$.
-  \item \textbf{Proliferation}: fibroblasts deposit
-    cross-woven collagen to progressively match
-    $Z_{\text{scar}} \to Z_{\text{skin}}$.
-  \item \textbf{Remodelling}: years-long fine-tuning
-    of fibre alignment to further reduce $\Gv^2$.
+  \item \textbf{Perception}: sensor measures $x_{\text{in}}$.
+  \item \textbf{Error}: $\Gamma = (Z_2-Z_1)/(Z_2+Z_1)$
+    quantifies mismatch; $\Gamma^2$ is reflected energy.
+  \item \textbf{Compensation}: C2 drives
+    $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$.
+  \item \textbf{Re-perception}: updated $Z$ changes next
+    $\Gamma$; loop repeats.
 \end{enumerate}
-
-\noindent
-The clinical observation that scars never fully recover
-original tissue properties corresponds to a residual
-$\Gamma_{\mathrm{v},\text{scar}}^2 > 0$: the impedance match is
-improved but not perfected.
-The term ``healing'' is less precise than
-``\emph{suturing}''---the system stitches together two
-impedance domains with a graded transition layer.
-
-\subsection{Dual-network wound monitoring}
-\label{sec:wound-protocol}
-
-The wound-health trajectory is characterised by two
-time series:
-\begin{align}
-  \Gn^2(t) &: \text{ neural mismatch at wound margin},
-    \label{eq:wound-Gn}\\
-  \Gv^2(t) &: \text{ vascular mismatch across wound}.
-    \label{eq:wound-Gv}
-\end{align}
-The local Health Index of the wound:
-\begin{equation}
-  H_{\text{wound}}(t) =
-    \bigl(1-\Gn^2(t)\bigr)
-    \bigl(1-\Gv^2(t)\bigr),
-  \label{eq:wound-health}
-\end{equation}
-with $H_{\text{wound}}(0) \approx 0$ at injury and
-$H_{\text{wound}} \to H_{\text{scar}} < 1$ at
-remodelling completion.
-
-\begin{remark}[Falsifiable prediction]
-Bioimpedance spectroscopy across a healing wound should
-show a monotonic decrease in local $|\Gv(f)|$ over
-weeks.
-The time constant of $\Gv^2$ decay should correlate with
-the rate of pain resolution (VAS), testing the
-``pain $= \Gamma$ readout'' hypothesis.
-\end{remark}
-
-\subsection{Pain as impedance signal}
-
-Pain perception during wound closure provides a direct
-readout of local $\Gv^2$: nociceptors respond to the
-magnitude of the impedance discontinuity.
-As collagen remodelling reduces $\Gv^2$, pain
-subsides---not because of ``neural adaptation'' but
-because the physical mismatch being sensed has
-diminished.
-The $\Gamma$-Pain Index $\Pi_\Gamma$
-(Paper~4~\cite{Paper4}) applied to the wound site:
-\begin{equation}
-  \Pi_{\Gamma,\text{wound}}(t) =
-    w_n\,\Gn^2(t) + w_v\,\Gv^2(t)
-    + w_D\,\frac{dD_{Z,\text{wound}}}{dt},
-  \label{eq:wound-pain}
-\end{equation}
-where $D_{Z,\text{wound}}$ is the cumulative impedance
-debt of the wound (Paper~3~\cite{Paper3}).
-
-
-% ============================================================
-%  PART C — CLINICAL VALIDATION
-% ============================================================
-
-\part*{Part C: Clinical Validation}
-
-
-% ============================================================
-\section{Numerical Experiments}
-\label{sec:experiments}
-% ============================================================
-
-Nine numerical experiments verify internal consistency
-of the dual-network model.
-All use the Alice simulation engine~\cite{zenodo_code}
-with physics modules built from C1--C3.
 
 \begin{table*}[t]
-\caption{Numerical experiments (V1--V9).
-All tests use reproducible seeds and are included in
-\texttt{tests/test\_paper2\_*.py}.}
-\label{tab:experiments}
-\begin{ruledtabular}
-\begin{tabular}{clcl}
-ID & Test & Pass & Criterion \\
-\hline
-V1 & Bifurcation $\Gv$ matches analytical &
-  \checkmark & $|\Gv^{\text{sim}} - \Gv^{\text{theory}}|
-  < 10^{-6}$ \\
-V2 & Murray's Law ($n=2,3,4$) &
-  \checkmark & MRP minimum $= r_p/n^{1/3}$ \\
-V3 & C1 conservation at every junction &
-  \checkmark & $|\Gv^2 + \Tv - 1| < 10^{-12}$ \\
-V4 & Vascular C2 reduces $\Gv^2$ monotonically &
-  \checkmark & $\Delta\Gv^2 \le 0$ at every tick \\
-V5 & Healthy organ: $H > 0.5$ &
-  \checkmark & $H = \Tn\Tv > 0.5$ \\
-V6 & 60\% stenosis cascade &
-  \checkmark & $H < 0.1$ by $t = 200$ \\
-V7 & Pure neural failure: $\Gv$ unaffected &
-  \checkmark & $\Delta\Gv^2 < 10^{-6}$ \\
-V8 & Aneurysm: bidirectional $\Gv\!\uparrow$ &
-  \checkmark & $\Gv^2 > 0.5$ at both boundaries \\
-V9 & Dual-failure cascade &
-  \checkmark & $\Gn^2, \Gv^2 > 0.5$ \\
+\centering
+\caption{Interface Scale Table---the same
+$\Gamma = (Z_2-Z_1)/(Z_2+Z_1)$ across every physical
+domain.}
+\label{tab:scale}
+\begin{tabular}{llllll}
+\toprule
+\textbf{Domain} & \textbf{System} & \textbf{Scale}
+  & \textbf{Effort} & \textbf{Flow}
+  & $Z$ \textbf{definition} \\
+\midrule
+\multirow{2}{*}{Electrical}
+  & Synapse / ion channel & 25~nm--1~\textmu m
+    & Membrane voltage & Ion current & $V/I$ ($\Omega$) \\
+  & Power-grid transformer & 10~m
+    & Voltage & Current & $V/I$ ($\Omega$) \\
+\midrule
+\multirow{2}{*}{Hydraulic}
+  & Arteriole (Poiseuille) & 100~\textmu m
+    & Blood pressure & Flow rate & $8\mu L/\pi r^4$ \\
+  & Whole-body vascular & 1~m
+    & Aortic pressure & Cardiac output & $P/Q$ \\
+\midrule
+\multirow{2}{*}{Acoustic}
+  & Tissue boundary (ultrasound) & 1~mm
+    & Acoustic pressure & Particle velocity & $\rho\,c$ \\
+  & Submarine hull & 10~m
+    & Acoustic pressure & Particle velocity & $\rho\,c$ \\
+\midrule
+\multirow{2}{*}{Electromagnetic}
+  & Optical fibre splice & 100~\textmu m
+    & Electric field & Magnetic field & $n\cdot Z_0$ \\
+  & Earth--ionosphere waveguide & $10^6$~m
+    & E-field & H-field & $\sqrt{\mu/\varepsilon}$ \\
+\midrule
+\multirow{2}{*}{Mechanical}
+  & Bone--cartilage joint (Wolff) & 10~cm
+    & Force / stress & Velocity / strain rate
+    & $\sigma/\dot{\varepsilon}$ (Pa$\cdot$s) \\
+  & Tendon--muscle junction (Davis) & 1~cm
+    & Tensile force & Elongation rate & $EA/L$ \\
+\midrule
+\multirow{2}{*}{Thermal}
+  & Brain thermal boundary & 10~cm
+    & Temperature & Heat flux & $T/\dot{Q}$ (K/W) \\
+  & Skin--air interface & 1~m
+    & Skin temperature & Convective heat loss
+    & $1/(hA)$ \\
+\midrule
+Chemical
+  & Organ parenchyma (metabolic) & 10~cm
+    & Metabolite conc.\ & Clearance flux
+    & $[\text{met}]/J$ \\
+\bottomrule
 \end{tabular}
-\end{ruledtabular}
 \end{table*}
 
-\noindent
-\textbf{Result: 9/9 passed.}
-These are self-consistency checks, not empirical
-validations.
-
 
 % ============================================================
-\section{Clinical Calibration}
-\label{sec:clinical}
+\section{Interface Isomorphism}
+\label{sec:isomorphism}
 % ============================================================
 
-Ten tests calibrate the model against published clinical
-data.
+\begin{proposition}[Interface Isomorphism]
+\label{prop:isomorphism}
+The reflection coefficient $\Gamma$ at any interface
+depends only on the impedance contrast at the boundary,
+not on the bulk properties of either medium.
+\end{proposition}
 
-\begin{table*}[t]
-\caption{Clinical calibrations (C1--C10).}
-\label{tab:clinical}
-\begin{ruledtabular}
-\begin{tabular}{clcl}
-ID & Clinical test & Pass & Criterion \\
-\hline
-C1 & FFR as $\Tv$ ratio &
-  \checkmark & FFR $= \Tv$ by definition \\
-C2 & FFR $\le 0.75$ predicts intervention
-  (FAME~\cite{DeBruyne2012}) &
-  \checkmark & $\Gv^2 \ge 0.25$ implies $H < H_c$ \\
-C3 & Carotid stenosis $>70\%$ $\Leftrightarrow$
-  $\Gv^2 > 0.86$
-  (NASCET~\cite{NASCET1991}) &
-  \checkmark & $r \to 0.3\,r_0$: $\Zv \to 123\,Z_{\mathrm{v},0}$ \\
-C4 & Peripheral artery disease: ABI $<$ 0.9
-  (Fowkes~\cite{Fowkes2013}) &
-  \checkmark & $\Gv^2 > 0.4$ \\
-C5 & Pre-eclampsia: uterine artery PI $> 1.6$
-  (Cnossen~\cite{Cnossen2008}) &
-  \checkmark & placental $\Gv^2 > 0.7$ \\
-C6 & Diabetic nephropathy: proteinuria onset
-  (Adler~\cite{Adler2003}) &
-  \checkmark & renal $\Gv^2 > 0.5$ \\
-C7 & Diabetic neuropathy staging
-  (Feldman~\cite{Feldman2005}) &
-  \checkmark & $\Gn^2$ correlates with NDS \\
-C8 & MI: coronary occlusion
-  (DeWood~\cite{DeWood1980}) &
-  \checkmark & $\Gv^2 \to 1$ \\
-C9 & Retinal arteriolar narrowing
-  (Wong~\cite{Wong2002retina}) &
-  \checkmark & retinal $\Gv^2 > 0.6$ \\
-C10 & Portal hypertension: MELD score
-  (Kamath~\cite{Kamath2001}) &
-  \checkmark & hepatic $\Gv^2$ correlates with MELD \\
-\end{tabular}
-\end{ruledtabular}
-\end{table*}
+\begin{proof}[Proof sketch]
+The formula $\Gamma = (Z_2-Z_1)/(Z_2+Z_1)$ contains
+only boundary values $Z_1$ and $Z_2$.
+The derivation uses only continuity conditions at the
+interface and conservation of power.
+No property of the bulk medium enters the result.
+\end{proof}
 
-\noindent
-\textbf{Result: 10/10 passed.}
+\subsection{The self-organisation chain}
 
-\begin{remark}[FFR $= \Tv$]
-Fractional flow reserve (FFR)---the ratio of distal
-to proximal coronary pressure during maximal
-hyperaemia---is \emph{exactly} the vascular transmission
-ratio $\Tv = 1 - \Gv^2$, not merely an analogy.
-The clinical threshold FFR $\le 0.75$ corresponds to
-$\Gv^2 \ge 0.25$: a quarter of the pressure wave is
-reflected.
-This identification transforms FFR from an empirical
-diagnostic index into a direct measurement of vascular
-impedance physics.
-\end{remark}
-
-
-% ============================================================
-\section{Literature Validation}
-\label{sec:literature}
-% ============================================================
-
-Twelve tests confront the dual-network model with
-published trial data.
-
-\begin{table*}[t]
-\caption{Literature validations (L1--L12).}
-\label{tab:literature}
-\begin{ruledtabular}
-\begin{tabular}{clcl}
-ID & Study & Pass & Dual-network prediction \\
-\hline
-L1 & STENO-2~\cite{Gaede2008}: multi-target $>$
-  single-target &
-  \checkmark & $H = \Tn\Tv$: reducing both $\Gn^2$ and
-  $\Gv^2$ gives $|\Delta H| > |\Delta H_n| + |\Delta H_v|$ \\
-L2 & ADVANCE~\cite{Patel2007}: BP + glucose &
-  \checkmark & dual intervention $>$ sum of parts \\
-L3 & SPRINT-MIND~\cite{Williamson2019}: intensive BP
-  reduces dementia &
-  \checkmark & lower $\Gv^2 \to$ slower $\Gn\!\uparrow$ \\
-L4 & CHARM~\cite{McMurray2003}: HF treatment maintains
-  cardiac $H$ &
-  \checkmark & reducing cardiac $\Gv^2$ preserves $H$ \\
-L5 & SHARP~\cite{Baigent2011}: CKD $+$ CVD coexist &
-  \checkmark & renal $\Gv\!\uparrow$ cascades to cardiac \\
-L6 & UKPDS-80~\cite{Holman2008}: legacy effect &
-  \checkmark & early $\Gv^2$ reduction $\to$ permanently
-  lower $\Gn^2$ trajectory \\
-L7 & Framingham~\cite{Jefferson2015}: cardiac index
-  predicts brain aging &
-  \checkmark & cardiac $\Tv$ sets cerebral $\rho$ \\
-L8 & ARIC~\cite{Wong2002}: retinal vessels predict
-  stroke &
-  \checkmark & retinal $\Gv$ proxies cerebral $\Gv$ \\
-L9 & Rochester DM~\cite{Dyck1993}: neuropathy $+$
-  retinopathy $+$ nephropathy cluster &
-  \checkmark & shared $\mu\!\uparrow$ drives all three \\
-L10 & CHS~\cite{Newman2005}: CVD predicts dementia &
-  \checkmark & systemic $\Gv\!\uparrow$ precedes
-  $\Gn\!\uparrow$ \\
-L11 & DIAD~\cite{Young2009}: asymptomatic CAD in DM &
-  \checkmark & coronary $\Gv\!\uparrow$ before symptoms \\
-L12 & NASCET~\cite{NASCET1991}: CEA benefit $>70\%$
-  stenosis &
-  \checkmark & $\Gv^2 > 0.86$ is the intervention
-  threshold \\
-\end{tabular}
-\end{ruledtabular}
-\end{table*}
-
-\noindent
-\textbf{Result: 12/12 passed.}
-
-\subsection{STENO-2 super-additivity}
-
-The STENO-2 trial showed that simultaneous reduction
-of blood pressure, glucose, and lipids produced a
-benefit greater than the sum of individual
-interventions.
-From $H = \Tn \cdot \Tv$:
-\begin{equation}
-  \Delta H = \Delta\Tn \cdot \Tv + \Tn \cdot \Delta\Tv
-    + \Delta\Tn \cdot \Delta\Tv.
-  \label{eq:super-additive}
-\end{equation}
-The cross-term $\Delta\Tn \cdot \Delta\Tv > 0$ is the
-\emph{super-additive} benefit: improving both networks
-simultaneously yields more than the sum of individual
-improvements.
-This is a mathematical consequence of the multiplicative
-health law, not a post-hoc explanation.
-
-\subsection{UKPDS-80 legacy effect}
-
-The UKPDS-80 follow-up showed that intensive glucose
-control continued to benefit patients years after the
-intervention ended.
-From the dual-network perspective:
-early reduction of $\Gv^2$ (by lowering $\mu$, reducing
-endothelial damage) permanently shifts the neural
-$\Gn^2$ trajectory downward.
-Even after glucose control relaxes, the improved
-vascular infrastructure supports neural C2 repair that
-would otherwise not have occurred.
-The ``legacy'' is the accumulated neural impedance
-improvement enabled by the early vascular correction.
-
-
-% ============================================================
-\section{Stability Analysis}
-\label{sec:stability}
-% ============================================================
-
-\subsection{Seven core stability tests}
-
-\begin{enumerate}
-  \item[S0.] \textbf{Healthy attractor.}
-    From $\Gv^2 = \Gn^2 = 0.1$, both networks converge
-    to $\Gv^2, \Gn^2 < 0.05$ within 200~ticks.
-
-  \item[S1.] \textbf{Lyapunov function.}
-    $V = \Gn^2 + \Gv^2$ is non-increasing under coupled
-    C2 with linearised neural self-repair:
-    $\dot{V} = 2\Gn\,\dot{\Gn} + 2\Gv\,\dot{\Gv} \le 0$
-    when the repair rate $\alpha > 0$.
-
-  \item[S2.] \textbf{Tikhonov--Fenichel separation.}
-    Because $\eta_v \ll \eta_n$, the fast (neural)
-    subsystem equilibrates on each slow (vascular) time
-    step.
-    The slow manifold $\Gn^* = f(\Gv)$ is attracting.
-
-  \item[S3.] \textbf{Organ viability.}
-    Ten organs from Table~\ref{tab:organs} all satisfy
-    $H > 0.01$ at the healthy attractor.
-\end{enumerate}
-
-\subsection{Randomised parameter sweeps}
-
-100~randomised runs
-($N = 50$ per organ, uniformly sampled
-$\Gv^2 \in [0, 0.3]$ and $\Gn^2 \in [0, 0.3]$)
-across all 10~organs:
-\begin{itemize}
-  \item Convergence rate: 100/100.
-  \item Viability ($H > 0.01$): 100/100.
-  \item C1 violation: 0/100.
-\end{itemize}
-
-\subsection{Five severity classes}
-
-Each organ is tested across five clinical severity
-classes ($\Gv^2 \in \{0.1, 0.3, 0.5, 0.7, 0.9\}$):
-\begin{itemize}
-  \item Class~I ($\Gv^2 = 0.1$): all organs recover to
-    $H > 0.8$.
-  \item Class~II ($\Gv^2 = 0.3$): 10/10 stable,
-    $H > 0.4$.
-  \item Class~III ($\Gv^2 = 0.5$): 10/10 stable,
-    cascade begins.
-  \item Class~IV ($\Gv^2 = 0.7$): 10/10 stable at
-    reduced $H$.
-  \item Class~V ($\Gv^2 = 0.9$): 10/10 reach dual
-    failure ($H < 0.05$).
-\end{itemize}
-
-Full test:
-\texttt{tests/test\_paper2\_stability.py}
-(all pass).
-
-
-% ============================================================
-\section{Four Irreducible Tissue Types}
-\label{sec:four-tissues}
-% ============================================================
-
-C2 remodeling requires four prerequisites at every
-channel:
-\begin{enumerate}
-  \item A \textbf{signal} ($x_{\text{in}}$) to detect
-    the mismatch $\Gamma$.
-  \item A \textbf{material substrate} ($x_{\text{out}}$,
-    delivered as a fluid by a pipe network) to execute
-    the physical change $\Delta Z$.
-  \item A \textbf{mechanical actuator} to apply the force
-    that performs the structural update.
-  \item A \textbf{boundary} that defines the spatial domain
-    across which $Z$ is measured.
-\end{enumerate}
-
-Each prerequisite corresponds to exactly one
-histological tissue type:
-\begin{center}
-\begin{tabular}{cl}
-\hline
-\textbf{C2 prerequisite} & \textbf{Tissue} \\
-\hline
-Signal detection & Nervous \\
-Material delivery & Connective (incl.\ vascular) \\
-Mechanical actuation & Muscle \\
-Boundary definition & Epithelial \\
-\hline
-\end{tabular}
-\end{center}
-
-Removing any one tissue collapses C2:
-without nerve, $x_{\text{in}} = 0$;
-without connective/blood, $x_{\text{out}} = 0$;
-without muscle, $\Delta Z$ cannot be applied;
-without epithelium, the domain across which
-$\Gamma$ is defined does not exist.
-
-Moreover the four tissues form a \textbf{dependency
-cycle}:
 \[
-  \text{Nervous}
-  \xrightarrow{\;\text{needs }\rho\;}
-  \text{Connective}
-  \xrightarrow{\;\text{needs pump}\;}
-  \text{Muscle}
-  \xrightarrow{\;\text{needs boundary}\;}
-  \text{Epithelial}
-  \xrightarrow{\;\text{needs control}\;}
-  \text{Nervous}
+  \text{Chemistry} \;\xrightarrow{\text{(materials science)}}
+  \;\text{Structure}
+  \;\xrightarrow{\text{(continuum mechanics)}}
+  \;\text{Impedance}
+  \;\xrightarrow{\text{(First Law)}}
+  \;\Gamma.
 \]
-Because the cycle is closed, no subset of three can
-sustain itself: four is both necessary and sufficient
-for C2 viability.
-
-All organs are spatial arrangements of these four
-tissues; the 29~C2 channels catalogued in
-Paper~5~\cite{Paper5} are instances of the same
-update rule at 29~distinct
-$(Z, x_{\text{in}}, x_{\text{out}})$ loci within the
-same four-tissue substrate.
-
-The dual-network model $H = \Tn\,\Tv$
-(Eq.~\ref{eq:dual_health}) resolves only the nervous
-and connective (vascular) components of the cycle;
-the epithelial and muscular prerequisites are implicitly
-satisfied whenever the organ exists.
-
-
-% ============================================================
-\section{Bioimpedance and Clinical Implications}
-\label{sec:implications}
-% ============================================================
-
-\subsection{Relation to bioimpedance analysis (BIA)}
-
-Bioimpedance analysis measures tissue $Z$ but treats it
-as a passive diagnostic marker.
-Our framework goes further: $\Gv$ is a \emph{causal,
-computational} quantity that determines energy flow,
-material delivery, and inter-organ coupling.
-BIA measures the thermometer; MRP describes the
-thermodynamics.
-
-\subsection{Clinical implications}
-
-The dual-network model provides a unified framework for:
-\begin{itemize}
-  \item \textbf{Diabetic complications}: microvascular
-    $\Gv\!\uparrow$ in retina, kidney, and peripheral
-    nerves triggers the cascade to neural
-    $\Gn\!\uparrow$, explaining why neuropathy,
-    nephropathy, and retinopathy
-    co-occur~\cite{brownlee2001}.
-  \item \textbf{Vascular dementia}: cerebral small-vessel
-    disease ($\Gv\!\uparrow$) leads to cognitive decline
-    ($\Gn\!\uparrow$) via material starvation.
-  \item \textbf{Pre-eclampsia}: placental vascular failure
-    cascades to maternal multi-organ damage.
-  \item \textbf{Heart failure}: cardiac remodeling
-    increases myocardial $\Gv$, reducing contractile
-    efficiency in a positive-feedback loop.
-\end{itemize}
-
-\subsection{Bedside wound monitoring}
-
-A minimal bedside prototype requires:
-(i)~a two-electrode bioimpedance probe placed across the
-wound margin (measuring $\Gv^2$ at 1--100\,kHz),
-(ii)~standard ICU monitoring (HR, HRV $\to \Gv$ at
-organ level), and
-(iii)~optional EEG (2-channel, somatosensory region
-$\to \Gn^2$).
-All three data streams feed into the dual-network model
-to produce $H_{\text{wound}}(t)$ and
-$\Pi_{\Gamma,\text{wound}}(t)$ in real time.
-
-
-% ============================================================
-\section{Falsifiable Predictions}
-\label{sec:predictions}
-% ============================================================
-
-\begin{enumerate}
-  \item \textbf{FFR $=$ $\Tv$.}
-    FFR measured invasively should equal
-    $1 - \Gv^2$ computed from pre-operative CT
-    angiography geometry via Eq.~\eqref{eq:poiseuille}.
-
-  \item \textbf{STENO-2 cross-term.}
-    The super-additive benefit $\Delta\Tn\,\Delta\Tv$
-    should be quantitatively measurable by decomposing
-    STENO-2 outcome data into neural and vascular
-    components.
-
-  \item \textbf{Wound $\Gv^2$ decay.}
-    Bioimpedance spectroscopy across healing wounds
-    should show monotonic $|\Gv(f)|$ decrease, with
-    time constant correlating with VAS pain resolution.
-
-  \item \textbf{Cascade timing.}
-    In diabetic patients, vascular $\Gv$ indices should
-    deteriorate \emph{before} neural indices $\Gn$,
-    with a lag set by $\eta_v / \eta_n$.
-
-  \item \textbf{Legacy effect duration.}
-    UKPDS-style legacy benefit should last
-    $\sim 1/\eta_v$ years after intervention ends.
-
-  \item \textbf{Organ impedance hierarchy.}
-    MRI-based organ perfusion indices should rank-order
-    as Table~\ref{tab:organs} predicts.
-
-  \item \textbf{Placental sensitivity.}
-    Placental $\Gv$ should respond to insult faster
-    than any other organ (lowest resting $\Gv^2$
-    $\Rightarrow$ largest $\Delta\Gv^2$ for a given
-    $\Delta\Zv$).
-
-  \item \textbf{Dual-failure signature.}
-    Patients with dual failure (e.g., diabetic
-    nephropathy) should show correlated $\Gv$ and $\Gn$
-    trajectories distinguishable from single-network
-    failure.
-
-  \item \textbf{Murray ratio invariance.}
-    $r_d / r_p = n^{-1/3}$ across all organs, all
-    species, all branching numbers.
-
-  \item \textbf{Scar $\Gv^2 > 0$.}
-    Mature scars should show permanently elevated
-    bioimpedance compared to surrounding skin.
-\end{enumerate}
+No arrow requires a biological assumption:
+materials science predicts structure from composition;
+continuum mechanics predicts impedance from structure;
+and $\Gamma$ follows from impedance.
+Once chemistry builds structure and structure carries
+flow, $\Gamma$ is not a choice---it is the First Law
+speaking.
 
 
 % ============================================================
@@ -1319,72 +917,85 @@ $\Pi_{\Gamma,\text{wound}}(t)$ in real time.
 \subsection{The concentric-circle structure}
 
 This paper follows a strictly outward derivation:
-single blood vessel $\to$ impedance at bifurcation $\to$
-Murray's Law from vascular action $\to$ vascular C2
-remodeling $\to$ dual-network organ coupling $\to$
-four failure modes $\to$ positive-feedback cascade $\to$
-disease models $\to$ wound repair $\to$ clinical
-validation $\to$ four irreducible tissue types.
-Each step is a logical consequence of the previous;
-no step requires information from a later one.
-Biological nomenclature (``atherosclerosis'',
-``pre-eclampsia'') is used for identification only---the
-physics does not depend on it.
-
-\subsection{Relation to Paper~1}
-
-Paper~1 derives neural architecture from a single neuron
-under C2.
-This paper derives vascular architecture from a single
-blood vessel under C2.
-The two papers are parallel derivations of the same
-variational principle applied to different physical
-substrates (electrical vs.\ hydraulic impedance).
-Part~B connects the two derivations: the dual-network
-organ model $H = \Tn\,\Tv$ is the product of the two
-independent results.
+single vessel $\to$ Murray's Law $\to$ vascular C2 $\to$
+dual-network health $\to$ four tissues $\to$
+fractal cost $\to$ Kleiber's Law $\to$ interface
+universality.
+Each step is a logical consequence of the previous.
 
 \subsection{Timescale separation}
 
-The key physical difference between neural and vascular
-networks is the remodeling rate:
-$\eta_n \gg \eta_v$.
-This creates a ``fast inner / slow outer'' dynamical
-structure (Tikhonov--Fenichel):
-\begin{itemize}
-  \item On the neural timescale (ms--hours): the vascular
-    network is effectively static; neural C2 operates on
-    a fixed substrate.
-  \item On the vascular timescale (days--weeks): the neural
-    network has equilibrated; vascular C2 operates on a
-    pre-adapted neural background.
-\end{itemize}
-Disease manifests when the vascular timescale overwhelms
-the neural timescale---the cascade
-(Eq.~\ref{eq:cascade}) operates when vascular degradation
-outpaces neural adaptation.
+$\eta_v \ll \eta_n$ produces a fast-inner/slow-outer
+Tikhonov--Fenichel structure:
+neural equilibrates on the fast timescale with
+vascular effectively static;
+vascular C2 then operates on a pre-adapted neural
+background.
+Disease manifests when vascular degradation outpaces
+neural adaptation (Paper~4~\cite{Paper4}).
+
+\subsection{What ``$1_v \times 1_n = \Omega$'' means}
+
+Each ``1'' is a topologically one-dimensional tree in
+3D.
+Packing two trees adds $\Acouple > 0$.
+The result $\Omega \approx 1.25$--$1.33$ and
+$\Omega_n \approx \beta$ suggests:
+the cost of adding a second hierarchical tree is of
+order one branching level of the first.
 
 \subsection{Limitations}
 
 \begin{enumerate}
-  \item The Poiseuille impedance
-    (Eq.~\ref{eq:poiseuille}) assumes Newtonian fluid
-    and rigid walls; real blood is non-Newtonian and
-    vessel walls are viscoelastic.
-    The Womersley extension (Eq.~\ref{eq:womersley})
-    partially addresses this.
-  \item The organ impedance values in
-    Table~\ref{tab:organs} are illustrative, not measured.
-    Direct validation requires organ-specific
-    bioimpedance data.
-  \item The positive-feedback cascade model is
-    phenomenological: the precise functional form of the
-    neural--vascular coupling requires experimental
-    measurement.
-  \item The four-tissue irreducibility argument assumes
-    macroscopic C2; organisms without one of the four
-    tissues (e.g., sponges lack nervous tissue) may
-    execute a simpler form of C2.
+  \item Poiseuille (Eq.~\ref{eq:poiseuille}) assumes
+    Newtonian fluid, rigid walls; real blood is
+    non-Newtonian and vessel walls are viscoelastic.
+  \item Organ impedance values in Table~\ref{tab:organs}
+    are illustrative, not measured.
+  \item The self-similar mode profile
+    (Eq.~\ref{eq:mode-profile}) is an idealisation.
+  \item $K$ values for neuron types are structural
+    observations, not derived from C2.
+  \item Capillary invariance is an empirical input.
+\end{enumerate}
+
+
+% ============================================================
+\section{Falsifiable Predictions}
+\label{sec:predictions}
+% ============================================================
+
+\begin{enumerate}
+  \item \textbf{Murray ratio invariance.}
+    $\beta = 2^{1/3} \approx 1.26$ across all
+    binary-branching species.
+  \item \textbf{$\Acut$ scaling.}
+    $\Acut \propto M^{2/3}$ measurable via DTI-based
+    mode-count atlases.
+  \item \textbf{Kleiber exponent.}
+    $B \propto M^{3/4}$ derivable from $d=3$
+    space-filling alone.
+  \item \textbf{$\Omega$ across vertebrates.}
+    Brain metabolic fraction correlates with neural
+    complexity:
+    $\Omega_{\text{fish}} < \Omega_{\text{mammal}} <
+    \Omega_{\text{primate}}$.
+  \item \textbf{$\Omega \approx 1$ for plants.}
+    $\Omega_{\text{plant}} \approx 1.05$.
+  \item \textbf{FFR $= \Tv$.}
+    Invasively measured FFR equals $1-\Gv^2$ computed
+    from CT angiography geometry.
+  \item \textbf{Cartilage as relay.}
+    $Z_{\text{cart}} \approx
+    \sqrt{Z_{\text{bone}}\cdot Z_{\text{syn}}}$.
+  \item \textbf{Vascular fractal dimension.}
+    3D micro-CT yields $d_H \to 3$ below capillary
+    spacing.
+  \item \textbf{Organ hierarchy invariance.}
+    MRI-based perfusion indices rank-order as
+    Table~\ref{tab:organs} predicts.
+  \item \textbf{Cross-kingdom $\beta$.}
+    $\beta = n^{1/d}$ even in vascular plants.
 \end{enumerate}
 
 
@@ -1393,78 +1004,54 @@ outpaces neural adaptation.
 \label{sec:conclusion}
 % ============================================================
 
-This paper derives vascular architecture and the
-dual-network organ model from the same Minimum
-Reflection Principle that governs neural architecture,
-through nine logical steps:
+Starting from a single blood vessel ($\Zv = 8\mu L/\pi r^4$)
+and the three constraints (C1--C3), this paper derives:
 
 \begin{enumerate}
-  \item A single blood vessel has impedance
-    $\Zv = 8\mu L / \pi r^4$.
-  \item At every bifurcation,
-    $\Gv = (\Zv^{\text{down}} - \Zv^{\text{up}}) /
-    (\Zv^{\text{down}} + \Zv^{\text{up}})$
-    and $\Gv^2 + \Tv = 1$.
-  \item The vascular action $\Av$ minimum yields
-    Murray's Law: $r_d = r_p / n^{1/3}$.
-  \item Vascular C2 remodeling operates with
-    $\eta_v \ll \eta_n$.
-  \item Two coincident networks give
-    $H = \Tn \cdot \Tv = (1-\Gn^2)(1-\Gv^2)$.
-  \item Four failure modes: healthy, pure neural, pure
-    vascular, dual.
-  \item The positive-feedback cascade
-    $\Gv\!\uparrow \to \rho\!\downarrow \to
-    \Gn\!\uparrow \to \text{auto}\!\downarrow \to
-    \Gv\!\uparrow\!\uparrow$.
-  \item Disease models are cascade instances at
-    different loci.
-  \item Wound repair is spatial impedance matching.
+  \item \textbf{Murray's Law} ($r_d = r_p/n^{1/3}$) as
+    the exact minimum of the vascular action.
+  \item \textbf{Dual-network organ health}
+    $H = (1-\Gn^2)(1-\Gv^2)$ from multiplicative
+    transmission.
+  \item \textbf{Four failure modes} classified by which
+    network fails.
+  \item \textbf{Fractal cost}
+    $\Acut \propto M^{(d-1)/d}$---economies of scale
+    from the relay hierarchy.
+  \item \textbf{Murray's ratio} $\beta = n^{1/d}$ as
+    geometric inevitability.
+  \item \textbf{Kleiber's Law} $B \propto M^{3/4}$ from
+    capillary invariance in $d=3$.
+  \item \textbf{Dual-network packing overhead}
+    $\Omega \approx 1.33$, with
+    $\Omega_n \approx \beta = 2^{1/3}$.
+  \item \textbf{Interface universality}: one formula
+    across seven physical domains and 14 orders of
+    magnitude.
 \end{enumerate}
 
 \noindent
-Together with Paper~1, this establishes the MRP as a
-universal physics of biological impedance networks:
-\begin{itemize}
-  \item Paper~1: Neural architecture (relay hierarchy,
-    fractal topology, metabolic scaling)
-  \item Paper~2 (this work): Vascular architecture,
-    dual-network organ model, clinical validation
-  \item Paper~3: Temporal dynamics (impedance debt,
-    sleep, lifecycle, aging)
-\end{itemize}
-
-\noindent
-The same equation,
-$\Gamma = (Z_L - Z_0) / (Z_L + Z_0)$,
-governs all scales.
-FFR $= \Tv$ is not an analogy---it is the physics.
-All code and data are publicly
-available~\cite{zenodo_code}.
+The title equation:
+\begin{equation}
+  1_v \times 1_n = \Omega \approx \beta
+  = 2^{1/3} \approx 1.26.
+  \label{eq:omega-beta}
+\end{equation}
+Life pays a fractal tax of $\beta - 1 \approx 26\%$ for
+the privilege of being simultaneously fed and informed.
 
 
-%====================================================================
+% ============================================================
 \begin{acknowledgments}
-This work is entirely self-funded.
-The author thanks the open-source scientific Python community.
+The author thanks the open-source scientific Python
+community (NumPy, SciPy, Matplotlib).
+All experiments were conducted on the Alice Gamma-Net
+simulator.
 \end{acknowledgments}
 
-%====================================================================
-\begin{thebibliography}{30}
 
-\bibitem{Paper1}
-H.-Y.~Huang,
-``Paper~1: From Neuron to Brain---Irreducible Topology,
-Neural Architecture, and Metabolic Scaling
-in Heterogeneous Impedance Networks
-under the Minimum Reflection Principle,''
-preprint (2026).
-
-\bibitem{Paper3}
-H.-Y.~Huang,
-``Paper~3: Temporal Dynamics---Impedance Debt, Sleep,
-  Lifecycle, and Aging,''
-preprint (2026).
+% ============================================================
+\begin{thebibliography}{99}
 
 \bibitem{Paper0}
 H.-Y.~Huang,
@@ -1472,209 +1059,77 @@ H.-Y.~Huang,
 for Electronic Lifeforms,''
 preprint (2026).
 
+\bibitem{Paper1}
+H.-Y.~Huang,
+``Paper~1: From Neuron to Mind---Irreducible Topology,
+Neural Architecture, Memory, Consciousness, and Soul,''
+preprint (2026).
+
+\bibitem{Paper3}
+H.-Y.~Huang,
+``Paper~3: Temporal Dynamics---Impedance Debt, Sleep,
+Lifecycle, and Aging,''
+preprint (2026).
+
 \bibitem{Paper4}
 H.-Y.~Huang,
-``Paper~4: Memory, Consciousness, and Nociception as
-Impedance Physics on the $\Gamma$-Net,''
+``Paper~4: Topological Pathology---Disease from Topology,''
 preprint (2026).
 
 \bibitem{Paper5}
 H.-Y.~Huang,
-``Paper~5: The Grand Unification---$\Gamma$ as the
-Universal Interface Law from Microtubules to Power Grids,
-and C2 as Universal Remodeling in Twenty-Nine Tissues,''
+``Paper~5: Full System Verification---Blueprints,
+Predictions, and Numerical Evidence,''
 preprint (2026).
 
 \bibitem{murray1926}
 C.~D.~Murray,
-``The Physiological Principle of Minimum Work.
-  I: The Vascular System and the Cost of Blood Volume,''
-\emph{Proc.\ Natl.\ Acad.\ Sci.\ USA} \textbf{12}, 207 (1926).
+Proc.\ Natl.\ Acad.\ Sci.\ USA \textbf{12}, 207 (1926).
 
 \bibitem{womersley1955}
 J.~R.~Womersley,
-``Method for the Calculation of Velocity, Rate of Flow,
-  and Viscous Drag in Arteries when the Pressure Gradient is Known,''
-\emph{J.\ Physiol.\ (London)} \textbf{127}, 553 (1955).
+J.~Physiol.\ \textbf{127}, 553 (1955).
 
 \bibitem{nichols2011}
 W.~W.~Nichols, M.~F.~O'Rourke, and C.~Vlachopoulos,
-\emph{McDonald's Blood Flow in Arteries},
-6th ed. (CRC Press, 2011).
+\emph{McDonald's Blood Flow in Arteries}, 6th~ed.\
+(Hodder Arnold, 2011).
+
+\bibitem{Kleiber1932}
+M.~Kleiber,
+Hilgardia \textbf{6}, 315 (1932).
+
+\bibitem{WBE1997}
+G.~B.~West, J.~H.~Brown, and B.~J.~Enquist,
+Science \textbf{276}, 122 (1997).
+
+\bibitem{McCulloh2003}
+K.~A.~McCulloh, J.~S.~Sperry, and F.~R.~Adler,
+Nature \textbf{421}, 939 (2003).
+
+\bibitem{Niklas1994}
+K.~J.~Niklas,
+\emph{Plant Allometry} (Univ.\ Chicago Press, 1994).
+
+\bibitem{Raichle2002}
+M.~E.~Raichle and D.~A.~Gusnard,
+Proc.\ Natl.\ Acad.\ Sci.\ USA \textbf{99}, 10237 (2002).
+
+\bibitem{Pozar2011}
+D.~M.~Pozar, \emph{Microwave Engineering}, 4th~ed.\
+(Wiley, 2011).
 
 \bibitem{langille1986}
 B.~L.~Langille and F.~O'Donnell,
-``Reductions in arterial diameter produced by chronic
-  decreases in blood flow are endothelium-dependent,''
-\emph{Science} \textbf{231}, 405 (1986).
+Science \textbf{231}, 405 (1986).
 
 \bibitem{kamiya1984}
 A.~Kamiya and T.~Togawa,
-``Adaptive regulation of wall shear stress to flow change
-  in the canine carotid artery,''
-\emph{Am.\ J.\ Physiol.} \textbf{247}, H14 (1984).
+Am.\ J.\ Physiol.\ \textbf{247}, H220 (1984).
 
-\bibitem{chiu2011}
-J.-J.~Chiu and S.~Chien,
-``Effects of disturbed flow on vascular endothelium:
-  pathophysiological basis and clinical perspectives,''
-\emph{Physiol.\ Rev.} \textbf{91}, 327 (2011).
-
-\bibitem{brownlee2001}
-M.~Brownlee,
-``Biochemistry and molecular cell biology of diabetic complications,''
-\emph{Nature} \textbf{414}, 813 (2001).
-
-\bibitem{mok2012}
-V.~Mok \emph{et al.},
-``Transcranial Doppler ultrasound for screening cerebral
-  small vessel disease: a community study,''
-\emph{Stroke} \textbf{43}, 2791 (2012).
-
-\bibitem{steegers2010}
-E.~A.~P.~Steegers \emph{et al.},
-``Pre-eclampsia,''
-\emph{Lancet} \textbf{376}, 631 (2010).
-
-\bibitem{DeBruyne2012}
-B.~De~Bruyne \emph{et al.},
-``Fractional flow reserve--guided PCI versus medical therapy
-  in stable coronary disease,''
-\emph{N.\ Engl.\ J.\ Med.} \textbf{367}, 991 (2012).
-
-\bibitem{Fowkes2013}
-F.~G.~R.~Fowkes \emph{et al.},
-``Comparison of global estimates of prevalence and risk
-  factors for peripheral artery disease in 2000 and 2010,''
-\emph{Lancet} \textbf{382}, 1329 (2013).
-
-\bibitem{Cnossen2008}
-J.~S.~Cnossen \emph{et al.},
-``Use of uterine artery Doppler ultrasonography to predict
-  pre-eclampsia and intrauterine growth restriction,''
-\emph{BMJ} \textbf{336}, 968 (2008).
-
-\bibitem{Adler2003}
-A.~I.~Adler \emph{et al.},
-``Development and progression of nephropathy in type~2
-  diabetes: the United Kingdom Prospective Diabetes Study
-  (UKPDS 64),''
-\emph{Kidney Int.} \textbf{63}, 225 (2003).
-
-\bibitem{Feldman2005}
-E.~L.~Feldman \emph{et al.},
-``A practical two-step quantitative clinical and
-  electrophysiological assessment for the diagnosis and
-  staging of diabetic neuropathy,''
-\emph{Diabetes Care} \textbf{28}, 2206 (2005).
-
-\bibitem{DeWood1980}
-M.~A.~DeWood \emph{et al.},
-``Prevalence of total coronary occlusion during the early
-  hours of transmural myocardial infarction,''
-\emph{N.\ Engl.\ J.\ Med.} \textbf{303}, 897 (1980).
-
-\bibitem{NASCET1991}
-North American Symptomatic Carotid Endarterectomy Trial
-  Collaborators,
-``Beneficial effect of carotid endarterectomy in symptomatic
-  patients with high-grade carotid stenosis,''
-\emph{N.\ Engl.\ J.\ Med.} \textbf{325}, 445 (1991).
-
-\bibitem{Wong2002retina}
-T.~Y.~Wong \emph{et al.},
-``Retinal arteriolar narrowing and risk of diabetes
-  mellitus in middle-aged persons,''
-\emph{JAMA} \textbf{287}, 2528 (2002).
-
-\bibitem{Kamath2001}
-P.~S.~Kamath \emph{et al.},
-``A model to predict survival in patients with end-stage
-  liver disease,''
-\emph{Hepatology} \textbf{33}, 464 (2001).
-
-\bibitem{Gaede2008}
-P.~Gaede \emph{et al.},
-``Effect of a multifactorial intervention on mortality in
-  type~2 diabetes,''
-\emph{N.\ Engl.\ J.\ Med.} \textbf{358}, 580 (2008).
-
-\bibitem{Jefferson2015}
-A.~L.~Jefferson \emph{et al.},
-``Cardiac index is associated with brain aging:
-  the Framingham Heart Study,''
-\emph{Circ.\ Heart Fail.} \textbf{8}, 49 (2015).
-
-\bibitem{Wong2002}
-T.~Y.~Wong \emph{et al.},
-``Retinal microvascular abnormalities and incident stroke:
-  the ARIC Study,''
-\emph{JAMA} \textbf{288}, 67 (2002).
-
-\bibitem{Patel2007}
-A.~Patel \emph{et al.},
-``Effects of a fixed combination of perindopril and
-  indapamide on macrovascular and microvascular outcomes
-  in patients with type~2 diabetes mellitus (the ADVANCE trial),''
-\emph{Lancet} \textbf{370}, 829 (2007).
-
-\bibitem{Dyck1993}
-P.~J.~Dyck \emph{et al.},
-``The prevalence by staged severity of various types of
-  diabetic neuropathy, retinopathy, and nephropathy in a
-  population-based cohort: the Rochester Diabetic Neuropathy
-  Study,''
-\emph{Neurology} \textbf{43}, 817 (1993).
-
-\bibitem{Newman2005}
-A.~B.~Newman \emph{et al.},
-``Dementia and Alzheimer's disease incidence in
-  relationship to cardiovascular disease in the CHS cohort,''
-\emph{J.\ Am.\ Geriatr.\ Soc.} \textbf{53}, 1101 (2005).
-
-\bibitem{Baigent2011}
-C.~Baigent \emph{et al.},
-``The effects of lowering LDL cholesterol with simvastatin
-  plus ezetimibe in patients with chronic kidney disease
-  (Study of Heart and Renal Protection): a randomised
-  placebo-controlled trial,''
-\emph{Lancet} \textbf{377}, 2181 (2011).
-
-\bibitem{McMurray2003}
-J.~J.~V.~McMurray \emph{et al.},
-``Effects of candesartan in patients with chronic heart
-  failure and reduced left-ventricular systolic function
-  (CHARM-Alternative),''
-\emph{Lancet} \textbf{362}, 772 (2003).
-
-\bibitem{Holman2008}
-R.~R.~Holman \emph{et al.},
-``10-year follow-up of intensive glucose control in type~2
-  diabetes,''
-\emph{N.\ Engl.\ J.\ Med.} \textbf{359}, 1577 (2008).
-
-\bibitem{Williamson2019}
-J.~D.~Williamson \emph{et al.},
-``Effect of intensive vs standard blood pressure control on
-  probable dementia: a randomized clinical trial,''
-\emph{JAMA} \textbf{321}, 553 (2019).
-
-\bibitem{Young2009}
-L.~H.~Young \emph{et al.},
-``Cardiac outcomes after screening for asymptomatic
-  coronary artery disease in patients with type~2 diabetes:
-  the DIAD study,''
-\emph{JAMA} \textbf{301}, 1547 (2009).
-
-\bibitem{Gurtner2008}
-G.~C.~Gurtner, S.~Werner, Y.~Barrandon, and
-M.~T.~Longaker,
-``Wound repair and regeneration,''
-\emph{Nature}\ \textbf{453}, 314 (2008).
-
-\bibitem{zenodo_code}
+\bibitem{ALICE_code}
 H.-Y.~Huang,
-ALICE Smart System,
+``Alice Smart System---Gamma-Net reference implementation,''
 \url{https://github.com/cyhuang76/alice-gamma-net} (2026).
 
 \end{thebibliography}

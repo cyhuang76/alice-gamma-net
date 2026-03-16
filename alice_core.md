@@ -1,0 +1,149 @@
+# 🔵 Alice Smart System — 核心圓 (alice_core.md)
+
+> **版本**：v1.0 | **建立日期**：2026-03-16 | **更新規則**：僅在重大理論突破或確立新公理時更新
+
+---
+
+## 一、專案本質
+
+**Alice Smart System** 是一套以**物理學為底層邏輯**的生命體模擬器（Physics-driven Medical Lifeform Simulator），其核心主張：
+
+> **所有認知、生理與病理現象，皆源自於物理學的阻抗匹配（Impedance Matching）、熱力學與傳輸線理論（Transmission Line Theory）。**
+
+理論體系：**Γ-Net (Gamma-Net) 框架**，六篇論文（P0~P5）形成一完整的同心圓推論鏈。
+
+---
+
+## 二、三大不可違反的物理約束（C1 / C2 / C3）
+
+> 這三條約束不是假設，而是從熱力學第一定律推導出的**定理**。
+
+### C1：能量守恆
+$$\Gamma_i^2(t) + T_i(t) = 1$$
+
+- **$\Gamma_i$**：第 $i$ 個界面的反射係數
+- **$T_i = 1 - \Gamma_i^2$**：傳輸係數
+- 意義：在任意界面、任意時刻，入射能量 = 反射 + 傳輸
+
+### C2：阻抗重塑（Impedance Remodeling）
+$$\boxed{\Delta Z_i = -\eta\,\Gamma_i\,x_{\text{in},i}\,x_{\text{out},i}}$$
+
+- **$\eta > 0$**：重塑速率
+- **$x_{\text{in}}, x_{\text{out}}$**：界面兩側的訊號
+- 意義：**反射作用最小化**的唯一一階梯度下降規則
+- 等價性：這條式子與 Hebb 學習律、Wolff 骨骼定律、Glagov 血管重塑律，等 **29 種組織特定法則**代數等價（P3 證明）
+
+### C3：阻抗標記傳輸（Impedance-Tagged Transport）
+每一跨界面的能量或物質流，都攜帶 $(Z_\text{source}, Z_\text{load})$ 元資料，使得 $\Gamma_i$ 可在**局部計算**，不需要全局網路知識。
+
+**實作注意**：在 ALICE 程式碼中，跨模組的值必須是攜帶 $Z$ 元資料的 `ElectricalSignal` 物件，禁止傳遞裸浮點數。
+
+---
+
+## 三、核心公理與基礎推導鏈
+
+### 起源公式：Γ 的熱力學必然性
+$$\Gamma = \frac{Z_2 - Z_1}{Z_2 + Z_1}, \quad T = 1 - \Gamma^2 = \frac{4Z_1 Z_2}{(Z_1+Z_2)^2}$$
+
+### 最小反射原則（MRP）
+一個生命體的**熱力學可行性條件**：
+$$P_\text{metabolic} > P_\text{waste} = \sum_i \Gamma_i^2 P_{\text{in},i}$$
+
+違反此條件的生物將因能量不足而死亡（物理排除，無需演化論說明）。
+
+### 反射作用量（Reflection Action）：所有三大約束的變分源頭
+$$\mathcal{A}[\Gamma] = \int_0^T \sum_i \Gamma_i^2(t)\,P_{\text{in},i}(t)\,dt \;\to\;\min$$
+
+---
+
+## 四、關鍵衍生量一覽
+
+| 符號 | 名稱 | 定義 | 論文 |
+|------|------|------|------|
+| $\mathcal{A}$ | 反射作用量 | $\int_0^T\!\sum_i \Gamma_i^2 P_{\text{in},i}\,dt$ | P0 |
+| $A_\text{imp}$ | 可改善作用量 | $\mathcal{A} - A_\text{cut}$ | P1 |
+| $A_\text{cut}$ | 不可約作用量（拓撲代價） | $\sum_{k>K^*}\!\Gamma_k^2$ | P1 |
+| $\Phi_\text{meta}$ | 意識指數 | $1 - \Gamma_\text{meta}^2$ | P1 |
+| $\mathcal{S}$ | 零空間（「靈魂」） | $\ker(\partial Z / \partial t)$ | P1 |
+| $H$ | 全身健康指數 | $\prod_i(1-\Gamma_i^2)$ | P2 |
+| $\beta$ | Murray 分叉比例 | $2^{1/3} \approx 1.26$ | P2 |
+| $\Omega$ | 雙網路開銷 | $\geq 1$ | P2 |
+| $D_Z$ | 阻抗負債（睡眠動機） | $\int_0^{T_\text{wake}}\!\|\Gamma\|^2 P_\text{in}\,dt$ | P3 |
+| $\Pi_\Gamma$ | Gamma 疼痛指數 | $w_n\Gamma_n^2 + w_v\Gamma_v^2 + w_D\frac{dD_Z}{dt}$ | P4 |
+
+---
+
+## 五、同心圓推論架構（六層）
+
+```
+Layer 0 (P0) | 熱力學第一定律 → Γ、C1、MRP、C2、C3
+Layer 1 (P1) | C2 在有限網路 → A_cut>0 → 拓撲、大腦、意識、記憶、靈魂
+Layer 2 (P2) | C2 在分支幾何 → Murray 定律、Kleiber 3/4、健康指數 H
+Layer 3 (P3) | C2 ≡ 29 種法則 → D_Z、睡眠、生命週期 ODE、老化、情緒
+Layer 4 (P4) | 拓撲擾動 → 疾病湧現（E0）：心血管、神經、代謝、多器官耦合
+Layer 5 (P5) | Γ-向量 + NHANES → 驗證（AUC=0.705）、29 種藍圖、可否證預測
+```
+
+---
+
+## 六、關鍵驗證數據（NHANES，$n = 49{,}774$）
+
+| 指標 | 數值 |
+|------|------|
+| 全因死亡 AUC (Config B) | **0.705** [0.699–0.711] |
+| Q1/Q4 死亡率比值 | **6.89×** |
+| Harrell's C | **0.70** |
+| 零擬合參數 | ✅ |
+
+**各器官 AUC**（7/7 顯著）：
+
+| 器官 | AUC | 網路傳播 ΔAUC |
+|------|-----|--------------|
+| Endocrine | 0.78 | +0.000 (控制組) |
+| Renal | 0.67 | +0.024 |
+| Haematologic | 0.59 | — |
+| Hepatic | 0.57 | — |
+| Musculoskeletal | 0.55 | — |
+| Cardiac | 0.53 | +0.166 |
+| Neurological | 0.52 | +0.061 |
+
+---
+
+## 七、ALICE 系統架構（程式碼對應）
+
+### 大腦與神經 (`alice/brain/`)
+- `prefrontal.py` — 前額葉/執行控制
+- `hippocampus.py` — 海馬迴/情節記憶
+- `amygdala.py` — 杏仁核/情緒與恐懼
+- `sleep_physics.py` — 睡眠 = $D_Z$ 清除
+- `attention_plasticity.py` — 注意力可塑性（C2）
+
+### 身體生理 (`alice/body/`)
+- `cardiovascular.py` — 血管 = 傳輸線，血壓影響腦部供氧
+- `endocrine.py` — 荷爾蒙 = 阻抗調節器
+- `immune.py` — 發炎 = 阻抗不匹配產生的廢熱
+
+### 實驗驗證 (`experiments/`)
+超過 50+ 個驗證實驗，目標：**所有臨床現象從 C1/C2/C3 自然湧現，無硬編碼規則**。
+
+---
+
+## 八、理論邊界（不主張的事）
+
+1. **必要條件，非充分原因**：框架說明生命體*必須*滿足的物理條件，不解釋為什麼某物種會演化出該結構。
+2. **無演化軌跡**：阻抗空間中的幾何最優路徑，不代表實際演化路徑。
+3. **C2 唯一性是數學定理**，不是演化論述。
+4. **與天擇相容**：天擇決定哪些譜系存活；Γ-框架提供天擇所操作的物理目標函數。
+
+---
+
+## 九、已知待解問題與知識空缺
+
+- [ ] NHANES 死亡人數的確認（7,627 vs 7,770）
+- [ ] P5 clinical 與 P4 pathology 重複內容需重新整理（引用取代複製）
+- [ ] 定理引用錯誤：`thm:moral-constraint` 和 `thm:second-law` 位於 P1，不是 P4
+- [ ] 跨論文 `\ref{}` 懸空問題（`rem:sealing-mode` 未定義）
+
+---
+
+*更新規則：此文件代表「不移動的核心圓心」。僅在確立新公理、獲得重要實驗驗證、或發現理論根本性錯誤時更新。*

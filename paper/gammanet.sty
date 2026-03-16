@@ -1,0 +1,56 @@
+% ============================================================
+%  gammanet.sty — Shared macros and theorem environments
+%                 for the Γ-Net paper series (Papers 0–5)
+%
+%  Usage:  \usepackage{gammanet}  in the preamble of each paper
+% ============================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gammanet}[2026/03/16 Gamma-Net shared definitions]
+
+% --- Theorem-like environments (amsthm) ---
+\@ifundefined{theorem}{%
+  \newtheorem{theorem}{Theorem}}{}
+\@ifundefined{corollary}{%
+  \newtheorem{corollary}{Corollary}}{}
+\@ifundefined{definition}{%
+  \newtheorem{definition}{Definition}}{}
+\@ifundefined{remark}{%
+  \newtheorem{remark}{Remark}}{}
+\@ifundefined{proposition}{%
+  \newtheorem{proposition}{Proposition}}{}
+\@ifundefined{lemma}{%
+  \newtheorem{lemma}{Lemma}}{}
+\@ifundefined{axiom}{%
+  \newtheorem{axiom}{Axiom}}{}
+
+% --- Core physical quantities ---
+\providecommand{\Aimp}{A_{\text{imp}}}
+\providecommand{\Acut}{A_{\text{cut}}}
+\providecommand{\Acouple}{A_{\text{couple}}}
+
+% --- Network symbols ---
+\providecommand{\Gnet}{$\Gamma$-Net}
+\providecommand{\avg}[1]{\langle #1 \rangle}
+
+% --- Mode-count helpers ---
+\providecommand{\Kcom}{K_{\text{com}}}
+\providecommand{\Krelay}{K_{\text{relay}}}
+
+% --- Vascular / Neural impedance shorthands ---
+\providecommand{\Zv}{Z_{\text{v}}}
+\providecommand{\Zn}{Z_{\text{n}}}
+\providecommand{\Gv}{\Gamma_{\text{v}}}
+\providecommand{\Gn}{\Gamma_{\text{n}}}
+\providecommand{\Tv}{T_{\text{v}}}
+\providecommand{\Tn}{T_{\text{n}}}
+
+% --- Consciousness / meta-reflection ---
+\providecommand{\Gmeta}{\Gamma_{\text{meta}}}
+\providecommand{\Phimeta}{\Phi_{\text{meta}}}
+\providecommand{\Zarousal}{G_{\text{arousal}}}
+\providecommand{\QPFC}{Q_{\text{PFC}}}
+
+% --- Vascular action ---
+\providecommand{\Av}{A_{\text{v}}}
+
+\endinput
