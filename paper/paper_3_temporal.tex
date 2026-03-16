@@ -377,7 +377,8 @@ observation.
 
 Sleep requires that all thalamic gates satisfy
 $G_i \approx 0$, so the television inequality
-(Paper~4~\cite{Paper4}) falls below threshold:
+(derived in the companion Paper~4~\cite{Paper4})
+falls below threshold:
 $Z_{\mathrm{arousal}}\sum_i G_i \cdot Q_{\text{PFC}} < \theta$.
 However, a gate is an impedance attenuator, not a
 perfect open circuit.  Even at $G_i \ll 1$
@@ -409,7 +410,7 @@ Three routes satisfy it:
     $P_{\mathrm{in},i}$ spikes (loud noise, pain,
     predator vibration).
     The startle circuit
-    (Paper~4~\cite{Paper4})
+    (see Paper~4~\cite{Paper4} for full derivation)
     drives $G_{\text{threat}} \to 1$ within
     $\sim$5\,ms, far faster than cortical processing.
     This is the ancestral survival mechanism.
@@ -458,7 +459,7 @@ is structurally compromised.
 
 \paragraph{Narcolepsy (arousal anchor loss).}
 The television inequality
-(Paper~4~\cite{Paper4})
+(see Paper~4~\cite{Paper4})
 requires $Z_{\mathrm{arousal}} > Z_{\min}$
 for consciousness.
 $Z_{\mathrm{arousal}}$ is held at its operating point
@@ -833,7 +834,16 @@ Define the \emph{critical diffusion length}:
       C_{\mathrm{surface}}}{\dot{m}}}\,,
   \label{eq:critical-length}
 \end{equation}
-where $D_{\mathrm{O}_2}$ is the oxygen diffusion
+where\footnote{Equation~\eqref{eq:critical-length} is the
+planar-geometry limit of the
+Krogh cylinder model~\cite{Krogh1919}.
+For cylindrical geometry, $\ell^*$ is replaced by
+the Krogh radius
+$r_K = \sqrt{4\,D_{\mathrm{O}_2}\,
+C_{\mathrm{surface}}/\dot{m}}$;
+the scaling $\ell^* \propto \sqrt{D/\dot{m}}$
+is identical.}
+$D_{\mathrm{O}_2}$ is the oxygen diffusion
 coefficient in tissue, $C_{\mathrm{surface}}$ is the
 surface oxygen concentration, and $\dot{m}$ is the
 volumetric metabolic rate.
@@ -918,46 +928,63 @@ The Lifecycle Equation (Theorem~\ref{thm:lifecycle},
 below) governs individual organisms,
 but its structure applies equally at the population
 level.
+Two logically distinct selection mechanisms emerge.
+
+\textbf{(A) Competitive selection within a structural tier.}
+Among organisms that share the same impedance
+threshold tier, those with lower $\Sigma\Gamma^2$
+relative to the current environment have higher
+viability.
+This is the standard ``survival of the fittest''
+expressed in impedance language: the fittest are
+the least mismatched.
+
+\textbf{(B) Physical exclusion across tiers.}
+A fundamentally different mechanism operates at
+structural-epoch boundaries.
+When an environmental shift makes
+$\ell > \ell^*$ the norm (e.g.\ rising oxygen
+and body size in the Cambrian), organisms that
+\emph{cannot} cross the pump threshold are not
+outcompeted---they are \emph{physically excluded}.
+A body with $\ell > \ell^*$ and no active
+circulation reaches $\Gamma_v \to 1$ (anoxia)
+at its core: this is not a failure to compete
+but a thermodynamic impossibility.
+The distinction matters: competitive selection
+is probabilistic (better-matched organisms are
+more \emph{likely} to survive); physical exclusion
+is deterministic (organisms that lack the
+required structural tier \emph{cannot} exist).
 
 \textbf{Mass extinction as $\Gamma_{\mathrm{env}} \to 1$.}
 A catastrophic environmental change
 (asteroid impact, supervolcanic eruption, ocean
 anoxia) is a global spike in
 $\gamma\,\Gamma_{\mathrm{env}}(t)$.
-When this term overwhelms the C2 correction
-$-\eta\,\Sigma\Gamma^2$, the organism's total
-mismatch diverges and viability collapses.
-The five major mass extinctions
-(Ordovician--Silurian, Late Devonian,
-Permian--Triassic, Triassic--Jurassic,
-Cretaceous--Paleogene) correspond to five episodes
-where $\gamma\,\Gamma_{\mathrm{env}}$ exceeded
-$\eta$ for the majority of extant species.
-
-\textbf{Survival of the least mismatched.}
-The survivors of each extinction are not the
-``strongest'' but those with the smallest
-$\Sigma\Gamma^2$ relative to the new environment:
-(i)~high $\eta$ (rapid adaptors, e.g.\ bacteria with
-horizontal gene transfer),
-(ii)~low metabolic demand ($\ell < \ell^*$,
-small body size---mammals were mouse-sized when
-dinosaurs perished),
-or (iii)~already low $\Gamma_v$ in the new regime
-(deep-sea organisms unaffected by surface
-temperature).
+When this term overwhelms the C2 correction capacity
+$\eta$, viability collapses.
+The five major mass extinctions correspond to five
+episodes where $\gamma\,\Gamma_{\mathrm{env}}$
+exceeded $\eta$ for the majority of extant species.
+Survivors are those with:
+(i)~high $\eta$ (rapid adaptors, e.g.\ bacteria),
+(ii)~low $\ell$ (small body, low metabolic demand),
+or (iii)~already low $\Gamma$ in the new regime
+(deep-sea organisms).
 
 \textbf{Post-extinction radiation.}
 When $\Gamma_{\mathrm{env}}$ relaxes, the vacated
-impedance landscape contains unoccupied niches
-where $\Sigma\Gamma^2 \approx 0$ is achievable.
+impedance landscape contains unoccupied niches.
 Survivors rapidly diversify to fill these niches
 (e.g.\ mammalian radiation after the
-end-Cretaceous event).
-This is the $\gamma\,\Gamma_{\mathrm{env}} \to 0$
-regime of the Lifecycle Equation: with low novelty
-injection and empty niche space,
-$\Sigma\Gamma^2$ drops rapidly---adaptive radiation.
+end-Cretaceous event)---the
+$\gamma\,\Gamma_{\mathrm{env}} \to 0$ regime of
+the Lifecycle Equation.
+Crucially, no post-extinction radiation has ever
+regressed a structural tier:
+all surviving macrofauna after the end-Cretaceous
+retained active circulation.
 \end{remark}
 
 
@@ -3019,6 +3046,12 @@ R.~E.~Wachtel, and F.~M.~Abboud,
 ``Structural versus functional modulation of the
 baroreflex,''
 \emph{Hypertension}\ \textbf{18}, 667 (1991).
+
+\bibitem{Krogh1919}
+A.~Krogh, ``The number and distribution of capillaries
+in muscles with calculations of the oxygen pressure
+head necessary for supplying the tissue,''
+\emph{J.\ Physiol.}\ \textbf{52}, 409--415 (1919).
 
 \end{thebibliography}
 
