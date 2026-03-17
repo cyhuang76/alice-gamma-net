@@ -1461,6 +1461,52 @@ decay as every other channel.
 $\square$
 \end{proposition}
 
+\begin{remark}[Willpower depletion as PFC bandwidth
+  saturation]
+\label{rem:pfc-bandwidth}
+The physical substrate of $\eta_{\text{pfc}}$
+is the prefrontal neural network, whose
+total processing bandwidth is
+\begin{equation}
+  B_{\text{PFC}}
+  = N_{\mathrm{neurons}}
+    \times N_{\mathrm{microtubule}}
+    \times \Delta f_{\mathrm{per\,channel}}\,,
+  \label{eq:pfc-bandwidth}
+\end{equation}
+where each microtubule carries $K=1$
+independent signal dimension (Paper~0,
+Minimum Reflection Principle).
+
+Each concurrent executive demand---impulse
+inhibition, emotional regulation, working
+memory, decision-making---consumes a
+bandwidth slice $\Delta B_i$.
+When $\sum_i \Delta B_i > B_{\text{PFC}}$,
+the overflow channels cannot be impedance-matched
+($\Gamma_n \to 1$ on lowest-priority tasks),
+yielding the clinically observed phenomena:
+\begin{itemize}
+  \item Decision fatigue after prolonged
+    cognitively demanding work;
+  \item Loss of dietary self-control under
+    occupational stress (bandwidth consumed
+    by work, diet channel overflows);
+  \item Sleep as bandwidth recovery
+    (all thalamic gates
+    $G_i \to 0 \Rightarrow B_{\text{PFC}}$
+    fully released).
+\end{itemize}
+Aging further reduces $B_{\text{PFC}}$
+through neuronal loss
+($N_{\mathrm{neurons}} \downarrow$) and
+vascular mismatch ($\Gamma_v \uparrow
+\Rightarrow \rho = (1-\Gamma_v^2)Q_0 \downarrow
+\Rightarrow$ material supply insufficient),
+compounding the Arrhenius decline
+in $\eta_{\text{pfc}}$ itself.
+\end{remark}
+
 
 \section{Immune--Metabolic Bidirectional Feedback:
   the Inflammation--Insulin Trap}
