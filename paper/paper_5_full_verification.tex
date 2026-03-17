@@ -1387,6 +1387,54 @@ function.
     with network propagation, not causation.
 \end{enumerate}
 
+\subsection{Positioning: zero-parameter physics
+  versus statistical prediction}
+\label{sec:positioning}
+
+A legitimate objection is that fitted statistical
+models (logistic regression, gradient-boosted trees,
+deep networks) routinely achieve AUC~$> 0.80$ on the
+same NHANES data, whereas the $\Gamma$-framework's
+best single-organ AUC is $0.925$ (endocrine) and
+mean organ AUC is $0.617$ (binary cascade).
+Why, then, is the present work useful?
+
+\textbf{The comparison is not AUC versus AUC;
+it is explanation versus correlation.}
+A fitted model with 200 parameters tells the clinician
+\emph{that} a patient is at risk.
+The $\Gamma$-framework, with zero fitted parameters,
+tells the clinician \emph{why}: which organ interface
+has $\Gamma \gg 0$, which relay node is degrading,
+and through which cascade pathway the mismatch
+will propagate.
+
+The analogy is thermodynamics versus chemistry.
+The Second Law ($\Delta G < 0$) does not predict
+products as accurately as a quantum-chemical
+simulation, but it identifies \emph{which reactions
+are possible at all}.
+Similarly, the $\Gamma$-framework identifies which
+disease trajectories are thermodynamically permitted
+and which cascade orderings are structurally
+forced by the relay topology
+(Section~\ref{sec:cascade-validation}).
+
+The two approaches are complementary:
+\begin{enumerate}
+  \item $\Gamma$-features provide a
+    \emph{physics-derived, interpretable basis}
+    for disease prediction;
+  \item Statistical models provide
+    \emph{optimisation over that basis}
+    (weighting, interaction terms, nonlinearities).
+\end{enumerate}
+The key prediction of this work is that
+$\Gamma$-features will outperform ad-hoc feature
+sets in \emph{out-of-distribution} scenarios
+(new populations, new measurement panels),
+because they are derived from conservation laws
+rather than from training-set correlations.
 \subsection{Relation to the Free Energy Principle}
 
 The present framework shares a structural goal with
