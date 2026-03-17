@@ -163,6 +163,89 @@ class GammaEngine:
         # Per-organ weighting in distance metric (default = uniform)
         self.organ_weights = organ_weights or {o: 1.0 for o in ORGAN_LIST}
 
+
+    # ---- Cascade Coupling Matrix (P4 §cascade) ----
+    # C_kj: how much Γ_j² in organ j propagates to organ k.
+    # Values from known physiological coupling (zero fitted parameters):
+    #   - vascular ↔ all organs (blood supply)
+    #   - endocrine → renal, hepatic, vascular, cardiac
+    #   - immune → hepatic, pulmonary, GI
+    #   - neuro ↔ cardiac (autonomic), endocrine (HPA axis)
+    # Rows = target organ, Columns = source organ (same order as ORGAN_LIST)
+    # ORGAN_LIST = cardiac, pulmonary, hepatic, renal, endocrine,
+    #              immune, heme, GI, vascular, bone, neuro, repro
+
+    CASCADE_COUPLING_MATRIX = np.array([
+        # card  pulm  hepa  rena  endo  immu  heme  GI    vasc  bone  neur  repr
+        [0.00, 0.05, 0.03, 0.04, 0.06, 0.02, 0.03, 0.00, 0.10, 0.00, 0.08, 0.00],  # cardiac
+        [0.04, 0.00, 0.02, 0.01, 0.02, 0.06, 0.02, 0.01, 0.06, 0.00, 0.03, 0.00],  # pulmonary
+        [0.02, 0.01, 0.00, 0.02, 0.06, 0.05, 0.03, 0.06, 0.06, 0.00, 0.02, 0.00],  # hepatic
+        [0.04, 0.01, 0.03, 0.00, 0.08, 0.03, 0.02, 0.01, 0.08, 0.00, 0.03, 0.00],  # renal
+        [0.02, 0.01, 0.04, 0.03, 0.00, 0.04, 0.02, 0.02, 0.04, 0.01, 0.05, 0.02],  # endocrine
+        [0.01, 0.03, 0.04, 0.01, 0.04, 0.00, 0.04, 0.04, 0.04, 0.02, 0.03, 0.01],  # immune
+        [0.01, 0.01, 0.03, 0.04, 0.03, 0.03, 0.00, 0.01, 0.03, 0.03, 0.01, 0.00],  # heme
+        [0.01, 0.01, 0.04, 0.01, 0.03, 0.04, 0.01, 0.00, 0.04, 0.00, 0.04, 0.00],  # GI
+        [0.06, 0.02, 0.03, 0.03, 0.06, 0.04, 0.02, 0.01, 0.00, 0.01, 0.05, 0.00],  # vascular
+        [0.01, 0.01, 0.01, 0.02, 0.04, 0.03, 0.02, 0.01, 0.03, 0.00, 0.02, 0.01],  # bone
+        [0.05, 0.02, 0.03, 0.02, 0.05, 0.03, 0.02, 0.02, 0.06, 0.01, 0.00, 0.01],  # neuro
+        [0.01, 0.00, 0.01, 0.01, 0.06, 0.02, 0.01, 0.00, 0.03, 0.01, 0.02, 0.00],  # repro
+    ], dtype=np.float64)
+
+    @classmethod
+    def apply_cascade(
+        cls,
+        gamma_direct: PatientGammaVector,
+        n_iterations: int = 1,
+    ) -> PatientGammaVector:
+        """Apply P4 cascade coupling: Γ_eff = Γ_direct + C_kj · Γ_j².
+
+        Physics: when organ j has mismatch Γ_j, it injects
+        C_kj · Γ_j² reflected power into organ k via the
+        relay topology. This is NOT a fitted parameter—
+        C_kj encodes known physiological coupling pathways.
+
+        Parameters
+        ----------
+        gamma_direct : PatientGammaVector
+            The independently-computed Γ vector (from lab_to_gamma).
+        n_iterations : int
+            Number of cascade propagation steps. Default 1 is
+            sufficient for single-step cross-organ coupling.
+
+        Returns
+        -------
+        PatientGammaVector with cascade-adjusted Γ values.
+        """
+        gamma = gamma_direct.to_array().copy()
+
+        for _ in range(n_iterations):
+            # 級聯注入：Γ²_j 的反射功率透過 C_kj 傳播
+            gamma_sq = gamma ** 2
+            cascade_injection = cls.CASCADE_COUPLING_MATRIX @ gamma_sq
+
+            # 有效 Γ = 原始 Γ + 級聯注入（保持符號）
+            # sign(Γ_direct) 保持——級聯只增加幅度
+            sign = np.sign(gamma)
+            sign[sign == 0] = 1.0
+            gamma = sign * (np.abs(gamma) + cascade_injection)
+
+            # 物理約束：|Γ| ≤ 1
+            gamma = np.clip(gamma, -1.0, 1.0)
+
+        return PatientGammaVector.from_array(gamma)
+
+    def lab_to_gamma_cascaded(
+        self,
+        lab_values: Dict[str, float],
+        n_iterations: int = 1,
+    ) -> PatientGammaVector:
+        """Convert lab values to a 12-D Γ vector WITH cascade propagation.
+
+        Pipeline:  lab_values → Z_organ → Γ_organ → C_kj cascade → Γ_eff
+        """
+        gamma_direct = self.lab_to_gamma(lab_values)
+        return self.apply_cascade(gamma_direct, n_iterations=n_iterations)
+
     # ---- Core Calculation ----
 
     @staticmethod
@@ -177,7 +260,7 @@ class GammaEngine:
         return (z_patient - z_normal) / denom
 
     def lab_to_gamma(self, lab_values: Dict[str, float]) -> PatientGammaVector:
-        """Convert lab values to a 12-D Γ vector.
+        """Convert lab values to a 12-D Γ vector (independent, no cascade).
 
         Pipeline:  lab_values → Z_organ → Γ_organ
         """
