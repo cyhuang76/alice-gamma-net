@@ -574,6 +574,22 @@ parameter adjustment.
 The coupling matrix $C_{kj}$ is either
 $\varepsilon$ or $0$, determined entirely
 by anatomy.
+
+The value $\varepsilon = 0.03$ is not arbitrary:
+NHANES data give $\langle\Gamma^2\rangle = 0.058$
+and on average $\bar{d} \approx 3.9$ connections
+per organ, so the mean cascade injection is
+$\varepsilon \bar{d} \langle\Gamma^2\rangle
+\approx 0.007$,
+about $3.7\%$ of $\langle|\Gamma|\rangle = 0.187$.
+The cascade is thus a \emph{perturbative
+first-order correction}---large enough to be
+detectable (7/7 improvement), but small enough
+that direct organ mismatch remains the dominant
+predictor.
+This is physically correct: inter-organ
+coupling is secondary to the organ's own
+impedance state.
 \end{remark}
 
 
