@@ -164,32 +164,65 @@ class GammaEngine:
         self.organ_weights = organ_weights or {o: 1.0 for o in ORGAN_LIST}
 
 
-    # ---- Cascade Coupling Matrix (P4 §cascade) ----
-    # C_kj: how much Γ_j² in organ j propagates to organ k.
-    # Values from known physiological coupling (zero fitted parameters):
-    #   - vascular ↔ all organs (blood supply)
-    #   - endocrine → renal, hepatic, vascular, cardiac
-    #   - immune → hepatic, pulmonary, GI
-    #   - neuro ↔ cardiac (autonomic), endocrine (HPA axis)
+
+    # ---- Cascade Coupling Matrix (P4, validated in P5 §4.3) ----
+    # Binary topology: C_kj = ε if anatomical connection exists, else 0.
+    # ε = 0.03 (uniform, not fitted to any outcome data).
+    # Connections from standard anatomy (Guyton & Hall, 14th ed.):
+    #   - vascular: supplies all organs (bilateral)
+    #   - neuro: autonomic innervation (cardiac, GI, pulm, endo, immune, vasc, renal)
+    #   - endocrine: receptor distribution (cardiac, renal, hepatic, vasc, bone, immune, repro, GI, neuro)
+    #   - immune: systemic presence (hepatic, pulm, GI, bone, vasc, neuro, heme)
+    #   - specific: GI→hepatic (portal), renal→heme (EPO), renal→cardiac (RAAS)
+    #
+    # Validated: 7/7 organ AUC improvement, p(binomial) = 0.008
     # Rows = target organ, Columns = source organ (same order as ORGAN_LIST)
     # ORGAN_LIST = cardiac, pulmonary, hepatic, renal, endocrine,
     #              immune, heme, GI, vascular, bone, neuro, repro
 
-    CASCADE_COUPLING_MATRIX = np.array([
-        # card  pulm  hepa  rena  endo  immu  heme  GI    vasc  bone  neur  repr
-        [0.00, 0.05, 0.03, 0.04, 0.06, 0.02, 0.03, 0.00, 0.10, 0.00, 0.08, 0.00],  # cardiac
-        [0.04, 0.00, 0.02, 0.01, 0.02, 0.06, 0.02, 0.01, 0.06, 0.00, 0.03, 0.00],  # pulmonary
-        [0.02, 0.01, 0.00, 0.02, 0.06, 0.05, 0.03, 0.06, 0.06, 0.00, 0.02, 0.00],  # hepatic
-        [0.04, 0.01, 0.03, 0.00, 0.08, 0.03, 0.02, 0.01, 0.08, 0.00, 0.03, 0.00],  # renal
-        [0.02, 0.01, 0.04, 0.03, 0.00, 0.04, 0.02, 0.02, 0.04, 0.01, 0.05, 0.02],  # endocrine
-        [0.01, 0.03, 0.04, 0.01, 0.04, 0.00, 0.04, 0.04, 0.04, 0.02, 0.03, 0.01],  # immune
-        [0.01, 0.01, 0.03, 0.04, 0.03, 0.03, 0.00, 0.01, 0.03, 0.03, 0.01, 0.00],  # heme
-        [0.01, 0.01, 0.04, 0.01, 0.03, 0.04, 0.01, 0.00, 0.04, 0.00, 0.04, 0.00],  # GI
-        [0.06, 0.02, 0.03, 0.03, 0.06, 0.04, 0.02, 0.01, 0.00, 0.01, 0.05, 0.00],  # vascular
-        [0.01, 0.01, 0.01, 0.02, 0.04, 0.03, 0.02, 0.01, 0.03, 0.00, 0.02, 0.01],  # bone
-        [0.05, 0.02, 0.03, 0.02, 0.05, 0.03, 0.02, 0.02, 0.06, 0.01, 0.00, 0.01],  # neuro
-        [0.01, 0.00, 0.01, 0.01, 0.06, 0.02, 0.01, 0.00, 0.03, 0.01, 0.02, 0.00],  # repro
-    ], dtype=np.float64)
+    _EPSILON = 0.03  # 統一耦合常數（非擬合）
+
+    # Anatomical connections: (source, target)
+    _CONNECTIONS = [
+        # 血管供應所有器官
+        ('vascular', 'cardiac'), ('vascular', 'pulmonary'), ('vascular', 'hepatic'),
+        ('vascular', 'renal'), ('vascular', 'endocrine'), ('vascular', 'immune'),
+        ('vascular', 'heme'), ('vascular', 'GI'), ('vascular', 'bone'),
+        ('vascular', 'neuro'), ('vascular', 'repro'),
+        # 心臟→血管（心輸出量）, 心臟→肺（肺循環）
+        ('cardiac', 'vascular'), ('cardiac', 'pulmonary'),
+        # 肺→心臟
+        ('pulmonary', 'cardiac'),
+        # 神經自律神經支配
+        ('neuro', 'cardiac'), ('neuro', 'GI'), ('neuro', 'pulmonary'),
+        ('neuro', 'endocrine'), ('neuro', 'immune'), ('neuro', 'vascular'),
+        ('neuro', 'renal'),
+        # 內分泌廣泛影響
+        ('endocrine', 'cardiac'), ('endocrine', 'renal'), ('endocrine', 'hepatic'),
+        ('endocrine', 'vascular'), ('endocrine', 'bone'), ('endocrine', 'immune'),
+        ('endocrine', 'repro'), ('endocrine', 'GI'), ('endocrine', 'neuro'),
+        # 免疫遍布
+        ('immune', 'hepatic'), ('immune', 'pulmonary'), ('immune', 'GI'),
+        ('immune', 'bone'), ('immune', 'vascular'), ('immune', 'neuro'),
+        ('immune', 'heme'),
+        # 肝門靜脈系統
+        ('GI', 'hepatic'),
+        ('hepatic', 'immune'), ('hepatic', 'endocrine'), ('hepatic', 'heme'),
+        # 腎→血液（EPO, RAAS）
+        ('renal', 'heme'), ('renal', 'cardiac'), ('renal', 'vascular'),
+        ('renal', 'endocrine'),
+        # 骨髓→血液
+        ('heme', 'immune'), ('heme', 'vascular'),
+    ]
+
+    # Build binary matrix at class level
+    _organ_idx = {o: i for i, o in enumerate(ORGAN_LIST)}
+    _binary = np.zeros((len(ORGAN_LIST), len(ORGAN_LIST)), dtype=np.float64)
+    for _src, _tgt in _CONNECTIONS:
+        _binary[_organ_idx[_tgt], _organ_idx[_src]] = 1.0
+    np.fill_diagonal(_binary, 0.0)
+
+    CASCADE_COUPLING_MATRIX = _binary * _EPSILON
 
     @classmethod
     def apply_cascade(
