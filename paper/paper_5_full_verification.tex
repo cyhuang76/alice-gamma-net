@@ -217,6 +217,43 @@ The null hypothesis (AUC $= 0.5$) is rejected at
 $p < 0.001$ for all seven systems.
 \end{theorem}
 
+\begin{proof}[Proof by empirical verification]
+The validation protocol proceeds in four stages,
+each completed before the next begins:
+\begin{enumerate}
+  \item \textbf{Prediction (blind).}
+    For each of $n = 7{,}393$ adults ($\geq$20\,years,
+    $\geq$10 lab values) across NHANES 2013--2014,
+    2015--2016, and 2017--2018,
+    organ-level $\Gamma$-vectors are computed
+    using textbook reference impedances
+    $Z_{\mathrm{normal}}$ (zero fitted parameters).
+  \item \textbf{Hash-lock.}
+    All $7{,}393$ prediction vectors are serialised
+    to JSON and SHA-256 hashed before any
+    diagnosis or mortality data is loaded.
+    The hash is recorded in the output file
+    \texttt{multicycle\_blind\_predictions.json}.
+  \item \textbf{Unblinding.}
+    Self-reported diagnoses (MCQ, DIQ) and
+    NDI-linked mortality are loaded.
+    Per-organ AUC is computed using
+    $|\Gamma_{\mathrm{organ}}|$ as the sole predictor.
+  \item \textbf{Result.}
+    All seven tested organ systems yield
+    AUC~$>$~0.5 with $p < 0.001$
+    (one-sided DeLong test against the null
+    AUC~$= 0.5$).  All-cause mortality
+    AUC~$= 0.705$.
+\end{enumerate}
+Since the predictions are hash-locked before
+diagnosis data is accessed, and no parameters
+are fitted to any NHANES data,
+the result constitutes a pre-registered,
+zero-parameter empirical verification.
+$\square$
+\end{proof}
+
 \subsection{Ten-cycle expanded validation}
 \label{sec:nhanes-10cycle}
 
