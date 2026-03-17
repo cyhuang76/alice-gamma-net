@@ -1435,6 +1435,58 @@ sets in \emph{out-of-distribution} scenarios
 (new populations, new measurement panels),
 because they are derived from conservation laws
 rather than from training-set correlations.
+
+Table~\ref{tab:five-layer} provides empirical
+evidence: adding blood pressure, cascade coupling,
+and a minimal 12-weight logistic regression
+progressively increases mean organ AUC
+from $0.604$ to $0.709$.
+
+\begin{table}[h]
+\centering
+\caption{Five-layer AUC progression
+  ($n = 7{,}393$, NHANES 2013--2018).
+  Layers~1--4 use zero fitted parameters;
+  Layer~5 uses 12 organ weights only.}
+\label{tab:five-layer}
+\footnotesize
+\begin{tabular}{lcccccr}
+\toprule
+Organ & Lab & Lab+C & BP & BP+C
+  & \textbf{LR} & $n_{+}$ \\
+\midrule
+Endocrine  & .925 & .926 & .925 & .926 & \textbf{.932} & 1080 \\
+Cardiac    & .507 & .531 & .546 & .568 & \textbf{.721} &  327 \\
+Pulmonary  & .547 & .562 & .547 & .568 & \textbf{.634} &  155 \\
+Hepatic    & .574 & .582 & .574 & .583 & \textbf{.611} &  355 \\
+Bone       & .515 & .531 & .515 & .533 & \textbf{.648} & 2085 \\
+Neuro      & .619 & .620 & .629 & .630 & \textbf{.678} &  301 \\
+Immune     & .542 & .569 & .542 & .572 & \textbf{.737} &  266 \\
+\midrule
+\textbf{Mean}
+  & .604 & .617 & .611 & .626
+  & \textbf{.709} & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{remark}[Information efficiency per parameter]
+\label{rem:info-efficiency}
+Logistic regression over the 12-dimensional
+$\Gamma$-vector achieves mean AUC~$= 0.709$
+with exactly 12 fitted weights (one per organ).
+Conventional risk scores (e.g.\ Framingham)
+use ${\sim}10$ fitted coefficients per disease
+endpoint; machine-learning models use hundreds
+to thousands.
+The $\Gamma$-features thus achieve comparable
+discrimination with far fewer fitted parameters,
+because the physics has already compressed the
+raw laboratory space (27+ biomarkers) into
+a 12-dimensional representation where each
+component has a clear physical meaning
+(impedance mismatch of one organ system).
+\end{remark}
 \subsection{Relation to the Free Energy Principle}
 
 The present framework shares a structural goal with
