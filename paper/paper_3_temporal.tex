@@ -2235,6 +2235,81 @@ mathematical structure}---gradient descent on the
 reflection action---regardless of their material substrate.
 \end{remark}
 
+\begin{remark}[Why twenty-nine C2 networks exist:
+  the interface--relay--maintenance chain]
+\label{rem:interface-relay-chain}
+The number twenty-nine is not arbitrary.
+By the Universal Relay-Node Corollary
+(Paper~0, Corollary~\ref{cor:universal-relay}),
+every impedance-discontinuous interface
+($\Gamma \neq 0$) requires a relay structure
+for signal integrity.
+Each relay structure is itself a physical
+component subject to degradation ($\Gamma \to 1$
+under Coffin--Manson fatigue) and therefore
+requires a maintenance mechanism.
+C2 \emph{is} that mechanism:
+\[
+  \underbrace{\Gamma \neq 0}_{\text{interface}}
+  \;\Longrightarrow\;
+  \underbrace{A_{\mathrm{cut}} > 0}_{\text{relay needed}}
+  \;\Longrightarrow\;
+  \underbrace{\Delta Z = -\eta\,\Gamma\,
+    x_{\mathrm{in}} x_{\mathrm{out}}}_{\text{C2 maintenance}}
+\]
+Thus each row of Table~\ref{tab:twentynine}
+exists because its corresponding interface
+exists.  The twenty-nine C2 networks are not
+discovered empirically and then unified
+post~hoc; they are \emph{predicted} by the
+number of impedance-discontinuous interfaces
+in the human body.  Table~\ref{tab:relay-map}
+lists the interface and relay structure for
+each network.
+
+\begin{table}[h!]
+\centering
+\caption{Interface--relay map for the 29 $\Gamma$-networks.}
+\label{tab:relay-map}
+\footnotesize
+\begin{tabular}{@{}rllp{3.2cm}@{}}
+\toprule
+\# & Network & Interface & Relay structure \\
+\midrule
+1 & Neural & Neuron--neuron & Synapse \\
+2 & Skeletal & Bone--soft tissue & Periosteum \\
+3 & Vascular & Blood--vessel wall & Endothelium \\
+4 & Immune & Immune--tissue & Lymph node \\
+5 & Epithelial & Body--environment & Basement membrane \\
+6 & Muscular & Muscle--tendon & Myotendinous junction \\
+7 & Pulmonary & Blood--air & Alveolar membrane \\
+8 & GI & Lumen--blood & Villous epithelium \\
+9 & Endocrine & Gland--blood & Fenestrated capillary \\
+10 & Lymphatic & Tissue--lymph & Lymphatic valve \\
+11 & Renal & Blood--filtrate & Glomerulus \\
+12 & Hepatic & Portal blood--bile & Disse space \\
+13 & Connective & Muscle--bone & Tendon sheath \\
+14 & Adipose & Fat--vasculature & Lobular septum \\
+15 & Haematopoietic & Marrow--blood & Sinusoidal endothelium \\
+16 & Reproductive & Follicle--blood & Theca--granulosa junction \\
+17 & Cardiac & Electrical--mechanical & Purkinje fibre \\
+18 & Reg.\ brain & Set-point--error & Hypothalamic nuclei \\
+19 & Ocular & Aqueous--venous & Trabecular meshwork \\
+20 & Auditory & Sound--neural & Organ of Corti \\
+21 & Vestibular & Motion--neural & Semicircular canal crista \\
+22 & Olfactory & Gas--neural & Olfactory epithelium \\
+23 & Dental & Oral--pulp & Odontoblast layer \\
+24 & Enteric & Lumen--ENS & Myenteric plexus \\
+25 & Autonomic & CNS--viscera & Autonomic ganglia \\
+26 & Pancreatic & Glucose--insulin & Islet of Langerhans \\
+27 & CSF & Brain--venous & Choroid plexus \\
+28 & Brain (func.) & Cortical areas & Association fibres \\
+29 & Cartilage & Load--matrix & Perichondrium ($\eta \approx 0$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{remark}
+
 \subsection{Unification Theorem}
 
 \begin{theorem}[C2 Universality across all 29 tissues]
