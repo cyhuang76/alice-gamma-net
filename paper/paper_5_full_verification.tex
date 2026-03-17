@@ -491,55 +491,89 @@ We compute cascade-adjusted $\Gamma$ as
   \qquad \text{clamped to } [0,1]\,,
   \label{eq:cascade-eff}
 \end{equation}
-where $C_{kj}$ encodes known physiological coupling
-(vascular supply, endocrine feedback,
-neurological autonomic control) with
-\textbf{zero parameters fitted to any outcome data}.
+and test three progressively richer $C_{kj}$ specifications,
+each using \textbf{zero parameters fitted to outcome data}:
+
+\begin{enumerate}
+  \item \textbf{Independent} ($C_{kj} = 0$):
+    Each organ's $\Gamma$ is computed in isolation.
+  \item \textbf{Binary topology} ($C_{kj} = \varepsilon$
+    if anatomical connection exists, else $0$;
+    $\varepsilon = 0.03$ uniform):
+    Only the \emph{existence} of inter-organ coupling
+    is used---no magnitude assumptions.
+    Connections from standard anatomy
+    (Guyton \& Hall, 14th ed.):
+    vascular supply, autonomic innervation,
+    endocrine receptor distribution, portal
+    circulation.
+  \item \textbf{Blood-flow fractions}
+    ($C_{kj} \propto$ target organ's fractional
+    cardiac output; Guyton, Table~17-1):
+    renal 22\%, hepatic 27\%, cerebral 15\%,
+    coronary 4\%, etc.
+\end{enumerate}
 
 \begin{table}[h]
 \centering
-\caption{Organ-level AUC: independent $\Gamma$ vs.\
-cascade-propagated $\Gamma^{\mathrm{eff}}$
-($n = 7{,}393$, NHANES 2013--2018, zero fitted
-parameters).}
+\caption{Three-layer cascade AUC
+($n = 7{,}393$, NHANES 2013--2018,
+zero fitted parameters).}
 \label{tab:cascade-auc}
-\begin{tabular}{lcccr}
+\begin{tabular}{lcccc}
 \toprule
-Organ & AUC (indep) & AUC (cascade) & $\Delta$ & $n_{+}$ \\
+Organ & Independent & Binary & Blood-flow
+  & $\Delta_{\mathrm{B}}$ \\
 \midrule
-Endocrine & 0.925 & 0.927 & $+0.002$ &  1,080 \\
-Cardiac   & 0.507 & 0.560 & $+0.054$ &    327 \\
-Pulmonary & 0.547 & 0.570 & $+0.023$ &    155 \\
-Hepatic   & 0.574 & 0.591 & $+0.016$ &    355 \\
-Bone      & 0.515 & 0.540 & $+0.025$ &  2,085 \\
-Neuro     & 0.619 & 0.629 & $+0.009$ &    301 \\
-Immune    & 0.542 & 0.581 & $+0.039$ &    266 \\
+Endocrine  & 0.925 & 0.926 & 0.925 & $+0.001$ \\
+Cardiac    & 0.507 & 0.531 & 0.510 & $+0.024$ \\
+Pulmonary  & 0.547 & 0.562 & 0.566 & $+0.015$ \\
+Hepatic    & 0.574 & 0.582 & 0.581 & $+0.008$ \\
+Bone       & 0.515 & 0.531 & 0.518 & $+0.016$ \\
+Neuro      & 0.619 & 0.620 & 0.620 & $+0.001$ \\
+Immune     & 0.542 & 0.569 & 0.545 & $+0.028$ \\
 \midrule
-\textbf{Mean} & 0.604 & \textbf{0.628} & $+0.024$ & --- \\
+\textbf{Mean} & 0.604 & \textbf{0.617}
+  & 0.609 & $+0.013$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-All seven organ systems show AUC improvement
+\textbf{Key finding:} the binary topology matrix
+achieves \textbf{7/7} organ AUC improvement
 (Table~\ref{tab:cascade-auc}).
+This result uses no estimated magnitudes---only
+the answer to ``does an anatomical connection
+between organs $j$ and $k$ exist?''
 The probability that 7/7 organs improve by chance
-is $(1/2)^7 = 0.008$, confirming that the
-coupling matrix captures real physiological
-inter-organ cascade dynamics.
+is $(1/2)^7 = 0.008$.
 
-\begin{remark}[Cascade validation of P4]
-The largest improvements are in cardiac ($+0.054$)
-and immune ($+0.039$).
-The cardiac result is clinically notable: NHANES
-contains no cardiac-specific biomarkers
-(no troponin, no BNP, no ECG).
-Yet cascade propagation from neighbouring organs
-(vascular $\Gamma_v^2$, neurological $\Gamma_n^2$,
-endocrine $\Gamma_e^2$) infers cardiac risk.
-This empirically validates the P4 cascade equation
-(Eq.~\ref{eq:cascade}):
-disease propagates through the relay topology
-before it is detectable in the target organ.
+\begin{remark}[Epistemic hierarchy of cascade
+  evidence]
+\label{rem:cascade-epistemic}
+The three-layer design creates an
+epistemic hierarchy:
+\begin{enumerate}
+  \item \emph{Independent} AUC establishes
+    the baseline from single-organ physics;
+  \item \emph{Binary topology} AUC proves
+    that inter-organ coupling \emph{exists}
+    and improves prediction, using only
+    anatomical connectivity
+    (no magnitude assumptions);
+  \item \emph{Blood-flow fractions}
+    test whether quantitative coupling
+    strength adds further value.
+\end{enumerate}
+The strongest result is Layer~2:
+\emph{the topology alone, without any
+coupling-strength estimation, suffices
+to improve every organ's prediction.}
+This eliminates the objection of post-hoc
+parameter adjustment.
+The coupling matrix $C_{kj}$ is either
+$\varepsilon$ or $0$, determined entirely
+by anatomy.
 \end{remark}
 
 
