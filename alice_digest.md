@@ -61,35 +61,42 @@
 
 ## 摘要 #003 — 2026-03-18
 
-**對話主題**：多項 P5 驗證強化 + P0/P2 remark 補充 + 死亡人數修正
+**對話主題**：多項 P5 驗證強化 + P0/P1/P2 remark 補充 + 死亡人數修正 + 全篇審計
 
-**論文變更（9 commits）**：
-1. P1/P2 編譯修復（檔名是 `paper_1_topology.tex` 不是 `paper_1_network.tex`）
-2. P5 ε=0.03 物理推導（perturbative first-order: injection ≈ 3.7% of |Γ|）
-3. P0 新 remark「Why biology is 1D」— 纖維=波導管，人體不是 3D 實體而是 1D 纖維編織的拓撲
-4. P2 新 remark「Organ-specific Ω_i」— 由下而上 mean=1.376 ≈ 由上而下 1.33（3% 一致）
-5. P5 新小節「Dimensional cost as thermal dissipation」— age-residualized AUC=0.60, Q4/Q1=3.3×
-6. P5 10-cycle 7/7 robustness（n=52,545，與 3-cycle 一致）
-7. P5 新小節「Multi-organ comorbidity」— DM+Cardiac AUC=**0.853**
-8. P5 Framingham 平手 — H_cascade = Framingham = AUC **0.682**（零參數 vs 10 參數）
+**論文變更（14 commits）**：
+1. P1/P2 編譯修復（檔名錯誤）
+2. P5 ε=0.03 物理推導（perturbative first-order）
+3. P0 remark「Why biology is 1D」— 纖維=波導管
+4. P2 remark「Organ-specific Ω_i」— mean=1.376 ≈ 1.33（3%）
+5. P5 §「Dimensional cost as thermal dissipation」— AUC=0.60, Q4/Q1=3.3×
+6. P5 10-cycle 7/7 robustness（n=52,545）
+7. P5 §「Multi-organ comorbidity」— DM+Cardiac AUC=**0.853**
+8. P5 Framingham 平手 — H_cascade = Framingham = **0.682**
 9. P5 死亡人數統一 → n=52,545, deaths=7,627
+10. P2 remark「Why impedance disparity is extreme」— 密度/彈性/膜電阻 → Z 差數量級
+11. P1 remark「Directional asymmetry of A_cut」— top-down A=4, bottom-up A=0
+12. P1 remark「Relay nodes increase bandwidth」— Chebyshev multi-stage 類比
+13. P1 remark「Thermal attractor」+ remark「Willpower as SNR」— Landauer, D_Z 噪聲, 安靜療癒
+14. 全篇審計修正 — P0 n→52,545, P1 thm:Acut→irreducibility, P1 Pozar bibitem
 
 **關鍵數據**：
-- 器官特異 Ω_i：neuro=2.000, renal=1.880, GI=1.800
 - 共病 AUC：DM+Cardiac=0.853, DM+Hepatic=0.851
 - Framingham 零參數平手：0.682 vs 0.682
-- 維度成本控制年齡後：AUC=0.600, Q4/Q1 死亡率=3.3×
+- 維度成本控制年齡後：AUC=0.600, Q4/Q1=3.3×
 
-**讀取的 4 份 PDF**：
-1. 大腦分區：K 值聚集 → 功能分區是身體複雜度的物理倒影
-2. 維度-中繼-重塑：生命三位一體（C1/C2/C3 的直覺版）
-3. 腦身 K 梯度：A_cut 方向不對稱 → 知易行難、肌肉記憶、分析癱瘓
-4. C2 法則：C2 = 雕刻人體的隱形刻刀（胚胎 morphogenesis）
+**新確立的核心概念**：
+- 纖維 = 1D 波導管（P0）
+- 阻抗差異的極端性（P2）
+- 維度傳播方向不對稱（P1）
+- 多級中繼增加頻寬（P1）
+- 熱底噪 = 熱力學吸引子 + 意志力 = SNR（P1）
+
+**論文頁數**：P0=7, P1=14, P2=8, P3=21, P4=15, P5=15 → **合計 80 頁**
 
 **我的觀察（知識空缺提示）**：
-> 1. 胚胎發育中 Ω 的階段性遞增（day21 心臟管 → day25 神經管）仍是猜測，需要模擬器驗證
-> 2. Ω_i 對短期死亡 AUC 無改善——物理意義（維護成本）≠ 統計意義（預測力）
-> 3. 下一步最有價值的工程項目是 HumanBodyModel 橋接層（三層架構串聯）
+> 1. 胚胎發育中 Ω 的階段性遞增仍是猜測，需要模擬器驗證
+> 2. P3/P5 跨論文 `\ref{}` 顯示 "??"——投稿前需決定合併或用 `xr` package
+> 3. HumanBodyModel 橋接層是唯一剩下的工程項目
 
 ---
 
