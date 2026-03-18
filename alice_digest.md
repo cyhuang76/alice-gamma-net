@@ -61,27 +61,35 @@
 
 ## 摘要 #003 — 2026-03-18
 
-**對話主題**：器官特異 Ω_i 推導、四份 PDF 洞見整理
+**對話主題**：多項 P5 驗證強化 + P0/P2 remark 補充 + 死亡人數修正
 
-**理論突破**：
-- ✅ **器官特異 Ω_i** = 1 + α·(血流分數)·(神經密度/5)，12 個器官各自有不同的雙網路開銷
-- ✅ **由下而上** mean Ω_i = 1.376 ≈ P2 **由上而下** Ω = 1.33（差異 3%）
-- ✅ 獨立回收 **Kleiber 4/3**：人體每 4 份能量中 3 份用於組織功能，1 份是基礎設施開銷
-- ✅ 讀取四份 PDF：大腦分區=身體倒影、維度-中繼-重塑、腦身 K 梯度不對稱、C2 雕刻人體
+**論文變更（9 commits）**：
+1. P1/P2 編譯修復（檔名是 `paper_1_topology.tex` 不是 `paper_1_network.tex`）
+2. P5 ε=0.03 物理推導（perturbative first-order: injection ≈ 3.7% of |Γ|）
+3. P0 新 remark「Why biology is 1D」— 纖維=波導管，人體不是 3D 實體而是 1D 纖維編織的拓撲
+4. P2 新 remark「Organ-specific Ω_i」— 由下而上 mean=1.376 ≈ 由上而下 1.33（3% 一致）
+5. P5 新小節「Dimensional cost as thermal dissipation」— age-residualized AUC=0.60, Q4/Q1=3.3×
+6. P5 10-cycle 7/7 robustness（n=52,545，與 3-cycle 一致）
+7. P5 新小節「Multi-organ comorbidity」— DM+Cardiac AUC=**0.853**
+8. P5 Framingham 平手 — H_cascade = Framingham = AUC **0.682**（零參數 vs 10 參數）
+9. P5 死亡人數統一 → n=52,545, deaths=7,627
 
 **關鍵數據**：
-- Ω 最高：neuro=2.000 > renal=1.880 > GI=1.800 > hepatic=1.720
-- Ω 最低：endocrine=1.040, repro=1.053, heme=1.053
-- 全因死亡 AUC：H_standard=0.699 ≈ H_omega=0.695（Ω 影響長期穩定性，非短期死亡）
+- 器官特異 Ω_i：neuro=2.000, renal=1.880, GI=1.800
+- 共病 AUC：DM+Cardiac=0.853, DM+Hepatic=0.851
+- Framingham 零參數平手：0.682 vs 0.682
+- 維度成本控制年齡後：AUC=0.600, Q4/Q1 死亡率=3.3×
 
-**已完成修復**：
-- P1/P2 編譯問題 → 原因是檔名錯誤（paper_1_topology.tex 不是 paper_1_network.tex）
-- ε = 0.03 推導 → 寫入 P5（擾動一階修正，injection ≈ 3.7% of |Γ|）
+**讀取的 4 份 PDF**：
+1. 大腦分區：K 值聚集 → 功能分區是身體複雜度的物理倒影
+2. 維度-中繼-重塑：生命三位一體（C1/C2/C3 的直覺版）
+3. 腦身 K 梯度：A_cut 方向不對稱 → 知易行難、肌肉記憶、分析癱瘓
+4. C2 法則：C2 = 雕刻人體的隱形刻刀（胚胎 morphogenesis）
 
 **我的觀察（知識空缺提示）**：
-> 1. Ω_i 對短期死亡 AUC 無改善，但可能需要 >10 年追蹤才能顯現效應
-> 2. Ω_i 的物理意義（組織維護成本）與 AUC 的統計意義（預測能力）是不同的維度
-> 3. 四份 PDF 的核心洞見（維度-中繼-重塑三位一體）可以作為論文系列的統一前言
+> 1. 胚胎發育中 Ω 的階段性遞增（day21 心臟管 → day25 神經管）仍是猜測，需要模擬器驗證
+> 2. Ω_i 對短期死亡 AUC 無改善——物理意義（維護成本）≠ 統計意義（預測力）
+> 3. 下一步最有價值的工程項目是 HumanBodyModel 橋接層（三層架構串聯）
 
 ---
 
