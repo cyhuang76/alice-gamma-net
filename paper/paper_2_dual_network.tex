@@ -704,6 +704,38 @@ Therefore $\Omega \approx 1/0.75 \approx 1.33$.
 The neural network alone gives
 $\Omega_n = 1/(1-0.20) = 1.25 \approx \beta = 2^{1/3}$.
 
+\begin{remark}[Organ-specific $\Omega_i$:
+  bottom-up recovery of $\tfrac{4}{3}$]
+\label{rem:omega-organ}
+The global $\Omega$ can be decomposed into
+organ-specific overhead factors.
+For each organ $i$, define
+$\Omega_i = 1 + \alpha\,
+\mathrm{BF}_i \times \mathrm{NI}_i / 5$,
+where $\mathrm{BF}_i$ is the blood-flow fraction
+(Guyton Table~17-1) and $\mathrm{NI}_i \in \{1,\ldots,5\}$
+is the neural innervation density
+(autonomic + somatic).
+Paper~5 computes:
+\[
+  \overline{\Omega_i}
+  = \frac{1}{12}\sum_{i=1}^{12} \Omega_i
+  = 1.376
+  \approx \Omega_{\text{global}} = 1.33.
+\]
+The $\sim\!3\%$ agreement between the
+bottom-up organ average and the top-down
+whole-body value constitutes an independent
+consistency check.
+The highest-overhead organs are
+neuro ($\Omega = 2.00$),
+renal ($1.88$), and
+GI ($1.80$);
+the lowest are
+endocrine ($1.04$) and
+reproductive ($1.05$).
+\end{remark}
+
 \subsection{Why blood before nerve}
 
 C2 requires a carrier for $x_{\text{in}}$:
