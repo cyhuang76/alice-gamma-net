@@ -73,6 +73,20 @@ $$|\Gamma_k^{\text{eff}}| = |\Gamma_k| + \sum_j C_{kj}\,\Gamma_j^2$$
 - **驗證**：7/7 器官 AUC 改善，$p(\text{binomial}) = 0.008$
 - **來源**：Guyton & Hall, 14th ed. 解剖連接
 
+### 器官特異 $\Omega_i$（由下而上回收 Kleiber 4/3）
+
+P2 定義全局 $\Omega = B_{\text{total}}/B_{\text{tissue}} \approx 1.33$（由上而下）。
+
+器官特異推導：$\Omega_i = 1 + \alpha \cdot \text{BF}_i \cdot \text{NI}_i/5$
+
+| 指標 | 值 |
+|------|------|
+| 由下而上 mean $\overline{\Omega_i}$ | **1.376** |
+| 由上而下 $\Omega$ (P2) | **1.33** |
+| 差異 | ~3% |
+
+物理意義：$\overline{\Omega} \approx \frac{4}{3}$ = 每 4 份能量中 3 份用於組織，1 份是雙網路基礎設施。
+
 ---
 
 ## 四、關鍵衍生量一覽
