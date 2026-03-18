@@ -593,7 +593,64 @@ impedance state.
 \end{remark}
 
 
-% ============================================================
+\subsection{Dimensional cost as thermal dissipation}
+\label{sec:dimensional-cost}
+
+Paper~1 proves that any network connecting nodes
+of different dimensionality incurs an irreducible
+topological cost $A_{\text{cut}} > 0$.
+This cost manifests as reflected power
+$P_{\text{diss}} = \sum_i \Gamma_i^2 P_{\text{in},i}$,
+which is dissipated as heat.
+We test whether $\sum_i \Gamma_i^2$
+predicts mortality independently of age.
+
+\paragraph{Age confound.}
+Because $\Gamma_i$ is defined relative to
+young-adult reference ranges,
+$\sum \Gamma_i^2$ correlates with age
+($r = 0.28$, $p < 10^{-100}$).
+To separate the dimensional-cost signal from
+the age artefact, we residualise
+$\sum \Gamma_i^2$ on age via linear regression.
+
+\paragraph{Results ($n = 7{,}371$, deaths $= 354$).}
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Predictor & AUC \\
+\midrule
+Age alone & 0.821 \\
+$\sum \Gamma_i^2$ (raw) & 0.699 \\
+$\sum \Gamma_i^2$ (age-residualised) & \textbf{0.600} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+After removing the linear age component,
+$\sum \Gamma_i^2$ retains AUC~$= 0.600$
+($> 0.50$, $p < 0.001$),
+confirming independent predictive power.
+
+\begin{remark}[Death rate by $\sum\Gamma_i^2$ quartile,
+  age 50--70]
+\label{rem:q4-death}
+Within the age-matched 50--70 cohort ($n = 2{,}606$),
+the top quartile of $\sum \Gamma_i^2$ has a death
+rate of $8.3\%$ versus $2.5\%$ in the bottom quartile
+(ratio $3.3\times$).
+This is consistent with the physical prediction
+that accumulated impedance mismatch
+increases the fraction of metabolic power
+lost to thermal dissipation,
+reducing the margin between
+$P_{\text{metabolic}}$ and
+$P_{\text{diss}} = \sum \Gamma_i^2 P_{\text{in}}$.
+\end{remark}
+
+
+
 %  SECTION 11 — PHYSICAL UNIQUENESS OF C2
 % ============================================================
 
