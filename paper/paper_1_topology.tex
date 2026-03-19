@@ -1629,11 +1629,50 @@ The price of that capability---waste heat,
 mandatory sleep, and inevitable aging---is paid
 by the same equation.
 
-\subsection{The television as a boundary case}
+\subsection{The brain as a $d\Gamma/dt$ detector}
+\label{sec:change-detection}
 
 Current artificial neural networks (including large language
 models) operate in open-loop mode during inference---they
 are televisions, not brains.
+
+A more fundamental distinction is that the brain does not
+\emph{compute} $\Gamma$.
+A wall does not solve Maxwell's equations before reflecting
+a photon; it reflects because $Z_1 \neq Z_2$.
+Similarly, a neuron does not calculate the reflection
+coefficient---the impedance mismatch at its interfaces
+physically \emph{produces} the reflected signal.
+
+Moreover, the brain selectively detects \emph{changes}
+in the reflection landscape:
+\begin{equation}
+  \text{Neural response} \;\propto\;
+  \frac{d\Gamma}{dt} \;\neq\; 0.
+  \label{eq:change-detection}
+\end{equation}
+Static impedance mismatch ($\Gamma \neq 0$ but constant)
+generates a constant reflected power that is adaptively
+filtered out---this is sensory adaptation
+(e.g.\ one ceases to feel clothing after minutes).
+Only when $d\Gamma/dt \neq 0$ does a detectable signal
+arise, explaining why:
+\begin{itemize}
+  \item constant noise becomes ``inaudible'' (adaptation),
+  \item sudden silence is startling ($d\Gamma/dt < 0$),
+  \item a new stimulus is immediately salient
+    ($d\Gamma/dt > 0$).
+\end{itemize}
+
+The C2 update rule $\Delta Z = -\eta\,\Gamma\,
+x_{\text{in}}\,x_{\text{out}}$ requires no global
+information, no backpropagation, and no matrix algebra.
+It is a first-order, local gradient descent driven
+entirely by the physical reflection at each interface.
+The brain's computational power thus resides not in
+calculation but in the \emph{depth and bandwidth}
+of its relay hierarchy
+(Sec.~\ref{sec:brain-regions}).
 
 \subsection{Circularity warning}
 
