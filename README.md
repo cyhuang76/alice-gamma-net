@@ -1,4 +1,4 @@
-# Alice Smart System — v3.9.0
+# Alice Smart System — v3.9.1
 
 <div align="center">
 
@@ -205,7 +205,7 @@ python -m alice.main server --port 8000
 | Disease models | 125 |
 | Medical specialties | 13 |
 | Lab items mapped | 53 |
-| Paper figures | 27 |
+| Paper figures | 30 |
 | Testable predictions | 18 |
 
 ---
@@ -215,21 +215,21 @@ python -m alice.main server --port 8000
 | # | Title | Pages | Status |
 |---|-------|:-----:|--------|
 | 0 | From the First Law of Thermodynamics to Three Inviolable Constraints — Framework Definition | 6 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18751831)) |
-| 1 | From Neuron to Mind — Irreducible Topology, Neural Architecture, Memory, Consciousness, and Soul | 14 | **Complete** |
-| 2 | Dual Impedance Networks and Metabolic Scaling — Vascular Architecture, Organ Health, and Kleiber's Law | 8 | **Complete** |
-| 3 | Temporal Dynamics and Universal Remodeling — Impedance Debt, Sleep, Lifecycle, Aging, and 29 C2 Networks | 20 | **Complete** |
+| 1 | From Neuron to Mind — Irreducible Topology, Neural Architecture, Memory, Consciousness, and Soul | 15 | **Complete** |
+| 2 | Dual Impedance Networks and Metabolic Scaling — Vascular Architecture, Organ Health, and Kleiber's Law | 9 | **Complete** |
+| 3 | Temporal Dynamics and Universal Remodeling — Impedance Debt, Sleep, Lifecycle, Aging, and 29 C2 Networks | 21 | **Complete** |
 | 4 | Topological Pathology — Disease as Impedance Failure on the Γ-Network | 16 | **Complete** |
-| 5 | Complete Empirical Validation — Γ as the Universal Interface Law from Microtubules to Power Grids | 12 | **Complete** |
+| 5 | Complete Empirical Validation — Γ as the Universal Interface Law from Microtubules to Power Grids | 15 | **Complete** |
 
 Key results:
 - **Paper 0**: Derives the complete axiomatic framework from the First Law of Thermodynamics. C1/C2/C3 emerge as *theorems*, not postulates. C2 proven as the *unique* first-order activity-gated update rule minimising reflected energy.
-- **Paper 1**: **Irreducibility theorem** — heterogeneous networks have a geometric cost floor $A_{\text{cut}}$ that cannot be learned away. Relay nodes emerge as thermodynamic necessity. **Memory** = hysteretic topological deformation ($\partial Z/\partial t$). **Consciousness** = $1 - \Gamma_{\text{meta}}^2$ (self-referential loop). **Soul** = Invariant Topological Core ($\ker(\partial Z/\partial t)$). **Television Theorem**: brain = TV + one feedback arc.
-- **Paper 2**: **Dual neural–vascular coupling** — $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$. **Murray's Law** derived as variational minimum. **Kleiber's Law** ($B \propto M^{3/4}$) from fractal impedance cost. Vascular–organ impedance landscape across 10 organs.
+- **Paper 1**: **Irreducibility theorem** — heterogeneous networks have a geometric cost floor $A_{\text{cut}}$ that cannot be learned away. Relay nodes emerge as thermodynamic necessity. **Directional asymmetry**: top-down $A_{\text{cut}}=4$, bottom-up $A_{\text{cut}}=0$ ("knowing is easy, doing is hard"). **Bandwidth increase** via multi-stage relay (Chebyshev transformer analogy). **Memory** = hysteretic topological deformation ($\partial Z/\partial t$); **cognitive standing wave** = stable interference pattern encoding concepts. **Consciousness** = $1 - \Gamma_{\text{meta}}^2$ (self-referential loop). **Soul** = Invariant Topological Core ($\ker(\partial Z/\partial t)$). **Brain as $d\Gamma/dt$ detector**: change-detection replaces computation. **Cognitive E0 emergences**: attention, habituation, curiosity, fight-or-flight as C2 resource allocation. **Thermal noise floor** as thermodynamic attractor (Landauer). **Willpower as SNR**. **Cross-network resonance**: empathy = tuning fork effect.
+- **Paper 2**: **Dual neural–vascular coupling** — $H = (1-\Gamma_n^2)(1-\Gamma_v^2)$. **Murray's Law** derived as variational minimum. **Kleiber's Law** ($B \propto M^{3/4}$) from fractal impedance cost. **Impedance disparity**: physical basis for extreme Z differences between tissues. **Blood as crosstalk isolator**: BBB = impedance wall preventing vascular Z fluctuations from polluting neural Z. Organ-specific $\Omega_i$ (bottom-up mean 1.376 ≈ top-down 1.33).
 - **Paper 3**: **Impedance debt** ($D_Z$) and **sleep** as global decoupled dissipation state; adenosine ≡ $D_Z$ readout. **Lifecycle equation** from embryo to senescence. **29 C2 networks** (Hebb, Wolff, Glagov, Davis, immune memory, …) unified as parameter instances of one gradient-descent rule. PTSD & chronic stress as integral-path equivalence. Morphogenesis PDE, embryogenesis timeline, skill-decay anti-chronology.
 - **Paper 4**: **Disease** — from single-organ pathology to multi-organ failure — emerges from impedance physics alone. 5-step dual-network cascade ($\Gamma_v\!\uparrow \to \rho\!\downarrow \to \Gamma_n\!\uparrow \to \text{autonomic}\!\downarrow \to \Gamma_v\!\uparrow\!\uparrow$). Coupled multi-organ dynamics with bifurcation analysis. **Willpower tri-factorization**: $\eta_{\text{pfc}}^{\text{eff}} = \eta \cdot Q_{\text{gate}} \cdot (1 - \langle\Gamma^2_{\text{mem}}\rangle)$. **Four Laws of the Null Space** (parallel to thermodynamics). **Moral Constraint Theorem**: blame on sealed patterns = pure injury.
-- **Paper 5**: **Complete Empirical Validation** — Γ as universal interface law. Interface Scale Table (25 nm microtubules → 10⁶ m power grids). NHANES 10-cycle validation ($n=49{,}774$, zero fitted parameters, AUC 0.705). **Three-layer cascade validation**: binary topology (7/7 organs improved, $p=0.008$). **Five-layer AUC progression**: 0.604 → 0.617 (cascade) → 0.626 (BP+cascade) → 0.709 (Γ+LR, 12 weights). Immune–metabolic feedback loop. Recovery dynamics (three regimes). **18 testable predictions** with falsification criteria.
+- **Paper 5**: **Complete Empirical Validation** — Γ as universal interface law. Interface Scale Table (25 nm microtubules → 10⁶ m power grids). NHANES 10-cycle validation ($n=52{,}545$, zero fitted parameters, AUC 0.705). **Three-layer cascade validation**: binary topology (7/7 organs improved, $p=0.008$). **Five-layer AUC progression**: 0.604 → 0.617 (cascade) → 0.626 (BP+cascade) → 0.709 (Γ+LR, 12 weights). **Multi-organ comorbidity** (DM+Cardiac AUC = 0.853). **Framingham zero-parameter match** (0.682 vs 0.682). ε = 0.03 physical derivation. **18 testable predictions** with falsification criteria.
 
-> **Methodological note**: Papers 0–4 include explicit circularity warnings — simulation data confirms the theory it is built from. Paper 5 breaks this circularity with NHANES external epidemiological data (10 cycles, $n=49{,}774$) and zero fitted parameters. Total: 76 pages, 18 testable predictions.
+> **Methodological note**: Papers 0–4 include explicit circularity warnings — simulation data confirms the theory it is built from. Paper 5 breaks this circularity with NHANES external epidemiological data (10 cycles, $n=52{,}545$) and zero fitted parameters. Total: 82 pages, 30 figures, 18 testable predictions.
 
 ---
 
@@ -249,9 +249,9 @@ alice-gamma-net/
 │   ├── figgen/             # 9 figure generators
 │   ├── validation/         # 5 validation experiments
 │   └── simulation/         # 13 simulation experiments
-├── paper/                  # 6 papers (70+ pages, LaTeX)
+├── paper/                  # 6 papers (82 pages, LaTeX)
 │   └── gammanet.sty        # Shared LaTeX macros
-├── figures/                # 27 generated figures (fig_p{N}_*)
+├── figures/                # 30 generated figures (fig_p{N}_*)
 ├── build_figures.py        # Unified figure generation API
 ├── docs/                   # Architecture docs
 │   ├── app/                # GitHub Pages verification web app
@@ -287,7 +287,7 @@ alice-gamma-net/
   author  = {Huang, Hsi-Yu},
   title   = {Alice Smart System — Physics-Driven Electronic Lifeform Simulator},
   year    = 2026,
-  version = {3.9.0},
+  version = {3.9.1},
   doi     = {10.5281/zenodo.18751831},
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }
