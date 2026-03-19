@@ -414,6 +414,36 @@ Vascular C2 requires neural control (autonomic signals
 regulate vascular tone).
 The two networks are \emph{mutually prerequisite}.
 
+\begin{remark}[Blood as crosstalk isolator]
+\label{rem:blood-isolation}
+In microwave circuits, absorbing material is placed
+between adjacent channels to prevent reflection
+pulses in one channel from contaminating another
+(crosstalk isolation).
+Blood serves the same function:  when a neural
+interface produces a reflection pulse
+$\Gamma_i^2 P_{\text{in},i}$,
+part of the scattered energy propagates laterally.
+Blood, with its own characteristic impedance
+$Z_{\text{blood}}$, absorbs this stray energy and
+converts it to heat, which is carried away by
+convective flow (Eq.~\ref{eq:thermal-bus}).
+This yields a third reason for the dual-network
+architecture beyond mutual prerequisiteness and
+thermal regulation:
+\emph{impedance isolation between densely packed
+neural interfaces}.
+The blood--brain barrier is, in this view,
+an impedance wall that prevents vascular $Z$
+fluctuations from polluting neural $Z$;
+cerebrospinal fluid is an impedance-matched
+filler between brain and cranium.
+The brain's disproportionate share of cardiac
+output ($\sim$15\%) is driven not solely by oxygen
+demand but by the crosstalk-isolation requirements
+of its extremely dense relay architecture.
+\end{remark}
+
 \subsection{Organ health}
 
 At each organ, the neural network transmits $\Tn = 1-\Gn^2$
