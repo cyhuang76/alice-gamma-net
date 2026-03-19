@@ -11,11 +11,43 @@
 <!-- Header -->
 <div class="header">
   <h1>Gamma-Net Health Check</h1>
-  <div class="subtitle">Zero-parameter impedance physics &middot; Public verification platform</div>
+  <div class="subtitle">Zero-parameter impedance physics &middot; Public verification platform &middot; <span style="background:#4fc3f7;color:#000;padding:2px 8px;border-radius:10px;font-size:0.7rem;font-weight:700;">v3.9.1</span></div>
   <div class="philosophy">&ldquo;Fixed formulas. Transparent results. Verification is yours.&rdquo;<br>
   &#20844;&#24335;&#26159;&#22266;&#23450;&#30340;&#65292;&#32080;&#26524;&#26159;&#36879;&#26126;&#30340;&#65292;&#39511;&#35657;&#27402;&#22312;&#20320;&#25163;&#19978;&#12290;</div>
   <div class="disclaimer">This tool is for physics-based model verification only. For any diagnosis or treatment, always follow your hospital reports and licensed physicians.<br>
   &#26412;&#38913;&#32080;&#26524;&#20677;&#20316;&#30740;&#31350;&#33287;&#33258;&#25105;&#39511;&#35657;&#21443;&#32771;&#65292;&#19981;&#27083;&#25104;&#20219;&#20309;&#37291;&#30274;&#24314;&#35696;&#65292;&#35531;&#20197;&#27491;&#24335;&#37291;&#30274;&#27298;&#26597;&#21450;&#23560;&#26989;&#37291;&#24107;&#21028;&#26039;&#28858;&#28310;&#12290;</div>
+</div>
+
+<!-- Theory Overview -->
+<div class="container" style="max-width:900px;margin:0 auto;padding:0.5rem 1rem;">
+  <details class="theory-overview">
+    <summary style="cursor:pointer;font-size:1.1rem;font-weight:700;color:var(--accent);padding:0.5rem 0;">&#9660; Theory Overview &mdash; Evidence Chain</summary>
+    <div style="padding:0.8rem 0;font-size:0.85rem;line-height:1.6;color:var(--text-dim);">
+      <p style="margin:0 0 0.5rem;"><strong>Everything</strong> emerges from one equation:
+        <span style="font-family:var(--mono);color:var(--accent);">A[&Gamma;] = &int; &sum; &Gamma;<sub>i</sub>&sup2;(t) dt &rarr; min</span></p>
+      <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+        <tr style="border-bottom:1px solid var(--border);">
+          <th style="text-align:left;padding:4px;">Law</th>
+          <th style="text-align:left;padding:4px;">Formula</th>
+          <th style="text-align:left;padding:4px;">Meaning</th>
+        </tr>
+        <tr><td style="padding:4px;"><strong>C1</strong></td><td style="padding:4px;font-family:var(--mono);">&Gamma;&sup2; + T = 1</td><td style="padding:4px;">Energy conservation at every interface</td></tr>
+        <tr><td style="padding:4px;"><strong>C2</strong></td><td style="padding:4px;font-family:var(--mono);">&Delta;Z = &minus;&eta;&Gamma;x<sub>in</sub>x<sub>out</sub></td><td style="padding:4px;">Local impedance matching (Hebbian learning)</td></tr>
+        <tr><td style="padding:4px;"><strong>C3</strong></td><td style="padding:4px;font-family:var(--mono);">Signal carries Z metadata</td><td style="padding:4px;">Every signal knows its source impedance</td></tr>
+      </table>
+      <div style="margin-top:0.6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;">
+        <div style="background:var(--card);padding:0.5rem;border-radius:6px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:#4fc3f7;">82</div><div>pages</div></div>
+        <div style="background:var(--card);padding:0.5rem;border-radius:6px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:#66bb6a;">28</div><div>theorems (E0)</div></div>
+        <div style="background:var(--card);padding:0.5rem;border-radius:6px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:#ffa726;">0</div><div>fitted parameters</div></div>
+      </div>
+      <div style="margin-top:0.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;">
+        <div style="background:var(--card);padding:0.5rem;border-radius:6px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:#ef5350;">52,545</div><div>NHANES cohort</div></div>
+        <div style="background:var(--card);padding:0.5rem;border-radius:6px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:#4fc3f7;">0.705</div><div>AUC (zero-param)</div></div>
+        <div style="background:var(--card);padding:0.5rem;border-radius:6px;text-align:center;"><div style="font-size:1.2rem;font-weight:700;color:#66bb6a;">7/7</div><div>organs improved</div></div>
+      </div>
+      <p style="margin:0.5rem 0 0;font-style:italic;color:#888;">Source: <a href="https://github.com/cyhuang76/alice-gamma-net" style="color:var(--accent);">alice-gamma-net</a> | DOI: <a href="https://doi.org/10.5281/zenodo.18751831" style="color:var(--accent);">10.5281/zenodo.18751831</a></p>
+    </div>
+  </details>
 </div>
 
 <!-- Loading Pyodide -->
@@ -230,7 +262,7 @@
   <p>Gamma-Net Health Check &mdash; Zero-parameter impedance physics &middot; Public verification platform</p>
   <p>All computation runs in your browser via <a href="https://pyodide.org" target="_blank" rel="noopener">Pyodide</a>. No data is sent to any server.</p>
   <p style="color:#ffa726;">&#26412;&#38913;&#32080;&#26524;&#20677;&#20316;&#30740;&#31350;&#33287;&#33258;&#25105;&#39511;&#35657;&#21443;&#32771;&#65292;&#19981;&#27083;&#25104;&#20219;&#20309;&#37291;&#30274;&#24314;&#35696;&#65292;&#35531;&#20197;&#27491;&#24335;&#37291;&#30274;&#27298;&#26597;&#21450;&#23560;&#26989;&#37291;&#24107;&#21028;&#26039;&#28858;&#28310;&#12290;</p>
-  <p>Source: <a href="https://github.com/cyhuang76/alice-gamma-net" target="_blank" rel="noopener">alice-gamma-net</a> | AGPL-3.0</p>
+  <p>Source: <a href="https://github.com/cyhuang76/alice-gamma-net" target="_blank" rel="noopener">alice-gamma-net</a> v3.9.1 | <a href="https://doi.org/10.5281/zenodo.18751831" target="_blank" rel="noopener">DOI: 10.5281/zenodo.18751831</a> | AGPL-3.0</p>
 </div>
 
 <!-- Pyodide -->
