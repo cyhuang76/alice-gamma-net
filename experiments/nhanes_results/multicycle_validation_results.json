@@ -1,0 +1,137 @@
+{
+  "protocol": "Gamma-Net Multi-Cycle Blind Validation v2.0",
+  "timestamp_utc": "2026-03-17T06:10:41.478352+00:00",
+  "sha256_predictions": "7460b3868f3640aec36f8ad4c47360f325126ac2e347b8f20265bc499b8339c2",
+  "n_respondents": 7393,
+  "n_per_cycle": {
+    "2013-2014": 2668,
+    "2015-2016": 2598,
+    "2017-2018": 2541
+  },
+  "cycles": [
+    "2013-2014",
+    "2015-2016",
+    "2017-2018"
+  ],
+  "auc_results": {
+    "cardiac": {
+      "auc": 0.5312,
+      "n_positive": 681,
+      "n_negative": 6712,
+      "z_statistic": 2.65,
+      "p_value": 0.004022437052686789,
+      "significant_005": true,
+      "significant_001": true
+    },
+    "hepatic": {
+      "auc": 0.5742,
+      "n_positive": 355,
+      "n_negative": 7038,
+      "z_statistic": 4.585,
+      "p_value": 2.267351166818088e-06,
+      "significant_005": true,
+      "significant_001": true
+    },
+    "endocrine": {
+      "auc": 0.7831,
+      "n_positive": 1738,
+      "n_negative": 5655,
+      "z_statistic": 40.739,
+      "p_value": 0.0,
+      "significant_005": true,
+      "significant_001": true
+    },
+    "pulmonary": {
+      "auc": 0.5444,
+      "n_positive": 650,
+      "n_negative": 6743,
+      "z_statistic": 3.677,
+      "p_value": 0.00011809308290378073,
+      "significant_005": true,
+      "significant_001": true
+    },
+    "neuro": {
+      "auc": 0.6192,
+      "n_positive": 301,
+      "n_negative": 7092,
+      "z_statistic": 6.785,
+      "p_value": 5.817679671338283e-12,
+      "significant_005": true,
+      "significant_001": true
+    },
+    "immune": {
+      "auc": 0.5376,
+      "n_positive": 704,
+      "n_negative": 6689,
+      "z_statistic": 3.234,
+      "p_value": 0.0006104042408090482,
+      "significant_005": true,
+      "significant_001": true
+    },
+    "bone": {
+      "auc": 0.6376,
+      "n_positive": 381,
+      "n_negative": 7012,
+      "z_statistic": 8.795,
+      "p_value": 0.0,
+      "significant_005": true,
+      "significant_001": true
+    }
+  },
+  "health_index_validation": {
+    "spearman_rho": -0.3775,
+    "spearman_p": 4.866282033007566e-249,
+    "pearson_r": -0.3998,
+    "pearson_p": 6.634996654367591e-282,
+    "mean_H_0_diseases": 0.5331,
+    "mean_H_1_disease": 0.4506,
+    "mean_H_2plus": 0.388,
+    "n_0_diseases": 4367,
+    "n_1_disease": 1828,
+    "n_2plus": 1198
+  },
+  "single_cycle_comparison": {
+    "cardiac": {
+      "auc": 0.5103,
+      "p": 0.302
+    },
+    "hepatic": {
+      "auc": 0.5129,
+      "p": 0.31
+    },
+    "endocrine": {
+      "auc": 0.8004,
+      "p": 0.0
+    },
+    "pulmonary": {
+      "auc": 0.5436,
+      "p": 0.013
+    },
+    "neuro": {
+      "auc": 0.5914,
+      "p": 0.0007
+    },
+    "immune": {
+      "auc": 0.5422,
+      "p": 0.017
+    },
+    "bone": {
+      "auc": 0.6296,
+      "p": 3.2e-08
+    }
+  },
+  "organ_z_normal": {
+    "cardiac": 50.0,
+    "pulmonary": 60.0,
+    "hepatic": 65.0,
+    "renal": 70.0,
+    "endocrine": 75.0,
+    "immune": 75.0,
+    "heme": 55.0,
+    "GI": 65.0,
+    "vascular": 45.0,
+    "bone": 120.0,
+    "neuro": 80.0,
+    "repro": 95.0
+  }
+}
