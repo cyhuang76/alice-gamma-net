@@ -292,3 +292,9 @@ alice-gamma-net/
   url     = {https://github.com/cyhuang76/alice-gamma-net}
 }
 ```
+
+---
+
+## Keywords
+
+`impedance mismatch` · `reflection coefficient` · `transmission line biology` · `zero-parameter model` · `NHANES validation` · `computational physiology` · `Hebbian learning` · `impedance matching` · `Murray's law derivation` · `Kleiber's law derivation` · `brain impedance topology` · `consciousness physics` · `sleep impedance debt` · `aging thermodynamics` · `disease topology` · `standing wave memory` · `impedance debt` · `minimum reflection principle` · `coaxial channel model` · `dual neural vascular network`
