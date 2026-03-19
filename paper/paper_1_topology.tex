@@ -305,40 +305,49 @@ Hierarchical topology is therefore a thermodynamic
 necessity for information transmission.
 \end{corollary}
 
-\begin{remark}[Directional asymmetry of
+\begin{corollary}[Directional asymmetry of
   dimensional cost]
-\label{rem:directional-asymmetry}
-The $(K_i - K_j)^+$ structure of $\Acut$ is
-inherently directional:
-\begin{itemize}
-  \item \emph{Top-down} (cortex $K=5$ $\to$
-    muscle $K=1$):
-    $\Acut = (5-1)^+ = 4$ excess modes are
+\label{cor:directional-asymmetry}
+For any edge $i \to j$ in the relay hierarchy,
+the dimensional cost $\Acut(i \to j) = (K_i - K_j)^+$
+satisfies:
+\begin{enumerate}
+  \item \emph{Top-down} ($K_i > K_j$):
+    $\Acut = K_i - K_j > 0$; the excess modes are
     totally reflected.
-    This is the physical basis of
-    ``knowing is easy, doing is hard'':
-    the cortical intention carries
-    high-dimensional structure that
-    low-dimensional effectors cannot receive.
-  \item \emph{Bottom-up} (nociceptor $K=1$ $\to$
-    cortex $K=5$):
-    $\Acut = (1-5)^+ = 0$.
-    Low-dimensional signals fit losslessly into
-    the cortex's larger receptive space,
-    explaining the speed of reflexes
-    and sensory awareness.
-\end{itemize}
+  \item \emph{Bottom-up} ($K_i < K_j$):
+    $\Acut = 0$; all modes are transmitted
+    losslessly.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:irreducibility},
+$\Acut(i \to j) = (K_i - K_j)^+$.
+For $K_i > K_j$, the target has
+fewer degrees of freedom;
+the $K_i - K_j$ excess modes
+have no receiving channel and are
+totally reflected ($\Gamma = 1$ per mode).
+For $K_i \leq K_j$, $(K_i - K_j)^+ = 0$
+and every mode has a receiving channel.
+$\square$
+\end{proof}
+
+\noindent
+\textbf{Example.}
+Cortex ($K=5$) $\to$ muscle ($K=1$):
+$\Acut = 4$ (``knowing is easy, doing is hard'').
+Nociceptor ($K=1$) $\to$ cortex ($K=5$):
+$\Acut = 0$ (reflexes are fast).
 Motor skill acquisition is the process of
-C2 remodelling ($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
-x_{\text{out}}$) applied iteratively to each relay
+C2 remodelling each relay
 node, flattening the $K = 5 \to 4 \to 3 \to 1$
 staircase until $\Gamma \to 0$ at every stage.
-Conversely, ``analysis paralysis'' (choking under
-pressure) occurs when conscious top-down signals
-($K=5$) are injected into an already-optimised
-low-$K$ automatic pathway, reintroducing
-reflection noise.
-\end{remark}
+``Analysis paralysis'' occurs when conscious
+top-down signals ($K=5$) are injected into an
+already-optimised low-$K$ automatic pathway,
+reintroducing reflection noise.
 
 \begin{remark}[Relay nodes increase bandwidth]
 \label{rem:bandwidth}
@@ -1526,48 +1535,92 @@ product $Q_{\text{gate}} (1 - \langle\Gamma^2\rangle)$
 forged by prior C2 remodelling.
 \end{remark}
 
-\begin{remark}[Thermal noise floor as
+\begin{theorem}[Thermal noise floor as
   thermodynamic attractor]
-\label{rem:thermal-attractor}
-Reflected power $\Gamma_i^2 P_{\text{in},i}$
-is dissipated as heat.
-Heat is the maximum-entropy state:
-all impedance structure is erased
-and cannot be recovered
-(Landauer: erasing 1~bit costs
-$\geq k_B T \ln 2$).
-The thermal noise floor
-$P_{\text{noise}} = \sum_i \Gamma_i^2 P_{\text{in},i}
-  + k_B T$
-is therefore a thermodynamic attractor---once
-impedance information reaches the noise floor,
-it is irreversibly lost.
+\label{thm:thermal-attractor}
+The total noise power
+\begin{equation}
+  P_{\text{noise}} = \sum_i \Gamma_i^2
+    P_{\text{in},i} + k_B T
+  \label{eq:noise-floor}
+\end{equation}
+is a thermodynamic attractor: any impedance
+information that reaches the noise floor is
+irreversibly lost.
+\end{theorem}
+
+\begin{proof}
+By C1, each impedance interface reflects
+$\Gamma_i^2 P_{\text{in},i}$.
+The reflected power thermalises through
+phonon--phonon scattering on a timescale
+$\tau_{\text{th}} \sim 10^{-12}$~s,
+becoming indistinguishable from the thermal
+bath at temperature~$T$.
+By Landauer's principle, erasing one bit
+of impedance information dissipates
+$\geq k_B T \ln 2$ of heat;
+the reverse process (spontaneous
+imposition of impedance structure from heat)
+would decrease entropy, violating the
+Second Law.
+Therefore $P_{\text{noise}}$ is a one-way
+attractor.
+$\square$
+\end{proof}
+
+\noindent
 Life is the process of C2 continuously
 extracting impedance structure \emph{away from}
 this attractor; death is the cessation of
 that process, after which all~$Z$ relaxes to
 thermal equilibrium.
-\end{remark}
 
-\begin{remark}[Willpower as signal-to-noise ratio]
-\label{rem:willpower-snr}
-The three-factor product
-(Eq.~\ref{eq:willpower-trifactor})
-can be understood in terms of signal-to-noise:
-an intentional signal $P_{\text{intention}}$
-must exceed the thermal noise floor to reach
-its effector.
-During waking, $D_Z(t) = \int_0^t \|\Gamma\|^2
-P_{\text{in}}\,d\tau$ accumulates,
-raising the noise floor continuously.
-``Willpower depletion'' is therefore
-not the exhaustion of a mysterious resource,
-but the noise floor exceeding the maximum
-signal power available from
-$P_{\text{metabolic}}$.
+\begin{corollary}[Willpower as signal-to-noise ratio]
+\label{cor:willpower-snr}
+Let $P_{\text{intention}}$ be the power of a
+top-down prefrontal signal directed at an
+effector.  The intention is executable if
+and only if
+\begin{equation}
+  \text{SNR}_{\text{will}}
+  = \frac{P_{\text{intention}}}{P_{\text{noise}}(t)}
+  > \theta_{\text{exec}}\,,
+  \label{eq:willpower-snr}
+\end{equation}
+where $P_{\text{noise}}(t)$ is the thermal
+noise floor
+(Theorem~\ref{thm:thermal-attractor}).
+During waking, $D_Z(t) = \int_0^t
+\|\Gamma\|^2 P_{\text{in}}\,d\tau$
+accumulates monotonically, raising
+$P_{\text{noise}}$.
+Willpower depletion occurs when
+$P_{\text{noise}}(t) > P_{\text{intention,max}}$.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:thermal-attractor},
+each C2 cycle dissipates
+$\Gamma_i^2 P_{\text{in},i}$ into the
+thermal noise floor.
+The cumulative dissipation
+$D_Z(t) = \int_0^t \sum_i \Gamma_i^2
+P_{\text{in},i}\,d\tau$
+is monotonically non-decreasing during waking
+(since all terms are non-negative).
+Therefore $P_{\text{noise}}(t)$ increases
+monotonically.
+Since $P_{\text{intention}} \leq
+P_{\text{metabolic}}$ (C1),
+there exists a time $t^*$ at which
+$\text{SNR}_{\text{will}} < \theta_{\text{exec}}$.
 Sleep resets $D_Z \to 0$, restoring the
-signal-to-noise margin.
+SNR margin.
+$\square$
+\end{proof}
 
+\noindent
 This also explains two empirical observations:
 \begin{enumerate}
   \item \emph{Quiet environments are therapeutic.}
@@ -1585,7 +1638,6 @@ This also explains two empirical observations:
     these faint echoes exceed the detection
     threshold and enter awareness.
 \end{enumerate}
-\end{remark}
 
 \subsection{Sensory deprivation as calibration collapse}
 \label{sec:sensory-deprivation}
@@ -1660,7 +1712,7 @@ pathways?
     $|\Gamma|$ remains small, enabling richer
     signal repertoires (force, timing, affect).
   \item \emph{Thermal cost}
-    (Remark~\ref{rem:thermal-attractor}):
+    (Theorem~\ref{thm:thermal-attractor}):
     each stage dissipates $\Gamma^2 P_{\text{in}}$
     as heat, raising $D_Z$.
     The brain consumes $\sim$20\% of metabolic
