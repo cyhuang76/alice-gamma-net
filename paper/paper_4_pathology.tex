@@ -2365,6 +2365,66 @@ tissue~X?''
 If nothing stops it, then tissue~X remodels via C2.
 And nothing stops it.
 
+\subsection{Parameter calibration roadmap}
+\label{sec:calibration-roadmap}
+
+The coupled ODE (Eq.~\ref{eq:coupled-G2}) contains
+two classes of coefficients that are structurally
+determined but not yet independently measured:
+
+\begin{enumerate}
+  \item \textbf{Coupling matrix $C_{kj}$}
+    (inter-organ impedance propagation).
+    $C_{kj}$ quantifies how much $\Gamma^2$ in
+    organ~$j$ drives $\Gamma^2$ in organ~$k$.
+    \emph{Measurement protocol}:
+    (a)~longitudinal cohort with serial
+    multi-organ biomarkers (e.g.\ UK Biobank,
+    $n > 500{,}000$);
+    (b)~cross-lagged panel analysis of paired
+    $\Gamma^2$ time series yields $C_{kj}$ as
+    the standardised cross-lagged coefficient;
+    (c)~Mendelian randomisation provides the
+    causal direction.
+
+  \item \textbf{Positive-feedback strength $\beta_k$}
+    (within-organ self-amplification).
+    $\beta_k$ sets the bifurcation threshold at
+    which disease becomes self-sustaining.
+    \emph{Measurement protocol}:
+    (a)~identify patients at the clinical tipping
+    point (e.g.\ HbA1c $\approx 6.5\%$ for T2DM);
+    (b)~fit the ODE to the pre- and post-transition
+    trajectories;
+    (c)~$\beta_k$ is the value at which the
+    Jacobian eigenvalue crosses zero.
+
+  \item \textbf{Repair rate $\eta_k(t)$}
+    (C2 gain per tissue).
+    Already partially available: the literature
+    reports tissue turnover rates (hepatocytes
+    $\sim 300$~days, bone $\sim 10$~years,
+    neurons $\sim \infty$).
+    $\eta_k$ is directly proportional to the
+    inverse turnover time.
+
+  \item \textbf{Cortisol coupling $\alpha_c$}
+    (HPA-axis amplification).
+    \emph{Measurement protocol}:
+    diurnal cortisol area-under-curve (AUC)
+    correlated with $\Delta\Gamma^2$ in a
+    stress-response cohort yields $\alpha_c$
+    as the regression slope.
+\end{enumerate}
+
+\noindent
+Until these coefficients are calibrated, the ODE
+produces \emph{qualitative} predictions (disease
+ordering, bifurcation topology) that are testable
+but not quantitatively precise.
+This is analogous to Kepler's laws predicting
+\emph{ellipses} before Newton quantified~$G$.
+
 
 % ============================================================
 %  CONCLUSION

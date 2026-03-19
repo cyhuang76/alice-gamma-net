@@ -938,6 +938,56 @@ two faces of the same relay necessity.
 
 
 % ============================================================
+%  SECTION 8b — OPERATIONAL DEFINITION OF K
+% ============================================================
+\section{Operational definition of modal complexity~$K$}
+\label{sec:K-operational}
+
+A potential concern is that the modal complexity~$K_i$
+assigned to each neural structure (e.g.\ $K=5$ for
+cortical pyramidal cells, $K=1$ for C-fibres) might be
+treated as a free parameter.  We clarify here that $K$
+is \emph{in principle measurable} using two independent
+protocols:
+
+\begin{enumerate}
+  \item \textbf{Diffusion Tensor Imaging (DTI).}
+    The number of independent fibre directions crossing
+    a voxel of volume $V$ is estimated by the rank of
+    the diffusion tensor $\mathbf{D}$:
+    $K_{\text{DTI}} = \operatorname{rank}(\mathbf{D})$.
+    For white-matter tracts this yields $K=1$
+    (single dominant eigenvector);
+    for cortical grey matter the orientation
+    distribution function (ODF) typically admits
+    $K = 3$--$6$ independent peaks.
+
+  \item \textbf{Multi-unit electrophysiology.}
+    Record $N$ simultaneous spike trains at a node;
+    perform principal component analysis (PCA) on the
+    cross-correlation matrix.  $K$ is the number of
+    eigenvalues exceeding the Marchenko--Pastur noise
+    threshold:
+    \[
+      K_{\text{ephys}} = \#\bigl\{\lambda_i :
+        \lambda_i > \lambda_{\text{MP}}(N,T)\bigr\}\,.
+    \]
+    This counts the number of independently modulated
+    signal dimensions at that node.
+\end{enumerate}
+
+\noindent
+Crucially, the qualitative results of Papers~1--5
+(e.g.\ Directional Asymmetry, Thermal Attractor)
+depend only on the \emph{ordering} $K_i > K_j$,
+not on the absolute values.
+Only quantitative predictions (e.g.\ the exact number
+of reflected modes) require calibrated $K$~values.
+Independent measurement of $K$ via DTI or
+electrophysiology is a falsifiable experimental
+programme that can validate or refute the framework.
+
+% ============================================================
 %  SECTION 9 — CONCLUSION
 % ============================================================
 \section{Conclusion}
