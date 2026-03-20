@@ -655,9 +655,101 @@ without any additional mechanism:
 
 \noindent
 The brain does not need a separate ``internal'' or
-``external'' label; the impedance metadata and
-relay-chain topology together provide full routing
-information.
+``external'' label; the relay-chain topology (C3)
+provides full routing information: external signals
+traverse body-surface $K$-staircases, internal
+signals traverse visceral $K$-staircases, and the
+two chains occupy distinct edges.
+
+
+% ============================================================
+\section{Sensory Perception as $\Gamma$ Detection}
+\label{sec:perception}
+% ============================================================
+
+\begin{remark}[The retina as a spherical
+  $\Gamma$ array \textnormal{(E1)}]
+\label{rem:retinal-array}
+The eye is a spherical impedance interface:
+light passes from air ($n_1$) through cornea,
+aqueous humour, lens, and vitreous body, each
+with distinct refractive index $n_i$---i.e.\
+distinct optical impedance $Z_i$.
+The reflection coefficient at each interface is
+$\Gamma_i = (n_{i+1} - n_i)/(n_{i+1} + n_i)$,
+identical in form to the electrical $\Gamma$.
+
+The ${\sim}1.2 \times 10^8$ photoreceptors
+tiling the retinal sphere each sample the local
+optical $\Gamma$ at their angular position.
+Object edges in the visual field correspond to
+spatial discontinuities in $\Gamma$---that is,
+$\lvert\partial\Gamma/\partial x\rvert \gg 0$---
+detected by retinal ganglion cells whose
+centre--surround receptive fields are
+spatial $d\Gamma/dx$ filters.
+
+Binocular depth perception arises as a spatial
+standing wave: the two retinal images produce
+counter-propagating signals in V1 whose
+phase difference encodes object distance.
+\end{remark}
+
+\begin{remark}[Compensatory binding
+  \textnormal{(E1)}]
+\label{rem:compensatory-binding}
+The binding problem (``How does the brain know that
+a sound and a visual object share the same source?'')
+has resisted solution for decades.
+In the impedance framework, the answer requires
+no new mechanism:
+
+When the auditory system detects $d\Gamma/dt > 0$
+(a sudden sound), motor C2 initiates a
+compensatory head turn.
+This single motor action simultaneously changes:
+(a)~auditory $\Gamma$ (the sound's direction
+relative to the ear axis), and
+(b)~visual $\Gamma$ (new objects enter the fovea).
+If auditory $\Gamma$ and visual $\Gamma$ decrease
+together under the same motor compensation,
+the two signals share the same physical source.
+
+\emph{Binding is not a computation---it is a
+correlation test performed by motor C2.}
+This also explains infant sensorimotor development:
+neonates constantly turn, grasp, and mouth objects
+not to ``learn'' but to build cross-modal $\Gamma$
+correspondence tables via C2 compensation.
+\end{remark}
+
+\begin{remark}[Attention as $\Gamma_{\max}$
+  tracking \textnormal{(E1)}]
+\label{rem:gamma-max}
+The impedance framework predicts that attention is
+not a cognitive ``spotlight'' but a physical reflex:
+the motor system continuously orients the
+highest-resolution sensor (fovea) toward the
+spatial location of $\Gamma_{\max}$---the point
+in the perceptual field with the largest
+impedance mismatch relative to its surroundings.
+
+$\Gamma_{\max}$ coincides with maximal survival
+threat: a predator on a uniform background has
+$\Gamma \approx 1$ (maximum contrast), triggering
+immediate orientation.
+The entire perception--action loop is therefore:
+\[
+  \text{detect } \Gamma_{\max} \;\to\;
+  \text{C2 motor compensation} \;\to\;
+  \text{resample} \;\to\;
+  \text{new } \Gamma_{\max}\,.
+\]
+No executive controller is required; the loop
+is driven by C1 (energy is reflected most at
+the largest mismatch) and C2 (motor correction
+reduces $\Gamma$ at the attended location).
+\end{remark}
 
 
 % ============================================================
