@@ -794,18 +794,38 @@ the same optimality applies:
 \emph{the brain splits into exactly two
 hemispheres}.
 
-The brain implements this as two hemispheres:
-\begin{itemize}
-  \item \emph{Left hemisphere}: decomposes the
-    multi-channel input, performing parallel
-    $\Gamma$ analysis across modalities (language,
-    sequential logic, fine motor control).
+\emph{Why asymmetric roles?}
+Under a fixed total power budget
+$P_{\text{brain}}$ (set by brainstem blood flow,
+a C1 constraint), simultaneously running
+high-$K$ multi-modal integration (fan-in) and
+wide fan-out multi-node control pushes the
+$\Gamma$-landscape to mutually exclusive extremes:
+integration demands low $\Gamma$ across few
+high-$K$ channels (deep matching), while motor
+broadcast demands low $\Gamma$ across many
+low-$K$ channels (wide matching).
+Minimising the lifetime action
+$\mathcal{A} = \int \sum \Gamma^2 P_{\text{in}}\,dt$
+under the single power constraint therefore
+yields two specialised sub-networks rather
+than one uniform processor.
 
-  \item \emph{Right hemisphere}: integrates the
-    analysed $\Gamma$ distribution and issues
-    motor commands---including the
+The brain implements this as:
+\begin{itemize}
+  \item \emph{Left hemisphere (fan-in)}:
+    multi-modal $K$-staircase convergence---
+    high-$K$, few channels, deep computation
+    (language, sequential logic, symbolic
+    reasoning).
+
+  \item \emph{Right hemisphere (fan-out)}:
+    $\Gamma$-distribution broadcast to many
+    output nodes---medium-$K$, many channels,
+    spatial-motor control
+    (body image, spatial awareness, the
     $\Gamma_{\max}$-tracking attention command
-    of Remark~\ref{rem:gamma-max}.
+    of Remark~\ref{rem:gamma-max}).
 
   \item \emph{Corpus callosum}: the C3
     dimensional relay between the two
