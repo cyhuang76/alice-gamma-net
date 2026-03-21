@@ -156,9 +156,10 @@ The three inviolable constraints are:
     $\Gamma^2 + T = 1$ at every interface, every tick.
   \item \textbf{C2 (Impedance Remodeling)}:
     $\Delta Z = -\eta\,\Gamma\,x_{\mathrm{in}}\,x_{\mathrm{out}}$.
-  \item \textbf{C3 (Impedance-Tagged Transport)}:
-    All inter-module signals are \texttt{ElectricalSignal}
-    objects carrying $Z$-metadata.
+  \item \textbf{C3 (Dimensional Relay)}:
+    When $K_i \neq K_j$, relay nodes forming a
+    $K$-staircase are required; each relay reads
+    local $Z$ as pulse density.
 \end{itemize}
 
 
