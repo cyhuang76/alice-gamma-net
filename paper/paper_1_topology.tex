@@ -729,7 +729,7 @@ correspondence tables via C2 compensation.
 \end{remark}
 
 \begin{remark}[Attention as $\Gamma_{\max}$
-  tracking \textnormal{(E1)}]
+  tracking \textnormal{(E0)}]
 \label{rem:gamma-max}
 The impedance framework predicts that attention is
 not a cognitive ``spotlight'' but a physical reflex:
@@ -738,6 +738,24 @@ highest-resolution sensor (fovea) toward the
 spatial location of $\Gamma_{\max}$---the point
 in the perceptual field with the largest
 impedance mismatch relative to its surroundings.
+
+Formally, the motor command vector $\mathbf{u}^*$
+at each time step solves:
+\begin{equation}
+  \mathbf{u}^*(t)
+    = \arg\min_{\mathbf{u}}
+      \max_{k\in\text{channels}}
+      \Gamma_k^2\bigl(t + \Delta t\,\big|\,\mathbf{u}\bigr)\,,
+  \label{eq:attention}
+\end{equation}
+where $\Gamma_k^2(t+\Delta t\,|\,\mathbf{u})$ is
+the predicted channel-$k$ reflection coefficient
+after motor compensation~$\mathbf{u}$ (head turn,
+saccade, body orientation).
+C2 drives the system toward the action that
+reduces the worst-case $\Gamma$; the channel
+with the current $\Gamma_{\max}$ therefore
+receives motor resources first.
 
 $\Gamma_{\max}$ coincides with maximal survival
 threat: a predator on a uniform background has
