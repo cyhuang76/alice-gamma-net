@@ -1256,6 +1256,68 @@ antipsychotics that only attenuate the output
 (downstream $P_{\text{in}}$ suppression).
 \end{remark}
 
+\begin{corollary}[Autonomous degradation loop
+  \textnormal{(E1)}]
+\label{cor:autonomous-loop}
+When a hallucination stabilises into a standing
+wave, it occupies $\Gamma_{\max}$ permanently.
+The minimax controller
+(Paper~1~\cite{Paper1}, Eq.~\ref{eq:attention})
+allocates all C2 resources to this internal
+channel.
+C2 processes at full load but produces zero net
+reduction---the input is self-generated and
+regenerates each cycle.
+Meanwhile, real-world events queue behind
+$\Gamma_{\max}$ and remain unprocessed.
+
+This creates a self-sustaining positive-feedback
+loop that requires \emph{no continued external
+injury}:
+\[
+  \Gamma^2\!\uparrow
+  \;\to\; D_Z\!\uparrow
+  \;\to\; \text{hallucination}
+  \;\to\; \text{C2 hijacked}
+  \;\to\; \text{real failures}
+  \;\to\; \eta\!\downarrow
+  \;\to\; \Gamma^2\!\uparrow\,.
+\]
+Three safety valves that could interrupt the loop
+are simultaneously destroyed:
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Safety valve & How it is broken \\
+\midrule
+$\eta(t)$ repair capacity &
+  Arrhenius erosion $+$ cortisol \\
+C2 gradient from external $x_{\text{in}}$ &
+  Bandwidth saturated by internal loop \\
+Exploration mechanism &
+  Redirected inward; no new paths carved \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Breaking the loop requires the same external
+gradient injection described in
+Remark~\ref{rem:seff-sealing}---but targeted at the
+\emph{original} sealed $\Gamma^2$ that first
+drove $D_Z$ past the gate-leak threshold,
+not at the hallucination itself
+(which is a symptom, not the source).
+The intervention must be small enough for the
+eroded $\eta(t)$ to process, safe enough not to
+create secondary trauma, and sustained over months.
+
+\textbf{This loop is the physical reason why
+humans need one another}: once the three
+internal safety valves are destroyed,
+the only remaining input channel for a
+downward C2 gradient is another person.
+\end{corollary}
 
 \section{Caregiver Triple-Load Model}
 \label{sec:triple-load}
