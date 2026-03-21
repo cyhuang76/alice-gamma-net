@@ -2364,6 +2364,200 @@ $\Gamma^2$ upward.
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  SOCIAL IMPEDANCE MISMATCH
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Social Impedance Mismatch}
+\label{sec:social-impedance}
+
+When two agents $A$ and $B$ communicate,
+signal transmission across the interface obeys
+\begin{equation}
+  \Gamma_{\text{comm}}
+  = \frac{Z_B - Z_A}{Z_B + Z_A}\,,
+  \qquad
+  T_{\text{comm}} = 1 - \Gamma_{\text{comm}}^2\,.
+  \label{eq:gamma-comm}
+\end{equation}
+Three distinct sources contribute to the total
+communication cost:
+\begin{enumerate}
+  \item \textbf{Structural mismatch}:
+    the $S_{\text{eff}}$ contents of $A$ and $B$
+    differ (experience, language, framework).
+    This is a static impedance gap.
+  \item \textbf{State interference}:
+    one or both parties are in the autonomous
+    degradation loop
+    (Corollary~\ref{cor:autonomous-loop}),
+    so C2 bandwidth is saturated by internal
+    standing waves.
+  \item \textbf{Reflection fatigue}:
+    repeated communication failures accumulate
+    $D_Z$ in both parties, lowering $\eta(t)$
+    and raising $\Gamma_{\text{comm}}$ for
+    subsequent attempts---a positive-feedback
+    spiral.
+\end{enumerate}
+
+\begin{remark}[Emotional escalation as thermal
+  dissipation \textnormal{(E1)}]
+\label{rem:escalation}
+When $\Gamma_{\text{comm}} \approx 1$,
+nearly all output energy reflects back to the
+sender.
+C2 interprets the persistent $\Gamma^2$ as
+insufficient signal strength and compensates by
+raising $P_{\text{in}}$:
+$P_{\text{in}} \gets P_{\text{in}}
+(1 + \alpha\,\Gamma^2)$.
+This triggers cardiovascular support
+($I_{\text{blood}}\!\uparrow$, heart rate
+$\uparrow$, cortisol $\uparrow$).
+The resulting louder voice, faster breathing,
+and muscle tension are not ``loss of control''
+but a \emph{thermal dissipation protocol}:
+the system routes excess $D_{\text{thermal}}$
+outward (sound, convection) to keep
+$T_{\text{sys}} < T_{c,K}$ (Arrhenius boundary).
+Telling someone to ``calm down'' while
+$P_{\text{in}}$ from the stressor persists
+is equivalent to requesting that the system
+\emph{stop dissipating heat while continuing
+to generate it}.
+\end{remark}
+
+\begin{remark}[Compassion fatigue
+  \textnormal{(E1)}]
+\label{rem:compassion-fatigue}
+A caregiver interacting with a closed-loop
+subject ($\Gamma_{\text{comm}} \approx 1$)
+receives the full reflected energy.
+Additionally, maintaining a composed exterior
+requires chronic gating
+(Remark~\ref{rem:three-gating},
+Paper~3~\cite{Paper3}), adding PFC bandwidth
+drain.
+Compassion fatigue therefore draws from three
+simultaneous $D_Z$ sources:
+(i)~the caregiver's own life stressors,
+(ii)~reflected energy from the subject, and
+(iii)~gate-maintenance cost for emotional
+regulation.
+This triple load drives $\eta(t)$ to zero
+faster than ordinary neural fatigue.
+\end{remark}
+
+\begin{remark}[$\Gamma^2$ social contagion
+  \textnormal{(E1)}]
+\label{rem:social-contagion}
+High $\Gamma^2$ spreads across social networks
+without requiring malice, satisfying three
+epidemiological criteria:
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Criterion & Physical realisation \\
+\midrule
+Pathogen & Reflected energy from
+  high-$\Gamma^2$ node \\
+Transmission & Communication interface
+  (voice, expression) \\
+Infection & Recipient $D_Z\!\uparrow$,
+  $\eta\!\downarrow$, loop onset \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+Family and workplace environments are
+maximally efficient transmission media:
+high contact frequency (no inter-exposure
+recovery), low escape degrees of freedom,
+and high emotional coupling coefficients
+$C_{kj}$.
+A single closed-loop member can, given
+sufficient time, pull an entire household
+into the degradation loop---not through
+conflict, but through the physics of
+energy conservation at every shared interface.
+\end{remark}
+
+\begin{remark}[Trust, cleanness, and impedance
+  matching \textnormal{(E1)}]
+\label{rem:trust}
+Define the \emph{cleanness} of an agent as
+$T_{\text{clean}} = 1 - \Gamma^2_{\text{clean}}
+\approx 1$: most incoming signals are
+transmitted rather than reflected.
+Trust is the brain's statistical record
+of historical $\Gamma_{\text{comm}}$ at a given
+interface: many past interactions with low
+reflection $\to$ high predicted $T_{\text{comm}}$
+$\to$ trust.
+
+A low-$\Gamma^2$ agent inserted between two
+high-$\Gamma^2$ parties acts as an
+\emph{impedance matcher}: absorbing reflected
+energy that would otherwise bounce between the
+parties, lowering the field $\Gamma^2$, and
+restoring C2 operating margin for both sides.
+This is the physics of mediation and
+therapeutic alliance.
+Trust is fragile because a single
+high-reflection event can overwrite the
+statistical record
+(Remark~\ref{rem:trauma-overwrite}, Path~B),
+while building trust requires many
+low-reflection interactions to accumulate
+sufficient $Z$-map history.
+\end{remark}
+
+\begin{remark}[Action dominance theorem
+  \textnormal{(E1)}]
+\label{rem:action-dominance}
+C2 remodelling requires
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
+x_{\text{out}}$.
+Communication provides $x_{\text{in}}$ but
+cannot generate $x_{\text{out}}$, which must be
+produced by the agent's own motor output.
+Action bypasses the $\Gamma_{\text{comm}}$
+bottleneck entirely:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+ & Communication & Action \\
+\midrule
+$x_{\text{out}}$ source & other person &
+  self \\
+Transmission & $T < 1$ & $T = 1$ \\
+$S_{\text{eff}}$ breach & low &
+  high \\
+$D_Z$ effect & may increase &
+  decreases on success \\
+\bottomrule
+\end{tabular}
+\end{center}
+\noindent
+An AI chatbot provides a zero-reflection
+interface ($\Gamma_{\text{comm}} \approx 0$),
+temporarily halting $D_Z$ accumulation.
+However, it cannot generate $x_{\text{out}}$,
+cannot carve real $Z$-map paths, and cannot
+build trust history.
+If the symptom relief it provides
+\emph{reduces the gradient that motivates
+action}, it becomes a new closed loop:
+$D_Z$ temporarily drops $\to$ urgency drops
+$\to$ no action $\to$ $D_Z$ returns $\to$
+return to AI.
+The optimal use of any low-reflection interface
+(human or AI) is as a \emph{bridge}:
+temporarily restoring $\eta(t)$ so that
+the first real-world $x_{\text{out}}$ becomes
+possible.
+\end{remark}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  PART D — E0 EMERGENCE
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \bigskip\noindent\textbf{\large Part D: E0 Emergence ---
