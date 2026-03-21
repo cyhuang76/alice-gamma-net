@@ -194,7 +194,7 @@ sum to incident power:
   \label{eq:C1}
 \end{equation}
 
-\textbf{C2---Impedance Remodeling.}
+\textbf{C2---Coefficient Update.}
 Each node adjusts its impedance to reduce local reflection:
 \begin{align}
   \Delta Z_{i,k} &= +\eta\,\gamma_k\,x_{\text{in},k}\,
@@ -206,7 +206,7 @@ Each node adjusts its impedance to reduce local reflection:
 \end{align}
 where $x_{\text{in},k}$ is the input activity at node~$i$
 and $x_{\text{out},k}$ the output activity at node~$j$
-for mode~$k$; $\eta$ is the remodeling rate.
+for mode~$k$; $\eta$ is the update rate.
 
 \textbf{C3---Dimensional Relay.}
 When $K_i \neq K_j$, the $(K_i - K_j)^+$ excess

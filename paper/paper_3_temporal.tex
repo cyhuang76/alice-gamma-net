@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\title{Paper~3: Temporal Dynamics and Universal Remodeling\\
+\title{Paper~3: Temporal Dynamics and Universal Coefficient Update\\
 --- Impedance Debt, Sleep, Lifecycle, Aging,\\
 and Twenty-Nine C2 Networks}
 
@@ -43,7 +43,7 @@ constraint favouring centralised neural architecture
 ($D_{\mathrm{thermal}}$ must be managed internally).
 A dual-field extension ($Z$-field + material field $\rho$)
 unifies Wolff's law (bone), Davis's law (muscle),
-and impedance-remodeling (neurons) as parameter
+and coefficient update (neurons) as parameter
 instances of a single impedance-matching PDE,
 with embryogenesis recapitulating the thermodynamic
 causal chain (heart $\to$ neural tube $\to$ brain).
@@ -74,7 +74,7 @@ explaining why cardiovascular disease precedes
 neurodegeneration.
 
 \textbf{Part~C} proves that C2 is the \emph{universal}
-remodeling law: we map all twenty-nine known
+update law: we map all twenty-nine known
 tissue-remodeling mechanisms to the single rule
 $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$,
 identify the thermodynamic boundaries of life
@@ -154,7 +154,7 @@ The three inviolable constraints are:
 \begin{itemize}
   \item \textbf{C1 (Energy Conservation)}:
     $\Gamma^2 + T = 1$ at every interface, every tick.
-  \item \textbf{C2 (Impedance Remodeling)}:
+  \item \textbf{C2 (Coefficient Update)}:
     $\Delta Z = -\eta\,\Gamma\,x_{\mathrm{in}}\,x_{\mathrm{out}}$.
   \item \textbf{C3 (Dimensional Relay)}:
     When $K_i \neq K_j$, relay nodes forming a
@@ -304,7 +304,7 @@ maintenance phase.
 During NREM sleep, the brain activates a recalibration
 mode: reduced sensory input
 halts $D_Z$ accumulation, while slow oscillations drive
-$Z$-map restoration via C2 impedance remodeling.
+$Z$-map restoration via C2 coefficient update.
 The discharge rate follows:
 \begin{equation}
   D_Z(t) = D_Z^{\mathrm{peak}}\,
@@ -342,7 +342,7 @@ waves~\cite{Fultz2019}.
 In $\Gamma$-Net language, glymphatic flow is the
 \emph{physical transport mechanism} that
 realises $D_Z$ discharge: reduced sensory drive
-($P_{\mathrm{in}} \to 0$) allows C2 remodeling
+($P_{\mathrm{in}} \to 0$) allows C2 update
 to dominate, while the 60\% expansion of
 interstitial space lowers the effective hydraulic
 impedance $Z_{\mathrm{ISF}}$, increasing the
@@ -674,7 +674,7 @@ the framework becomes a reaction--diffusion system:
 \begin{align}
   \frac{\partial Z}{\partial t}
     &= D_Z\,\nabla^2 Z
-    \underbrace{-\eta\,f(\rho)\,\Gamma\,Z}_{\text{C2 remodeling}}
+    \underbrace{-\eta\,f(\rho)\,\Gamma\,Z}_{\text{C2 update}}
     \underbrace{-\,E(\Gamma^2)\,(-\Gamma)\,\rho}_{\text{enzyme}}
     - \lambda\,Z\,,
   \label{eq:Z-field} \\[4pt]
@@ -701,7 +701,7 @@ bidirectional remodeling: building when $Z < Z_0$
 $Z > Z_0$ ($\Gamma > 0$, osteoclast-like)---the
 mathematical expression of Wolff's law~\cite{Wolff1892}.
 Under appropriate parameters, the same PDE reduces to
-Davis's law (muscle) and impedance remodeling (neurons).
+Davis's law (muscle) and coefficient update (neurons).
 
 When the diffusion ratio $D_\rho / D_Z$ exceeds a
 tissue-specific threshold, the uniform steady state
@@ -1164,7 +1164,7 @@ coupling weight from Paper~2.
 Three physically distinct mechanisms alter $\Sigma\Gamma^2$:
 
 \emph{(i)~Learning (MRP descent).}
-C2 impedance remodeling adapts $Z_{\mathrm{load}}$ toward
+C2 coefficient update adapts $Z_{\mathrm{load}}$ toward
 $Z_{\mathrm{source}}$:
 \begin{equation}
   \left.\frac{d(\Sigma\Gamma^2)}{dt}\right|_{\mathrm{learn}}
@@ -1719,7 +1719,7 @@ completes self-calibration.
 
 If impedance drifts upward with age, why no chronic pain?
 For slow drift with healthy C2 ($\eta > 0$),
-the impedance-remodeling update continuously re-matches:
+the coefficient update continuously re-matches:
 $\Gamma^2 \sim (\Delta Z / 2\bar{Z})^2 \lesssim 10^{-6}$.
 Pain triggers only in three regimes:
 \begin{enumerate}
@@ -2160,7 +2160,7 @@ the integral the patient sits when clinically assessed.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  PART C — C2 AS UNIVERSAL REMODELING LAW
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bigskip\noindent\textbf{\large Part C: C2 as Universal Remodeling Law}
+\bigskip\noindent\textbf{\large Part C: C2 as Universal Coefficient Update Law}
 \bigskip
 
 
@@ -2938,7 +2938,7 @@ nitric oxide, lactate, bilirubin, uric acid, and adenosine.
 \subsection{Dual-field morphogenesis}
 
 The unification of Wolff's law, Davis's law, and
-impedance remodeling as parameter instances of a single
+coefficient update as parameter instances of a single
 PDE (Table~\ref{tab:morphogenesis})
 suggests a common thermodynamic origin:
 $\mathcal{A}[\Gamma] = \int |\Gamma|^2\,dt \to \min$.
@@ -2973,7 +2973,7 @@ simultaneously.
 \label{sec:conclusion}
 
 We have developed the temporal theory of impedance networks
-and proved the universality of the C2 remodeling law
+and proved the universality of the C2 update law
 in three complementary parts.
 
 \textbf{Part~A:}
@@ -3007,7 +3007,7 @@ instances of a single impedance-debt integral with
 different time-scale parameters.
 
 \textbf{Part~C:}
-The C2 remodeling rule
+The C2 update rule
 $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
 is algebraically equivalent to all twenty-nine known
 tissue-remodeling laws
