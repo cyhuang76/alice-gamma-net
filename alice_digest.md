@@ -100,6 +100,52 @@
 
 ---
 
+## 摘要 #004 — 2026-03-21
+
+**對話主題**：心理力學 + 社會阻抗物理學
+
+**論文變更（19 個 Remark/Corollary + 1 個完整 Section）**：
+1. **P5**: AUC 0.705 = 物理地板（SNR 區分）
+2. **P0-P5**: C3 全論文統一更新為 Dimensional Relay（8 處）
+3. **P1 E0**: Γ_max 注意力方程 = minimax 控制律
+4. **P4**: 幻覺 = 內部 gate-leak
+5. **P3**: 三種 gating（急性/慢性/冥想）
+6. **P4**: 三層慢性壓力破壞（D_Z / η侵蝕 / gate鎖死）
+7. **P4**: S_eff 固化 + 外部梯度注入
+8. **P4**: 覆蓋 vs 複合創傷（Path A/B，η殘值決定）
+9. **P4**: 自信 = S_eff 外低 Γ² 路徑數
+10. **P4**: 自信崩潰 = 正回饋級聯 + C_kj 擴散
+11. **P3**: 教育 = η 窗口期 S_eff 塑形
+12. **P4**: 自主退化閉環（C2 被駐波綁架，三安全閥被毀）
+13. **P4 Section**: Social Impedance Mismatch（Γ_comm 公式、情緒激動=散熱、共情疲勞、Γ²傳染、信任/乾淨、行動>溝通+AI橋）
+14. **P2**: Baroreceptor/壓電/高血壓 Remark
+15. **P0-P5**: C2 全論文統一更名為 Coefficient Update（35+ 處）
+
+**頁數變化**：P1(16→16), P2(8→9), P3(20→21), P4(15→18), P5(15→15)
+
+**推導鏈**：從骨骼壓電 → 脈衝密度 → C3 維度轉介 → 注意力 → 意志力 → 壓力 → 幻覺 → 自主退化 → 自信/教育 → 溝通成本 → 傳染 → 信任 → 行動 > 溝通 → AI 倫理。全部只用 C1+C2+C3。
+
+---
+
+## 摘要 #005 — 2026-03-22
+
+**對話主題**：用戶新增實驗驗證 + C3 恢復 + 核心文件更新
+
+**用戶新增**：
+- 6 個新驗證圖（organ mortality, cross-species T_c, vascular impedance, infant HRV, EEG neuro, PTB-XL cardiac）
+- 10 個新 NHANES 結果 JSON
+- P5 +443 行（Extended Multi-Organ Validation: 11系統、運動、跨物種）
+- P0-P4 重構精簡
+
+**AI 修復**：
+- P0 C3 恢復為 Dimensional Relay（K-staircase 定理 + metadata co-transport Remark）
+- 5 個跨論文 \ref{} 未定義引用修復
+- P0 摘要 C2 名稱恢復為 Coefficient Update
+- `alice_core.md` v1.3（C2/C3 名稱、社會阻抗、頁數）
+- `alice_digest.md` 更新（本筆摘要）
+
+**頁數**：P0=7, P1=13, P2=8, P3=20, P4=14, P5=18 → **總計 80**
+
 ## 如何使用此文件
 
 1. **每次對話開始**：先讀 `alice_core.md`（核心圓），再讀此文件最後 3~5 筆摘要。
