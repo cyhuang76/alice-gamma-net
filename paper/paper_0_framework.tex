@@ -31,7 +31,7 @@ Three constraints emerge as \emph{theorems}, not postulates:
 C1 (energy conservation: $\Gamma^2 + T = 1$),
 C2 (impedance remodeling: $\Delta Z = -\eta\,\Gamma\,
 x_{\text{in}}\,x_{\text{out}}$),
-and C3 (dimensional relay: $K$-staircase necessity).
+and C3 (impedance-tagged transport).
 C2 is proven to be the \emph{unique} first-order
 activity-gated update rule that minimises reflected energy.
 We provide a complete inventory of derived quantities
@@ -95,7 +95,7 @@ Five companion papers develop the consequences:
     alone, with zero disease-specific code.
   \item \textbf{Paper~5}~\cite{Paper5}:
     Validates the full framework against NHANES
-    epidemiological data ($n = 52{,}545$, zero fitted
+    epidemiological data ($n = 49{,}774$, zero fitted
     parameters), reports all-cause mortality
     AUC~$= 0.705$, and collects all falsifiable
     predictions from Papers~1--4.
@@ -130,7 +130,7 @@ where impedance is defined as the ratio of effort
   \label{eq:Z-def}
 \end{equation}
 
-\begin{theorem}[$\Gamma$ universality \textnormal{(E0)}]
+\begin{theorem}[$\Gamma$ universality]
 \label{thm:gamma}
 At any one-dimensional interface between media of
 impedance $Z_1$ and $Z_2$, the First Law of
@@ -162,35 +162,6 @@ boundaries---the mathematical structure depends only
 on the existence of effort and flow variables, not
 on the physical medium.
 \end{proof}
-
-\begin{remark}[Why biology is one-dimensional \textnormal{(E0)}]
-\label{rem:fibers}
-A natural question is whether a one-dimensional
-interface equation can describe a three-dimensional
-organism.
-The answer is that biological energy transport
-is intrinsically one-dimensional:
-every major structural element in the body
-is a \emph{fibre}---a 1D waveguide that
-confines energy flow along a single axis,
-preventing $1/r^2$ spherical dissipation:
-\begin{itemize}
-  \item \emph{Axons}: electromagnetic waveguides
-    (myelinated for insulation);
-  \item \emph{Blood vessels}: hydraulic waveguides
-    (collagen/elastin walls confine flow);
-  \item \emph{Tendons/ligaments}: mechanical waveguides
-    (collagen fibres transmit tensile force);
-  \item \emph{Bone trabeculae}: structural waveguides
-    (aligned along compressive stress lines).
-\end{itemize}
-The three-dimensional body is not a homogeneous
-solid; it is a network of one-dimensional fibres
-woven into a 3D topology.
-Eq.~(\ref{eq:gamma-def}) is therefore not a
-simplification---it describes the actual geometry
-of biological energy transport.
-\end{remark}
 
 \noindent
 Theorem~\ref{thm:gamma} is not a modelling choice.
@@ -248,7 +219,7 @@ constraints are derived.
 \subsection{C1: Energy Conservation}
 \label{sec:c1}
 
-\begin{theorem}[C1 \textnormal{(E0)}]
+\begin{theorem}[C1]
 \label{thm:c1}
 At every interface $i$, at every instant $t$:
 \begin{equation}
@@ -288,7 +259,7 @@ Dissipative corrections (Johnson--Nyquist noise,
 Arrhenius aging) modify $Z$ over time but never
 violate power balance at a single interface.
 
-\begin{remark}[Signal power vs.\ metabolic work \textnormal{(E0)}]
+\begin{remark}[Signal power vs.\ metabolic work]
 \label{rem:signal-vs-metabolic}
 C1 governs instantaneous \emph{signal power} at each
 interface: incident = reflected + transmitted.
@@ -300,7 +271,7 @@ supply changes the gain (modifies $Z$), yet Kirchhoff's
 power law holds at every RF port.
 \end{remark}
 
-\begin{corollary}[Thermal Dissipation \textnormal{(E0)}]
+\begin{corollary}[Thermal Dissipation]
 \label{cor:thermal}
 The reflected fraction $\Gamma_i^2$ of incident power
 is re-absorbed by the source impedance and dissipated
@@ -319,10 +290,10 @@ temperature at which those computations remain viable}.
 \end{corollary}
 
 
-\subsection{C2: Coefficient Update}
+\subsection{C2: Impedance Remodeling}
 \label{sec:c2}
 
-\begin{theorem}[C2 as gradient descent on $\mathcal{A}$ \textnormal{(E0)}]
+\begin{theorem}[C2 as gradient descent on $\mathcal{A}$]
 \label{thm:c2}
 First-order gradient descent on the reflection action
 $\mathcal{A}$ (Eq.~\ref{eq:action}) with respect to $Z_i$,
@@ -334,7 +305,7 @@ gated by input and output activity, yields:
   }
   \label{eq:c2}
 \end{equation}
-where $\eta > 0$ is the update rate,
+where $\eta > 0$ is the remodeling rate,
 $x_{\text{in},i}$ is the input signal, and
 $x_{\text{out},i}$ is the transmitted signal.
 \end{theorem}
@@ -377,87 +348,52 @@ We adopt \emph{impedance remodeling} and
 $(x_{\text{in}}, x_{\text{out}})$ throughout.
 
 
-\subsection{C3: Dimensional Relay}
+\subsection{C3: Impedance-Tagged Transport}
 \label{sec:c3}
 
-\begin{theorem}[C3 \textnormal{(E0)}]
+\begin{theorem}[C3]
 \label{thm:c3}
-When two nodes $i,j$ have different modal complexity
-$K_i \neq K_j$, direct transmission incurs an
-irreducible dimensional cost
-$\Acut(i \to j) = (K_i - K_j)^+$
-modes of total reflection.
-The \emph{only} physical mechanism to convert this
-total reflection into partial transmission is the
-insertion of relay nodes that form a monotone
-$K$-staircase between source and target.
+Every energy or material flow across an interface
+carries $(Z_{\text{source}}, Z_{\text{load}})$ as
+metadata, so that $\Gamma_i$ is locally computable
+without global network knowledge.
 \end{theorem}
 
 \begin{proof}
-By C1, energy at each mode must satisfy
-$\Gamma_k^2 + T_k = 1$.
-If the target has fewer degrees of freedom
-($K_j < K_i$), the $(K_i - K_j)$ excess modes
-have no receiving channel: $T_k = 0$,
-$\Gamma_k = 1$ for each excess mode.
-This reflection is \emph{topological}, not impedance-based:
-C2 cannot remove it because there is no
-$Z$-mismatch to minimise---the receiving dimension
-simply does not exist.
-
-The only resolution is to insert intermediate
-node~$m$ with $K_j < K_m < K_i$, splitting the
-single $(K_i - K_j)$-mode total reflection into
-two smaller reflections, each of which C2 can
-partially reduce.
-By induction, a chain of relays
-$K_i > K_{m_1} > K_{m_2} > \cdots > K_j$
-minimises total $\Gamma^2$ subject to the
-topological constraint.  $\square$
+By definition, $\Gamma_i = (Z_{\text{load},i} -
+Z_{\text{source},i})/(Z_{\text{load},i} +
+Z_{\text{source},i})$ (Theorem~\ref{thm:gamma}).
+This expression depends only on the \emph{local} pair
+$(Z_{\text{source},i}, Z_{\text{load},i})$---not on
+any impedance elsewhere in the network.
+For $\Gamma_i$ to be computable without global
+knowledge, it is necessary and sufficient that each
+carrier (electrical signal, blood, mechanical load)
+encodes its source impedance as metadata upon
+departure, and that the receiving node reads the
+load impedance from its own structural properties.
+This is not a new physical law but a statement that
+the First Law constrains what information must be
+co-transported with energy: any system that obeys
+Theorem~\ref{thm:gamma} implicitly satisfies C3,
+because $\Gamma_i$ is well-defined at the interface
+from local data alone. $\square$
 \end{proof}
 
 \noindent
-C3 explains why biological systems develop layered
-architecture:
-\begin{itemize}
-  \item \emph{Neural}: cortex ($K\!=\!5$) $\to$
-    thalamus $\to$ brainstem $\to$ spinal cord
-    $\to$ motor neuron $\to$ muscle ($K\!=\!1$).
-  \item \emph{Vascular}: aorta $\to$ arteries $\to$
-    arterioles $\to$ capillaries---a fractal
-    $K$-staircase for impedance matching.
-  \item \emph{Skeletal}: bone $\to$ cartilage $\to$
-    tendon $\to$ muscle---graded stiffness
-    across the joint interface.
-\end{itemize}
-Without dimensional relay, high-$K$ controllers
-and low-$K$ effectors would be separated by
-100\% reflection walls, and complex life would
-be physically impossible.
-
-\begin{remark}[Impedance metadata as natural
-  consequence \textnormal{(E0)}]
-\label{rem:metadata}
-The reflected signal at each interface naturally
-encodes the local impedance pair
-$(Z_{\text{source}}, Z_{\text{load}})$ in its
-amplitude and frequency spectrum.
-This is not an additional axiom but a direct
-consequence of C1: since $\Gamma_i =
-(Z_{\text{load}} - Z_{\text{source}})/
-(Z_{\text{load}} + Z_{\text{source}})$,
-the reflection coefficient is computable from
-local data alone.
-C2 exploits this implicit metadata to perform
-local gradient descent without global network
-knowledge.
-\end{remark}
+C3 is a bookkeeping requirement, not an additional
+physical law.
+In biological terms: blood carries its viscosity
+($Z_{\text{blood}}$) into a vessel of compliance
+($Z_{\text{vessel}}$); a nerve impulse carries
+$R_m + 1/j\omega C_m$ into a synapse of input impedance
+$Z_{\text{syn}}$; a mechanical load carries force/velocity
+into a bone of stiffness $Z_{\text{bone}}$.
 
 \medskip\noindent
 \textbf{Implementation note.}
-In the reference implementation (ALICE), the old
-``C3 metadata tagging'' is enforced by requiring
-all inter-module values to be
+In the reference implementation (ALICE), C3 is enforced
+by requiring all inter-module values to be
 \texttt{ElectricalSignal} objects carrying $Z$ metadata.
 Raw floating-point numbers between modules are forbidden.
 
@@ -468,7 +404,7 @@ Raw floating-point numbers between modules are forbidden.
 \section{Mathematical Uniqueness of C2}
 \label{sec:uniqueness}
 
-\begin{theorem}[C2 uniqueness \textnormal{(E0)}]
+\begin{theorem}[C2 uniqueness]
 \label{thm:unique}
 Among all first-order, local, activity-gated update rules
 of the form $\Delta Z = f(Z, x_{\text{in}}, x_{\text{out}})$,
@@ -905,123 +841,6 @@ $\Pi_\Gamma$ & $\Gamma$-Pain Index
 \end{table}
 
 
-
-% ============================================================
-%  COROLLARY: UNIVERSAL RELAY NODES
-% ============================================================
-
-\begin{corollary}[Universal relay-node necessity \textnormal{(E0)}]
-\label{cor:universal-relay}
-Paper~1 proves that a heterogeneous network with
-geometric cost floor $A_{\mathrm{cut}} > 0$ requires
-relay nodes for signal integrity.
-The Interface Isomorphism (Paper~2) guarantees that
-$\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1) \neq 0$
-at \emph{every} impedance-discontinuous boundary,
-regardless of medium.
-Together, these two results imply that relay
-structures are a thermodynamic necessity at
-\emph{every} tissue interface in the body,
-not only in the nervous system.
-
-\medskip
-\begin{center}
-\begin{tabular}{@{}lll@{}}
-\hline
-\textbf{Interface} & \textbf{Relay structure}
-  & \textbf{$Z$ discontinuity} \\
-\hline
-Neuron--neuron
-  & Synapse
-  & Axonal vs.\ dendritic $Z_n$ \\
-Blood--tissue
-  & Capillary endothelium
-  & Fluid vs.\ interstitial $Z_v$ \\
-Blood--filtrate
-  & Glomerulus (kidney)
-  & Haemodynamic vs.\ osmotic $Z$ \\
-Blood--brain
-  & Blood--brain barrier
-  & Vascular vs.\ neural $Z$ \\
-Immune--tissue
-  & Lymph node
-  & Lymphatic vs.\ interstitial $Z$ \\
-Blood--air
-  & Alveolar membrane
-  & Fluid vs.\ gas-phase $Z$ \\
-Flow direction
-  & Heart valve
-  & Forward vs.\ reverse $Z_v$ \\
-\hline
-\end{tabular}
-\end{center}
-
-\medskip\noindent
-None of these structures are independent evolutionary
-inventions; each is the unique topological solution
-to $\Gamma \neq 0$ at its respective interface.
-
-\textbf{Duality.}\;
-The same relay topology that maintains signal
-integrity also provides the propagation path
-for pathological cascades (Paper~4):
-a relay node can transmit both matched signals
-and impedance-mismatch damage across boundaries.
-Signal maintenance and disease propagation are
-two faces of the same relay necessity.
-\end{corollary}
-
-
-% ============================================================
-%  SECTION 8b — OPERATIONAL DEFINITION OF K
-% ============================================================
-\section{Operational definition of modal complexity~$K$}
-\label{sec:K-operational}
-
-A potential concern is that the modal complexity~$K_i$
-assigned to each neural structure (e.g.\ $K=5$ for
-cortical pyramidal cells, $K=1$ for C-fibres) might be
-treated as a free parameter.  We clarify here that $K$
-is \emph{in principle measurable} using two independent
-protocols:
-
-\begin{enumerate}
-  \item \textbf{Diffusion Tensor Imaging (DTI).}
-    The number of independent fibre directions crossing
-    a voxel of volume $V$ is estimated by the rank of
-    the diffusion tensor $\mathbf{D}$:
-    $K_{\text{DTI}} = \operatorname{rank}(\mathbf{D})$.
-    For white-matter tracts this yields $K=1$
-    (single dominant eigenvector);
-    for cortical grey matter the orientation
-    distribution function (ODF) typically admits
-    $K = 3$--$6$ independent peaks.
-
-  \item \textbf{Multi-unit electrophysiology.}
-    Record $N$ simultaneous spike trains at a node;
-    perform principal component analysis (PCA) on the
-    cross-correlation matrix.  $K$ is the number of
-    eigenvalues exceeding the Marchenko--Pastur noise
-    threshold:
-    \[
-      K_{\text{ephys}} = \#\bigl\{\lambda_i :
-        \lambda_i > \lambda_{\text{MP}}(N,T)\bigr\}\,.
-    \]
-    This counts the number of independently modulated
-    signal dimensions at that node.
-\end{enumerate}
-
-\noindent
-Crucially, the qualitative results of Papers~1--5
-(e.g.\ Directional Asymmetry, Thermal Attractor)
-depend only on the \emph{ordering} $K_i > K_j$,
-not on the absolute values.
-Only quantitative predictions (e.g.\ the exact number
-of reflected modes) require calibrated $K$~values.
-Independent measurement of $K$ via DTI or
-electrophysiology is a falsifiable experimental
-programme that can validate or refute the framework.
-
 % ============================================================
 %  SECTION 9 — CONCLUSION
 % ============================================================
@@ -1036,7 +855,7 @@ Gradient descent on the reflection action gives C2
 ($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
 x_{\text{out}}$), proven unique among first-order
 activity-gated rules.
-Dimensional relay gives C3.
+Local computability gives C3.
 
 From these three constraints, five companion papers
 derive, in a strictly outward deductive chain:

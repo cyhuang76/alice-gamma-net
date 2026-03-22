@@ -1,0 +1,72 @@
+{
+  "n_total": 484,
+  "by_class": {
+    "NORM": {
+      "n": 100,
+      "mean_gamma": 0.2879,
+      "std_gamma": 0.0661,
+      "mean_hr": 70.7,
+      "mean_qrs": 35.5,
+      "mean_rmssd": 61.3
+    },
+    "MI": {
+      "n": 92,
+      "mean_gamma": 0.3324,
+      "std_gamma": 0.0998,
+      "mean_hr": 78.2,
+      "mean_qrs": 44.3,
+      "mean_rmssd": 103.5
+    },
+    "STTC": {
+      "n": 98,
+      "mean_gamma": 0.3348,
+      "std_gamma": 0.0769,
+      "mean_hr": 76.6,
+      "mean_qrs": 39.9,
+      "mean_rmssd": 106.0
+    },
+    "CD": {
+      "n": 94,
+      "mean_gamma": 0.3405,
+      "std_gamma": 0.116,
+      "mean_hr": 74.1,
+      "mean_qrs": 55.2,
+      "mean_rmssd": 140.4
+    },
+    "HYP": {
+      "n": 100,
+      "mean_gamma": 0.3178,
+      "std_gamma": 0.0723,
+      "mean_hr": 79.2,
+      "mean_qrs": 38.1,
+      "mean_rmssd": 82.5
+    }
+  },
+  "auc_results": {
+    "MI": {
+      "auc": 0.6566,
+      "n_pos": 92,
+      "n_neg": 100
+    },
+    "STTC": {
+      "auc": 0.6818,
+      "n_pos": 98,
+      "n_neg": 100
+    },
+    "CD": {
+      "auc": 0.6372,
+      "n_pos": 94,
+      "n_neg": 100
+    },
+    "HYP": {
+      "auc": 0.6278,
+      "n_pos": 100,
+      "n_neg": 100
+    },
+    "ANY_PATHOLOGY": {
+      "auc": 0.6508,
+      "n_pos": 384,
+      "n_neg": 100
+    }
+  }
+}

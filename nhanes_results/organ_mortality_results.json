@@ -1,0 +1,202 @@
+{
+  "all_cause": {
+    "auc": 0.6063,
+    "ci_lo": 0.5995,
+    "ci_hi": 0.6131,
+    "p_value": 0.0,
+    "n_pos": 7627,
+    "n_neg": 44918
+  },
+  "organ_specific": {
+    "1_cardiac": {
+      "ucod": 1,
+      "organ": "cardiac",
+      "label": "Heart disease",
+      "auc": 0.4926,
+      "ci_lo": 0.4794,
+      "ci_hi": 0.5067,
+      "p_value": 0.8683126970235165,
+      "n_pos": 1965,
+      "n_neg": 50580
+    },
+    "2_immune": {
+      "ucod": 2,
+      "organ": "immune",
+      "label": "Malignant neoplasms",
+      "auc": 0.5205,
+      "ci_lo": 0.5054,
+      "ci_hi": 0.534,
+      "p_value": 0.0025864841776899183,
+      "n_pos": 1646,
+      "n_neg": 50899
+    },
+    "3_pulmonary": {
+      "ucod": 3,
+      "organ": "pulmonary",
+      "label": "Chronic lower respiratory",
+      "auc": 0.5336,
+      "ci_lo": 0.5061,
+      "ci_hi": 0.5585,
+      "p_value": 0.010390518607544363,
+      "n_pos": 412,
+      "n_neg": 52133
+    },
+    "4_neuro": {
+      "ucod": 4,
+      "organ": "neuro",
+      "label": "Cerebrovascular",
+      "auc": 0.5313,
+      "ci_lo": 0.4937,
+      "ci_hi": 0.5644,
+      "p_value": 0.04626401098727251,
+      "n_pos": 250,
+      "n_neg": 52295
+    },
+    "6_neuro": {
+      "ucod": 6,
+      "organ": "neuro",
+      "label": "Alzheimer's",
+      "auc": 0.5457,
+      "ci_lo": 0.5123,
+      "ci_hi": 0.5743,
+      "p_value": 0.004749934254014598,
+      "n_pos": 283,
+      "n_neg": 52262
+    },
+    "7_endocrine": {
+      "ucod": 7,
+      "organ": "endocrine",
+      "label": "Diabetes mellitus",
+      "auc": 0.8234,
+      "ci_lo": 0.7934,
+      "ci_hi": 0.8517,
+      "p_value": 0.0,
+      "n_pos": 277,
+      "n_neg": 52268
+    },
+    "8_pulmonary": {
+      "ucod": 8,
+      "organ": "pulmonary",
+      "label": "Influenza/pneumonia",
+      "auc": 0.4934,
+      "ci_lo": 0.4507,
+      "ci_hi": 0.5381,
+      "p_value": 0.6134254745914083,
+      "n_pos": 158,
+      "n_neg": 52387
+    },
+    "9_renal": {
+      "ucod": 9,
+      "organ": "renal",
+      "label": "Renal disease",
+      "auc": 0.6738,
+      "ci_lo": 0.6283,
+      "ci_hi": 0.7283,
+      "p_value": 3.186340080674199e-14,
+      "n_pos": 165,
+      "n_neg": 52380
+    }
+  },
+  "cross_organ": {
+    "ucod_1_Heart_disease": {
+      "ucod": 1,
+      "label": "Heart disease",
+      "auc": 0.6201,
+      "ci_lo": 0.6056,
+      "ci_hi": 0.6341,
+      "p_value": 0.0,
+      "n_pos": 1965,
+      "n_neg": 50580
+    },
+    "ucod_2_Malignant_neoplasms": {
+      "ucod": 2,
+      "label": "Malignant neoplasms",
+      "auc": 0.5491,
+      "ci_lo": 0.5334,
+      "ci_hi": 0.5621,
+      "p_value": 1.7197354651443675e-11,
+      "n_pos": 1646,
+      "n_neg": 50899
+    },
+    "ucod_3_Chronic_lower_respiratory": {
+      "ucod": 3,
+      "label": "Chronic lower respiratory",
+      "auc": 0.5552,
+      "ci_lo": 0.5295,
+      "ci_hi": 0.5825,
+      "p_value": 8.389931034291642e-05,
+      "n_pos": 412,
+      "n_neg": 52133
+    },
+    "ucod_4_Cerebrovascular": {
+      "ucod": 4,
+      "label": "Cerebrovascular",
+      "auc": 0.4863,
+      "ci_lo": 0.4453,
+      "ci_hi": 0.5247,
+      "p_value": 0.7750981349485597,
+      "n_pos": 250,
+      "n_neg": 52295
+    },
+    "ucod_5_Accidents": {
+      "ucod": 5,
+      "label": "Accidents",
+      "auc": 0.5753,
+      "ci_lo": 0.5476,
+      "ci_hi": 0.6038,
+      "p_value": 8.182086663754973e-08,
+      "n_pos": 434,
+      "n_neg": 52111
+    },
+    "ucod_6_Alzheimer's": {
+      "ucod": 6,
+      "label": "Alzheimer's",
+      "auc": 0.4946,
+      "ci_lo": 0.4617,
+      "ci_hi": 0.5268,
+      "p_value": 0.6240478974114327,
+      "n_pos": 283,
+      "n_neg": 52262
+    },
+    "ucod_7_Diabetes_mellitus": {
+      "ucod": 7,
+      "label": "Diabetes mellitus",
+      "auc": 0.8101,
+      "ci_lo": 0.7818,
+      "ci_hi": 0.8374,
+      "p_value": 0.0,
+      "n_pos": 277,
+      "n_neg": 52268
+    },
+    "ucod_8_Influenza/pneumonia": {
+      "ucod": 8,
+      "label": "Influenza/pneumonia",
+      "auc": 0.6258,
+      "ci_lo": 0.5797,
+      "ci_hi": 0.6698,
+      "p_value": 7.137824331593379e-08,
+      "n_pos": 158,
+      "n_neg": 52387
+    },
+    "ucod_9_Renal_disease": {
+      "ucod": 9,
+      "label": "Renal disease",
+      "auc": 0.7022,
+      "ci_lo": 0.6558,
+      "ci_hi": 0.7516,
+      "p_value": 0.0,
+      "n_pos": 165,
+      "n_neg": 52380
+    },
+    "ucod_10_All_other_causes": {
+      "ucod": 10,
+      "label": "All other causes",
+      "auc": 0.6016,
+      "ci_lo": 0.5879,
+      "ci_hi": 0.6136,
+      "p_value": 0.0,
+      "n_pos": 2037,
+      "n_neg": 50508
+    }
+  }
+}

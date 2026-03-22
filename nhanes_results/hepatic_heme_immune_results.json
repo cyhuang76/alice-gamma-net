@@ -1,0 +1,21 @@
+{
+  "hepatic_allcause": {
+    "auc": 0.5905,
+    "n": 37644,
+    "deaths": 3805
+  },
+  "heme_allcause": {
+    "auc": 0.5683,
+    "n": 38298,
+    "deaths": 3907
+  },
+  "immune_allcause": {
+    "auc": 0.5701,
+    "n": 38298,
+    "deaths": 3907
+  },
+  "immune_cancer": {
+    "auc": 0.5619,
+    "n_deaths": 873
+  }
+}

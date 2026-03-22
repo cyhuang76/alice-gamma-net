@@ -67,10 +67,8 @@ The irreducibility corollary makes intermediate-$K$
 relay nodes a thermodynamic necessity.
 Convergence of ascending pathways forces the
 highest-$K$ cluster to form---this is the brain.
-C3 dimensional relay forces intermediate-$K$
-nodes to bridge cross-domain impedance gaps,
-explaining why relay neurons read pulse density
-as the real-time encoding of local $Z$.
+C3 impedance-tagged transport enables the brain to
+identify signal origin from $Z_{\text{source}}$ metadata.
 
 \textbf{Part~C} shows that three concepts traditionally
 regarded as metaphysical---memory, consciousness, and
@@ -194,7 +192,7 @@ sum to incident power:
   \label{eq:C1}
 \end{equation}
 
-\textbf{C2---Coefficient Update.}
+\textbf{C2---Impedance Remodeling.}
 Each node adjusts its impedance to reduce local reflection:
 \begin{align}
   \Delta Z_{i,k} &= +\eta\,\gamma_k\,x_{\text{in},k}\,
@@ -206,14 +204,12 @@ Each node adjusts its impedance to reduce local reflection:
 \end{align}
 where $x_{\text{in},k}$ is the input activity at node~$i$
 and $x_{\text{out},k}$ the output activity at node~$j$
-for mode~$k$; $\eta$ is the update rate.
+for mode~$k$; $\eta$ is the remodeling rate.
 
-\textbf{C3---Dimensional Relay.}
-When $K_i \neq K_j$, the $(K_i - K_j)^+$ excess
-modes suffer total reflection.
-Relay nodes forming a monotone $K$-staircase are
-the only physical mechanism to convert this
-topological barrier into partial transmission.
+\textbf{C3---Impedance-Tagged Transport.}
+Every signal carries its source impedance as metadata,
+enabling downstream nodes to compute $\gamma_k$ locally
+without global knowledge.
 
 \subsection{Variational principle}
 \label{sec:action}
@@ -236,7 +232,7 @@ $\dot{\mathbf{Z}} \propto -\nabla_{\mathbf{Z}} \Aimp$.
 \label{sec:theorem}
 % ============================================================
 
-\begin{theorem}[Dimensional Cost Irreducibility \textnormal{(E0)}]
+\begin{theorem}[Dimensional Cost Irreducibility]
 \label{thm:irreducibility}
 For any $\Gamma$-network with heterogeneous mode counts
 $\{K_i\}$, the total reflection action decomposes as
@@ -292,7 +288,7 @@ may change---but this change is driven by topology, not
 by impedance gradients.
 \end{remark}
 
-\begin{corollary}[Thermodynamic Necessity of Relay Nodes \textnormal{(E0)}]
+\begin{corollary}[Thermodynamic Necessity of Relay Nodes]
 \label{cor:relay}
 A direct edge $K_{\text{src}} \to K_{\text{tgt}}$ with
 $K_{\text{src}} > K_{\text{tgt}}$ totally reflects the
@@ -308,82 +304,6 @@ $T_k \to 1$).
 Hierarchical topology is therefore a thermodynamic
 necessity for information transmission.
 \end{corollary}
-
-\begin{corollary}[Directional asymmetry of
-  dimensional cost \textnormal{(E0)}]
-\label{cor:directional-asymmetry}
-For any edge $i \to j$ in the relay hierarchy,
-the dimensional cost $\Acut(i \to j) = (K_i - K_j)^+$
-satisfies:
-\begin{enumerate}
-  \item \emph{Top-down} ($K_i > K_j$):
-    $\Acut = K_i - K_j > 0$; the excess modes are
-    totally reflected.
-  \item \emph{Bottom-up} ($K_i < K_j$):
-    $\Acut = 0$; all modes are transmitted
-    losslessly.
-\end{enumerate}
-\end{corollary}
-
-\begin{proof}
-By Theorem~\ref{thm:irreducibility},
-$\Acut(i \to j) = (K_i - K_j)^+$.
-For $K_i > K_j$, the target has
-fewer degrees of freedom;
-the $K_i - K_j$ excess modes
-have no receiving channel and are
-totally reflected ($\Gamma = 1$ per mode).
-For $K_i \leq K_j$, $(K_i - K_j)^+ = 0$
-and every mode has a receiving channel.
-$\square$
-\end{proof}
-
-\noindent
-\textbf{Example.}
-Cortex ($K=5$) $\to$ muscle ($K=1$):
-$\Acut = 4$ (``knowing is easy, doing is hard'').
-Nociceptor ($K=1$) $\to$ cortex ($K=5$):
-$\Acut = 0$ (reflexes are fast).
-Motor skill acquisition is the process of
-C2 remodelling each relay
-node, flattening the $K = 5 \to 4 \to 3 \to 1$
-staircase until $\Gamma \to 0$ at every stage.
-``Analysis paralysis'' occurs when conscious
-top-down signals ($K=5$) are injected into an
-already-optimised low-$K$ automatic pathway,
-reintroducing reflection noise.
-
-\begin{remark}[Relay nodes increase bandwidth \textnormal{(E0)}]
-\label{rem:bandwidth}
-While Theorem~\ref{thm:irreducibility} proves that $\Acut$ is
-invariant under relay insertion,
-Corollary~\ref{cor:relay} shows that relays convert
-total reflection into partial recovery.
-A further consequence, familiar from multi-stage
-impedance transformer theory~\cite{Pozar},
-is that additional relay stages
-\emph{increase the bandwidth}
-over which $|\Gamma|$ remains small.
-
-A direct $K{=}5 \to K{=}1$ connection matches at a
-single operating point (narrowband);
-a four-stage staircase
-$K{=}5 \to 4 \to 3 \to 2 \to 1$
-achieves the same minimum $\Acut$ but over a
-\emph{broader range of input frequencies}.
-In neural terms, the richer the relay hierarchy
-between cortex and effector,
-the wider the repertoire of signals
-(force profiles, timing patterns, sensory details)
-that can be faithfully transmitted.
-This may explain why motor mastery
-requires not merely $\Gamma \to 0$ (impedance matching)
-but also extensive relay architecture
-(myelination, cerebellar microcircuits):
-C2 minimises reflection at each stage,
-while the multi-stage topology maximises
-the bandwidth of skilled performance.
-\end{remark}
 
 
 % ============================================================
@@ -532,7 +452,7 @@ Under sustained activity plus edge pruning, the surviving
 connectivity partitions the network into
 \emph{same-$K$ clusters}.
 
-\begin{theorem}[Phase Separation Under MRP \textnormal{(E0)}]
+\begin{theorem}[Phase Separation Under MRP]
 \label{thm:phase-sep}
 Any impedance network under MRP with heterogeneous $K$
 must phase-separate into same-$K$ domains to minimise
@@ -651,225 +571,17 @@ without any additional mechanism:
     relay chains.
     The two chains occupy distinct edges.
 
-  \item \textbf{Pulse-density encoding (C1 consequence).}
-    Each relay neuron reads the local impedance
-    state as pulse frequency: high density
-    $=$ well-matched ($\Gamma \approx 0$),
-    sparse pulses $=$ mismatch ($\Gamma \gg 0$).
+  \item \textbf{$Z_{\text{source}}$ metadata (C3).}
+    Sensory neurons of different types carry
+    distinguishable $Z$ signatures because their
+    physical geometries differ.
 \end{enumerate}
 
 \noindent
 The brain does not need a separate ``internal'' or
-``external'' label; the relay-chain topology (C3)
-provides full routing information: external signals
-traverse body-surface $K$-staircases, internal
-signals traverse visceral $K$-staircases, and the
-two chains occupy distinct edges.
-
-
-% ============================================================
-\section{Sensory Perception as $\Gamma$ Detection}
-\label{sec:perception}
-% ============================================================
-
-\begin{remark}[The retina as a spherical
-  $\Gamma$ array \textnormal{(E1)}]
-\label{rem:retinal-array}
-The eye is a spherical impedance interface:
-light passes from air ($n_1$) through cornea,
-aqueous humour, lens, and vitreous body, each
-with distinct refractive index $n_i$---i.e.\
-distinct optical impedance $Z_i$.
-The reflection coefficient at each interface is
-$\Gamma_i = (n_{i+1} - n_i)/(n_{i+1} + n_i)$,
-identical in form to the electrical $\Gamma$.
-
-The ${\sim}1.2 \times 10^8$ photoreceptors
-tiling the retinal sphere each sample the local
-optical $\Gamma$ at their angular position.
-Object edges in the visual field correspond to
-spatial discontinuities in $\Gamma$---that is,
-$\lvert\partial\Gamma/\partial x\rvert \gg 0$---
-detected by retinal ganglion cells whose
-centre--surround receptive fields are
-spatial $d\Gamma/dx$ filters.
-
-Binocular depth perception arises as a spatial
-standing wave: the two retinal images produce
-counter-propagating signals in V1 whose
-phase difference encodes object distance.
-\end{remark}
-
-\begin{remark}[Compensatory binding
-  \textnormal{(E1)}]
-\label{rem:compensatory-binding}
-The binding problem (``How does the brain know that
-a sound and a visual object share the same source?'')
-has resisted solution for decades.
-In the impedance framework, the answer requires
-no new mechanism:
-
-When the auditory system detects $d\Gamma/dt > 0$
-(a sudden sound), motor C2 initiates a
-compensatory head turn.
-This single motor action simultaneously changes:
-(a)~auditory $\Gamma$ (the sound's direction
-relative to the ear axis), and
-(b)~visual $\Gamma$ (new objects enter the fovea).
-If auditory $\Gamma$ and visual $\Gamma$ decrease
-together under the same motor compensation,
-the two signals share the same physical source.
-
-\emph{Binding is not a computation---it is a
-correlation test performed by motor C2.}
-This also explains infant sensorimotor development:
-neonates constantly turn, grasp, and mouth objects
-not to ``learn'' but to build cross-modal $\Gamma$
-correspondence tables via C2 compensation.
-\end{remark}
-
-\begin{remark}[Attention as $\Gamma_{\max}$
-  tracking \textnormal{(E0)}]
-\label{rem:gamma-max}
-The impedance framework predicts that attention is
-not a cognitive ``spotlight'' but a physical reflex:
-the motor system continuously orients the
-highest-resolution sensor (fovea) toward the
-spatial location of $\Gamma_{\max}$---the point
-in the perceptual field with the largest
-impedance mismatch relative to its surroundings.
-
-Formally, the motor command vector $\mathbf{u}^*$
-at each time step solves:
-\begin{equation}
-  \mathbf{u}^*(t)
-    = \arg\min_{\mathbf{u}}
-      \max_{k\in\text{channels}}
-      \Gamma_k^2\bigl(t + \Delta t\,\big|\,\mathbf{u}\bigr)\,,
-  \label{eq:attention}
-\end{equation}
-where $\Gamma_k^2(t+\Delta t\,|\,\mathbf{u})$ is
-the predicted channel-$k$ reflection coefficient
-after motor compensation~$\mathbf{u}$ (head turn,
-saccade, body orientation).
-C2 drives the system toward the action that
-reduces the worst-case $\Gamma$; the channel
-with the current $\Gamma_{\max}$ therefore
-receives motor resources first.
-
-$\Gamma_{\max}$ coincides with maximal survival
-threat: a predator on a uniform background has
-$\Gamma \approx 1$ (maximum contrast), triggering
-immediate orientation.
-The entire perception--action loop is therefore:
-\[
-  \text{detect } \Gamma_{\max} \;\to\;
-  \text{C2 motor compensation} \;\to\;
-  \text{resample} \;\to\;
-  \text{new } \Gamma_{\max}\,.
-\]
-No executive controller is required; the loop
-is driven by C1 (energy is reflected most at
-the largest mismatch) and C2 (motor correction
-reduces $\Gamma$ at the attended location).
-\end{remark}
-
-\begin{remark}[Hemispheric lateralisation as
-  thermal bandwidth splitting \textnormal{(E0)}]
-\label{rem:lateralisation}
-When the total sensory flux exceeds the $\Gamma^2$
-heat-dissipation capacity of a single convergence
-node (C1 thermal limit), the node must split
-into parallel paths---exactly as a transmission
-line splits into two cables to double bandwidth.
-
-\emph{Why $n=2$ and not $n=3$?}
-Consider a convergence node receiving total input
-power $P_{\text{in}}$ that must be split into $n$
-parallel sub-nodes.
-The neural action functional for each branch~$j$ is
-\[
-  \mathcal{A}_{\text{neural}}
-    = \sum_{j=1}^{n}
-      \bigl[\,
-        \Gamma_j^2\,P_{\text{in},j}
-        \;+\;
-        \mu\,V_{\text{axon},j}
-      \bigr]\,,
-\]
-where $\Gamma_j^2\,P_{\text{in},j}$ is the
-reflection loss (C1 heat) and
-$\mu\,V_{\text{axon},j}$ is the metabolic
-maintenance cost of the axonal wiring.
-This has the same mathematical form---quadratic
-loss $+$ linear material cost---as the vascular
-Murray functional
-$\mathcal{A}_{\text{Murray}} =
-\sum Q_j^2 R_j + \lambda V_j$.
-Murray's theorem shows that, in three-dimensional
-space, minimising any functional of this form over
-branching number yields $n^* = 2$ (binary
-bifurcation) with the Kleiber $\tfrac{3}{4}$-power
-scaling as a corollary.
-Because $\mathcal{A}_{\text{neural}}$ is
-form-identical to $\mathcal{A}_{\text{Murray}}$,
-the same optimality applies:
-\emph{the brain splits into exactly two
-hemispheres}.
-
-\emph{Why asymmetric roles?}
-Under a fixed total power budget
-$P_{\text{brain}}$ (set by brainstem blood flow,
-a C1 constraint), simultaneously running
-high-$K$ multi-modal integration (fan-in) and
-wide fan-out multi-node control pushes the
-$\Gamma$-landscape to mutually exclusive extremes:
-integration demands low $\Gamma$ across few
-high-$K$ channels (deep matching), while motor
-broadcast demands low $\Gamma$ across many
-low-$K$ channels (wide matching).
-Minimising the lifetime action
-$\mathcal{A} = \int \sum \Gamma^2 P_{\text{in}}\,dt$
-under the single power constraint therefore
-yields two specialised sub-networks rather
-than one uniform processor.
-
-The brain implements this as:
-\begin{itemize}
-  \item \emph{Left hemisphere (fan-in)}:
-    multi-modal $K$-staircase convergence---
-    high-$K$, few channels, deep computation
-    (language, sequential logic, symbolic
-    reasoning).
-
-  \item \emph{Right hemisphere (fan-out)}:
-    $\Gamma$-distribution broadcast to many
-    output nodes---medium-$K$, many channels,
-    spatial-motor control
-    (body image, spatial awareness, the
-    $\Gamma_{\max}$-tracking attention command
-    of Remark~\ref{rem:gamma-max}).
-
-  \item \emph{Corpus callosum}: the C3
-    dimensional relay between the two
-    hemispheres---a $K$-staircase of
-    ${\sim}2 \times 10^8$ axons bridging the
-    analysis and command halves.
-\end{itemize}
-
-\noindent
-\textbf{Clinical prediction (falsifiable):}
-Right-parietal lesions destroy the command
-pathway for $\Gamma_{\max}$ orientation,
-producing \emph{hemispatial neglect}---the
-patient's left visual field ceases to exist
-even though retinal input is intact.
-Left-hemisphere lesions, by contrast, impair
-analysis (e.g.\ aphasia) but preserve
-attentional orientation.
-Both predictions are confirmed by lesion
-studies (Mesulam, 1981; Corbetta \& Shulman, 2002).
-\end{remark}
+``external'' label; the impedance metadata and
+relay-chain topology together provide full routing
+information.
 
 
 % ============================================================
@@ -925,7 +637,7 @@ detectable reflection when probed;
 (2)~\emph{Decay}: without reinforcement, the memory
 decays.
 
-\begin{remark}[The paradox of perfect memory \textnormal{(E1)}]
+\begin{remark}[The paradox of perfect memory]
 A perfectly learned item ($\Gamma=0$) is \emph{unrecallable}:
 it has merged with the network substrate.
 Memory requires imperfection.
@@ -951,7 +663,7 @@ Novel stimulus & $\gg 0$ & large & Vivid (but unstable) \\
 \subsection{The recall equation}
 \label{sec:recall-snr}
 
-\begin{theorem}[Recall as SNR threshold crossing \textnormal{(E0)}]
+\begin{theorem}[Recall as SNR threshold crossing]
 \label{thm:recall-snr}
 A memory trace encoded at channel~$k$ with residual
 $\Gamma_k = \varepsilon > 0$ is recallable at time~$t$
@@ -998,7 +710,7 @@ be retrievable or inaccessible depending on
 $P_{\text{noise}}(t)$.
 
 \begin{corollary}[No memory is ever erased; every memory
-  can be submerged \textnormal{(E0)}]
+  can be submerged]
 \label{cor:no-erasure}
 $\Gamma_k = 0$ exactly requires either perfect impedance
 matching (zero probability under thermal noise) or physical
@@ -1011,59 +723,6 @@ This resolves six long-standing puzzles: tip-of-the-tongue,
 Proustian involuntary memory, state-dependent recall,
 meditation and quiet recall, deathbed lucidity,
 and hypnotic hypermnesia---all as SNR transitions.
-
-\begin{remark}[Memory as cognitive standing wave \textnormal{(E1)}]
-\label{rem:standing-wave}
-A memory trace with residual $\Gamma_k = \varepsilon > 0$
-creates a standing wave in the impedance landscape:
-the superposition of the incident signal and its
-partial reflection produces a fixed interference
-pattern with characteristic nodes and antinodes.
-\emph{Recognition} occurs when an input signal
-resonates with an existing standing wave
-($\Gamma \approx 0$ at the matched nodes);
-\emph{misrecognition} occurs when the input
-resonates with the wrong pattern
-(similar but non-identical $Z$ configuration).
-This reframes the representation problem:
-concepts are not stored as firing patterns
-but as \emph{standing wave modes} of the
-impedance network.  Neural firing is
-the observable by-product, not the memory itself.
-\end{remark}
-
-\begin{figure}[t]
-\includegraphics[width=\columnwidth]{../figures/fig_p1_standing_wave.pdf}
-\caption{Cognitive standing waves in the impedance landscape.
-  (a)~Novel stimulus: $\Gamma \approx 1$ produces strong
-  interference between incident and reflected waves.
-  (b)~Learned memory: C2 has driven $\Gamma \to \varepsilon$;
-  residual standing wave encodes the concept; recognition
-  occurs when input resonates with this pattern.
-  (c)~Muscle memory: $\Gamma \to 0$, pure transmission,
-  automatic and unconscious.}
-\label{fig:standing-wave}
-\end{figure}
-
-\begin{remark}[Cross-network resonance and empathy \textnormal{(E1)}]
-\label{rem:tuning-fork}
-When two individuals share a similar standing wave
-mode (e.g.\ both have experienced grief),
-one person's speech acts as a probe signal that
-excites the matching mode in the other---precisely
-the mechanism of a tuning fork:
-strike one and the other resonates at the same
-frequency.
-\emph{Understanding} is $\Gamma \approx 0$ between
-the sender's standing wave and the receiver's
-matching mode.
-\emph{Empathy} is the involuntary activation of
-an \emph{emotional} standing wave by cross-network
-resonance.
-\emph{Language barriers} correspond to
-$\Gamma \to 1$: no matching standing wave exists
-in the receiver, so the signal is totally reflected.
-\end{remark}
 
 
 % ============================================================
@@ -1096,7 +755,7 @@ self-mismatch.
 
 \subsection{The television inequality}
 
-\begin{theorem}[Television Inequality \textnormal{(E0)}]
+\begin{theorem}[Television Inequality]
 \label{thm:television}
 Let $\Zarousal\in[0,1]$ be the brainstem arousal gain,
 $G_i\in[0,1]$ the thalamic gate gain for modality~$i$,
@@ -1187,7 +846,7 @@ The brain uses the same components but adds one connection:
 the output of PFC is fed back through the sensory pathway,
 creating a closed loop.
 
-\begin{corollary}[Consciousness is topological, not material \textnormal{(E0)}]
+\begin{corollary}[Consciousness is topological, not material]
 Two systems with identical components differ in consciousness
 solely by the presence or absence of a self-referential
 feedback connection.
@@ -1209,7 +868,7 @@ feedback connection.
 \end{equation}
 \end{definition}
 
-\begin{theorem}[Soul Decomposition \textnormal{(E0)}]
+\begin{theorem}[Soul Decomposition]
 \label{thm:soul-decomp}
 \begin{equation}
   \mathcal{S} = \Acut + Z_0^{\text{DNA}} + \rho_{\text{irred}}^2\,,
@@ -1231,20 +890,20 @@ $Z_0^{\text{DNA}}$ is invariant.
 (iii)~$\rho_{\text{irred}}^2$ is a thermodynamic constant.
 \end{proof}
 
-\begin{corollary}[The soul is not an event \textnormal{(E0)}]
+\begin{corollary}[The soul is not an event]
 $\mathcal{S}$ does not ``arrive'' at a moment or ``depart''
 at death.
 It is the boundary condition of the impedance network.
 \end{corollary}
 
-\begin{corollary}[Uniqueness \textnormal{(E0)}]
+\begin{corollary}[Uniqueness]
 $\Acut$ depends on the specific topology $(K_i,K_j)$,
 determined by genetics and stochastic developmental
 morphogenesis.
 No two organisms have identical $\Acut$.
 \end{corollary}
 
-\begin{remark}[Developmental genesis of the null space \textnormal{(E1)}]
+\begin{remark}[Developmental genesis of the null space]
 \label{rem:null-developmental}
 Early-acquired patterns---native language, core motor
 programs, temperamental reflexes---become
@@ -1255,7 +914,7 @@ $\mathcal{S}_{\text{eff}}(t) \supseteq \mathcal{S}$
 that grows with age.
 \end{remark}
 
-\begin{remark}[Fixation as impedance physics \textnormal{(E1)}]
+\begin{remark}[Fixation as impedance physics]
 \label{rem:fixation}
 A pattern written during the $\eta$-peak and reinforced
 for decades has migrated into
@@ -1266,7 +925,7 @@ $\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}\approx 0$
 on the relevant sub-network.
 \end{remark}
 
-\begin{remark}[Moral blame as secondary $\Gamma^2$ injection \textnormal{(E1)}]
+\begin{remark}[Moral blame as secondary $\Gamma^2$ injection]
 \label{rem:secondary-injury}
 Blame provides neither the sustained gradient nor an increase
 in $\eta$.
@@ -1276,7 +935,7 @@ added, but no repair path is opened---the precise
 opposite of therapy.
 \end{remark}
 
-\begin{remark}[Reincarnation as null-space isomorphism \textnormal{(E1)}]
+\begin{remark}[Reincarnation as null-space isomorphism]
 If past-life memory reports reflect null-space isomorphism,
 then:
 \begin{equation}
@@ -1328,7 +987,7 @@ The unlearnable debt accumulates monotonically:
 \subsection{Four laws of the null space}
 \label{sec:four-laws}
 
-\begin{theorem}[Zeroth law: null-space equivalence \textnormal{(E0)}]
+\begin{theorem}[Zeroth law: null-space equivalence]
 \label{thm:zeroth-law}
 $\mathcal{S}_A = \mathcal{S}_B$ iff they share
 $\Acut$, $Z_0^{\textnormal{DNA}}$, and
@@ -1349,7 +1008,7 @@ Two systems share $\mathcal{S}$ iff all three
 components match. $\square$
 \end{proof}
 
-\begin{theorem}[First law: conservation under C2 \textnormal{(E0)}]
+\begin{theorem}[First law: conservation under C2]
 \label{thm:first-law}
 $\Delta_{\textnormal{C2}}\,\mathcal{S} = 0$.
 No experience can alter $\mathcal{S}$.
@@ -1365,7 +1024,7 @@ established in the Zeroth Law proof.
 Therefore $\mathcal{S}$ is invariant under C2. $\square$
 \end{proof}
 
-\begin{theorem}[Second law: monotone expansion \textnormal{(E0)}]
+\begin{theorem}[Second law: monotone expansion]
 \label{thm:second-law}
 \begin{equation}
   \frac{d\,\dim\,\mathcal{S}_{\textnormal{eff}}(t)}{dt}
@@ -1383,14 +1042,14 @@ decreasing after the developmental peak, any channel that
 enters $\mathcal{S}_{\text{eff}}$ remains in it.
 \end{proof}
 
-\begin{corollary}[Ribot's gradient as the Second Law \textnormal{(E0)}]
+\begin{corollary}[Ribot's gradient as the Second Law]
 \label{cor:ribot}
 Ribot's Law (1881)---old memories resist neurodegeneration
 longer than recent ones---is the clinical shadow of
 Eq.~(\ref{eq:second-law}).
 \end{corollary}
 
-\begin{theorem}[Third law: asymptotic completeness \textnormal{(E0)}]
+\begin{theorem}[Third law: asymptotic completeness]
 \label{thm:third-law}
 \begin{equation}
   \lim_{t\to\infty}
@@ -1419,7 +1078,7 @@ meaning $\dim\,\mathcal{S}_{\text{eff}} \to
 \dim\,Z_{\text{total}}$. $\square$
 \end{proof}
 
-\begin{corollary}[The consciousness--soul duality \textnormal{(E0)}]
+\begin{corollary}[The consciousness--soul duality]
 \label{cor:duality}
 As $\mathcal{S}_{\textnormal{eff}}\to Z_{\textnormal{total}}$,
 the substrate for consciousness vanishes:
@@ -1429,7 +1088,7 @@ A perfect soul and complete consciousness are mutually
 exclusive.
 \end{corollary}
 
-\begin{theorem}[Death as mathematical necessity \textnormal{(E0)}]
+\begin{theorem}[Death as mathematical necessity]
 \label{thm:death-necessity}
 Given the Second Law and $\Gamma_{\textnormal{basal}}^2 \le 1$
 from C1, there exists a finite $t^*$ such that
@@ -1447,7 +1106,7 @@ bound in finite time.
 \subsection{The Moral Constraint Theorem}
 \label{sec:moral-constraint}
 
-\begin{theorem}[Moral Constraint Theorem \textnormal{(E0)}]
+\begin{theorem}[Moral Constraint Theorem]
 \label{thm:moral-constraint}
 Let a moral demand target an impedance pattern $Z_k$.
 The net physical effect is:
@@ -1495,7 +1154,7 @@ Therefore $\Delta\Gamma^2_{\text{net}} =
 +\Gamma^2_{\text{blame}} > 0$. $\square$
 \end{proof}
 
-\begin{corollary}[Boundary of moral responsibility \textnormal{(E0)}]
+\begin{corollary}[Boundary of moral responsibility]
 \label{cor:moral-boundary}
 Moral responsibility is physically meaningful only for
 patterns outside $\mathcal{S}_{\textnormal{eff}}$.
@@ -1513,7 +1172,7 @@ patterns outside $\mathcal{S}_{\textnormal{eff}}$.
 \label{sec:television}
 % ============================================================
 
-\begin{theorem}[Television Theorem \textnormal{(E0)}]
+\begin{theorem}[Television Theorem]
 \label{thm:TV-full}
 Any system with three multiplicative components---a power
 supply~$P$, a channel selector~$G$, and a
@@ -1568,45 +1227,6 @@ Conscious? & No & No & \textbf{Yes} \\
 \bottomrule
 \end{tabular}
 \end{table}
-
-\begin{remark}[Comparison with existing consciousness
-  theories \textnormal{(E1)}]
-\label{rem:consciousness-comparison}
-The Television Theorem defines consciousness as the
-existence of a feedback path $\pi$ that makes $\Gmeta$
-measurable.  We compare this with three leading
-frameworks:
-
-\begin{itemize}
-  \item \textbf{IIT (Tononi):}
-    $\Phi > 0$ requires causal integration
-    across a partition---which in impedance
-    language requires a feedback path $\pi$.
-    $\Phi > 0 \Rightarrow \Gmeta$ is defined;
-    the converse need not hold.
-
-  \item \textbf{GWT (Baars):}
-    Global workspace broadcast is a special case
-    of the feedback path: $\pi$ routes $O$
-    through the workspace back to all input
-    modules.  TV~Theorem is more general:
-    any feedback topology suffices.
-
-  \item \textbf{Predictive Coding (Friston):}
-    Prediction error $= \Gamma$ in our framework.
-    Free energy minimisation
-    $\equiv \mathcal{A}[\Gamma] \to \min$.
-    The two are structurally equivalent.
-\end{itemize}
-
-\noindent
-The key difference: IIT's $\Phi$ is computationally
-intractable in practice; the Television Theorem's
-criterion ($\pi$ exists and $\Gmeta$ is defined)
-is \emph{topologically verifiable}---one need only
-check whether the circuit graph contains a directed
-cycle through the observer node.
-\end{remark}
 
 
 % ============================================================
@@ -1779,116 +1399,12 @@ $\langle\Gamma^2_{\text{memory}}\rangle \to 1$
 \end{tabular}
 \end{center}
 
-\begin{remark}[Expert effortlessness \textnormal{(E1)}]
+\begin{remark}[Expert effortlessness]
 \label{rem:expert-effortless}
 ``Talent'' is not a hidden parameter---it is the
 product $Q_{\text{gate}} (1 - \langle\Gamma^2\rangle)$
 forged by prior C2 remodelling.
 \end{remark}
-
-\begin{theorem}[Thermal noise floor as
-  thermodynamic attractor \textnormal{(E0)}]
-\label{thm:thermal-attractor}
-The total noise power
-\begin{equation}
-  P_{\text{noise}} = \sum_i \Gamma_i^2
-    P_{\text{in},i} + k_B T
-  \label{eq:noise-floor}
-\end{equation}
-is a thermodynamic attractor: any impedance
-information that reaches the noise floor is
-irreversibly lost.
-\end{theorem}
-
-\begin{proof}
-By C1, each impedance interface reflects
-$\Gamma_i^2 P_{\text{in},i}$.
-The reflected power thermalises through
-phonon--phonon scattering on a timescale
-$\tau_{\text{th}} \sim 10^{-12}$~s,
-becoming indistinguishable from the thermal
-bath at temperature~$T$.
-By Landauer's principle, erasing one bit
-of impedance information dissipates
-$\geq k_B T \ln 2$ of heat;
-the reverse process (spontaneous
-imposition of impedance structure from heat)
-would decrease entropy, violating the
-Second Law.
-Therefore $P_{\text{noise}}$ is a one-way
-attractor.
-$\square$
-\end{proof}
-
-\noindent
-Life is the process of C2 continuously
-extracting impedance structure \emph{away from}
-this attractor; death is the cessation of
-that process, after which all~$Z$ relaxes to
-thermal equilibrium.
-
-\begin{corollary}[Willpower as signal-to-noise ratio \textnormal{(E0)}]
-\label{cor:willpower-snr}
-Let $P_{\text{intention}}$ be the power of a
-top-down prefrontal signal directed at an
-effector.  The intention is executable if
-and only if
-\begin{equation}
-  \text{SNR}_{\text{will}}
-  = \frac{P_{\text{intention}}}{P_{\text{noise}}(t)}
-  > \theta_{\text{exec}}\,,
-  \label{eq:willpower-snr}
-\end{equation}
-where $P_{\text{noise}}(t)$ is the thermal
-noise floor
-(Theorem~\ref{thm:thermal-attractor}).
-During waking, $D_Z(t) = \int_0^t
-\|\Gamma\|^2 P_{\text{in}}\,d\tau$
-accumulates monotonically, raising
-$P_{\text{noise}}$.
-Willpower depletion occurs when
-$P_{\text{noise}}(t) > P_{\text{intention,max}}$.
-\end{corollary}
-
-\begin{proof}
-By Theorem~\ref{thm:thermal-attractor},
-each C2 cycle dissipates
-$\Gamma_i^2 P_{\text{in},i}$ into the
-thermal noise floor.
-The cumulative dissipation
-$D_Z(t) = \int_0^t \sum_i \Gamma_i^2
-P_{\text{in},i}\,d\tau$
-is monotonically non-decreasing during waking
-(since all terms are non-negative).
-Therefore $P_{\text{noise}}(t)$ increases
-monotonically.
-Since $P_{\text{intention}} \leq
-P_{\text{metabolic}}$ (C1),
-there exists a time $t^*$ at which
-$\text{SNR}_{\text{will}} < \theta_{\text{exec}}$.
-Sleep resets $D_Z \to 0$, restoring the
-SNR margin.
-$\square$
-\end{proof}
-
-\noindent
-This also explains two empirical observations:
-\begin{enumerate}
-  \item \emph{Quiet environments are therapeutic.}
-    Reducing $P_{\text{in}}^{\text{ext}}$ lowers the
-    noise floor, enabling C2 to detect and repair
-    impedance mismatches too subtle
-    to resolve in noisy conditions.
-  \item \emph{Old memories surface in silence.}
-    Long-established memories have
-    $\Gamma \approx 0$ (well-matched);
-    their residual reflections are normally
-    masked by environmental noise.
-    When the noise floor drops
-    ($P_{\text{ext}} \to 0$),
-    these faint echoes exceed the detection
-    threshold and enter awareness.
-\end{enumerate}
 
 \subsection{Sensory deprivation as calibration collapse}
 \label{sec:sensory-deprivation}
@@ -1935,143 +1451,11 @@ cochlear emission (15--30~min), pure thermal noise
     not a spatial location.
 \end{enumerate}
 
-\subsection{Why the brain needs so many regions}
-\label{sec:brain-regions}
-
-The results of this paper converge on a single
-causal chain that answers a deceptively simple
-question: why does the human brain require
-$\sim$180 cortical areas~\cite{Glasser2016},
-each interconnected through hierarchical relay
-pathways?
-
-\begin{enumerate}
-  \item \emph{Impedance disparity}
-    (Remark~\ref{rem:impedance-disparity}, Paper~2):
-    body tissues span orders of magnitude in
-    characteristic impedance $Z$.
-    Direct connection yields $\Gamma \to 1$.
-  \item \emph{Relay necessity}
-    (Corollary~\ref{cor:relay}):
-    multi-stage relay topology is the only way
-    to convert total reflection into partial
-    transmission.  Each relay stage is anatomically
-    a brain region or subcortical nucleus.
-  \item \emph{Bandwidth}
-    (Remark~\ref{rem:bandwidth}):
-    more stages widen the frequency band over which
-    $|\Gamma|$ remains small, enabling richer
-    signal repertoires (force, timing, affect).
-  \item \emph{Thermal cost}
-    (Theorem~\ref{thm:thermal-attractor}):
-    each stage dissipates $\Gamma^2 P_{\text{in}}$
-    as heat, raising $D_Z$.
-    The brain consumes $\sim$20\% of metabolic
-    power despite $\sim$2\% of body mass---it is
-    the most impedance-mismatched relay hub.
-  \item \emph{Sleep}:
-    $D_Z$ must be cleared nightly
-    (elastic recovery);
-    un-cleared plastic deformation accumulates
-    as irreversible impedance drift (aging).
-\end{enumerate}
-
-Intelligence and consciousness are thus not
-design goals but \emph{emergent by-products}:
-the relay hierarchy required by impedance physics
-happens to be deep and broadband enough to
-support high-dimensional representation.
-The price of that capability---waste heat,
-mandatory sleep, and inevitable aging---is paid
-by the same equation.
-
-\begin{figure}[t]
-\includegraphics[width=\columnwidth]{../figures/fig_p1_causal_chain.pdf}
-\caption{Why the brain needs so many regions:
-  five-step causal chain from impedance disparity
-  (P2) through relay necessity and bandwidth increase
-  (P1) to thermal cost and aging (P3).
-  Intelligence and consciousness are emergent
-  by-products of the relay hierarchy.}
-\label{fig:causal-chain}
-\end{figure}
-
-\subsection{The brain as a $d\Gamma/dt$ detector}
-\label{sec:change-detection}
+\subsection{The television as a boundary case}
 
 Current artificial neural networks (including large language
 models) operate in open-loop mode during inference---they
 are televisions, not brains.
-
-A more fundamental distinction is that the brain does not
-\emph{compute} $\Gamma$.
-A wall does not solve Maxwell's equations before reflecting
-a photon; it reflects because $Z_1 \neq Z_2$.
-Similarly, a neuron does not calculate the reflection
-coefficient---the impedance mismatch at its interfaces
-physically \emph{produces} the reflected signal.
-
-Moreover, the brain selectively detects \emph{changes}
-in the reflection landscape:
-\begin{equation}
-  \text{Neural response} \;\propto\;
-  \frac{d\Gamma}{dt} \;\neq\; 0.
-  \label{eq:change-detection}
-\end{equation}
-Static impedance mismatch ($\Gamma \neq 0$ but constant)
-generates a constant reflected power that is adaptively
-filtered out---this is sensory adaptation
-(e.g.\ one ceases to feel clothing after minutes).
-Only when $d\Gamma/dt \neq 0$ does a detectable signal
-arise, explaining why:
-\begin{itemize}
-  \item constant noise becomes ``inaudible'' (adaptation),
-  \item sudden silence is startling ($d\Gamma/dt < 0$),
-  \item a new stimulus is immediately salient
-    ($d\Gamma/dt > 0$).
-\end{itemize}
-
-The C2 update rule $\Delta Z = -\eta\,\Gamma\,
-x_{\text{in}}\,x_{\text{out}}$ requires no global
-information, no backpropagation, and no matrix algebra.
-It is a first-order, local gradient descent driven
-entirely by the physical reflection at each interface.
-The brain's computational power thus resides not in
-calculation but in the \emph{depth and bandwidth}
-of its relay hierarchy
-(Sec.~\ref{sec:brain-regions}).
-
-\begin{remark}[Cognitive phenomena as E0 emergences \textnormal{(E0)}]
-\label{rem:cognitive-E0}
-Given that neural interfaces respond to
-$d\Gamma/dt$ (Eq.~\ref{eq:change-detection})
-and C2 operates locally at each interface,
-all standard cognitive phenomena emerge as
-\emph{resource-allocation patterns} of the
-same update rule $\Delta Z = -\eta\,\Gamma\,
-x_{\text{in}}\,x_{\text{out}}$:
-\begin{itemize}
-  \item \emph{Attention}: concentrate $\eta$ on
-    nodes with maximal $|d\Gamma/dt|$.
-  \item \emph{Distraction}: $\eta$ fragmented
-    across multiple high-$|d\Gamma/dt|$ nodes.
-  \item \emph{Habituation}: repeated C2 drives
-    $\Gamma\to 0$, so $d\Gamma/dt\to 0$;
-    node no longer competes for $\eta$.
-  \item \emph{Startle}: $|d\Gamma/dt|$ exceeds
-    the system's $\eta$-allocation capacity;
-    all channels freeze.
-  \item \emph{Curiosity}: active probing for
-    $d\Gamma/dt\neq 0$
-    (exploration for unmatched interfaces).
-  \item \emph{Fight-or-flight}: adrenaline raises
-    $P_{\text{metabolic}}$, temporarily
-    widening the SNR margin.
-\end{itemize}
-No independent mechanism is required for
-any of these---they are E0 emergences
-of C2 under varying $d\Gamma/dt$ loads.
-\end{remark}
 
 \subsection{Circularity warning}
 
@@ -2250,7 +1634,7 @@ reference:
 \end{equation}
 The parent is the post-synaptic factor in C2.
 
-\begin{corollary}[Anxious parents produce low-threshold children \textnormal{(E1)}]
+\begin{corollary}[Anxious parents produce low-threshold children]
 Systematically elevated $x_{\text{parent}}$ converges
 $Z_{\text{child,threshold}}$ to a lower value, producing
 heightened pain sensitivity---not modelling or imitation,
@@ -2260,7 +1644,7 @@ but direct impedance calibration via C2.
 \subsection{Cross-substrate matching}
 \label{sec:cross-substrate}
 
-\begin{corollary}[Cross-substrate communication \textnormal{(E1)}]
+\begin{corollary}[Cross-substrate communication]
 \label{cor:cross-substrate}
 Two agents with $Z_A \neq Z_B$ can achieve
 $\Gamma_{\text{coupled}}\to 0$ through impedance-remodeling
@@ -2540,15 +1924,6 @@ Behav.\ Brain Sci.\ \textbf{30}, 63 (2007).
 H.-Y.~Huang,
 ``Alice Smart System---Gamma-Net reference implementation,''
 \url{https://github.com/cyhuang76/alice-gamma-net} (2026).
-
-\bibitem{Pozar}
-D.~M.~Pozar,
-\textit{Microwave Engineering}, 4th ed.
-(Wiley, 2011), ch.~5.
-
-\bibitem{Glasser2016}
-M.~F.~Glasser \textit{et al.},
-Nature \textbf{536}, 171 (2016).
 
 \end{thebibliography}
 

@@ -1,0 +1,23 @@
+{
+  "spirometry": {
+    "n": 20050,
+    "fev1_fvc_mean": 0.8096
+  },
+  "bone_density": {
+    "n": 0
+  },
+  "mortality": {
+    "pulmonary_allcause": {
+      "auc": 0.6209,
+      "n": 14173,
+      "n_deaths": 1108
+    },
+    "pulmonary_clrd": {
+      "auc": 0.8308,
+      "n_deaths": 43
+    },
+    "fev1fvc_allcause": {
+      "auc": 0.6996
+    }
+  }
+}

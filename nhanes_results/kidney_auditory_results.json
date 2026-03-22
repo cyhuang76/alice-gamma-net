@@ -1,0 +1,16 @@
+{
+  "renal_uacr_allcause": {
+    "auc": 0.524,
+    "n": 16731,
+    "deaths": 744
+  },
+  "renal_uacr_renal_death": {
+    "auc": 0.8191,
+    "n_deaths": 14
+  },
+  "auditory_allcause": {
+    "auc": 0.3617,
+    "n": 4312,
+    "deaths": 86
+  }
+}

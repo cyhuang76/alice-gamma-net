@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\title{Paper~3: Temporal Dynamics and Universal Coefficient Update\\
+\title{Paper~3: Temporal Dynamics and Universal Remodeling\\
 --- Impedance Debt, Sleep, Lifecycle, Aging,\\
 and Twenty-Nine C2 Networks}
 
@@ -43,7 +43,7 @@ constraint favouring centralised neural architecture
 ($D_{\mathrm{thermal}}$ must be managed internally).
 A dual-field extension ($Z$-field + material field $\rho$)
 unifies Wolff's law (bone), Davis's law (muscle),
-and coefficient update (neurons) as parameter
+and impedance-remodeling (neurons) as parameter
 instances of a single impedance-matching PDE,
 with embryogenesis recapitulating the thermodynamic
 causal chain (heart $\to$ neural tube $\to$ brain).
@@ -74,7 +74,7 @@ explaining why cardiovascular disease precedes
 neurodegeneration.
 
 \textbf{Part~C} proves that C2 is the \emph{universal}
-update law: we map all twenty-nine known
+remodeling law: we map all twenty-nine known
 tissue-remodeling mechanisms to the single rule
 $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$,
 identify the thermodynamic boundaries of life
@@ -154,12 +154,11 @@ The three inviolable constraints are:
 \begin{itemize}
   \item \textbf{C1 (Energy Conservation)}:
     $\Gamma^2 + T = 1$ at every interface, every tick.
-  \item \textbf{C2 (Coefficient Update)}:
+  \item \textbf{C2 (Impedance Remodeling)}:
     $\Delta Z = -\eta\,\Gamma\,x_{\mathrm{in}}\,x_{\mathrm{out}}$.
-  \item \textbf{C3 (Dimensional Relay)}:
-    When $K_i \neq K_j$, relay nodes forming a
-    $K$-staircase are required; each relay reads
-    local $Z$ as pulse density.
+  \item \textbf{C3 (Impedance-Tagged Transport)}:
+    All inter-module signals are \texttt{ElectricalSignal}
+    objects carrying $Z$-metadata.
 \end{itemize}
 
 
@@ -304,7 +303,7 @@ maintenance phase.
 During NREM sleep, the brain activates a recalibration
 mode: reduced sensory input
 halts $D_Z$ accumulation, while slow oscillations drive
-$Z$-map restoration via C2 coefficient update.
+$Z$-map restoration via C2 impedance remodeling.
 The discharge rate follows:
 \begin{equation}
   D_Z(t) = D_Z^{\mathrm{peak}}\,
@@ -342,7 +341,7 @@ waves~\cite{Fultz2019}.
 In $\Gamma$-Net language, glymphatic flow is the
 \emph{physical transport mechanism} that
 realises $D_Z$ discharge: reduced sensory drive
-($P_{\mathrm{in}} \to 0$) allows C2 update
+($P_{\mathrm{in}} \to 0$) allows C2 remodeling
 to dominate, while the 60\% expansion of
 interstitial space lowers the effective hydraulic
 impedance $Z_{\mathrm{ISF}}$, increasing the
@@ -378,8 +377,7 @@ observation.
 
 Sleep requires that all thalamic gates satisfy
 $G_i \approx 0$, so the television inequality
-(derived in the companion Paper~4~\cite{Paper4})
-falls below threshold:
+(Paper~4~\cite{Paper4}) falls below threshold:
 $Z_{\mathrm{arousal}}\sum_i G_i \cdot Q_{\text{PFC}} < \theta$.
 However, a gate is an impedance attenuator, not a
 perfect open circuit.  Even at $G_i \ll 1$
@@ -411,7 +409,7 @@ Three routes satisfy it:
     $P_{\mathrm{in},i}$ spikes (loud noise, pain,
     predator vibration).
     The startle circuit
-    (see Paper~4~\cite{Paper4} for full derivation)
+    (Paper~4~\cite{Paper4})
     drives $G_{\text{threat}} \to 1$ within
     $\sim$5\,ms, far faster than cortical processing.
     This is the ancestral survival mechanism.
@@ -460,7 +458,7 @@ is structurally compromised.
 
 \paragraph{Narcolepsy (arousal anchor loss).}
 The television inequality
-(see Paper~4~\cite{Paper4})
+(Paper~4~\cite{Paper4})
 requires $Z_{\mathrm{arousal}} > Z_{\min}$
 for consciousness.
 $Z_{\mathrm{arousal}}$ is held at its operating point
@@ -563,86 +561,6 @@ or raise~$\beta_{\mathrm{recal}}$
 (hypersomnia, via GABA$_\text{A}$ modulation or
 wake-promoting agents that reduce residual~$D_Z$).
 
-\begin{remark}[Three regimes of attentional gating
-  \textnormal{(E1)}]
-\label{rem:three-gating}
-The gate-leak inequality
-(Eq.~\ref{eq:forced-wake}) describes what happens
-when gating fails.
-Here we distinguish three physically distinct
-\emph{modes} of intentional gating,
-all sharing the same $G_i \to 0$ operation but
-differing in $D_Z$ consequences.
-
-\begin{center}
-\begin{tabular}{@{}llll@{}}
-\toprule
-\textbf{Regime} & \textbf{$G_i$} & \textbf{$P_{\text{in}}$} &
-  \textbf{$D_Z$ on gated ch.} \\
-\midrule
-Acute (threat) & $\to 0$ (seconds) & unchanged &
-  accumulates; safe \\
- & & & (auto-discharge) \\
-Chronic (suppression) & $\to 0$ (months) & unchanged &
-  accumulates; \\
- & & & \textbf{dangerous} \\
-Meditative & $\to 0$ & $\to 0$ &
-  \textbf{clears} \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\noindent
-\emph{Acute gating} (the ``car crash'' reflex)
-redirects bandwidth to the prefrontal cortex
-for seconds; $D_Z$ on the gated channels is
-discharged during the next sleep cycle.
-\emph{Chronic gating} (emotional suppression,
-``willpower through gritting teeth'')
-maintains $G_i \approx 0$ for months,
-but $P_{\text{in}}$ on the gated channel persists.
-$D_Z$ accumulates behind the closed gate
-(Eq.~\ref{eq:DZ}), and when
-$\Gamma_k^2 \cdot P_{\text{in},k}$ exceeds the
-gate's attenuation capacity the channel
-leaks---producing flashbacks, panic attacks,
-or hallucinations
-(Paper~4~\cite{Paper4}, Remark~\ref{rem:hallucination}).
-\emph{Meditative gating} actively reduces
-$P_{\text{in}}$ on the gated channel
-(sensory withdrawal, not suppression),
-so $D_Z$ truly clears rather than accumulates.
-
-The total available cortical power is
-$P_{\text{brain}} \propto T_v =
-1 - \Gamma_v^2$ (Paper~2~\cite{Paper2}).
-On the timescale of seconds this ceiling is
-fixed (blood flow cannot change instantly),
-but on the timescale of months
-\emph{aerobic training} lowers
-$\Gamma_v^2$ via vascular C2
-($\eta_v \sim 0.001$), raising
-$P_{\text{brain}}$ itself.
-Therefore, attention training decomposes
-into three separable capacities:
-\begin{enumerate}
-\item \textbf{Switching speed}:
-  $\Gamma_{\text{gate}} \downarrow$
-  (neural C2, seconds--weeks).
-\item \textbf{Switching safety}:
-  pairing gating with $D_Z$ discharge
-  (sleep, meditation), not
-  accumulation (suppression).
-\item \textbf{Power ceiling}:
-  $T_v \uparrow$ via aerobic vascular C2
-  (months).
-\end{enumerate}
-Only training all three simultaneously is
-sustainable; training switching speed alone
-(``raw willpower'') without $D_Z$ discharge
-is a loan against future gate-leak.
-\end{remark}
-
 
 \subsection{NREM/REM partition}
 \label{sec:NREM-REM}
@@ -674,7 +592,7 @@ the framework becomes a reaction--diffusion system:
 \begin{align}
   \frac{\partial Z}{\partial t}
     &= D_Z\,\nabla^2 Z
-    \underbrace{-\eta\,f(\rho)\,\Gamma\,Z}_{\text{C2 update}}
+    \underbrace{-\eta\,f(\rho)\,\Gamma\,Z}_{\text{C2 remodeling}}
     \underbrace{-\,E(\Gamma^2)\,(-\Gamma)\,\rho}_{\text{enzyme}}
     - \lambda\,Z\,,
   \label{eq:Z-field} \\[4pt]
@@ -701,7 +619,7 @@ bidirectional remodeling: building when $Z < Z_0$
 $Z > Z_0$ ($\Gamma > 0$, osteoclast-like)---the
 mathematical expression of Wolff's law~\cite{Wolff1892}.
 Under appropriate parameters, the same PDE reduces to
-Davis's law (muscle) and coefficient update (neurons).
+Davis's law (muscle) and impedance remodeling (neurons).
 
 When the diffusion ratio $D_\rho / D_Z$ exceeds a
 tissue-specific threshold, the uniform steady state
@@ -902,7 +820,7 @@ in ontogeny.}
 \label{fig:embryogenesis}
 \end{figure}
 
-\begin{remark}[Recapitulation as impedance-threshold ordering \textnormal{(E1)}]
+\begin{remark}[Recapitulation as impedance-threshold ordering]
 \label{rem:recapitulation}
 Haeckel's recapitulation law---``ontogeny recapitulates
 phylogeny''---has long been regarded as a descriptive
@@ -915,16 +833,7 @@ Define the \emph{critical diffusion length}:
       C_{\mathrm{surface}}}{\dot{m}}}\,,
   \label{eq:critical-length}
 \end{equation}
-where\footnote{Equation~\eqref{eq:critical-length} is the
-planar-geometry limit of the
-Krogh cylinder model~\cite{Krogh1919}.
-For cylindrical geometry, $\ell^*$ is replaced by
-the Krogh radius
-$r_K = \sqrt{4\,D_{\mathrm{O}_2}\,
-C_{\mathrm{surface}}/\dot{m}}$;
-the scaling $\ell^* \propto \sqrt{D/\dot{m}}$
-is identical.}
-$D_{\mathrm{O}_2}$ is the oxygen diffusion
+where $D_{\mathrm{O}_2}$ is the oxygen diffusion
 coefficient in tissue, $C_{\mathrm{surface}}$ is the
 surface oxygen concentration, and $\dot{m}$ is the
 volumetric metabolic rate.
@@ -1003,132 +912,52 @@ mechanism.
 \end{remark}
 
 \begin{remark}[Natural selection as impedance-mismatch
-  minimisation \textnormal{(E1)}]
+  minimisation]
 \label{rem:natural-selection}
 The Lifecycle Equation (Theorem~\ref{thm:lifecycle},
 below) governs individual organisms,
 but its structure applies equally at the population
 level.
-Two logically distinct selection mechanisms emerge.
-
-\textbf{(A) Competitive selection within a structural tier.}
-Among organisms that share the same impedance
-threshold tier, those with lower $\Sigma\Gamma^2$
-relative to the current environment have higher
-viability.
-This is the standard ``survival of the fittest''
-expressed in impedance language: the fittest are
-the least mismatched.
-
-\textbf{(B) Physical exclusion across tiers.}
-A fundamentally different mechanism operates at
-structural-epoch boundaries.
-When an environmental shift makes
-$\ell > \ell^*$ the norm (e.g.\ rising oxygen
-and body size in the Cambrian), organisms that
-\emph{cannot} cross the pump threshold are not
-outcompeted---they are \emph{physically excluded}.
-A body with $\ell > \ell^*$ and no active
-circulation reaches $\Gamma_v \to 1$ (anoxia)
-at its core: this is not a failure to compete
-but a thermodynamic impossibility.
-The distinction matters: competitive selection
-is probabilistic (better-matched organisms are
-more \emph{likely} to survive); physical exclusion
-is deterministic (organisms that lack the
-required structural tier \emph{cannot} exist).
 
 \textbf{Mass extinction as $\Gamma_{\mathrm{env}} \to 1$.}
 A catastrophic environmental change
 (asteroid impact, supervolcanic eruption, ocean
 anoxia) is a global spike in
 $\gamma\,\Gamma_{\mathrm{env}}(t)$.
-When this term overwhelms the C2 correction capacity
-$\eta$, viability collapses.
-The five major mass extinctions correspond to five
-episodes where $\gamma\,\Gamma_{\mathrm{env}}$
-exceeded $\eta$ for the majority of extant species.
-Survivors are those with:
-(i)~high $\eta$ (rapid adaptors, e.g.\ bacteria),
-(ii)~low $\ell$ (small body, low metabolic demand),
-or (iii)~already low $\Gamma$ in the new regime
-(deep-sea organisms).
+When this term overwhelms the C2 correction
+$-\eta\,\Sigma\Gamma^2$, the organism's total
+mismatch diverges and viability collapses.
+The five major mass extinctions
+(Ordovician--Silurian, Late Devonian,
+Permian--Triassic, Triassic--Jurassic,
+Cretaceous--Paleogene) correspond to five episodes
+where $\gamma\,\Gamma_{\mathrm{env}}$ exceeded
+$\eta$ for the majority of extant species.
+
+\textbf{Survival of the least mismatched.}
+The survivors of each extinction are not the
+``strongest'' but those with the smallest
+$\Sigma\Gamma^2$ relative to the new environment:
+(i)~high $\eta$ (rapid adaptors, e.g.\ bacteria with
+horizontal gene transfer),
+(ii)~low metabolic demand ($\ell < \ell^*$,
+small body size---mammals were mouse-sized when
+dinosaurs perished),
+or (iii)~already low $\Gamma_v$ in the new regime
+(deep-sea organisms unaffected by surface
+temperature).
 
 \textbf{Post-extinction radiation.}
 When $\Gamma_{\mathrm{env}}$ relaxes, the vacated
-impedance landscape contains unoccupied niches.
+impedance landscape contains unoccupied niches
+where $\Sigma\Gamma^2 \approx 0$ is achievable.
 Survivors rapidly diversify to fill these niches
 (e.g.\ mammalian radiation after the
-end-Cretaceous event)---the
-$\gamma\,\Gamma_{\mathrm{env}} \to 0$ regime of
-the Lifecycle Equation.
-Crucially, no post-extinction radiation has ever
-regressed a structural tier:
-all surviving macrofauna after the end-Cretaceous
-retained active circulation.
-\end{remark}
-
-\begin{corollary}[Recovery rate $=$ $\eta(t)$ \textnormal{(E0)}]
-\label{cor:recovery-rate}
-The clinically observed decline in recovery rate
-with age---whether from stress
-($\Gamma_n$ spike on neural channels),
-fatigue ($D_Z$ accumulation), or wound healing
-(local $\Gamma_v \to 1$)---is a direct manifestation
-of the Arrhenius decline in $\eta(t)$.
-Recovery~$=$ C2 driving $\Gamma$ back toward zero:
-\[
-  \text{Recovery rate}
-  \;\propto\;
-  \eta(t) \cdot x_{\mathrm{in}} \cdot |\Gamma_{\mathrm{damage}}|\,.
-\]
-In youth, $\eta$ is high, $x_{\mathrm{in}}$ is high
-(active lifestyle), and vascular $\Gamma_v$ is low
-(good material supply $\rho$).
-All three factors decline with age, so recovery
-rate decays as their \emph{product}---faster
-than any single factor alone.
-\end{corollary}
-
-\begin{remark}[Exercise as C2 input-signal maintenance \textnormal{(E1)}]
-\label{rem:exercise-c2}
-The Lifecycle Equation predicts that exercise
-maintains $x_{\mathrm{in}} > 0$ on the
-vascular C2 channel (wall shear stress
-$\tau_{\mathrm{wall}} = 4\mu Q /\pi r^3$
-increases with cardiac output $Q$), thereby
-keeping the learning term $-\eta \, x_{\mathrm{in}}
-\, \Sigma\Gamma^2$ active against the aging
-drift $\delta \, D(t)$.
-
-This is a zero-parameter, falsifiable prediction:
-\emph{physically active adults should have lower
-$\Sigma\Gamma^2$ than sedentary adults at every
-age tier.}
-
-We tested this prediction using NHANES 2013--2018
-Physical Activity Questionnaire (PAQ) data
-($n = 7{,}393$ adults across three 2-year cycles),
-cross-referenced with the pre-computed
-$\Gamma$-vectors from Section~\ref{sec:nhanes} of
-Paper~5.
-Active respondents ($n_{\text{active}} = 2{,}517$;
-WHO guideline:
-$\geq$150\,min/week moderate-equivalent)
-had significantly lower $\Sigma\Gamma^2$ than
-sedentary respondents ($n_{\text{sed}} = 4{,}876$)
-overall ($\bar\Sigma\Gamma^2_{\text{active}} = 0.634$
-vs.\ $\bar\Sigma\Gamma^2_{\text{sed}} = 0.733$;
-Mann--Whitney $p = 3.7 \times 10^{-48}$)
-and in all three age tiers:
-20--39 ($p = 8.6 \times 10^{-10}$),
-40--59 ($p = 1.8 \times 10^{-8}$),
-60+ ($p = 1.2 \times 10^{-9}$).
-The 60+ active group's mean $\Sigma\Gamma^2 = 0.727$
-was lower than the 40--59 sedentary group's
-$0.723$, consistent with the simulation prediction
-that a 70-year-old exerciser can have lower
-impedance mismatch than a non-exercising 50-year-old.
+end-Cretaceous event).
+This is the $\gamma\,\Gamma_{\mathrm{env}} \to 0$
+regime of the Lifecycle Equation: with low novelty
+injection and empty niche space,
+$\Sigma\Gamma^2$ drops rapidly---adaptive radiation.
 \end{remark}
 
 
@@ -1164,7 +993,7 @@ coupling weight from Paper~2.
 Three physically distinct mechanisms alter $\Sigma\Gamma^2$:
 
 \emph{(i)~Learning (MRP descent).}
-C2 coefficient update adapts $Z_{\mathrm{load}}$ toward
+C2 impedance remodeling adapts $Z_{\mathrm{load}}$ toward
 $Z_{\mathrm{source}}$:
 \begin{equation}
   \left.\frac{d(\Sigma\Gamma^2)}{dt}\right|_{\mathrm{learn}}
@@ -1193,7 +1022,7 @@ kinetics:
 
 Combining all three:
 
-\begin{theorem}[Lifecycle Equation \textnormal{(E0)}]
+\begin{theorem}[Lifecycle Equation]
 \label{thm:lifecycle}
 The population-averaged squared reflection coefficient
 $\Sigma\Gamma^2(t)$ satisfies the non-autonomous ODE
@@ -1304,7 +1133,7 @@ when placed at the keyboard.
   \label{fig:skill-decay}
 \end{figure}
 
-\begin{remark}[Three mechanisms of impedance fixation \textnormal{(E1)}]
+\begin{remark}[Three mechanisms of impedance fixation]
 \label{rem:fixation-mechanisms}
 The $\eta(t)$ lifecycle and C2 dynamics identify three
 routes by which a $Z$-pattern becomes functionally
@@ -1497,59 +1326,6 @@ analogy but derivation from the same physics.
 \label{fig:emotions}
 \end{figure}
 
-\begin{remark}[Education as $\eta$-window
-  $S_{\text{eff}}$ shaping \textnormal{(E1)}]
-\label{rem:education}
-The developmental factor $f_{\text{dev}}(t)$ in
-$\eta(t) = \eta_0\,f_{\text{dev}}(t)\,
-e^{-E_a/k_BT}$ peaks during childhood and
-adolescence, then declines monotonically
-(Arrhenius).
-Any $Z$-pattern reinforced during this window
-is carved maximally deep into $S_{\text{eff}}$.
-
-Education does not primarily transfer knowledge
-($\varepsilon_{\text{env}}$ inputs are forgotten);
-it shapes three persistent structures:
-\begin{enumerate}
-  \item \textbf{$S_{\text{eff}}$ content.}
-    Good education carves ``explore when
-    $\Gamma^2$ rises'' into $S_{\text{eff}}$;
-    bad education carves ``avoid when
-    $\Gamma^2$ rises.''
-    The same mismatch signal triggers opposite
-    responses depending on which pattern was
-    sealed first.
-
-  \item \textbf{$\eta$ baseline.}
-    Chronic stress during schooling
-    (humiliation, fear of failure) accelerates
-    Arrhenius erosion of $\eta$, permanently
-    lowering the repair-rate ceiling
-    (Remark~\ref{rem:three-gating}).
-
-  \item \textbf{Gate-control architecture.}
-    The PFC gating pathways trained during
-    the $\eta$-peak determine whether
-    the default response to novel $\Gamma^2$
-    is exploration (gate non-essential channels,
-    allocate bandwidth) or avoidance
-    (gate the novel channel itself).
-\end{enumerate}
-
-\noindent
-\textbf{Bad education is worse than no education.}
-With no education, $S_{\text{eff}}$ accumulates
-random shallow patterns and $\eta$ declines
-naturally.
-With harmful education, the highest-efficiency
-window is used to \emph{actively} seal
-``novelty $=$ danger'' into $S_{\text{eff}}$
-at maximum depth, while simultaneously burning
-$\eta$ via chronic stress---producing a system
-that resists all future attempts at expansion.
-\end{remark}
-
 
 % ============================================================
 %  SECTION 10 — STRESS, FATIGUE, AND AGING
@@ -1719,7 +1495,7 @@ completes self-calibration.
 
 If impedance drifts upward with age, why no chronic pain?
 For slow drift with healthy C2 ($\eta > 0$),
-the coefficient update continuously re-matches:
+the impedance-remodeling update continuously re-matches:
 $\Gamma^2 \sim (\Delta Z / 2\bar{Z})^2 \lesssim 10^{-6}$.
 Pain triggers only in three regimes:
 \begin{enumerate}
@@ -1754,7 +1530,7 @@ contracture (ongoing minimisation), keloid formation
 (overshoot to opposite-sign mismatch),
 and cumulative surgical debt (raised $\Sigma\Gamma^2$ floor).
 
-\begin{remark}[Scar debt and the bathtub curve \textnormal{(E1)}]
+\begin{remark}[Scar debt and the bathtub curve]
 An individual accumulating many scars shifts baseline
 $\Sigma\Gamma^2$ upward, raising the bathtub-curve floor
 ---a mechanistic link between cumulative trauma and
@@ -1908,7 +1684,7 @@ absorb more of the patient's $\Gamma^2$ per unit
 time---precisely the trait that makes them effective
 caregivers also makes them vulnerable to burnout.
 
-\begin{remark}[Burnout is not weakness \textnormal{(E1)}]
+\begin{remark}[Burnout is not weakness]
 \label{rem:burnout}
 Caregiver burnout---emotional exhaustion, depersonalisation,
 reduced efficacy---is the predictable endpoint of
@@ -1922,7 +1698,7 @@ are, in impedance terms, running a network past its
 Coffin--Manson fatigue limit.
 \end{remark}
 
-\begin{remark}[Moral blame as $\Gamma^2$-injection \textnormal{(E1)}]
+\begin{remark}[Moral blame as $\Gamma^2$-injection]
 \label{rem:moral-load}
 The preceding analysis reveals a sharp criterion for
 evaluating social responses to fixation, trauma, and
@@ -2026,7 +1802,7 @@ their repair capacity, and manifest as the familiar
 clinical picture of lowered immunity, metabolic syndrome,
 and accelerated somatic aging.
 
-\begin{remark}[Visual health perception as impedance tomography \textnormal{(E1)}]
+\begin{remark}[Visual health perception as impedance tomography]
 \label{rem:visual-tomography}
 The everyday judgment ``this person looks exhausted''
 is, in $\Gamma$-Net terms, an unconscious
@@ -2143,7 +1919,7 @@ Two further consequences merit emphasis:
     break through because immune $T_{\text{imm}} \to 0$.
 \end{itemize}
 
-\begin{remark}[Anxiety spectrum as integration time \textnormal{(E1)}]
+\begin{remark}[Anxiety spectrum as integration time]
 \label{rem:anxiety-spectrum}
 The clinical labels form a continuum
 parameterised by $D_Z$ integration time:
@@ -2160,7 +1936,7 @@ the integral the patient sits when clinically assessed.
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  PART C — C2 AS UNIVERSAL REMODELING LAW
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bigskip\noindent\textbf{\large Part C: C2 as Universal Coefficient Update Law}
+\bigskip\noindent\textbf{\large Part C: C2 as Universal Remodeling Law}
 \bigskip
 
 
@@ -2359,7 +2135,7 @@ $H_A \cdot A/h$ & Load & Deformation &
 \end{tabular}
 \end{table*}
 
-\begin{remark}[Material substrate vs.\ mathematical structure \textnormal{(E1)}]
+\begin{remark}[Material substrate vs.\ mathematical structure]
 \label{rem:substrate-vs-structure}
 The molecular transduction pathways implementing C2 in each
 tissue are well characterised in the respective
@@ -2369,84 +2145,9 @@ mathematical structure}---gradient descent on the
 reflection action---regardless of their material substrate.
 \end{remark}
 
-\begin{remark}[Why twenty-nine C2 networks exist:
-  the interface--relay--maintenance chain \textnormal{(E1)}]
-\label{rem:interface-relay-chain}
-The number twenty-nine is not arbitrary.
-By the Universal Relay-Node Corollary
-(Paper~0, Corollary~\ref{cor:universal-relay}),
-every impedance-discontinuous interface
-($\Gamma \neq 0$) requires a relay structure
-for signal integrity.
-Each relay structure is itself a physical
-component subject to degradation ($\Gamma \to 1$
-under Coffin--Manson fatigue) and therefore
-requires a maintenance mechanism.
-C2 \emph{is} that mechanism:
-\[
-  \underbrace{\Gamma \neq 0}_{\text{interface}}
-  \;\Longrightarrow\;
-  \underbrace{A_{\mathrm{cut}} > 0}_{\text{relay needed}}
-  \;\Longrightarrow\;
-  \underbrace{\Delta Z = -\eta\,\Gamma\,
-    x_{\mathrm{in}} x_{\mathrm{out}}}_{\text{C2 maintenance}}
-\]
-Thus each row of Table~\ref{tab:twentynine}
-exists because its corresponding interface
-exists.  The twenty-nine C2 networks are not
-discovered empirically and then unified
-post~hoc; they are \emph{predicted} by the
-number of impedance-discontinuous interfaces
-in the human body.  Table~\ref{tab:relay-map}
-lists the interface and relay structure for
-each network.
-
-\begin{table}[h!]
-\centering
-\caption{Interface--relay map for the 29 $\Gamma$-networks.}
-\label{tab:relay-map}
-\footnotesize
-\begin{tabular}{@{}rllp{3.2cm}@{}}
-\toprule
-\# & Network & Interface & Relay structure \\
-\midrule
-1 & Neural & Neuron--neuron & Synapse \\
-2 & Skeletal & Bone--soft tissue & Periosteum \\
-3 & Vascular & Blood--vessel wall & Endothelium \\
-4 & Immune & Immune--tissue & Lymph node \\
-5 & Epithelial & Body--environment & Basement membrane \\
-6 & Muscular & Muscle--tendon & Myotendinous junction \\
-7 & Pulmonary & Blood--air & Alveolar membrane \\
-8 & GI & Lumen--blood & Villous epithelium \\
-9 & Endocrine & Gland--blood & Fenestrated capillary \\
-10 & Lymphatic & Tissue--lymph & Lymphatic valve \\
-11 & Renal & Blood--filtrate & Glomerulus \\
-12 & Hepatic & Portal blood--bile & Disse space \\
-13 & Connective & Muscle--bone & Tendon sheath \\
-14 & Adipose & Fat--vasculature & Lobular septum \\
-15 & Haematopoietic & Marrow--blood & Sinusoidal endothelium \\
-16 & Reproductive & Follicle--blood & Theca--granulosa junction \\
-17 & Cardiac & Electrical--mechanical & Purkinje fibre \\
-18 & Reg.\ brain & Set-point--error & Hypothalamic nuclei \\
-19 & Ocular & Aqueous--venous & Trabecular meshwork \\
-20 & Auditory & Sound--neural & Organ of Corti \\
-21 & Vestibular & Motion--neural & Semicircular canal crista \\
-22 & Olfactory & Gas--neural & Olfactory epithelium \\
-23 & Dental & Oral--pulp & Odontoblast layer \\
-24 & Enteric & Lumen--ENS & Myenteric plexus \\
-25 & Autonomic & CNS--viscera & Autonomic ganglia \\
-26 & Pancreatic & Glucose--insulin & Islet of Langerhans \\
-27 & CSF & Brain--venous & Choroid plexus \\
-28 & Brain (func.) & Cortical areas & Association fibres \\
-29 & Cartilage & Load--matrix & Perichondrium ($\eta \approx 0$) \\
-\bottomrule
-\end{tabular}
-\end{table}
-\end{remark}
-
 \subsection{Unification Theorem}
 
-\begin{theorem}[C2 Universality across all 29 tissues \textnormal{(E0)}]
+\begin{theorem}[C2 Universality across all 29 tissues]
 \label{thm:c2-universal}
 Let $\mathcal{T} = \{1, 2, \ldots, 29\}$ be the index set
 of all known tissue-remodeling systems listed in
@@ -2492,7 +2193,7 @@ weight, bone density, vessel radius, receptor affinity,
 etc.).
 In each case, impedance is definable as the ratio of an
 effort variable to a flow variable
-(Eq.~\ref{eq:Z-def} of Paper~0),
+(Paper~0, $Z = \text{effort}/\text{flow}$),
 and the update $\Delta Q_i$ maps to $\Delta Z_i$ via
 a sign-preserving linear relation
 ($\Delta Z \propto -\Delta w$ for synapses;
@@ -2506,7 +2207,7 @@ Section~\ref{sec:tissue-proofs}.
 Under $\varphi_i$, each $\mathcal{L}_i$ reduces to
 gradient descent on the reflection action
 $\mathcal{A} = \int \Gamma_i^2 P_{\text{in},i}\,dt$
-(Eq.~\ref{eq:action} of Paper~0).
+(Paper~0, $\mathcal{A} = \int \Gamma^2 P_{\text{in}}\,dt$).
 By the uniqueness theorem for C2
 (Paper~0, Theorem~5), gradient descent on
 $\mathcal{A}$ with activity gating yields
@@ -2528,7 +2229,7 @@ units---not different physical content.
 Therefore $\varphi_i$ is unique up to unit rescaling.
 \end{proof}
 
-\begin{corollary}[Plasticity as $\eta_i > 0$ \textnormal{(E0)}]
+\begin{corollary}[Plasticity as $\eta_i > 0$]
 \label{cor:plasticity}
 Tissue $i$ is remodeling-capable if and only if
 $\eta_i > 0$.
@@ -2538,7 +2239,7 @@ mismatch, making pathology under sustained load
 a thermodynamic necessity rather than a disease.
 \end{corollary}
 
-\begin{corollary}[Substrate independence \textnormal{(E0)}]
+\begin{corollary}[Substrate independence]
 \label{cor:substrate}
 The molecular machinery implementing C2 in each
 tissue (NMDA receptors, RANKL/OPG, eNOS, AID
@@ -2725,7 +2426,7 @@ Chronic stress causes multi-organ disease because
 the \emph{controller's} $\Gamma$ error propagates
 to all downstream networks.
 
-\begin{remark}[The full chain: trauma $\to$ multi-organ disease \textnormal{(E1)}]
+\begin{remark}[The full chain: trauma $\to$ multi-organ disease]
 \label{rem:trauma-somatic-ctrl}
 Part~B (Sec.~\ref{sec:empathic-load}) derives a caregiver
 lifecycle equation
@@ -2938,7 +2639,7 @@ nitric oxide, lactate, bilirubin, uric acid, and adenosine.
 \subsection{Dual-field morphogenesis}
 
 The unification of Wolff's law, Davis's law, and
-coefficient update as parameter instances of a single
+impedance remodeling as parameter instances of a single
 PDE (Table~\ref{tab:morphogenesis})
 suggests a common thermodynamic origin:
 $\mathcal{A}[\Gamma] = \int |\Gamma|^2\,dt \to \min$.
@@ -2973,7 +2674,7 @@ simultaneously.
 \label{sec:conclusion}
 
 We have developed the temporal theory of impedance networks
-and proved the universality of the C2 update law
+and proved the universality of the C2 remodeling law
 in three complementary parts.
 
 \textbf{Part~A:}
@@ -3007,7 +2708,7 @@ instances of a single impedance-debt integral with
 different time-scale parameters.
 
 \textbf{Part~C:}
-The C2 update rule
+The C2 remodeling rule
 $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
 is algebraically equivalent to all twenty-nine known
 tissue-remodeling laws
@@ -3318,12 +3019,6 @@ R.~E.~Wachtel, and F.~M.~Abboud,
 ``Structural versus functional modulation of the
 baroreflex,''
 \emph{Hypertension}\ \textbf{18}, 667 (1991).
-
-\bibitem{Krogh1919}
-A.~Krogh, ``The number and distribution of capillaries
-in muscles with calculations of the oxygen pressure
-head necessary for supplying the tissue,''
-\emph{J.\ Physiol.}\ \textbf{52}, 409--415 (1919).
 
 \end{thebibliography}
 

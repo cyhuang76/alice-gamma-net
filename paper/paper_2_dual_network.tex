@@ -41,7 +41,7 @@ Fractal Cost, and Kleiber's Law\\[4pt]
 % ============================================================
 \begin{abstract}
 We ask: given a blood vessel with impedance
-$\Zv = 8\mu L/\pi r^4$ governed by vascular C2 update,
+$\Zv = 8\mu L/\pi r^4$ governed by vascular C2 remodeling,
 what architecture---and what metabolic scaling laws---must
 emerge?
 
@@ -54,7 +54,7 @@ We derive Murray's Law ($r_p^3 = \sum r_i^3$) as the
 exact minimum of the vascular action
 $\Av = \sum_j[Q_j^2 Z_j + \lambda V_j]$, with 100\%
 numerical agreement for $n=2,3,4$.
-Vascular C2 update ($\Delta\Zv=-\eta_v\Gv\tau_{\text{wall}}\rho$)
+Vascular C2 remodeling ($\Delta\Zv=-\eta_v\Gv\tau_{\text{wall}}\rho$)
 operates on the same principle as neural C2 but with
 $\eta_v \ll \eta_n$.
 
@@ -194,7 +194,7 @@ $T = 1-\Gamma^2$ & $\Tv$       & dimensionless \\
 \textbf{C1---Energy Conservation.}
 $\Gv^2 + \Tv = 1$ at every vascular junction.
 
-\textbf{C2---Vascular Coefficient Update.}
+\textbf{C2---Vascular Remodeling.}
 \begin{equation}
   \Delta\Zv = -\eta_v\,\Gv\,\tau_{\text{wall}}\,\rho,
   \label{eq:C2v}
@@ -202,59 +202,10 @@ $\Gv^2 + \Tv = 1$ at every vascular junction.
 where $\tau_{\text{wall}}$ is wall shear stress
 ($x_{\text{in}}$), $\rho$ is material supply
 ($x_{\text{out}}$), and $\eta_v$ is the vascular
-update rate.
+remodeling rate.
 
-\textbf{C3---Dimensional Relay.}
-When vascular and neural $K$-values differ,
-relay nodes (e.g.\ baroreceptors reading
-vessel-wall pulse density) bridge the
-dimensional gap.
-
-\begin{remark}[Pulse density as real-time $Z$
-  encoding \textnormal{(E1)}]
-\label{rem:pulse-density}
-Two C3 relay examples make the mechanism
-concrete:
-\begin{enumerate}
-  \item \textbf{Baroreceptors} fire at a rate
-    proportional to vessel-wall strain, i.e.\
-    their firing frequency encodes the local
-    vascular impedance $Z_v$ in real time.
-    The brainstem reads this pulse density
-    to regulate cardiac output---a
-    dimensional relay from mechanical ($Z_v$)
-    to neural ($Z_n$) via frequency modulation.
-
-  \item \textbf{Bone piezoelectricity}
-    (Wolff's Law~\cite{Wolff1892}):
-    mechanical loading generates charge
-    proportional to strain, producing action
-    potentials in periosteal neurons.
-    Pulse density again encodes local $Z$,
-    bridging the mechanical--electrical
-    dimensional gap.
-\end{enumerate}
-
-\noindent
-\textbf{Hypertension as chronic $\Gamma$ compensation.}
-If a tissue sustains elevated $\Gamma^2$
-(chronic mismatch), C2 cannot resolve it
-locally.
-The baroreceptor relay reports the persistent
-impedance deviation to the brainstem, which
-responds by raising cardiac output to that
-vascular territory.
-If the mismatch never resolves,
-the brain \emph{continuously forces the heart
-to over-pump}---producing sustained
-hypertension not as a disease but as a
-C2/C3 feedback response to an
-unresolved $\Gamma$ source.
-\textbf{Falsifiable prediction:}
-mapping the spatial $\Gamma^2$ profile via
-pulse-wave velocity should identify the
-tissue origin of ``essential'' hypertension.
-\end{remark}
+\textbf{C3---Impedance-Tagged Transport.}
+Blood pressure waves carry source impedance as metadata.
 
 \subsection{Bifurcation reflection}
 \label{sec:bifurcation}
@@ -270,34 +221,6 @@ $r_d = r_p / n^{1/4}$, which \emph{disagrees} with
 Murray's Law.
 The resolution: MRP minimises the \emph{total vascular
 action} including metabolic maintenance cost.
-
-\begin{remark}[Why impedance disparity is extreme \textnormal{(E1)}]
-\label{rem:impedance-disparity}
-Characteristic impedance $Z$ depends on the physical
-properties of the medium---density, elastic modulus,
-membrane resistance---not on any single variable.
-In the human body, these properties span orders of
-magnitude:
-\begin{itemize}
-  \item \emph{Cortical neurons}: high membrane
-    resistance ($R_m \sim 10^4\;\Omega\,\mathrm{cm}^2$),
-    giving high characteristic impedance $Z_n$;
-  \item \emph{Skeletal muscle}: low membrane resistance,
-    high density ($\rho \sim 1.06\;\mathrm{g/cm^3}$),
-    giving low characteristic impedance $Z_m \ll Z_n$;
-  \item \emph{Cortical bone}: elastic modulus
-    $E \sim 18\;\mathrm{GPa}$, two orders above
-    soft tissue ($\sim 10\;\mathrm{kPa}$).
-\end{itemize}
-Direct connection between any two such media gives
-$\Gamma \to 1$ (total reflection).
-Multi-stage fractal matching---the vascular tree
-for hydraulic impedance, the neural relay hierarchy
-for electromagnetic impedance---is therefore not merely
-optimal but \emph{physically necessary}.
-Murray's Law (below) quantifies the exact geometry
-of the vascular solution.
-\end{remark}
 
 
 % ============================================================
@@ -332,7 +255,7 @@ Minimising $\partial\Av^d/\partial r_d = 0$:
 \end{equation}
 Taking the ratio:
 
-\begin{theorem}[Murray's Law from MRP \textnormal{(E0)}]
+\begin{theorem}[Murray's Law from MRP]
 \label{thm:murray}
 For symmetric $n$-branching of a vessel with parent
 radius~$r_p$, minimisation of the vascular action
@@ -358,7 +281,7 @@ dissipation ($\propto r^{-4}$) and maintenance
 ($\propto r^{+2}$).
 \end{proof}
 
-\begin{remark}[Physics, not optimisation \textnormal{(E1)}]
+\begin{remark}[Physics, not optimisation]
 The $1/3$ exponent arises from the balance of dissipation
 ($\propto r^{-4}$) and maintenance ($\propto r^{+2}$).
 Pure impedance matching gives $1/4$; MRP gives $1/3$.
@@ -398,7 +321,7 @@ Full test: \texttt{tests/test\_paper2\_murray.py}
 (15~tests, 100\% pass).
 
 % ============================================================
-\section{Vascular C2 Coefficient Update}
+\section{Vascular C2 Remodeling}
 \label{sec:vascular-C2}
 
 \begin{figure}[t]
@@ -462,48 +385,6 @@ vascular delivery.
 Vascular C2 requires neural control (autonomic signals
 regulate vascular tone).
 The two networks are \emph{mutually prerequisite}.
-
-\begin{remark}[Blood as crosstalk isolator \textnormal{(E1)}]
-\label{rem:blood-isolation}
-In microwave circuits, absorbing material is placed
-between adjacent channels to prevent reflection
-pulses in one channel from contaminating another
-(crosstalk isolation).
-Blood serves the same function:  when a neural
-interface produces a reflection pulse
-$\Gamma_i^2 P_{\text{in},i}$,
-part of the scattered energy propagates laterally.
-Blood, with its own characteristic impedance
-$Z_{\text{blood}}$, absorbs this stray energy and
-converts it to heat, which is carried away by
-convective flow (Eq.~\ref{eq:thermal-bus}).
-This yields a third reason for the dual-network
-architecture beyond mutual prerequisiteness and
-thermal regulation:
-\emph{impedance isolation between densely packed
-neural interfaces}.
-The blood--brain barrier is, in this view,
-an impedance wall that prevents vascular $Z$
-fluctuations from polluting neural $Z$;
-cerebrospinal fluid is an impedance-matched
-filler between brain and cranium.
-The brain's disproportionate share of cardiac
-output ($\sim$15\%) is driven not solely by oxygen
-demand but by the crosstalk-isolation requirements
-of its extremely dense relay architecture.
-\end{remark}
-
-\begin{figure}[t]
-\includegraphics[width=\columnwidth]{../figures/fig_p2_blood_isolation.pdf}
-\caption{Blood as crosstalk isolator.
-  (a)~In microwave circuits, ferrite absorber prevents
-  reflection pulses from contaminating adjacent channels.
-  (b)~In biological tissue, blood with impedance
-  $Z_{\text{blood}}$ absorbs stray $\Gamma^2 P_{\text{in}}$
-  pulses between neural interfaces, converting them to
-  heat carried away by convective flow.}
-\label{fig:blood-isolation}
-\end{figure}
 
 \subsection{Organ health}
 
@@ -719,7 +600,7 @@ Total network dissipation:
 \end{equation}
 For $d=3$: $B_{\text{network}} \propto M^{2/3}$.
 
-\begin{theorem}[Kleiber's Law from MRP \textnormal{(E0)}]
+\begin{theorem}[Kleiber's Law from MRP]
 \label{thm:kleiber}
 For a self-similar vascular tree with branching number~$n$
 in $d$ spatial dimensions, MRP implies
@@ -785,7 +666,7 @@ networks: the \textbf{vascular tree}
 \textbf{neural tree}
 ($Z_n = R_m + 1/j\omega C_m$, control).
 
-\begin{theorem}[Dual-Network Overhead \textnormal{(E0)}]
+\begin{theorem}[Dual-Network Overhead]
 \label{thm:packing}
 When two space-filling relay trees share a volume in
 $d$~dimensions,
@@ -822,38 +703,6 @@ $B_{\text{vasc}}/B_{\text{total}} \approx 0.05$.
 Therefore $\Omega \approx 1/0.75 \approx 1.33$.
 The neural network alone gives
 $\Omega_n = 1/(1-0.20) = 1.25 \approx \beta = 2^{1/3}$.
-
-\begin{remark}[Organ-specific $\Omega_i$:
-  bottom-up recovery of $\tfrac{4}{3}$ \textnormal{(E1)}]
-\label{rem:omega-organ}
-The global $\Omega$ can be decomposed into
-organ-specific overhead factors.
-For each organ $i$, define
-$\Omega_i = 1 + \alpha\,
-\mathrm{BF}_i \times \mathrm{NI}_i / 5$,
-where $\mathrm{BF}_i$ is the blood-flow fraction
-(Guyton Table~17-1) and $\mathrm{NI}_i \in \{1,\ldots,5\}$
-is the neural innervation density
-(autonomic + somatic).
-Paper~5 computes:
-\[
-  \overline{\Omega_i}
-  = \frac{1}{12}\sum_{i=1}^{12} \Omega_i
-  = 1.376
-  \approx \Omega_{\text{global}} = 1.33.
-\]
-The $\sim\!3\%$ agreement between the
-bottom-up organ average and the top-down
-whole-body value constitutes an independent
-consistency check.
-The highest-overhead organs are
-neuro ($\Omega = 2.00$),
-renal ($1.88$), and
-GI ($1.80$);
-the lowest are
-endocrine ($1.04$) and
-reproductive ($1.05$).
-\end{remark}
 
 \subsection{Why blood before nerve}
 

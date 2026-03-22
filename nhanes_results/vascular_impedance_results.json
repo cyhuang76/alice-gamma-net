@@ -1,0 +1,59 @@
+{
+  "bp_summary": {
+    "n_total": 72886,
+    "mean_sbp": 119.2,
+    "mean_dbp": 66.4,
+    "mean_pp": 52.8
+  },
+  "cross_reference": {
+    "n_common": 61112,
+    "gamma_source": "10-cycle",
+    "pp_vs_gamma_vascular": {
+      "spearman_rho": 0.2388,
+      "spearman_p": 0.0,
+      "pearson_r": 0.2102,
+      "pearson_p": 0.0
+    },
+    "pp_quartile_gamma": [
+      {
+        "quartile": "Q1 (PP<41)",
+        "mean_gamma_vasc": 0.0926,
+        "n": 15138
+      },
+      {
+        "quartile": "Q2 (PP 41-49)",
+        "mean_gamma_vasc": 0.1033,
+        "n": 15335
+      },
+      {
+        "quartile": "Q3 (PP 49-61)",
+        "mean_gamma_vasc": 0.1152,
+        "n": 15158
+      },
+      {
+        "quartile": "Q4 (PP>61)",
+        "mean_gamma_vasc": 0.1455,
+        "n": 15481
+      }
+    ],
+    "monotonic_pp_to_gamma": true
+  },
+  "mortality": {
+    "n_common": 53222,
+    "allcause": {
+      "auc": 0.7403,
+      "n_deaths": 7849
+    },
+    "vascular_death": {
+      "auc": 0.7275,
+      "n_deaths": 2269
+    },
+    "z_index_allcause": {
+      "auc": 0.7153
+    }
+  },
+  "blueprint_comparison": {
+    "tissue_blueprint_Z_vascular": 45.0,
+    "note": "PP serves as a linear proxy for Z_char. Direct comparison requires hemodynamic model calibration."
+  }
+}

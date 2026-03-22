@@ -1,0 +1,13 @@
+{
+  "bone": {
+    "n": 3127,
+    "bmd_mean": 0.9473
+  },
+  "mortality": {
+    "bone_allcause": {
+      "auc": 0.617,
+      "n": 3122,
+      "n_deaths": 271
+    }
+  }
+}

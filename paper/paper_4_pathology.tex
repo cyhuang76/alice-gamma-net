@@ -152,7 +152,7 @@ This establishes a fundamental asymmetry:
 This is why brain damage is often permanent while soft
 tissue heals.
 
-\begin{theorem}[Neural deficit as topological signature \textnormal{(E0)}]
+\begin{theorem}[Neural deficit as topological signature]
 \label{thm:neural-topology}
 Let $\mathcal{G} = (V, E, K)$ be a neural
 \texttt{GammaTopology} with node set $V$,
@@ -264,7 +264,7 @@ $\Gamma$-Net, its failure is not merely one disease among
 many---it is the necessary precursor to system-wide
 pathological emergence.
 
-\begin{theorem}[Neural Control Priority \textnormal{(E0)}]
+\begin{theorem}[Neural Control Priority]
 \label{thm:neural-control-priority}
 Let $\mathcal{G} = \mathcal{G}_n \cup \mathcal{G}_v \cup
 \mathcal{G}_m$ be a $\Gamma$-Net partitioned into neural
@@ -350,7 +350,7 @@ is a necessary condition for uncorrectable escalation
 at any non-neural node. $\square$
 \end{proof}
 
-\begin{corollary}[Cascade Ordering \textnormal{(E0)}]
+\begin{corollary}[Cascade Ordering]
 \label{cor:cascade-ordering}
 Under the conditions of Theorem~\ref{thm:neural-control-priority},
 if multiple non-neural channels $k_1, k_2, \ldots$ lose
@@ -361,7 +361,7 @@ the channel requiring the largest relative correction
 fails first.
 \end{corollary}
 
-\begin{corollary}[Observability of Neural Failure \textnormal{(E0)}]
+\begin{corollary}[Observability of Neural Failure]
 \label{cor:neural-observability}
 Because neural tissue has high impedance maintenance
 cost and minimal buffering (low $T$ reserve relative to
@@ -528,118 +528,6 @@ The cascade extends systemically:
 placental $\Gamma_v\!\uparrow$ $\to$ fetal material
 starvation $\to$ maternal hypertensive compensation
 $\to$ multi-organ damage.
-
-
-\begin{remark}[Dynamic pathological isomorphism:
-  electrical vs.\ biological cascade failure \textnormal{(E1)}]
-\label{rem:dynamic-isomorphism}
-Papers~2 and~5 establish that
-$\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1)$
-is medium-independent (Interface Isomorphism).
-However, that result applies to the
-\emph{static} form of the equation.
-The \emph{dynamic} cascade---how a local
-impedance mismatch propagates to systemic
-failure---is also isomorphic across media:
-
-\medskip
-\begin{center}
-\begin{tabular}{@{}lll@{}}
-\hline
-\textbf{Electrical circuit} & \textbf{Neural system}
-  & \textbf{$\Gamma$-Net} \\
-\hline
-Resistance $\uparrow$ $\to$ Ohmic heat
-  & $\Gamma_n^2\!\uparrow$ $\to$ thermal noise
-  & $P_{\mathrm{diss}} = \Gamma_i^2 P_{\mathrm{in}}$ \\
-Insulation breakdown
-  & Myelin damage
-  & $\Gamma_i \to 1$ (transmission collapse) \\
-Arc flash / fire
-  & Axon death
-  & $A_{\mathrm{cut}}$ irreversibly increases \\
-Substation damage
-  & Brain-structure lesion
-  & Topological phase transition \\
-\hline
-\end{tabular}
-\end{center}
-
-\medskip\noindent
-The only difference is the medium boundary
-condition:\ gaseous (air) in electrical circuits
-versus aqueous (interstitial fluid) in neural
-tissue. In air, $P_{\mathrm{diss}}$ triggers
-exothermic oxidation (fire);
-in water, the same energy is absorbed as latent
-heat without flame.
-In both cases the causal chain is identical:
-\[
-  \Gamma_i^2\!\uparrow
-  \;\to\; P_{\mathrm{diss}}\!\uparrow
-  \;\to\; \text{structural failure}
-  \;\to\; A_{\mathrm{cut}}\!\uparrow
-  \;\to\; \text{upstream cascade}\,.
-\]
-This dynamic isomorphism means that the disease
-cascade of Eq.~(\ref{eq:cascade}) is not a
-biological model---it is a medium-independent
-theorem of impedance networks.
-
-Table~\ref{tab:cascade-iso} extends this principle
-to seven tissue systems.
-In every case the four-stage cascade
-($\Gamma^2\!\uparrow \to P_{\mathrm{diss}}\!\uparrow
-\to$ structural failure $\to A_{\mathrm{cut}}\!\uparrow$)
-is mathematically identical;
-only the boundary conditions and material
-constants differ.
-
-\begin{table}[h]
-\centering
-\caption{Dynamic pathological isomorphism:
-  the same cascade equation in seven systems.}
-\label{tab:cascade-iso}
-\footnotesize
-\begin{tabular}{@{}p{1.7cm}p{1.8cm}p{1.8cm}p{1.8cm}@{}}
-\toprule
-\textbf{System}
-  & \textbf{$\Gamma^2\!\uparrow$}
-  & \textbf{Structural failure}
-  & \textbf{Cascade endpoint} \\
-\midrule
-Electrical
-  & Ohmic heat
-  & Insulation breakdown
-  & Substation fire \\
-Neural
-  & Thermal noise
-  & Myelin damage
-  & Brain lesion \\
-Vascular
-  & Wall shear
-  & Plaque rupture
-  & Infarction \\
-Renal
-  & Glomerular hyper-filtration
-  & Basement-membrane sclerosis
-  & Renal failure \\
-Hepatic
-  & Metabolic overload
-  & Hepatocyte necrosis
-  & Cirrhosis \\
-Musculoskeletal
-  & Fatigue stress
-  & Micro-fracture
-  & Complete fracture \\
-Pulmonary
-  & Airway resistance
-  & Alveolar destruction
-  & Respiratory failure \\
-\bottomrule
-\end{tabular}
-\end{table}
-\end{remark}
 
 
 \section{Wound Repair as Spatial Impedance Matching}
@@ -884,7 +772,7 @@ shape of $\Gamma^2(t)$ differs.
 \end{figure}
 
 \begin{remark}[Disease onset as impedance phase
-transition \textnormal{(E1)}]
+transition]
 \label{rem:disease-phase-transition}
 The positive-feedback term $\beta_k\,\Gamma_k^4$ in
 Eq.~(\ref{eq:coupled-G2}) creates a saddle-node
@@ -984,7 +872,7 @@ Three regimes emerge:
 \end{enumerate}
 
 \begin{remark}[Why ``just removing the stress''
-  is sometimes not enough \textnormal{(E1)}]
+  is sometimes not enough]
 \label{rem:hysteresis}
 The saddle-node bifurcation in
 Eq.~(\ref{eq:coupled-G2}) exhibits
@@ -1077,7 +965,7 @@ When $D_Z$ accumulates faster than C2 can process:
   \dot{D}_{\text{repair}}^{\max}\,,
   \label{eq:necrosis-condition}
 \end{equation}
-the excess energy has no coefficient-update
+the excess energy has no impedance-remodeling
 pathway and is dissipated as heat and
 reactive biochemistry.
 
@@ -1174,7 +1062,7 @@ surgically created rather than pathologically created
 $\Gamma = 1$ boundary.
 
 \begin{remark}[The therapeutic hierarchy of
-  intervention \textnormal{(E1)}]
+  intervention]
 \label{rem:therapeutic-hierarchy}
 The $\Gamma$-framework orders clinical
 interventions by the severity of the impedance
@@ -1203,121 +1091,12 @@ Necrotic & Topological truncation &
 \end{tabular}
 \end{center}
 No intervention outside this hierarchy is
-physically meaningful: you cannot C2-update a
+physically meaningful: you cannot C2-remodel a
 substrate that no longer exists, and you cannot
 stressor-remove a bifurcation that is
 self-sustaining.
 \end{remark}
 
-\begin{remark}[Hallucination as internal gate-leak
-  \textnormal{(E1)}]
-\label{rem:hallucination}
-Phantom limb pain arises from a surgically created
-$\Gamma = 1$ boundary on a \emph{peripheral} channel.
-Hallucination is the same mechanism on a
-\emph{central} channel.
-
-Under chronic stress, cortisol-driven $\Gamma^2$
-elevation (Sec.~\ref{sec:acute-vs-chronic})
-raises the internal standing-wave amplitude on
-one or more cortical channels.
-When the reflected power on channel~$k$ exceeds the
-Johnson--Nyquist noise floor,
-\[
-  \Gamma_k^2 \cdot P_{\text{internal},k}
-  \;>\;
-  4\,k_B T\,R_{\text{eff}}\,\Delta f
-  \;=\; P_\theta\,,
-\]
-the brain cannot distinguish the internal
-reflection from external input---precisely the
-gate-leak inequality of
-Paper~3~\cite{Paper3}, Eq.~(9),
-applied to a sensory discrimination gate rather
-than a sleep gate.
-
-\emph{Auditory} hallucinations dominate because
-the auditory $K$-staircase is shorter than the
-visual one (fewer relay nodes), giving internal
-standing waves a higher $Q$-factor and therefore
-a larger $\Gamma^2$ amplitude at the cortical
-endpoint.
-Content is always recognisable (one's own
-language, familiar voices) because the standing
-wave is shaped by pre-existing impedance
-patterns---new patterns have no resonant mode
-to amplify.
-
-\textbf{Clinical prediction (falsifiable):}
-Interventions that reduce cortical $\Gamma^2$
-at the source (CBT, stress reduction) should
-reduce hallucination frequency more durably than
-antipsychotics that only attenuate the output
-(downstream $P_{\text{in}}$ suppression).
-\end{remark}
-
-\begin{corollary}[Autonomous degradation loop
-  \textnormal{(E1)}]
-\label{cor:autonomous-loop}
-When a hallucination stabilises into a standing
-wave, it occupies $\Gamma_{\max}$ permanently.
-The minimax controller
-(Paper~1~\cite{Paper1}, Eq.~\ref{eq:attention})
-allocates all C2 resources to this internal
-channel.
-C2 processes at full load but produces zero net
-reduction---the input is self-generated and
-regenerates each cycle.
-Meanwhile, real-world events queue behind
-$\Gamma_{\max}$ and remain unprocessed.
-
-This creates a self-sustaining positive-feedback
-loop that requires \emph{no continued external
-injury}:
-\[
-  \Gamma^2\!\uparrow
-  \;\to\; D_Z\!\uparrow
-  \;\to\; \text{hallucination}
-  \;\to\; \text{C2 hijacked}
-  \;\to\; \text{real failures}
-  \;\to\; \eta\!\downarrow
-  \;\to\; \Gamma^2\!\uparrow\,.
-\]
-Three safety valves that could interrupt the loop
-are simultaneously destroyed:
-\begin{center}
-\begin{tabular}{@{}ll@{}}
-\toprule
-Safety valve & How it is broken \\
-\midrule
-$\eta(t)$ repair capacity &
-  Arrhenius erosion $+$ cortisol \\
-C2 gradient from external $x_{\text{in}}$ &
-  Bandwidth saturated by internal loop \\
-Exploration mechanism &
-  Redirected inward; no new paths carved \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\noindent
-Breaking the loop requires the same external
-gradient injection described in
-Remark~\ref{rem:seff-sealing}---but targeted at the
-\emph{original} sealed $\Gamma^2$ that first
-drove $D_Z$ past the gate-leak threshold,
-not at the hallucination itself
-(which is a symptom, not the source).
-The intervention must be small enough for the
-eroded $\eta(t)$ to process, safe enough not to
-create secondary trauma, and sustained over months.
-
-\textbf{This loop is the physical reason why
-humans need one another}: once the three
-internal safety valves are destroyed,
-the only remaining input channel for a
-downward C2 gradient is another person.
-\end{corollary}
 
 \section{Caregiver Triple-Load Model}
 \label{sec:triple-load}
@@ -1367,7 +1146,7 @@ Moral pressure \emph{forbids} this adjustment
 (``abandonment''), locking the intake valve open.
 
 \begin{remark}[Structural inevitability of caregiver
-disease \textnormal{(E1)}]
+disease]
 \label{rem:caregiver-inevitable}
 In Eq.~(\ref{eq:triple-load}), the first three
 terms are approximately constant or increasing
@@ -1390,7 +1169,7 @@ is applied.
 \end{remark}
 
 \begin{remark}[Compassion fatigue, burnout, vicarious
-trauma: one equation, three names \textnormal{(E1)}]
+trauma: one equation, three names]
 \label{rem:fatigue-taxonomy}
 Clinical nomenclature distinguishes compassion
 fatigue, burnout, and vicarious trauma as separate
@@ -1461,7 +1240,7 @@ The full observable chain is:
 \]
 
 \begin{remark}[Empathic overload as single-core
-running dual-core load \textnormal{(E1)}]
+running dual-core load]
 \label{rem:single-core}
 The empath's $\Gamma$-network physically simulates
 another person's pain state:
@@ -1516,7 +1295,7 @@ the visual reflection coefficient
 \end{equation}
 is read out as ``something looks off.''
 
-\begin{remark}[Downstream convergence \textnormal{(E1)}]
+\begin{remark}[Downstream convergence]
 \label{rem:downstream-convergence}
 Empathic load
 ($\lambda\Gamma^2_{\text{other}}$ dominant)
@@ -1585,7 +1364,7 @@ This is the metabolic analogue of the PTSD
 flashback--avoidance cycle (Paper~3).
 
 \begin{remark}[Moral blame as secondary metabolic
-injury \textnormal{(E1)}]
+injury]
 \label{rem:obesity-blame}
 Applying the Moral Constraint Theorem
 (Paper~1, Theorem~5~\cite{Paper1})
@@ -1606,7 +1385,7 @@ paradox~\cite{Sutin2015}.
 \end{remark}
 
 \begin{remark}[Positive-feedback closure:
-obesity as mathematical attractor \textnormal{(E1)}]
+obesity as mathematical attractor]
 \label{rem:obesity-loop}
 The metabolic cascade of
 Eq.~(\ref{eq:selfish-brain}) is a
@@ -1632,7 +1411,7 @@ dynamics.
 
 \begin{remark}[``Willpower'' as
 $\eta_{\text{pfc}}(t)$: a depleting physical
-quantity \textnormal{(E1)}]
+quantity]
 \label{rem:willpower}
 What common discourse calls ``willpower''
 corresponds to the prefrontal repair rate
@@ -1681,52 +1460,6 @@ $\eta_{\text{pfc}}(t)$, subject to the same
 decay as every other channel.
 $\square$
 \end{proposition}
-
-\begin{remark}[Willpower depletion as PFC bandwidth
-  saturation \textnormal{(E1)}]
-\label{rem:pfc-bandwidth}
-The physical substrate of $\eta_{\text{pfc}}$
-is the prefrontal neural network, whose
-total processing bandwidth is
-\begin{equation}
-  B_{\text{PFC}}
-  = N_{\mathrm{neurons}}
-    \times N_{\mathrm{microtubule}}
-    \times \Delta f_{\mathrm{per\,channel}}\,,
-  \label{eq:pfc-bandwidth}
-\end{equation}
-where each microtubule carries $K=1$
-independent signal dimension (Paper~1,
-Irreducible Topology).
-
-Each concurrent executive demand---impulse
-inhibition, emotional regulation, working
-memory, decision-making---consumes a
-bandwidth slice $\Delta B_i$.
-When $\sum_i \Delta B_i > B_{\text{PFC}}$,
-the overflow channels cannot be impedance-matched
-($\Gamma_n \to 1$ on lowest-priority tasks),
-yielding the clinically observed phenomena:
-\begin{itemize}
-  \item Decision fatigue after prolonged
-    cognitively demanding work;
-  \item Loss of dietary self-control under
-    occupational stress (bandwidth consumed
-    by work, diet channel overflows);
-  \item Sleep as bandwidth recovery
-    (all thalamic gates
-    $G_i \to 0 \Rightarrow B_{\text{PFC}}$
-    fully released).
-\end{itemize}
-Aging further reduces $B_{\text{PFC}}$
-through neuronal loss
-($N_{\mathrm{neurons}} \downarrow$) and
-vascular mismatch ($\Gamma_v \uparrow
-\Rightarrow \rho = (1-\Gamma_v^2)Q_0 \downarrow
-\Rightarrow$ material supply insufficient),
-compounding the Arrhenius decline
-in $\eta_{\text{pfc}}$ itself.
-\end{remark}
 
 
 \section{Immune--Metabolic Bidirectional Feedback:
@@ -1823,7 +1556,7 @@ raises $Z_R$, increasing $\Gamma_{\text{ins}}^2$
 monotonically.
 
 
-\subsection{C2 update of receptor impedance}
+\subsection{C2 remodeling of receptor impedance}
 \label{sec:receptor-remodeling}
 
 Unlike neural channels, the insulin--receptor
@@ -1831,7 +1564,7 @@ system operates as a \emph{chemical bath}:
 insulin is broadcast systemically.
 A chronic stressor (elevated cortisol) acts as a
 \emph{global} $x_{\text{in}}$ that drives
-C2 update on every peripheral receptor
+C2 remodeling on every peripheral receptor
 simultaneously:
 \begin{equation}
   \frac{dZ_R}{dt}
@@ -1882,7 +1615,7 @@ the system is locked in a high-$\Gamma_{\text{ins}}^2$
 attractor---insulin resistance is structurally
 irreversible under the current $\eta_R$.
 
-\begin{remark}[Why diet alone often fails \textnormal{(E1)}]
+\begin{remark}[Why diet alone often fails]
 \label{rem:diet-alone}
 Caloric restriction reduces $x_{\text{glucose}}$,
 which weakens the C2 repair term in
@@ -1953,7 +1686,7 @@ insufficient:
 \end{equation}
 
 \begin{theorem}[T2DM treatment minimum:
-  multi-channel simultaneous intervention \textnormal{(E0)}]
+  multi-channel simultaneous intervention]
 \label{thm:t2d-treatment}
 Let $\mathcal{L} \subseteq \{1,\ldots,6\}$
 be the set of channels that have individually
@@ -1998,7 +1731,7 @@ exercise (vascular + metabolic), stress reduction
 the hexagon.
 
 \begin{remark}[$\beta$-cell exhaustion as
-impedance substrate collapse \textnormal{(E1)}]
+impedance substrate collapse]
 \label{rem:beta-exhaustion}
 In advanced T2DM, compensatory hyperinsulinaemia
 eventually exhausts $\beta$-cell secretory
@@ -2073,7 +1806,7 @@ a threshold that \emph{decreases} with age
 (because $\eta(t)$ declines by Arrhenius kinetics
 while $\delta_k(t)$ grows).
 
-\begin{remark}[The exercise paradox resolved \textnormal{(E1)}]
+\begin{remark}[The exercise paradox resolved]
 \label{rem:exercise}
 Exercise is simultaneously a high-$\Gamma^2$
 perturbation and the most effective known
@@ -2092,470 +1825,6 @@ Exercise is therapeutic precisely because it is
 \emph{intermittent and bounded}.
 \end{remark}
 
-\begin{remark}[Three-level simultaneous destruction
-  under chronic stress \textnormal{(E1)}]
-\label{rem:three-level-stress}
-Chronic stress does not merely deplete a
-``stress budget''; it simultaneously attacks
-three distinct layers of the impedance system,
-forming a positive-feedback loop:
-
-\begin{enumerate}
-  \item \textbf{Repair-budget depletion
-    (daily $D_Z$ deficit).}
-    The repair rate cannot match the stressor's
-    drive:
-    $dD_Z/dt = \Gamma^2 P_{\text{in}} - \eta\,\Gamma^2
-    > 0$,
-    so impedance debt grows monotonically.
-
-  \item \textbf{Repair-capacity degradation
-    ($\eta$ Arrhenius erosion).}
-    Chronically elevated cortisol accelerates
-    the Arrhenius decay of $\eta$:
-    $\eta(t) = \eta_0\,e^{-E_a/k_BT}\cdot
-    f(\text{cortisol}, D_Z)$,
-    meaning the system's ability to \emph{repair
-    itself} degrades in proportion to the damage
-    it has already sustained.
-
-  \item \textbf{Gate-maintenance drain
-    (PFC bandwidth theft).}
-    If the subject additionally gates an
-    emotionally loaded channel
-    (Remark~\ref{rem:three-gating},
-    Paper~3~\cite{Paper3}),
-    maintaining $G_i \approx 0$ on that channel
-    consumes a fixed fraction of
-    $P_{\text{brain}}$, reducing
-    the bandwidth available for all other tasks.
-\end{enumerate}
-
-\noindent
-The three levels interact as a positive-feedback
-loop:
-\[
-  \Gamma^2\!\uparrow
-  \;\xrightarrow{\text{L1}}\;
-  D_Z\!\uparrow
-  \;\xrightarrow{\text{L2}}\;
-  \eta\!\downarrow
-  \;\xrightarrow{\text{L3}}\;
-  \text{PFC drain}\!\uparrow
-  \;\xrightarrow{\hphantom{\text{L1}}}\;
-  \text{less capacity to manage }\Gamma^2
-  \;\to\; \Gamma^2\!\uparrow\,.
-\]
-This explains why chronic-stress damage is
-\emph{exponential} rather than linear, and why
-recovery requires simultaneously addressing
-all three layers---which have mismatched
-time constants:
-
-\begin{center}
-\begin{tabular}{@{}lll@{}}
-\toprule
-Layer & Recovery mechanism & Time scale \\
-\midrule
-L1: $D_Z$ & Sleep, rest & days \\
-L2: $\eta$ erosion & Aerobic vascular C2 & months \\
-L3: Gate lock & Therapy, stressor removal &
-  months--years \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\noindent
-``A week's holiday'' addresses only L1;
-L2 and L3 remain unrepaired, explaining the
-universal complaint of chronic-stress patients:
-``I rested but I'm still exhausted.''
-\end{remark}
-
-\begin{remark}[$S_{\text{eff}}$ sealing and external
-  gradient injection \textnormal{(E1)}]
-\label{rem:seff-sealing}
-Paper~3~\cite{Paper3} defines the effective null space
-$S_{\text{eff}} = \{Z_s : \Delta Z_s \approx 0
-\text{ for any practical } x_{\text{in}}\}$.
-When all environmental stimuli fall within
-$S_{\text{eff}}$ (same people, same routines,
-same stressors), the C2 gradient
-$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
-is effectively zero for every available input.
-\emph{Change becomes physically impossible from
-within.}
-
-The only escape is an external input
-$x_{\text{in}} \notin S_{\text{eff}}$---a novel
-stimulus that produces nonzero $\Delta Z$.
-This is the physical basis of therapeutic
-intervention, travel, and forced behavioural
-change.
-The intervention amplitude must satisfy
-\[
-  \varepsilon_{\text{eff}}^{\min}
-  < \varepsilon_{\text{intervention}}
-  < \eta(t) \cdot \Gamma^2_{\max}\,,
-\]
-where $\varepsilon_{\text{eff}}^{\min}$ is the
-minimum amplitude to cross the $S_{\text{eff}}$
-boundary.
-Below the lower bound, no new path is carved.
-Above the upper bound, $D_Z$ accumulates faster
-than C2 can process, producing secondary trauma
-rather than recovery.
-\end{remark}
-
-\begin{remark}[Trauma overwrite vs.\
-  compound trauma \textnormal{(E1)}]
-\label{rem:trauma-overwrite}
-When a new event produces
-$\Gamma^2_{\text{new}} \gg \Gamma^2_{\text{old}}$,
-it becomes the new $\Gamma_{\max}$ and the
-minimax attention controller
-(Paper~1~\cite{Paper1},
-Eq.~\ref{eq:attention}) redirects all
-resources to the new channel.
-Simultaneously, the large $\Delta Z$ physically
-breaks the $S_{\text{eff}}$ boundary that sealed
-the old trauma.
-Two outcomes are possible:
-\begin{itemize}
-  \item \textbf{Path~A (overwrite):}
-    C2 successfully processes the new event
-    ($\eta \cdot \Delta t > \Gamma^2_{\text{new}}$).
-    The entire $Z$-map reorganises at lower
-    $\Gamma^2$; the old trauma's relative
-    priority drops below $\Gamma_{\max}$.
-    Clinically: ``after the big event,
-    the old wound stopped hurting.''
-
-  \item \textbf{Path~B (compound trauma):}
-    $\eta$ is too low to process the new event.
-    $\Gamma^2_{\text{new}}$ also seals into
-    $S_{\text{eff}}$.
-    The system now oscillates between \emph{two}
-    sealed high-$\Gamma^2$ modes---harder to treat
-    than either alone.
-\end{itemize}
-
-\noindent
-\textbf{The bifurcation variable is $\eta(t)$
-at the time of impact.}
-Subjects whose $\eta$ has been eroded by chronic
-stress (Remark~\ref{rem:three-level-stress}, L2)
-are far more likely to follow Path~B.
-Path~A ``overwriting'' is not true healing:
-the old $\Gamma^2$ remains, merely suppressed
-below $\Gamma_{\max}$.
-If the new event is later fully processed by C2,
-$\Gamma^2_{\text{new}}$ drops and the old
-trauma may resurface as the new $\Gamma_{\max}$---
-explaining delayed PTSD reactivation years after
-apparent recovery.
-\end{remark}
-
-\begin{remark}[Confidence as a physical observable
-  \textnormal{(E1)}]
-\label{rem:confidence}
-Define the \emph{confidence index} of an agent as
-\[
-  \mathcal{C}
-  = \bigl|\{k : Z_k \notin S_{\text{eff}},\;
-      \Gamma_k^2 < \Gamma_{\text{thr}}^2\}\bigr|\,,
-\]
-i.e., the number of accessible response pathways
-outside $S_{\text{eff}}$ whose reflection coefficients
-are below a functional threshold.
-A high $\mathcal{C}$ means the agent has many
-practised low-$\Gamma^2$ routes through novel
-situations; a low $\mathcal{C}$ means most
-unfamiliar stimuli hit sealed or high-$\Gamma^2$
-channels, triggering avoidance.
-
-This definition explains three clinical observations:
-\begin{enumerate}
-  \item \emph{``I know I can do it, but I'm still
-    afraid.''}
-    Cortical (language, logic) assessment says
-    $\Gamma^2$ should be low; the actual Z-map
-    has never been C2-updated on that path
-    $\to$ $\Gamma^2$ is still high.
-
-  \item \emph{Confidence is built, not willed.}
-    Each successful traversal of a novel path
-    runs C2: $\Delta Z = -\eta\,\Gamma\,
-    x_{\text{in}}\,x_{\text{out}}$,
-    lowering $\Gamma^2$ on that path.
-    $\mathcal{C}$ increases one path at a time.
-    Telling someone ``just be confident'' without
-    providing safe practice is asking for lower
-    $\Gamma^2$ without any C2 input---physically
-    impossible.
-
-  \item \emph{Confidence is fragile at critical
-    periods.}
-    When $\eta$ is high (childhood, adolescence),
-    a single high-$\Gamma^2$ failure can
-    deeply carve a sealed mode into
-    $S_{\text{eff}}$, blocking an entire class
-    of future paths.
-\end{enumerate}
-\end{remark}
-
-\begin{corollary}[Confidence collapse as
-  positive-feedback cascade \textnormal{(E1)}]
-\label{cor:confidence-collapse}
-Building confidence follows C2 negative feedback
-($\Gamma^2 \downarrow$ per successful traversal)
-and is therefore slow (weeks to months).
-Collapse follows \emph{positive} feedback and is
-fast (hours to days):
-\[
-  \Gamma^2\!\uparrow
-  \;\to\; \text{avoidance}
-  \;\to\; \text{no C2 input}
-  \;\to\; \Gamma^2\!\uparrow
-  \;\to\; \text{more avoidance}\,.
-\]
-No continued injury is needed; avoidance alone
-drives autonomous $\Gamma^2$ escalation.
-
-The coupling matrix $C_{kj}$
-(Sec.~\ref{sec:coupled}) spreads a single-channel
-collapse to unrelated domains:
-a work failure raises $\Gamma^2_{\text{work}}$,
-which couples into $\Gamma^2_{\text{social}}$,
-$\Gamma^2_{\text{self}}$, and eventually
-$\Gamma^2_{\text{hobby}}$---explaining why
-subjects ``lose interest in everything'' after
-a localised failure.
-
-Three collapse speeds exist:
-\begin{center}
-\begin{tabular}{@{}lll@{}}
-\toprule
-Type & Mechanism & Time scale \\
-\midrule
-Point & Single high-impact failure &
-  hours \\
-Diffusion & $C_{kj}$ coupling spread &
-  days--weeks \\
-Solidification & Avoidance $\to S_{\text{eff}}$ &
-  permanent \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\noindent
-``The last straw'' is not a metaphor but a
-saddle-node bifurcation
-(Eq.~\ref{eq:chronic-bifurcation}):
-small failures accumulate $\Gamma^2$ toward
-the critical point, and the triggering event
-need not be large---it merely crosses the
-threshold.
-Recovery requires an environment designed so
-that failure is nearly impossible,
-allowing C2 to re-carve paths from the lowest
-$\Gamma^2$ upward.
-\end{corollary}
-
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  SOCIAL IMPEDANCE MISMATCH
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Social Impedance Mismatch}
-\label{sec:social-impedance}
-
-When two agents $A$ and $B$ communicate,
-signal transmission across the interface obeys
-\begin{equation}
-  \Gamma_{\text{comm}}
-  = \frac{Z_B - Z_A}{Z_B + Z_A}\,,
-  \qquad
-  T_{\text{comm}} = 1 - \Gamma_{\text{comm}}^2\,.
-  \label{eq:gamma-comm}
-\end{equation}
-Three distinct sources contribute to the total
-communication cost:
-\begin{enumerate}
-  \item \textbf{Structural mismatch}:
-    the $S_{\text{eff}}$ contents of $A$ and $B$
-    differ (experience, language, framework).
-    This is a static impedance gap.
-  \item \textbf{State interference}:
-    one or both parties are in the autonomous
-    degradation loop
-    (Corollary~\ref{cor:autonomous-loop}),
-    so C2 bandwidth is saturated by internal
-    standing waves.
-  \item \textbf{Reflection fatigue}:
-    repeated communication failures accumulate
-    $D_Z$ in both parties, lowering $\eta(t)$
-    and raising $\Gamma_{\text{comm}}$ for
-    subsequent attempts---a positive-feedback
-    spiral.
-\end{enumerate}
-
-\begin{remark}[Emotional escalation as thermal
-  dissipation \textnormal{(E1)}]
-\label{rem:escalation}
-When $\Gamma_{\text{comm}} \approx 1$,
-nearly all output energy reflects back to the
-sender.
-C2 interprets the persistent $\Gamma^2$ as
-insufficient signal strength and compensates by
-raising $P_{\text{in}}$:
-$P_{\text{in}} \gets P_{\text{in}}
-(1 + \alpha\,\Gamma^2)$.
-This triggers cardiovascular support
-($I_{\text{blood}}\!\uparrow$, heart rate
-$\uparrow$, cortisol $\uparrow$).
-The resulting louder voice, faster breathing,
-and muscle tension are not ``loss of control''
-but a \emph{thermal dissipation protocol}:
-the system routes excess $D_{\text{thermal}}$
-outward (sound, convection) to keep
-$T_{\text{sys}} < T_{c,K}$ (Arrhenius boundary).
-Telling someone to ``calm down'' while
-$P_{\text{in}}$ from the stressor persists
-is equivalent to requesting that the system
-\emph{stop dissipating heat while continuing
-to generate it}.
-\end{remark}
-
-\begin{remark}[Compassion fatigue
-  \textnormal{(E1)}]
-\label{rem:compassion-fatigue}
-A caregiver interacting with a closed-loop
-subject ($\Gamma_{\text{comm}} \approx 1$)
-receives the full reflected energy.
-Additionally, maintaining a composed exterior
-requires chronic gating
-(Remark~\ref{rem:three-gating},
-Paper~3~\cite{Paper3}), adding PFC bandwidth
-drain.
-Compassion fatigue therefore draws from three
-simultaneous $D_Z$ sources:
-(i)~the caregiver's own life stressors,
-(ii)~reflected energy from the subject, and
-(iii)~gate-maintenance cost for emotional
-regulation.
-This triple load drives $\eta(t)$ to zero
-faster than ordinary neural fatigue.
-\end{remark}
-
-\begin{remark}[$\Gamma^2$ social contagion
-  \textnormal{(E1)}]
-\label{rem:social-contagion}
-High $\Gamma^2$ spreads across social networks
-without requiring malice, satisfying three
-epidemiological criteria:
-\begin{center}
-\begin{tabular}{@{}ll@{}}
-\toprule
-Criterion & Physical realisation \\
-\midrule
-Pathogen & Reflected energy from
-  high-$\Gamma^2$ node \\
-Transmission & Communication interface
-  (voice, expression) \\
-Infection & Recipient $D_Z\!\uparrow$,
-  $\eta\!\downarrow$, loop onset \\
-\bottomrule
-\end{tabular}
-\end{center}
-\noindent
-Family and workplace environments are
-maximally efficient transmission media:
-high contact frequency (no inter-exposure
-recovery), low escape degrees of freedom,
-and high emotional coupling coefficients
-$C_{kj}$.
-A single closed-loop member can, given
-sufficient time, pull an entire household
-into the degradation loop---not through
-conflict, but through the physics of
-energy conservation at every shared interface.
-\end{remark}
-
-\begin{remark}[Trust, cleanness, and impedance
-  matching \textnormal{(E1)}]
-\label{rem:trust}
-Define the \emph{cleanness} of an agent as
-$T_{\text{clean}} = 1 - \Gamma^2_{\text{clean}}
-\approx 1$: most incoming signals are
-transmitted rather than reflected.
-Trust is the brain's statistical record
-of historical $\Gamma_{\text{comm}}$ at a given
-interface: many past interactions with low
-reflection $\to$ high predicted $T_{\text{comm}}$
-$\to$ trust.
-
-A low-$\Gamma^2$ agent inserted between two
-high-$\Gamma^2$ parties acts as an
-\emph{impedance matcher}: absorbing reflected
-energy that would otherwise bounce between the
-parties, lowering the field $\Gamma^2$, and
-restoring C2 operating margin for both sides.
-This is the physics of mediation and
-therapeutic alliance.
-Trust is fragile because a single
-high-reflection event can overwrite the
-statistical record
-(Remark~\ref{rem:trauma-overwrite}, Path~B),
-while building trust requires many
-low-reflection interactions to accumulate
-sufficient $Z$-map history.
-\end{remark}
-
-\begin{remark}[Action dominance theorem
-  \textnormal{(E1)}]
-\label{rem:action-dominance}
-C2 update requires
-$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
-x_{\text{out}}$.
-Communication provides $x_{\text{in}}$ but
-cannot generate $x_{\text{out}}$, which must be
-produced by the agent's own motor output.
-Action bypasses the $\Gamma_{\text{comm}}$
-bottleneck entirely:
-\begin{center}
-\begin{tabular}{@{}lll@{}}
-\toprule
- & Communication & Action \\
-\midrule
-$x_{\text{out}}$ source & other person &
-  self \\
-Transmission & $T < 1$ & $T = 1$ \\
-$S_{\text{eff}}$ breach & low &
-  high \\
-$D_Z$ effect & may increase &
-  decreases on success \\
-\bottomrule
-\end{tabular}
-\end{center}
-\noindent
-An AI chatbot provides a zero-reflection
-interface ($\Gamma_{\text{comm}} \approx 0$),
-temporarily halting $D_Z$ accumulation.
-However, it cannot generate $x_{\text{out}}$,
-cannot carve real $Z$-map paths, and cannot
-build trust history.
-If the symptom relief it provides
-\emph{reduces the gradient that motivates
-action}, it becomes a new closed loop:
-$D_Z$ temporarily drops $\to$ urgency drops
-$\to$ no action $\to$ $D_Z$ returns $\to$
-return to AI.
-The optimal use of any low-reflection interface
-(human or AI) is as a \emph{bridge}:
-temporarily restoring $\eta(t)$ so that
-the first real-world $x_{\text{out}}$ becomes
-possible.
-\end{remark}
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  PART D — E0 EMERGENCE
@@ -2669,7 +1938,7 @@ C2 (learnable).
 \subsection{Implications}
 \label{sec:e0-implications}
 
-\begin{theorem}[E0 Emergence \textnormal{(E0)}]
+\begin{theorem}[E0 Emergence]
 \label{thm:e0-emergence}
 Let $\mathcal{N}$ be a network topology satisfying C1/C2/C3
 with biologically realistic initial conditions
@@ -2713,7 +1982,7 @@ The disease \emph{is} the perturbation; the
 clinical pattern \emph{is} the resulting
 $\Gamma$-distribution.
 
-\begin{corollary}[Disease identity as topological fingerprint \textnormal{(E0)}]
+\begin{corollary}[Disease identity as topological fingerprint]
 \label{cor:disease-identity}
 Two perturbations that produce identical
 $\Gamma$-distributions across the network topology
@@ -2724,7 +1993,7 @@ $\Gamma$-distributions are distinct diseases,
 even if they share the same molecular pathway.
 \end{corollary}
 
-\begin{corollary}[Irreversibility threshold \textnormal{(E0)}]
+\begin{corollary}[Irreversibility threshold]
 \label{cor:irreversibility}
 A topological perturbation is clinically irreversible
 if and only if the resulting $\Gamma$-distribution
@@ -2816,7 +2085,7 @@ The thalamic gate~$G_i$ is at its physical minimum,
 yet the leaked power exceeds~$P_\theta$.
 Pharmacological intervention (e.g.\ benzodiazepines)
 temporarily increases gate attenuation;
-durable resolution requires C2 update of the
+durable resolution requires C2 remodelling of the
 underlying $\Gamma_i^2$
 (CBT-I provides the sustained counter-signal).
 
@@ -2937,66 +2206,6 @@ The question is: ``What stops C2 from applying to
 tissue~X?''
 If nothing stops it, then tissue~X remodels via C2.
 And nothing stops it.
-
-\subsection{Parameter calibration roadmap}
-\label{sec:calibration-roadmap}
-
-The coupled ODE (Eq.~\ref{eq:coupled-G2}) contains
-two classes of coefficients that are structurally
-determined but not yet independently measured:
-
-\begin{enumerate}
-  \item \textbf{Coupling matrix $C_{kj}$}
-    (inter-organ impedance propagation).
-    $C_{kj}$ quantifies how much $\Gamma^2$ in
-    organ~$j$ drives $\Gamma^2$ in organ~$k$.
-    \emph{Measurement protocol}:
-    (a)~longitudinal cohort with serial
-    multi-organ biomarkers (e.g.\ UK Biobank,
-    $n > 500{,}000$);
-    (b)~cross-lagged panel analysis of paired
-    $\Gamma^2$ time series yields $C_{kj}$ as
-    the standardised cross-lagged coefficient;
-    (c)~Mendelian randomisation provides the
-    causal direction.
-
-  \item \textbf{Positive-feedback strength $\beta_k$}
-    (within-organ self-amplification).
-    $\beta_k$ sets the bifurcation threshold at
-    which disease becomes self-sustaining.
-    \emph{Measurement protocol}:
-    (a)~identify patients at the clinical tipping
-    point (e.g.\ HbA1c $\approx 6.5\%$ for T2DM);
-    (b)~fit the ODE to the pre- and post-transition
-    trajectories;
-    (c)~$\beta_k$ is the value at which the
-    Jacobian eigenvalue crosses zero.
-
-  \item \textbf{Repair rate $\eta_k(t)$}
-    (C2 gain per tissue).
-    Already partially available: the literature
-    reports tissue turnover rates (hepatocytes
-    $\sim 300$~days, bone $\sim 10$~years,
-    neurons $\sim \infty$).
-    $\eta_k$ is directly proportional to the
-    inverse turnover time.
-
-  \item \textbf{Cortisol coupling $\alpha_c$}
-    (HPA-axis amplification).
-    \emph{Measurement protocol}:
-    diurnal cortisol area-under-curve (AUC)
-    correlated with $\Delta\Gamma^2$ in a
-    stress-response cohort yields $\alpha_c$
-    as the regression slope.
-\end{enumerate}
-
-\noindent
-Until these coefficients are calibrated, the ODE
-produces \emph{qualitative} predictions (disease
-ordering, bifurcation topology) that are testable
-but not quantitatively precise.
-This is analogous to Kepler's laws predicting
-\emph{ellipses} before Newton quantified~$G$.
 
 
 % ============================================================
