@@ -41,7 +41,7 @@ Fractal Cost, and Kleiber's Law\\[4pt]
 % ============================================================
 \begin{abstract}
 We ask: given a blood vessel with impedance
-$\Zv = 8\mu L/\pi r^4$ governed by vascular C2 remodeling,
+$\Zv = 8\mu L/\pi r^4$ governed by vascular C2 update,
 what architecture---and what metabolic scaling laws---must
 emerge?
 
@@ -54,7 +54,7 @@ We derive Murray's Law ($r_p^3 = \sum r_i^3$) as the
 exact minimum of the vascular action
 $\Av = \sum_j[Q_j^2 Z_j + \lambda V_j]$, with 100\%
 numerical agreement for $n=2,3,4$.
-Vascular C2 remodeling ($\Delta\Zv=-\eta_v\Gv\tau_{\text{wall}}\rho$)
+Vascular C2 update ($\Delta\Zv=-\eta_v\Gv\tau_{\text{wall}}\rho$)
 operates on the same principle as neural C2 but with
 $\eta_v \ll \eta_n$.
 
@@ -194,7 +194,7 @@ $T = 1-\Gamma^2$ & $\Tv$       & dimensionless \\
 \textbf{C1---Energy Conservation.}
 $\Gv^2 + \Tv = 1$ at every vascular junction.
 
-\textbf{C2---Vascular Remodeling.}
+\textbf{C2---Vascular Update.}
 \begin{equation}
   \Delta\Zv = -\eta_v\,\Gv\,\tau_{\text{wall}}\,\rho,
   \label{eq:C2v}
@@ -321,7 +321,7 @@ Full test: \texttt{tests/test\_paper2\_murray.py}
 (15~tests, 100\% pass).
 
 % ============================================================
-\section{Vascular C2 Remodeling}
+\section{Vascular C2 Update}
 \label{sec:vascular-C2}
 
 \begin{figure}[t]

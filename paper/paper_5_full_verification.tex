@@ -548,7 +548,7 @@ $\sim$18{,}000 subjects per quartile.
 \subsubsection{Thermoregulation: $T_c(K)$ across 18 species}
 
 Paper~3 predicts a critical temperature
-$T_c(K)$ below which C2 remodelling fails,
+$T_c(K)$ below which C2 update fails,
 increasing with brain modal complexity~$K$.
 We compiled body temperatures, brain masses, and
 thermoregulatory strategies for 18 species
@@ -1551,7 +1551,7 @@ on $\mathcal{A}[\Gamma]$, not a biological claim.
 \begin{theorem}[C2 as unique gradient descent rule \textnormal{(E0)}]
 \label{thm:c2-unique-p5}
 Among all first-order, local, activity-gated
-remodeling rules of the form
+update rules of the form
 $\Delta Z = f(Z, x_{\text{in}}, x_{\text{out}})$,
 the rule $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
 x_{\text{out}}$ is the unique descent direction
@@ -1559,7 +1559,7 @@ that minimises the reflection action
 $\mathcal{A}[\Gamma] = \int_0^T \sum_i \Gamma_i^2
 P_{\text{in},i}\,dt$ at every step.
 This uniqueness is inherited by all 29 tissue
-remodeling laws (Paper~3, Universality Theorem).
+update laws (Paper~3, Universality Theorem).
 \end{theorem}
 
 \begin{proof}
@@ -1883,7 +1883,7 @@ First Law of Thermodynamics.
 
 \subsection{Implications for medicine}
 
-If tissue remodeling is C2, then disease is
+If tissue update is C2, then disease is
 $|\Gamma| \gg 0$ that C2 cannot correct---either because
 the stimulus is too fast ($\eta$ too small: Glagov's
 threshold), the stimulus has stopped (astronaut bone loss),
@@ -1923,7 +1923,7 @@ function.
 \label{sec:not-claimed}
 
 \begin{enumerate}
-  \item C2 is not the only molecular process in remodeling.
+  \item C2 is not the only molecular process in tissue update.
     We claim only that the \emph{net effect} on impedance
     follows C2 on average.
   \item We do not claim exact quantitative equivalence.
