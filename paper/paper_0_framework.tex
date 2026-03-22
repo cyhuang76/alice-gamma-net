@@ -290,7 +290,7 @@ temperature at which those computations remain viable}.
 \end{corollary}
 
 
-\subsection{C2: Impedance Remodeling}
+\subsection{C2: Coefficient Update}
 \label{sec:c2}
 
 \begin{theorem}[C2 as gradient descent on $\mathcal{A}$]
@@ -305,7 +305,7 @@ gated by input and output activity, yields:
   }
   \label{eq:c2}
 \end{equation}
-where $\eta > 0$ is the remodeling rate,
+where $\eta > 0$ is the update rate,
 $x_{\text{in},i}$ is the input signal, and
 $x_{\text{out},i}$ is the transmitted signal.
 \end{theorem}
@@ -344,7 +344,7 @@ $x_{\text{post}}$.
 Paper~3 proves that the same equation governs all
 29~tissue types, making neural-specific terminology
 misleading.
-We adopt \emph{impedance remodeling} and
+We adopt \emph{coefficient update} and
 $(x_{\text{in}}, x_{\text{out}})$ throughout.
 
 
@@ -836,7 +836,7 @@ $\Gamma$ & Reflection coefficient
   & $[-1,+1]$ & 0 \\
 $T$ & Transmission ($1{-}\Gamma^2$)
   & $[0,1]$ & 0 \\
-$\eta$ & Remodeling rate & $>0$ & 0 \\
+$\eta$ & Update rate & $>0$ & 0 \\
 $(x_{\text{in}},x_{\text{out}})$ & Interface signals
   & signal units & 0 \\
 $\mathcal{A}$ & Reflection action & J$\cdot$s & 0 \\

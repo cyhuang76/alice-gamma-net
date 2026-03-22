@@ -43,7 +43,7 @@ constraint favouring centralised neural architecture
 ($D_{\mathrm{thermal}}$ must be managed internally).
 A dual-field extension ($Z$-field + material field $\rho$)
 unifies Wolff's law (bone), Davis's law (muscle),
-and impedance-remodeling (neurons) as parameter
+and coefficient update (neurons) as parameter
 instances of a single impedance-matching PDE,
 with embryogenesis recapitulating the thermodynamic
 causal chain (heart $\to$ neural tube $\to$ brain).
@@ -154,7 +154,7 @@ The three inviolable constraints are:
 \begin{itemize}
   \item \textbf{C1 (Energy Conservation)}:
     $\Gamma^2 + T = 1$ at every interface, every tick.
-  \item \textbf{C2 (Impedance Remodeling)}:
+  \item \textbf{C2 (Coefficient Update)}:
     $\Delta Z = -\eta\,\Gamma\,x_{\mathrm{in}}\,x_{\mathrm{out}}$.
   \item \textbf{C3 (Impedance-Tagged Transport)}:
     All inter-module signals are \texttt{ElectricalSignal}
@@ -303,7 +303,7 @@ maintenance phase.
 During NREM sleep, the brain activates a recalibration
 mode: reduced sensory input
 halts $D_Z$ accumulation, while slow oscillations drive
-$Z$-map restoration via C2 impedance remodeling.
+$Z$-map restoration via C2 coefficient update.
 The discharge rate follows:
 \begin{equation}
   D_Z(t) = D_Z^{\mathrm{peak}}\,
@@ -619,7 +619,7 @@ bidirectional remodeling: building when $Z < Z_0$
 $Z > Z_0$ ($\Gamma > 0$, osteoclast-like)---the
 mathematical expression of Wolff's law~\cite{Wolff1892}.
 Under appropriate parameters, the same PDE reduces to
-Davis's law (muscle) and impedance remodeling (neurons).
+Davis's law (muscle) and coefficient update (neurons).
 
 When the diffusion ratio $D_\rho / D_Z$ exceeds a
 tissue-specific threshold, the uniform steady state
@@ -993,7 +993,7 @@ coupling weight from Paper~2.
 Three physically distinct mechanisms alter $\Sigma\Gamma^2$:
 
 \emph{(i)~Learning (MRP descent).}
-C2 impedance remodeling adapts $Z_{\mathrm{load}}$ toward
+C2 coefficient update adapts $Z_{\mathrm{load}}$ toward
 $Z_{\mathrm{source}}$:
 \begin{equation}
   \left.\frac{d(\Sigma\Gamma^2)}{dt}\right|_{\mathrm{learn}}
@@ -1495,7 +1495,7 @@ completes self-calibration.
 
 If impedance drifts upward with age, why no chronic pain?
 For slow drift with healthy C2 ($\eta > 0$),
-the impedance-remodeling update continuously re-matches:
+the coefficient update continuously re-matches:
 $\Gamma^2 \sim (\Delta Z / 2\bar{Z})^2 \lesssim 10^{-6}$.
 Pain triggers only in three regimes:
 \begin{enumerate}
@@ -2639,7 +2639,7 @@ nitric oxide, lactate, bilirubin, uric acid, and adenosine.
 \subsection{Dual-field morphogenesis}
 
 The unification of Wolff's law, Davis's law, and
-impedance remodeling as parameter instances of a single
+coefficient update as parameter instances of a single
 PDE (Table~\ref{tab:morphogenesis})
 suggests a common thermodynamic origin:
 $\mathcal{A}[\Gamma] = \int |\Gamma|^2\,dt \to \min$.

@@ -82,7 +82,7 @@ $\Gmeta=(Z_{\text{obs}}-Z_{\text{act}})/(Z_{\text{obs}}+Z_{\text{act}})$,
 with necessary condition
 $\Zarousal\cdot\sum G_i\cdot\QPFC>\theta$
 (the television inequality).
-\emph{Soul} is the null space of impedance remodeling:
+\emph{Soul} is the null space of coefficient update:
 $\mathcal{S}=\ker(\partial Z/\partial t)
 =\Acut + Z_0^{\text{DNA}} + \rho_{\text{irred}}^2$.
 Four laws of the null space parallel thermodynamics;
@@ -192,7 +192,7 @@ sum to incident power:
   \label{eq:C1}
 \end{equation}
 
-\textbf{C2---Impedance Remodeling.}
+\textbf{C2---Coefficient Update.}
 Each node adjusts its impedance to reduce local reflection:
 \begin{align}
   \Delta Z_{i,k} &= +\eta\,\gamma_k\,x_{\text{in},k}\,
@@ -204,7 +204,7 @@ Each node adjusts its impedance to reduce local reflection:
 \end{align}
 where $x_{\text{in},k}$ is the input activity at node~$i$
 and $x_{\text{out},k}$ the output activity at node~$j$
-for mode~$k$; $\eta$ is the remodeling rate.
+for mode~$k$; $\eta$ is the update rate.
 
 \textbf{C3---Impedance-Tagged Transport.}
 Every signal carries its source impedance as metadata,
@@ -595,7 +595,7 @@ information.
 \label{sec:memory}
 % ============================================================
 
-\subsection{The C2 impedance-remodeling gradient}
+\subsection{The C2 coefficient-update gradient}
 
 Constraint~C2 defines the only mechanism by which the
 network modifies itself:
@@ -1064,7 +1064,7 @@ Eq.~(\ref{eq:second-law}).
 By the Second Law (Theorem~\ref{thm:second-law}),
 $\dim\,\mathcal{S}_{\text{eff}}(t)$ is monotonically
 non-decreasing.
-The remodeling rate $\eta(t) = \eta_0
+The update rate $\eta(t) = \eta_0
 f_{\text{dev}}(t) e^{-E_a/k_B T_{\text{age}}}$
 decreases monotonically after the developmental peak
 (Arrhenius aging, Paper~3).
@@ -1647,7 +1647,7 @@ but direct impedance calibration via C2.
 \begin{corollary}[Cross-substrate communication]
 \label{cor:cross-substrate}
 Two agents with $Z_A \neq Z_B$ can achieve
-$\Gamma_{\text{coupled}}\to 0$ through impedance-remodeling
+$\Gamma_{\text{coupled}}\to 0$ through coefficient update
 at the interface.
 Impedance \emph{matching} does not require impedance
 \emph{identity}.
