@@ -1297,6 +1297,74 @@ $\Gamma_{\mathrm{think}} < \Gamma_{\mathrm{S2}}$;
 System~2 (slow, deliberate) when
 $\Gamma_{\mathrm{think}} > \Gamma_{\mathrm{S2}}$.
 
+\begin{remark}[Thirst-sensation distortion as sensory-channel
+  $\Gamma^2$ drift]
+\label{rem:thirst-distortion}
+Osmoreceptors in the hypothalamus encode hydration
+status via $\Gamma_{\text{osmo}}$.
+Chronic metabolic overload (insulin resistance,
+hypernatraemia, high visceral adiposity) elevates
+vascular $\Gamma_v^2$ and metabolic $\Gamma_m^2$,
+which couple into the osmoreceptor channel via
+$C_{kj}$:
+$|\Gamma_{\text{osmo}}^{\text{eff}}|
+= |\Gamma_{\text{osmo}}|
++ \varepsilon\,\Gamma_m^2
++ \varepsilon\,\Gamma_v^2$.
+When $\Gamma_{\text{osmo}}^{\text{eff}}$ is
+chronically elevated, C2 shifts the receptor
+set-point upward: the system recalibrates
+``normal'' to a dehydrated baseline.
+The body is objectively underhydrated,
+but the subjective thirst signal is absent---water
+intake ``feels'' insufficient because the delivery
+channel ($Z_{\text{vasc}} \to Z_{\text{cell}}$)
+itself is high-$\Gamma^2$.
+This is not a behavioural choice but a
+\emph{sensory-channel impedance drift}, identical
+in physics to baroreceptor resetting in chronic
+hypertension (Paper~2).
+\end{remark}
+
+\begin{remark}[Reward-misalignment trap:
+  local $\Gamma^2$ minimum, global maximum]
+\label{rem:sugar-trap}
+The reward signal is
+$R = -\Delta\Gamma^2_{\text{local}}$
+(dopamine as negative prediction error).
+Sugar ingestion produces a rapid, large
+$R > 0$ via transient blood-glucose normalisation,
+while plain water yields a smaller, slower $R$
+distributed across many channels.
+
+C2 strengthens the pathway with the steepest
+$R$-gradient:
+$\Delta Z_{\text{sugar}} = -\eta\,\Gamma\,
+x_{\text{in}}\,x_{\text{out}} < 0$,
+making the sugar pathway progressively
+lower-impedance (preferred).
+Water---whose $x_{\text{out}}$ produces
+smaller instantaneous $R$---is not reinforced,
+and its pathway drifts to higher impedance.
+
+The trap closes when global metabolic
+$\Gamma^2_m$ rises from chronic sugar load,
+requiring ever-larger sugar boluses:
+$\text{sugar}\uparrow \to
+\Gamma^2_m\!\uparrow \to
+R_{\text{next}}\!\downarrow \to
+\text{dose}\uparrow \to \cdots$
+
+The neural system has found a \emph{local}
+impedance minimum that is a \emph{global}
+maximum.
+Resolution requires \emph{external} gradient
+injection (fasting, exercise, social support)
+to break the closed loop---identical in physics
+to the autonomous degradation loop
+(Paper~4).
+\end{remark}
+
 
 % ============================================================
 %  SECTION 9 — THE BATHTUB CURVE
@@ -2270,6 +2338,68 @@ The update equation is dictated by physics
 and is substrate-independent.
 \end{corollary}
 
+\begin{remark}[Bile as lipid quality-control relay node]
+\label{rem:bile-relay}
+In the 29-tissue network, the hepatic channel
+(\#12, Table~\ref{tab:twentynine}) and adipose channel
+(\#14) are coupled through a critical
+\emph{quality-control relay}: the biliary system.
+Bile acids emulsify dietary lipids, determining
+\emph{which} fatty acids and fat-soluble vitamins
+pass the gut--blood interface
+($\Gamma_{\text{gut}} \to 0$ for compatible substrates,
+$\Gamma_{\text{gut}} \to 1$ for incompatible ones).
+
+Bile acids also act as signalling molecules via
+FXR and TGR5 receptors, regulating:
+(i)~hepatic lipid metabolism,
+(ii)~brown-adipose thermogenesis
+($D_{\text{thermal}}$ production),
+(iii)~intestinal barrier integrity.
+The biliary node therefore functions as a
+C3 dimensional relay between the GI channel (\#8)
+and the metabolic channels (\#12, \#14):
+if bile composition is degraded
+($Z_{\text{bile}} \neq Z_0$), downstream channels
+receive mismatched material, and
+$\Gamma_m^2$ rises across the entire
+gut--liver--adipose axis.
+
+Clinically, biliary dysfunction manifests as
+impaired fat-soluble vitamin absorption (A, D, E, K),
+hormonal dysregulation (cholesterol is the precursor
+for steroid hormones), and the ``sallow, fatigued''
+phenotype---all consequences of a single relay node
+operating at high $\Gamma^2$.
+\end{remark}
+
+\begin{remark}[Adipose tissue as dynamic C2 reservoir]
+\label{rem:adipose-c2}
+Adipose tissue (channel \#14) is not a passive
+energy store but a continuously C2-updated reservoir.
+Old lipids are turned over by three mechanisms:
+\begin{enumerate}
+  \item \textbf{Lipolysis $\to$ $\beta$-oxidation}:
+    triglycerides $\to$ fatty acids $\to$
+    CO$_2$ + H$_2$O, excreted via respiration.
+  \item \textbf{Triglyceride cycling}:
+    intracellular hydrolysis and re-esterification
+    replaces acyl chains without net mass change.
+  \item \textbf{Lipophagy}: lysosomal degradation of
+    lipid droplets, recycling components into
+    the metabolic network.
+\end{enumerate}
+Adipocyte annual turnover rate is
+$\sim$8\%~\cite{Spalding2008},
+yielding a half-life of $\sim$8 years---comparable
+to the skeletal remodelling half-life.
+When $\eta_{\text{adipose}}$ is reduced
+(chronic insulin resistance, age-related decline),
+old lipids accumulate beyond the normal C2-update
+cycle, raising $\Gamma_m^2$ and feeding the
+metabolic--vascular--skin cascade (Paper~4).
+\end{remark}
+
 \subsection{Selected tissue proofs}
 \label{sec:tissue-proofs}
 
@@ -3039,6 +3169,11 @@ R.~E.~Wachtel, and F.~M.~Abboud,
 ``Structural versus functional modulation of the
 baroreflex,''
 \emph{Hypertension}\ \textbf{18}, 667 (1991).
+
+\bibitem{Spalding2008}
+K.~L.~Spalding \emph{et~al.},
+``Dynamics of fat cell turnover in humans,''
+\emph{Nature}\ \textbf{453}, 783 (2008).
 
 \end{thebibliography}
 

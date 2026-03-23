@@ -1409,6 +1409,127 @@ is a \emph{fixed-point attractor} of the coupled
 dynamics.
 \end{remark}
 
+\begin{remark}[Skin disease as metabolic$\times$immune
+  interface projection]
+\label{rem:skin-projection}
+Skin is the terminal load on the vascular,
+metabolic, and immune bus.
+Its impedance
+$Z_{\text{skin}}$ is coupled to internal channels
+via $C_{kj}$:
+\[
+  \Gamma_{\text{skin}}^2
+  = \Gamma_{\text{skin,local}}^2
+  + C_{\text{skin,met}}\,\Gamma_m^2
+  + C_{\text{skin,imm}}\,\Gamma_{\text{imm}}^2.
+\]
+Metabolic syndrome and immune activation share
+the same chronic-inflammation mediators
+(IL-6, TNF-$\alpha$), which couple through the
+blood stream to the dermal interface.
+Psoriasis, eczema, and acne are therefore not
+``skin problems'' but \emph{visible readouts}
+of internal $\Gamma^2$ projected onto the
+highest-surface-area interface.
+Treatment targeting only the skin
+(topicals, emollients) reduces
+$\Gamma_{\text{skin,local}}^2$
+but leaves the dominant metabolic and immune
+terms intact---explaining chronic relapse.
+\end{remark}
+
+\begin{remark}[Gut--liver--metabolic C3 relay chain]
+\label{rem:gut-liver-chain}
+The intestinal (\#8), hepatic (\#12), adipose (\#14),
+and endocrine (\#9) channels form a strongly coupled
+subsystem---the ``gut--liver--metabolic axis''---that
+functions as a C3 relay chain:
+\[
+  \underbrace{\text{food/microbiome}}_{\text{GI interface}}
+  \;\to\;
+  \underbrace{\text{liver, adipose, pancreas}}_{\text{metabolic channels}}
+  \;\to\;
+  \underbrace{\text{feedback to GI wall}}_{\text{Z-change \& symptoms}}.
+\]
+Any segment operating at high $\Gamma^2$
+produces reflected energy that propagates bidirectionally:
+hepatic steatosis raises $\Gamma_{\text{hep}}^2$,
+altering bile composition (Remark~\ref{rem:bile-relay},
+Paper~3) and downstream fat absorption;
+gut dysbiosis raises $\Gamma_{\text{gut}}^2$,
+increasing portal endotoxin load to the liver.
+The entire axis is a single impedance cascade
+whose clinical manifestations (IBS, NAFLD,
+type~2 diabetes, PCOS) are projections of
+the same underlying $\Gamma^2$ distribution.
+\end{remark}
+
+\begin{remark}[Lymphatic blockade as positive-feedback
+  cascade]
+\label{rem:lymphatic-cascade}
+Adipose tissue expansion increases the mechanical
+and immunological load on lymph nodes
+(channel \#10).
+Three coupled mechanisms drive a positive-feedback
+loop:
+\begin{enumerate}
+  \item \textbf{Load}: chronic inflammation enlarges
+    lymph nodes (reactive hypertrophy, Table~\ref{tab:twentynine}).
+  \item \textbf{Flow}: adipose compression and
+    chronic inflammation reduce lymphatic contractility
+    and increase vessel permeability---raising
+    $\Gamma_{\text{lymph}}^2$.
+  \item \textbf{Closure}: impaired lymphatic drainage
+    increases interstitial fluid and inflammatory mediators,
+    which further stimulate node hypertrophy
+    and vessel fibrosis.
+\end{enumerate}
+The loop gain exceeds unity when body fat reaches
+a critical threshold.
+Clinical manifestations include limb oedema,
+lymphoedema, increased infection susceptibility,
+and impaired wound healing---all of which
+increase $\Gamma^2$ in other channels,
+feeding the metabolic cascade.
+\end{remark}
+
+\begin{remark}[Bile--metabolic--vascular--skin: the closed
+  pathology loop]
+\label{rem:metabolic-loop}
+Combining
+Remark~\ref{rem:bile-relay} (Paper~3, bile relay),
+Remark~\ref{rem:gut-liver-chain} (gut--liver axis),
+Remark~\ref{rem:lymphatic-cascade}
+(lymphatic blockade),
+and Remark~\ref{rem:skin-projection}
+(skin projection) yields a single closed loop:
+\[
+  \text{bile quality}\!\downarrow
+  \;\to\;
+  \Gamma_m^2\!\uparrow
+  \;\to\;
+  \text{fat/liver load}\!\uparrow
+  \;\to\;
+  \text{bile secretion altered}
+  \;\to\;
+  \text{bile quality}\!\downarrow
+\]
+Each traversal accumulates $D_Z$ in every
+coupled channel (vascular, skin, lymphatic, immune).
+The ``sallow, fatigued'' phenotype is the
+observable fixed-point of this loop---not a single
+organ's failure but the equilibrium state of the
+whole coupled system.
+Breaking the loop requires simultaneous
+intervention at multiple impedance nodes:
+dietary substrate quality (bile input),
+exercise (vascular $\eta$ increase),
+and hydration (Remark~\ref{rem:thirst-distortion},
+Paper~3).
+No single-channel treatment is sufficient when
+the loop gain exceeds unity.
+\end{remark}
+
 \begin{remark}[``Willpower'' as
 $\eta_{\text{pfc}}(t)$: a depleting physical
 quantity]
