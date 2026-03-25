@@ -756,7 +756,9 @@ self-mismatch.
 
 \begin{theorem}[Television Inequality]
 \label{thm:television}
-Let $\Zarousal\in[0,1]$ be the brainstem arousal gain,
+Let $\Zarousal\in[0,1]$ be the subcortical arousal gain
+(set jointly by the amygdala, hypothalamus, and
+brainstem reticular activating system),
 $G_i\in[0,1]$ the thalamic gate gain for modality~$i$,
 and $\QPFC\in[0,1]$ the prefrontal cortex processing
 quality.  The consciousness index $\Phimeta>0$ requires:
@@ -945,10 +947,14 @@ Detect $\Gamma^2 \neq 0$ &
   Subcortical pathway, 30--74\,ms \\
 Classify (threat/reward) &
   Low-$K$ coarse evaluation \\
+Dispatch to hypothalamus &
+  Amygdala $\to$ hypothalamus (C3 relay) \\
 Modulate $Z_{\text{arousal}}$ &
-  Amygdala $\to$ brainstem RAS \\
+  Hypothalamus $\to$ brainstem RAS \\
 Modulate $G_i$ (gate override) &
-  Amygdala $\to$ thalamus \\
+  Hypothalamus $\to$ thalamus \\
+Modulate $Z_v$ (vascular) &
+  Hypothalamus $\to$ sympathetic (Paper~2) \\
 Modulate $\eta$ &
   Amygdala $\to$ VTA (dopamine) \\
 \bottomrule
@@ -1011,6 +1017,44 @@ does not ($\Gamma^2_{\text{pitch}} = 0$).
 The subjective experience of beauty, discomfort, or
 recognition is the \emph{attention response} to
 $\Gamma^2$, not the signal itself.
+\end{remark}
+
+\begin{remark}[Subjective attention as hypothalamic
+  resource allocation]
+\label{rem:subjective-attention}
+The preceding remark identifies attention as the
+selective response to $\Gamma^2 \neq 0$, but does
+not specify \emph{who decides} which channel receives
+resources.  The anatomical causal chain is:
+\begin{center}
+\begin{tabular}{rll}
+\toprule
+Stage & Structure & Latency \\
+\midrule
+1 & Amygdala detects $\Gamma^2 > 0$ & 30--74\,ms \\
+2 & Hypothalamus allocates resources & 80--120\,ms \\
+  & \quad neural: $G_i$ redistribution (via thalamus) & \\
+  & \quad vascular: $Z_v$ adjustment (Paper~2) & \\
+3 & Thalamic gates open on selected channel & 120--170\,ms \\
+4 & PFC high-$K$ processing & 170--270\,ms \\
+5 & Subjective awareness (``I notice this'') & 270--300\,ms \\
+\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Subjective attention} appears in the window
+between stage~3 (gate opens) and stage~5 (cortical
+report)---approximately 170--270\,ms after stimulus
+onset.  This window coincides with the
+readiness potential $\to$ conscious awareness gap
+measured by Libet~(1983): the brain ``decides'' at
+stage~2 (hypothalamic allocation), but the subject
+``knows'' only at stage~5.
+
+The $\Gamma$-Net interpretation: the Libet delay is
+not a philosophical mystery but a \textbf{C1
+propagation delay} through four sequential
+impedance-matching stages, each with finite
+transmission time.
 \end{remark}
 
 \begin{remark}[The self as a thermal-noise byproduct]
