@@ -1688,6 +1688,87 @@ This unifies vascular topology (Paper~2) and neural
 topology under a single optimality condition.
 \end{remark}
 
+\begin{remark}[Unified brain functional division
+  from $\Gamma$-MRP]
+\label{rem:brain-division}
+The preceding sections derive each brain structure's
+role from impedance physics.
+Table~\ref{tab:brain-division} consolidates the
+spatial division of labour; it complements
+the temporal processing chain in
+Table~\ref{tab:anatomical-map}.
+\begin{table*}[t]
+\centering
+\caption{Brain functional division derived from
+$\Gamma$-MRP.  Each structure's role is a
+\emph{consequence} of minimising $\Sigma\Gamma^2$,
+not a design assumption.}
+\label{tab:brain-division}
+\begin{tabular}{@{}llclll@{}}
+\toprule
+Structure & $\Gamma$-Net role & $K$ &
+  Processing type & MRP derivation &
+  Lesion prediction \\
+\midrule
+Left cortex &
+  Sequential processor &
+  $\sim\!10$ &
+  Language / logic / fine motor &
+  MRP bifurcation (Eq.~\ref{eq:neural-murray}) &
+  Aphasia \\
+Right cortex &
+  Spatial processor &
+  $\sim\!10^2$ &
+  Spatial / holistic / emotion &
+  MRP bifurcation (Eq.~\ref{eq:neural-murray}) &
+  Neglect \\
+Corpus callosum &
+  C3 inter-hemispheric relay &
+  mid &
+  $K$-staircase matching &
+  Chebyshev transformer &
+  Split-brain \\
+Cerebellum &
+  Low-$K$ C2 co-processor &
+  low &
+  Real-time compensation &
+  C2 gradient descent &
+  Ataxia ($\neq$ paralysis) \\
+Thalamus &
+  Gate executor $G_i$ &
+  mid &
+  Modality selection &
+  TV Inequality &
+  Loss of qualia \\
+Hypothalamus &
+  C3 cross-P1/P2 relay &
+  low--mid &
+  Dual-network coordination &
+  Dual-network theorem (P2) &
+  Dysautonomia \\
+Amygdala &
+  $\Gamma^2$ detector &
+  low &
+  Fast threat/reward eval &
+  Measurement loop closure &
+  Loss of fear \\
+Brainstem RAS &
+  Arousal gain $Z_{\text{arousal}}$ &
+  low &
+  Tonic power supply &
+  C1 energy conservation &
+  Coma \\
+\bottomrule
+\end{tabular}
+\end{table*}
+Every row is derivable: the structure exists because
+removing it would increase $\Sigma\Gamma^2$.
+The ``lesion prediction'' column lists the
+clinical consequence of setting that structure's
+contribution to zero---each is empirically
+confirmed.
+\end{remark}
+
 \begin{remark}[Cortical area count as peripheral interface count]
 \label{rem:cortical-peripheral}
 The HCP multi-modal parcellation identifies
