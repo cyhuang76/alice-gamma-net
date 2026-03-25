@@ -1599,6 +1599,85 @@ No additional ``synchronisation mechanism'' is required;
 C2 activity gating \emph{is} the mechanism.
 \end{remark}
 
+\begin{corollary}[Cerebellum as temporal alignment
+  for binding]
+\label{cor:cerebellum-binding}
+The binding condition
+(Eq.~\ref{eq:binding-condition}) requires two
+channels' C2 writes to fall within the same
+$\gamma$-cycle ($\sim$25\,ms).
+However, peripheral conduction delays differ
+by modality:
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+Modality & Conduction delay \\
+\midrule
+Auditory  & 8--10\,ms \\
+Visual    & 20--40\,ms \\
+Tactile   & 20--30\,ms \\
+Nociceptive & 100--200\,ms \\
+\bottomrule
+\end{tabular}
+\end{center}
+Without compensation, a simultaneous audiovisual
+event arrives at the thalamus with
+$\Delta t \approx 20$\,ms offset---comparable to
+the binding window itself.
+The cerebellum resolves this by learning each
+channel's conduction delay $\delta t_\alpha$
+via C2 gradient descent (Remark~\ref{rem:cerebellum})
+and issuing predictive timing corrections:
+\begin{equation}
+  x_{\text{in},\alpha}^{\text{(corrected)}}(t)
+  = x_{\text{in},\alpha}(t + \delta t_\alpha)\,,
+  \label{eq:cerebellar-timing}
+\end{equation}
+so that all channels' signals arrive within the
+same $\gamma$-cycle despite differing peripheral
+latencies.
+\end{corollary}
+
+\begin{proof}
+Without the compensator, the binding condition
+$\Delta Z_\alpha(\tau) \neq 0
+\;\wedge\; \Delta Z_\beta(\tau) \neq 0$
+fails whenever
+$|\delta t_\alpha - \delta t_\beta|
+> \tau_\gamma / 2 \approx 12$\,ms.
+C2 on the cerebellar Purkinje-cell network writes
+$\Delta Z_{\text{timing}} =
+-\eta\,\Gamma_{\text{timing}}\,
+x_{\text{in}}\,x_{\text{out}}$,
+where $\Gamma_{\text{timing}}$ is the
+temporal-offset mismatch.
+Convergence drives $\Gamma_{\text{timing}} \to 0$,
+aligning all channels.
+\end{proof}
+
+\begin{remark}[Binding requires thalamus $+$
+  cerebellum]
+\label{rem:binding-dual}
+The binding problem has two orthogonal requirements:
+\begin{itemize}
+  \item \textbf{Spatial co-location}:
+    all channels converge through the same C3 relay
+    node $\to$ \emph{thalamus}.
+  \item \textbf{Temporal alignment}:
+    all channels arrive within the same C2 tick
+    $\to$ \emph{cerebellum}.
+\end{itemize}
+Thalamic lesions destroy spatial binding
+(loss of integrated qualia);
+cerebellar lesions destroy temporal binding
+(dyschronometria, the inability to judge
+temporal intervals---Ivry \& Keele, 1989).
+Neither is sufficient alone:
+$\text{Binding} =
+\text{Thalamus (space)} \times
+\text{Cerebellum (time)}$.
+\end{remark}
+
 \subsection{Corpus callosum as inter-hemispheric C3 relay}
 \label{sec:corpus-callosum}
 
