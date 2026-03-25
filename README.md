@@ -214,12 +214,12 @@ python -m alice.main server --port 8000
 
 | # | Title | Pages | Status |
 |---|-------|:-----:|--------|
-| 0 | From the First Law of Thermodynamics to Three Inviolable Constraints — Framework Definition | 6 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18751831)) |
-| 1 | From Neuron to Mind — Irreducible Topology, Neural Architecture, Memory, Consciousness, and Soul | 15 | **Complete** |
-| 2 | Dual Impedance Networks and Metabolic Scaling — Vascular Architecture, Organ Health, and Kleiber's Law | 9 | **Complete** |
+| 0 | From the First Law of Thermodynamics to Three Inviolable Constraints — Framework Definition | 7 | **Published** ([DOI](https://doi.org/10.5281/zenodo.18751831)) |
+| 1 | From Neuron to Mind — Irreducible Topology, Neural Architecture, Memory, Consciousness, and Soul | 22 | **Complete** |
+| 2 | Dual Impedance Networks and Metabolic Scaling — Vascular Architecture, Organ Health, and Kleiber's Law | 13 | **Complete** |
 | 3 | Temporal Dynamics and Universal Remodeling — Impedance Debt, Sleep, Lifecycle, Aging, and 29 C2 Networks | 21 | **Complete** |
-| 4 | Topological Pathology — Disease as Impedance Failure on the Γ-Network | 16 | **Complete** |
-| 5 | Complete Empirical Validation — Γ as the Universal Interface Law from Microtubules to Power Grids | 15 | **Complete** |
+| 4 | Topological Pathology — Disease as Impedance Failure on the Γ-Network | 15 | **Complete** |
+| 5 | Complete Empirical Validation — Γ as the Universal Interface Law from Microtubules to Power Grids | 18 | **Complete** |
 
 Key results:
 - **Paper 0**: Derives the complete axiomatic framework from the First Law of Thermodynamics. C1/C2/C3 emerge as *theorems*, not postulates. C2 proven as the *unique* first-order activity-gated update rule minimising reflected energy.
@@ -229,7 +229,7 @@ Key results:
 - **Paper 4**: **Disease** — from single-organ pathology to multi-organ failure — emerges from impedance physics alone. 5-step dual-network cascade ($\Gamma_v\!\uparrow \to \rho\!\downarrow \to \Gamma_n\!\uparrow \to \text{autonomic}\!\downarrow \to \Gamma_v\!\uparrow\!\uparrow$). Coupled multi-organ dynamics with bifurcation analysis. **Willpower tri-factorization**: $\eta_{\text{pfc}}^{\text{eff}} = \eta \cdot Q_{\text{gate}} \cdot (1 - \langle\Gamma^2_{\text{mem}}\rangle)$. **Four Laws of the Null Space** (parallel to thermodynamics). **Moral Constraint Theorem**: blame on sealed patterns = pure injury.
 - **Paper 5**: **Complete Empirical Validation** — Γ as universal interface law. Interface Scale Table (25 nm microtubules → 10⁶ m power grids). NHANES 10-cycle validation ($n=52{,}545$, zero fitted parameters, AUC 0.705). **Three-layer cascade validation**: binary topology (7/7 organs improved, $p=0.008$). **Five-layer AUC progression**: 0.604 → 0.617 (cascade) → 0.626 (BP+cascade) → 0.709 (Γ+LR, 12 weights). **Multi-organ comorbidity** (DM+Cardiac AUC = 0.853). **Framingham zero-parameter match** (0.682 vs 0.682). ε = 0.03 physical derivation. **18 testable predictions** with falsification criteria.
 
-> **Methodological note**: Papers 0–4 include explicit circularity warnings — simulation data confirms the theory it is built from. Paper 5 breaks this circularity with NHANES external epidemiological data (10 cycles, $n=52{,}545$) and zero fitted parameters. Total: 82 pages, 30 figures, 18 testable predictions.
+> **Methodological note**: Papers 0–4 include explicit circularity warnings — simulation data confirms the theory it is built from. Paper 5 breaks this circularity with NHANES external epidemiological data (10 cycles, $n=52{,}545$) and zero fitted parameters. Total: 96 pages, 30 figures, 18 testable predictions.
 
 ---
 
@@ -249,7 +249,7 @@ alice-gamma-net/
 │   ├── figgen/             # 9 figure generators
 │   ├── validation/         # 5 validation experiments
 │   └── simulation/         # 13 simulation experiments
-├── paper/                  # 6 papers (82 pages, LaTeX)
+├── paper/                  # 6 papers (96 pages, LaTeX)
 │   └── gammanet.sty        # Shared LaTeX macros
 ├── figures/                # 30 generated figures (fig_p{N}_*)
 ├── build_figures.py        # Unified figure generation API
