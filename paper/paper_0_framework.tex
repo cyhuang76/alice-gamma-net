@@ -1,5 +1,5 @@
 % ═══════════════════════════════════════════════════════════════════
-% Paper 0: Γ-Net Framework — From the First Law to C1/C2/C3
+% Paper 0: Γ-Net Framework — The Minimum Reflection Principle and C1/C2/C3
 % ═══════════════════════════════════════════════════════════════════
 \documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
 \usepackage{amsmath,amssymb,amsthm}
@@ -12,9 +12,10 @@
 
 \begin{document}
 
-\title{$\Gamma$-Net: From the First Law of Thermodynamics\\
-to Three Inviolable Constraints\\[4pt]
-\small Framework Definition and Theorem Directory}
+\title{$\Gamma$-Net: The Minimum Reflection Principle\\
+and Three Inviolable Constraints\\[4pt]
+\small Framework Definition, Axiomatic Foundations,
+and Theorem Directory}
 
 \author{Hsi-Yu Huang}
 \email{llc.y.huangll@gmail.com}
@@ -23,15 +24,23 @@ to Three Inviolable Constraints\\[4pt]
 \date{\today}
 
 \begin{abstract}
-We derive the complete axiomatic framework of the
-$\Gamma$-Net theory from a single physical origin:
-the First Law of Thermodynamics applied to
-one-dimensional interfaces.
-Three constraints emerge as \emph{theorems}, not postulates:
-C1 (energy conservation: $\Gamma^2 + T = 1$),
+We present the complete axiomatic framework of the
+$\Gamma$-Net theory.
+The framework rests on a single first principle---the
+\emph{Minimum Reflection Principle} ($\Gamma$-MRP):
+at every interface, the system acts to minimise
+total reflected energy.
+From this principle, three constraints emerge as a
+sequential deductive chain:
+C1 (energy conservation: $\Gamma^2 + T = 1$)
+follows from power balance;
 C2 (coefficient update: $\Delta Z = -\eta\,\Gamma\,
-x_{\text{in}}\,x_{\text{out}}$),
-and C3 (dimensional relay: $K$-staircase necessity).
+x_{\text{in}}\,x_{\text{out}}$)
+follows from C1 because persistent mismatch
+requires impedance adjustment;
+C3 (dimensional relay: $K$-staircase necessity)
+follows from C2 because cross-dimensional mismatch
+produces standing waves that C2 alone cannot resolve.
 C2 is proven to be the \emph{unique} first-order
 activity-gated update rule that minimises reflected energy.
 We provide a complete inventory of derived quantities
@@ -62,12 +71,13 @@ membrane, skin surface---is characterised by an
 impedance mismatch that determines how much energy
 is transmitted versus reflected.
 
-The framework rests on three constraints, C1--C3,
-which are not modelling choices but consequences of
-the First Law of Thermodynamics.
-This paper derives all three from first principles
-and proves the uniqueness of the central remodeling
-law (C2).
+The framework rests on a single first principle---the
+Minimum Reflection Principle ($\Gamma$-MRP)---from
+which three constraints C1--C3 emerge as a sequential
+deductive chain, not independent postulates.
+This paper states the first principle, derives the
+three constraints, and proves the uniqueness of the
+central remodeling law (C2).
 
 Five companion papers develop the consequences:
 \begin{itemize}
@@ -104,7 +114,7 @@ Five companion papers develop the consequences:
 \noindent
 A reader entering at any single paper encounters local
 axiom recaps but lacks:
-(i)~the derivation chain from the First Law to C1/C2/C3;
+(i)~the derivation chain from $\Gamma$-MRP to C1/C2/C3;
 (ii)~the proof of C2 uniqueness;
 (iii)~a unified quantity inventory;
 (iv)~a theorem directory mapping every major result to
@@ -113,9 +123,9 @@ This paper fills those four gaps.
 
 
 % ============================================================
-%  SECTION 2 — Γ AS THERMODYNAMIC NECESSITY
+%  SECTION 2 — THE FIRST PRINCIPLE: Γ-MRP
 % ============================================================
-\section{$\Gamma$ as Thermodynamic Necessity}
+\section{The First Principle: $\Gamma$-MRP}
 \label{sec:gamma}
 
 \subsection{Impedance at a one-dimensional interface}
@@ -133,9 +143,9 @@ where impedance is defined as the ratio of effort
 \begin{theorem}[$\Gamma$ universality]
 \label{thm:gamma}
 At any one-dimensional interface between media of
-impedance $Z_1$ and $Z_2$, the First Law of
-Thermodynamics requires that incident power be
-partitioned into reflected and transmitted fractions:
+impedance $Z_1$ and $Z_2$, conservation of energy
+requires that incident power be partitioned into
+reflected and transmitted fractions:
 \begin{equation}
   \Gamma = \frac{Z_2 - Z_1}{Z_2 + Z_1}\,,
   \qquad
@@ -171,7 +181,8 @@ The reflection coefficient $\Gamma$ is as fundamental
 as temperature or pressure: it exists wherever two
 impedances meet.
 
-\subsection{The Minimum Reflection Principle}
+\subsection{The Minimum Reflection Principle (first principle)}
+\label{sec:mrp}
 
 For an organism with $N$ interface channels, the total
 reflected (wasted) power is:
@@ -192,12 +203,11 @@ Organisms that violate Eq.~\eqref{eq:viability} die
 by energy deficit---no natural-selection argument
 is required.
 
-The Minimum Reflection Principle (MRP) is therefore
-not an optimality \emph{assumption} but a thermodynamic
-\emph{viability condition}: organisms that waste too
-much energy at their interfaces fail by physics alone.
-
-Define the \textbf{reflection action} over lifetime~$T$:
+\begin{axiom}[$\Gamma$-MRP: the first principle]
+\label{ax:mrp}
+At every interface in a viable physical system, the
+total reflected energy over its operational lifetime
+is minimised:
 \begin{equation}
   \boxed{
   \mathcal{A}[\Gamma]
@@ -206,8 +216,20 @@ Define the \textbf{reflection action} over lifetime~$T$:
   }
   \label{eq:action}
 \end{equation}
-This is the variational principle from which all three
-constraints are derived.
+\end{axiom}
+
+\noindent
+$\Gamma$-MRP is the single axiom of this framework.
+It is not derived from a deeper law; rather,
+conservation of energy at an interface
+(the thermodynamic First Law) is a \emph{consequence}
+of $\Gamma$-MRP applied to a single time instant.
+The three constraints C1, C2, C3 are derived from
+$\Gamma$-MRP as a sequential deductive chain:
+C1 follows from instantaneous power balance;
+C1 generates C2 (persistent mismatch requires update);
+C2 generates C3 (cross-dimensional mismatch produces
+standing waves requiring relay insertion).
 
 
 % ============================================================
@@ -253,7 +275,9 @@ in time.
 \end{proof}
 
 \noindent
-C1 is the First Law applied locally.
+C1 is $\Gamma$-MRP applied to a single interface
+at a single instant---the thermodynamic First Law
+is this special case.
 It holds exactly for any lossless interface.
 Dissipative corrections (Johnson--Nyquist noise,
 Arrhenius aging) modify $Z$ over time but never
@@ -290,8 +314,15 @@ temperature at which those computations remain viable}.
 \end{corollary}
 
 
-\subsection{C2: Coefficient Update}
+\subsection{C2: Coefficient Update (generated by C1)}
 \label{sec:c2}
+
+C1 diagnoses mismatch ($\Gamma \neq 0$) but does not
+resolve it.
+For the system to obey $\Gamma$-MRP over time,
+it must \emph{update} its impedances to reduce
+$\mathcal{A}$.
+This necessity generates C2:
 
 \begin{theorem}[C2 as gradient descent on $\mathcal{A}$]
 \label{thm:c2}
@@ -348,8 +379,18 @@ We adopt \emph{coefficient update} and
 $(x_{\text{in}}, x_{\text{out}})$ throughout.
 
 
-\subsection{C3: Dimensional Relay}
+\subsection{C3: Dimensional Relay (generated by C2)}
 \label{sec:c3}
+
+C2 adjusts impedance within a given dimension.
+But when two nodes have different modal complexities
+($K_i \neq K_j$), the extra modes in the
+higher-$K$ node produce standing waves with no
+counterpart at the lower-$K$ node.
+C2 cannot resolve this mismatch because there is no
+$Z$ to adjust---the receiving dimension does not exist.
+To satisfy $\Gamma$-MRP, the system must insert
+intermediate relay nodes, generating C3:
 
 \begin{theorem}[C3 \textnormal{(E0)}]
 \label{thm:c3}
@@ -726,7 +767,7 @@ The logical structure is a concentric expansion:
 \begin{tabular}{cl}
 \textbf{Layer} & \textbf{Content} \\
 \hline
-0 & First Law $\to$ $\Gamma$, C1, MRP, C2, C3
+0 & $\Gamma$-MRP $\to$ C1 $\to$ C2 $\to$ C3
   \quad(this paper) \\
 1 & C2 on finite network $\to$ $\Acut > 0$
   $\to$ topology, brain, mind
@@ -757,8 +798,8 @@ guarantee against circularity.
   \centering
   \includegraphics[width=\columnwidth]{../figures/fig_p0_deductive_chain.pdf}
   \caption{The deductive chain of the $\Gamma$-Net framework.
-  From the First Law of Thermodynamics, $\Gamma$ emerges as
-  thermodynamic necessity; the Minimum Reflection Principle
+  From the first principle $\Gamma$-MRP, the three constraints
+  emerge as a sequential deductive chain; the Minimum Reflection Principle
   yields C1/C2/C3; each subsequent paper applies these
   constraints to a specific domain.
   No layer imports from an outer layer.}
@@ -869,15 +910,82 @@ $\Pi_\Gamma$ & $\Gamma$-Pain Index
 \section{Conclusion}
 \label{sec:conclusion}
 
-The $\Gamma$-Net framework is derived, not postulated.
-The First Law of Thermodynamics at a one-dimensional
-interface yields the reflection coefficient~$\Gamma$.
-Energy conservation gives C1 ($\Gamma^2 + T = 1$).
-Gradient descent on the reflection action gives C2
-($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
-x_{\text{out}}$), proven unique among first-order
-activity-gated rules.
-Local computability gives C3.
+The $\Gamma$-Net framework rests on a single first
+principle: the Minimum Reflection Principle
+($\Gamma$-MRP, Axiom~\ref{ax:mrp}).
+From this axiom, three constraints emerge as a
+sequential deductive chain:
+C1 ($\Gamma^2 + T = 1$) from instantaneous power balance;
+C2 ($\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
+x_{\text{out}}$) from the necessity to resolve
+persistent mismatch, proven unique among first-order
+activity-gated rules;
+C3 ($K$-staircase relay) from the standing waves
+that arise when C2 encounters cross-dimensional
+mismatch.
+
+\subsection{The minimal operational loop}
+
+The three constraints compress into a single
+three-step cycle that every interface must execute:
+
+\begin{center}
+\begin{tabular}{cll}
+\hline
+\textbf{Constraint} & \textbf{Role}
+  & \textbf{Physical content} \\
+\hline
+C1 & \textbf{Perceive}
+  & $\Gamma^2 + T = 1$ partitions every signal \\
+  & & into ``reflected'' and ``transmitted.'' \\
+  & & All sensation is a readout of this split. \\[3pt]
+C2 & \textbf{Update}
+  & $\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,
+    x_{\text{out}}$ \\
+  & & writes the perceived mismatch back into $Z$, \\
+  & & changing how subsequent signals are partitioned. \\[3pt]
+C3 & \textbf{Relay}
+  & Dimensional relay propagates the local update \\
+  & & along the $K$-staircase to all connected nodes, \\
+  & & distributing the error across the network. \\
+\hline
+\end{tabular}
+\end{center}
+
+\noindent
+Every physiological phenomenon in Papers~1--5 is a
+manifestation of this \emph{Perceive--Update--Relay}
+loop executing on different channels, at different
+timescales, with different material substrates.
+
+\begin{remark}[Perception $\times$ error $\times$
+  compensation]
+\label{rem:pec-loop}
+The three-step cycle admits a compact control-theoretic
+reading:
+\begin{enumerate}
+  \item \textbf{Perception} (C1 readout):
+    the organism estimates its current mismatch
+    $\hat\Gamma^2$ from sensory channels.
+  \item \textbf{Error}:
+    $e = \Gamma^2_{\text{real}}
+    - \hat\Gamma^2$.
+  \item \textbf{Compensation}:
+    a behavioural or metabolic action~$u$ is selected
+    to reduce~$e$.
+  \item \textbf{Write-back} (C2):
+    the compensation result is committed to~$Z$,
+    updating the next perception.
+\end{enumerate}
+When compensation is correct, global~$\Gamma^2$
+decreases and perception recalibrates.
+When compensation is incorrect---reward misalignment,
+addictive substances, sensory distortion---the
+erroneous perception is written into~$Z$ by C2,
+creating a positive-feedback loop whose
+pathological consequences are derived in
+Papers~3 and~4.
+\end{remark}
 
 From these three constraints, five companion papers
 derive, in a strictly outward deductive chain:

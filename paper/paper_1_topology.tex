@@ -770,15 +770,54 @@ the self-referential loop to close.
 \end{theorem}
 
 \begin{proof}
-The meta-reflection loop requires a signal to:
-(a)~traverse the thalamic gate ($\times G_i$),
-(b)~be processed by PFC ($\times\QPFC$),
-(c)~be routed back through the arousal-modulated pathway
-($\times\Zarousal$).
-If any factor is zero, the loop is open and $\Gmeta$ is
-undefined.
-The threshold~$\theta$ accounts for Johnson--Nyquist noise.
+By C1 (energy conservation), a signal traversing the
+self-referential loop loses power at each interface:
+$P_{\text{loop}} = P_{\text{in}} \cdot \Zarousal
+\cdot \bigl(\sum_{i} G_i\bigr) \cdot \QPFC$.
+The loop closes (self-detection occurs) only if
+$P_{\text{loop}}$ exceeds the Johnson--Nyquist noise
+floor of the measurement circuit:
+$P_{\text{noise}} = 4 k_B T R_{\text{eff}} \Delta f$.
+Setting $\theta = P_{\text{noise}} / P_{\text{in}}$
+yields the inequality.
+If any factor is zero, $P_{\text{loop}} = 0$, the loop
+is open, and $\Gmeta$ is undefined.
+The measurement is performed by the amygdala's
+subcortical fast pathway (30--74\,ms;
+Remark~\ref{rem:measurement-loop}), which continuously
+evaluates $\Gamma^2$ before cortical processing
+completes.
 \end{proof}
+
+\paragraph{Numerical estimate of~$\theta$.}
+For a cortical neuron the input resistance is
+$R_{\text{eff}} \approx 100\,\text{M}\Omega$ and the
+relevant bandwidth is the gamma-oscillation band
+$\Delta f \approx 40\,\text{Hz}$ at body temperature
+$T = 310\,\text{K}$:
+\[
+  P_{\text{noise}}
+  = 4 k_B T R_{\text{eff}} \Delta f
+  = 4 \times 1.38 \times 10^{-23}
+    \times 310 \times 10^{8} \times 40
+  \approx 69\,\text{pW}\,.
+\]
+The cerebral metabolic power available for
+electrical signalling is $P_{\text{in}} \approx 1\,\text{W}$
+(roughly 5\,\% of the brain's 20\,W total metabolism).
+Therefore
+\[
+  \theta
+  = \frac{P_{\text{noise}}}{P_{\text{in}}}
+  \approx 7 \times 10^{-11}\,.
+\]
+This extremely small value implies that the
+consciousness threshold is easily exceeded by any
+non-zero product $Z_{\text{arousal}} \cdot \sum G_i
+\cdot Q_{\text{PFC}}$---consistent with the clinical
+observation that consciousness is lost only under
+severe disruption (deep anaesthesia, major brain
+injury) and not by mild perturbations.
 
 \begin{figure}[t]
   \centering
@@ -787,8 +826,11 @@ The threshold~$\theta$ accounts for Johnson--Nyquist noise.
   Heatmap of $G_{\rm arousal}\cdot\sum\Gamma_i\cdot Q_{\rm PFC}$
   with clinical states: awake (green), deep sleep (blue),
   general anaesthesia (red), occipital trauma (purple).
-  Black curve: consciousness boundary $\theta = 0.5$.
-  Shaded region below curve: unconscious.}
+  Black curve: consciousness boundary at normalised
+  threshold $\theta_{\text{norm}} = 0.5$
+  (the physical value is $\theta \approx 7 \times 10^{-11}$;
+  the normalised plot rescales axes to $[0,1]$ for
+  visualisation).  Shaded region below curve: unconscious.}
   \label{fig:television-space}
 \end{figure}
 
@@ -822,7 +864,27 @@ where $N$ is the number of previously multiplexed modalities.
 This is the physics of ``time slowing down'' during danger---
 bandwidth reallocation under C1 conservation.
 
-\subsection{Open loop vs.\ closed loop}
+\subsection{Open loop vs.\ closed loop: origin of the
+  television analogy}
+
+The television inequality arose from a mundane
+observation: in the analogue era, a malfunctioning
+television could sometimes be ``repaired'' by
+\emph{slapping its casing}---a physical impact that
+momentarily displaced internal components, reducing
+contact resistance at corroded solder joints
+and thereby lowering $\Gamma^2$ at those interfaces.
+
+This is C2 in its most primitive form:
+a mechanical perturbation ($x_{\text{in}}$) produces
+impedance change ($\Delta Z$) that reduces reflection
+($\Gamma^2 \downarrow$).
+A human can perform this repair because a human has
+a \emph{closed} feedback loop: the human observes the
+screen (measurement), judges whether the image improved
+(error detection), and adjusts the next slap accordingly
+(C2 update).  The television cannot repair itself
+because it has no such loop.
 
 \begin{center}
 \begin{tabular}{@{}lll@{}}
@@ -832,9 +894,9 @@ Component & Television & Brain \\
 Power supply & Wall plug & Brainstem RAS ($\Zarousal$) \\
 Channel selector & Tuner & Thalamus ($\sum G_i$) \\
 Decoder chip & Video IC & PFC ($\QPFC$) \\
-\midrule
-Kill method 1 & Unplug power & Occipital impact \\
-Kill method 2 & Overheat IC & Fever \\
+\textbf{Measurement sensor} & \textbf{(absent)} &
+  \textbf{Amygdala ($\Gamma^2$ detector)} \\
+Feedback wire & (absent) & PFC $\to$ sensory cortex \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -851,6 +913,1402 @@ Two systems with identical components differ in consciousness
 solely by the presence or absence of a self-referential
 feedback connection.
 \end{corollary}
+
+\begin{remark}[The amygdala as the consciousness
+  measurement device]
+\label{rem:measurement-loop}
+The Television Inequality requires a physical device
+that continuously \emph{measures} $\Gamma^2$ and feeds
+the result back to modulate $Z_{\text{arousal}}$,
+$G_i$, and $\eta$.
+This device is the amygdala:
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Measurement function & Amygdala implementation \\
+\midrule
+Detect $\Gamma^2 \neq 0$ &
+  Subcortical pathway, 30--74\,ms \\
+Classify (threat/reward) &
+  Low-$K$ coarse evaluation \\
+Modulate $Z_{\text{arousal}}$ &
+  Amygdala $\to$ brainstem RAS \\
+Modulate $G_i$ (gate override) &
+  Amygdala $\to$ thalamus \\
+Modulate $\eta$ &
+  Amygdala $\to$ VTA (dopamine) \\
+\bottomrule
+\end{tabular}
+\end{center}
+The PFC is the \emph{processor} (high-$K$, slow,
+200--300\,ms), but the amygdala is the
+\emph{measurement instrument} (low-$K$, fast,
+30--74\,ms).
+A television lacks this measurement device entirely:
+no component evaluates whether the displayed signal
+matches an internal model.
+This is the precise physical difference between an
+open-loop system (television) and a closed-loop system
+(brain): the amygdala closes the loop by measuring
+$\Gamma^2$ and feeding it back before the cortex has
+even finished processing the stimulus.
+
+Patients with bilateral amygdala lesions
+(Urbach--Wiethe disease) retain consciousness but lose
+fear recognition and threat-driven attention---the
+measurement loop is partially intact (other subcortical
+structures compensate for basic $\Gamma^2$ detection)
+but the threat-threshold calibration is lost.
+\end{remark}
+
+\begin{remark}[Subjective experience $=$ consciousness
+  $\times$ attention]
+\label{rem:qualia}
+The Television Inequality defines consciousness as a
+threshold condition: $Z_{\text{arousal}} \cdot \sum G_i
+\cdot Q_{\text{PFC}} > \theta$.
+A television satisfies signal flow ($x_{\text{in}} \to
+x_{\text{out}}$) but lacks feedback, hence no $\Gamma^2$
+detection.
+Without $\Gamma^2$ detection there is no C2 update,
+no gate selection, and therefore no \emph{attention}.
+The missing ingredient of subjective experience is not
+consciousness per~se but \emph{attention}---the
+selective response to $\Gamma^2 \neq 0$.
+
+Consciousness provides the ``stage'' (baseline
+awareness); attention selects ``what is on stage''
+(which $\Gamma^2$ triggers a gate).
+The sense of ``I am I'' is the unique attention pattern
+determined by $\mathcal{S}_{\text{eff}}$:
+\[
+  \text{Identity} \;=\;
+  \bigl\{\,\alpha : \Gamma^2_\alpha
+  \;\text{triggers}\; G_\alpha\,\bigr\}
+  \;\subset\;
+  \text{all channels}\,.
+\]
+Two individuals share the same consciousness mechanism
+(identical Television Inequality) but differ in
+$\mathcal{S}_{\text{eff}}$ and therefore in which
+$\Gamma^2$ they notice---a musician hears a mis-tuned
+note ($\Gamma^2_{\text{pitch}} > 0$); a non-musician
+does not ($\Gamma^2_{\text{pitch}} = 0$).
+The subjective experience of beauty, discomfort, or
+recognition is the \emph{attention response} to
+$\Gamma^2$, not the signal itself.
+\end{remark}
+
+\begin{remark}[The self as a thermal-noise byproduct]
+\label{rem:self-thermal}
+The preceding analysis implies that the sense of ``I''
+requires $\Gamma^2 \neq 0$ on at least one channel:
+without impedance mismatch there is no attention and
+no self.
+Two limiting cases annihilate the self for opposite
+reasons:
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Limit & Interface & Energy flow & ``I'' \\
+\midrule
+$\Gamma^2 \to 0$ &
+  Boundary dissolves & 100\,\% transmission &
+  Absent (unity) \\
+$\Gamma^2 \to 1$ &
+  Boundary impenetrable & 0\,\% transmission &
+  Absent (isolation) \\
+$0 < \Gamma^2 < 1$ &
+  Partial boundary & Partial transmission &
+  \textbf{Present} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The self exists only in the intermediate band
+$0 < \Gamma^2 < 1$: there must be a boundary
+(otherwise subject and environment merge), and the
+boundary must be partially transmissive
+(otherwise no information crosses it and no C2
+update occurs).
+
+$\Gamma$-MRP drives the system toward $\Gamma^2 \to 0$,
+but Johnson--Nyquist thermal noise
+($V_n^2 = 4k_B T R\,\Delta f$) imposes a floor:
+as long as body temperature $T > 0$, every interface
+retains a minimum $\Gamma^2 > 0$, and the self
+persists.
+In this precise sense,
+\emph{the self is a byproduct of thermal noise}---the
+irreducible mismatch that heat imposes on every
+physical interface.
+
+The contemplative experience of ``ego dissolution''
+reported in deep meditation corresponds to a
+transient, voluntary approach toward $\Gamma^2 \to 0$
+across high-$K$ channels (all gates closed,
+$G_i \to 0$): attention is extinguished, and with it
+the sense of a separate self.
+The experience is reversible because the thermal floor
+ensures $\Gamma^2$ never actually reaches zero.
+
+However, approaching $\Gamma^2 \to 0$ is actively
+resisted by the survival system.
+The amygdala's low-$K$ fast pathway
+(Remark~\ref{rem:emotion}) interprets declining
+$\Gamma^2$ as loss of control---a threat signal---and
+triggers the emergency response:
+$Z_{\text{arousal}} \to Z_{\max}$,
+$G_{\text{threat}} = 1$
+(Eq.~\ref{eq:time-dilation}).
+Intracranial recordings show that amygdala gamma
+power surges within 30--74\,ms of threat onset
+(M\'{e}ndez-B\'{e}rtolo et~al., 2016), whereas
+cortical awareness requires $\sim$200--300\,ms
+(LeDoux, 1996)---a $\sim$4$\times$ latency ratio
+consistent with the C3-stage model of
+Remark~\ref{rem:tree-topology}.
+
+This is the same mechanism that produces ``time
+slowing down'' before a car crash
+(\emph{tachypsychia}).
+Under threat, norepinephrine and dopamine release
+accelerate the internal clock; free-fall experiments
+show participants overestimate event duration by
+$\sim$36\,\% (Stetson et~al., 2007), consistent with
+the bandwidth-reallocation prediction of
+Eq.~(\ref{eq:time-dilation}): all $N$ modalities
+are collapsed into a single threat channel, giving
+$N\times$ the temporal resolution on that channel.
+The brain \emph{maximises} $\Gamma^2$ and the sense
+of self at exactly the moment both are about to be
+destroyed.
+
+Reaching $\Gamma^2 \to 0$ therefore requires
+\emph{rewriting} the amygdala's $Z$-pattern: the
+association ``$\Gamma^2 \downarrow =$ danger'' must be
+replaced by ``$\Gamma^2 \downarrow =$ safe.''
+fMRI studies confirm that long-term meditators show
+significantly reduced default-mode network (DMN)
+activity---the self-referential network comprising
+medial prefrontal cortex, posterior cingulate, and
+precuneus (Brewer et~al., 2011).
+Critically, DMN suppression persists even when
+experienced meditators are \emph{not} meditating,
+indicating that the amygdala's $Z$-pattern has been
+permanently rewritten into a new
+$\mathcal{S}_{\text{eff}}$.
+This rewriting requires years to decades of practice
+because the original pattern is part of the
+evolutionary $\mathcal{S}_{\text{eff}}$ (written by
+millions of years of natural selection).
+
+Death, conversely, pushes $\Gamma^2_{\text{basal}}
+\to 1$ (Fourth Law, \S\ref{sec:death}):
+the boundary becomes impenetrable and the self is
+annihilated by disconnection rather than by merger.
+\end{remark}
+
+\begin{remark}[Empathy as $\mathcal{S}_{\text{eff}}$
+  resonance]
+\label{rem:empathy}
+Empathy---feeling another person's state---requires
+that the observer's $\mathcal{S}_{\text{eff}}$ contains
+$Z$-patterns similar to the one the other person is
+currently expressing.
+The other's behavioural $x_{\text{out}}$ (facial
+expression, vocal tone, posture) enters the observer as
+$x_{\text{in}}$ on social--emotional channels.
+If the observer's $\mathcal{S}_{\text{eff}}$ has a
+matching pattern, $\Gamma^2 \neq 0$ is triggered,
+gate $G_{\text{empathy}}$ opens, and the observer
+\emph{feels} the other's state:
+\[
+  \Gamma^2_{\text{empathy}}
+  = \left\lvert
+    \frac{Z_{\text{other}}^{\text{expressed}}
+         - Z_{\text{self}}^{S_{\text{eff}}}}
+         {Z_{\text{other}}^{\text{expressed}}
+         + Z_{\text{self}}^{S_{\text{eff}}}}
+  \right\rvert^2 \neq 0\,,
+\]
+where both $Z$ values are projected onto the common
+social-emotional channel space (facial expression,
+vocal prosody, postural cues) so that the
+reflection coefficient is dimensionally consistent.
+Three predictions follow:
+\begin{enumerate}
+  \item \textbf{Empathy requires shared experience}:
+    without a matching $Z$-pattern in
+    $\mathcal{S}_{\text{eff}}$, the observer's
+    $\Gamma^2_{\text{empathy}} = 0$---no gate
+    triggers, no feeling.
+    This is why lived experience (not verbal
+    description) produces empathy: only direct C2
+    writing creates the $Z$-pattern in
+    $\mathcal{S}_{\text{eff}}$.
+  \item \textbf{Words are insufficient for caregivers}:
+    telling a caregiver ``I understand your burden''
+    operates only on $K_{\text{language}}$.
+    The caregiver's suffering is on
+    $K_{\text{sleep}}$, $K_{\text{muscular}}$,
+    $K_{\text{thermal}}$---channels that language
+    cannot reach.
+    True support must provide $x_{\text{in}}$ on
+    the \emph{physical} channels (respite, monitoring,
+    intervention).
+  \item \textbf{Mirror neurons as C2 resonance hardware}:
+    mirror neurons fire both when performing and
+    observing an action, providing the physical
+    substrate for cross-individual $\Gamma^2$ matching.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Social referencing: the developmental
+  origin of empathy]
+\label{rem:social-referencing}
+Before $\mathcal{S}_{\text{eff}}$ has been calibrated,
+an infant cannot independently evaluate $\Gamma^2$
+magnitude.
+When a toddler falls, the amygdala detects
+$\Gamma^2 \neq 0$ (``something happened'')
+but has no reference pattern to classify its severity.
+The child therefore looks at the caregiver's face---a
+behaviour called \emph{social referencing}
+(Sorce et~al., 1985)---and reads the caregiver's
+emotional output as an external $\Gamma^2$ standard.
+
+\begin{itemize}
+  \item If the caregiver shows alarm (high $\Gamma^2$),
+    the infant's C2 writes:
+    ``this event is dangerous''---the child cries.
+  \item If the caregiver smiles (low $\Gamma^2$),
+    the infant's C2 writes:
+    ``this event is harmless''---the child resumes play.
+\end{itemize}
+
+This is not imitation: it is
+\textbf{$\mathcal{S}_{\text{eff}}$ bootstrapping
+via external $\Gamma^2$ calibration}.
+The same mechanism operates in two directions:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+& Read other's $\Gamma^2$ & Effect \\
+\midrule
+Adult (empathy) &
+  Triggers matching $Z$-pattern &
+  \emph{Feels} the other's state \\
+Infant (referencing) &
+  Writes new $Z$-pattern into $\mathcal{S}_{\text{eff}}$ &
+  \emph{Calibrates} future responses \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This predicts the permanent impact of early
+caregiving: during the $\eta_{\text{peak}}$ period,
+$Z$-patterns are written at maximum depth.
+A caregiver who chronically transmits high $\Gamma^2$
+(anxiety, hostility) calibrates the infant's
+amygdala baseline to ``the world is dangerous''---a
+setting that persists in $\mathcal{S}_{\text{eff}}$
+for life (cf.\ ACE studies; Felitti et~al., 1998).
+\end{remark}
+
+\begin{remark}[Therapeutic communication as guided
+  $\Gamma^2$ descent]
+\label{rem:therapy}
+Chronic caregiver burden shares the $\Gamma$-topology of
+post-traumatic stress disorder (PTSD, Paper~4):
+a high-$\Gamma^2$ pattern on physical channels
+($K_{\text{sleep}}$, $K_{\text{muscular}}$,
+$K_{\text{thermal}}$) that has been reinforced daily
+until it approaches $\mathcal{S}_{\text{eff}}$.
+Once near-fixed, the pattern cannot be displaced by
+language alone ($K_{\text{language}}$ does
+not reach the affected channels;
+Remark~\ref{rem:empathy}).
+
+Effective psychotherapy succeeds because the therapist
+provides \emph{structured $x_{\text{in}}$ on the
+correct $K$-channels}, enabling a guided C2 descent:
+\begin{enumerate}
+  \item \textbf{Resonance}:
+    the therapist's $\mathcal{S}_{\text{eff}}$ contains
+    matching $Z$-patterns (training $+$ experience),
+    so $\Gamma^2_{\text{empathy}} \neq 0$---the client
+    \emph{feels understood}.
+    This opens $G_{\text{emotional}}$, which mere
+    advice cannot.
+  \item \textbf{Guided re-exposure}:
+    the therapist carefully re-presents
+    $x_{\text{in}}$ at a controlled intensity,
+    allowing C2 to write a new $\Delta Z$ on the
+    trauma channel without overwhelm---gradual gradient
+    descent rather than a single large step that
+    would overshoot.
+  \item \textbf{Action prescription}:
+    effective therapy is not conversation alone
+    but includes \emph{behavioural homework}---physical
+    action that provides $x_{\text{in}}$ on somatic
+    channels ($K_{\text{muscular}}$,
+    $K_{\text{thermal}}$) where C2 can update.
+\end{enumerate}
+The therapeutic relationship is therefore a
+\emph{mutual C2 calibration}: the therapist and client
+jointly perform gradient descent on the client's
+$\Gamma^2$ landscape.
+The session provides $\eta$-elevation (safe novelty
+$\Rightarrow$ dopamine) and structured $x_{\text{in}}$
+on the right channels---precisely the two ingredients
+that unstructured social support cannot reliably supply.
+\end{remark}
+
+\subsection{Reconciliation with established memory neuroscience}
+\label{sec:memory-reconciliation}
+
+\begin{remark}[The hippocampus as episodic C3 relay]
+\label{rem:hippocampus}
+Mainstream neuroscience identifies the hippocampus as
+the ``memory centre'' (Scoville \& Milner, 1957).
+In the $\Gamma$-framework, the hippocampus is not a
+storage device but a \emph{C3 relay specialised for
+episodic binding}: it provides the high-$K$
+cross-dimensional relay required to bind
+what/where/when/how into a single C2 tick.
+
+Patient H.M.\ (bilateral hippocampectomy) could not
+form new episodic memories but could learn new
+motor skills (Corkin, 2002).
+This is predicted by C2: removing the hippocampal
+C3 relay eliminates episodic binding (high-$K$
+cross-dimensional) but leaves single-channel C2
+intact (motor learning in cerebellum, emotional
+conditioning in amygdala).
+
+\begin{center}
+\begin{tabular}{lccl}
+\toprule
+Memory type & Needs hippocampus? & $K$ & $\Gamma$-Net role \\
+\midrule
+Episodic & Yes & High &
+  C3 cross-dimensional relay \\
+Procedural & No & Low &
+  Cerebellar C2 (single-channel) \\
+Emotional & No & Low &
+  Amygdala direct C2 \\
+Priming & No & Low &
+  Same-channel C2 micro-update \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Memory consolidation during sleep
+(hippocampal replay $\to$ cortical transfer;
+Diekelmann \& Born, 2010) is the C3 relay
+gradually ``teaching'' the cortex to reproduce the
+bound $Z$-pattern without the relay---transferring
+from hippocampal-dependent to hippocampal-independent
+$\mathcal{S}_{\text{eff}}$.
+\end{remark}
+
+\begin{remark}[Memory is the impedance configuration,
+  not a stored object]
+\label{rem:memory-is-Z}
+The $\Gamma$-framework predicts that memory is not
+``stored in'' the brain any more than a violin's
+timbre is ``stored in'' the violin.
+The $Z$-pattern \emph{is} the memory: it is the
+configuration of every interface in the system.
+Recalling a memory is not retrieval from a separate
+storage medium but \emph{re-activation} of the
+$Z$-pattern.
+
+Engram cells (Liu et~al., 2012; Josselyn \& Tonegawa,
+2020) are real and experimentally verified: optogenetic
+stimulation of engram-labelled neurons elicits the
+associated memory.
+In $\Gamma$-Net terms, engram cells are
+\emph{entry nodes} of the $Z$-pattern: activating them
+provides the initial $x_{\text{in}}$ that, via C3
+relay, reconstructs the full pattern across all bound
+channels.
+They are not ``containers'' but ``keys''---the
+$Z$-pattern they unlock is distributed across every
+interface that participated in the original binding.
+
+This interpretation originated from two clinical
+observations.
+First, peaceful elders retain complete
+autobiographical identity despite severe physical
+decline---if memory were a stored object it would
+degrade with the substrate, but it does not.
+Second, dementia patients lose memories in strict
+reverse chronological order
+(Remark~\ref{rem:ageing-vs-dementia})---the erasure
+sequence mirrors the $\eta$-weighted writing depth,
+exactly as predicted by C2.
+Together these observations establish that memory is
+the $Z$-pattern \emph{configuration}, with depth
+proportional to $\eta$ at the time of writing.
+\end{remark}
+
+\begin{remark}[LTP and LTD as two views of a
+  single C2 update]
+\label{rem:ltp-ltd}
+Long-term potentiation (LTP) and long-term depression
+(LTD) are conventionally described as two separate
+calcium-dependent mechanisms (Malenka \& Bear, 2004).
+In the $\Gamma$-framework they are a single C2 equation
+viewed from different channels.
+
+When C2 updates impedance toward a new pattern~$B$:
+\[
+  Z \xrightarrow{\Delta Z} Z'
+  \;:\quad
+  \Gamma^2_B \downarrow \;(\text{LTP for }B),
+  \quad
+  \Gamma^2_A \uparrow \;(\text{LTD for }A)\,.
+\]
+Moving $Z$ toward the matching point of~$B$
+necessarily moves it away from the matching point
+of any previously learned pattern~$A$.
+LTP and LTD are therefore not mechanistically
+independent: they are the same impedance shift observed
+from two different input channels.
+
+This predicts that LTP on one pathway and LTD on a
+competing pathway should be correlated in magnitude,
+a prediction consistent with heterosynaptic
+depression data (Chistiakova et~al., 2014).
+More precisely, since both arise from a single
+$\Delta Z$, the magnitudes satisfy
+\[
+  |\Delta\Gamma^2_{\text{LTP}}|
+  + |\Delta\Gamma^2_{\text{LTD}}|
+  = \text{const}
+  \quad\text{(impedance conservation)}\,,
+\]
+whereas the Bienenstock--Cooper--Munro (BCM) model
+predicts a\emph{threshold switch} without
+constraining the magnitudes on competing pathways.
+A patch-clamp experiment measuring simultaneous
+LTP and LTD on two convergent pathways in CA1
+could distinguish these predictions directly.
+\end{remark}
+
+\begin{remark}[The cerebellum as a general-purpose
+  low-$K$ C2 co-processor]
+\label{rem:cerebellum}
+The cerebellum contains $\sim$80\,\% of the brain's
+neurons despite occupying only $\sim$10\,\% of its
+volume.
+In the $\Gamma$-framework, this reflects
+its function as a \emph{massively parallel low-$K$
+C2 engine}.
+Although historically associated with motor control,
+the cerebellum also participates in emotional
+conditioning (Sacchetti et~al., 2002) and cognitive
+timing (Strick et~al., 2009).
+The $\Gamma$-framework explains this naturally:
+the Purkinje-cell architecture implements a
+general-purpose C2 loop---climbing-fibre error
+signal ($\Gamma^2$) drives parallel-fibre $\Delta Z$
+---that operates on \emph{any} low-$K$ channel,
+not only motor channels.
+
+The vast neuron count is needed because real-time
+calibration requires simultaneous C2 updates on
+hundreds of channels in parallel, each at low~$K$
+but with very fast update rates
+($\tau_{\text{cerebellar}} \approx 10$\,ms vs.\
+$\tau_{\text{cortical}} \approx 100$\,ms).
+Cerebellar damage produces \emph{ataxia}
+(loss of coordination, not loss of strength)
+because the C2 co-processor is offline:
+$\Gamma^2$ on motor channels cannot be minimised
+in real time, but the cortical C3 commands remain
+intact.
+\end{remark}
+
+
+% ============================================================
+\section{The Binding Problem as Synchronous C2 Writing}
+\label{sec:binding}
+% ============================================================
+
+Multi-modal perception requires disparate sensory
+channels (vision, audition, touch, olfaction) to be
+unified into a single coherent percept.
+The classical ``binding problem''---how the brain
+knows that a red apple is the same object as the
+sweet taste---has resisted solution because it
+presupposes a central integrator.
+In the $\Gamma$-framework, no such integrator is needed:
+\emph{binding is synchronous C2 writing through shared
+C3 relay nodes}.
+
+\subsection{Binding by temporal coincidence}
+\label{sec:binding-mechanism}
+
+Each sensory modality $\alpha$ contributes an impedance
+change at its own modal complexity~$K_\alpha$:
+$\Delta Z_\alpha = -\eta\,\Gamma_\alpha\,
+x_{\text{in},\alpha}\,x_{\text{out},\alpha}$.
+Two channels $\alpha,\beta$ are \emph{bound} if and only
+if their C2 updates are both non-zero within the same
+update tick~$\tau$:
+\begin{equation}
+  \text{Bound}(\alpha,\beta,\tau)
+  \;\Longleftrightarrow\;
+  \Delta Z_\alpha(\tau) \neq 0
+  \;\wedge\;
+  \Delta Z_\beta(\tau) \neq 0\,.
+  \label{eq:binding-condition}
+\end{equation}
+The activity-gating factor
+$x_{\text{in}} \cdot x_{\text{out}}$ is the
+\emph{coincidence detector}: only channels that are
+simultaneously active participate in the same write.
+The thalamus---the brain's principal C3 relay node---serves
+as the shared interface through which all cortical
+channels must pass, ensuring that co-active channels
+share the same C2 tick.
+
+\begin{remark}[Gamma oscillation as C2 clock]
+\label{rem:gamma-clock}
+The 30--70\,Hz gamma oscillation widely observed in
+cortical recordings corresponds, in this framework,
+to the C2 update clock rate.
+Each gamma cycle ($\sim$25\,ms) defines one binding
+window~$\tau$: channels whose $x_{\text{in}} \cdot
+x_{\text{out}} > 0$ within the same cycle are written
+together and thus bound.
+No additional ``synchronisation mechanism'' is required;
+C2 activity gating \emph{is} the mechanism.
+\end{remark}
+
+\subsection{Corpus callosum as inter-hemispheric C3 relay}
+\label{sec:corpus-callosum}
+
+The two cerebral hemispheres specialise in different
+$K$-ranges:
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Left hemisphere & Right hemisphere \\
+\midrule
+Sequential language ($K \sim O(10)$) &
+  Spatial/holistic ($K \sim O(10^2)$) \\
+Fine motor control & Global pattern recognition \\
+Logical chains & Emotional colour \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The corpus callosum ($\sim 2 \times 10^8$ axons, the
+largest white-matter tract) is the C3 $K$-staircase
+that matches the two hemispheres:
+\begin{equation}
+  \text{L-hemisphere}\;(K_L)
+  \;\underset{\text{corpus callosum}}
+    {\longleftrightarrow}
+  \;(K_R)\;\text{R-hemisphere.}
+  \label{eq:cc-relay}
+\end{equation}
+Here $K_L$ and $K_R$ are order-of-magnitude
+estimates reflecting the sequential ($\sim\!10$
+temporal features) versus spatial ($\sim\!10^2$
+pixel-like features) nature of the dominant
+processing mode in each hemisphere;
+precise values depend on the task-specific
+$K$-decomposition and are not required for the
+qualitative argument.
+
+Callosotomy (split-brain surgery) severs this relay:
+$\Gamma_{L \leftrightarrow R} \to 1$, and the two
+hemispheres become independent networks, each with its
+own binding domain---precisely the split-brain
+phenomenology reported by Gazzaniga (1967).
+
+\begin{remark}[Lateralisation as impedance specialisation]
+\label{rem:lateralisation}
+Hemispheric lateralisation is not a design choice but a
+consequence of C3 efficiency.
+A single hemisphere covering both low-$K$ sequential
+and high-$K$ spatial modes would require a longer
+internal $K$-staircase with higher total $\Gamma^2$.
+Splitting into two specialised hemispheres with a
+dedicated inter-hemispheric relay (corpus callosum)
+minimises the system's total reflection---a direct
+prediction of $\Gamma$-MRP.
+\end{remark}
+
+\begin{remark}[Hemispheric bifurcation as neural Murray's law]
+\label{rem:neural-murray}
+Murray's law for vascular branching states that a parent
+vessel bifurcates when two daughter vessels carry the
+same total flow at lower total impedance
+($r_0^3 = r_1^3 + r_2^3$, Paper~2).
+The hemispheric split obeys the same $\Gamma$-MRP logic
+with neural impedance in place of hydraulic impedance.
+A single cortex spanning $K_{\min} \leftrightarrow
+K_{\max}$ requires an internal $K$-staircase of length
+$\log(K_{\max}/K_{\min})$ with cumulative reflection
+$\Gamma_{\text{single}}^2$.
+Splitting into two specialised hemispheres, each covering
+half the $K$-range, plus a matched inter-hemispheric
+relay of impedance
+$Z_{\text{CC}} = \sqrt{Z_L \cdot Z_R}$, yields:
+\begin{equation}
+  \Gamma_L^2 + \Gamma_R^2 + \Gamma_{\text{CC}}^2
+  \;<\; \Gamma_{\text{single}}^2\,,
+  \label{eq:neural-murray}
+\end{equation}
+which is the neural analogue of the vascular branching
+inequality.
+Both are instances of the same principle:
+\emph{$\Gamma$-MRP drives bifurcation whenever the
+total reflection of two matched sub-networks plus
+their relay is less than the reflection of a single
+unmatched network.}
+This unifies vascular topology (Paper~2) and neural
+topology under a single optimality condition.
+\end{remark}
+
+\begin{remark}[Cortical area count as peripheral interface count]
+\label{rem:cortical-peripheral}
+The HCP multi-modal parcellation identifies
+$\sim$360 cortical areas (180 per hemisphere;
+Glasser et~al., 2016).
+The $\Gamma$-framework predicts that each distinct
+peripheral tissue interface requires a dedicated
+cortical C2 controller and C3 relay node.
+The human body contains $\sim$78 organs
+(anatomical consensus) distributed across $\sim$30
+dermatomes (31 spinal nerve pairs minus C1),
+with bilateral symmetry and multi-modal innervation
+(motor, sensory, autonomic), yielding an estimated
+$78 \times 2 \times 2 \approx 312$ independent
+interface channels---consistent with 360 cortical areas
+to within the counting uncertainty.
+
+The \emph{cortical magnification factor}---the
+disproportionately large cortical area devoted to
+fingertips, lips, and face (the sensory homunculus)---is
+conventionally attributed to peripheral innervation
+density alone.
+However, innervation density does not fully account
+for the observed magnification (Corniani \& Saal, 2020).
+The $\Gamma$-framework provides the missing factor:
+cortical area $\propto K_{\text{peripheral}}$, the
+modal complexity of the tissue interface.
+Fingertips require simultaneous multi-modal binding
+(tactile texture + pressure + proprioception +
+temperature + fine motor control), yielding high~$K$
+and therefore a large C3 relay area.
+The trunk, despite substantial physical area, has
+low multi-modal binding demands (low~$K$) and
+correspondingly small cortical representation.
+
+This somatotopic organisation is present even in
+preterm infants (Dall'Orso et~al., 2018), consistent
+with $Z_0^{\text{DNA}}$ (genetically fixed impedance,
+Theorem~\ref{thm:soul-decomp}): the cortical map
+is a boundary condition, not a learned structure.
+\end{remark}
+
+\begin{remark}[Tree-trunk topology of the central nervous system]
+\label{rem:tree-topology}
+The nervous system's architecture maps onto a tree:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Tree & CNS & $\Gamma$-Net role \\
+\midrule
+Canopy (leaves) & Cerebral cortex &
+  High-$K$ sensory/cognitive processing \\
+Trunk & Spinal cord &
+  C3 main relay ($K$-staircase backbone) \\
+Root system & Peripheral nerves $\to$ organs &
+  Low-$K$ end-effectors (C2 update targets) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Three quantitative predictions follow from this topology:
+\begin{enumerate}
+  \item \textbf{Trunk diameter obeys Murray's law.}
+    The spinal cord is thickest at the cervical
+    enlargement (carrying all limb and organ channels),
+    thins in the thoracic region (upper-limb signals
+    already diverted), and widens again at the lumbar
+    enlargement (lower-limb signals converge).
+    Cross-sectional area at each level equals the
+    Murray-optimal sum of all downstream branch areas.
+  \item \textbf{Trunk severance $=$ downstream $\Gamma \to 1$.}
+    Spinal cord injury at level~$\ell$ sets
+    $\Gamma_{k} = 1$ for all channels $k > \ell$
+    (below the injury): complete reflection, zero
+    transmission, paralysis.
+    Channels $k < \ell$ (above the injury) remain intact.
+    This is exactly the clinical presentation of
+    spinal cord injury, derived here from a single
+    equation.
+  \item \textbf{Bidirectional flow, like sap.}
+    Energy flows upward (sensory $x_{\text{in}}$
+    from organs to cortex) and downward (motor
+    $x_{\text{out}}$ from cortex to organs)
+    simultaneously, with the spinal cord providing
+    C3 impedance matching in both directions.
+    Damage to ascending tracts (posterior columns)
+    produces sensory loss without motor deficit;
+    damage to descending tracts (corticospinal)
+    produces motor deficit without sensory loss---the
+    two flows are physically independent channels
+    sharing the same trunk.
+  \item \textbf{Reflex arcs as spinal-level C3 shortcuts.}
+    The full sensory--cortical--motor loop traverses the
+    entire $K$-staircase twice (ascending + descending),
+    accumulating $\Gamma^2$ at every relay.
+    For survival-critical responses, $\Gamma$-MRP
+    selects a shorter path: the \emph{spinal reflex arc}
+    closes the C2 loop at the spinal level, bypassing
+    cortical processing entirely.
+    \begin{center}
+    \begin{tabular}{lccc}
+    \toprule
+    Path & C3 stages & Latency & Example \\
+    \midrule
+    Reflex arc & $\sim$2 & $\sim$30\,ms & Knee jerk \\
+    Cortical loop & $\sim$14 & $\sim$300\,ms & P300 ERP \\
+    \bottomrule
+    \end{tabular}
+    \end{center}
+    The $\sim$7$\times$ stage-count ratio
+    (14/2) compares with the observed
+    $\sim$10$\times$ latency ratio (300/30).
+    The discrepancy is expected: synaptic delay
+    is not perfectly uniform across relay types
+    (chemical synapses in cortex $\approx$
+    1--2\,ms each vs.\ electrical gap junctions in
+    some spinal interneurons $\approx$ 0.1\,ms),
+    and the cortical loop includes additional
+    thalamo-cortical relays not counted as C3
+    stages.
+    The prediction is that the ratio should lie
+    in the range $[N_{\text{reflex}}/N_{\text{cortical}},\;
+    \tau_{\text{cortical}}/\tau_{\text{reflex}}]$,
+    bracketed by stage count and total latency.
+    The subjective experience of ``withdrawing before
+    feeling pain'' is a direct consequence: the motor
+    reflex completes in $\sim$2 C3 stages while pain
+    perception requires the full $\sim$14-stage ascent
+    to cortex.
+\end{enumerate}
+\end{remark}
+
+\subsection{Sensory misalignment and compensatory behaviour}
+\label{sec:misalignment}
+
+When two bound channels arrive out of synchrony---for
+example, seeing lip movement at tick~$t$ but hearing
+the voice at tick~$t + \Delta$---the binding condition
+(Eq.~\ref{eq:binding-condition}) fails.
+The organism's learned $Z$-pattern expects synchrony;
+the mismatch elevates $\Gamma^2$, triggering the
+Perception--Error--Compensation loop
+(Paper~0, Perception--Error--Compensation Remark):
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+$\Delta$ range & Compensation & Percept \\
+\midrule
+$< 150$\,ms & C2 temporal recalibration &
+  ``Normal'' (unnoticed) \\
+150--300\,ms & Head turn, gaze shift &
+  ``Something is off'' \\
+$> 300$\,ms & Binding abandoned &
+  Two separate events \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The ventriloquism effect---sound perceived at the
+visual source location---is C2 overwriting the auditory
+spatial map with the dominant visual $Z$-pattern,
+because vision has higher spatial~$K$ and therefore
+lower $\Gamma^2$ on the spatial dimension.
+
+\subsection{Missing-channel compensation}
+\label{sec:missing-channel}
+
+\begin{remark}[Cross-modal plasticity as C2 repurposing]
+\label{rem:cross-modal}
+When a sensory channel is permanently absent
+($x_{\text{in},\alpha} = 0$ $\forall\,t$), C2 produces
+$\Delta Z_\alpha = 0$: the cortical territory
+assigned to channel~$\alpha$ is never written.
+However, neighbouring channels with
+$x_{\text{in}} > 0$ provide lateral
+$x_{\text{out}}$ that invades the unused territory.
+C2 then writes \emph{their} $Z$-patterns into the
+vacated substrate:
+\begin{itemize}
+  \item \textbf{Congenital blindness}: visual cortex V1
+    is rewritten by tactile and auditory inputs
+    (Braille reading activates V1; Sadato et~al., 1996).
+  \item \textbf{Congenital deafness}: auditory cortex A1
+    is rewritten by visual and somatosensory inputs
+    (sign-language processing in A1; Nishimura et~al., 1999).
+\end{itemize}
+No special ``plasticity mechanism'' is required;
+C2 with activity gating automatically repurposes unused
+$Z$-substrate.
+\end{remark}
+
+\begin{remark}[Deafness and language: the C3 re-routing
+  prediction]
+\label{rem:deaf-language}
+Language is a $Z$-pattern, not a sound.
+In hearing individuals, the language $K$-staircase
+runs through the auditory channel.
+In congenital deafness, $x_{\text{in,auditory}} = 0$,
+so C2 never writes the auditory language pathway.
+Sign language re-routes the same $Z$-pattern through
+the visual--motor channel:
+the C2 equation is substrate-independent
+(Paper~3, C2 universality).
+If sign language is introduced after the developmental
+$\eta$-peak (age $\sim$5), the visual language
+$K$-staircase is incompletely formed---predicting the
+well-documented ``language deprivation syndrome'' in
+late-signing deaf children.
+\end{remark}
+
+\subsection{Self-talk as C3 dimensional compression}
+\label{sec:self-talk}
+
+\begin{remark}[Verbalisation as external C3 loop]
+\label{rem:self-talk}
+Internal cognitive states reside in the PFC at modal
+complexity $K_{\text{PFC}} \sim O(10^2)$.
+When internal $\Gamma^2$ is high (emotional activation,
+confusion, conflict), $\Gamma$-MRP drives the system to
+find a discharge pathway.
+The language channel provides a well-trained
+$K$-staircase:
+\[
+  K_{\text{PFC}} \;(\sim 10^2)
+  \;\xrightarrow[\text{Broca}]{\text{C3}}
+  K_{\text{language}} \;(\sim 10^1)
+  \;\xrightarrow[\text{motor}]{\text{C3}}
+  K_{\text{voice}} \;(\sim 10^0)
+  \;\to\; \text{sound}
+  \;\to\; \text{ear}
+  \;\xrightarrow[\text{Wernicke}]{\text{C3}}
+  K_{\text{PFC}}
+\]
+The compression from $K \sim 10^2$ to $K \sim 10^1$
+forces the speaker to discard irrelevant dimensions,
+retaining only the most salient features of the
+internal state.
+This is why ``saying it out loud'' clarifies
+thinking---the C3 compression is a physical filter.
+Writing provides the same compression with an
+additional advantage: the output persists as a visual
+$x_{\text{in}}$ that can be re-read, enabling
+iterative C2 refinement.
+\end{remark}
+
+\begin{remark}[Language fluency vs.\ content novelty]
+\label{rem:language-compositionality}
+The language \emph{channel} (phonology, grammar)
+converges to $\Gamma^2 \approx 0$ after years of C2
+update and enters $\mathcal{S}_{\text{eff}}$.
+Fixed phrases (``hello,'' ``thank you'') are
+fully compressed paths with $\Gamma^2 \approx 0$.
+However, sentences are \emph{compositional}: each
+novel combination of words requires a new
+$K_{\text{PFC}} \to K_{\text{language}}$ compression
+mapping that has never been executed.
+The subjective experience of ``thinking about what to
+say'' is therefore not language processing
+(which is automatic) but real-time C3 compression of a
+novel high-$K$ state into the low-$K$ language channel.
+\end{remark}
+
+\begin{remark}[Environmental noise as binding dilution]
+\label{rem:noise-binding}
+C2 activity gating does not distinguish signal from
+noise: any channel with $x_{\text{in}} \cdot
+x_{\text{out}} > 0$ participates in the current write.
+In a quiet environment, only the target channels are
+active; C2 writes a clean, high-contrast $Z$-pattern.
+In a noisy environment, many irrelevant channels are
+simultaneously activated by ambient stimuli,
+diluting the binding:
+\[
+  \text{SNR}_{\text{binding}}
+  = \frac{\sum_{\text{target}} |\Delta Z_\alpha|}
+         {\sum_{\text{noise}} |\Delta Z_\beta|}
+  \;<\; \theta_{\text{recall}}
+  \;\Rightarrow\;
+  \text{memory retrieval fails.}
+\]
+This provides the physical basis for two well-known
+observations:
+\begin{enumerate}
+  \item \textbf{Learning requires low-noise environments}:
+    effective C2 binding demands that target-channel
+    $|\Delta Z|$ dominates the total write.
+    Classrooms, libraries, and study environments
+    minimise $\sum_{\text{noise}} |\Delta Z_\beta|$.
+  \item \textbf{Context-dependent memory}:
+    environmental noise that \emph{was} present during
+    learning is written into the $Z$-pattern alongside
+    the target.
+    Recall is facilitated when the same noise is
+    re-presented (reinstating the bound $x_{\text{in}}$
+    pattern), consistent with encoding-specificity
+    findings (Tulving \& Thomson, 1973).
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Metabolic modal transfer and subjective relaxation]
+\label{rem:modal-transfer}
+In a familiar environment, most impedance mismatches are
+same-dimensional: the learned $Z$-pattern is well-matched
+($\Gamma^2 \approx 0$), C2 updates are small, and C3
+is rarely triggered.
+The brain operates in ``autopilot''---metabolic cost is
+dominated by low-$K$ routine channels.
+Over time, un-updated channels accumulate impedance debt
+$D_Z$ while the novelty-dependent learning rate $\eta$
+declines (no new $x_{\text{in}}$ patterns).
+The subjective experience is staleness and fatigue.
+
+Entering a radically different environment (e.g.\
+international travel) simultaneously invalidates
+$Z$-patterns across multiple $K$-dimensions:
+language ($K_{\text{ling}}$), food
+($K_{\text{gustatory}}$), visual scenery
+($K_{\text{visual}}$), social norms
+($K_{\text{social}}$), and climate
+($K_{\text{thermal}}$).
+The massive cross-dimensional mismatch triggers
+widespread C3 relay activation, forcing C2 to
+recalibrate many channels simultaneously.
+The metabolic cost shifts from low-$K$ routine
+channels to high-$K$ novelty channels:
+\[
+  \frac{d}{dt}
+  \left(
+    \frac{\Sigma\Gamma^2_{\text{high-}K}}
+         {\Sigma\Gamma^2_{\text{total}}}
+  \right) > 0\,.
+\]
+Crucially, novelty elevates dopaminergic $\eta$
+(Paper~3, Lifecycle Equation), re-enabling C2 updates
+on channels that had been stagnant.
+The subjective experience is ``tiring but refreshing''
+---high metabolic expenditure, but directed at
+productive $\Delta Z$ rather than chronic $D_Z$
+accumulation.
+
+The prediction extends to return-from-travel syndrome:
+upon return, the familiar environment re-invalidates the
+travel-updated $Z$-patterns while novelty-driven $\eta$
+has already subsided, producing high $\Gamma^2$ with
+low $\eta$---the precise condition for subjective
+malaise.
+\end{remark}
+
+\begin{remark}[Dopamine as the mathematically necessary $\eta$-modulator]
+\label{rem:dopamine-eta}
+A fixed learning rate $\eta$ is unstable:
+too high causes oscillation, too low prevents adaptation.
+$\Gamma$-MRP requires $\eta$ to be dynamic.
+Variational optimisation of the reflection action
+$\mathcal{A}[\Gamma] = \int \Sigma\Gamma^2\,dt$ with
+respect to $\eta$ yields:
+\begin{equation}
+  \eta^*(t) \;\propto\; -\frac{d\,\Gamma^2}{dt}\,.
+  \label{eq:eta-optimal}
+\end{equation}
+The optimal $\eta$ is \emph{large} when $\Gamma^2$ is
+decreasing (``correct direction---accelerate learning'')
+and \emph{small} when $\Gamma^2$ is increasing or
+stationary (``wrong direction---stop'').
+This is precisely the function of the dopaminergic
+system: ventral tegmental area (VTA) neurons fire when
+outcome exceeds prediction (negative reward prediction
+error $\equiv$ $d\Gamma^2/dt < 0$), releasing dopamine
+that amplifies synaptic plasticity (long-term
+potentiation).
+Dopamine is therefore not a ``reward molecule'' but an
+$\eta$-gain signal---a mathematical necessity of C2,
+not an evolutionary design choice.
+
+\emph{Addiction} follows directly: exogenous substances
+(nicotine, opioids, amphetamines) hijack the
+$\eta$-modulator, artificially setting $\eta \gg \eta^*$
+on the reward channel.
+The $Z$-pattern of substance use is written into
+$\mathcal{S}_{\text{eff}}$ with far fewer repetitions
+than normal motor learning ($\eta \times n = \text{const}$;
+high $\eta$ compensates for low $n$).
+Once inside $\mathcal{S}_{\text{eff}}$, the pattern is
+irremovable (Theorem~\ref{thm:first-law}), explaining
+lifelong relapse vulnerability.
+\end{remark}
+
+\begin{remark}[The neural operating cycle]
+\label{rem:neural-cycle}
+The binding, learning, and recovery mechanisms of this
+section form a single closed operating cycle:
+\begin{enumerate}
+  \item \textbf{Wake: C2 $+$ dopamine.}
+    $\Gamma$-MRP drives C2 updates; dopamine modulates
+    $\eta$ via Eq.~(\ref{eq:eta-optimal}).
+  \item \textbf{Metabolic cost.}
+    Each $\Delta Z \neq 0$ consumes ATP.
+    ATP hydrolysis yields ADP $\to$ AMP $\to$
+    \emph{adenosine}, which accumulates monotonically
+    during wakefulness.
+  \item \textbf{Shutdown trigger.}
+    Adenosine binds A$_1$ receptors on wake-promoting
+    neurons, progressively inhibiting arousal
+    ($Z_{\text{arousal}} \downarrow$) until the
+    Television Inequality
+    (Theorem~\ref{thm:television}) fails:
+    $Z_{\text{arousal}} \cdot \sum G_i \cdot Q_{\text{PFC}}
+    < \theta \Rightarrow$ loss of consciousness (sleep).
+  \item \textbf{Sleep: clearance $+$ reset.}
+    Glymphatic flow clears adenosine and metabolic
+    waste ($D_Z$ reduction).
+    Gate-leak processing during REM (Paper~4) replays
+    and consolidates the day's $Z$-updates.
+  \item \textbf{Wake: cycle restarts.}
+    Adenosine cleared $\to$ $Z_{\text{arousal}}$
+    restored $\to$ Television Inequality satisfied
+    $\to$ consciousness returns.
+\end{enumerate}
+This five-step cycle is not a biological design but a
+\emph{physical consequence} of C2: any system that
+updates impedance by gradient descent must consume
+energy, accumulate waste, and periodically halt to
+clear that waste.
+The infant's 16-hour sleep schedule and the adult's
+8-hour schedule differ only in $\eta$: higher $\eta$
+(developmental peak) $\to$ faster ATP consumption $\to$
+faster adenosine accumulation $\to$ more frequent and
+longer sleep.
+\end{remark}
+
+\begin{remark}[Dreaming as gate-leak binding]
+\label{rem:dreaming}
+During REM sleep, thalamic gates are partially open
+(gate leak, $0 < G_i \ll 1$; Paper~4,
+\S\,Sleep disorders).
+In this regime, C2 still executes
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+but the $x_{\text{in}}$ vectors are internally generated
+(no external stimulation), drawn from the day's
+residual activation patterns.
+The partial-gate condition admits multiple channels
+simultaneously but without the structured
+$x_{\text{in}}$ of wakefulness.
+The binding condition (Eq.~\ref{eq:binding-condition})
+is satisfied by whichever channels happen to have
+residual $x_{\text{in}} \cdot x_{\text{out}} > 0$ in the
+same tick---a stochastic process.
+The result is \emph{dreams}: coherent but unexpected
+bindings of memory fragments that would never co-occur
+during structured wakefulness.
+The ``narrative logic'' of dreams reflects the C3
+relay topology (channels that share a relay node are
+more likely to be co-activated), while the
+``bizarreness'' reflects the random gating
+(channels that normally never bind are forced together
+by chance).
+\end{remark}
+
+\begin{remark}[Attention as gate selection; ADHD as gate
+  instability]
+\label{rem:attention}
+Selective attention corresponds to setting one thalamic
+gate high ($G_{\text{target}} \approx 1$) while
+suppressing all others
+($G_{j \neq \text{target}} \approx 0$).
+This maximises the binding SNR
+(Remark~\ref{rem:noise-binding}) by ensuring that
+only target-channel $\Delta Z$ dominates the write.
+Each gate $G_i$ has an RC time constant $\tau_G$
+determined by the prefrontal--thalamic feedback loop.
+Sustained attention requires $\tau_G$ to exceed the
+task duration: the gate must remain open long enough
+for C2 to complete meaningful $Z$-updates.
+
+ADHD is, in this framework, a shortened $\tau_G$:
+\begin{equation}
+  \tau_{G,\text{ADHD}} \;\ll\; \tau_{G,\text{typical}}
+  \;\Rightarrow\;
+  \text{gate switches before C2 completes.}
+  \label{eq:adhd}
+\end{equation}
+The consequence is not inability to learn (C2 is
+intact) but inability to \emph{bind} a coherent
+$Z$-pattern before the gate switches to another
+channel.
+Stimulant medications (methylphenidate, amphetamine)
+increase dopaminergic tone in the PFC, effectively
+lengthening $\tau_G$ by stabilising the
+prefrontal--thalamic loop---consistent with the
+$\eta$-modulation framework of
+Remark~\ref{rem:dopamine-eta}.
+\end{remark}
+
+\begin{remark}[Emotion as low-$K$ broadcast]
+\label{rem:emotion}
+The amygdala receives sensory input via a
+\emph{subcortical shortcut} (thalamus $\to$ amygdala,
+bypassing cortex; LeDoux, 1996).
+This pathway has very low $K$ ($\sim O(1)$): it carries
+only coarse threat/reward classification, not detailed
+feature analysis.
+In $\Gamma$-Net terms, the amygdala is a
+\emph{low-$K$ fast C1 detector}: it evaluates $\Gamma^2$
+on basic survival channels (predator, food, mate)
+before the high-$K$ cortical analysis is complete.
+
+When $\Gamma^2_{\text{amygdala}}$ exceeds a threshold,
+the amygdala triggers a system-wide response:
+\begin{itemize}
+  \item \textbf{Autonomic broadcast}:
+    sympathetic activation changes $Z_{\text{cardiac}}$,
+    $Z_{\text{vascular}}$, $Z_{\text{respiratory}}$
+    simultaneously (fight-or-flight).
+  \item \textbf{Gate override}:
+    $G_{\text{threat}} \to 1$, all other $G_i \to 0$
+    (attentional capture by emotional stimulus).
+  \item \textbf{$\eta$ amplification}:
+    amygdala $\to$ VTA projection releases dopamine,
+    ensuring the threatening $Z$-pattern is written
+    with high $\eta$ (one-trial fear learning).
+\end{itemize}
+Emotional ``irrationality'' is therefore not a failure
+of the system but the intended low-$K$ fast path
+overriding the slow high-$K$ cortical analysis---a
+$\Gamma$-MRP optimal strategy when speed matters more
+than precision.
+\end{remark}
+
+\begin{remark}[Creativity as gate relaxation]
+\label{rem:creativity}
+Creativity requires binding channels that are normally
+separated---connecting ideas from different $K$-domains
+that would not co-occur in focused attention.
+In the framework, this corresponds to \emph{relaxing}
+the gate selectivity: instead of
+$G_{\text{target}} = 1,\; G_{\text{other}} = 0$
+(focused attention), the creative state sets
+$G_i \approx 0.3$ across many channels simultaneously.
+
+This increases the number of channels that pass the
+binding condition (Eq.~\ref{eq:binding-condition})
+per tick, enabling \emph{remote associations}---bindings
+between channels with large $K$-separation that are
+normally isolated.
+The cost is reduced binding SNR
+(Remark~\ref{rem:noise-binding}): many weak bindings
+instead of one strong binding.
+
+This explains two observations:
+\begin{enumerate}
+  \item \textbf{Creativity and relaxation co-occur}:
+    showers, walks, and drowsiness are creative because
+    prefrontal gate control weakens, allowing wider
+    binding.
+  \item \textbf{Creativity and focus are antagonistic}:
+    tight gate ($G_{\text{target}} = 1$) blocks remote
+    associations; loose gate allows them but prevents
+    deep single-channel processing.
+    The ``incubation effect'' is the alternation between
+    these two modes.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Intuition as $\mathcal{S}_{\text{eff}}$
+  direct output]
+\label{rem:intuition}
+Expert intuition---the immediate ``knowing'' without
+conscious reasoning---is the output of a $Z$-pattern
+that has entered $\mathcal{S}_{\text{eff}}$ through
+thousands of C2 updates.
+The pattern is so deeply written ($\Gamma^2 \approx 0$)
+that it does not require PFC processing: the input
+$x_{\text{in}}$ directly produces $x_{\text{out}}$
+through the fixed $Z$, bypassing the high-$K$ cortical
+reasoning loop entirely.
+
+In contrast, novice reasoning must traverse the full
+$K$-staircase (input $\to$ PFC analysis $\to$ decision
+$\to$ output), accumulating C3 relay delays and
+$\Gamma^2$ at each stage.
+The subjective difference between ``I know this is
+right'' (intuition) and ``let me think about it''
+(reasoning) corresponds to:
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+& Intuition & Reasoning \\
+\midrule
+$Z$-pattern location & $\mathcal{S}_{\text{eff}}$ &
+  Active $Z$ (still updating) \\
+C3 stages traversed & $\sim$2 (reflex-like) &
+  $\sim$14 (full cortical loop) \\
+Latency & $\sim$100\,ms & $\sim$1--10\,s \\
+Confidence & High (but not infallible) & Variable \\
+\bottomrule
+\end{tabular}
+\end{center}
+Intuition can be wrong when the environment changes but
+$\mathcal{S}_{\text{eff}}$ has not---the pattern is
+frozen and cannot update.
+This is the expert's ``experience trap'': the same
+mechanism that enables instant correct responses in
+familiar situations produces instant \emph{wrong}
+responses in unfamiliar situations that superficially
+resemble familiar ones.
+\end{remark}
+
+\begin{remark}[``Sixth sense'' as sub-threshold amygdala
+  detection]
+\label{rem:sixth-sense}
+The subjective experience of ``sensing danger without
+knowing why'' is not a sixth sensory modality but the
+output of the amygdala's low-$K$ fast pathway
+(Remark~\ref{rem:emotion}) processing sub-threshold
+inputs from the standard five senses.
+Peripheral cues---a subtle change in ambient sound,
+a faint odour, a movement in peripheral vision---enter
+the amygdala via the subcortical shortcut in
+30--74\,ms (Remark~\ref{rem:measurement-loop}),
+triggering $\Gamma^2_{\text{threat}} > 0$ before PFC
+has completed conscious evaluation (200--300\,ms).
+
+The subjective sequence is:
+\begin{enumerate}
+  \item ``Something feels wrong'' (amygdala output,
+    no PFC involvement).
+  \item ``I don't know why'' (PFC has not yet processed
+    the cue).
+  \item Seconds later: ``Ah, \emph{that's} what it was''
+    (PFC completes analysis and identifies the cue).
+\end{enumerate}
+The ``sixth sense'' is the temporal gap between
+amygdala detection and cortical awareness, not evidence
+of an additional sensory channel.
+\end{remark}
+
+\begin{remark}[Remote sensing: physical limits and the
+  $\mathcal{S}_{\text{eff}}$ alternative]
+\label{rem:remote-sensing}
+Reports of ``sensing a loved one in danger at a
+distance'' are physically constrained by the
+signal-to-noise ratio of brain-to-brain electromagnetic
+coupling.
+The brain emits $\sim$10$^{-12}$\,W of electromagnetic
+power; the Johnson--Nyquist noise floor at the
+receiver is $P_{\text{noise}} = k_B T \Delta f \approx
+4 \times 10^{-17}$\,W.
+At the scalp, SNR $\approx 10^5$ (EEG works), but
+power falls as $1/r^2$; beyond $\sim$3\,cm,
+SNR $< 1$ and no information can be decoded.
+\emph{Brain-to-brain electromagnetic communication
+at macroscopic distances is therefore physically
+impossible.}
+
+The $\Gamma$-framework offers a non-supernatural
+alternative:
+\begin{enumerate}
+  \item \textbf{$\mathcal{S}_{\text{eff}}$ convergence}:
+    years of co-habitation produce mutual C2
+    calibration, making the two $S_{\text{eff}}$
+    nearly identical.
+    Both individuals respond to the same environmental
+    risk cues with the same $\Gamma^2$ pattern.
+  \item \textbf{Sub-threshold cue storage}:
+    during the last face-to-face interaction, the
+    partner's micro-expressions (vocal pitch, gaze
+    aversion, respiration rate) were detected by
+    the observer's amygdala and written into
+    a transient $Z$-buffer.
+    Background processing of this buffer may complete
+    hours later, producing anxiety that coincides
+    with the actual event.
+  \item \textbf{Confirmation bias}:
+    worry episodes are frequent ($\sim$100/year);
+    actual events are rare ($\sim$1/year).
+    Only coincidences are remembered (high-$\eta$
+    emotional write), inflating subjective
+    accuracy to $\sim$100\,\% against a base
+    rate of $\sim$1\,\%.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}[Self-confidence as pre-PFC action
+  threshold]
+\label{rem:confidence}
+Self-confidence is the willingness to act on
+$\mathcal{S}_{\text{eff}}$ output (amygdala/intuition,
+$\sim$30--100\,ms) before PFC confirmation
+($\sim$200--300\,ms).
+Whether this willingness exists depends on a
+single $Z$-pattern:
+``my sub-threshold $\Gamma^2$ detections are reliable.''
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+& High confidence & Low confidence \\
+\midrule
+$Z$-pattern in $S_{\text{eff}}$ &
+  ``trust intuition'' & ``distrust intuition'' \\
+Action pathway &
+  Amygdala $\to$ direct output &
+  Amygdala $\to$ wait for PFC \\
+Response latency & $\sim$100\,ms & $\sim$1--10\,s \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This pattern is trained by C2:
+each time a sub-threshold detection is \emph{validated}
+by subsequent events, dopamine ($\eta \uparrow$)
+reinforces the ``trust'' $Z$-pattern (LTP).
+Each time it is \emph{invalidated} or \emph{dismissed
+by others}, the competing ``distrust'' pattern is
+reinforced (LTD for ``trust'').
+Chronic invalidation (controlling relationships,
+repeated failure) writes ``distrust'' deeply into
+$\mathcal{S}_{\text{eff}}$, producing low
+self-confidence that is resistant to verbal
+encouragement ($K_{\text{language}}$ cannot reach the
+affected somatic channels;
+Remark~\ref{rem:therapy}).
+Rebuilding confidence requires structured
+\emph{experiential} success---providing
+$x_{\text{in}}$ on the correct channels to drive
+C2 back toward the ``trust'' $Z$-pattern.
+\end{remark}
 
 
 % ============================================================
@@ -1102,6 +2560,66 @@ is bounded above by~$1$.
 A bounded, monotonically increasing function reaches the
 bound in finite time.
 \end{proof}
+
+\begin{remark}[Peaceful ageing vs.\ dementia:
+  two modes of $\mathcal{S}_{\text{eff}}$ at end of life]
+\label{rem:ageing-vs-dementia}
+The death theorem predicts that every individual
+reaches $\Gamma^2 \to 1$, but it does not specify
+\emph{how} the null space erodes.
+Observation of two end-of-life trajectories
+motivates the following distinction.
+
+\textbf{Peaceful ageing.}
+$\eta$ decays uniformly across all channels
+(Second Law).
+No new patterns enter $\mathcal{S}_{\text{eff}}$,
+but none are removed either: the elder retains
+a complete identity---knowing who they are,
+who they love, and what they have lived---until
+the body's $\Gamma^2_{\text{basal}}$ reaches~$1$.
+$\mathcal{S}_{\text{eff}}$ is \emph{intact at
+the moment of death}.
+
+\textbf{Dementia (Alzheimer's type).}
+$\eta$ drops \emph{asymmetrically}: specific cortical
+regions (hippocampus, entorhinal cortex) lose C2
+capacity first, while primary sensory and motor areas
+are preserved.
+$\mathcal{S}_{\text{eff}}$ erodes in reverse
+chronological order:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Lost first & Lost last & $\Gamma$-Net reason \\
+\midrule
+Recent memories &
+  Childhood memories &
+  Low-$\eta$ writes are shallow $Z$-patterns \\
+Names of acquaintances &
+  Mother's face &
+  High-$\eta_{\text{peak}}$ writes are deepest \\
+Executive planning &
+  Motor habits (walking) &
+  High-$K$ PFC fails before low-$K$ motor \\
+\bottomrule
+\end{tabular}
+\end{center}
+The \emph{subjective horror} of dementia has a precise
+physical description: $\mathcal{S}_{\text{eff}}$
+disintegrates before $\Gamma^2_{\text{basal}} \to 1$.
+The ``soul'' departs while the body remains alive.
+
+This distinction arose from observing that peaceful
+elders retain complete autobiographical identity
+despite severe physical decline---implying that
+$\mathcal{S}_{\text{eff}}$ integrity is independent
+of $\Gamma^2_{\text{basal}}$.
+The reverse question---``what if
+$\mathcal{S}_{\text{eff}}$ erodes first?''---yields
+the dementia phenotype as a \emph{prediction}, not
+a post-hoc label.
+\end{remark}
 
 \subsection{The Moral Constraint Theorem}
 \label{sec:moral-constraint}
@@ -1451,6 +2969,35 @@ cochlear emission (15--30~min), pure thermal noise
     not a spatial location.
 \end{enumerate}
 
+\subsection{Measurement protocol for~$K$}
+\label{sec:K-protocol}
+The mode count~$K_i$ for a neural or vascular element
+is defined as the number of morphologically
+distinguishable waveguide segments between the cell body
+and the network boundary.
+For a cortical pyramidal neuron:
+basal dendrite tree ($K=1$), soma ($K=1$),
+apical dendrite ($K=1$), axon initial segment ($K=1$),
+axon ($K=1$) $\Rightarrow K \approx 5$.
+
+This counting protocol has an intrinsic uncertainty
+of~$\pm 1$: whether the apical tuft constitutes one
+segment or two is morphologically ambiguous.
+However, the key results of this paper
+(irreducibility theorem, $A_{\text{cut}} > 0$,
+television inequality) depend only on
+$K_i \neq K_j$ between adjacent neural populations,
+not on the absolute values of~$K$.
+A systematic error of~$\pm 1$ shifts all $K$ values
+by the same amount and leaves $\Delta K = K_i - K_j$
+unchanged.
+
+An independent inter-rater study in which two
+neuroanatomists independently count waveguide segments
+for a fixed set of cell types would establish the
+reliability of this protocol.
+We propose this as a necessary validation step.
+
 \subsection{The television as a boundary case}
 
 Current artificial neural networks (including large language
@@ -1698,6 +3245,24 @@ access---the physical substrate of intuition.
     location, not biochemical markers.
   \item $\Pi_{\Gamma}$ correlates with tissue damage
     in sedated patients, independent of anaesthetic depth.
+  \item \textbf{LTP/LTD magnitude conservation}:
+    simultaneous patch-clamp recording of two convergent
+    pathways in CA1 should show
+    $|\Delta\Gamma^2_{\text{LTP}}|
+    + |\Delta\Gamma^2_{\text{LTD}}| = \text{const}$.
+    BCM theory does not predict this constraint.
+  \item \textbf{Reflex-to-cortical latency ratio}:
+    the ratio should lie in $[N_{\text{reflex}}/
+    N_{\text{cortical}},\;
+    \tau_{\text{cortical}}/\tau_{\text{reflex}}]$
+    = $[0.14,\; 0.10]$, bounded by C3 stage count.
+  \item \textbf{Meditation and amygdala latency}:
+    long-term meditators ($>10{,}000$\,hours) should show
+    increased initial response latency of the subcortical
+    amygdala pathway (MEG, not fMRI), not merely
+    reduced amplitude---reflecting rewriting of the
+    $\Gamma^2 \to 0$ defence in
+    $\mathcal{S}_{\text{eff}}$.
 \end{enumerate}
 
 

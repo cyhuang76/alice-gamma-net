@@ -11,8 +11,8 @@ repository-code: "https://github.com/cyhuang76/alice-gamma-net"
 doi: "10.5281/zenodo.18751831"
 url: "https://doi.org/10.5281/zenodo.18751831"
 license: AGPL-3.0-or-later
-version: "3.9.0"
-date-released: "2026-03-16"
+version: "4.0.0"
+date-released: "2026-03-25"
 keywords:
   - gamma-net
   - impedance mismatch
@@ -33,14 +33,13 @@ abstract: >-
   theory. The system implements a complete electronic lifeform (ALICE)
   with 42 brain modules, 31 body organs, and closed-loop consciousness,
   governed by a single variational principle: A[Gamma] = integral of
-  sum Gamma_i^2 dt -> min. v3.8.0 adds the Four Laws of the Null Space
-  (parallel to thermodynamics), Moral Constraint Theorem, caregiver
-  triple-load model, surface observability (skin as impedance boundary),
-  obesity as impedance-driven metabolic strategy, willpower non-existence
-  proof, 5-organ disease cascade simulation, NHANES 10-cycle validation
-  (n=49,774, zero fitted parameters), and 18 testable predictions with
-  falsification criteria. v3.9.0 adds 9 new figures across all 6 papers,
-  unified LaTeX infrastructure (gammanet.sty), project structure
-  reorganization, and build_figures.py automation.
-  Includes 220+ source files, 93,000+ lines, 3,274 tests, 27 figures,
-  and 6 papers totalling 70+ pages.
+  sum Gamma_i^2 dt -> min. v4.0.0 completes the axiomatic foundations:
+  P1 adds TV origin story, peaceful ageing vs dementia S_eff erosion,
+  social referencing as S_eff bootstrapping, LTP/LTD conservation
+  prediction, and K-counting protocol. P2 adds Windkessel ageing model,
+  tri-network (arterial/venous/lymphatic), neurovascular coupling
+  (P_in = P_basal * (1 - Gamma_vessel^2)), multiplicative tensor product
+  dual-network, nested maternal-foetal C1, fontanelle C1 theorem,
+  brain K-vulnerability, exercise/sleep/fever Remarks, 8-organ Omega_i
+  table, portal system, and emotion-vascular feedback loop.
+  Includes 220+ source files, 6 papers totalling 96 pages.

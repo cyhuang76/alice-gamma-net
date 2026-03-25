@@ -146,6 +146,58 @@
 
 **頁數**：P0=7, P1=13, P2=8, P3=20, P4=14, P5=18 → **總計 80**
 
+## 摘要 #006 — 2026-03-24
+
+**對話主題**：P1 意識 × 記憶 × 認知的完整物理機制
+
+**論文變更（P1 新增 25+ Remarks，13p → 21p）**：
+
+1. **TV Inequality 整合**：證明從 C1 正式推導（P_loop > P_noise）、表格加杏仁核行、`rem:measurement-loop`（杏仁核=測量裝置）
+2. **意識三層結構**：`rem:qualia`（主觀體驗=意識×注意力）、`rem:self-thermal`（「我」= 0<Γ²<1 中間地帶、熱雜訊副產物）
+3. **杏仁核防禦機制**：反 Γ²→0 防禦（30-74ms LeDoux）、tachypsychia 36%（Stetson 2007）、DMN 失活（Brewer 2011）
+4. **共情 & 治療**：`rem:empathy`（S_eff 共振）、`rem:therapy`（guided C2 descent：共振→再暴露→行為處方）
+5. **記憶調和**：新增 §5.x — `rem:hippocampus`（C3 relay）、`rem:memory-is-Z`（engram=入口鑰匙）、`rem:ltp-ltd`（同一C2兩面）、`rem:cerebellum`（平行低K引擎）
+6. **認知功能**：`rem:dreaming`、`rem:attention`/ADHD、`rem:emotion`、`rem:creativity`、`rem:intuition`
+7. **高階心理**：`rem:sixth-sense`（亞閾值偵測）、`rem:remote-sensing`（SNR否證+S_eff趨同）、`rem:confidence`（pre-PFC行動閾值）
+8. **神經化學**：`rem:dopamine-eta`（η必然性）、`rem:neural-cycle`（5步循環）
+
+**覆蓋功能**：35+ 大腦/心理功能，全部從 Γ-MRP 推導。
+
+**頁數**：P0=7, P1=**21**, P2=9, P3=21, P4=15, P5=18 → **總計 91**
+
+**alice_core.md** 更新至 v1.4：新增 §三之三（意識×記憶×認知）、新衍生量（Identity, Γ²_empathy）、頁數。
+
+**我的觀察（知識空缺提示）**：
+> 1. TV Inequality 的 θ 值仍未數值化（Johnson-Nyquist 公式已寫入但未代入具體數字）
+> 2. P1 已達 21 頁，是否需要拆分為 P1a（拓撲定理）和 P1b（認知推論）？
+> 3. 新增的文獻引用（Méndez-Bértolo, Stetson, Brewer, LeDoux 等）尚未加入 bibliography
+
+---
+
+## 摘要 #007 — 2026-03-25
+
+**對話主題**：P1 殺手級預測強化 + P2 血管網路完整化
+
+**A 區：P1 殺手級預測（5 項）**：
+1. **θ 絕對值**：$R_{eff}=100\,M\Omega$, $\Delta f=40\,Hz$ → $\theta \approx 7 \times 10^{-11}$（意識閾值極低 → 只有嚴重損傷才失去意識）
+2. **小腦修正**：「motor only」→ 泛用低 K C2 co-processor（Sacchetti 2002 情緒記憶）
+3. **LTP/LTD 精確預測**：幅度守恆 $|\Delta\Gamma^2_{LTP}| + |\Delta\Gamma^2_{LTD}| = \text{const}$（BCM 不預測此約束）
+4. **K 計數協定**：Discussion 新增 §K-protocol（計數規則 + ±1 不確定性 + inter-rater 建議）
+5. **延遲比討論**：7:1（C3 階數）vs 10:1（實測），正面討論差異原因
+
+**B 區：P2 血管網路強化（5 個新 Remarks）**：
+1. **三套管路統一框架**：動脈/靜脈/淋巴 = 三棵 C3 relay 樹（含 K-staircase + 阻抗值）
+2. **`rem:arterial-stiffening`**：PWV + Moens-Korteweg → 動脈硬化 = Γ²↑
+3. **`rem:hypertension`**：baroreceptor C3 relay 校準失敗（含戒藥反彈預測）
+4. **`rem:microcirculation`**：DM 微血管病變 = terminal staircase 損壞
+5. **`rem:venous`** + **`rem:lymphoedema`**：靜脈曲張/淋巴水腫 = C3 relay 失效
+
+**Falsifiable Predictions 新增 3 個（#11-#13）**：LTP/LTD 幅度守恆、延遲比範圍、冥想者杏仁核延遲
+
+**頁數**：P0=7, P1=21, P2=**10**, P3=21, P4=15, P5=18 → **總計 92**
+
+---
+
 ## 如何使用此文件
 
 1. **每次對話開始**：先讀 `alice_core.md`（核心圓），再讀此文件最後 3~5 筆摘要。

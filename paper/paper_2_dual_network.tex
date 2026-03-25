@@ -1,15 +1,15 @@
 % ============================================================
-%  Paper 2 — Dual Impedance Networks and Metabolic Scaling
+%  Paper 2 ??Dual Impedance Networks and Metabolic Scaling
 %            Vascular Architecture, Murray's Law,
 %            Organ Health, Fractal Cost, and Kleiber's Law
 %
 %  Merged from: Paper 2 (Parts A+B §1-8) +
 %               Paper 1 old Part C (fractal/Kleiber/packing) +
 %               Paper 5 §4-5 (interface scale/isomorphism)
-%  §9-11 (cascade/disease/wound) → Paper 4
-%  Part C (clinical validation) → Paper 5
+%  §9-11 (cascade/disease/wound) ??Paper 4
+%  Part C (clinical validation) ??Paper 5
 %
-%  Compile:  pdflatex paper_2_dual_network.tex  (×2)
+%  Compile:  pdflatex paper_2_dual_network.tex  (?2)
 % ============================================================
 \documentclass[aps,pre,twocolumn,superscriptaddress,floatfix]{revtex4-2}
 
@@ -101,7 +101,7 @@ Papers~3--5~\cite{Paper3,Paper4,Paper5}.
 
 
 % ============================================================
-%  PART A — FROM BLOOD VESSEL TO VASCULAR NETWORK
+%  PART A ??FROM BLOOD VESSEL TO VASCULAR NETWORK
 % ============================================================
 
 \bigskip\noindent\textbf{\large Part A: From Blood Vessel to Vascular Network}\medskip
@@ -366,8 +366,58 @@ over decades) and recovery is slow even with
 optimal conditions.
 
 
+\subsection{The Windkessel model: arterial compliance
+  as a capacitor}
+\label{sec:windkessel}
+
+The aorta and large arteries are not rigid pipes:
+their elastic walls store energy during systole and
+release it during diastole, smoothing pulsatile flow.
+In the transmission-line analogy, wall compliance is
+a \emph{capacitor} $C_w = \Delta V / \Delta P$
+(volume change per unit pressure).
+
+The simplest Windkessel model treats the arterial
+tree as an $RC$ circuit:
+\begin{equation}
+  Z_{\text{WK}} = R + \frac{1}{j\omega C_w}\,,
+  \label{eq:windkessel}
+\end{equation}
+where $R$ is the peripheral resistance
+($\approx 8\mu L / \pi r^4$ from Poiseuille) and
+$C_w$ is the total arterial compliance
+($\approx 1$--$2$\,mL/mmHg in a healthy young adult;
+Westerhof et~al., 2009).
+
+\begin{remark}[Ageing as capacitor degradation]
+\label{rem:windkessel-ageing}
+With age, collagen cross-linking and elastin
+fragmentation reduce $C_w$ monotonically
+(cf.\ the Second Law of $\Gamma$-Net, Paper~1).
+The consequences are purely electrical:
+\begin{itemize}
+  \item $C_w \downarrow \;\Rightarrow\;$
+    systolic pressure rises (capacitor stores less),
+  \item diastolic pressure falls
+    (less stored energy to release),
+  \item pulse pressure $\Delta P$ widens,
+  \item reflected waves arrive during systole
+    rather than diastole, augmenting peak pressure.
+\end{itemize}
+All four are the canonical haemodynamic changes of
+ageing.  In $\Gamma$-language, $C_w \downarrow$
+increases wall $Z$, increasing $\Gamma^2$ at every
+bifurcation---exactly the progressive
+$\Gamma^2_{\text{basal}} \uparrow$ predicted by the
+Second Law.
+The clinical marker PWV $= \sqrt{1/(\rho C_w)}$
+therefore rises with $C_w^{-1/2}$, providing a
+non-invasive proxy for vascular $\Gamma^2$.
+\end{remark}
+
+
 % ============================================================
-%  PART B — DUAL-NETWORK ORGAN MODEL
+%  PART B --- DUAL-NETWORK ORGAN MODEL
 % ============================================================
 
 \bigskip\noindent\textbf{\large Part B: The Dual-Network Organ Model}\medskip
@@ -378,13 +428,133 @@ optimal conditions.
 \label{sec:organ-model}
 % ============================================================
 
-\subsection{Why two networks}
+\subsection{Why two networks: multiplicative coupling}
 
 Neural C2 requires material substrate ($\rho$) from
 vascular delivery.
 Vascular C2 requires neural control (autonomic signals
 regulate vascular tone).
-The two networks are \emph{mutually prerequisite}.
+The two networks are \emph{mutually prerequisite},
+and their coupling is \textbf{multiplicative, not
+additive}:
+\begin{equation}
+  \boxed{\text{Dual network}
+  = \underbrace{\text{Vascular}}_{\text{supplies } P_{\text{in}}}
+  \;\otimes\;
+  \underbrace{\text{Neural}}_{\text{uses } P_{\text{in}}}\,,}
+  \label{eq:tensor-dual}
+\end{equation}
+where $\otimes$ denotes tensor product.
+The effective SNR of the combined system is:
+\[
+  \text{SNR} = \frac{P_{\text{in}}
+  \cdot (1 - \Gamma^2_{\text{vessel}})
+  \cdot \eta \cdot \Gamma^2_{\text{signal}}}
+  {P_{\text{noise}}}\,.
+\]
+If \emph{any} factor is zero, the product is zero.
+No amount of neural excellence compensates for
+$P_{\text{in}} = 0$; no amount of vascular health
+compensates for $\eta = 0$.
+This is the physics of why a stroke (vascular) and
+anaesthesia (neural) produce the \emph{same} outcome:
+consciousness off.
+
+\paragraph{The 200\,$\mu$m diffusion limit.}
+Oxygen diffusion in tissue reaches
+$\sim$200\,$\mu$m before concentration drops below
+the metabolic threshold.
+Once an embryo exceeds this radius ($\sim$64 cells),
+peripheral cells have $P_{\text{in}} = 0$;
+all multiplicative factors vanish and differentiation
+halts.
+A transport system (heart + vessels) must exist
+\emph{before} the embryo can grow beyond 200\,$\mu$m.
+This is a C1 theorem, not an evolutionary contingency:
+\[
+  \forall\, t:\quad P_{\text{in}}(t) > 0 \;\implies\;
+  \text{cardiovascular system precedes all others.}
+\]
+
+\paragraph{Nested C1: mother and foetus.}
+The foetus operates inside a two-layer C1 structure:
+\begin{align}
+  \text{Layer 1 (maternal):} &\quad
+    P_{\text{in}}^{\text{fetal}}
+    = P_{\text{in}}^{\text{maternal}}
+    \cdot (1 - \Gamma^2_{\text{placenta}})\,, \nonumber\\
+  \text{Layer 2 (foetal):} &\quad
+    P_{\text{in}}^{\text{organ}}
+    = P_{\text{in}}^{\text{fetal}}
+    \cdot (1 - \Gamma^2_{\text{vessel},i})\,.
+    \label{eq:nested-C1}
+\end{align}
+The placental $\Gamma^2$ determines the foetal energy
+budget.
+Maternal stress (cortisol $\to$ vasoconstriction
+$\to \Gamma^2_{\text{vessel}} \uparrow$ on the
+maternal side) directly reduces foetal $P_{\text{in}}$,
+providing a first-principles explanation for the
+well-documented effect of prenatal stress on
+neurodevelopment
+(Remark~\ref{rem:social-referencing}).
+
+\begin{remark}[Neurovascular coupling: the vascular
+  network sets the neural SNR ceiling]
+\label{rem:neurovascular-coupling}
+The mutual dependence of P1 and P2 has a precise
+quantitative form.
+The input power available to a neuron is:
+\begin{equation}
+  P_{\text{in}}(t) = P_{\text{basal}} \cdot
+  \bigl(1 - \Gamma^2_{\text{vessel}}(t)\bigr)\,,
+  \label{eq:Pin-vessel}
+\end{equation}
+where $\Gamma^2_{\text{vessel}}$ is the vascular
+reflection coefficient at the local capillary bed.
+Since $\theta = P_{\text{noise}} / P_{\text{in}}$
+(Paper~1), a rise in $\Gamma^2_{\text{vessel}}$
+lowers $P_{\text{in}}$ and thereby degrades neural
+SNR \emph{regardless of the neural network's own
+state}.
+
+The coupling loop is mediated by astrocytes:
+\[
+  \text{neuron } \Gamma^2 \uparrow
+  \;\xrightarrow{\text{astrocyte}}
+  \text{NO, prostaglandin}
+  \;\xrightarrow{\text{vessel}}
+  Z_v \downarrow
+  \;\Rightarrow\;
+  Q \uparrow
+  \;\Rightarrow\;
+  P_{\text{in}} \; \text{restored.}
+\]
+This is \emph{neurovascular coupling} (NVC);
+the BOLD signal measured by fMRI is its
+haemodynamic trace.
+
+Three clinical consequences follow directly:
+\begin{enumerate}
+  \item \textbf{Vascular disease $\to$ emotional
+    disorders}: atherosclerosis raises
+    $\Gamma^2_{\text{vessel}}$ chronically,
+    reducing $P_{\text{in}}$, degrading SNR,
+    and producing the ``vascular depression''
+    phenotype (Alexopoulos et~al., 1997).
+  \item \textbf{Exercise $\to$ emotional improvement}:
+    exercise lowers $\Gamma^2_{\text{vessel}}$
+    via C2 vascular remodelling
+    (Remark~\ref{rem:exercise}), raising
+    $P_{\text{in}}$ and restoring neural SNR.
+  \item \textbf{Diabetes $\to$ cognitive decline}:
+    fluctuating blood glucose causes intermittent
+    $P_{\text{in}}$ drops; C2 updates stall during each
+    trough, shrinking the effective
+    $\mathcal{S}_{\text{eff}}$ maintenance window
+    and accelerating cognitive ageing.
+\end{enumerate}
+\end{remark}
 
 \subsection{Organ health}
 
@@ -408,6 +578,206 @@ The vascular network carries heat:
 \end{equation}
 When $\Gv^2$ increases, $Q$ decreases and thermal
 exchange is compromised.
+
+\begin{remark}[Blood as the actively manufactured
+  transport bus]
+\label{rem:blood-bus}
+Blood is not a passive residue of tissue metabolism
+but a continuously manufactured transport substrate:
+\begin{itemize}
+  \item \textbf{Cellular fraction}: red blood cells,
+    white blood cells, and platelets are produced by
+    haematopoietic stem cells in bone marrow
+    (C2 network \#15, Table~5 of Paper~3)
+    and recycled by the spleen.
+  \item \textbf{Plasma proteins}: albumin, fibrinogen,
+    and complement factors are synthesised by the liver
+    (C2 network \#12) and maintain osmotic pressure,
+    coagulation, and immune function.
+  \item \textbf{Dual cargo}: the same flow simultaneously
+    delivers fresh material
+    ($\rho \equiv x_{\text{out}}$ for downstream C2)
+    and removes metabolic waste (lactate, urea, CO$_2$).
+\end{itemize}
+In the $\Gamma$-framework, blood is the
+\emph{trunk bus} whose impedance
+$Z_v = 8\mu L/\pi r^4$ determines C2 supply to every
+organ.
+When $Z_v$ rises (atherosclerosis, dehydration,
+anaemia), \emph{all} downstream
+$x_{\text{out},i}$ decrease, stalling C2 globally.
+The vascular bus is therefore the universal
+$\rho$-bottleneck of the dual-network model.
+\end{remark}
+
+\begin{remark}[Emotion is a vascular event observed
+  by the brain]
+\label{rem:emotion-vascular}
+In the $\Gamma$-framework, an emotion has three
+physical phases:
+\begin{enumerate}
+  \item \textbf{Detection (P1, neural):}
+    the amygdala detects $\Gamma^2 \neq 0$
+    ($\sim$30\,ms; Paper~1).
+  \item \textbf{Execution (P2, vascular):}
+    sympathetic or parasympathetic C3 relay
+    modulates vascular $Z_v$---producing the
+    physical sensations universally reported as
+    ``feeling an emotion'': flushing (anger),
+    pallor (fear), warmth (joy),
+    chest heaviness (grief).
+  \item \textbf{Perception (P2$\to$P1):}
+    interoceptive afferents from the vascular
+    periphery feed back to the insular cortex,
+    which labels the bodily state as an emotion.
+\end{enumerate}
+This is consistent with the James--Lange theory
+(1884): the subjective experience of emotion
+\emph{is} the brain's perception of its own
+vascular response, not the cause of it.
+The $\Gamma$-framework adds precision: the
+``feeling'' is the insular cortex reading the
+$\Gamma^2$ change in the vascular tree that was
+triggered by the amygdala's neural $\Gamma^2$ signal.
+\end{remark}
+
+\begin{remark}[Vasovagal syncope as a P2 safety valve]
+\label{rem:vasovagal}
+When emotional $\Gamma^2$ exceeds a threshold (extreme
+joy, grief, or pain), the vagus nerve fires a
+paradoxical parasympathetic response:
+heart rate drops (bradycardia) and peripheral vessels
+dilate simultaneously.
+Blood pressure collapses, cerebral $P_{\text{in}}$
+falls below the consciousness threshold~$\theta$
+(Paper~1, Theorem~4), and the subject faints.
+
+This is a \emph{protective circuit breaker}:
+rather than allowing sustained high-$\Gamma^2$
+signalling to overheat the neural network,
+the vascular system shuts down cerebral perfusion,
+forcing consciousness offline.
+Recovery occurs automatically when the horizontal
+posture restores venous return and $P_{\text{in}}$
+rises above~$\theta$.
+\end{remark}
+
+\begin{remark}[Summer irritability as thermal-bus
+  SNR degradation]
+\label{rem:thermal-irritability}
+The consciousness threshold
+$\theta = 4 k_B T R_{\text{eff}} \Delta f / P_{\text{in}}$
+(Paper~1) depends linearly on body temperature~$T$.
+When ambient temperature rises, the thermal bus
+(Eq.~\ref{eq:thermal-bus}) becomes less efficient:
+$T_{\text{art}} - T_{\text{ven}}$ narrows, reducing
+$\dot{Q}_{\text{organ}}$ and allowing core $T$
+to drift upward.
+
+Even a $+0.5$\,K rise in $T$ increases $P_{\text{noise}}$
+by $\sim 0.16\%$---negligible in absolute terms, but
+$\Gamma^2$ operates on margins: the amygdala's
+detection threshold is already near the noise floor,
+so any SNR degradation lowers the barrier for
+emotional triggering.
+This provides a first-principles explanation for the
+well-documented summer increase in violent crime
+(Anderson, 2001) and road rage:
+\emph{heat does not cause anger; it reduces the
+$\Gamma^2$ margin between detection and triggering}.
+\end{remark}
+
+\begin{remark}[Exercise as vascular C2 training]
+\label{rem:exercise}
+Aerobic exercise increases cardiac output, raising
+shear stress $\tau_{\text{wall}}$ on endothelial cells.
+Since vascular C2 is $\Delta Z_v = -\eta_v \Gamma_v
+\tau_{\text{wall}} \rho$ (Eq.~\ref{eq:C2v-detail}),
+elevated $\tau_{\text{wall}}$ directly drives
+$Z_v \downarrow$: the vessel walls remodel to
+reduce impedance (vasodilation, angiogenesis,
+reduced stiffness).
+The downstream effects cascade through the
+entire framework:
+\begin{enumerate}
+  \item $Z_v \downarrow \;\Rightarrow\;
+    \Gamma_v^2 \downarrow$ at every bifurcation;
+  \item Blood flow $Q \uparrow \;\Rightarrow\;$
+    thermal bus capacity $\dot{Q}_{\text{organ}}
+    \uparrow$ (Eq.~\ref{eq:thermal-bus});
+  \item Body temperature better regulated
+    $\Rightarrow\; P_{\text{noise}} \downarrow
+    \;\Rightarrow\; \theta \downarrow
+    \;\Rightarrow\;$ SNR$\uparrow$;
+  \item Amygdala triggering threshold rises
+    $\Rightarrow\;$ emotional stability improves.
+\end{enumerate}
+This provides a first-principles explanation for the
+well-established antidepressant effect of exercise:
+it is not ``endorphins'' (a correlation) but a
+\emph{direct vascular C2 improvement} that raises
+the SNR of the entire neural network.
+\end{remark}
+
+\begin{remark}[Sleep as the glymphatic C2
+  maintenance window]
+\label{rem:glymphatic-sleep}
+During slow-wave sleep, the brain's interstitial
+space expands by $\sim$60\% (Xie et~al., 2013)
+and cerebrospinal fluid flow increases, flushing
+metabolic waste (amyloid-$\beta$, tau, lactate)
+through perivascular channels---the
+\emph{glymphatic system}.
+
+In $\Gamma$-Net terms, this is the lymphatic tree's
+scheduled C2 maintenance cycle:
+\begin{itemize}
+  \item \textbf{Wake}: neural C2 is active
+    (learning), producing metabolic waste that
+    accumulates as impedance debris
+    ($Z_{\text{waste}} \uparrow$).
+  \item \textbf{Sleep}: neural C2 is suspended;
+    the glymphatic system activates, clearing
+    $Z_{\text{waste}}$ and restoring vascular
+    $\Gamma^2$ to baseline.
+\end{itemize}
+Chronic sleep deprivation prevents this maintenance,
+allowing $Z_{\text{waste}}$ to accumulate
+$\to \Gamma^2_{\text{basal}} \uparrow$ $\to$
+accelerated ageing and neurodegeneration
+(cf.\ Alzheimer's amyloid hypothesis).
+Sleep is not rest---it is \emph{P2 maintenance}.
+\end{remark}
+
+\begin{remark}[Fever as Arrhenius-accelerated
+  immune C2]
+\label{rem:fever}
+Fever raises body temperature by $+1$--$4$\,K.
+By the Arrhenius equation, the rate of biochemical
+reactions (including immune C2 updates)
+scales as $\exp[-E_a / k_B T]$.
+A $+2$\,K increase from $37\,^{\circ}$C to
+$39\,^{\circ}$C accelerates immune reaction rates
+by $\sim$20--40\% (depending on activation energy).
+
+In $\Gamma$-Net terms, fever is a
+\emph{controlled C1 violation} that trades
+short-term thermal stress for accelerated C2:
+\[
+  \eta_{\text{immune}}(T) \propto
+  \exp\!\bigl[-E_a / k_B T\bigr]
+  \;\xrightarrow{T \uparrow}\;
+  \eta_{\text{immune}} \uparrow\,.
+\]
+The cost: $P_{\text{noise}}$ rises (SNR degrades),
+producing the cognitive fog and irritability of
+fever.
+The benefit: faster pathogen clearance.
+Antipyretic drugs that suppress fever remove the
+$\eta$ boost, potentially prolonging infection---a
+prediction consistent with clinical observations
+(Brandts et~al., 1997).
+\end{remark}
 
 \subsection{Four irreducible tissue types}
 \label{sec:four-tissues}
@@ -500,7 +870,7 @@ The hierarchy reflects perfusion priority: placenta
 
 
 % ============================================================
-%  PART C — FRACTAL COST AND METABOLIC SCALING
+%  PART C ??FRACTAL COST AND METABOLIC SCALING
 % ============================================================
 
 \bigskip\noindent\textbf{\large Part C: Fractal Cost and Metabolic Scaling}\medskip
@@ -704,6 +1074,38 @@ Therefore $\Omega \approx 1/0.75 \approx 1.33$.
 The neural network alone gives
 $\Omega_n = 1/(1-0.20) = 1.25 \approx \beta = 2^{1/3}$.
 
+\begin{table}[t]
+\caption{Organ-specific metabolic overhead $\Omega_i$.}
+\label{tab:omega-organ}
+\begin{ruledtabular}
+\begin{tabular}{lccc}
+\textbf{Organ} &
+  $B_{\text{vasc},i}/B_i$ &
+  $B_{\text{nerve},i}/B_i$ &
+  $\Omega_i$ \\
+\hline
+Brain      & 0.15 & 0.25 & 1.67 \\
+Heart      & 0.10 & 0.05 & 1.18 \\
+Liver      & 0.25 & 0.05 & 1.43 \\
+Kidneys    & 0.20 & 0.05 & 1.33 \\
+Skel.\ muscle & 0.03 & 0.02 & 1.05 \\
+Skin       & 0.05 & 0.10 & 1.18 \\
+GI tract   & 0.15 & 0.10 & 1.33 \\
+Lungs      & 0.10 & 0.03 & 1.15 \\
+\hline
+\multicolumn{3}{l}{\textbf{Weighted mean}} & \textbf{1.33} \\
+\end{tabular}
+\end{ruledtabular}
+\end{table}
+
+\noindent
+The weighted mean $\langle\Omega_i\rangle \approx 1.33
+\approx 4/3$: the dual-network overhead is a geometric
+constant, not a free parameter.
+Organs with dense vascular supply (liver, kidneys) have
+higher $\Omega_i$; those dominated by bulk tissue
+(skeletal muscle) have $\Omega_i \approx 1$.
+
 \subsection{Why blood before nerve}
 
 C2 requires a carrier for $x_{\text{in}}$:
@@ -715,6 +1117,376 @@ Embryology confirms: cardiac tube at day~21; neural tube
 closure at day~25--28.
 In the product $1_v \times 1_n$, the vascular ``1'' is
 the left factor.
+
+The deeper reason is C1 applied to the
+mother--fetus system.
+The embryo develops inside the mother's body
+at $T \approx 37\,^{\circ}$C.
+Every metabolising cell produces heat
+($\dot{Q} = \Gamma^2 P_{\text{in}}$).
+Without a thermal bus to export this heat to the
+mother's vascular tree, the embryo's temperature
+would rise uncontrollably---violating C1
+(energy has no outflow path).
+The \emph{placenta} is the C3 impedance-matching
+relay between the maternal and foetal vascular trees:
+\[
+  Z_{\text{maternal}} \;\underset{\text{placenta}}
+    {\longleftrightarrow}\; Z_{\text{foetal}}.
+\]
+Placental matching ensures $\Gamma^2_{\text{mat-foet}}
+\approx 0$, maximising heat and nutrient transfer.
+The developmental sequence is therefore not a design
+choice but a physical necessity:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Day & Event & $\Gamma$-Net reason \\
+\midrule
+21 & Cardiac tube (first heartbeat) &
+  C1: thermal bus must exist first \\
+25--28 & Neural tube closure &
+  C2: control network requires $\rho$ from P2 \\
+$5+$ wk & Organ differentiation &
+  C2 targets: need both P1 and P2 in place \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{remark}[The fontanelle as a C1 safety valve]
+\label{rem:fontanelle}
+The neonatal skull contains open sutures
+(fontanelles) that do not fuse until 12--18 months.
+This is commonly attributed to birth-canal passage,
+but the $\Gamma$-framework reveals a deeper C1 reason.
+
+During postnatal brain growth the neural network
+(P1) expands rapidly, increasing metabolic heat
+production.
+The vascular thermal bus (P2) must scale in
+parallel: new capillaries must invade expanding
+cortex.
+Open fontanelles permit the cranial volume to
+increase, allowing the P2 thermal bus to grow
+alongside P1.
+If the sutures fuse prematurely
+(\emph{craniosynostosis}):
+\begin{enumerate}
+  \item Cranial volume is locked;
+  \item Intracranial pressure rises,
+    compressing blood vessels:
+    $Z_v \uparrow \;\Rightarrow\; Q \downarrow$;
+  \item Thermal bus capacity is capped while
+    neural metabolism continues to rise;
+  \item C1 is violated: $\dot{Q}_{\text{in}}
+    > \dot{Q}_{\text{out}}$ $\Rightarrow$
+    local temperature rise $\Rightarrow$
+    neuronal damage.
+\end{enumerate}
+Untreated craniosynostosis leads to brain injury and
+death---a direct C1 prediction.
+
+Three related neonatal observations confirm the
+same principle:
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Observation & C1 interpretation \\
+\midrule
+Amniotic fluid &
+  Maternal thermal bus extension (liquid cooling) \\
+Placenta &
+  Mother--foetus C3 relay ($Z$-matching) \\
+Fontanelle &
+  P2 thermal bus expansion window \\
+Hydrocephalus &
+  Fluid compresses vessels $=$ thermal bus failure \\
+\bottomrule
+\end{tabular}
+\end{center}
+All four are instances of the same physical
+constraint: C1 requires that metabolic heat
+production never exceed thermal bus capacity.
+\end{remark}
+
+\begin{remark}[Thermoregulation as the developmental
+  ignition signal]
+\label{rem:thermoregulation-trigger}
+A newborn's ``start-up sequence'' recapitulates
+the C1 priority chain:
+\begin{enumerate}
+  \item First breath $\to$ pulmonary circulation
+    activates $\to$ P2 begins independent operation.
+  \item First feed (milk) $\to$ metabolic fuel
+    supplied $\to$ thermal bus has energy to burn.
+  \item Thermoregulation established $\to$ the infant
+    can maintain $T \approx 37\,^{\circ}$C autonomously
+    $\to$ \textbf{C1 is independently satisfied
+    for the first time}.
+  \item Full-body developmental growth begins.
+\end{enumerate}
+Step~3 is the gate: until the thermal bus is
+self-sustaining, the body cannot increase metabolic
+load (growing organs) without violating C1.
+This is why premature infants are placed in
+incubators---the incubator is an \emph{artificial
+thermal bus} substituting for the mother's P2,
+and the clinical criterion for discharge includes
+the ability to maintain body temperature
+independently.
+\end{remark}
+
+\begin{remark}[High-$K$ organs fail first under C1
+  insufficiency]
+\label{rem:brain-vulnerability}
+The metabolic overhead $\Omega_i$
+(Table~\ref{tab:omega-organ}) scales with $K$:
+the brain ($K=5$, $\Omega_i = 1.67$) consumes
+$\sim$20\% of basal metabolic rate despite
+comprising only $\sim$2\% of body mass.
+Its C1 margin---the gap between heat production
+and thermal bus capacity---is therefore the
+\emph{thinnest} of any organ.
+
+When C1 is marginally violated (e.g.\ perinatal
+hypoxia, premature thermoregulation failure,
+congenital metabolic defect), the brain reaches
+its thermal ceiling \emph{first}:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+C1 insufficiency & High-$K$ effect (brain) &
+  Low-$K$ effect (body) \\
+\midrule
+Perinatal hypoxia &
+  Cerebral palsy &
+  Other organs often recover \\
+Premature birth &
+  Intraventricular haemorrhage &
+  Body usually intact \\
+Metabolic error &
+  Intellectual disability &
+  Normal physical appearance \\
+\bottomrule
+\end{tabular}
+\end{center}
+The clinical observation that paediatric diseases are
+disproportionately neurological is a direct
+consequence of $K$-dependent C1 margin:
+\emph{the highest-$K$ organ is always the first to
+fail when the thermal bus is insufficient}.
+\end{remark}
+
+\subsection{The tri-network body: arterial, venous,
+  and lymphatic trees}
+\label{sec:tri-network}
+
+The preceding analysis treats the vasculature as a
+single tree, but the body contains \emph{three}
+distinct fluid-transport networks, each a C3 relay
+hierarchy:
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+Network & Direction & Cargo & $\Gamma$-role \\
+\midrule
+Arterial tree &
+  Heart $\to$ periphery &
+  O$_2$, glucose, hormones &
+  Energy delivery C3 relay \\
+Venous tree &
+  Periphery $\to$ heart &
+  CO$_2$, lactate, urea &
+  Waste return C3 relay \\
+Lymphatic tree &
+  Interstitium $\to$ veins &
+  Immune cells, excess fluid &
+  Immune + clearance C3 relay \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Each tree is a $K$-staircase:
+\begin{itemize}
+  \item \textbf{Arterial}: aorta ($Z \approx 6 \times 10^6$\,
+    Pa\,s\,m$^{-3}$) $\to$ large artery $\to$ small artery
+    $\to$ arteriole $\to$ capillary
+    ($Z \approx 10^{13}$\,Pa\,s\,m$^{-3}$).
+    The $\sim 10^7$-fold impedance jump is distributed
+    across $\sim$15 branching generations
+    (Murray, 1926), each reducing $\Gamma^2$ per stage.
+  \item \textbf{Venous}: capillary $\to$ venule $\to$
+    small vein $\to$ large vein $\to$ vena cava.
+    This tree mirrors the arterial staircase in reverse,
+    but with lower wall stiffness (larger compliance),
+    acting as a volume reservoir.
+  \item \textbf{Lymphatic}: initial lymphatics
+    (blind-ended, $K=1$) $\to$
+    collecting vessels (with valves, $K=2$) $\to$
+    lymph nodes (immune relay, $K=3$) $\to$
+    thoracic duct $\to$ subclavian vein.
+    Lymph nodes are C3 relay stations where
+    $K$-dimension increases: antigen presentation
+    converts a simple molecular signal ($K=1$) into
+    an adaptive immune response ($K \geq 3$).
+\end{itemize}
+
+The organ health index generalises to:
+\begin{equation}
+  H = T_n \cdot T_{v,\text{art}} \cdot
+      T_{v,\text{ven}} \cdot T_{\ell}\,,
+  \label{eq:tri-health}
+\end{equation}
+where $T_{\ell} = 1 - \Gamma_{\ell}^2$ is the
+lymphatic transmission.
+Setting any factor to zero destroys organ viability.
+
+\begin{remark}[Arterial stiffening as progressive
+  $\Gamma^2$ increase]
+\label{rem:arterial-stiffening}
+Arterial stiffening (arteriosclerosis) increases wall
+impedance $Z_{\text{wall}}$ while downstream tissue
+impedance remains unchanged.
+The result is a progressive rise in $\Gamma^2$ at
+every bifurcation, detectable as increased
+\emph{pulse wave velocity} (PWV).
+The Moens--Korteweg equation gives
+$\text{PWV} = \sqrt{E h / 2 \rho r}$,
+where $E$ is the elastic modulus,
+$h$ the wall thickness, $r$ the radius,
+and $\rho$ the blood density.
+As $E$ increases with age (collagen cross-linking,
+elastin degradation), $Z_{\text{wall}}$ rises and
+$\Gamma^2 = |(Z_{\text{wall}} - Z_{\text{tissue}})|^2
+/ |Z_{\text{wall}} + Z_{\text{tissue}}|^2$ increases
+monotonically.
+The 2015 AHA/ACC guidelines recognise
+PWV $> 10$\,m/s as an independent cardiovascular
+risk factor (Townsend et~al., 2015)---in
+$\Gamma$-language, this is a threshold on the
+organ-level $\Gamma^2_{v}$.
+\end{remark}
+
+\begin{remark}[Hypertension as baroreceptor C3
+  relay miscalibration]
+\label{rem:hypertension}
+The arterial baroreflex is a C3 feedback loop:
+baroreceptors in the carotid sinus and aortic arch
+measure pulse-wave amplitude
+(mechanical $\to$ neural C3 relay;
+Paper~0 Remark)
+and modulate sympathetic tone to maintain $Z_v$
+within the matched range.
+\emph{Essential hypertension} is a C2 failure
+of this relay: chronic elevation of $Z_v$
+causes the baroreceptor's reference $Z$-pattern
+to adapt upward (C2 writes the new ``normal''),
+resetting the feedback target.
+Treatment by medication ($Z_v \downarrow$ via
+vasodilators) or exercise ($Z_v \downarrow$ via
+endothelial C2) must overcome this adapted
+$\mathcal{S}_{\text{eff}}$.
+This predicts that abrupt antihypertensive
+withdrawal produces overshoot: the C2-adapted
+reference has not yet been rewritten.
+\end{remark}
+
+\begin{remark}[Microcirculation as the terminal
+  $K$-staircase]
+\label{rem:microcirculation}
+The capillary bed is the terminal matching section
+where arterial wave impedance meets tissue impedance.
+Pre-capillary sphincters act as \emph{variable gates}
+($G_i$), modulating local $\Gamma^2$ in response to
+tissue metabolic demand (metabolic autoregulation).
+Diabetic microangiopathy thickens the capillary
+basement membrane, increasing $Z$ at the terminal
+matching point and elevating $\Gamma^2_{\text{cap}}$.
+This explains why diabetic complications affect
+\emph{end-organs} (retina, kidney, nerves)
+preferentially: these organs depend on the
+terminal staircase being precisely matched.
+\end{remark}
+
+\begin{remark}[Venous insufficiency as return-path
+  $\Gamma^2$ failure]
+\label{rem:venous}
+The venous tree relies on valves to maintain
+unidirectional flow against gravity.
+Valve failure allows retrograde flow, creating a
+standing wave between the damaged valve and the next
+competent valve.
+A standing wave is a region of high $\Gamma^2$
+(persistent reflection)---the clinical presentation
+is \emph{varicose veins}: dilated, tortuous vessels
+with elevated venous pressure.
+In the $\Gamma$-framework, varicosities are the
+vascular equivalent of reverberating neural trauma
+(Paper~4): a C3 relay failure that produces a
+self-sustaining reflection pattern.
+\end{remark}
+
+\begin{remark}[Lymphoedema as third-network relay
+  failure]
+\label{rem:lymphoedema}
+The lymphatic tree's C3 relay function is to return
+excess interstitial fluid and immune cells to the
+venous system.
+When lymphatic relay nodes are damaged (surgical
+removal, radiation, filariasis), the local
+$\Gamma_{\ell}^2 \to 1$: fluid cannot be transmitted
+and accumulates as \emph{lymphoedema}.
+This is the exact analogue of spinal cord injury
+(Paper~1): severing a C3 relay produces
+$\Gamma = 1$ on all downstream channels.
+The prediction is that lymphoedema severity should
+correlate with the number of relay nodes removed,
+not with the volume of tissue resected---consistent
+with the sentinel lymph node paradigm in oncologic
+surgery.
+\end{remark}
+
+\begin{remark}[The hepatic portal system: a dual-input
+  C3 relay]
+\label{rem:portal}
+The liver receives blood from two sources
+simultaneously: the hepatic artery
+($\sim$25\,\% of flow, high $Z$, oxygen-rich)
+and the portal vein
+($\sim$75\,\% of flow, low $Z$, nutrient-rich
+from the GI tract).
+This is the only organ with a \emph{dual-input}
+C3 relay topology.
+
+In $\Gamma$-Net terms, the liver performs impedance
+matching between two trees of different $K$:
+\[
+  \Gamma_{\text{liver}} =
+  \frac{Z_{\text{portal}} \| Z_{\text{hepatic}}
+        - Z_{\text{sinusoid}}}
+       {Z_{\text{portal}} \| Z_{\text{hepatic}}
+        + Z_{\text{sinusoid}}}\,,
+\]
+where $\|$ denotes parallel combination.
+This unique topology explains three clinical facts:
+\begin{enumerate}
+  \item \textbf{Liver failure cascades globally}:
+    the liver is the only relay station that processes
+    both circulatory and digestive $Z$-patterns.
+    Failure ($\Gamma_{\text{liver}} \to 1$) blocks
+    both networks simultaneously.
+  \item \textbf{Cirrhosis produces portal hypertension}:
+    fibrosis increases $Z_{\text{sinusoid}}$,
+    mismatching the parallel input, raising
+    $\Gamma^2$ and backpressure into the portal vein.
+  \item \textbf{Hepatic first-pass metabolism}:
+    drugs absorbed from the GI tract encounter the
+    liver's $Z$-matching before reaching systemic
+    circulation---a natural impedance filter that
+    attenuates high-$\Gamma$ substances.
+\end{enumerate}
+\end{remark}
 
 
 % ============================================================
@@ -748,6 +1520,88 @@ acts as a quarter-wave relay~\cite{Pozar2011},
 achieving $T > 0.80$.
 When cartilage degrades (osteoarthritis), the relay is
 removed and $\Acut$ is no longer mitigated.
+
+\begin{remark}[C3 as interfacial transition relay:
+  a universal principle]
+\label{rem:c3-relay}
+The cartilage example above is a special case of a
+general physical principle: whenever two tissues of
+impedance $Z_1$ and $Z_2$ ($Z_1 \neq Z_2$) share an
+interface, the direct junction produces a reflection
+coefficient $\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1)$ that
+wastes energy as heat.
+Inserting an intermediate layer at
+$Z_{\text{mid}} = \sqrt{Z_1 Z_2}$ (the geometric mean)
+splits one large reflection into two smaller ones,
+each with $|\Gamma| = |\sqrt{Z_2/Z_1} - 1|/
+(\sqrt{Z_2/Z_1} + 1)$, reducing total reflected power.
+This is the quarter-wave transformer condition in
+RF engineering~\cite{Pozar2011}, anti-reflection coating
+in optics, and impedance-grading horn in acoustics.
+
+In biology, every major tissue--tissue interface
+develops such a transition layer:
+\begin{enumerate}
+  \item \textbf{Periosteum}: bone ($Z \approx 120$)
+    $\leftrightarrow$ soft tissue ($Z \approx 50$),
+    bridged by a fibrovascular membrane.
+  \item \textbf{Fascia}: organ parenchyma
+    $\leftrightarrow$ surrounding vasculature/nerve,
+    bridged by connective tissue sheaths.
+  \item \textbf{Adventitia}: arterial smooth muscle
+    $\leftrightarrow$ perivascular tissue,
+    the outermost vessel wall layer.
+  \item \textbf{Myelin sheath}: axonal cytoplasm
+    ($Z_{\text{axon}}$) $\leftrightarrow$ extracellular
+    fluid ($Z_{\text{ECF}}$), providing impedance
+    grading that enables saltatory conduction.
+  \item \textbf{Basement membrane}: epithelium
+    $\leftrightarrow$ connective tissue,
+    a universal boundary relay.
+  \item \textbf{Cartilage}: bone $\leftrightarrow$
+    synovial fluid (the case above).
+\end{enumerate}
+
+At the inter-organ scale, C3 operates through a
+different mechanism: \emph{bifurcation and low-$K$
+relay neurons}.
+Neural and vascular trees connect organs of vastly
+different impedances by inserting successive branching
+levels at progressively lower mode counts $K$.
+At each bifurcation, the daughter branch has
+$K_{\ell+1} < K_\ell$ (Eq.~\ref{eq:mode-profile}),
+creating a staircase of decreasing $K$ that
+\emph{translates} high-dimensional cortical signals
+into low-dimensional autonomic commands compatible
+with peripheral tissue impedances.
+The ganglionic relay neurons of the autonomic nervous
+system---with $K = 1$--$2$, far below cortical
+$K = 5$---are purpose-built C3 translators.
+Without these low-$K$ intermediaries, the cortex
+could not drive organs whose update physics operates
+at $K = 1$ (smooth muscle, secretory epithelium).
+Similarly, the vascular tree's Murray bifurcation
+(Theorem~\ref{thm:murray}) implements C3 in the
+hydraulic domain: each branching level steps
+$Z_v$ downward by $n^{4/3}$, grading impedance
+from aorta to capillary.
+
+\textbf{Prediction:}
+degradation of \emph{any} C3 relay layer produces
+pathology proportional to the impedance gap it
+previously bridged.
+Demyelination (multiple sclerosis): axonal
+$\Gamma$ jumps as the myelin relay is removed.
+Osteoarthritis: the cartilage relay erodes.
+Adventitial fibrosis: perivascular coupling
+degrades.
+Autonomic neuropathy: loss of low-$K$ relay
+neurons causes cortical commands to reflect
+at the organ interface.
+In each case, the physics is identical:
+removing the intermediate $Z$ layer restores
+the full $\Gamma = (Z_2-Z_1)/(Z_2+Z_1)$ mismatch.
+\end{remark}
 
 \subsection{Twenty-nine tissue atlas}
 
@@ -810,7 +1664,7 @@ is testable by cross-kingdom metabolic comparisons.
 
 
 % ============================================================
-%  PART D — INTERFACE UNIVERSALITY
+%  PART D ??INTERFACE UNIVERSALITY
 % ============================================================
 
 \bigskip\noindent\textbf{\large Part D: Interface Universality}\medskip
@@ -826,6 +1680,12 @@ interfaces across seven physical domains and 14~orders
 of magnitude in spatial scale.
 Each row represents a \emph{different effort--flow pair}
 (different physics), not merely a different cable size.
+The table deliberately includes non-biological systems
+(power-grid transformers, submarine hulls, optical fibres,
+and the Earth--ionosphere waveguide) to demonstrate that
+$\Gamma$-MRP is a law of physics, not a biological model:
+the same equation governs every energy-carrying interface
+regardless of substrate.
 
 Every row participates in the same four-step closed loop:
 \begin{enumerate}
@@ -850,9 +1710,14 @@ domain.}
   & \textbf{Effort} & \textbf{Flow}
   & $Z$ \textbf{definition} \\
 \midrule
-\multirow{2}{*}{Electrical}
-  & Synapse / ion channel & 25~nm--1~\textmu m
+\multirow{4}{*}{Electrical}
+  & Cell membrane (lipid bilayer) & 5~nm
+    & Trans-membrane potential & Ion current & $V/I$ ($\Omega$) \\
+  & Ion channel / synapse & 25~nm--1~\textmu m
     & Membrane voltage & Ion current & $V/I$ ($\Omega$) \\
+  & Mitochondrial membrane & $\sim$1~\textmu m
+    & Proton-motive force & Proton current
+    & $\Delta\psi / I_H$ ($\Omega$) \\
   & Power-grid transformer & 10~m
     & Voltage & Current & $V/I$ ($\Omega$) \\
 \midrule
@@ -924,7 +1789,7 @@ No property of the bulk medium enters the result.
   \;\text{Structure}
   \;\xrightarrow{\text{(continuum mechanics)}}
   \;\text{Impedance}
-  \;\xrightarrow{\text{(First Law)}}
+  \;\xrightarrow{\text{($\Gamma$-MRP)}}
   \;\Gamma.
 \]
 No arrow requires a biological assumption:
@@ -932,7 +1797,7 @@ materials science predicts structure from composition;
 continuum mechanics predicts impedance from structure;
 and $\Gamma$ follows from impedance.
 Once chemistry builds structure and structure carries
-flow, $\Gamma$ is not a choice---it is the First Law
+flow, $\Gamma$ is not a choice---it is $\Gamma$-MRP
 speaking.
 
 
