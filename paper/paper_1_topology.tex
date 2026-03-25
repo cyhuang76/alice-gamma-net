@@ -1678,6 +1678,79 @@ $\text{Binding} =
 \text{Cerebellum (time)}$.
 \end{remark}
 
+\begin{proposition}[Working memory capacity
+  from $\Gamma^2$ channel count]
+\label{prop:working-memory}
+The number of items that can be simultaneously
+maintained in working memory is bounded by the
+number of \emph{independent} $\Gamma^2 \neq 0$
+channels that the thalamic gate vector $\{G_i\}$
+can sustain within one $\gamma$-cycle:
+\begin{equation}
+  N_{\text{WM}} \;\leq\; N_\Gamma
+  \;=\; \bigl|\bigl\{\,i : \Gamma_i^2 \neq 0
+  \;\wedge\; G_i > 0\,\bigr\}\bigr|\,.
+  \label{eq:working-memory}
+\end{equation}
+Each independent mismatch $\Gamma_i^2 \neq 0$
+requires its own thalamic gate slot and its own
+amygdala detection channel; the PFC must
+simultaneously invert all $N_\Gamma$ impedance
+matrices.
+The empirically observed $7 \pm 2$ limit (Miller,
+1956) reflects the physical gate-count
+$N_\Gamma$ of the human thalamus.
+\end{proposition}
+
+\begin{proof}
+An item in working memory is, by definition, a
+pattern whose C2 update is currently active
+($\Delta Z_i \neq 0$).
+Activity requires $\Gamma_i^2 > 0$
+(unmatched impedance) and $G_i > 0$ (gate open).
+The product $\Gamma_i^2 \cdot G_i$ occupies one
+slot in the PFC's $K$-dimensional processing
+space.
+Once all slots are occupied, opening a new gate
+requires closing an existing one
+($\sum G_i$ is bounded by C1), displacing the
+previous item.
+\end{proof}
+
+\begin{remark}[Structuring as $\Gamma^2$
+  compression (chunking)]
+\label{rem:chunking}
+The $7 \pm 2$ limit applies to
+\emph{independent} $\Gamma^2$ channels.
+Structuring---arranging items into regular
+patterns---performs C2 matching on the spatial
+or temporal regularity, collapsing $N$ independent
+mismatches into $N_{\text{eff}} \ll N$:
+\begin{equation}
+  N_{\text{eff}} = N_{\text{raw}}
+    - N_{\text{matched}}\,.
+  \label{eq:chunking}
+\end{equation}
+\textbf{Example}: seven randomly placed apples
+produce $N_{\text{raw}} = 7$ independent
+$\Gamma^2$ channels (each position is
+unpredictable).
+The same seven apples in a $3 \times 2 + 1$ grid
+produce $N_{\text{eff}} = 2$
+(``3 columns'' $+$ ``2 rows''), because the
+regularity is $\Gamma^2 = 0$ on the matched
+spatial pattern.
+
+This is the physics of \emph{chunking}
+(Miller, 1956): every cognitive tool---abacus,
+mathematical notation, language, tables---is a
+device for converting unstructured $\Gamma^2$
+into structured $\Gamma^2 = 0$, thereby reducing
+$N_{\text{eff}}$ below $N_\Gamma$.
+Technology is impedance matching applied to
+information.
+\end{remark}
+
 \subsection{Corpus callosum as inter-hemispheric C3 relay}
 \label{sec:corpus-callosum}
 
