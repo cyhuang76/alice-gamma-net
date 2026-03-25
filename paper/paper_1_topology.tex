@@ -89,8 +89,7 @@ Four laws of the null space parallel thermodynamics;
 death is a theorem derived from the Second Law and C1.
 
 \textbf{Part~D} presents experimental evidence and
-extensions: two independent kill mechanisms of
-consciousness (fever vs.\ occipital impact), thermal
+extensions: thermal
 vulnerability scaling as $K^{3/2}$, willpower as a
 three-factor product, sensory-deprivation collapse,
 pain as topological crosstalk and bandwidth hijacking,
@@ -2747,78 +2746,6 @@ Conscious? & No & No & \textbf{Yes} \\
 \end{table}
 
 
-% ============================================================
-\section{Two Independent Kill Mechanisms}
-\label{sec:two-kills}
-% ============================================================
-
-We demonstrate that consciousness can be destroyed by
-two physically independent mechanisms, proving it is a
-product rather than a location.
-
-\subsection{Kill mechanism 1: Fever}
-
-Temperature rises from $37^\circ$C to $41^\circ$C
-over 20~ticks.  Arousal remains at~0.85.
-
-\textbf{Result}: All thalamic gates remain \emph{open}.
-PFC energy remains~1.0.
-$\Phi_{\text{proxy}}$ declines gradually from 0.42 to 0.30.
-
-\emph{Diagnosis}: ``Lights on, nobody home.''
-PFC matrix inversion degrades because
-$\delta\Gamma/\Gamma\propto\kappa(\mathbf{Z})\cdot\delta T/T$
-and $\kappa(\mathbf{Z})\propto K^{3/2}$.
-
-\subsection{Kill mechanism 2: Occipital impact}
-
-Temperature constant at $37^\circ$C.
-Arousal crashes from 0.85 to 0.01 in three ticks.
-
-\textbf{Result}: All thalamic gates slam \emph{shut}.
-PFC energy remains~1.0.
-$\Phi_{\text{proxy}}$ drops to~0.000 within 2~ticks.
-
-\emph{Diagnosis}: ``Power cut, hardware fine.''
-
-\subsection{Impact + vestibular shock}
-
-A realistic posterior impact produces mechanical shockwaves
-reaching the cochlea and vestibular apparatus.
-The startle circuit bypasses normal arousal-modulated
-gating ($\tau_{\text{startle}}\approx 5$~ms $\ll
-\tau_{\text{arousal shutdown}}\approx 50$--$200$~ms),
-explaining why tinnitus and vertigo are perceived
-\emph{before} loss of consciousness.
-
-\begin{table}[h]
-\centering
-\caption{Consciousness collapse comparison.}
-\label{tab:two-kills}
-\begin{tabular}{@{}lcc@{}}
-\toprule
- & Fever & Impact \\
-\midrule
-Kill target & $\QPFC$ (thermal noise) & $\Zarousal$ (arousal collapse) \\
-Onset & Minutes--hours & Milliseconds \\
-Gate state & Open & Closed \\
-$\Phi_{\min}$ & 0.302 & 0.000 \\
-PFC energy & Intact & Intact \\
-Physics & $\rho^2\!\uparrow\!\Rightarrow Q\!\downarrow$ & $Z_{\text{ar}}\!\to\! 0\!\Rightarrow G\!\to\! 0$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\begin{figure}[t]
-\includegraphics[width=\columnwidth]{../figures/fig_p1_bone_china_heat.pdf}
-\caption{Two independent kill mechanisms on Alice.
-  Left: fever pathway ($Q_{\mathrm{PFC}}$ collapse via thermal noise);
-  right: occipital impact pathway ($Z_{\mathrm{arousal}}$ shutdown
-  via vestibular startle bypass).
-  Simulated via \texttt{exp\_bone\_china\_heat.py}.}
-\label{fig:two-kills}
-\end{figure}
-
 
 % ============================================================
 \section{Thermal Vulnerability and the K-Dimensional Bottleneck}
@@ -3286,7 +3213,8 @@ this paper derives:
     with recall governed by SNR, not storage.
   \item \textbf{Consciousness}:
     $\Phimeta=1-\Gmeta^2$, requiring the television
-    inequality.  Two independent kill mechanisms prove
+    inequality.  The television origin
+    story (open vs.\ closed loop) proves
     consciousness is a product, not a location.
   \item \textbf{Soul}:
     $\mathcal{S}=\ker(\partial Z/\partial t)$,
@@ -3323,8 +3251,7 @@ unteachable boundary persists.
 This work used no external funding.
 All experiments were conducted on the Alice Gamma-Net simulator.
 The author thanks Claude (Anthropic) for extended
-theoretical discussions that sharpened the Television Theorem
-and the two-kill-mechanism analysis.
+theoretical discussions that sharpened the Television Theorem.
 \end{acknowledgments}
 
 
@@ -3335,8 +3262,8 @@ and the two-kill-mechanism analysis.
 \label{app:code}
 
 \begin{itemize}
-  \item \texttt{experiments/exp\_consciousness\_two\_kills.py}:
-    Fever vs.\ occipital impact comparison.
+  \item \texttt{experiments/exp\_consciousness\_tv\_origin.py}:
+    Open vs.\ closed loop comparison.
   \item \texttt{experiments/exp\_prefrontal\_signal\_trace.py}:
     Visual and auditory signal trace to PFC.
   \item \texttt{experiments/exp\_brain\_gamma\_calibration.py}:

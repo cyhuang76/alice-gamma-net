@@ -1040,59 +1040,121 @@ kinetics:
   \label{eq:arrhenius-aging}
 \end{equation}
 
-Combining all three:
+Combining all three, with the coefficients now
+explicitly coupled to the vascular network
+established in Paper~2:
 
-\begin{theorem}[Lifecycle Equation]
+\begin{theorem}[Lifecycle Equation --- dual-network form]
 \label{thm:lifecycle}
 The population-averaged squared reflection coefficient
 $\Sigma\Gamma^2(t)$ satisfies the non-autonomous ODE
 \begin{equation}
   \boxed{\;
   \frac{d(\Sigma\Gamma^2)}{dt}
-    = -\eta\,\Sigma\Gamma^2
+    = -\eta_{\text{eff}}(t)\,\Sigma\Gamma^2
     + \gamma\,\Gamma_{\mathrm{env}}(t)
-    + \delta\,D(t)
+    + \delta_{\text{eff}}(t)\,D(t)
   \;}
   \label{eq:lifecycle}
 \end{equation}
-where $\eta$ is the C2 learning rate,
-$\gamma\,\Gamma_{\mathrm{env}}$ is the novelty injection
-term, and $\delta\,D$ is the irreversible
-Coffin--Manson aging drift.
-The coefficients are functions of developmental stage,
-environmental statistics, and cumulative damage.
+where the effective learning rate and aging rate
+are determined by the vascular network state:
+\begin{align}
+  \eta_{\text{eff}}(t) &= \eta_0 \;
+    f_{\text{dev}}(t) \;
+    \bigl(1 - \Gamma^2_{\text{vessel}}(t)\bigr)\,,
+    \label{eq:eta-eff} \\[2pt]
+  \delta_{\text{eff}}(t) &=
+    \frac{\delta_0\,
+      \exp\!\bigl(E_a\,\sigma_{\text{stress}}(t)\bigr)}
+         {C_w(t)}\,.
+    \label{eq:delta-eff}
+\end{align}
+Here:
+\begin{itemize}
+  \item $f_{\text{dev}}(t)$: bell-shaped developmental
+    envelope (Sec.~\ref{sec:eta-lifecycle});
+  \item $(1 - \Gamma^2_{\text{vessel}})$: the
+    neurovascular coupling factor
+    (Paper~2, Eq.~\ref*{eq:Pin-vessel})---vascular
+    health sets the ceiling on neural C2;
+  \item $C_w(t)$: arterial Windkessel compliance
+    (Paper~2)---its decline amplifies the aging term;
+  \item $\sigma_{\text{stress}}$: cumulative allostatic
+    stress.
+\end{itemize}
 \end{theorem}
 
 \begin{proof}
 The three terms follow from:
 (i)~C2 gradient descent on
-$\mathcal{A}[\Gamma]$ (Eq.~\ref{eq:learning-term});
+$\mathcal{A}[\Gamma]$ (Eq.~\ref{eq:learning-term}),
+with $\eta$ replaced by $\eta_{\text{eff}}$ because
+C2 update requires material substrate delivered by
+the vascular network at rate
+$P_{\text{in}} = P_{\text{basal}}\,(1 - \Gamma_v^2)$
+(Paper~2);
 (ii)~new stimuli introducing mismatches at untuned
 interfaces (Eq.~\ref{eq:novelty-term});
 (iii)~Arrhenius-driven irreversible impedance drift
-(Eq.~\ref{eq:arrhenius-aging}).
+(Eq.~\ref{eq:arrhenius-aging}), with $\delta$
+amplified by $1/C_w$ because reduced arterial
+compliance (Paper~2) increases pulse stress per
+cardiac cycle.
 Superposition gives the full ODE.
 \end{proof}
 
+\begin{remark}[Positive feedback and the acceleration
+  of aging]
+\label{rem:aging-feedback}
+As the organism ages, two simultaneous changes create
+a positive feedback loop:
+\begin{enumerate}
+  \item $\Gamma^2_{\text{vessel}} \uparrow$
+    $\;\Rightarrow\;$ $\eta_{\text{eff}} \downarrow$
+    (learning capacity declines);
+  \item $C_w \downarrow$
+    $\;\Rightarrow\;$ $\delta_{\text{eff}} \uparrow$
+    (aging accelerates).
+\end{enumerate}
+The numerator of the learning term shrinks while
+the denominator of the aging term shrinks.
+This is why aging is not linear but accelerating:
+the system enters a regime where reduced vascular
+health simultaneously impairs repair and amplifies
+damage.  The bathtub curve of $\Sigma\Gamma^2$
+(Fig.~\ref{fig:lifecycle}) is not a phenomenological
+fit---it emerges from the multiplicative coupling
+between P1 and P2.
+\end{remark}
 
-\subsection{Developmental modulation of $\eta(t)$}
+
+\subsection{Developmental modulation of $\eta_{\text{eff}}(t)$}
 \label{sec:eta-lifecycle}
 
-In Eq.~\eqref{eq:lifecycle}, $\eta$ has so far been treated
-as a context-dependent constant.
-Experimentally, synaptic plasticity, myelination rate,
-and tissue remodeling capacity all peak in early life and
-decline with age.
-We model this as:
-\begin{equation}
-  \eta(t) = \eta_0 \; f_{\mathrm{dev}}(t) \;
-    \exp\!\bigl(-E_a / k_B T_{\mathrm{age}}(t)\bigr)\,,
-  \label{eq:eta-lifecycle}
-\end{equation}
-where $f_{\mathrm{dev}}(t)$ is a bell-shaped developmental
-envelope (high in infancy, plateau in adolescence,
-monotone decline thereafter) and the Arrhenius factor
-captures aging-induced loss of remodeling capacity.
+The effective learning rate
+$\eta_{\text{eff}} = \eta_0\,f_{\text{dev}}\,
+(1 - \Gamma^2_{\text{vessel}})$
+(Eq.~\ref{eq:eta-eff}) has three factors:
+\begin{enumerate}
+  \item $\eta_0$: the intrinsic biochemical C2 rate;
+  \item $f_{\text{dev}}(t)$: a bell-shaped
+    developmental envelope (high in infancy, plateau
+    in adolescence, monotone decline thereafter)
+    reflecting myelination, synaptic density, and
+    neurotrophin availability;
+  \item $(1 - \Gamma^2_{\text{vessel}})$: the
+    vascular supply ceiling (Paper~2,
+    neurovascular coupling).
+\end{enumerate}
+Note that the Arrhenius factor previously included
+in $\eta$ is now absorbed into
+$\Gamma^2_{\text{vessel}}$: arterial stiffening raises
+$\Gamma^2_{\text{vessel}}$ (Windkessel
+$C_w \downarrow$), which reduces
+$(1 - \Gamma^2_{\text{vessel}})$ and thereby
+$\eta_{\text{eff}}$---the same physics, but now
+derived from P2 rather than postulated.
 
 The cumulative impedance change for a skill chain $s$
 acquired at time $t_s$ is:
@@ -2082,8 +2144,132 @@ these conditions is a palaeontological question
 beyond the scope of this theory.
 
 
+\begin{remark}[C2 universality necessitates C3 and
+  relay nodes]
+\label{rem:c2-c3-relay}
+The universality of C2 creates a physical problem:
+twenty-nine tissue types all obey the same update rule
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$,
+but with twenty-nine \emph{different} impedance types.
+A mechanical stress signal ($Z_{\text{bone}}$) and a
+chemical perfusion signal ($Z_{\text{vascular}}$)
+are dimensionally incompatible: connecting them without
+metadata would produce $\Gamma \to 1$ at the junction.
+
+This is why C3 (signal protocol) is not an independent
+axiom but a \textbf{necessary consequence of C2 operating
+on a heterogeneous network}:
+\[
+  \underbrace{\text{C2 universal}}_{\text{one rule}}
+  \;\xrightarrow{\text{29 tissues}}\;
+  \underbrace{\text{29 different } Z}_{\text{heterogeneous}}
+  \;\xrightarrow{\text{communication}}\;
+  \underbrace{\text{C3 labels}}_{\text{Z-metadata}}
+  \;\xrightarrow{\text{cross-}Z}\;
+  \underbrace{\text{relay nodes}}_{\text{P1 } A_{\text{cut}}}
+\]
+
+\textbf{Bone vs.\ cartilage: the definitive example.}
+Cortical bone has a periosteum---a vascularised
+membrane that serves as a \emph{relay node} between
+two C2 domains:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+& Cortical bone & Articular cartilage \\
+\midrule
+Blood supply & \checkmark\; periosteum &
+  $\times$\; avascular \\
+C3 labels & Mechanical + chemical &
+  Mechanical only \\
+Relay node & Periosteum (translates $Z_{\text{mech}}
+  \leftrightarrow Z_{\text{vasc}}$) &
+  None \\
+$\eta_{\text{eff}}$ & $ > 0$ (C2 active) &
+  $\approx 0$ (C2 blocked) \\
+Repair capacity & Fracture heals &
+  \textbf{Permanent damage} \\
+\bottomrule
+\end{tabular}
+\end{center}
+Cartilage has functioning C2 on the mechanical
+channel (it remodels under load via Wolff's law),
+but lacks the vascular relay that supplies
+$\rho > 0$.
+From the dual-network Lifecycle Equation
+(Theorem~\ref{thm:lifecycle}):
+$\eta_{\text{eff}} = \eta_0\,f_{\text{dev}}\,
+(1 - \Gamma^2_{\text{vessel}})$, and for cartilage
+$\Gamma^2_{\text{vessel}} = 1$ (no vessel),
+so $\eta_{\text{eff}} = 0$.
+
+Osteoarthritis is therefore not a disease of
+cartilage---it is the \textbf{absence of a
+cross-dimensional relay node}, predicted by the
+C2$\to$C3$\to$relay causal chain.
+\end{remark}
+
+\begin{remark}[Fractal branching as a
+  dual-network relay staircase]
+\label{rem:fractal-relay}
+The body is not a point-to-point network:
+every arterial bifurcation and every nerve
+branching point is a \emph{relay dimension}
+where the dual network (Paper~2) splits
+into sub-branches of progressively lower $K$.
+
+A signal originating at $K = 5$ (cerebral cortex)
+that must reach $K = 1$ (epithelial surface)
+traverses a chain of fractal bifurcations:
+\[
+  K_5 \to K_4 \to K_3 \to K_2 \to K_1\,,
+  \qquad
+  A_{\text{cut}} = K_{\max} - K_{\min} = 4\,.
+\]
+The total irreducible cost $A_{\text{cut}}$ is
+invariant under relay insertion (Paper~1):
+no matter how many intermediate tissues the
+signal passes through, the sum of per-junction
+dimensional gaps equals $(K_{\max} - K_{\min})$.
+Relay nodes cannot \emph{reduce} $A_{\text{cut}}$;
+they \emph{distribute} it into smaller steps.
+
+\textbf{Why distribute?}
+For a single junction of gap $\Delta K$,
+the reflection coefficient scales as
+$\Gamma^2 \propto (\Delta K)^2$.
+For $n$ equal-step relays each of gap
+$\Delta K / n$, the per-step reflection is
+$\Gamma_{\text{step}}^2 \propto (\Delta K / n)^2$.
+The total transmission is:
+\[
+  T_{\text{relay}} = \prod_{j=1}^{n}
+    (1 - \Gamma_j^2) \;\ge\;
+  (1 - \Gamma_{\text{direct}}^2)\,.
+\]
+More relay stages $\Rightarrow$ higher $T$ for
+the same $A_{\text{cut}}$.
+This is precisely the Chebyshev multi-section
+transformer (Paper~1): the fractal branching
+architecture of the dual vascular--neural network
+is the biological implementation of an optimal
+impedance-matching staircase.
+
+Each organ is therefore not merely a
+functional unit but a \textbf{relay dimension}
+in the dual network:
+the liver ($K = 4$, dual-input C3 relay,
+Paper~2), the kidney ($K = 4$, baroreceptor
+reset relay), the spleen ($K = 2$,
+immune-vascular relay)---all serve as
+intermediate $K$-steps that maximise
+whole-body transmission $T = \prod_i
+(1 - \Gamma_i^2)$.
+\end{remark}
+
+
 % ============================================================
-%  SECTION 15 — TWENTY-NINE Γ-NETWORKS
+%  SECTION 15 --- TWENTY-NINE Gamma-NETWORKS
 % ============================================================
 \section{Twenty-Nine $\Gamma$-Networks}
 \label{sec:twentynine}
