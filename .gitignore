@@ -23,6 +23,9 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 
+# Google Drive sync temp files
+.tmp.driveupload/
+
 # Classified modules (confidential research — not published)
 classified/
 
