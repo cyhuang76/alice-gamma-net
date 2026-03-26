@@ -1795,17 +1795,57 @@ hemispheres become independent networks, each with its
 own binding domain---precisely the split-brain
 phenomenology reported by Gazzaniga (1967).
 
-\begin{remark}[Lateralisation as impedance specialisation]
+\begin{remark}[Lateralisation as C1 energy-optimal
+  topology]
 \label{rem:lateralisation}
-Hemispheric lateralisation is not a design choice but a
-consequence of C3 efficiency.
-A single hemisphere covering both low-$K$ sequential
-and high-$K$ spatial modes would require a longer
-internal $K$-staircase with higher total $\Gamma^2$.
-Splitting into two specialised hemispheres with a
-dedicated inter-hemispheric relay (corpus callosum)
-minimises the system's total reflection---a direct
-prediction of $\Gamma$-MRP.
+Hemispheric lateralisation is not a design choice but
+the unique $\Gamma$-MRP optimum for sharing a fixed
+power budget $P_{\text{total}}$ between two
+complementary processing modes:
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+& Left hemisphere & Right hemisphere \\
+\midrule
+Mode &
+  Sequential control &
+  Parallel field \\
+Task examples &
+  Language, logic, counting &
+  Spatial, holistic, emotion \\
+$K$-range &
+  Low--mid ($\sim\!10$) &
+  Mid--high ($\sim\!10^2$) \\
+Energy allocation &
+  \emph{Temporal}: many C2 ticks, &
+  \emph{Spatial}: many channels, \\
+& few channels per tick &
+  few ticks per update \\
+\bottomrule
+\end{tabular}
+\end{center}
+Both modes compete for the same $P_{\text{total}}$
+(C1).
+Each C2 update costs $\Gamma_i^2 \cdot P_{\text{in}}$
+regardless of whether it serves a sequential step or
+a parallel field---the \emph{unit cost is identical}.
+A single hemisphere spanning both $K$-ranges would
+require a long internal $K$-staircase with cumulative
+$\Gamma_{\text{single}}^2$.
+Splitting into two specialised hemispheres, each
+covering half the $K$-range, with a matched
+corpus-callosum relay yields
+$\Gamma_L^2 + \Gamma_R^2 + \Gamma_{\text{CC}}^2
+< \Gamma_{\text{single}}^2$
+(Eq.~\ref{eq:neural-murray})---the same energy
+budget produces higher resolution in \emph{both}
+time and space.
+
+Lateralisation is therefore the neural analogue of
+frequency-division multiplexing: the $K$-spectrum is
+split into two sub-bands, each assigned to a
+dedicated processor, with the corpus callosum as the
+inter-band C3 relay.
 \end{remark}
 
 \begin{remark}[Hemispheric bifurcation as neural Murray's law]
