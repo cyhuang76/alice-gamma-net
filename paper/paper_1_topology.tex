@@ -1961,6 +1961,49 @@ contribution to zero---each is empirically
 confirmed.
 \end{remark}
 
+\begin{remark}[Excitatory and inhibitory neurons
+  as two irreducible $\Gamma^2$ operations]
+\label{rem:excitatory-inhibitory}
+Conventional neuroscience treats excitatory and
+inhibitory neurons as chemically distinct switches
+(glutamate vs.\ GABA).  In the $\Gamma$-framework,
+their distinction is \emph{thermodynamically
+required}: every mismatch $\Gamma_i^2 \neq 0$
+must be either (a)~preserved and broadcast to drive
+learning, or (b)~locally dissipated to free
+resources.
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+& Excitatory & Inhibitory \\
+\midrule
+$\Gamma^2$ operation &
+  Broadcast (preserve error) &
+  Local sink (dissipate error) \\
+Physical role &
+  $\Gamma^2_{\text{local}} \to
+  \Gamma^2_{\text{distal}}$ &
+  $\Gamma^2_{\text{local}} \to
+  Q_{\text{heat}}$ \\
+C2 effect &
+  Maintain mismatch for learning &
+  Delete mismatch to release slots \\
+Time constant &
+  Slow (sustain error signal) &
+  Fast (rapid gating, $\sim$ms) \\
+\bottomrule
+\end{tabular}
+\end{center}
+A single homogeneous neuron type with signed
+weights cannot simultaneously broadcast errors
+(C2 learning) and suppress noise (C1 stability).
+The two operations require physically distinct
+channels with different time constants, different
+$K$-configurations, and different C2 update rules.
+Excitation/inhibition is therefore not a chemical
+accident but a \emph{C1+C2 thermodynamic necessity}.
+\end{remark}
+
 \begin{remark}[Cortical area count as peripheral interface count]
 \label{rem:cortical-peripheral}
 The HCP multi-modal parcellation identifies
@@ -3277,6 +3320,53 @@ cochlear emission (15--30~min), pure thermal noise
     is a geometric structure,
     not a spatial location.
 \end{enumerate}
+
+\subsection{What $K$-analysis adds to classical debates}
+
+Several long-standing controversies in neuroscience
+resolve immediately once recast in $K$-and-$\Gamma^2$
+language:
+\begin{enumerate}
+  \item \emph{Lateralisation (left-brain/right-brain).}
+    Traditional debate concerns which functions are
+    ``truly'' lateralised.
+    $\Gamma$-MRP shows that the question is
+    mis-posed: under fixed $P_{\text{total}}$,
+    any system needing both high-resolution
+    sequential ($K \sim 10$) and high-resolution
+    parallel ($K \sim 10^2$) processing
+    \emph{must} bifurcate into two specialised
+    hemispheres (Eq.~\ref{eq:neural-murray}).
+    Specific functional assignments fill a
+    mathematically predetermined topology.
+  \item \emph{The binding problem.}
+    How disparate features merge into one percept
+    is unexplained by neural synchrony alone.
+    The $\Gamma$-framework decomposes binding into
+    two orthogonal requirements: spatial
+    co-location (thalamus) and temporal alignment
+    (cerebellum), each derivable from C2 and C3
+    (Corollary~\ref{cor:cerebellum-binding}).
+  \item \emph{Working memory capacity ($7 \pm 2$).}
+    Miller's limit is traditionally
+    attributed to unspecified neural resources.
+    Proposition~\ref{prop:working-memory} derives
+    it as the thalamic gate count $N_\Gamma$;
+    chunking (Remark~\ref{rem:chunking}) is C2
+    matching that reduces $N_{\text{eff}}$.
+  \item \emph{Excitation vs.\ inhibition.}
+    Chemical taxonomy offers no
+    \emph{why}.
+    Remark~\ref{rem:excitatory-inhibitory} shows
+    that two physically distinct $\Gamma^2$
+    operations (broadcast vs.\ local sink) are a
+    C1+C2 thermodynamic necessity.
+\end{enumerate}
+In each case, the $\Gamma$-framework does not choose
+a side in the existing debate but instead derives
+\emph{why the debated structure must exist},
+rendering the empirical controversy a special case of
+a deeper physical constraint.
 
 \subsection{Measurement protocol for~$K$}
 \label{sec:K-protocol}
