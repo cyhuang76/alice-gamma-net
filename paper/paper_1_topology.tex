@@ -304,6 +304,88 @@ Hierarchical topology is therefore a thermodynamic
 necessity for information transmission.
 \end{corollary}
 
+\begin{remark}[C3 relay as quarter-wave impedance
+  transformer]
+\label{rem:quarter-wave}
+The relay node of Corollary~\ref{cor:relay} is not a
+passive repeater.
+Its optimal impedance is the geometric mean
+$Z_{\text{relay}} = \sqrt{Z_L \, Z_R}$,
+the exact analogue of the quarter-wave transformer
+in transmission-line theory.
+In a numerical sweep of relay strength
+$c_3 \in \{0, 0.5, 1.0, 2.0, 5.0\}$ on a 128-level
+anti-parallel network, three results emerge:
+
+\textbf{(i)} The $c_3 = 0 \to c_3 > 0$ transition is a
+  sharp phase transition: mean
+  $\Gamma^2_{\text{CC}}$ drops from baseline
+  ($\sim 18\%$ reduction by C2 alone) to
+  $\sim 71\%$ reduction once the relay engages.
+
+\textbf{(ii)} For $c_3 \ge 0.5$ the reduction saturates;
+  the exact relay strength is irrelevant once the
+  mechanism is present.
+  This mirrors the biological observation that the
+  corpus callosum either connects or does not
+  (agenesis produces qualitative, not graded,
+  deficits).
+
+\textbf{(iii)} Direct $\Gamma^2(L, R)$ is four-fold larger
+  than the $\Gamma^2$ computed via CC relay at every
+  processing level, confirming that the relay
+  achieves impedance matching rather than mere
+  signal forwarding.
+\end{remark}
+
+\begin{remark}[Standing-wave parcellation of the
+  $K$-profile]
+\label{rem:standing-wave}
+When the anti-parallel staircase is simulated at high
+resolution ($N = 512$ processing levels),
+the emergent $K$-profile is not a monotone gradient
+but a \emph{spatial standing wave} with
+$K \in [\sim\!7,\, K_{\max}]$.
+The oscillation arises from two competing MRP
+constraints:
+(a)~local phase separation
+(Theorem~\ref{thm:phase-separation}): each node
+minimises $\Gamma^2$ with its chain neighbours by
+aligning $K$;
+(b)~CC cross-matching: each node minimises
+$\Gamma^2_{\text{CC}}$ with its contralateral
+counterpart.
+When (a) and (b) cannot be simultaneously satisfied,
+the global optimum is a standing wave whose spatial
+period is set by the coupling-strength ratio.
+
+Fourier analysis of the $N = 512$ simulation reveals:
+\begin{center}
+\begin{tabular}{@{}lrl@{}}
+\toprule
+Quantity & Value & Interpretation \\
+\midrule
+Left dominant period & $\sim 256$ levels &
+  two macro-zones \\
+Right dominant period & $\sim 57$ levels &
+  $\sim 9$ functional segments \\
+L--R correlation & $r \approx 0.5$ &
+  CC synchronisation \\
+Cross-correlation lag & $0$ levels &
+  zero-delay coupling \\
+\bottomrule
+\end{tabular}
+\end{center}
+The right hemisphere's finer parcellation ($\sim 9$
+segments) is an order-of-magnitude prediction for the
+number of major cortical functional zones---intermediate
+between the $\sim 5$ classical lobes and the $\sim 52$
+Brodmann areas.
+The local maxima of $\Gamma^2_{\text{CC}}$ mark
+functional-zone \emph{boundaries}: at these levels,
+the analytic and synthetic hemispheres disagree most
+strongly, producing the largest C3 relay load.
+\end{remark}
 
 % ============================================================
 \section{Numerical Verification}
