@@ -1754,98 +1754,121 @@ information.
 \subsection{Corpus callosum as inter-hemispheric C3 relay}
 \label{sec:corpus-callosum}
 
-The two cerebral hemispheres specialise in different
-$K$-ranges:
-\begin{center}
-\begin{tabular}{ll}
-\toprule
-Left hemisphere & Right hemisphere \\
-\midrule
-Sequential language ($K \sim O(10)$) &
-  Spatial/holistic ($K \sim O(10^2)$) \\
-Fine motor control & Global pattern recognition \\
-Logical chains & Emotional colour \\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\noindent
-The corpus callosum ($\sim 2 \times 10^8$ axons, the
-largest white-matter tract) is the C3 $K$-staircase
-that matches the two hemispheres:
+The two cerebral hemispheres do not merely occupy
+different $K$-ranges; they implement
+\emph{anti-parallel $K$-staircases}---each spanning
+the full complexity spectrum but in opposite
+directions:
 \begin{equation}
-  \text{L-hemisphere}\;(K_L)
-  \;\underset{\text{corpus callosum}}
-    {\longleftrightarrow}
-  \;(K_R)\;\text{R-hemisphere.}
-  \label{eq:cc-relay}
+\underbrace{
+  K_5 \!\to\! K_{10} \!\to\! K_{50} \!\to\! K_{100}
+}_{\text{Left: analysis (low$\to$high)}}
+\quad
+\underset{\text{CC relay at each }K_j}
+  {\longleftrightarrow}
+\quad
+\underbrace{
+  K_{100} \!\to\! K_{50} \!\to\! K_{10} \!\to\! K_5
+}_{\text{Right: synthesis (high$\to$low)}}
+\label{eq:cc-relay}
 \end{equation}
-Here $K_L$ and $K_R$ are order-of-magnitude
-estimates reflecting the sequential ($\sim\!10$
-temporal features) versus spatial ($\sim\!10^2$
-pixel-like features) nature of the dominant
-processing mode in each hemisphere;
-precise values depend on the task-specific
-$K$-decomposition and are not required for the
-qualitative argument.
-
-Callosotomy (split-brain surgery) severs this relay:
-$\Gamma_{L \leftrightarrow R} \to 1$, and the two
-hemispheres become independent networks, each with its
-own binding domain---precisely the split-brain
-phenomenology reported by Gazzaniga (1967).
-
-\begin{remark}[Lateralisation as C1 energy-optimal
-  topology]
-\label{rem:lateralisation}
-Hemispheric lateralisation is not a design choice but
-the unique $\Gamma$-MRP optimum for sharing a fixed
-power budget $P_{\text{total}}$ between two
-complementary processing modes:
 \begin{center}
 \begin{tabular}{@{}lll@{}}
 \toprule
 & Left hemisphere & Right hemisphere \\
 \midrule
-Mode &
-  Sequential control &
-  Parallel field \\
-Task examples &
-  Language, logic, counting &
-  Spatial, holistic, emotion \\
-$K$-range &
-  Low--mid ($\sim\!10$) &
-  Mid--high ($\sim\!10^2$) \\
-Energy allocation &
-  \emph{Temporal}: many C2 ticks, &
-  \emph{Spatial}: many channels, \\
-& few channels per tick &
-  few ticks per update \\
+$K$-direction &
+  Low $\to$ High (analysis) &
+  High $\to$ Low (synthesis) \\
+Primary flow &
+  Sensory $\to$ abstract symbol &
+  Holistic scene $\to$ action plan \\
+Dominant $\Gamma^2$ op.\ &
+  Inhibitory (focus) &
+  Excitatory (broadcast) \\
+Cognitive role &
+  \emph{Attention} ($N_{\text{eff}} \to 1$) &
+  \emph{Will} ($N_{\text{eff}} \gg 1$) \\
 \bottomrule
 \end{tabular}
 \end{center}
-Both modes compete for the same $P_{\text{total}}$
-(C1).
-Each C2 update costs $\Gamma_i^2 \cdot P_{\text{in}}$
-regardless of whether it serves a sequential step or
-a parallel field---the \emph{unit cost is identical}.
-A single hemisphere spanning both $K$-ranges would
-require a long internal $K$-staircase with cumulative
-$\Gamma_{\text{single}}^2$.
-Splitting into two specialised hemispheres, each
-covering half the $K$-range, with a matched
-corpus-callosum relay yields
+The corpus callosum ($\sim 2 \times 10^8$ axons)
+provides a \emph{K-matched relay matrix}: at
+every complexity level~$K_j$, left and right are
+cross-connected.
+When the left hemisphere's analytic decomposition
+at level~$K_j$ disagrees with the right hemisphere's
+synthetic reconstruction at the same~$K_j$---i.e.\
+$\Gamma^2_{\text{CC}}(K_j) \neq 0$---the
+mismatch triggers cerebellum-mediated C2
+correction:
+\begin{equation}
+  \Gamma^2_{\text{CC}}(K_j) \neq 0
+  \;\;\xrightarrow{\text{cerebellum C2}}\;\;
+  \Delta Z_L(K_j),\;\Delta Z_R(K_j)
+  \;\;\longrightarrow\;\;
+  \Gamma^2_{\text{CC}}(K_j) \to 0\,.
+  \label{eq:cc-cerebellum-loop}
+\end{equation}
+After convergence, both hemispheres hold a
+consistent $Z$-pattern at level~$K_j$---new,
+mutually validated data.
+
+This explains why the cerebellum contains more
+neurons ($\sim\!70 \times 10^9$) than the entire
+cerebral cortex ($\sim\!20 \times 10^9$): it must
+perform C2 corrections at \emph{every}
+$K$-level of every CC crossing simultaneously.
+
+Callosotomy severs the relay matrix:
+$\Gamma_{\text{CC}} \to 1$ at all $K$-levels, and
+the two hemispheres become independent processors,
+each with its own binding domain---precisely the
+split-brain phenomenology reported by Gazzaniga
+(1967).
+
+\begin{remark}[Lateralisation as C1 energy-optimal
+  anti-parallel topology]
+\label{rem:lateralisation}
+Hemispheric lateralisation is not a design choice but
+the unique $\Gamma$-MRP optimum for sharing a fixed
+power budget $P_{\text{total}}$ between two
+complementary processing directions.
+A single hemisphere would need to
+run both analysis (low$\to$high) and synthesis
+(high$\to$low) on the same $K$-staircase,
+creating internal interference
+($\Gamma^2_{\text{self-cross}} > 0$).
+Splitting into two anti-parallel processors,
+each covering the full $K$-range in one direction,
+eliminates self-interference:
 $\Gamma_L^2 + \Gamma_R^2 + \Gamma_{\text{CC}}^2
 < \Gamma_{\text{single}}^2$
-(Eq.~\ref{eq:neural-murray})---the same energy
-budget produces higher resolution in \emph{both}
-time and space.
+(Eq.~\ref{eq:neural-murray}).
 
 Lateralisation is therefore the neural analogue of
-frequency-division multiplexing: the $K$-spectrum is
-split into two sub-bands, each assigned to a
-dedicated processor, with the corpus callosum as the
-inter-band C3 relay.
+\emph{full-duplex communication}: the same
+$K$-band carries two anti-parallel signal flows
+simultaneously, with the corpus callosum as
+the directional coupler.
+\end{remark}
+
+\begin{remark}[Skill acquisition as
+  CC$\to$cerebellum convergence]
+\label{rem:skill-acquisition}
+Learning a new skill produces large
+$\Gamma^2_{\text{CC}}$ at many $K$-levels
+(the analytic left and synthetic right hemispheres
+disagree); the cerebellum is heavily loaded, and
+the subjective experience is ``effortful.''
+As C2 drives $\Gamma^2_{\text{CC}} \to 0$
+level by level, the cerebellum stores the matching
+$\Delta Z$ corrections internally, and the task
+becomes ``automatic''---it no longer requires
+conscious (cortical) monitoring.
+Expertise is the state where
+$\Gamma^2_{\text{CC}} \approx 0$ across all
+task-relevant $K$-levels.
 \end{remark}
 
 \begin{remark}[Hemispheric bifurcation as neural Murray's law]
@@ -2002,6 +2025,45 @@ channels with different time constants, different
 $K$-configurations, and different C2 update rules.
 Excitation/inhibition is therefore not a chemical
 accident but a \emph{C1+C2 thermodynamic necessity}.
+
+\paragraph{Hemispheric anti-symmetry of $K$ and
+dominant $\Gamma^2$ operation.}
+The $K$-range of each hemisphere determines
+which $\Gamma^2$ operation dominates:
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+& Left hemisphere & Right hemisphere \\
+\midrule
+$K$-range &
+  Low ($\sim\!10$) &
+  High ($\sim\!10^2$) \\
+Dominant operation &
+  \textbf{Inhibitory} (sink) &
+  \textbf{Excitatory} (broadcast) \\
+Cognitive function &
+  \emph{Attention}: suppress &
+  \emph{Will}: activate \\
+& all but one channel &
+  many channels at once \\
+$N_{\text{eff}}$ target &
+  $\to 1$ (serial focus) &
+  $\gg 1$ (parallel field) \\
+\bottomrule
+\end{tabular}
+\end{center}
+Low $K$ inherently requires closing irrelevant gates
+(inhibition) to process one sequential stream;
+high $K$ inherently requires opening many gates
+(excitation) to maintain a coherent spatial field.
+The $K$-spectrum of each hemisphere thus
+\emph{dictates} its dominant $\Gamma^2$ operation.
+
+Clinical predictions:
+ADHD (attention deficit) $=$ insufficient left-hemisphere
+inhibition ($N_{\text{eff}}$ remains too high);
+depression (loss of will) $=$ insufficient
+right-hemisphere excitation (field fails to activate).
 \end{remark}
 
 \begin{remark}[Cortical area count as peripheral interface count]
