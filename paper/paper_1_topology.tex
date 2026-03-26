@@ -1871,6 +1871,62 @@ $\Gamma^2_{\text{CC}} \approx 0$ across all
 task-relevant $K$-levels.
 \end{remark}
 
+\begin{remark}[Standing-wave parcellation of the
+  $K$-profile]
+\label{rem:standing-wave}
+When the anti-parallel staircase of
+Eq.~\eqref{eq:cc-relay} is simulated at high
+resolution ($N \geq 512$ processing levels),
+the emergent $K$-profile is not a monotone
+gradient but a \emph{spatial standing wave}
+with $K \in [\sim\!7,\, K_{\max}]$.
+The oscillation arises from two competing MRP
+constraints:
+\begin{enumerate}
+\item \emph{Local phase separation
+  (Theorem~\ref{thm:phase-separation})}---each
+  node minimises $\Gamma^2$ with its chain
+  neighbours by aligning $K$;
+\item \emph{CC cross-matching}---each node
+  minimises $\Gamma^2_{\text{CC}}$ with its
+  contralateral counterpart.
+\end{enumerate}
+When (1) and (2) cannot be simultaneously
+satisfied, the global optimum is a standing wave
+whose spatial period is set by the ratio of local
+and cross-chain coupling strengths.
+
+Fourier analysis of the $N=512$ simulation reveals:
+\begin{center}
+\begin{tabular}{@{}lrl@{}}
+\toprule
+Quantity & Value & Interpretation \\
+\midrule
+Left dominant period & $\sim 256$ levels &
+  two macro-zones \\
+Right dominant period & $\sim 57$ levels &
+  $\sim 9$ functional segments \\
+L--R correlation & $r \approx 0.5$ &
+  CC synchronisation \\
+Cross-correlation lag & $0$ levels &
+  zero-delay coupling \\
+\bottomrule
+\end{tabular}
+\end{center}
+The right hemisphere's finer parcellation
+($\sim 9$ segments) is an order-of-magnitude
+prediction for the number of major cortical
+functional zones---intermediate between the
+$\sim 5$ classical lobes and the $\sim 52$
+Brodmann areas.
+The local maxima of
+$\Gamma^2_{\text{CC}}(K_j)$
+mark functional-zone \emph{boundaries}:
+at these levels, the analytic and synthetic
+hemispheres disagree most strongly, producing
+the largest cerebellum correction load.
+\end{remark}
+
 \begin{remark}[Hemispheric bifurcation as neural Murray's law]
 \label{rem:neural-murray}
 Murray's law for vascular branching states that a parent
