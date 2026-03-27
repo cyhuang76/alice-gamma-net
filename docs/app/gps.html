@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Γ-Net GPS — Body Topology Diagnostic</title>
+  <link rel="stylesheet" href="gps.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  HEADER                                                 -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<header class="top-bar">
+  <div class="logo">Γ-Net <span class="accent">GPS</span></div>
+  <div class="subtitle">人體拓撲定位系統 · 即時阻抗診斷 · 零參數物理</div>
+  <a href="index.html" class="nav-link">← Health Check</a>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  MAIN SPLIT LAYOUT                                      -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<main class="split">
+
+  <!-- ── LEFT: Body Topology ─────────────────────────── -->
+  <section class="panel-body" id="panelBody">
+
+    <!-- Health Score -->
+    <div class="health-score" id="healthScore">
+      <div class="h-label">HEALTH INDEX</div>
+      <div class="h-value" id="hValue">H = —</div>
+      <div class="h-sub" id="hSub">輸入數據後計算</div>
+    </div>
+
+    <!-- SVG Body -->
+    <div class="body-container">
+      <svg viewBox="0 0 400 700" id="bodySvg" class="body-svg">
+        <!-- Body silhouette -->
+        <defs>
+          <radialGradient id="glowGreen" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#66bb6a" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#66bb6a" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="glowYellow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffa726" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#ffa726" stop-opacity="0"/>
+          </radialGradient>
+          <radialGradient id="glowRed" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ef5350" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#ef5350" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Body outline -->
+        <path d="M200,45 C220,45 240,55 245,75 L250,95 C255,105 265,110 280,115
+                 L310,125 C325,130 340,140 340,155 L335,195 C330,210 315,215 295,210
+                 L275,205 C270,215 270,250 275,290 L280,350 C285,400 290,450 290,500
+                 L285,560 C280,590 265,620 260,650 L240,650 C235,620 230,590 225,560
+                 L215,500 C210,460 205,420 200,380 C195,420 190,460 185,500
+                 L175,560 C170,590 165,620 160,650 L140,650 C135,620 120,590 115,560
+                 L110,500 C110,450 115,400 120,350 L125,290 C130,250 130,215 125,205
+                 L105,210 C85,215 70,210 65,195 L60,155 C60,140 75,130 90,125
+                 L120,115 C135,110 145,105 150,95 L155,75 C160,55 180,45 200,45Z"
+              fill="rgba(100,120,160,0.08)" stroke="rgba(100,120,160,0.25)" stroke-width="1.5"/>
+
+        <!-- C3 Trunk Lines -->
+        <!-- Vascular trunk (red) -->
+        <path d="M200,90 L200,160 L195,220 L195,350 L190,450 L185,550"
+              stroke="#ef5350" stroke-width="3" fill="none" opacity="0.5"
+              stroke-dasharray="8,4" class="trunk-line"/>
+        <path d="M200,90 L200,160 L205,220 L205,350 L210,450 L215,550"
+              stroke="#ef5350" stroke-width="3" fill="none" opacity="0.5"
+              stroke-dasharray="8,4" class="trunk-line"/>
+        <!-- Neural trunk (blue) -->
+        <path d="M200,90 L200,160 L200,220 L200,350 L200,450 L200,550"
+              stroke="#4fc3f7" stroke-width="2" fill="none" opacity="0.5"
+              stroke-dasharray="6,6" class="trunk-line"/>
+
+        <!-- C3 Label -->
+        <text x="165" y="300" class="label-c3">C3</text>
+        <text x="155" y="315" class="label-c3-sub">血管+神經</text>
+        <text x="155" y="328" class="label-c3-sub">雙主幹</text>
+
+        <!-- ── ORGAN NODES ── -->
+        <!-- Brain (C1) -->
+        <g class="organ-node" data-organ="brain" id="node-brain">
+          <circle cx="200" cy="60" r="28" class="organ-glow"/>
+          <circle cx="200" cy="60" r="14" class="organ-circle"/>
+          <text x="200" y="64" class="organ-icon">🧠</text>
+          <text x="200" y="30" class="organ-label">C1 大腦</text>
+          <text x="245" y="60" class="organ-gamma" id="g-brain"></text>
+        </g>
+
+        <!-- Heart (cardiac) -->
+        <g class="organ-node" data-organ="cardiac" id="node-cardiac">
+          <circle cx="185" cy="165" r="22" class="organ-glow"/>
+          <circle cx="185" cy="165" r="11" class="organ-circle"/>
+          <text x="185" y="169" class="organ-icon">❤️</text>
+          <text x="140" y="155" class="organ-label">心臟</text>
+          <text x="140" y="170" class="organ-gamma" id="g-cardiac"></text>
+        </g>
+
+        <!-- Lungs (pulmonary) -->
+        <g class="organ-node" data-organ="pulmonary" id="node-pulmonary">
+          <circle cx="240" cy="155" r="22" class="organ-glow"/>
+          <circle cx="240" cy="155" r="11" class="organ-circle"/>
+          <text x="240" y="159" class="organ-icon">🫁</text>
+          <text x="275" y="145" class="organ-label">肺</text>
+          <text x="275" y="160" class="organ-gamma" id="g-pulmonary"></text>
+        </g>
+
+        <!-- Vascular -->
+        <g class="organ-node" data-organ="vascular" id="node-vascular">
+          <circle cx="155" cy="200" r="18" class="organ-glow"/>
+          <circle cx="155" cy="200" r="9" class="organ-circle"/>
+          <text x="155" y="204" class="organ-icon">🩸</text>
+          <text x="110" y="195" class="organ-label">血管</text>
+          <text x="110" y="210" class="organ-gamma" id="g-vascular"></text>
+        </g>
+
+        <!-- Liver (hepatic) -->
+        <g class="organ-node" data-organ="hepatic" id="node-hepatic">
+          <circle cx="240" cy="220" r="22" class="organ-glow"/>
+          <circle cx="240" cy="220" r="11" class="organ-circle"/>
+          <text x="240" y="224" class="organ-icon">🫘</text>
+          <text x="275" y="215" class="organ-label">肝臟</text>
+          <text x="275" y="230" class="organ-gamma" id="g-hepatic"></text>
+        </g>
+
+        <!-- Kidneys (renal) -->
+        <g class="organ-node" data-organ="renal" id="node-renal">
+          <circle cx="170" cy="275" r="20" class="organ-glow"/>
+          <circle cx="170" cy="275" r="10" class="organ-circle"/>
+          <text x="170" y="279" class="organ-icon">🫘</text>
+          <text x="120" y="270" class="organ-label">腎臟</text>
+          <text x="120" y="285" class="organ-gamma" id="g-renal"></text>
+        </g>
+
+        <!-- Endocrine -->
+        <g class="organ-node" data-organ="endocrine" id="node-endocrine">
+          <circle cx="230" cy="275" r="20" class="organ-glow"/>
+          <circle cx="230" cy="275" r="10" class="organ-circle"/>
+          <text x="230" y="279" class="organ-icon">⚗️</text>
+          <text x="270" y="270" class="organ-label">內分泌</text>
+          <text x="270" y="285" class="organ-gamma" id="g-endocrine"></text>
+        </g>
+
+        <!-- GI (gastrointestinal) -->
+        <g class="organ-node" data-organ="gi" id="node-gi">
+          <circle cx="200" cy="330" r="22" class="organ-glow"/>
+          <circle cx="200" cy="330" r="11" class="organ-circle"/>
+          <text x="200" y="334" class="organ-icon">🫃</text>
+          <text x="245" y="330" class="organ-label">消化</text>
+          <text x="245" y="345" class="organ-gamma" id="g-gi"></text>
+        </g>
+
+        <!-- Immune (hematologic) -->
+        <g class="organ-node" data-organ="immune" id="node-immune">
+          <circle cx="155" cy="340" r="18" class="organ-glow"/>
+          <circle cx="155" cy="340" r="9" class="organ-circle"/>
+          <text x="155" y="344" class="organ-icon">🛡️</text>
+          <text x="110" y="335" class="organ-label">免疫</text>
+          <text x="110" y="350" class="organ-gamma" id="g-immune"></text>
+        </g>
+
+        <!-- Musculoskeletal -->
+        <g class="organ-node" data-organ="musculoskeletal" id="node-musculoskeletal">
+          <circle cx="295" cy="400" r="18" class="organ-glow"/>
+          <circle cx="295" cy="400" r="9" class="organ-circle"/>
+          <text x="295" y="404" class="organ-icon">🦴</text>
+          <text x="325" y="395" class="organ-label">骨骼</text>
+          <text x="325" y="410" class="organ-gamma" id="g-musculoskeletal"></text>
+        </g>
+
+        <!-- Autonomic -->
+        <g class="organ-node" data-organ="autonomic" id="node-autonomic">
+          <circle cx="105" cy="400" r="18" class="organ-glow"/>
+          <circle cx="105" cy="400" r="9" class="organ-circle"/>
+          <text x="105" y="404" class="organ-icon">⚡</text>
+          <text x="65" y="395" class="organ-label">自律</text>
+          <text x="55" y="410" class="organ-gamma" id="g-autonomic"></text>
+        </g>
+
+        <!-- Thyroid -->
+        <g class="organ-node" data-organ="thyroid" id="node-thyroid">
+          <circle cx="200" cy="110" r="16" class="organ-glow"/>
+          <circle cx="200" cy="110" r="8" class="organ-circle"/>
+          <text x="200" y="114" class="organ-icon">🦋</text>
+          <text x="240" y="108" class="organ-label">甲狀腺</text>
+          <text x="240" y="120" class="organ-gamma" id="g-thyroid"></text>
+        </g>
+
+        <!-- Legend -->
+        <g transform="translate(15,620)">
+          <rect x="0" y="0" width="130" height="65" rx="6"
+                fill="rgba(20,22,30,0.8)" stroke="rgba(100,120,160,0.3)"/>
+          <circle cx="15" cy="15" r="5" fill="#66bb6a"/>
+          <text x="28" y="19" class="legend-text">Γ² < 0.05 健康</text>
+          <circle cx="15" cy="33" r="5" fill="#ffa726"/>
+          <text x="28" y="37" class="legend-text">0.05–0.15 注意</text>
+          <circle cx="15" cy="51" r="5" fill="#ef5350"/>
+          <text x="28" y="55" class="legend-text">Γ² > 0.15 警告</text>
+        </g>
+
+        <!-- C2 label -->
+        <text x="320" y="330" class="label-c2">C2 器官</text>
+        <text x="320" y="345" class="label-c2-sub">局部阻抗匹配</text>
+      </svg>
+    </div>
+
+    <!-- D_Z Forecast -->
+    <div class="dz-forecast" id="dzForecast" style="display:none;">
+      <h3>🔮 D<sub>Z</sub> 累積預測 — 誰先倒？</h3>
+      <div id="dzBars"></div>
+    </div>
+  </section>
+
+  <!-- ── RIGHT: Data Input ───────────────────────────── -->
+  <section class="panel-input">
+    <h2>📋 健檢數據輸入</h2>
+    <p class="input-hint">輸入你的健檢數值，點擊「定位」即時更新左側人體拓撲</p>
+
+    <div class="preset-row">
+      <button class="btn-preset" onclick="loadPreset('healthy')">🟢 健康</button>
+      <button class="btn-preset" onclick="loadPreset('metabolic')">🟡 代謝風險</button>
+      <button class="btn-preset" onclick="loadPreset('kidney')">🔴 腎臟預警</button>
+      <button class="btn-preset" onclick="loadPreset('smoker')">🚬 年輕吸菸</button>
+      <button class="btn-preset small" onclick="clearAll()">清除</button>
+    </div>
+
+    <!-- Input Groups -->
+    <div class="input-scroll">
+      <fieldset class="field-group">
+        <legend>👤 基本資料</legend>
+        <div class="field-row">
+          <label>年齡</label>
+          <input type="number" id="in_age" min="18" max="100" placeholder="55">
+        </div>
+        <div class="field-row">
+          <label>性別</label>
+          <select id="in_sex">
+            <option value="M">男</option>
+            <option value="F">女</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label>腰圍 (cm)</label>
+          <input type="number" id="in_waist" step="0.1" placeholder="88">
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>💓 血壓</legend>
+        <div class="field-row">
+          <label>收縮壓 (mmHg)</label>
+          <input type="number" id="in_sbp" placeholder="120">
+        </div>
+        <div class="field-row">
+          <label>舒張壓 (mmHg)</label>
+          <input type="number" id="in_dbp" placeholder="80">
+        </div>
+        <div class="field-row check">
+          <input type="checkbox" id="in_bp_treated">
+          <label for="in_bp_treated">服用降壓藥</label>
+        </div>
+        <div class="field-row check">
+          <input type="checkbox" id="in_smoker">
+          <label for="in_smoker">目前吸菸</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>🧪 血脂</legend>
+        <div class="field-row">
+          <label>總膽固醇 (mg/dL)</label>
+          <input type="number" id="in_TC" step="0.1" placeholder="195">
+        </div>
+        <div class="field-row">
+          <label>HDL (mg/dL)</label>
+          <input type="number" id="in_HDL" step="0.1" placeholder="55">
+        </div>
+        <div class="field-row">
+          <label>LDL (mg/dL)</label>
+          <input type="number" id="in_LDL" step="0.1" placeholder="110">
+        </div>
+        <div class="field-row">
+          <label>三酸甘油酯 (mg/dL)</label>
+          <input type="number" id="in_TG" step="0.1" placeholder="120">
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>🍬 代謝</legend>
+        <div class="field-row">
+          <label>空腹血糖 (mg/dL)</label>
+          <input type="number" id="in_Glucose" step="0.1" placeholder="88">
+        </div>
+        <div class="field-row">
+          <label>HbA1c (%)</label>
+          <input type="number" id="in_HbA1c" step="0.1" placeholder="5.2">
+        </div>
+        <div class="field-row">
+          <label>空腹胰島素 (μU/mL)</label>
+          <input type="number" id="in_insulin" step="0.1" placeholder="6">
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>🫘 腎 / 肝</legend>
+        <div class="field-row">
+          <label>肌酸酐 (mg/dL)</label>
+          <input type="number" id="in_Cr" step="0.01" placeholder="0.9">
+        </div>
+        <div class="field-row">
+          <label>BUN (mg/dL)</label>
+          <input type="number" id="in_BUN" step="0.1" placeholder="14">
+        </div>
+        <div class="field-row">
+          <label>AST (U/L)</label>
+          <input type="number" id="in_AST" step="0.1" placeholder="22">
+        </div>
+        <div class="field-row">
+          <label>ALT (U/L)</label>
+          <input type="number" id="in_ALT" step="0.1" placeholder="25">
+        </div>
+        <div class="field-row">
+          <label>白蛋白 (g/dL)</label>
+          <input type="number" id="in_Albumin" step="0.1" placeholder="4.5">
+        </div>
+      </fieldset>
+
+      <fieldset class="field-group">
+        <legend>⚡ 電解質 / 血球</legend>
+        <div class="field-row">
+          <label>Na (mEq/L)</label>
+          <input type="number" id="in_Na" step="0.1" placeholder="141">
+        </div>
+        <div class="field-row">
+          <label>K (mEq/L)</label>
+          <input type="number" id="in_K" step="0.1" placeholder="4.2">
+        </div>
+        <div class="field-row">
+          <label>WBC (10³/μL)</label>
+          <input type="number" id="in_WBC" step="0.1" placeholder="6.5">
+        </div>
+        <div class="field-row">
+          <label>血紅素 (g/dL)</label>
+          <input type="number" id="in_Hb" step="0.1" placeholder="15.0">
+        </div>
+        <div class="field-row">
+          <label>血小板 (10³/μL)</label>
+          <input type="number" id="in_Plt" step="1" placeholder="250">
+        </div>
+        <div class="field-row">
+          <label>TSH (mIU/L)</label>
+          <input type="number" id="in_TSH" step="0.01" placeholder="2.1">
+        </div>
+      </fieldset>
+    </div>
+
+    <button class="btn-compute" id="btnCompute" onclick="runCompute()" disabled>
+      🛰️ 定位 — GPS Localize
+    </button>
+
+    <div class="disclaimer">
+      ⚠️ 本頁結果僅作物理模型驗證參考，不構成任何醫療建議。請以正式醫療報告及專業醫師判斷為準。
+    </div>
+  </section>
+</main>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <div>正在載入物理引擎 (Pyodide)…</div>
+</div>
+
+<!-- Detail Panel -->
+<div class="detail-panel" id="detailPanel">
+  <button class="detail-close" onclick="closeDetail()">×</button>
+  <h3 id="detailTitle"></h3>
+  <div id="detailContent"></div>
+</div>
+
+<!-- Pyodide -->
+<script src="https://cdn.jsdelivr.net/pyodide/v0.27.2/full/pyodide.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════════
+// Presets
+// ═══════════════════════════════════════════════════════════
+const PRESETS = {
+  healthy: {
+    age:55, sex:"M", waist:88, sbp:118, dbp:75, bp_treated:false, smoker:false,
+    TC:195, HDL:55, LDL:110, TG:120, Glucose:88, HbA1c:5.2, insulin:6,
+    Cr:0.9, BUN:14, AST:22, ALT:25, Albumin:4.5,
+    Na:141, K:4.2, WBC:6.5, Hb:15.0, Plt:250, TSH:2.1
+  },
+  metabolic: {
+    age:55, sex:"M", waist:108, sbp:145, dbp:92, bp_treated:true, smoker:false,
+    TC:242, HDL:36, LDL:165, TG:210, Glucose:118, HbA1c:6.8, insulin:18,
+    Cr:1.1, BUN:18, AST:38, ALT:45, Albumin:4.0,
+    Na:141, K:4.5, WBC:7.8, Hb:14.2, Plt:280, TSH:3.0
+  },
+  kidney: {
+    age:62, sex:"F", waist:98, sbp:155, dbp:95, bp_treated:true, smoker:false,
+    TC:228, HDL:38, LDL:152, TG:195, Glucose:125, HbA1c:7.2, insulin:22,
+    Cr:1.8, BUN:32, AST:42, ALT:38, Albumin:3.4,
+    Na:138, K:5.2, WBC:8.5, Hb:11.5, Plt:310, TSH:4.5
+  },
+  smoker: {
+    age:32, sex:"M", waist:90, sbp:128, dbp:82, bp_treated:false, smoker:true,
+    TC:215, HDL:42, LDL:140, TG:165, Glucose:95, HbA1c:5.5, insulin:8,
+    Cr:0.95, BUN:15, AST:28, ALT:32, Albumin:4.3,
+    Na:140, K:4.3, WBC:7.2, Hb:15.5, Plt:240, TSH:2.0
+  }
+};
+
+const FIELD_MAP = {
+  age:'in_age', sex:'in_sex', waist:'in_waist',
+  sbp:'in_sbp', dbp:'in_dbp', bp_treated:'in_bp_treated', smoker:'in_smoker',
+  TC:'in_TC', HDL:'in_HDL', LDL:'in_LDL', TG:'in_TG',
+  Glucose:'in_Glucose', HbA1c:'in_HbA1c', insulin:'in_insulin',
+  Cr:'in_Cr', BUN:'in_BUN', AST:'in_AST', ALT:'in_ALT', Albumin:'in_Albumin',
+  Na:'in_Na', K:'in_K', WBC:'in_WBC', Hb:'in_Hb', Plt:'in_Plt', TSH:'in_TSH'
+};
+
+const ORGAN_NAMES = {
+  brain: '大腦 (C1)',
+  cardiac: '心臟',
+  pulmonary: '肺',
+  vascular: '血管',
+  hepatic: '肝臟',
+  renal: '腎臟',
+  endocrine: '內分泌',
+  gi: '消化系統',
+  immune: '免疫',
+  musculoskeletal: '骨骼肌肉',
+  autonomic: '自律神經',
+  thyroid: '甲狀腺'
+};
+
+// ═══════════════════════════════════════════════════════════
+// Input helpers
+// ═══════════════════════════════════════════════════════════
+function loadPreset(name) {
+  const p = PRESETS[name];
+  if (!p) return;
+  for (const [k,v] of Object.entries(p)) {
+    const el = document.getElementById(FIELD_MAP[k]);
+    if (!el) continue;
+    if (el.type === 'checkbox') el.checked = v;
+    else if (el.tagName === 'SELECT') el.value = v;
+    else el.value = v;
+  }
+  document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function clearAll() {
+  for (const id of Object.values(FIELD_MAP)) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    if (el.type === 'checkbox') el.checked = false;
+    else if (el.tagName === 'SELECT') el.selectedIndex = 0;
+    else el.value = '';
+  }
+  document.querySelectorAll('.btn-preset').forEach(b => b.classList.remove('active'));
+  resetBody();
+}
+
+function gatherInput() {
+  const data = {};
+  const numFields = ['age','waist','sbp','dbp','TC','HDL','LDL','TG',
+    'Glucose','HbA1c','insulin','Cr','BUN','AST','ALT','Albumin',
+    'Na','K','WBC','Hb','Plt','TSH'];
+  for (const f of numFields) {
+    const el = document.getElementById(FIELD_MAP[f]);
+    if (el && el.value !== '') data[f] = parseFloat(el.value);
+  }
+  data.sex = document.getElementById('in_sex').value;
+  data.systolic_bp = data.sbp || 120;
+  data.diastolic_bp = data.dbp || 80;
+  data.bp_treated = document.getElementById('in_bp_treated').checked;
+  data.smoker = document.getElementById('in_smoker').checked;
+  if (data.waist) data.waist_cm = data.waist;
+  return data;
+}
+
+function objFromMap(v) {
+  if (v instanceof Map) return Object.fromEntries(v);
+  if (v && typeof v.toJs === 'function') return v.toJs({dict_converter: Object.fromEntries});
+  return v;
+}
+
+// ═══════════════════════════════════════════════════════════
+// Pyodide
+// ═══════════════════════════════════════════════════════════
+let pyodide = null;
+
+async function initPyodide() {
+  pyodide = await loadPyodide();
+  const resp = await fetch('gamma_compute.py');
+  const code = await resp.text();
+  pyodide.runPython(code);
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('btnCompute').disabled = false;
+}
+
+initPyodide().catch(err => {
+  document.getElementById('loading').innerHTML =
+    '<span style="color:#ef5350;">載入失敗: ' + err.message + '</span>';
+});
+
+// ═══════════════════════════════════════════════════════════
+// Compute & Update Body
+// ═══════════════════════════════════════════════════════════
+function runCompute() {
+  const data = gatherInput();
+  pyodide.globals.set('_input_data', pyodide.toPy(data));
+  pyodide.runPython('_result = compute_all(dict(_input_data))');
+  const result = pyodide.globals.get('_result').toJs({dict_converter: Object.fromEntries});
+
+  updateBody(result);
+  updateHealthScore(result);
+  updateDZ(result);
+}
+
+function getColor(g2) {
+  if (g2 > 0.15) return { fill: '#ef5350', glow: 'url(#glowRed)', cls: 'critical' };
+  if (g2 > 0.05) return { fill: '#ffa726', glow: 'url(#glowYellow)', cls: 'warning' };
+  return { fill: '#66bb6a', glow: 'url(#glowGreen)', cls: 'healthy' };
+}
+
+function updateBody(result) {
+  const gamma = objFromMap(result.gamma);
+  const organs = Object.keys(ORGAN_NAMES);
+
+  for (const organ of organs) {
+    const g = gamma[organ] || 0;
+    const g2 = g * g;
+    const color = getColor(g2);
+    const node = document.getElementById('node-' + organ);
+    if (!node) continue;
+
+    // Update circle color
+    const circle = node.querySelector('.organ-circle');
+    if (circle) {
+      circle.style.fill = color.fill;
+      circle.style.stroke = color.fill;
+    }
+
+    // Update glow
+    const glow = node.querySelector('.organ-glow');
+    if (glow) {
+      glow.setAttribute('fill', color.glow);
+      glow.style.opacity = g2 > 0.05 ? '1' : '0.3';
+    }
+
+    // Update gamma text
+    const gText = document.getElementById('g-' + organ);
+    if (gText) {
+      gText.textContent = 'Γ²=' + g2.toFixed(3);
+      gText.style.fill = color.fill;
+    }
+
+    // Add animation class
+    node.classList.remove('pulse-warn', 'pulse-crit');
+    if (color.cls === 'critical') node.classList.add('pulse-crit');
+    else if (color.cls === 'warning') node.classList.add('pulse-warn');
+
+    // Click handler
+    node.onclick = () => showDetail(organ, g, g2, result);
+  }
+}
+
+function updateHealthScore(result) {
+  const h = result.health_index;
+  const g2 = result.total_gamma_squared;
+  const el = document.getElementById('hValue');
+  const sub = document.getElementById('hSub');
+  const container = document.getElementById('healthScore');
+
+  el.textContent = 'H = ' + h.toFixed(4);
+  sub.textContent = (h * 100).toFixed(1) + '% 傳輸效率 · ΣΓ² = ' + g2.toFixed(4);
+
+  container.classList.remove('score-good', 'score-warn', 'score-bad');
+  if (h > 0.95) container.classList.add('score-good');
+  else if (h > 0.85) container.classList.add('score-warn');
+  else container.classList.add('score-bad');
+}
+
+function updateDZ(result) {
+  const annual = result.dz_annual;
+  const dzOrgans = objFromMap(result.dz_organs);
+  const container = document.getElementById('dzForecast');
+  const bars = document.getElementById('dzBars');
+  container.style.display = 'block';
+
+  const entries = Object.entries(dzOrgans).sort((a,b) => {
+    const ao = objFromMap(a[1]), bo = objFromMap(b[1]);
+    return (bo.share || 0) - (ao.share || 0);
+  });
+
+  let html = '<div class="dz-total">年度 D<sub>Z</sub> = ' + annual.toFixed(1) + ' 阻抗日</div>';
+  for (const [organ, vals] of entries) {
+    const v = objFromMap(vals);
+    const pct = Math.min(v.share, 100);
+    const color = pct > 25 ? '#ef5350' : (pct > 10 ? '#ffa726' : '#66bb6a');
+    const name = ORGAN_NAMES[organ] || organ;
+    html += '<div class="dz-bar-row">' +
+      '<span class="dz-name">' + name + '</span>' +
+      '<div class="dz-track"><div class="dz-fill" style="width:' + pct + '%;background:' + color + ';"></div></div>' +
+      '<span class="dz-pct">' + v.share.toFixed(1) + '%</span></div>';
+  }
+  html += '<div class="dz-hint">⚠️ D<sub>Z</sub> 佔比最高的器官 = 物理預測最先惡化的器官</div>';
+  bars.innerHTML = html;
+}
+
+function resetBody() {
+  const organs = Object.keys(ORGAN_NAMES);
+  for (const organ of organs) {
+    const node = document.getElementById('node-' + organ);
+    if (!node) continue;
+    const circle = node.querySelector('.organ-circle');
+    if (circle) { circle.style.fill = '#555'; circle.style.stroke = '#666'; }
+    const glow = node.querySelector('.organ-glow');
+    if (glow) { glow.setAttribute('fill', 'rgba(100,100,100,0.1)'); glow.style.opacity = '0.2'; }
+    const gText = document.getElementById('g-' + organ);
+    if (gText) { gText.textContent = ''; }
+    node.classList.remove('pulse-warn', 'pulse-crit');
+  }
+  document.getElementById('hValue').textContent = 'H = —';
+  document.getElementById('hSub').textContent = '輸入數據後計算';
+  document.getElementById('healthScore').classList.remove('score-good', 'score-warn', 'score-bad');
+  document.getElementById('dzForecast').style.display = 'none';
+}
+
+// ═══════════════════════════════════════════════════════════
+// Detail Panel
+// ═══════════════════════════════════════════════════════════
+function showDetail(organ, g, g2, result) {
+  const panel = document.getElementById('detailPanel');
+  const title = document.getElementById('detailTitle');
+  const content = document.getElementById('detailContent');
+  const name = ORGAN_NAMES[organ] || organ;
+  const color = getColor(g2);
+
+  title.innerHTML = '<span style="color:' + color.fill + '">●</span> ' + name;
+
+  let html = '<div class="detail-grid">';
+  html += '<div class="detail-item"><div class="detail-label">Γ</div><div class="detail-val">' + (g >= 0 ? '+' : '') + g.toFixed(4) + '</div></div>';
+  html += '<div class="detail-item"><div class="detail-label">Γ²</div><div class="detail-val">' + g2.toFixed(4) + '</div></div>';
+  html += '<div class="detail-item"><div class="detail-label">T = 1−Γ²</div><div class="detail-val">' + (1 - g2).toFixed(4) + '</div></div>';
+  html += '<div class="detail-item"><div class="detail-label">狀態</div><div class="detail-val" style="color:' + color.fill + '">' +
+    (color.cls === 'critical' ? '⚠️ 警告' : (color.cls === 'warning' ? '🟡 注意' : '✅ 健康')) + '</div></div>';
+  html += '</div>';
+
+  // DZ info
+  if (result.dz_organs) {
+    const dzOrgans = objFromMap(result.dz_organs);
+    if (dzOrgans[organ]) {
+      const dz = objFromMap(dzOrgans[organ]);
+      html += '<div class="detail-dz">';
+      html += '<div>日 D<sub>Z</sub>: ' + dz.g2.toFixed(4) + '</div>';
+      html += '<div>年 D<sub>Z</sub>: ' + dz.annual.toFixed(1) + ' 阻抗日</div>';
+      html += '<div>佔比: ' + dz.share.toFixed(1) + '%</div>';
+      html += '</div>';
+    }
+  }
+
+  // Physics note
+  const notes = {
+    brain: 'C1 節點：全身阻抗恆定控制器。穩態時冗餘，急性壓力下關鍵。',
+    cardiac: '心臟 C2：Laplace-Starling 法則驅動的阻抗匹配器。',
+    pulmonary: '肺 C2：氣道阻抗由 FEV1/FVC 決定。Γ²_pulm → CLRD AUC=0.83。',
+    vascular: '血管 C3 trunk：Murray 法則 + Windkessel。脈壓 = Γ_vascular 的直接量測。',
+    hepatic: '肝臟 C2：FIB-4 對應的纖維化阻抗。',
+    renal: '腎臟 C2：eGFR = (1−Γ²_renal) 的臨床近似。',
+    endocrine: '內分泌 C2：HOMA-IR = Γ²_endocrine 的受體漂移。AUC=0.81。',
+    gi: '消化 C2：腸道適應法則（腸道可塑性）。',
+    immune: '免疫 C2：WBC + 血小板阻抗匹配。',
+    musculoskeletal: '骨骼 C2：Wolff 法則 + Davis 法則。',
+    autonomic: '自律 C2：交感迷走重塑法則。',
+    thyroid: '甲狀腺 C2：TSH 回饋迴路阻抗。'
+  };
+  html += '<div class="detail-note">' + (notes[organ] || '') + '</div>';
+
+  content.innerHTML = html;
+  panel.classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('detailPanel').classList.remove('open');
+}
+</script>
+</body>
+</html>
