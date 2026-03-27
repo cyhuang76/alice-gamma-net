@@ -23,14 +23,8 @@
 <main class="split">
 
   <!-- ── LEFT: Body Topology ─────────────────────────── -->
-  <section class="panel-body" id="panelBody">
-
-    <!-- Health Score -->
-    <div class="health-score" id="healthScore">
-      <div class="h-label">HEALTH INDEX</div>
-      <div class="h-value" id="hValue">H = —</div>
-      <div class="h-sub" id="hSub">輸入數據後計算</div>
-    </div>
+  <!-- ── PANEL 1: Topology ─────────────────────────────── -->
+  <section class="panel-topo" id="panelBody">
 
     <!-- Topology Diagram -->
     <div class="topo-diagram">
@@ -125,14 +119,10 @@
       </div>
     </div>
 
-    <!-- D_Z Forecast -->
-    <div class="dz-forecast" id="dzForecast" style="display:none;">
-      <h3>🔮 D<sub>Z</sub> 累積預測 — 誰先倒？</h3>
-      <div id="dzBars"></div>
-    </div>
   </section>
 
-  <!-- ── RIGHT: Data Input ───────────────────────────── -->
+  <!-- ── PANEL 2: Data Input ─────────────────────────────── -->
+
   <section class="panel-input">
     <h2>📋 健檢數據輸入</h2>
     <p class="input-hint">輸入你的健檢數值，點擊「定位」即時更新左側人體拓撲</p>
@@ -281,6 +271,28 @@
 
     <div class="disclaimer">
       ⚠️ 本頁結果僅作物理模型驗證參考，不構成任何醫療建議。請以正式醫療報告及專業醫師判斷為準。
+    </div>
+  </section>
+
+  <!-- ── PANEL 3: Results ─────────────────────────────── -->
+  <section class="panel-result" id="panelResult">
+    <!-- Health Score -->
+    <div class="health-score" id="healthScore">
+      <div class="h-label">HEALTH INDEX</div>
+      <div class="h-value" id="hValue">H = —</div>
+      <div class="h-sub" id="hSub">輸入數據後計算</div>
+    </div>
+
+    <!-- D_Z Forecast -->
+    <div class="dz-forecast" id="dzForecast" style="display:none;">
+      <h3>🔮 D<sub>Z</sub> 累積預測 — 誰先倒？</h3>
+      <div id="dzBars"></div>
+    </div>
+
+    <div class="result-placeholder" id="resultPlaceholder">
+      <div class="ph-icon">🛰️</div>
+      <div>輸入數據並點擊「定位」</div>
+      <div>即可查看器官風險預測</div>
     </div>
   </section>
 </main>
@@ -439,6 +451,8 @@ function runCompute() {
   updateBody(result);
   updateHealthScore(result);
   updateDZ(result);
+  const ph = document.getElementById('resultPlaceholder');
+  if (ph) ph.style.display = 'none';
 }
 
 function getColor(g2) {

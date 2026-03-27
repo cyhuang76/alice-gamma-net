@@ -74,15 +74,15 @@ body {
   color: var(--bg);
 }
 
-/* ── Split Layout ──────────────────────────────────────── */
+/* ── 3-Column Layout ───────────────────────────────────── */
 .split {
   display: flex;
   min-height: calc(100vh - 48px);
 }
 
-.panel-body {
-  flex: 0 0 50%;
-  padding: 1.5rem 2rem;
+.panel-topo {
+  flex: 0 0 30%;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,27 +93,56 @@ body {
 }
 
 .panel-input {
-  flex: 0 0 50%;
-  padding: 1.5rem;
+  flex: 0 0 36%;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
   background: var(--bg2);
   overflow-y: auto;
   max-height: calc(100vh - 48px);
+  border-right: 1px solid var(--border);
+}
+
+.panel-result {
+  flex: 0 0 34%;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+  overflow-y: auto;
+  max-height: calc(100vh - 48px);
+}
+
+/* Result placeholder */
+.result-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  text-align: center;
+  gap: 0.3rem;
+}
+.ph-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.3;
 }
 
 /* ── Health Score ───────────────────────────────────────── */
 .health-score {
   text-align: center;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.5rem;
   border-radius: 16px;
   background: var(--glass);
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(15px);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   transition: all 0.5s;
   width: 100%;
-  max-width: 400px;
 }
 
 .h-label {
@@ -463,7 +492,6 @@ body {
 /* ── DZ Forecast ───────────────────────────────────────── */
 .dz-forecast {
   width: 100%;
-  max-width: 400px;
   margin-top: 1rem;
   padding: 1rem;
   background: var(--glass);
@@ -633,17 +661,23 @@ body {
 }
 
 /* ── Responsive ────────────────────────────────────────── */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .split {
     flex-direction: column;
   }
-  .panel-body {
+  .panel-topo {
     flex: none;
     border-right: none;
     border-bottom: 1px solid var(--border);
     max-height: none;
   }
   .panel-input {
+    flex: none;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .panel-result {
     flex: none;
     max-height: none;
   }
