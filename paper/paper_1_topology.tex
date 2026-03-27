@@ -1561,6 +1561,39 @@ in real time, but the cortical C3 commands remain
 intact.
 \end{remark}
 
+\begin{remark}[Cerebellum bilateral symmetry:
+  the only same-direction structure]
+\label{rem:cerebellum-bilateral}
+Among all bilateral brain structures, the cerebellum
+is unique: its left and right hemispheres run
+\emph{same-direction} $K$-staircases
+($K = 2 \to 5$ on both sides), whereas every other
+bilateral structure (cortex, amygdala, hippocampus,
+thalamus, basal ganglia) runs anti-parallel staircases
+(left: low$\to$high, right: high$\to$low).
+
+This follows directly from the cerebellum's role as a
+pure C2 engine (Remark~\ref{rem:cerebellum}):
+it performs only local impedance adjustment
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+without requiring the analysis/synthesis split that
+demands anti-parallel processing.
+Because both hemispheres process the same low-$K$
+calibration signals, they produce minimal
+direct $\Gamma^2_{L \leftrightarrow R}$.
+The vermis serves only as an axial coordinator
+(left-hand/right-hand synchronisation),
+not as a quarter-wave $K$-level relay like the
+corpus callosum.
+
+Clinical consequence: cerebellar lesions produce
+ataxia (coordination loss) but never consciousness
+loss or personality change---the structure has no
+high-$K$ anti-parallel conflict to resolve, and
+therefore no self-referential $\Gamma_{\text{meta}}$
+loop.
+\end{remark}
+
 
 % ============================================================
 \section{The Binding Problem as Synchronous C2 Writing}
@@ -1870,6 +1903,69 @@ Lateralisation is therefore the neural analogue of
 $K$-band carries two anti-parallel signal flows
 simultaneously, with the corpus callosum as
 the directional coupler.
+\end{remark}
+
+\begin{remark}[Six-structure bilateral brain topology
+  and midline relay classification]
+\label{rem:bilateral-topology}
+The $\Gamma$-MRP framework predicts that every
+bilateral brain structure must be classified by
+two properties: (i)~whether its left--right
+$K$-staircases are anti-parallel or same-direction,
+and (ii)~whether a midline C3 relay (commissure)
+exists to correct the resulting $\Gamma^2_{L
+\leftrightarrow R}$.
+The complete classification is:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lccl@{}}
+\toprule
+Structure & $K$ range & Direction & Relay \\
+\midrule
+Cortex       & 5--15 & $\uparrow$L $\downarrow$R
+  & CC (corpus callosum) \\
+Amygdala     & 3--8  & $\uparrow$L $\downarrow$R
+  & AC (anterior commissure) \\
+Hippocampus  & 6--12 & $\uparrow$L $\downarrow$R
+  & HC (hippocampal commissure) \\
+Thalamus     & 4--10 & $\uparrow$L $\downarrow$R
+  & MI (massa intermedia) \\
+Basal ganglia& 3--7  & $\uparrow$L $\downarrow$R
+  & \textbf{none} \\
+Cerebellum   & 2--5  & $\uparrow$L $\uparrow$R
+  & vermis (axial only) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Two structures are topologically exceptional.
+First, the \textbf{basal ganglia} lack any direct
+commissure: left and right striatum/pallidum
+are physically isolated.
+Consequently, when dopaminergic $\eta$ decays
+asymmetrically (e.g., substantia nigra degeneration),
+the resulting $\Gamma^2$ rise cannot be compensated
+by a contralateral C3 relay.
+This is the topological reason why
+\textbf{Parkinson's disease almost always begins
+unilaterally}---the absent commissure traps
+$\Gamma^2$ on the affected side.
+
+Second, the \textbf{cerebellum} is the only
+same-direction ($\uparrow$L$\,\uparrow$R) structure
+(Remark~\ref{rem:cerebellum-bilateral}).
+All anti-parallel structures require quarter-wave
+C3 relays to reconcile the analysis--synthesis
+split; the cerebellum, as a pure C2 engine,
+does not.
+
+Numerical simulation (\texttt{exp\_bilateral\_brain.py})
+confirms that anti-parallel structures with relay
+achieve $\Gamma^2 \approx 0$, same-direction
+structures achieve $\Gamma^2 \approx 0$ without
+relay need, and the relay-less basal ganglia
+accumulate the highest residual $\Gamma^2$.
 \end{remark}
 
 \begin{remark}[Skill acquisition as

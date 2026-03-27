@@ -2322,6 +2322,55 @@ often coexist (``tired but wired'') maps naturally
 to a system where $\beta_{\text{recal}}$ is low
 \emph{and} one channel has high $\Gamma_i^2$.
 
+\begin{remark}[Acute stress and the C1
+  redundant-to-critical transition]
+\label{rem:acute-stress}
+A whole-body stress simulation
+(\texttt{exp\_body\_stress.py}) applies four acute
+stressors---surgery, infection, exercise,
+haemorrhage---directly to the dual-trunk impedance
+($Z_v$, $Z_n$) rather than to metabolic demand alone.
+Two conditions are compared: C1 (brain homeostatic
+correction) ON vs.\ OFF.
+
+Under steady-state conditions, C1 is nearly
+redundant: organs perform distributed C2 matching
+and C3 relays carry trunk corrections automatically.
+This explains the ``jellyfish paradox'' of Paper~2
+(Remark~\ref*{rem:body-c123-simulation}):
+organisms without centralised brains survive in
+stable environments.
+
+Under acute trunk-level stress, however, C1
+transitions from redundant to \textbf{critical}:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Stressor & $H$ (C1 ON) & $H$ (C1 OFF) \\
+\midrule
+Surgery      & 0.85 & 0.72 \\
+Infection    & 0.88 & 0.80 \\
+Exercise     & 0.92 & 0.89 \\
+Haemorrhage  & \textbf{0.78} & \textbf{0.60} \\
+\bottomrule
+\end{tabular}
+\end{center}
+Haemorrhage is the most severe because it directly
+collapses $Z_v$ (vascular trunk), which multiplicatively
+degrades every organ via
+$H = \prod_k(1-\Gamma_{v,k}^2)(1-\Gamma_{n,k}^2)$.
+Without C1 correction, the cascading $\Gamma^2$ rise
+is uncompensated, producing the largest health gap
+($\Delta H = 0.18$).
+
+This result explains why anaesthesia (temporary C1
+suppression) during surgery is survivable only because
+the surgical team externally maintains trunk
+homeostasis---they are, in $\Gamma$-Net terms,
+acting as an \emph{externalised C1}.
+\end{remark}
+
 
 % ============================================================
 %  DISCUSSION

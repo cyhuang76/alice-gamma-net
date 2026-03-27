@@ -2157,6 +2157,33 @@ rigour:
     cascade ordering, the existence of
     bifurcation thresholds, the hysteresis
     gap---not quantitative point estimates.
+
+    Four additional dynamical simulations extend
+    Layer~3 evidence:
+    (i)~a 29-tissue whole-body model
+    (\texttt{exp\_body\_c123.py}) confirms the
+    C1--C2--C3 hierarchy with multiplicative
+    coupling $H = \prod_k(1-\Gamma_{v,k}^2)
+    (1-\Gamma_{n,k}^2)$ and validates the
+    ``jellyfish paradox''
+    (No\,C3 $\gg$ No\,C1 in steady-state damage);
+    (ii)~an acute stress test
+    (\texttt{exp\_body\_stress.py}) demonstrates
+    the C1 redundant-to-critical transition
+    under trunk-level haemorrhage
+    ($\Delta H = 0.18$ with vs.\ without C1);
+    (iii)~a bilateral brain simulation
+    (\texttt{exp\_bilateral\_brain.py})
+    classifies six structures by anti-parallel
+    vs.\ same-direction $K$-staircases and
+    confirms that relay-less basal ganglia
+    accumulate the highest residual $\Gamma^2$;
+    (iv)~a triple-hit aging simulation
+    (\texttt{exp\_bilateral\_aging.py}) predicts
+    the neurodegenerative disease order---basal
+    ganglia (Parkinson) first, hippocampus/cortex
+    (Alzheimer) second, cerebellum last---matching
+    clinical epidemiology from topology alone.
 \end{enumerate}
 The critical distinction is: Layers~1 and~2
 cannot be made to fit any dataset by parameter

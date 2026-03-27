@@ -1788,6 +1788,49 @@ The title equation:
 Life pays a fractal tax of $\beta - 1 \approx 26\%$ for
 the privilege of being simultaneously fed and informed.
 
+\begin{remark}[Whole-body C1--C2--C3 simulation:
+  the jellyfish paradox and trunk criticality]
+\label{rem:body-c123-simulation}
+A dynamical simulation of 29 organ tissues---each
+modelled as a C2 impedance matcher receiving dual
+vascular ($Z_v$) and neural ($Z_n$) supply through
+a shared C3 relay trunk---confirms the macro-scale
+hierarchy:
+\begin{itemize}
+  \item \textbf{C1 (brain)} acts as a homeostatic
+    constraint, correcting trunk impedance toward
+    organ-demand matches when C2 alone is insufficient.
+  \item \textbf{C2 (organs)} performs distributed
+    local gradient descent:
+    $\Delta Z_k = -\eta\,\Gamma_k\,x_{\text{in},k}\,
+    x_{\text{out},k}$ per tissue~$k$.
+  \item \textbf{C3 (dual trunk)} relays impedance
+    corrections across the vascular and neural buses
+    via quarter-wave matching.
+\end{itemize}
+Whole-body health is multiplicative:
+$H = \prod_k (1-\Gamma_{v,k}^2)(1-\Gamma_{n,k}^2)$,
+so each tissue's failure cascades through the product.
+
+Four ablation scenarios reveal a key hierarchy:
+(i)~full system converges to $H \approx 0.96$;
+(ii)~removing C1 (brain offline) degrades health only
+mildly in steady state ($H \approx 0.93$);
+(iii)~removing C3 (trunk severed) causes catastrophic
+collapse ($H \to 0$, all organs starved);
+(iv)~aging ($\eta \to 0$) shows gradual decline.
+The result that \textbf{No\,C3 $\gg$ No\,C1} in
+steady-state damage confirms the ``jellyfish paradox'':
+organisms without brains (C1) survive if C2 and C3
+remain intact, but no organism survives trunk loss.
+
+Under acute stress (haemorrhage, surgery, infection),
+C1 transitions from redundant to critical:
+without C1 correction, haemorrhage drives
+$H \approx 0.60$, whereas with C1, $H \approx 0.78$
+(\texttt{exp\_body\_stress.py}).
+\end{remark}
+
 
 % ============================================================
 \begin{acknowledgments}

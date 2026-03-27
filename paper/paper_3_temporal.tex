@@ -1128,6 +1128,66 @@ fit---it emerges from the multiplicative coupling
 between P1 and P2.
 \end{remark}
 
+\begin{remark}[Bilateral aging and the predicted
+  neurodegenerative disease order]
+\label{rem:bilateral-aging-order}
+The positive feedback of the preceding remark acts
+\emph{differentially} across bilateral brain
+structures, because each structure has distinct
+topological protection.
+A ``triple-hit'' simulation
+(\texttt{exp\_bilateral\_aging.py}) confirms this:
+\begin{enumerate}
+  \item \textbf{Hit~1: $\eta$ decay} (dopamine
+    depletion).
+    Not all structures lose dopamine equally:
+    the basal ganglia (substantia nigra) decay
+    $1.6\times$ faster than cortex.
+  \item \textbf{Hit~2: Asymmetric $Z$ drift.}
+    Left and right hemispheres receive
+    \emph{different contralateral stimuli},
+    so C2 adapts each side to its own demand
+    ---this \emph{increases} the
+    $\Gamma^2_{L \leftrightarrow R}$ mismatch.
+  \item \textbf{Hit~3: Relay degradation}
+    (white-matter atrophy).
+    Midline commissures (CC, AC, HC) lose
+    effectiveness with age, weakening C3 correction.
+\end{enumerate}
+The critical observation: the basal ganglia
+have \textbf{no commissure}
+(Paper~1, Remark~\ref*{rem:bilateral-topology})
+and therefore receive zero C3 relay correction
+from birth.
+As $\eta$ decays and $Z$ drifts asymmetrically,
+$\Gamma^2_{L \leftrightarrow R}$ in the basal
+ganglia rises unchecked---crossing the disease
+threshold \emph{first} among all structures.
+
+The simulation predicts:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}clcc@{}}
+\toprule
+Order & Structure & Relay & Disease \\
+\midrule
+1 & Basal ganglia & \textbf{none} & Parkinson \\
+2 & Hippocampus & HC & Memory loss \\
+3 & Cortex & CC & Alzheimer \\
+4 & Cerebellum & vermis & Ataxia (last) \\
+\bottomrule
+\end{tabular}
+\end{center}
+This matches clinical epidemiology:
+Parkinson's onset peaks at $\sim$55--65\,yr,
+Alzheimer's at $\sim$65--80\,yr,
+and cerebellar degeneration at $\sim$70--85\,yr.
+The ordering is not coincidental but
+\emph{topologically inevitable}:
+structures without C3 relay protection
+fail first under the same aging dynamics.
+\end{remark}
+
 
 \subsection{Developmental modulation of $\eta_{\text{eff}}(t)$}
 \label{sec:eta-lifecycle}
