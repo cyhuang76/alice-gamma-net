@@ -105,7 +105,7 @@ Five companion papers develop the consequences:
     alone, with zero disease-specific code.
   \item \textbf{Paper~5}~\cite{Paper5}:
     Validates the full framework against NHANES
-    epidemiological data ($n = 49{,}774$, zero fitted
+    epidemiological data ($n = 49{,}774$, zero outcome-fitted
     parameters), reports all-cause mortality
     AUC~$= 0.705$, and collects all falsifiable
     predictions from Papers~1--4.
@@ -180,6 +180,58 @@ Any system with two impedances meeting at an interface
 The reflection coefficient $\Gamma$ is as fundamental
 as temperature or pressure: it exists wherever two
 impedances meet.
+
+\begin{remark}[Wave-independence of $\Gamma$]
+\label{rem:wave-independence}
+The reflection coefficient $\Gamma$ and the power
+transmission $T = 1 - \Gamma^2$ are properties of
+\emph{any} linear system with a source impedance
+and a load impedance.
+They do \emph{not} require wave propagation.
+In an RF transmission line, $\Gamma$ creates a
+reflected travelling wave;
+in a DC resistor circuit, $\Gamma$ determines the
+power transfer efficiency without any wave;
+in an overdamped chemical system (e.g.\ insulin
+signalling), $\Gamma$ quantifies the fraction of
+input signal that fails to activate the downstream
+pathway.
+The underlying theorem is the
+\emph{maximum power transfer theorem}
+(Jacobi, 1840), which states that maximum power is
+delivered when $Z_{\mathrm{load}} = Z_{\mathrm{source}}^*$
+($\Gamma = 0$).
+This theorem holds for DC circuits, AC circuits,
+acoustic systems, hydraulic networks, and
+chemical flux systems---any domain where
+effort and flow variables are defined.
+\end{remark}
+
+\begin{remark}[Dimensionless universality of $\Gamma$]
+\label{rem:dimensionless}
+Because $\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1)$
+is the ratio of two quantities with the same
+physical dimension, the units cancel identically:
+\[
+  [\Gamma] = \frac{[Z] - [Z]}{[Z] + [Z]}
+  = \frac{[Z]}{[Z]} = 1
+  \quad (\text{dimensionless}).
+\]
+This holds regardless of whether $Z$ is measured in
+$\Omega$ (electrical), Pa$\cdot$s/m$^3$ (vascular),
+N$\cdot$s/m (mechanical), or any other effort/flow
+ratio.
+When the framework computes cross-domain quantities
+such as $H = \prod_i(1 - \Gamma_i^2)$ or
+$\Sigma\Gamma^2 = \sum_i \Gamma_i^2$,
+each $\Gamma_i$ is already dimensionless, so the
+product and sum are well-defined without requiring
+transducer matrices or unit conversion.
+The cross-network coupling matrix $C_{kj}$
+(Papers~2--4) couples dimensionless $\Gamma^2$
+values, not raw impedances.
+\end{remark}
+
 
 \subsection{The Minimum Reflection Principle (first principle)}
 \label{sec:mrp}
@@ -564,7 +616,7 @@ $A_{\text{cut}}$ & Irreducible action
 $\Phi_{\text{meta}}$ & Consciousness index
   & $1 - \Gamma_{\text{meta}}^2$
   & Self-referential matching & 1 \\[4pt]
-$\mathcal{S}$ & Null space (``soul'')
+$\mathcal{S}$ & Invariant topological core (``soul'')
   & $\ker(\partial Z / \partial t)$
   & Impedances immune to experience & 1 \\[4pt]
 $\beta$ & Murray bifurcation ratio
@@ -642,7 +694,7 @@ Irreducibility}} \\
   Television Theorem
   & C1, C2, feedback
   & P1 \S9--10 \\
-& Soul &
+& ITC (``Soul'') &
   $\mathcal{S} = \ker(\partial Z/\partial t)$;
   four laws of null space
   & C2 uniqueness

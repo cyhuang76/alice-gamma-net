@@ -9,7 +9,7 @@
 \usepackage{gammanet}
 
 \begin{document}
-\newcommand{\ZFP}{zero fitted parameters}
+\newcommand{\ZFP}{zero outcome-fitted parameters}
 
 \title{Paper~5: Complete Empirical Validation---$\Gamma$ as the
 Universal Interface Law from Microtubules to Power Grids}
@@ -35,7 +35,7 @@ $\Gamma = (Z_2 - Z_1)/(Z_2 + Z_1)$ and the conservation
 identity $\Gamma^2 + T = 1$ from the Minimum Reflection
 Principle ($\Gamma$-MRP, Paper~0).
 NHANES validation (3~cycles, $n = 7{,}393$; 10~cycles,
-$n = 52{,}545$, $7{,}627$ deaths; zero fitted parameters; SHA-256
+$n = 52{,}545$, $7{,}627$ deaths; zero outcome-fitted parameters; SHA-256
 hash-locked) confirms organ-level $\Gamma$-diagnostics
 in 7/7 systems (endocrine AUC~$= 0.78$) and all-cause
 mortality AUC~$= 0.705$.
@@ -87,7 +87,7 @@ each algebraically equivalent to C2 under the appropriate
 substitution of effort, flow, and impedance variables.
 
 NHANES 10-cycle network-propagation validation ($n=52{,}545$,
-zero fitted parameters) confirms that a vascular measurement
+zero outcome-fitted parameters) confirms that a vascular measurement
 (blood pressure) improves non-vascular organ predictions
 (cardiac $\Delta\text{AUC} = +0.166$, neurological $+0.061$,
 renal $+0.024$) through inter-network $\Gamma$-coupling,
@@ -123,7 +123,7 @@ the $\Gamma$-Net axioms:
   \item \textbf{External empirical validation.}
     We apply the framework to NHANES population health data
     (3-cycle $n = 7{,}393$; 10-cycle $n = 52{,}545$)
-    with zero fitted parameters and SHA-256 hash-locking.
+    with zero outcome-fitted parameters and SHA-256 hash-locking.
     The predictions are non-trivially correct across
     7~organ systems and all-cause mortality.
 
@@ -169,18 +169,18 @@ The protocol is:
   \item Predict organ disease status
     ($\Gamma_{\text{organ}}^2 > \theta$).
   \item Compare with self-reported diagnoses.
-  \item Zero fitted parameters throughout.%
-    \footnote{``Zero fitted parameters'' means that no
+  \item Zero outcome-fitted parameters throughout.%
+    \footnote{``Zero outcome-fitted parameters'' means that no
     coefficient in the pipeline was optimised against
     the NHANES outcome labels.
     The reference intervals ($x_{\text{ref},j}$) and
-    anatomical weights ($w_j$) are external physiological
-    constants drawn from textbook consensus values
+    anatomical weights ($w_j$) are \emph{a~priori}
+    clinical consensus constants drawn from textbook values
     (e.g.\ fasting glucose $<100$\,mg/dL,
     SBP $<120$\,mmHg), analogous to using
     $g = 9.81$\,m/s$^2$ in a ballistics prediction.
-    They constitute prior knowledge, not regression
-    coefficients fitted to the validation cohort.}
+    They constitute prior physiological knowledge, not
+    regression coefficients fitted to the validation cohort.}
 \end{enumerate}
 
 \subsubsection{Results}
@@ -188,7 +188,7 @@ The protocol is:
 \begin{table}[h]
 \centering
 \caption{Three-cycle NHANES organ-level AUC
-($n = 7{,}393$, zero fitted parameters).}
+($n = 7{,}393$, zero outcome-fitted parameters).}
 \label{tab:3cycle}
 \begin{tabular}{lcc}
 \toprule
@@ -206,7 +206,7 @@ Neurological & 0.52 & $< 0.01$ \\
 \end{table}
 
 All 7/7 organ systems are significant at $p < 0.01$
-with zero fitted parameters.
+with zero outcome-fitted parameters.
 
 The composite Health Index
 $H = \prod_{i=1}^{12} (1 - \Gamma_i^2)$
@@ -224,7 +224,7 @@ limitations, not framework failure.
 \label{thm:nhanes-3cycle}
 In a pre-registered blind validation on three
 non-overlapping NHANES cycles ($n = 7{,}393$,
-zero fitted parameters, SHA-256 hash-locked protocol),
+zero outcome-fitted parameters, SHA-256 hash-locked protocol),
 the $\Gamma$-vector achieves statistically significant
 AUC in all seven organ systems tested, with
 all-cause mortality AUC $= 0.705$.
@@ -242,7 +242,7 @@ each completed before the next begins:
     2015--2016, and 2017--2018,
     organ-level $\Gamma$-vectors are computed
     using textbook reference impedances
-    $Z_{\mathrm{normal}}$ (zero fitted parameters).
+    $Z_{\mathrm{normal}}$ (zero outcome-fitted parameters).
   \item \textbf{Hash-lock.}
     All $7{,}393$ prediction vectors are serialised
     to JSON and SHA-256 hashed before any
@@ -374,7 +374,7 @@ for free and need only explain the residual.
 \label{cor:zero-param}
 The $\Gamma$-Net framework achieves predictive
 validity across 10 NHANES cycles ($n = 52{,}545$)
-with zero fitted parameters.
+with zero outcome-fitted parameters.
 This excludes the hypothesis that the observed AUC
 results from overfitting or post-hoc parameter tuning.
 \end{corollary}
@@ -390,7 +390,7 @@ validated $\Gamma$ using blood chemistry alone.
 This section extends the validation to eleven organ systems
 using five independent data modalities---spirometry,
 DEXA, audiometry, 12-lead ECG, and EEG---each
-with zero fitted parameters.
+with zero outcome-fitted parameters.
 
 \subsection{Exercise validation: Lifecycle Equation}
 \label{sec:exercise}
@@ -409,7 +409,7 @@ $\geq 150$~min/week of moderate-equivalent recreational exercise.
 \begin{table}[h]
 \centering
 \caption{Exercise vs.\ $\Sigma\Gamma^2$:
-  NHANES 3-cycle ($n = 7{,}393$, zero fitted parameters).}
+  NHANES 3-cycle ($n = 7{,}393$, zero outcome-fitted parameters).}
 \label{tab:exercise}
 \begin{tabular}{lccc}
 \toprule
@@ -458,7 +458,7 @@ mapped to organ $\Gamma$ as follows:
 \begin{table}[h]
 \centering
 \caption{Organ-specific $|\Gamma|$ $\to$ cause-specific
-  death AUC ($n \approx 52{,}545$, zero fitted parameters).}
+  death AUC ($n \approx 52{,}545$, zero outcome-fitted parameters).}
 \label{tab:organ-death}
 \begin{tabular}{llccc}
 \toprule
@@ -474,7 +474,7 @@ UCOD & Death cause & Organ $\Gamma$ & AUC & $n_+$ \\
 \end{table}
 
 The endocrine/diabetes result (AUC~$= 0.81$,
-zero fitted parameters) is comparable to fitted clinical
+zero outcome-fitted parameters) is comparable to fitted clinical
 models such as FINDRISC (AUC~$= 0.84$ with 8 fitted parameters).
 $\Sigma\Gamma^2$ also predicts all-cause mortality
 (AUC~$= 0.606$) from labs alone, consistent
@@ -497,7 +497,7 @@ $\text{PP} = \text{SV} / C_{\text{arterial}}
 \begin{table}[h]
 \centering
 \caption{Pulse-pressure quartiles vs.\ vascular
-  $|\Gamma|$ ($n = 72{,}886$, zero fitted parameters).}
+  $|\Gamma|$ ($n = 72{,}886$, zero outcome-fitted parameters).}
 \label{tab:pp-gamma}
 \begin{tabular}{lcc}
 \toprule
@@ -595,12 +595,12 @@ of cardiac impedance mismatch.
 Using textbook reference values (QRS~$= 80$~ms, HR~$= 75$~bpm,
 RMSSD~$= 40$~ms, ST~$= 0$) as $Z_{\text{normal}}$,
 we compute $\Gamma_{\text{cardiac}}$ per ECG with
-zero fitted parameters.
+zero outcome-fitted parameters.
 
 \begin{table}[h]
 \centering
 \caption{PTB-XL cardiac $\Gamma$ by diagnostic class
-  (zero fitted parameters, $n = 484$).}
+  (zero outcome-fitted parameters, $n = 484$).}
 \label{tab:ptbxl}
 \begin{tabular}{lcccc}
 \toprule
@@ -699,7 +699,7 @@ $n = 38{,}298$) provide additional organ-specific $\Gamma$ tests.
 \begin{table}[h]
 \centering
 \caption{Complete organ-specific $\Gamma$ validation summary
-  (all zero fitted parameters).}
+  (all zero outcome-fitted parameters).}
 \label{tab:organ-summary}
 \begin{tabular}{llccc}
 \toprule
@@ -722,7 +722,7 @@ Autonomic   & PhysioNet PICS  & ---   & 10   & HRV proxy \\
 
 Eleven organ systems now have real-data validation.
 Nine produce AUC~$> 0.55$ for mortality or disease-state
-prediction, all with zero fitted parameters.
+prediction, all with zero outcome-fitted parameters.
 
 \begin{theorem}[Multi-organ zero-parameter validation \textnormal{(E2)}]
 \label{thm:multi-organ}
@@ -731,7 +731,7 @@ five independent data modalities
 (blood chemistry, blood pressure, spirometry, DEXA, ECG),
 three external datasets (NHANES, PTB-XL, Figshare~EEG),
 and total $N > 200{,}000$ measurements
-with zero fitted parameters:
+with zero outcome-fitted parameters:
 \begin{enumerate}
   \item Nine of eleven organ-specific $\Gamma$ channels
     predict their corresponding clinical endpoint
@@ -882,7 +882,7 @@ signature of network propagation.}
   Health Index $H$ quartile.
   Q1 (sickest): mortality $= 10.5\%$;
   Q4 (healthiest): mortality $= 1.5\%$.
-  Relative risk $= 6.89\times$, zero fitted parameters.}
+  Relative risk $= 6.89\times$, zero outcome-fitted parameters.}
   \label{fig:kaplan-meier}
 \end{figure}
 
@@ -954,7 +954,7 @@ each using \textbf{zero parameters fitted to outcome data}:
 \centering
 \caption{Three-layer cascade AUC
 ($n = 7{,}393$, NHANES 2013--2018,
-zero fitted parameters).}
+zero outcome-fitted parameters).}
 \label{tab:cascade-auc}
 \begin{tabular}{lcccc}
 \toprule
@@ -1949,7 +1949,7 @@ Why, then, is the present work useful?
 it is explanation versus correlation.}
 A fitted model with 200 parameters tells the clinician
 \emph{that} a patient is at risk.
-The $\Gamma$-framework, with zero fitted parameters,
+The $\Gamma$-framework, with zero outcome-fitted parameters,
 provides mechanistic attribution for: which organ interface
 has $\Gamma \gg 0$, which relay node is degrading,
 and through which cascade pathway the mismatch
@@ -1992,7 +1992,7 @@ from $0.604$ to $0.709$.
 \centering
 \caption{Five-layer AUC progression
   ($n = 7{,}393$, NHANES 2013--2018).
-  Layers~1--4 use zero fitted parameters;
+  Layers~1--4 use zero outcome-fitted parameters;
   Layer~5 uses 12 organ weights only.}
 \label{tab:five-layer}
 \footnotesize
@@ -2114,7 +2114,7 @@ rigour:
     the results are mathematical necessities.
 
   \item \textbf{NHANES validation layer
-    (zero fitted parameters).}
+    (zero outcome-fitted parameters).}
     The organ-level $\Gamma$ scores used in
     Sec.~\ref{sec:nhanes} are computed from
     textbook reference ranges and published
@@ -2279,7 +2279,7 @@ runs exactly this ODE with $\Delta t = 1$\,year
 and reproduces the full-lifetime disease trajectory
 of Fig.~Paper~4, Fig.~1 in under
 one second on commodity hardware, with
-\emph{zero fitted parameters}.
+\emph{zero outcome-fitted parameters}.
 
 The implication for clinical computation is direct:
 the same engine that generates theoretical predictions
@@ -2502,7 +2502,8 @@ Lifecycle, and Aging as Thermodynamic Consequences of
 $\Gamma$-Minimisation,'' arXiv (2026), Paper~3.
 
 \bibitem{Paper4}
-H.-Y.~Huang, ``Memory, Consciousness, and Soul as Impedance
+H.-Y.~Huang, ``Memory, Consciousness, and the Invariant
+Topological Core as Impedance
 Physics on the $\Gamma$-Net,'' arXiv (2026), Paper~4.
 
 \bibitem{Wolff1892}
