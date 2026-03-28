@@ -1832,6 +1832,79 @@ $H \approx 0.60$, whereas with C1, $H \approx 0.78$
 (\texttt{exp\_body\_stress.py}).
 \end{remark}
 
+\begin{remark}[Afferent--efferent asymmetry and the
+  directional $K$-staircase]
+\label{rem:afferent-efferent-asymmetry}
+Sensory (afferent) and motor (efferent) pathways
+exhibit a fundamental channel-count asymmetry that
+is a direct consequence of the $K$-level structure.
+
+\textbf{Afferent path ($K\!: 1 \to 3 \to 5$, upload).}
+A peripheral receptor encodes a stimulus as a single
+frequency on a single transmission line.
+This signal is progressively combined with others
+as it ascends the $K$-hierarchy:
+$K = 1$ (raw receptor) $\to$ $K = 3$ (spinal
+integration) $\to$ $K = 5$ (cortical
+representation).
+At each stage, the channel count remains $\leq 1$
+per receptor;
+the impedance match is hard-wired and does not
+require learning.
+Hence $\Gamma_{\mathrm{aff}} \to 0$ by construction,
+and sensation is immediate from birth.
+
+\textbf{Efferent path ($K\!: 5 \to 3 \to 1$, download).}
+A single cortical intention at $K = 5$ must be
+\emph{expanded} into $N$ simultaneous output channels
+at $K = 1$ (individual motor units):
+\[
+  1 \;\text{intention} \;\xrightarrow{K=5 \to 3}
+  \;\text{motor plan}
+  \;\xrightarrow{K=3 \to 1}
+  \;N \;\text{muscle fibres.}
+\]
+Each channel $i$ has its own reflection coefficient
+$\Gamma_i$;
+the total efferent mismatch is
+$\Sigma\Gamma^2_{\mathrm{eff}} =
+\sum_{i=1}^{N} \Gamma_i^2$.
+Reducing this sum to zero requires simultaneous
+C2 gradient descent across all $N$ channels---this
+is exactly what \emph{motor learning} accomplishes,
+and why skill acquisition takes
+$\eta \times n = \text{const}$ repetitions.
+
+\textbf{Bilateral specialisation.}
+The anti-parallel $K$-staircase of the two
+hemispheres maps onto this asymmetry:
+\begin{itemize}
+  \item \textbf{Left hemisphere} ($K\!: 1 \to 5$):
+    specialises in single-channel decoding---language
+    parsing, sequential logic, analytical detail.
+  \item \textbf{Right hemisphere} ($K\!: 5 \to 1$):
+    specialises in multi-channel coordination---spatial
+    integration, holistic pattern recognition,
+    emotional context.
+\end{itemize}
+Contralateral wiring (left body $\to$ right brain,
+right body $\to$ left brain) ensures that afferent
+and efferent processing are handled by opposite
+hemispheres, maintaining the anti-parallel topology.
+
+\textbf{Clinical predictions:}
+(i)~left-hemisphere stroke impairs language
+comprehension (single-channel decoder lost);
+(ii)~right-hemisphere stroke causes hemispatial
+neglect (multi-channel coordinator lost);
+(iii)~cerebellar damage preserves sensation and
+intention but degrades multi-channel
+synchronisation (ataxia);
+(iv)~spinal cord injury severs both directions
+simultaneously (paralysis + anaesthesia below
+the lesion).
+\end{remark}
+
 
 % ============================================================
 \begin{acknowledgments}
