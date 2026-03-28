@@ -71,6 +71,73 @@ membrane, skin surface---is characterised by an
 impedance mismatch that determines how much energy
 is transmitted versus reflected.
 
+\subsection*{Core physical narrative}
+
+Before entering the mathematical derivations, we
+summarise the entire theory in three physical
+pictures---one for each constraint.
+Every subsequent equation in this series is a
+quantitative expression of these three facts.
+
+\textbf{C1 --- The thermodynamic imperative.}
+A developing embryo is a high-metabolic heat source
+embedded inside a second heat source (the mother).
+Unless this heat is removed by convection, local
+temperature rises until proteins denature.
+Convection requires a pump; therefore the heart
+\emph{must} be the first functional organ
+(human embryo: day~22).
+No genetic programme ``chooses'' this ordering:
+energy conservation (C1) demands it.
+The heart beats before the brain exists because
+there is no alternative consistent with the First
+Law of Thermodynamics
+(Paper~3, Remark~\ref*{rem:embryonic-c123-order}).
+
+\textbf{C2 --- Phase separation creates $\Gamma$.}
+To minimise internal reflection, cells with similar
+impedance cluster together---the physical process
+known as \emph{phase separation}.
+But phase separation inevitably creates sharp
+boundaries between dissimilar phases (organs).
+At every such boundary, impedance mismatch
+($\Gamma \neq 0$) is physically unavoidable.
+Life is therefore a system that, in building its
+own order, simultaneously creates the very friction
+it must spend its lifetime repairing.
+The coefficient update rule
+$\Delta Z = -\eta\,\Gamma\,x_{\text{in}}\,x_{\text{out}}$
+is the unique first-order algorithm for this
+perpetual repair (Section~\ref{sec:uniqueness}).
+
+\textbf{C3 --- The quarter-wave bridge.}
+When two phases have different modal complexities
+($K_i \neq K_j$), C2 cannot reduce the mismatch
+because the receiving dimension does not exist
+($\Gamma \to 1$).
+The only resolution is to insert intermediate
+relay tissues whose impedance is the geometric
+mean of the two extremes
+($Z_{\text{relay}} = \sqrt{Z_1 Z_2}$)---precisely
+the quarter-wave impedance transformer of
+microwave engineering.
+In the body, cartilage bridges bone to synovial
+fluid, the thalamus bridges cortex to brainstem,
+and arterioles bridge arteries to capillaries.
+These transition tissues are not biological
+curiosities; they are the physically mandatory
+solution to cross-dimensional reflection.
+
+\medskip\noindent
+These three constraints---energy balance,
+impedance repair, and dimensional relay---are not
+biological peculiarities.
+They are consequences of energy transmission at
+interfaces, and would arise in \emph{any} viable
+physical system with internal structure.
+
+\subsection*{Framework overview}
+
 The framework rests on a single first principle---the
 Minimum Reflection Principle ($\Gamma$-MRP)---from
 which three constraints C1--C3 emerge as a sequential
@@ -503,6 +570,39 @@ $(Z_{\text{source},i}, Z_{\text{load},i})$,
 each carrier (electrical signal, blood, mechanical
 load) must encode its source impedance upon
 departure.
+\end{remark}
+
+\begin{remark}[Phase separation creates $\Gamma$]
+\label{rem:phase-separation}
+C2 gradient descent drives cells with similar impedance
+into spatial clusters (same-$K$ clustering,
+Paper~1~\cite{Paper1}).
+This is the physical process known as
+\emph{phase separation}: liver cells aggregate with
+liver cells, bone with bone, neural tissue with
+neural tissue.
+Phase separation minimises \emph{intra}-phase
+reflection, but it simultaneously sharpens the
+\emph{inter}-phase boundaries.
+At every such boundary, impedance mismatch is
+physically unavoidable:
+\[
+  Z_{\text{phase}\,A} \neq Z_{\text{phase}\,B}
+  \;\;\Longrightarrow\;\;
+  \Gamma_{AB} \neq 0\,.
+\]
+The irreducible topological cost
+$\Acut > 0$ (Paper~1, Theorem~2) is therefore not
+a design flaw but a \emph{thermodynamic consequence}
+of structural order.
+Life exists in a perpetual tension:
+C2 builds order by clustering, but clustering
+creates the very boundaries that generate $\Gamma$.
+The organism spends its entire lifetime running C2
+to repair friction that C2's own success created.
+This self-referential loop is the physical reason
+why $\Acut$ can never reach zero in any
+finite network.
 \end{remark}
 
 \medskip\noindent
