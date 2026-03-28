@@ -2336,10 +2336,10 @@ correction) ON vs.\ OFF.
 Under steady-state conditions, C1 is nearly
 redundant: organs perform distributed C2 matching
 and C3 relays carry trunk corrections automatically.
-This explains the ``jellyfish paradox'' of Paper~2
+This confirms the thermodynamic hierarchy of Paper~2
 (Remark~\ref*{rem:body-c123-simulation}):
-organisms without centralised brains survive in
-stable environments.
+systems with $\ell < \ell^*$ require no centralised
+controller in stable environments.
 
 Under acute trunk-level stress, however, C1
 transitions from redundant to \textbf{critical}:
@@ -2369,6 +2369,66 @@ suppression) during surgery is survivable only because
 the surgical team externally maintains trunk
 homeostasis---they are, in $\Gamma$-Net terms,
 acting as an \emph{externalised C1}.
+\end{remark}
+
+
+\begin{remark}[Pain as the biological $\Gamma^2$ sensor]
+\label{rem:pain-as-gamma-sensor}
+Transmission-line physics requires that reflected power
+$P_{\mathrm{refl}} = \Gamma^2 P_{\mathrm{in}}$
+be dissipated somewhere.
+In biological tissue this dissipation manifests as
+\emph{local heat accumulation}, which triggers the
+classical inflammatory tetrad:
+\begin{center}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Sign & Latin & $\Gamma$-Net mechanism \\
+\midrule
+Redness (rubor) & vasodilation & increased $Q$ to
+  carry away $\Gamma^2$-heat \\
+Swelling (tumor) & plasma leakage & fluid attempting
+  to buffer $Z$-mismatch \\
+Heat (calor) & local $T$ rise & direct consequence of
+  $P_{\mathrm{refl}} > 0$ \\
+Pain (dolor) & nociceptor firing & \textbf{$\Gamma^2$
+  sensor activation} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Pain is therefore not a symptom of disease but the
+body's \emph{impedance-mismatch detector}: nociceptors
+fire when local $\Gamma^2$ exceeds a threshold,
+reporting ``this boundary is reflecting power.''
+The intensity of pain correlates with the magnitude
+of $\Gamma^2$, and the location of pain identifies
+the mismatched interface.
+
+This yields a sharp pharmacological distinction:
+\begin{itemize}
+  \item \textbf{Analgesics} (opioids, paracetamol)
+    block the nociceptive pathway without reducing
+    $\Gamma^2$.  The mismatch persists;
+    $D_Z$ continues to accumulate.
+    Analgesics disable the sensor, not the source.
+  \item \textbf{Anti-inflammatory agents}
+    (NSAIDs, corticosteroids) reduce local
+    impedance mismatch ($\Gamma^2 \downarrow$),
+    thereby reducing both heat and pain at the
+    source.
+\end{itemize}
+
+\textbf{Chronic pain} is the state where $\Gamma^2$
+at one or more interfaces remains persistently above
+the nociceptive threshold despite C2 repair attempts.
+In $\Gamma$-Net terms, the C2 gradient-descent
+algorithm has converged to a local minimum that is
+not the global minimum $\Gamma^2 = 0$---a ``stuck''
+impedance state requiring either external intervention
+(physiotherapy, pharmacology) or C1-level re-routing
+(neural plasticity, cognitive behavioural therapy).
 \end{remark}
 
 
